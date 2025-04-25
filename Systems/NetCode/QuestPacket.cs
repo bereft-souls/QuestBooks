@@ -1,0 +1,32 @@
+﻿using System;
+using System.IO;
+using Terraria.ModLoader;
+
+namespace QuestBooks.Systems.NetCode
+{
+    internal abstract class QuestPacket
+    {
+        public virtual void WritePacket(ModPacket modPacket) { }
+
+        public abstract void HandlePacket(in BinaryReader packet, int sender);
+
+        public ModPacket Create()
+        {
+            var packet = QuestBooks.Instance.GetPacket();
+            packet.Write(PacketManager.PacketToId[GetType()]);
+            return packet;
+        }
+
+        public static void Send<TPacket>(int toClient = -1, int ignoreClient = -1, Action<ModPacket> extraWriting = null)
+            where TPacket : QuestPacket
+        {
+            TPacket packet = Activator.CreateInstance<TPacket>();
+            var modPacket = packet.Create();
+
+            packet.WritePacket(modPacket);
+            extraWriting?.Invoke(modPacket);
+
+            modPacket.Send(toClient, ignoreClient);
+        }
+    }
+}
