@@ -5,16 +5,16 @@ namespace QuestBooks.Controls
 {
     internal class Keybinds : ModSystem
     {
-        public static ModKeybind ToggleQuestBook;
+        public static ModKeybind ToggleQuestLog;
 
         public override void Load()
         {
-            ToggleQuestBook = KeybindLoader.RegisterKeybind(Mod, "ToggleQuestBook", Keys.P);
+            ToggleQuestLog = KeybindLoader.RegisterKeybind(Mod, "ToggleQuestLog", Keys.P);
         }
 
         public override void Unload()
         {
-            ToggleQuestBook = null;
+            ToggleQuestLog = null;
         }
     }
 }

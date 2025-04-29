@@ -23,7 +23,7 @@ namespace QuestBooks.Systems
                     // If this is running on the server, send a packet to each client
                     // containing the quest that was just completed.
                     if (Main.dedServ)
-                        QuestPacket.Send<QuestCompletionPacket>(extraWriting: (packet) => packet.WriteNullTerminatedString(questName));
+                        QuestPacket.Send<QuestCompletionPacket>((packet) => packet.WriteNullTerminatedString(questName));
                 }
             }
         }

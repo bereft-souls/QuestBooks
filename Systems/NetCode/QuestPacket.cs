@@ -17,11 +17,11 @@ namespace QuestBooks.Systems.NetCode
             return packet;
         }
 
-        public static void Send<TPacket>(int toClient = -1, int ignoreClient = -1, Action<ModPacket> extraWriting = null)
+        public static void Send<TPacket>(Action<ModPacket> extraWriting = null, int toClient = -1, int ignoreClient = -1)
             where TPacket : QuestPacket
         {
             TPacket packet = Activator.CreateInstance<TPacket>();
-            var modPacket = packet.Create();
+            var modPacket = packet.Create(); // This pre-writes the packet type ID
 
             packet.WritePacket(modPacket);
             extraWriting?.Invoke(modPacket);

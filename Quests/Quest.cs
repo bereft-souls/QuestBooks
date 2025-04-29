@@ -1,4 +1,4 @@
-﻿namespace QuestBooks.Content
+﻿namespace QuestBooks.Quests
 {
     public abstract class Quest
     {

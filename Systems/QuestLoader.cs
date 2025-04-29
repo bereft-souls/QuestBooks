@@ -1,10 +1,9 @@
-﻿using QuestBooks.Content;
+﻿using QuestBooks.QuestLog;
+using QuestBooks.Quests;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -27,7 +26,7 @@ namespace QuestBooks.Systems
             foreach (var questType in questTypes)
             {
                 var quest = (Quest)Activator.CreateInstance(questType);
-                loadingQuests.Add(quest.Key, questType);
+                loadingQuests.TryAdd(quest.Key, questType);
             }
         }
 
@@ -42,6 +41,8 @@ namespace QuestBooks.Systems
         // This is the first loading related method called on world entry.
         // We use it to reset which quests are considered "complete".
         public override void OnWorldLoad() => QuestManager.LoadActiveQuests();
+
+        #region Quest Loading
 
         public override void LoadWorldData(TagCompound tag)
         {
@@ -66,12 +67,18 @@ namespace QuestBooks.Systems
             }
         }
 
+        #endregion
+
+        #region Quest Saving
+
         public override void SaveWorldData(TagCompound tag) => tag[TagKey] = QuestManager.CompletedWorldQuests.ToList();
 
         public partial class PlayerQuestLoader : ModPlayer
         {
             public override void SaveData(TagCompound tag) => tag[TagKey] = QuestManager.CompletedPlayerQuests.ToList();
         }
+
+        #endregion
 
         public override void OnWorldUnload() => QuestManager.UnloadActiveQuests();
 

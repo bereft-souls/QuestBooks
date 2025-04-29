@@ -7,7 +7,7 @@ namespace QuestBooks.Controls
     {
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if (!Keybinds.ToggleQuestBook.JustPressed)
+            if (!Keybinds.ToggleQuestLog.JustPressed)
                 return;
         }
     }

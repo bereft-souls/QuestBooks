@@ -1,4 +1,5 @@
-﻿using QuestBooks.Content;
+﻿using QuestBooks.QuestLog;
+using QuestBooks.Quests;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace QuestBooks.Systems
         public static FrozenDictionary<string, Quest> PlayerQuests { get; internal set; }
         public static string[] CompletedPlayerQuests { get; internal set; }
         public static string[] IncompletePlayerQuests { get; internal set; }
+
+        public static FrozenSet<QuestBook> QuestBooks { get; internal set; } = Array.Empty<QuestBook>().ToFrozenSet();
 
         // Reset "completed" quests
         public static void LoadActiveQuests()
@@ -75,8 +78,7 @@ namespace QuestBooks.Systems
         public static bool TryGetQuest(string questName, out Quest result) => ActiveQuests.TryGetValue(questName, out result);
         public static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest
         {
-            if (QuestLoader.QuestNames.TryGetValue(typeof(TQuest), out var questName)
-                && ActiveQuests.TryGetValue(questName, out var questResult))
+            if (QuestLoader.QuestNames.TryGetValue(typeof(TQuest), out var questName) && TryGetQuest(questName, out var questResult))
             { 
                 result = (TQuest)questResult;
                 return true;
