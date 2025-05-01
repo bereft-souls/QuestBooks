@@ -38,9 +38,9 @@ namespace QuestBooks
         { }
 
         // Adds a questbook to the active list.
-        public static void AddQuestBook(QuestBook questBook)
+        public static void AddQuestBook(QuestBook questBook, Mod mod)
         {
-            QuestLoader.LoadQuests(questBook);
+            QuestLoader.LoadQuests(mod);
             QuestManager.QuestBooks.Add(questBook);
         }
 
@@ -54,11 +54,14 @@ namespace QuestBooks
             {
                 case "addquestbook":
 
+                    if (args[2] is not Mod mod)
+                        return new ArgumentException("Invalid arguments: Third argument must be the mod instance that is adding this questbook");
+
                     if (args[1] is QuestBook questBook)
-                        AddQuestBook(questBook);
+                        AddQuestBook(questBook, mod);
 
                     else if (args[1] is string serialized)
-                        AddQuestBook(JsonConvert.DeserializeObject<BasicQuestBook>(serialized));
+                        AddQuestBook(JsonConvert.DeserializeObject<BasicQuestBook>(serialized), mod);
 
                     else
                         return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer");

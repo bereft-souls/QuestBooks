@@ -12,7 +12,11 @@ namespace QuestBooks.Systems
         // Not on multiplayer clients.
         public static void UpdateWorldQuests()
         {
-            foreach (var questName in QuestManager.IncompleteWorldQuests)
+            // Save the original array copy so that even if collection modification
+            // occurs, enumeration can still continue.
+            var incompleteQuests = QuestManager.IncompleteWorldQuests;
+
+            foreach (var questName in incompleteQuests)
             {
                 var quest = QuestManager.GetQuest(questName);
 
@@ -32,7 +36,11 @@ namespace QuestBooks.Systems
         // Not on the server.
         public static void UpdatePlayerQuests()
         {
-            foreach (var questName in QuestManager.IncompletePlayerQuests)
+            // Save the original array copy so that even if collection modification
+            // occurs, enumeration can still continue.
+            var incompleteQuests = QuestManager.IncompletePlayerQuests;
+
+            foreach (var questName in incompleteQuests)
             {
                 var quest = QuestManager.GetQuest(questName);
 

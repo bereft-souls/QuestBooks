@@ -20,9 +20,9 @@ namespace QuestBooks.Systems
         private static readonly List<Assembly> checkedAssemblies = [];
         public static FrozenDictionary<Type, string> QuestNames { get; internal set; }
 
-        public static void LoadQuests(QuestBook questBook)
+        public static void LoadQuests(Mod mod)
         {
-            var loadingAssembly = questBook.GetType().Assembly;
+            var loadingAssembly = mod.GetType().Assembly;
 
             if (checkedAssemblies.Contains(loadingAssembly))
                 return;
