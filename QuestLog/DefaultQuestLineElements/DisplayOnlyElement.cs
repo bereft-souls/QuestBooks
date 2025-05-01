@@ -7,6 +7,9 @@ using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultQuestLineElements
 {
+    /// <summary>
+    /// A simple display element that moves with the canvas.
+    /// </summary>
     public class DisplayOnlyElement : QuestLineElement
     {
         public Vector2 CanvasPosition { get; set; }

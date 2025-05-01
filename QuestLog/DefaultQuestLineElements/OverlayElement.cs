@@ -7,6 +7,9 @@ using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultQuestLineElements
 {
+    /// <summary>
+    /// A simple element that overlays onto the canvas and does not move when the canvas view moves.
+    /// </summary>
     public class OverlayElement : QuestLineElement
     {
         public Vector2 CanvasPosition { get; set; }

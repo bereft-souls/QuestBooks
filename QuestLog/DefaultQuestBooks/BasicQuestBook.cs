@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {
+    /// <summary>
+    /// A basic <see cref="QuestBook"/> implementation, containing a set of <see cref="QuestLine"/>s.
+    /// </summary>
     public class BasicQuestBook : QuestBook
     {
         public List<QuestLine> QuestLines = [];

@@ -23,7 +23,7 @@ namespace QuestBooks.Systems
         public static string[] CompletedPlayerQuests { get; internal set; }
         public static string[] IncompletePlayerQuests { get; internal set; }
 
-        public static FrozenSet<QuestBook> QuestBooks { get; internal set; } = Array.Empty<QuestBook>().ToFrozenSet();
+        public static List<QuestBook> QuestBooks { get; internal set; } = [];
 
         // Reset "completed" quests
         public static void LoadActiveQuests()

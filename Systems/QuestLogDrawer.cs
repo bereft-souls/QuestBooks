@@ -13,12 +13,6 @@ namespace QuestBooks.Systems
 {
     internal class QuestLogDrawer : ModSystem
     {
-        public override void UpdateUI(GameTime gameTime)
-        {
-            foreach (QuestBook questBook in QuestManager.QuestBooks)
-                questBook.Update();
-        }
-
         public override void Load()
         {
             // Prepare render targets.
@@ -26,6 +20,17 @@ namespace QuestBooks.Systems
             {
 
             };
+        }
+
+        public static void DrawQuestLog()
+        {
+
+        }
+
+        public override void UpdateUI(GameTime gameTime)
+        {
+            foreach (QuestBook questBook in QuestManager.QuestBooks)
+                questBook.Update();
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
@@ -38,7 +43,7 @@ namespace QuestBooks.Systems
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
-                    // DRAW HERE
+                    DrawQuestLog();
                     return true;
                 }
             ));

@@ -6,6 +6,9 @@ using System;
 
 namespace QuestBooks.QuestLog.DefaultQuestLineElements
 {
+    /// <summary>
+    /// A simple canvas element that contains quest information.
+    /// </summary>
     public class BasicQuestElement : QuestElement
     {
         public string QuestName { get; set; }

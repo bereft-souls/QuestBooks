@@ -4,6 +4,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -15,12 +16,18 @@ namespace QuestBooks.Systems
 
         // We use a separate dictionary for loading and accessing to
         // improve performance and ensure that quests are not modified post-setup.
-        private static Dictionary<string, Type> loadingQuests = [];
+        private static readonly Dictionary<string, Type> loadingQuests = [];
+        private static readonly List<Assembly> checkedAssemblies = [];
         public static FrozenDictionary<Type, string> QuestNames { get; internal set; }
 
         public static void LoadQuests(QuestBook questBook)
         {
             var loadingAssembly = questBook.GetType().Assembly;
+
+            if (checkedAssemblies.Contains(loadingAssembly))
+                return;
+
+            checkedAssemblies.Add(loadingAssembly);
             var questTypes = loadingAssembly.GetTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
 
             foreach (var questType in questTypes)
@@ -35,12 +42,9 @@ namespace QuestBooks.Systems
         public override void OnModLoad()
         {
             QuestNames = loadingQuests.Select(kvp => new KeyValuePair<Type, string>(kvp.Value, kvp.Key)).ToFrozenDictionary();
-            loadingQuests = [];
+            loadingQuests.Clear();
+            checkedAssemblies.Clear();
         }
-
-        // This is the first loading related method called on world entry.
-        // We use it to reset which quests are considered "complete".
-        public override void OnWorldLoad() => QuestManager.LoadActiveQuests();
 
         #region Quest Loading
 
@@ -79,6 +83,10 @@ namespace QuestBooks.Systems
         }
 
         #endregion
+
+        // This is the first loading related method called on world entry.
+        // We use it to reset which quests are considered "complete".
+        public override void OnWorldLoad() => QuestManager.LoadActiveQuests();
 
         public override void OnWorldUnload() => QuestManager.UnloadActiveQuests();
 
