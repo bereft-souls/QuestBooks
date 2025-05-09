@@ -1,1 +1,6 @@
-Keybinds.ToggleQuestBook.DisplayName: Toggle Quest Log
+Keybinds: {
+	ToggleQuestBook.DisplayName: Toggle Quest Log
+	ToggleQuestLog.DisplayName: Toggle Quest Log
+}
+
+Configs.QuestLogConfig.DisplayName: Quest Log Config

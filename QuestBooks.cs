@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultQuestBooks;
+using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
 using QuestBooks.Systems.NetCode;
@@ -29,6 +30,8 @@ namespace QuestBooks
         {
             if (ModLoader.Mods.Any(m => Attribute.GetCustomAttribute(m.GetType(), typeof(EnableDesignerAttribute)) is not null))
                 DesignerEnabled = true;
+
+            AddQuestLogStyle(new BasicQuestLogStyle(), this);
         }
 
         #region API
@@ -36,6 +39,13 @@ namespace QuestBooks
         [AttributeUsage(AttributeTargets.Class)]
         public class EnableDesignerAttribute : Attribute
         { }
+
+        // Adds a questlog display style to the active list.
+        public static void AddQuestLogStyle(QuestLogStyle questLog, Mod mod)
+        {
+            QuestLogDrawer.LogStyleRegistry.TryAdd(mod, []);
+            QuestLogDrawer.LogStyleRegistry[mod].Add(questLog);
+        }
 
         // Adds a questbook to the active list.
         public static void AddQuestBook(QuestBook questBook, Mod mod)

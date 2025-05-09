@@ -39,11 +39,16 @@ namespace QuestBooks.Systems
 
         // Mods should load their quests in PostSetupContent().
         // Following that, we freeze the dictionary and reset the loading.
-        public override void OnModLoad()
+        public override void PostSetupRecipes()
         {
             QuestNames = loadingQuests.Select(kvp => new KeyValuePair<Type, string>(kvp.Value, kvp.Key)).ToFrozenDictionary();
             loadingQuests.Clear();
             checkedAssemblies.Clear();
+
+            QuestLogDrawer.QuestLogStyles = QuestLogDrawer.LogStyleRegistry
+                .SelectMany(kvp => kvp.Value)
+                .Select(q => new KeyValuePair<string, QuestLogStyle>(q.Key, q))
+                .ToDictionary();
         }
 
         #region Quest Loading

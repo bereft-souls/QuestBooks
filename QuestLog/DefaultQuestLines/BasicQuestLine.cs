@@ -14,7 +14,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// <summary>
         /// The list of all elements contained within this quest line.
         /// </summary>
-        public List<QuestLineElement> Elements = [];
+        public override IEnumerable<QuestLineElement> Elements { get; } = new List<QuestLineElement>();
 
         /// <summary>
         /// A collection of all quests contained by elements in this quest line.<br/>
@@ -42,22 +42,6 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         {
             foreach (QuestLineElement questElement in Elements)
                 questElement.Update();
-        }
-
-        /// <summary>
-        /// Draws this quest line to the chapter selection of the quest book.
-        /// </summary>
-        public override void DrawChapter()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Draws all elements within this questline to the canvas.
-        /// </summary>
-        public override void DrawContents()
-        {
-            throw new NotImplementedException();
         }
     }
 }

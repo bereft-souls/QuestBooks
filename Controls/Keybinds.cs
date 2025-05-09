@@ -9,7 +9,7 @@ namespace QuestBooks.Controls
 
         public override void Load()
         {
-            ToggleQuestLog = KeybindLoader.RegisterKeybind(Mod, "ToggleQuestLog", Keys.P);
+            ToggleQuestLog = KeybindLoader.RegisterKeybind(Mod, "ToggleQuestLog", Keys.L);
         }
 
         public override void Unload()

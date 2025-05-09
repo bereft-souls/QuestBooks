@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using QuestBooks.QuestLog.DefaultQuestLineElements.BaseElements;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
@@ -16,7 +17,12 @@ namespace QuestBooks.QuestLog.DefaultQuestLineElements
         [JsonIgnore]
         public override Quest Quest => QuestManager.GetQuest(QuestName);
 
-        public override void DrawToCanvas()
+        public override void DrawDesigner(Vector2 offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DrawToCanvas(Vector2 offset)
         {
             throw new NotImplementedException();
         }
