@@ -12,6 +12,7 @@ namespace QuestBooks.Systems
     internal class QuestLogDrawer : ModSystem
     {
         public static RenderTarget2D ScreenRenderTarget { get; private set; }
+        public static Vector2 RealScreenSize => ScreenRenderTarget.Size();
 
         public static Dictionary<Mod, List<QuestLogStyle>> LogStyleRegistry = [];
         public static Dictionary<string, QuestLogStyle> QuestLogStyles = null;
@@ -19,6 +20,10 @@ namespace QuestBooks.Systems
         public static QuestLogStyle ActiveStyle = null;
         public static bool DisplayLog { get; private set; } = false;
         public static bool UseDesigner { get; set; } = false;
+        private static bool useDesignerCache = false;
+
+        public static float LogScale { get; set; } = 1f;
+        public static Vector2 LogPositionOffset { get; set; } = Vector2.Zero;
 
         public static void Toggle(bool? active = null)
         {
@@ -29,6 +34,8 @@ namespace QuestBooks.Systems
 
         public override void UpdateUI(GameTime gameTime)
         {
+            useDesignerCache = UseDesigner;
+
             if (!UseDesigner)
                 ActiveStyle.UpdateLog();
 
@@ -49,7 +56,7 @@ namespace QuestBooks.Systems
 
             Main.spriteBatch.Begin();
 
-            if (QuestBooks.DesignerEnabled && UseDesigner)
+            if (QuestBooks.DesignerEnabled && useDesignerCache)
                 ActiveStyle.DrawDesigner(Main.spriteBatch);
 
             else
@@ -72,8 +79,7 @@ namespace QuestBooks.Systems
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
-                    Texture2D texture = ScreenRenderTarget;
-                    Main.spriteBatch.Draw(texture, Main.ScreenSize.ToVector2() / 2f, null, Color.White, 0f, texture.Size() / 2f, 1f, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() / 2f, null, Color.White, 0f, ScreenRenderTarget.Size() / 2f, Main.UIScale, SpriteEffects.None, 0f);
                     return true;
                 },
                 InterfaceScaleType.None

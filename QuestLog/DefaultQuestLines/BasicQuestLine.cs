@@ -1,4 +1,5 @@
-﻿using QuestBooks.QuestLog.DefaultQuestLineElements.BaseElements;
+﻿using Newtonsoft.Json;
+using QuestBooks.QuestLog.DefaultQuestLineElements.BaseElements;
 using QuestBooks.Quests;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,16 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// <summary>
         /// The list of all elements contained within this quest line.
         /// </summary>
-        public override IEnumerable<QuestLineElement> Elements { get; } = new List<QuestLineElement>();
+        [JsonIgnore]
+        public override IEnumerable<QuestLineElement> Elements { get => ChapterElements; }
+
+        public List<QuestLineElement> ChapterElements = [];
 
         /// <summary>
         /// A collection of all quests contained by elements in this quest line.<br/>
         /// These quests are all the actual implemented instances, and not duplicates or templates - you can access accurate info or methods from them.
         /// </summary>
+        [JsonIgnore]
         public IEnumerable<Quest> QuestList => Elements.Where(e => e is QuestElement).Cast<QuestElement>().Select(e => e.Quest);
 
         /// <summary>
@@ -27,12 +32,14 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// 0f is no quests completed, and 1f is all quests completed.<br/>
         /// Pulls from <see cref="QuestList"/>.
         /// </summary>
+        [JsonIgnore]
         public float Progress => (float)QuestList.Count(q => q.Completed) / Math.Max(1, QuestList.Count());
 
         /// <summary>
         /// Whether or not all quests in this questline are complete.<br/>
         /// Pulls from <see cref="QuestList"/>
         /// </summary>
+        [JsonIgnore]
         public bool Complete => QuestList.All(q => q.Completed);
 
         /// <summary>

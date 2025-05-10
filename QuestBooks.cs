@@ -1,3 +1,4 @@
+global using static QuestBooks.Utilities.Utils;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultQuestBooks;
@@ -15,7 +16,7 @@ namespace QuestBooks
 	public class QuestBooks : Mod
 	{
         public static Mod Instance { get; private set; }
-        public static bool DesignerEnabled { get; private set; } = false;
+        public static bool DesignerEnabled { get; set; } = false;
 
         public override void Load() => Instance = this;
 

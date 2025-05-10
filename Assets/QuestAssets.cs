@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Assets
@@ -12,16 +13,19 @@ namespace QuestBooks.Assets
     public class QuestAssets : ModSystem
     {
         public static LazyTexture BasicQuestCanvas { get; } = new("QuestLogCanvas");
+        public static LazyTexture UnderConstruction { get; } = new("UnderConstruction");
+        public static LazyTexture MagicPixel { get; } = new("Terraria/Images/MagicPixel", true);
 
         public override void PostSetupContent()
         {
             // Force an early load of lazy assets.
             foreach (var property in typeof(QuestAssets).GetProperties().Where(p => p.PropertyType == typeof(LazyTexture)))
-                property.GetValue(null);
+                ((LazyTexture)property.GetValue(null)).Texture.Size();
         }
     }
 
-    public class LazyTexture(string asset) : Lazy<Asset<Texture2D>>(() => ModContent.Request<Texture2D>($"QuestBooks/Assets/{asset}"))
+    public class LazyTexture(string asset, bool fullString = false) : Lazy<Asset<Texture2D>>(() =>
+        ModContent.Request<Texture2D>($"{(fullString ? "" : "QuestBooks/Assets/Textures/")}{asset}"))
     {
         public Texture2D Texture => Value.Value;
         public static implicit operator Texture2D(LazyTexture texture) => texture.Texture;

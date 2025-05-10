@@ -12,6 +12,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLineElements
     /// </summary>
     public class BasicQuestElement : QuestElement
     {
+        public Vector2 CanvasPosition { get; set; }
+
         public string QuestName { get; set; }
 
         [JsonIgnore]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,10 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
     /// </summary>
     public class BasicQuestBook : QuestBook
     {
-        public List<QuestLine> QuestLines = [];
+        [JsonIgnore]
         public override IEnumerable<QuestLine> Chapters => QuestLines;
+
+        public List<QuestLine> QuestLines = [];
 
         public override void Update()
         {
