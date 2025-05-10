@@ -51,7 +51,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         #region Draw Regions
 
         private static Rectangle LogArea;
-        private static Rectangle Library;
+
         private static Rectangle Books;
         private static Rectangle Chapters;
         private static Rectangle Canvas;
@@ -182,10 +182,10 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
             UpdateDesignerToggle();
 
-            Library = LogArea.CookieCutter(new(-0.505f, -0.07f), new(0.43f, 0.86f));
+            Rectangle library = LogArea.CookieCutter(new(-0.505f, -0.07f), new(0.43f, 0.86f));
 
-            Books = Library.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
-            Chapters = Library.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
+            Books = library.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
+            Chapters = library.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
 
             Canvas = LogArea.CookieCutter(new(0.505f, -0.07f), new(0.43f, 0.86f));
         }
