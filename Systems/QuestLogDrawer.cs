@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultQuestLogStyles;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -19,12 +20,7 @@ namespace QuestBooks.Systems
 
         public static QuestLogStyle ActiveStyle = null;
         public static bool DisplayLog { get; private set; } = false;
-        public static bool UseDesigner { get; set; } = false;
-        private static bool useDesignerCache = false;
-
-        public static float LogScale { get; set; } = 1f;
-        public static Vector2 LogPositionOffset { get; set; } = Vector2.Zero;
-
+        
         public static void Toggle(bool? active = null)
         {
             bool display = active ?? !DisplayLog;
@@ -34,13 +30,7 @@ namespace QuestBooks.Systems
 
         public override void UpdateUI(GameTime gameTime)
         {
-            useDesignerCache = UseDesigner;
-
-            if (!UseDesigner)
-                ActiveStyle.UpdateLog();
-
-            else
-                ActiveStyle.UpdateDesigner();
+            ActiveStyle.UpdateLog();
         }
 
         // This draws the actual quest log to the RenderTarget2D
@@ -50,19 +40,13 @@ namespace QuestBooks.Systems
                 return;
 
             var graphics = Main.spriteBatch.GraphicsDevice;
-
             graphics.SetRenderTarget(ScreenRenderTarget);
             graphics.Clear(Color.Transparent);
 
-            Main.spriteBatch.Begin();
-
-            if (QuestBooks.DesignerEnabled && useDesignerCache)
-                ActiveStyle.DrawDesigner(Main.spriteBatch);
-
-            else
-                ActiveStyle.DrawLog(Main.spriteBatch);
-
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, ActiveStyle.CustomBlendState, ActiveStyle.CustomSamplerState, ActiveStyle.CustomDepthStencilState, ActiveStyle.CustomRasterizerState);
+            ActiveStyle.DrawLog(Main.spriteBatch);
             Main.spriteBatch.End();
+
             graphics.SetRenderTargets(null);
         }
 
@@ -79,7 +63,7 @@ namespace QuestBooks.Systems
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
-                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() / 2f, null, Color.White, 0f, ScreenRenderTarget.Size() / 2f, Main.UIScale, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() / 2f, null, Color.White, 0f, ScreenRenderTarget.Size() / 2f, 1f, SpriteEffects.None, 0f);
                     return true;
                 },
                 InterfaceScaleType.None
@@ -88,23 +72,41 @@ namespace QuestBooks.Systems
 
         public override void Load()
         {
-            SetupRenderTarget();
+            SetupRenderTarget(new(Main.screenWidth, Main.screenHeight));
 
             // Prepare render targets.
             Main.OnPreDraw += (_) => DrawQuestLog();
-            Main.OnResolutionChanged += (_) => SetupRenderTarget();
-
-            // TODO: Change this for config loading
-            ActiveStyle = new BasicQuestLogStyle();
+            Main.OnResolutionChanged += (newSize) => SetupRenderTarget(newSize.ToPoint());
         }
 
-        public static void SetupRenderTarget()
+        public override void PostSetupContent()
         {
-            Main.RunOnMainThread(() =>
+            // TODO: Change this for config loading
+            ActiveStyle = new BasicQuestLogStyle();
+            ActiveStyle.OnSelect();
+        }
+
+        public static void SetupRenderTarget(Point screenSize)
+        {
+            void ResetAction()
             {
                 ScreenRenderTarget?.Dispose();
-                ScreenRenderTarget = new(Main.graphics.GraphicsDevice, Main.screenWidth, Main.screenHeight);
-            }).GetAwaiter().GetResult();
+                ScreenRenderTarget = new(
+                    Main.graphics.GraphicsDevice,
+                    screenSize.X,
+                    screenSize.Y,
+                    false,
+                    SurfaceFormat.Color,
+                    DepthFormat.None,
+                    0,
+                    RenderTargetUsage.PreserveContents);
+            }
+
+            if (ThreadCheck.IsMainThread)
+                ResetAction();
+
+            else
+                Main.RunOnMainThread(ResetAction).GetAwaiter().GetResult();
         }
     }
 }

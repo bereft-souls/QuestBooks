@@ -12,9 +12,10 @@ namespace QuestBooks.Assets
 {
     public class QuestAssets : ModSystem
     {
-        public static LazyTexture BasicQuestCanvas { get; } = new("QuestLogCanvas");
-        public static LazyTexture UnderConstruction { get; } = new("UnderConstruction");
         public static LazyTexture MagicPixel { get; } = new("Terraria/Images/MagicPixel", true);
+
+        public static LazyTexture BasicQuestCanvas { get; } = new("QuestLogCanvas");
+        public static LazyTexture ResizeIndicator { get; } = new("ResizeIndicator");
 
         public override void PostSetupContent()
         {

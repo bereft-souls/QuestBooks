@@ -24,12 +24,21 @@ namespace QuestBooks.Utilities
         }
 
         /// <summary>
-        /// Creates non-scaled margins at the edges of a rectangle.<br/>
-        /// Positive margins make the rectangle smaller, negative margins make it bigger.
+        /// Scales a rectangle around its center.
         /// </summary>
-        public static Rectangle CreateMargin(this Rectangle rectangle, float margin)
+        public static Rectangle Scale(this Rectangle rectangle, Vector2 scale)
         {
-            return CenteredRectangle(rectangle.Center(), new(rectangle.Width - margin, rectangle.Height - margin));
+            return CenteredRectangle(rectangle.Center(), rectangle.Size() * scale);
+        }
+
+        /// <summary>
+        /// Creates non-scaled margins at the edges of a rectangle.<br/>
+        /// Positive margins make the rectangle smaller, negative margins make it bigger.<br/>
+        /// This margin will be subtracted from each side of the rectangle, not just the width/height.
+        /// </summary>
+        public static Rectangle CreateMargin(this Rectangle rectangle, int margin)
+        {
+            return CenteredRectangle(rectangle.Center(), new(rectangle.Width - (margin * 2), rectangle.Height - (margin * 2)));
         }
 
         /// <summary>
@@ -39,6 +48,25 @@ namespace QuestBooks.Utilities
         public static Rectangle CreateMargins(this Rectangle rectangle, int left = 0, int right = 0, int top = 0, int bottom = 0)
         {
             return new Rectangle(rectangle.Left + left, rectangle.Top + top, rectangle.Width - left - right, rectangle.Height - top - bottom);
+        }
+
+        /// <summary>
+        /// Creates scaled margins at the edge of a rectangle.<br/>
+        /// Positive margins make the rectangle smaller, negative margins make it bigger.<br/>
+        /// This margin will be subtracted from each side of the rectangle, not just the width/height.
+        /// </summary>
+        public static Rectangle CreateScaledMargin(this Rectangle rectangle, float margin)
+        {
+            return rectangle.Scale(1f - (margin * 2f));
+        }
+
+        /// <summary>
+        /// Creates scaled margins at the edges of a rectangle.<br/>
+        /// Positive margins make the rectangle smaller, negative margins make it bigger.
+        /// </summary>
+        public static Rectangle CreateScaledMargins(this Rectangle rectangle, float left = 0f, float right = 0f, float top = 0f, float bottom = 0f)
+        {
+            return rectangle.CreateMargins((int)(left * rectangle.Width), (int)(right * rectangle.Width), (int)(top * rectangle.Height), (int)(bottom * rectangle.Height));
         }
 
         /// <summary>

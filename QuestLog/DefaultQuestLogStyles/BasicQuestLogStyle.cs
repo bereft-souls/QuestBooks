@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using QuestBooks.Controls;
+using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.ModLoader.IO;
 
 namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 {
@@ -19,11 +22,14 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         public override string Key => "DefaultQuestLog";
         public override string DisplayName => "Book";
 
-        public static bool DebugDisplay = false;
-
         public static QuestBook SelectedBook = null;
         public static QuestLine SelectedLine = null;
         public static QuestLineElement SelectedElement = null;
+
+        private static RenderTargetBinding[] returnTargets = null;
+        public static RenderTarget2D BooksTarget = null;
+        public static RenderTarget2D ChaptersTarget = null;
+        public static RenderTarget2D QuestAreaTarget = null;
 
         #region Mouse Elements
 
@@ -48,31 +54,35 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
         #endregion
 
-        #region Draw Regions
+        #region Draw Parameters
+
+        public static Vector2 LogPositionOffset { get; set; } = Vector2.Zero;
+        public static float LogScale { get; set; } = 1f;
+        public static bool UseDesigner { get; set; } = false;
 
         private static Rectangle LogArea;
-
-        private static Rectangle Books;
-        private static Rectangle Chapters;
-        private static Rectangle Canvas;
-
-        private static Rectangle MoveTab;
-        private static Rectangle ResizeTab;
-
-        private static Rectangle DesignerToggle;
+        private static readonly List<Action<SpriteBatch>> DrawTasks = [];
 
         #endregion
 
-        #region Normal Log
+        public override void OnSelect()
+        {
+            SetupTargets(Vector2.Zero);
+            Main.OnResolutionChanged += SetupTargets;
+        }
+
+        public override void OnDeselect()
+        {
+            Main.OnResolutionChanged -= SetupTargets;
+        }
 
         public override void UpdateLog()
         {
             UpdateMouseClicks();
+            DrawTasks.Clear();
 
             if (!QuestLogDrawer.DisplayLog)
                 return;
-
-            //QuestLogDrawer.LogPositionOffset = Vector2.Zero;
 
             // Scale MouseCanvas around the center of the screen.
             //
@@ -81,40 +91,110 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             //
             // MouseCanvas is the position within the bounds of the canvas itself, even if said canvas does not exactly
             // match the bounds of the screen.
-            Vector2 halfScreen = Main.ScreenSize.ToVector2() * 0.5f;
-            Vector2 halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
-
-            ScaledMousePos = (Main.MouseScreen - halfScreen) / halfScreen / Main.UIScale * halfRealScreen + halfRealScreen;
+            LogArea = CalculateLogArea(out var logSize, out var halfScreen, out var halfRealScreen);
+            ScaledMousePos = (Main.MouseScreen - halfScreen) / halfScreen * halfRealScreen + halfRealScreen;
             MouseCanvas = ScaledMousePos.ToPoint();
-
-            // Calculate a log area pre-movement check.
-            // This will be recalculated if the canvas moves.
-            Vector2 logSize = QuestAssets.BasicQuestCanvas.Texture.Size() * QuestLogDrawer.LogScale;
-            LogArea = CenteredRectangle(halfRealScreen + (QuestLogDrawer.LogPositionOffset * halfRealScreen), logSize);
 
             // These encompass the entire area covered by quest log UI.
             if (LogArea.Contains(MouseCanvas))
                 Main.LocalPlayer.mouseInterface = true;
 
-            #region Canvas Modification
+            UpdateCanvasMovement(halfRealScreen, halfScreen, logSize);
+            UpdateCanvasResizing(halfRealScreen);
+            UpdateDesignerToggle();
 
-            MoveTab = LogArea.CookieCutter(new(0f, 0f), new(0.059f, 1f));
-            if ((MoveTab.Contains(MouseCanvas) || CanvasMoving) && !CanvasResizing)
+            CalculateLibraryRegions(LogArea, out var books, out var chapters, out var questArea);
+
+            float fadeDesignation = 0.025f;
+
+            SwitchTargets(BooksTarget);
+            UpdateBooks(BooksTarget.Bounds.CreateScaledMargins(top: fadeDesignation, bottom: fadeDesignation), (MouseCanvas - books.Location).ToVector2() * (BooksTarget.Size() / books.Size()));
+            SwitchTargets(null);
+
+            AddRectangle(books, Color.LimeGreen);
+            DrawTasks.Add(sb => sb.Draw(BooksTarget, books.Center(), null, Color.White, 0f, BooksTarget.Size() / 2f, LogScale, SpriteEffects.None, 0f));
+            
+            SwitchTargets(ChaptersTarget);
+            UpdateChapters(ChaptersTarget.Bounds.CreateScaledMargins(top: fadeDesignation, bottom: fadeDesignation));
+            SwitchTargets(null);
+
+            AddRectangle(chapters, Color.LimeGreen);
+            DrawTasks.Add(sb => sb.Draw(ChaptersTarget, chapters.Center(), null, Color.White, 0f, ChaptersTarget.Size() / 2f, LogScale, SpriteEffects.None, 0f));
+
+            SwitchTargets(QuestAreaTarget);
+            UpdateQuestArea(QuestAreaTarget.Bounds.CreateScaledMargin(fadeDesignation));
+            SwitchTargets(null);
+
+            AddRectangle(questArea, Color.LimeGreen);
+            DrawTasks.Add(sb => sb.Draw(QuestAreaTarget, questArea.Center(), null, Color.White, 0f, QuestAreaTarget.Size() / 2f, LogScale, SpriteEffects.None, 0f));
+
+            if (books.Contains(MouseCanvas) || chapters.Contains(MouseCanvas) || questArea.Contains(MouseCanvas))
+                PlayerInput.LockVanillaMouseScroll("QuestBooks/QuestLog");
+        }
+
+        public override void DrawLog(SpriteBatch spriteBatch)
+        {
+            Vector2 halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
+
+            Texture2D logTexture = QuestAssets.BasicQuestCanvas;
+            spriteBatch.Draw(logTexture, halfRealScreen + (LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() / 2f, LogScale, SpriteEffects.None, 0f);
+
+            foreach (var drawAction in DrawTasks)
+                drawAction(spriteBatch);
+        }
+
+        #region Components
+
+        #region Movement
+
+        private static void UpdateDesignerToggle()
+        {
+            if (QuestBooks.DesignerEnabled)
+            {
+                Rectangle designerToggle = LogArea.CookieCutter(new(0f, -1.1f), new(0.06f, 0.05f));
+
+                if (designerToggle.Contains(MouseCanvas))
+                {
+                    Main.LocalPlayer.mouseInterface = true;
+
+                    if (LeftMouseJustPressed)
+                    {
+                        UseDesigner = !UseDesigner;
+
+                        if (UseDesigner)
+                            SoundEngine.PlaySound(SoundID.Item28);
+
+                        else
+                            SoundEngine.PlaySound(SoundID.Item78);
+                    }
+                }
+
+                AddRectangle(designerToggle, Color.Orange);
+
+                if (UseDesigner)
+                    AddRectangle(LogArea, Color.Aquamarine);
+            }
+        }
+
+        private static void UpdateCanvasMovement(Vector2 halfRealScreen, Vector2 halfScreen, Vector2 logSize)
+        {
+            Rectangle moveTab = LogArea.CookieCutter(new(0f, 0f), new(0.059f, 1f));
+            if ((moveTab.Contains(MouseCanvas) || CanvasMoving) && !CanvasResizing)
             {
                 // Reset the position if right clicked.
                 if (RightMouseJustPressed)
                 {
-                    QuestLogDrawer.LogPositionOffset = Vector2.Zero;
+                    LogPositionOffset = Vector2.Zero;
                     CanvasMoving = false;
                     CachedMouseClick = null;
-                    goto PostMoveTab;
+                    return;
                 }
 
-                if (!LeftMouseHeld)
+                if (!LeftMouseHeld || (!CanvasMoving && !LeftMouseJustPressed))
                 {
                     CanvasMoving = false;
                     CachedMouseClick = null;
-                    goto PostMoveTab;
+                    return;
                 }
 
                 CanvasMoving = true;
@@ -127,32 +207,32 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     // Move the canvas based on mouse movement and re-size the log area to match.
                     Vector2 mouseMovement = ScaledMousePos - CachedMouseClick.Value;
                     CachedMouseClick = ScaledMousePos;
-                    QuestLogDrawer.LogPositionOffset += mouseMovement / halfScreen;
+                    LogPositionOffset += mouseMovement / halfScreen;
 
-                    LogArea = CenteredRectangle(halfRealScreen + (QuestLogDrawer.LogPositionOffset * halfRealScreen), logSize);
-                    MoveTab = LogArea.CookieCutter(new(0f, 0f), new(0.059f, 1f));
+                    LogArea = CenteredRectangle(halfRealScreen + (LogPositionOffset * halfRealScreen), logSize);
                 }
             }
+        }
 
-        PostMoveTab:
-
-            ResizeTab = LogArea.CookieCutter(new(1f, 1f), new(0.05f, 0.05f));
-            if ((ResizeTab.Contains(MouseCanvas) || CanvasResizing) && !CanvasMoving)
+        private static void UpdateCanvasResizing(Vector2 halfRealScreen)
+        {
+            Rectangle resizeTab = LogArea.CookieCutter(new(1.01f, 1.02f), new(0.062f, 0.09f));
+            if ((resizeTab.Contains(MouseCanvas) || CanvasResizing) && !CanvasMoving)
             {
                 Main.LocalPlayer.mouseInterface = true;
 
                 // Reset the scale on right click.
                 if (RightMouseJustPressed)
                 {
-                    QuestLogDrawer.LogScale = 1f;
+                    LogScale = 1f;
                     CanvasResizing = false;
-                    goto PostResizeTab;
+                    goto PostResize;
                 }
 
-                if (!LeftMouseHeld)
+                if (!LeftMouseHeld || (!CanvasResizing && !LeftMouseJustPressed))
                 {
                     CanvasResizing = false;
-                    goto PostResizeTab;
+                    goto PostResize;
                 }
 
                 CanvasResizing = true;
@@ -163,113 +243,172 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 Vector2 intersection = GetPointOfIntersection(LogArea.Center(), areaLineAngle, ScaledMousePos, mouseLineAngle);
 
                 if (intersection.X < LogArea.Center().X)
-                    goto PostResizeTab;
+                    goto PostResize;
 
                 Vector2 defaultLogSize = QuestAssets.BasicQuestCanvas.Texture.Size();
                 float scale = (intersection - LogArea.Center()).Length() / (defaultLogSize * 0.5f).Length();
 
                 // Minimum scale
                 if (scale >= 0.4f)
-                    QuestLogDrawer.LogScale = scale;
+                    LogScale = scale;
 
-                LogArea = CenteredRectangle(halfRealScreen + (QuestLogDrawer.LogPositionOffset * halfRealScreen), logSize);
-                ResizeTab = LogArea.CookieCutter(new(1f, 1f), new(0.05f, 0.05f));
+                Vector2 logSize = QuestAssets.BasicQuestCanvas.Texture.Size() * LogScale;
+                LogArea = CenteredRectangle(halfRealScreen + (LogPositionOffset * halfRealScreen), logSize);
             }
 
-        PostResizeTab:
-
-            #endregion
-
-            UpdateDesignerToggle();
-
-            Rectangle library = LogArea.CookieCutter(new(-0.505f, -0.07f), new(0.43f, 0.86f));
-
-            Books = library.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
-            Chapters = library.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
-
-            Canvas = LogArea.CookieCutter(new(0.505f, -0.07f), new(0.43f, 0.86f));
-        }
-
-        public override void DrawLog(SpriteBatch spriteBatch)
-        {
-            Vector2 halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
-
-            // Display "under construction" message while mod is in development!
-            if (!DebugDisplay)
-            {
-                Texture2D construction = QuestAssets.UnderConstruction;
-                spriteBatch.Draw(construction, halfRealScreen + (QuestLogDrawer.LogPositionOffset * halfRealScreen), null, Color.White, 0f, construction.Size() / 2f, QuestLogDrawer.LogScale, SpriteEffects.None, 0f);
-                return;
-            }
-
-            Texture2D logTexture = QuestAssets.BasicQuestCanvas;
-            spriteBatch.Draw(logTexture, halfRealScreen + (QuestLogDrawer.LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() / 2f, QuestLogDrawer.LogScale, SpriteEffects.None, 0f);
-
-            if (!QuestLogDrawer.UseDesigner)
-                spriteBatch.DrawRectangle(LogArea, Color.Red);
-
-            spriteBatch.DrawRectangle(Books, Color.LimeGreen);
-            spriteBatch.DrawRectangle(Chapters, Color.LimeGreen);
-
-            spriteBatch.DrawRectangle(Canvas, Color.Blue);
-
-            spriteBatch.DrawRectangle(MoveTab, Color.Yellow);
-            spriteBatch.DrawRectangle(ResizeTab, Color.Orange);
-
-            if (QuestBooks.DesignerEnabled)
-                spriteBatch.DrawRectangle(DesignerToggle, Color.Orange);
+        PostResize:
+            DrawTasks.Add(sb => sb.Draw(QuestAssets.ResizeIndicator, LogArea.BottomRight(), null, Color.White, 0f, QuestAssets.ResizeIndicator.Texture.Size() / 2f, LogScale, SpriteEffects.None, 0f));
         }
 
         #endregion
 
-        #region Designer
+        #region Display
 
-        public override void UpdateDesigner()
+        private static void UpdateBooks(Rectangle books, Vector2 scaledMouse)
         {
-            UpdateLog();
+            var mouseBooks = scaledMouse.ToPoint();
+
+            DrawTasks.Add(sb =>
+            {
+                Main.graphics.GraphicsDevice.Clear(Color.Transparent);
+                sb.DrawRectangle(books, Color.Yellow);
+            });
         }
 
-        public override void DrawDesigner(SpriteBatch spriteBatch)
+        private static void UpdateChapters(Rectangle chapters)
         {
-            DrawLog(spriteBatch);
 
-            if (!QuestLogDrawer.UseDesigner)
-                return;
+        }
 
-            spriteBatch.DrawRectangle(LogArea, Color.Aquamarine);
+        private static void UpdateQuestArea(Rectangle questArea)
+        {
+
         }
 
         #endregion
 
-        #region Components
+        #endregion
 
-        private static void UpdateDesignerToggle()
+        #region Area Calculation
+
+        // Queues a rectangle for drawing.
+        private static Rectangle AddRectangle(Rectangle rectangle, Color color, float stroke = 2f, bool fill = false)
         {
-            if (QuestBooks.DesignerEnabled)
-            {
-                DesignerToggle = LogArea.CookieCutter(new(0f, -1.1f), new(0.06f, 0.05f));
+            DrawTasks.Add(sb => sb.DrawRectangle(rectangle, color, stroke, fill));
+            return rectangle;
+        }
 
-                if (DesignerToggle.Contains(MouseCanvas))
+        private static Rectangle CalculateLogArea(out Vector2 logSize, out Vector2 halfScreen, out Vector2 halfRealScreen, float? scaleOverride = null)
+        {
+            halfScreen = Main.ScreenSize.ToVector2() * 0.5f;
+            halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
+            logSize = QuestAssets.BasicQuestCanvas.Texture.Size() * (scaleOverride ?? LogScale);
+            return CenteredRectangle(halfRealScreen + (LogPositionOffset * halfRealScreen), logSize);
+        }
+
+        private static void CalculateLibraryRegions(Rectangle logArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea)
+        {
+            Rectangle library = logArea.CookieCutter(new(-0.505f, -0.055f), new(0.43f, 0.84f)); // The combined area of the Books and Chapters
+            questArea = logArea.CookieCutter(new(0.505f, -0.055f), new(0.43f, 0.84f));
+
+            books = library.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
+            chapters = library.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
+        }
+
+        #endregion
+
+        #region Render Targets
+
+        private void SwitchTargets(RenderTarget2D renderTarget, Matrix? matrix = null, Effect effect = null)
+        {
+            if (renderTarget is null)
+            {
+                DrawTasks.Add(sb =>
                 {
-                    Main.LocalPlayer.mouseInterface = true;
+                    sb.End();
+                    sb.GraphicsDevice.SetRenderTargets(returnTargets);
+                    returnTargets = null;
+                    sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState);
+                });
 
-                    if (LeftMouseJustPressed)
-                    {
-                        QuestLogDrawer.UseDesigner = !QuestLogDrawer.UseDesigner;
-
-                        if (QuestLogDrawer.UseDesigner)
-                            SoundEngine.PlaySound(SoundID.Item28);
-
-                        else
-                            SoundEngine.PlaySound(SoundID.Item78);
-                    }
-                }
+                return;
             }
+
+            DrawTasks.Add(sb =>
+            {
+                sb.End();
+                returnTargets = sb.GraphicsDevice.GetRenderTargets();
+                sb.GraphicsDevice.SetRenderTarget(renderTarget);
+                sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState, effect, matrix ?? Matrix.Identity);
+            });
+        }
+
+        private static void SetupTargets(Vector2 screenSize)
+        {
+            QuestAssets.BasicQuestCanvas.Value.Wait();
+            var basicLogArea = CalculateLogArea(out _, out _, out _, 1f);
+            CalculateLibraryRegions(basicLogArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea);
+
+            books.Width -= books.Width % 2;
+            books.Height += books.Height % 2;
+
+            chapters.Width -= chapters.Width % 2;
+            chapters.Height += chapters.Height % 2;
+
+            questArea.Width -= questArea.Width % 2;
+            questArea.Height += questArea.Height % 2;
+
+            void TargetSetup()
+            {
+                static RenderTarget2D GenerateTarget(int width, int height)
+                {
+                    return new(Main.graphics.GraphicsDevice,
+                        width,
+                        height,
+                        false,
+                        SurfaceFormat.Color,
+                        DepthFormat.None,
+                        0,
+                        RenderTargetUsage.PreserveContents);
+                }
+
+                BooksTarget?.Dispose();
+                ChaptersTarget?.Dispose();
+                QuestAreaTarget?.Dispose();
+
+                BooksTarget = GenerateTarget(books.Width, books.Height);
+                ChaptersTarget = GenerateTarget(chapters.Width, chapters.Height);
+                QuestAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
+            }
+
+            if (ThreadCheck.IsMainThread)
+                TargetSetup();
+
+            else
+                Main.RunOnMainThread(TargetSetup);
         }
 
         #endregion
 
         #region State Caching
+
+        private const string ScaleKey = "QuestBooksScale";
+        private const string OffsetKey = "QuestBooksOffset";
+
+        public override void SavePlayerData(TagCompound tag)
+        {
+            tag[ScaleKey] = LogScale;
+            tag[OffsetKey] = LogPositionOffset;
+        }
+
+        public override void LoadPlayerData(TagCompound tag)
+        {
+            if (tag.TryGet(ScaleKey, out float scale))
+                        LogScale = scale;
+
+            if (tag.TryGet(OffsetKey, out Vector2 offset))
+                LogPositionOffset = offset;
+        }
 
         private static void UpdateMouseClicks()
         {
@@ -317,6 +456,5 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         }
 
         #endregion
-
     }
 }

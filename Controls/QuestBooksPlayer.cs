@@ -9,24 +9,6 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Controls
 {
-    internal class DebugInfoCommand : ModCommand
-    {
-        public override string Command => "questdebug";
-
-        public override CommandType Type => CommandType.Chat;
-
-        public override void Action(CommandCaller caller, string input, string[] args)
-        {
-            BasicQuestLogStyle.DebugDisplay = !BasicQuestLogStyle.DebugDisplay;
-
-            if (BasicQuestLogStyle.DebugDisplay)
-                SoundEngine.PlaySound(SoundID.Item43);
-
-            else
-                SoundEngine.PlaySound(SoundID.Item44);
-        }
-    }
-
     internal class QuickDesignerCommand : ModCommand
     {
         public override string Command => "questdesigner";
@@ -41,10 +23,7 @@ namespace QuestBooks.Controls
                 SoundEngine.PlaySound(SoundID.AchievementComplete);
 
             else
-            {
-                QuestLogDrawer.UseDesigner = false;
                 SoundEngine.PlaySound(SoundID.Unlock);
-            }
         }
     }
 
@@ -103,22 +82,7 @@ namespace QuestBooks.Controls
             QuestLogDrawer.Toggle(false);
         }
 
-        private const string ScaleKey = "QuestBooksScale";
-        private const string OffsetKey = "QuestBooksOffset";
-
-        public override void SaveData(TagCompound tag)
-        {
-            tag[ScaleKey] = QuestLogDrawer.LogScale;
-            tag[OffsetKey] = QuestLogDrawer.LogPositionOffset;
-        }
-
-        public override void LoadData(TagCompound tag)
-        {
-            if (tag.TryGet(ScaleKey, out float scale))
-                QuestLogDrawer.LogScale = scale;
-
-            if (tag.TryGet(OffsetKey, out Microsoft.Xna.Framework.Vector2 offset))
-                QuestLogDrawer.LogPositionOffset = offset;
-        }
+        public override void SaveData(TagCompound tag) => QuestLogDrawer.ActiveStyle.SavePlayerData(tag);
+        public override void LoadData(TagCompound tag) => QuestLogDrawer.ActiveStyle.LoadPlayerData(tag);
     }
 }

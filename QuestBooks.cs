@@ -13,6 +13,7 @@ using Terraria.ModLoader;
 
 namespace QuestBooks
 {
+    [EnableDesigner]
 	public class QuestBooks : Mod
 	{
         public static Mod Instance { get; private set; }
