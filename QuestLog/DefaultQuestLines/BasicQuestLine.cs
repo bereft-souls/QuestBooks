@@ -4,6 +4,7 @@ using QuestBooks.Quests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultQuestLines
 {
@@ -20,9 +21,15 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
 
         public List<QuestLineElement> ChapterElements = [];
 
+        [JsonIgnore]
+        public virtual string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
+
+        public string NameKey;
+
         /// <summary>
         /// A collection of all quests contained by elements in this quest line.<br/>
-        /// These quests are all the actual implemented instances, and not duplicates or templates - you can access accurate info or methods from them.
+        /// These quests are all the actual implemented instances, and not duplicates or templates - you can access accurate info or methods from them.<br/>
+        /// Pulls from <see cref="Elements"/>
         /// </summary>
         [JsonIgnore]
         public IEnumerable<Quest> QuestList => Elements.Where(e => e is QuestElement).Cast<QuestElement>().Select(e => e.Quest);

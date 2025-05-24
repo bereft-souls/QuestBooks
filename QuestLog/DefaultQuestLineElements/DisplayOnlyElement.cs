@@ -19,11 +19,6 @@ namespace QuestBooks.QuestLog.DefaultQuestLineElements
         [JsonIgnore]
         public Texture2D DrawTexture { get => ModContent.Request<Texture2D>(Texture, AssetRequestMode.AsyncLoad).Value; }
 
-        public override void DrawDesigner(Vector2 offset)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void DrawToCanvas(Vector2 offset)
         {
             throw new NotImplementedException();

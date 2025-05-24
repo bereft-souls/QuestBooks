@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using QuestBooks.QuestLog.DefaultQuestLines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {
@@ -15,11 +17,16 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         [JsonIgnore]
         public override IEnumerable<QuestLine> Chapters => QuestLines;
 
-        public List<QuestLine> QuestLines = [];
+        [JsonIgnore]
+        public virtual string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
+
+        public string NameKey;
+
+        public List<BasicQuestLine> QuestLines = [];
 
         public override void Update()
         {
-            foreach (QuestLine questLine in QuestLines)
+            foreach (BasicQuestLine questLine in QuestLines)
                 questLine.Update();
         }
     }

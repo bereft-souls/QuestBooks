@@ -24,6 +24,8 @@ namespace QuestBooks.Systems
         public static string[] IncompletePlayerQuests { get; internal set; }
 
         public static List<QuestBook> QuestBooks { get; internal set; } = [];
+        public static Dictionary<string, QuestLogStyle> QuestLogStyles = null;
+        public static QuestLogStyle ActiveStyle = null;
 
         // Reset "completed" quests
         public static void LoadActiveQuests()

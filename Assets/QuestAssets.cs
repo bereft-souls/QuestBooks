@@ -3,6 +3,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
@@ -16,19 +17,39 @@ namespace QuestBooks.Assets
 
         public static LazyTexture BasicQuestCanvas { get; } = new("QuestLogCanvas");
         public static LazyTexture ResizeIndicator { get; } = new("ResizeIndicator");
+        public static LazyTexture LogEntryBackground { get; } = new("LogEntryBackground");
+        public static LazyTexture LogEntryBorder { get; } = new("LogEntryBorder");
+
+        public static LazyShader FadedEdges { get; } = new("FadedEdges");
 
         public override void PostSetupContent()
         {
             // Force an early load of lazy assets.
-            foreach (var property in typeof(QuestAssets).GetProperties().Where(p => p.PropertyType == typeof(LazyTexture)))
-                ((LazyTexture)property.GetValue(null)).Texture.Size();
+            foreach (var property in typeof(QuestAssets).GetProperties().Where(p => p.PropertyType.IsAssignableTo(typeof(ILazy))))
+                ((ILazy)property.GetValue(null)).WaitAction();
         }
     }
 
-    public class LazyTexture(string asset, bool fullString = false) : Lazy<Asset<Texture2D>>(() =>
-        ModContent.Request<Texture2D>($"{(fullString ? "" : "QuestBooks/Assets/Textures/")}{asset}"))
+    public class LazyTexture(string asset, bool fullString = false) :
+        LazyAsset<Texture2D>($"{(fullString ? "" : "QuestBooks/Assets/Textures/")}{asset}")
+    { }
+
+    public class LazyShader(string asset) :
+        LazyAsset<Effect>($"QuestBooks/Assets/Shaders/{asset}")
+    { }
+
+    public class LazyAsset<T>(string asset) : Lazy<Asset<T>>(() => ModContent.Request<T>(asset)), ILazy
+        where T : class
     {
-        public Texture2D Texture => Value.Value;
-        public static implicit operator Texture2D(LazyTexture texture) => texture.Texture;
+        public Asset<T> ContentAsset => Value;
+        public T Asset => Value.Value;
+        public Action WaitAction => Value.Wait;
+
+        public static implicit operator T(LazyAsset<T> lazyAsset) => lazyAsset.Asset;
+    }
+
+    public interface ILazy
+    {
+        public Action WaitAction { get; }
     }
 }

@@ -19,11 +19,6 @@ namespace QuestBooks.QuestLog.DefaultQuestLineElements
         [JsonIgnore]
         public override Quest Quest => QuestManager.GetQuest(QuestName);
 
-        public override void DrawDesigner(Vector2 offset)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void DrawToCanvas(Vector2 offset)
         {
             throw new NotImplementedException();

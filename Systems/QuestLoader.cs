@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Core;
 using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Systems
@@ -20,15 +21,18 @@ namespace QuestBooks.Systems
         private static readonly List<Assembly> checkedAssemblies = [];
         public static FrozenDictionary<Type, string> QuestNames { get; internal set; }
 
+        public static QuestLogStyle ExclusiveOverrideStyle = null;
+        public static Dictionary<Mod, List<QuestLogStyle>> LogStyleRegistry = [];
+
         public static void LoadQuests(Mod mod)
         {
-            var loadingAssembly = mod.GetType().Assembly;
+            var loadingAssembly = mod.Code;
 
             if (checkedAssemblies.Contains(loadingAssembly))
                 return;
 
             checkedAssemblies.Add(loadingAssembly);
-            var questTypes = loadingAssembly.GetTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
+            var questTypes = AssemblyManager.GetLoadableTypes(loadingAssembly).Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
 
             foreach (var questType in questTypes)
             {
@@ -39,16 +43,31 @@ namespace QuestBooks.Systems
 
         // Mods should load their quests in PostSetupContent().
         // Following that, we freeze the dictionary and reset the loading.
-        public override void PostSetupRecipes()
+        public override void PostAddRecipes()
         {
             QuestNames = loadingQuests.Select(kvp => new KeyValuePair<Type, string>(kvp.Value, kvp.Key)).ToFrozenDictionary();
             loadingQuests.Clear();
             checkedAssemblies.Clear();
 
-            QuestLogDrawer.QuestLogStyles = QuestLogDrawer.LogStyleRegistry
+            //if (QuestManager.QuestBooks.Count == 0)
+            //    VanillaQuests.AddVanillaQuests();
+
+            QuestManager.QuestLogStyles = LogStyleRegistry
                 .SelectMany(kvp => kvp.Value)
                 .Select(q => new KeyValuePair<string, QuestLogStyle>(q.Key, q))
                 .ToDictionary();
+        }
+
+        public override void PostSetupRecipes()
+        {
+            if (ExclusiveOverrideStyle != null)
+                QuestManager.ActiveStyle = ExclusiveOverrideStyle;
+
+            // TODO: Change this for config loading
+            else
+                QuestManager.ActiveStyle = QuestManager.QuestLogStyles.First().Value;
+
+            QuestManager.ActiveStyle.OnSelect();
         }
 
         #region Quest Loading

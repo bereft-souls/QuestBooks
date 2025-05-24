@@ -7,6 +7,9 @@
 	<PropertyGroup>
 		
 	</PropertyGroup>
+	<ItemGroup>
+	  <Folder Include="Assets\Shaders\" />
+	</ItemGroup>
 
 	<!-- References -->
 

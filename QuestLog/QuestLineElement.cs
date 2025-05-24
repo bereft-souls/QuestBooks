@@ -13,7 +13,5 @@ namespace QuestBooks.QuestLog
         public virtual float DrawPriority { get => 0.5f; }
 
         public abstract void DrawToCanvas(Vector2 offset);
-
-        public abstract void DrawDesigner(Vector2 offset);
     }
 }

@@ -13,7 +13,8 @@ namespace QuestBooks.QuestLog
             ColorSourceBlend = Blend.SourceAlpha,
             AlphaSourceBlend = Blend.SourceAlpha,
             ColorDestinationBlend = Blend.InverseSourceAlpha,
-            AlphaDestinationBlend = Blend.DestinationAlpha,
+            AlphaDestinationBlend = Blend.DestinationColor,
+            AlphaBlendFunction = BlendFunction.Max
         };
 
         public abstract string Key { get; }

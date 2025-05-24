@@ -1,7 +1,104 @@
+Configs.QuestLogConfig.DisplayName: Quest Log Config
+
 Keybinds: {
 	ToggleQuestBook.DisplayName: Toggle Quest Log
 	ToggleQuestLog.DisplayName: Toggle Quest Log
 	QuickDesigner.DisplayName: Quick Designer
 }
 
-Configs.QuestLogConfig.DisplayName: Quest Log Config
+VanillaQuests: {
+	TestBook1: {
+		DisplayName: TestBook1
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+		TestChapter4: TestChapter4
+		TestChapter5: TestChapter5
+		TestChapter6: TestChapter6
+		TestChapter7: TestChapter7
+		TestChapter8: TestChapter8
+		TestChapter9: TestChapter9
+		TestChapter10: TestChapter10
+	}
+
+	TestBook2: {
+		DisplayName: TestBook2
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+		TestChapter4: TestChapter4
+		TestChapter5: TestChapter5
+		TestChapter6: TestChapter6
+		TestChapter7: TestChapter7
+		TestChapter8: TestChapter8
+		TestChapter9: TestChapter9
+	}
+
+	TestBook3: {
+		DisplayName: TestBook3
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+		TestChapter4: TestChapter4
+		TestChapter5: TestChapter5
+		TestChapter6: TestChapter6
+		TestChapter7: TestChapter7
+		TestChapter8: TestChapter8
+	}
+
+	TestBook4: {
+		DisplayName: TestBook4
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+		TestChapter4: TestChapter4
+		TestChapter5: TestChapter5
+		TestChapter6: TestChapter6
+		TestChapter7: TestChapter7
+	}
+
+	TestBook5: {
+		DisplayName: TestBook5
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+		TestChapter4: TestChapter4
+		TestChapter5: TestChapter5
+		TestChapter6: TestChapter6
+	}
+
+	TestBook6: {
+		DisplayName: TestBook6
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+		TestChapter4: TestChapter4
+		TestChapter5: TestChapter5
+	}
+
+	TestBook7: {
+		DisplayName: TestBook7
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+		TestChapter4: TestChapter4
+	}
+
+	TestBook8: {
+		DisplayName: TestBook8
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+		TestChapter3: TestChapter3
+	}
+
+	TestBook9: {
+		DisplayName: TestBook9
+		TestChapter1: TestChapter1
+		TestChapter2: TestChapter2
+	}
+
+	TestBook10: {
+		DisplayName: TestBook10
+		TestChapter1: TestChapter1
+	}
+}

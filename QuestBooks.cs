@@ -19,7 +19,11 @@ namespace QuestBooks
         public static Mod Instance { get; private set; }
         public static bool DesignerEnabled { get; set; } = false;
 
-        public override void Load() => Instance = this;
+        public override void Load()
+        {
+            Instance = this;
+            VanillaQuests.AddVanillaQuests();
+        }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
@@ -42,14 +46,24 @@ namespace QuestBooks
         public class EnableDesignerAttribute : Attribute
         { }
 
-        // Adds a questlog display style to the active list.
-        public static void AddQuestLogStyle(QuestLogStyle questLog, Mod mod)
+        /// <summary>
+        /// Adds a custom quest log style to be able to used.<br/>
+        /// If <paramref name="exclusive"/> is <see langword="true"/>, the passed in style will be the only one able to be used.<br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// </summary>
+        public static void AddQuestLogStyle(QuestLogStyle questLog, Mod mod, bool exclusive = false)
         {
-            QuestLogDrawer.LogStyleRegistry.TryAdd(mod, []);
-            QuestLogDrawer.LogStyleRegistry[mod].Add(questLog);
+            if (exclusive)
+                QuestLoader.ExclusiveOverrideStyle = questLog;
+
+            QuestLoader.LogStyleRegistry.TryAdd(mod, []);
+            QuestLoader.LogStyleRegistry[mod].Add(questLog);
         }
 
-        // Adds a questbook to the active list.
+        /// <summary>
+        /// Adds a custom quest book to the log.<br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// </summary>
         public static void AddQuestBook(QuestBook questBook, Mod mod)
         {
             QuestLoader.LoadQuests(mod);
@@ -66,17 +80,31 @@ namespace QuestBooks
             {
                 case "addquestbook":
 
-                    if (args[2] is not Mod mod)
+                    if (args[2] is not Mod)
                         return new ArgumentException("Invalid arguments: Third argument must be the mod instance that is adding this questbook");
 
                     if (args[1] is QuestBook questBook)
-                        AddQuestBook(questBook, mod);
+                        AddQuestBook(questBook, (Mod)args[2]);
 
                     else if (args[1] is string serialized)
-                        AddQuestBook(JsonConvert.DeserializeObject<BasicQuestBook>(serialized), mod);
+                        AddQuestBook(JsonConvert.DeserializeObject<BasicQuestBook>(serialized), (Mod)args[2]);
 
                     else
                         return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer");
+
+                    return true;
+
+                case "addquestlogstyle":
+                    if (args[2] is not Mod)
+                        return new ArgumentException("Invalid arguments: Third argument must be the mod instance that is adding this quest log style");
+
+                    bool styleExclusive = args.Length >= 4 && args[3] is bool exclusive && exclusive;
+
+                    if (args[1] is QuestLogStyle logStyle)
+                        AddQuestLogStyle(logStyle, (Mod)args[2], styleExclusive);
+
+                    else
+                        return new ArgumentException("Invalid arguments: Second argument must be a quest log style implementation");
 
                     return true;
             }

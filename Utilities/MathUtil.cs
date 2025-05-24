@@ -6,6 +6,11 @@ namespace QuestBooks.Utilities
 {
     public static partial class Utils
     {
+        public static float InverseLerp(float from, float to, float x)
+        {
+            return MathHelper.Clamp((x - from) / (to - from), 0f, 1f);
+        }
+
         /// <summary>
         /// Centers a rectangle on a give point.
         /// </summary>
@@ -98,6 +103,14 @@ namespace QuestBooks.Utilities
             float py = m1 * px + b1; // collision y
 
             return new Vector2(px, py);
+        }
+
+        public static int ToNearestDoubleEven(this int value)
+        {
+            value -= value % 2;
+            if (value % 4 != 0)
+                value += 2;
+            return value;
         }
     }
 }

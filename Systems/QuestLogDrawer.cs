@@ -4,6 +4,7 @@ using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -14,23 +15,13 @@ namespace QuestBooks.Systems
     {
         public static RenderTarget2D ScreenRenderTarget { get; private set; }
         public static Vector2 RealScreenSize => ScreenRenderTarget.Size();
-
-        public static Dictionary<Mod, List<QuestLogStyle>> LogStyleRegistry = [];
-        public static Dictionary<string, QuestLogStyle> QuestLogStyles = null;
-
-        public static QuestLogStyle ActiveStyle = null;
         public static bool DisplayLog { get; private set; } = false;
-        
+
         public static void Toggle(bool? active = null)
         {
             bool display = active ?? !DisplayLog;
             DisplayLog = display;
-            ActiveStyle.OnToggle(display);
-        }
-
-        public override void UpdateUI(GameTime gameTime)
-        {
-            ActiveStyle.UpdateLog();
+            QuestManager.ActiveStyle.OnToggle(display);
         }
 
         // This draws the actual quest log to the RenderTarget2D
@@ -43,8 +34,13 @@ namespace QuestBooks.Systems
             graphics.SetRenderTarget(ScreenRenderTarget);
             graphics.Clear(Color.Transparent);
 
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, ActiveStyle.CustomBlendState, ActiveStyle.CustomSamplerState, ActiveStyle.CustomDepthStencilState, ActiveStyle.CustomRasterizerState);
-            ActiveStyle.DrawLog(Main.spriteBatch);
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred,
+                QuestManager.ActiveStyle.CustomBlendState,
+                QuestManager.ActiveStyle.CustomSamplerState,
+                QuestManager.ActiveStyle.CustomDepthStencilState,
+                QuestManager.ActiveStyle.CustomRasterizerState);
+
+            QuestManager.ActiveStyle.DrawLog(Main.spriteBatch);
             Main.spriteBatch.End();
 
             graphics.SetRenderTargets(null);
@@ -63,7 +59,7 @@ namespace QuestBooks.Systems
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
-                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() / 2f, null, Color.White, 0f, ScreenRenderTarget.Size() / 2f, 1f, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() / 2f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
                     return true;
                 },
                 InterfaceScaleType.None
@@ -72,29 +68,22 @@ namespace QuestBooks.Systems
 
         public override void Load()
         {
-            SetupRenderTarget(new(Main.screenWidth, Main.screenHeight));
+            SetupRenderTarget();
 
             // Prepare render targets.
             Main.OnPreDraw += (_) => DrawQuestLog();
-            Main.OnResolutionChanged += (newSize) => SetupRenderTarget(newSize.ToPoint());
+            Main.OnResolutionChanged += _ => SetupRenderTarget();
         }
 
-        public override void PostSetupContent()
+        public static void SetupRenderTarget()
         {
-            // TODO: Change this for config loading
-            ActiveStyle = new BasicQuestLogStyle();
-            ActiveStyle.OnSelect();
-        }
-
-        public static void SetupRenderTarget(Point screenSize)
-        {
-            void ResetAction()
+            static void ResetAction()
             {
                 ScreenRenderTarget?.Dispose();
                 ScreenRenderTarget = new(
                     Main.graphics.GraphicsDevice,
-                    screenSize.X,
-                    screenSize.Y,
+                    Main.graphics.GraphicsDevice.Viewport.Width,
+                    Main.graphics.GraphicsDevice.Viewport.Height,
                     false,
                     SurfaceFormat.Color,
                     DepthFormat.None,

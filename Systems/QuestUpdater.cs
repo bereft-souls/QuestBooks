@@ -1,4 +1,5 @@
-﻿using MonoMod.Utils;
+﻿using Microsoft.Xna.Framework;
+using MonoMod.Utils;
 using QuestBooks.Systems.NetCode;
 using Terraria;
 using Terraria.ID;
@@ -8,6 +9,12 @@ namespace QuestBooks.Systems
 {
     internal class QuestUpdater : ModSystem
     {
+        // Update the active quest log style.
+        public override void UpdateUI(GameTime gameTime)
+        {
+            QuestManager.ActiveStyle.UpdateLog();
+        }
+
         // World quests are updated in singleplayer and on the server.
         // Not on multiplayer clients.
         public static void UpdateWorldQuests()

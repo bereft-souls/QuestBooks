@@ -82,7 +82,7 @@ namespace QuestBooks.Controls
             QuestLogDrawer.Toggle(false);
         }
 
-        public override void SaveData(TagCompound tag) => QuestLogDrawer.ActiveStyle.SavePlayerData(tag);
-        public override void LoadData(TagCompound tag) => QuestLogDrawer.ActiveStyle.LoadPlayerData(tag);
+        public override void SaveData(TagCompound tag) => QuestManager.ActiveStyle.SavePlayerData(tag);
+        public override void LoadData(TagCompound tag) => QuestManager.ActiveStyle.LoadPlayerData(tag);
     }
 }
