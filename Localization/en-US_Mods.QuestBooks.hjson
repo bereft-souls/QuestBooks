@@ -75,30 +75,4 @@ VanillaQuests: {
 		TestChapter4: TestChapter4
 		TestChapter5: TestChapter5
 	}
-
-	TestBook7: {
-		DisplayName: TestBook7
-		TestChapter1: TestChapter1
-		TestChapter2: TestChapter2
-		TestChapter3: TestChapter3
-		TestChapter4: TestChapter4
-	}
-
-	TestBook8: {
-		DisplayName: TestBook8
-		TestChapter1: TestChapter1
-		TestChapter2: TestChapter2
-		TestChapter3: TestChapter3
-	}
-
-	TestBook9: {
-		DisplayName: TestBook9
-		TestChapter1: TestChapter1
-		TestChapter2: TestChapter2
-	}
-
-	TestBook10: {
-		DisplayName: TestBook10
-		TestChapter1: TestChapter1
-	}
 }

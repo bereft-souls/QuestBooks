@@ -65,6 +65,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         private static float targetScale = 1f;
 
         private static bool WantsRetarget = false;
+        const float scrollAcceleration = 0.2f;
+
+        private static float realBooksScrollOffset = 0;
+        private static float realChaptersScrollOffset = 0;
+
         private static int BooksScrollOffset = 0;
         private static int ChaptersScrollOffset = 0;
 
@@ -245,9 +250,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 }
             }
 
+            realBooksScrollOffset = MathHelper.Lerp(realBooksScrollOffset, BooksScrollOffset, scrollAcceleration);
+
             foreach ((var rectangle, var questBook) in bookLibrary)
             {
-                rectangle.Offset(0, BooksScrollOffset);
+                rectangle.Offset(0, (int)realBooksScrollOffset);
                 bool hovered = rectangle.Contains(mouseBooks);
 
                 if (hovered && LeftMouseJustReleased)
@@ -259,6 +266,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                         SelectedBook = null;
                     
                     ChaptersScrollOffset = 0;
+                    realChaptersScrollOffset = 0f;
                 }
 
                 DrawTasks.Add(sb =>
@@ -329,7 +337,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                 if (data != 0)
                 {
-                    int scrollAmount = data / 6;
+                    int scrollAmount = (int)(data / 2.5f);
                     ChaptersScrollOffset += scrollAmount;
 
                     Rectangle lastBook = chapterLibrary[^1].area;
@@ -343,9 +351,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 }
             }
 
+            realChaptersScrollOffset = MathHelper.Lerp(realChaptersScrollOffset, ChaptersScrollOffset, scrollAcceleration);
+
             foreach ((var rectangle, var questLine) in chapterLibrary)
             {
-                rectangle.Offset(0, ChaptersScrollOffset);
+                rectangle.Offset(0, (int)realChaptersScrollOffset);
                 bool hovered = hoveringChapters && rectangle.Contains(mouseChapters);
 
                 if (hovered && LeftMouseJustReleased)
@@ -355,6 +365,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                     else
                         SelectedChapter = null;
+
                     //QuestAreaPositionOffset = Vector2.Zero;
                 }
 
@@ -403,7 +414,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         private void UpdateQuestArea(Rectangle questArea)
         {
             SwitchTargets(QuestAreaTarget);
-            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Gray * 0.08f));
+            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Gray * 0.12f));
             SwitchTargets(null);
         }
 
