@@ -71,10 +71,10 @@ namespace QuestBooks.Utilities
 
                 Vector2 origin = alignment switch
                 {
-                    TextAlignment.Left => new Vector2(0, textSize.Y / 2f),
-                    TextAlignment.Middle => textSize / 2f,
-                    TextAlignment.Right => new Vector2(textSize.X, textSize.Y / 2f),
-                    _ => textSize / 2f
+                    TextAlignment.Left => new Vector2(0, textSize.Y * 0.5f),
+                    TextAlignment.Middle => textSize * 0.5f,
+                    TextAlignment.Right => new Vector2(textSize.X, textSize.Y * 0.5f),
+                    _ => textSize * 0.5f
                 };
 
                 Vector2 drawPos = alignment switch

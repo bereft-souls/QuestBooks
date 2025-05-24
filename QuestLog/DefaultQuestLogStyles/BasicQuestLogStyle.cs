@@ -94,19 +94,9 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             QuestAreaTarget?.Dispose();
         }
 
-        // Draw the log texture before running through all of our queued
-        // draw tasks from update. This allows us to practically handle
-        // updating and drawing at the same time, while skipping over
-        // performing the actual draw work when it is not necessary.
-        public override void DrawLog(SpriteBatch spriteBatch)
+        public override void OnToggle(bool active)
         {
-            Vector2 halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
 
-            Texture2D logTexture = QuestAssets.BasicQuestCanvas;
-            spriteBatch.Draw(logTexture, halfRealScreen + (LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
-
-            foreach (var drawAction in DrawTasks)
-                drawAction(spriteBatch);
         }
 
         public override void UpdateLog()
@@ -190,6 +180,21 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
             if (MouseTooltip is not null)
                 Main.instance.MouseText(MouseTooltip, "", noOverride: true);
+        }
+
+        // Draw the log texture before running through all of our queued
+        // draw tasks from update. This allows us to practically handle
+        // updating and drawing at the same time, while skipping over
+        // performing the actual draw work when it is not necessary.
+        public override void DrawLog(SpriteBatch spriteBatch)
+        {
+            Vector2 halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
+
+            Texture2D logTexture = QuestAssets.BasicQuestCanvas;
+            spriteBatch.Draw(logTexture, halfRealScreen + (LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
+
+            foreach (var drawAction in DrawTasks)
+                drawAction(spriteBatch);
         }
 
         #region Components

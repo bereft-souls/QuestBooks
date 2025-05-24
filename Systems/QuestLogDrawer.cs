@@ -59,7 +59,7 @@ namespace QuestBooks.Systems
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
-                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() / 2f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() * 0.5f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
                     return true;
                 },
                 InterfaceScaleType.None
