@@ -17,7 +17,7 @@ namespace QuestBooks.Quests
 
             for (int i = 0; i < testBookCount; i++)
             {
-                string bookKeys = QuestBooks.Instance.GetLocalizationKey($"VanillaQuests.TestBook{i + 1}");
+                string bookKeys = QuestBooksMod.Instance.GetLocalizationKey($"VanillaQuests.TestBook{i + 1}");
 
                 var basicBook = new BasicQuestBook()
                 {
@@ -25,13 +25,13 @@ namespace QuestBooks.Quests
                     QuestLines = [..Enumerable.Range(0, maxQuestLines - i).Select(num => new BasicQuestLine() { NameKey = $"{bookKeys}.TestChapter{num + 1}" })]
                 };
 
-                QuestBooks.AddQuestBook(basicBook, QuestBooks.Instance);
+                QuestBooksMod.AddQuestBook(basicBook, QuestBooksMod.Instance);
             }
 
             return;
 
             foreach (string book in Books)
-                QuestBooks.Instance.Call("addquestbook", book, QuestBooks.Instance);
+                QuestBooksMod.Instance.Call("addquestbook", book, QuestBooksMod.Instance);
         }
     }
 }

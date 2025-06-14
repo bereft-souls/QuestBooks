@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 namespace QuestBooks
 {
     [EnableDesigner]
-	public class QuestBooks : Mod
+	public class QuestBooksMod : Mod
 	{
         public static Mod Instance { get; private set; }
         public static bool DesignerEnabled { get; set; } = false;
@@ -27,8 +27,8 @@ namespace QuestBooks
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
-            Type packetType = PacketManager.IdToPacket[reader.ReadByte()];
-            var packet = (QuestPacket)Activator.CreateInstance(packetType);
+            var packetType = PacketManager.IdToPacket[reader.ReadByte()];
+            var packet = (QuestPacket)Activator.CreateInstance(packetType)!;
             packet.HandlePacket(reader, whoAmI);
         }
 
@@ -83,14 +83,17 @@ namespace QuestBooks
                     if (args[2] is not Mod)
                         return new ArgumentException("Invalid arguments: Third argument must be the mod instance that is adding this questbook");
 
-                    if (args[1] is QuestBook questBook)
-                        AddQuestBook(questBook, (Mod)args[2]);
-
-                    else if (args[1] is string serialized)
-                        AddQuestBook(JsonConvert.DeserializeObject<BasicQuestBook>(serialized), (Mod)args[2]);
-
-                    else
-                        return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer");
+                    switch (args[1])
+                    {
+                        case QuestBook questBook:
+                            AddQuestBook(questBook, (Mod)args[2]);
+                            break;
+                        case string serialized:
+                            AddQuestBook(JsonConvert.DeserializeObject<BasicQuestBook>(serialized), (Mod)args[2]);
+                            break;
+                        default:
+                            return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer");
+                    }
 
                     return true;
 
@@ -98,7 +101,7 @@ namespace QuestBooks
                     if (args[2] is not Mod)
                         return new ArgumentException("Invalid arguments: Third argument must be the mod instance that is adding this quest log style");
 
-                    bool styleExclusive = args.Length >= 4 && args[3] is bool exclusive && exclusive;
+                    bool styleExclusive = args.Length < 4 || args[3] is not bool exclusive || !exclusive;
 
                     if (args[1] is QuestLogStyle logStyle)
                         AddQuestLogStyle(logStyle, (Mod)args[2], styleExclusive);

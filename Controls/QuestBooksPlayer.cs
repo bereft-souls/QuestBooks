@@ -17,9 +17,9 @@ namespace QuestBooks.Controls
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            QuestBooks.DesignerEnabled = !QuestBooks.DesignerEnabled;
+            QuestBooksMod.DesignerEnabled = !QuestBooksMod.DesignerEnabled;
 
-            if (QuestBooks.DesignerEnabled)
+            if (QuestBooksMod.DesignerEnabled)
                 SoundEngine.PlaySound(SoundID.AchievementComplete);
 
             else

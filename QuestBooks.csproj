@@ -10,6 +10,9 @@
 	<ItemGroup>
 	  <Folder Include="Assets\Shaders\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="NativeFileDialogSharp" Version="0.6.0-alpha" />
+	</ItemGroup>
 
 	<!-- References -->
 

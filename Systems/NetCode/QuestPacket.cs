@@ -12,7 +12,7 @@ namespace QuestBooks.Systems.NetCode
 
         public ModPacket Create()
         {
-            var packet = QuestBooks.Instance.GetPacket();
+            var packet = QuestBooksMod.Instance.GetPacket();
             packet.Write(PacketManager.PacketToId[GetType()]);
             return packet;
         }

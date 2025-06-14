@@ -6,6 +6,12 @@
 			"commandLineArgs": "$(tMLPath)",
 			"workingDirectory": "$(tMLSteamPath)"
 		},
+		"Profiling": {
+			"commandName": "Executable",
+			"executablePath": "$(DotNetName)",
+			"commandLineArgs": "$(tMLPath)",
+			"workingDirectory": "$(tMLSteamPath)"
+		},
 		"TerrariaServer": {
 			"commandName": "Executable",
 			"executablePath": "$(DotNetName)",
