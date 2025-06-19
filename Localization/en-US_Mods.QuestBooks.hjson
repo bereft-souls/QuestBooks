@@ -1,5 +1,60 @@
 Configs.QuestLogConfig.DisplayName: Quest Log Config
 
+Tooltips: {
+	OpenQuestLog: Open Quest Log
+	ToggleDesigner:
+		'''
+		[c/CCC018:Toggle Designer]
+		Toggles whether the quest log designer is active.
+		'''
+	SaveAll:
+		'''
+		[c/CCC018:Save All]
+		Saves all books currently open in the designer.
+		Select a folder for the books to be exported to.
+		'''
+	SaveSelected:
+		'''
+		[c/CCC018:Save Selected Book]
+		Exports the selected quest book.
+		Choose a file to export to.
+		'''
+	LoadAll:
+		'''
+		[c/CCC018:Load All Books]
+		Loads multiple quest books into the designer.
+		[c/FF0000:WARNING]: This will clear the books currently in the designer, so be sure to save your progress!
+		'''
+	LoadBook:
+		'''
+		[c/CCC018:Load Quest Book]
+		Loads a quest book from a file.
+		Choose a file to import from.
+		'''
+	AddBook:
+		'''
+		[c/CCC018:Add Book]
+		Adds a book to the designer.
+		'''
+	AddChapter:
+		'''
+		[c/CCC018:Add Chapter]
+		Adds a chapter to the selected quest book.
+		'''
+	DeleteBook:
+		'''
+		[c/CCC018:Delete Book]
+		Deletes the selected quest book.
+		[c/FF0000:WARNING]: This cannot be undone!
+		'''
+	DeleteChapter:
+		'''
+		[c/CCC018:Delete Book]
+		Deletes the selected chapter from the selected quest book.
+		[c/FF0000:WARNING]: This cannot be undone!
+		'''
+}
+
 Keybinds: {
 	ToggleQuestBook.DisplayName: Toggle Quest Log
 	ToggleQuestLog.DisplayName: Toggle Quest Log

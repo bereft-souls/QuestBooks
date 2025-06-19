@@ -22,8 +22,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         // some parameters to handle "sliding" between books
         private static bool previousBookSwipeDirection = false;
         private static float previousBookSwipeOffset = 0f;
-        private static QuestBook previousBook = null;
-        public static QuestBook SelectedBook = null;
+        private static BasicQuestBook previousBook = null;
+        public static BasicQuestBook SelectedBook = null;
 
         private static float realBooksScrollOffset = 0;
         private static float realChaptersScrollOffset = 0;
@@ -118,11 +118,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     outlineColor = Color.Lerp(outlineColor, Color.Black, 0.4f);
 
                     string displayName = questBook.DisplayName;
-                    Rectangle nameRectangle = rectangle.CreateScaledMargins(left: 0.065f, right: 0.165f, top: 0.1f, bottom: 0.1f);
+                    Rectangle nameRectangle = rectangle.CreateScaledMargins(left: 0.065f, right: 0.065f, top: 0.1f, bottom: 0.1f);
 
                     float scaleShift = InverseLerp(0.4f, 2f, LogScale) * 0.8f;
                     float stroke = MathHelper.Lerp(1f, 4f, scaleShift);
-                    Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift));
+                    Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift) / MathHelper.Clamp(displayName.Length / 15f, 1f, 2f));
 
                     var font = FontAssets.DeathText.Value;
                     var (line, drawPos, origin, scale) = GetRectangleStringParameters(nameRectangle, font, displayName, offset: offset, alignment: Utilities.TextAlignment.Left)[0];
@@ -136,6 +136,9 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             }
 
             SwitchTargets(null);
+
+            if (!UseDesigner)
+                return;
         }
     }
 }

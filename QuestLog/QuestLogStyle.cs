@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria.ModLoader.IO;
+using Terraria.UI;
 
 namespace QuestBooks.QuestLog
 {
@@ -27,6 +29,7 @@ namespace QuestBooks.QuestLog
 
         public virtual void UpdateLog() { }
         public abstract void DrawLog(SpriteBatch spriteBatch);
+        public virtual void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) { }
 
         public virtual void SavePlayerData(TagCompound tag) { }
         public virtual void SaveWorldData(TagCompound tag) { }

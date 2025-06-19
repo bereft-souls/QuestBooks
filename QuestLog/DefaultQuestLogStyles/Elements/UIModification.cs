@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria;
+using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 {
@@ -23,24 +24,21 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         {
             if (QuestBooksMod.DesignerEnabled)
             {
-                Rectangle designerToggle = LogArea.CookieCutter(new(0f, -1.1f), new(0.06f, 0.05f));
+                Rectangle designerToggle = LogArea.CookieCutter(new(0.94f, -1.08f), new(0.05f, 0.06f));
 
                 if (designerToggle.Contains(MouseCanvas))
                 {
-                    Main.LocalPlayer.mouseInterface = true;
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ToggleDesigner");
+                    LockMouse();
 
                     if (LeftMouseJustPressed)
                     {
                         UseDesigner = !UseDesigner;
-
                         SoundEngine.PlaySound(UseDesigner ? SoundID.Item28 : SoundID.Item78);
                     }
                 }
 
-                AddRectangle(designerToggle, Color.Orange);
-
-                if (UseDesigner)
-                    AddRectangle(LogArea, Color.Aquamarine);
+                AddRectangle(designerToggle, Color.Yellow, fill: true);
             }
         }
 

@@ -4,6 +4,7 @@ using QuestBooks.Assets;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 
 namespace QuestBooks.Utilities
@@ -17,6 +18,25 @@ namespace QuestBooks.Utilities
 
     public static partial class Utils
     {
+        private static readonly FieldInfo customEffectField = typeof(SpriteBatch).GetField("customEffect", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly FieldInfo transformMatrixField = typeof(SpriteBatch).GetField("transformMatrix", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        public static void GetDrawParameters(this SpriteBatch spriteBatch,
+            out BlendState blendState,
+            out SamplerState samplerState,
+            out DepthStencilState depthStencilState,
+            out RasterizerState rasterizerState,
+            out Effect effect,
+            out Matrix matrix)
+        {
+            blendState = spriteBatch.GraphicsDevice.BlendState;
+            samplerState = spriteBatch.GraphicsDevice.SamplerStates[0];
+            depthStencilState = spriteBatch.GraphicsDevice.DepthStencilState;
+            rasterizerState = spriteBatch.GraphicsDevice.RasterizerState;
+            effect = customEffectField.GetValue(spriteBatch) as Effect;
+            matrix = (Matrix)transformMatrixField.GetValue(spriteBatch);
+        }
+
         public static void DrawRectangle(this SpriteBatch spriteBatch, Rectangle rectangle, Color color, float stroke = 2f, bool fill = false)
         {
             Texture2D pixel = QuestAssets.MagicPixel;
@@ -108,12 +128,39 @@ namespace QuestBooks.Utilities
             float extraScale = 1f,
             TextAlignment alignment = TextAlignment.Middle,
             Vector2? offset = null,
-            float verticalSpacing = 0)
+            float verticalSpacing = 0,
+            bool clipBounds = true)
         {
             var results = GetRectangleStringParameters(rectangle, font, text, minimumScale, maxScale, extraScale, alignment, offset, verticalSpacing);
 
-            foreach (var (line, drawPos, origin, scale) in results)
-                spriteBatch.DrawString(font, line, drawPos, color, 0f, origin, scale * extraScale, SpriteEffects.None, 0f);
+            bool cachedClip = spriteBatch.GraphicsDevice.RasterizerState.ScissorTestEnable;
+            Rectangle cachedClipArea = spriteBatch.GraphicsDevice.ScissorRectangle;
+
+            if (clipBounds)
+            {
+                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                spriteBatch.End();
+
+                raster.ScissorTestEnable = true;
+                spriteBatch.GraphicsDevice.ScissorRectangle = Rectangle.Intersect(cachedClipArea, rectangle);
+
+                spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+            }
+
+            if (spriteBatch.GraphicsDevice.ScissorRectangle != Rectangle.Empty)
+                foreach (var (line, drawPos, origin, scale) in results)
+                    spriteBatch.DrawString(font, line, drawPos, color, 0f, origin, scale * extraScale, SpriteEffects.None, 0f);
+
+            if (clipBounds)
+            {
+                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                spriteBatch.End();
+
+                raster.ScissorTestEnable = cachedClip;
+                spriteBatch.GraphicsDevice.ScissorRectangle = cachedClipArea;
+
+                spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+            }
         }
     }
 }

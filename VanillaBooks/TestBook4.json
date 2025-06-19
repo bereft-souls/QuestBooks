@@ -1,0 +1,65 @@
+{
+  "$type": "QuestBooks.QuestLog.DefaultQuestBooks.BasicQuestBook, QuestBooks",
+  "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.DisplayName",
+  "QuestLines": {
+    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks]], System.Private.CoreLib",
+    "$values": [
+      {
+        "$type": "QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks",
+        "ChapterElements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestLineElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.TestChapter1"
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks",
+        "ChapterElements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestLineElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.TestChapter2"
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks",
+        "ChapterElements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestLineElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.TestChapter3"
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks",
+        "ChapterElements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestLineElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.TestChapter4"
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks",
+        "ChapterElements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestLineElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.TestChapter5"
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks",
+        "ChapterElements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestLineElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.TestChapter6"
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultQuestLines.BasicQuestLine, QuestBooks",
+        "ChapterElements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestLineElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook4.TestChapter7"
+      }
+    ]
+  }
+}

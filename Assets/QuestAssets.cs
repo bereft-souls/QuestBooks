@@ -15,6 +15,9 @@ namespace QuestBooks.Assets
     {
         public static LazyTexture MagicPixel { get; } = new("Terraria/Images/MagicPixel", true);
 
+        public static LazyTexture QuestBookIcon { get; } = new("QuestBookIcon");
+        public static LazyTexture QuestBookOutline { get; } = new("QuestBookOutline");
+
         public static LazyTexture BasicQuestCanvas { get; } = new("QuestLogCanvas");
         public static LazyTexture ResizeIndicator { get; } = new("ResizeIndicator");
         public static LazyTexture LogEntryBackground { get; } = new("LogEntryBackground");

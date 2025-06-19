@@ -22,8 +22,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         // some parameters to handle "sliding" between lines
         private static bool previousLineSwipeDirection = false;
         private static float previousLineSwipeOffset = 0f;
-        private static QuestLine previousLine = null;
-        public static QuestLine SelectedChapter = null;
+        private static BasicQuestLine previousLine = null;
+        public static BasicQuestLine SelectedChapter = null;
 
         private static int BooksScrollOffset = 0;
         private static int ChaptersScrollOffset = 0;
@@ -159,7 +159,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                     float scaleShift = InverseLerp(0.4f, 2f, LogScale) * 0.8f;
                     float stroke = MathHelper.Lerp(1f, 4f, scaleShift);
-                    Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift));
+                    Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift) / MathHelper.Clamp(displayName.Length / 15f, 1f, 2f));
 
                     var font = FontAssets.DeathText.Value;
                     var (line, drawPos, origin, scale) = GetRectangleStringParameters(nameRectangle, font, displayName, offset: offset, alignment: Utilities.TextAlignment.Left)[0];

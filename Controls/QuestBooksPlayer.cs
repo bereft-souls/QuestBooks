@@ -36,12 +36,6 @@ namespace QuestBooks.Controls
 
             // Toggle the QuestLog.
             QuestLogDrawer.Toggle();
-
-            // If the inventory is currently open, close it.
-            // We can't guarantee the log won't overlap with the inventory,
-            // so the easiest way to reduce mouse overlap conflict is just close it.
-            if (QuestLogDrawer.DisplayLog && Main.playerInventory)
-                Main.playerInventory = false;
         }
 
         public override void SetControls()

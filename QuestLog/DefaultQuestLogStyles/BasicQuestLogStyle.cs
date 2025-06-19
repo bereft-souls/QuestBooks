@@ -23,8 +23,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         public override string DisplayName => "Book";
 
         // Available element retrieval
-        public static IEnumerable<BasicQuestBook> AvailableBooks { get => QuestManager.QuestBooks.Cast<BasicQuestBook>(); }
-        public static IEnumerable<BasicQuestLine> AvailableChapters { get => SelectedBook?.Chapters.Cast<BasicQuestLine>() ?? []; }
+        public static IEnumerable<BasicQuestBook> AvailableBooks { get => QuestManager.QuestBooks.Where(b => b is BasicQuestBook).Cast<BasicQuestBook>(); }
+        public static IEnumerable<BasicQuestLine> AvailableChapters { get => SelectedBook?.Chapters.Where(c => c is BasicQuestLine).Cast<BasicQuestLine>() ?? []; }
 
         // Mouse position on canvas
         public static Vector2 ScaledMousePos { get; set; }
@@ -147,7 +147,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState);
             });
 
-            DrawMouseTooltip();
+            if (UseDesigner)
+                UpdateDesigner(books, chapters, questArea);
         }
 
         // This allows us to practically handle updating and drawing at the same time,

@@ -1,10 +1,13 @@
-﻿using QuestBooks.QuestLog;
+﻿using Newtonsoft.Json;
+using QuestBooks.QuestLog;
 using QuestBooks.Quests;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 using Terraria.ModLoader.IO;
@@ -118,6 +121,31 @@ namespace QuestBooks.Systems
         {
             foreach (string quest in completedQuests)
                 QuestManager.MarkComplete(quest);
+        }
+
+        public static void SaveQuestBook(QuestBook book, string filePath)
+        {
+            string serialized = JsonConvert.SerializeObject(book, Formatting.Indented, new JsonSerializerSettings()
+            { TypeNameHandling = TypeNameHandling.All });
+
+            File.WriteAllText(filePath, serialized);
+        }
+
+        public static QuestBook LoadQuestBook(string filePath)
+        {
+            string serialized = File.ReadAllText(filePath);
+
+            try
+            {
+                QuestBook book = JsonConvert.DeserializeObject<QuestBook>(serialized, new JsonSerializerSettings()
+                { TypeNameHandling = TypeNameHandling.All });
+
+                return book;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
