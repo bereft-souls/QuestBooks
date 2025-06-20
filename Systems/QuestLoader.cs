@@ -1,5 +1,9 @@
 ﻿using Newtonsoft.Json;
 using QuestBooks.QuestLog;
+using QuestBooks.QuestLog.DefaultQuestBooks;
+using QuestBooks.QuestLog.DefaultQuestLineElements;
+using QuestBooks.QuestLog.DefaultQuestLines;
+using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.Quests;
 using System;
 using System.Collections.Frozen;
@@ -35,7 +39,12 @@ namespace QuestBooks.Systems
                 return;
 
             checkedAssemblies.Add(loadingAssembly);
-            var questTypes = AssemblyManager.GetLoadableTypes(loadingAssembly).Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
+            var types = AssemblyManager.GetLoadableTypes(loadingAssembly);
+            var questTypes = types.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
+
+            BasicQuestLogStyle.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestBook))));
+            BasicQuestLogStyle.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestLine))));
+            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestElement))));
 
             foreach (var questType in questTypes)
             {

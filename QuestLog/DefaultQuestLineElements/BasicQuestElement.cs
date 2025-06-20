@@ -10,7 +10,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLineElements
     /// <summary>
     /// A simple canvas element that contains quest information.
     /// </summary>
-    public class BasicQuestElement : QuestElement
+    public class BasicQuestElement() : QuestElement
     {
         public Vector2 CanvasPosition { get; set; }
 

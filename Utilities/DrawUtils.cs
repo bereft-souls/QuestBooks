@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
+using Terraria.UI;
+using static System.Net.Mime.MediaTypeNames;
+using static Terraria.GameContent.Animations.IL_Actions.Sprites;
 
 namespace QuestBooks.Utilities
 {
@@ -117,6 +120,52 @@ namespace QuestBooks.Utilities
 
             return results;
         }
+        public static void DrawOutlinedStringInRectangle(this SpriteBatch spriteBatch,
+            Rectangle rectangle,
+            DynamicSpriteFont font,
+            Color color,
+            Color outlineColor,
+            string text,
+            float stroke = 2f,
+            float? minimumScale = null,
+            float? maxScale = null,
+            float extraScale = 1f,
+            TextAlignment alignment = TextAlignment.Middle,
+            Vector2? offset = null,
+            float verticalSpacing = 0,
+            bool clipBounds = true)
+        {
+            var results = GetRectangleStringParameters(rectangle, font, text, minimumScale, maxScale, extraScale, alignment, offset, verticalSpacing);
+
+            bool cachedClip = spriteBatch.GraphicsDevice.RasterizerState.ScissorTestEnable;
+            Rectangle cachedClipArea = spriteBatch.GraphicsDevice.ScissorRectangle;
+
+            if (clipBounds)
+            {
+                spriteBatch.End();
+                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+
+                raster.ScissorTestEnable = true;
+                spriteBatch.GraphicsDevice.ScissorRectangle = Rectangle.Intersect(cachedClipArea, rectangle);
+
+                spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+            }
+
+            if (spriteBatch.GraphicsDevice.ScissorRectangle != Rectangle.Empty)
+                foreach (var (line, drawPos, origin, scale) in results)
+                    spriteBatch.DrawOutlinedString(font, line, drawPos, origin, scale, stroke, outlineColor, color);
+
+            if (clipBounds)
+            {
+                spriteBatch.End();
+                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+
+                raster.ScissorTestEnable = cachedClip;
+                spriteBatch.GraphicsDevice.ScissorRectangle = cachedClipArea;
+
+                spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+            }
+        }
 
         public static void DrawStringInRectangle(this SpriteBatch spriteBatch,
             Rectangle rectangle,
@@ -138,8 +187,8 @@ namespace QuestBooks.Utilities
 
             if (clipBounds)
             {
-                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
                 spriteBatch.End();
+                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
                 raster.ScissorTestEnable = true;
                 spriteBatch.GraphicsDevice.ScissorRectangle = Rectangle.Intersect(cachedClipArea, rectangle);
@@ -149,18 +198,58 @@ namespace QuestBooks.Utilities
 
             if (spriteBatch.GraphicsDevice.ScissorRectangle != Rectangle.Empty)
                 foreach (var (line, drawPos, origin, scale) in results)
-                    spriteBatch.DrawString(font, line, drawPos, color, 0f, origin, scale * extraScale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(font, line, drawPos, color, 0f, origin, scale, SpriteEffects.None, 0f);
 
             if (clipBounds)
             {
-                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
                 spriteBatch.End();
+                spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
                 raster.ScissorTestEnable = cachedClip;
                 spriteBatch.GraphicsDevice.ScissorRectangle = cachedClipArea;
 
                 spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
             }
+        }
+
+        public static void DrawOutlinedString(this SpriteBatch spriteBatch,
+            SpriteFont font,
+            string line, 
+           Vector2 drawPos,
+           Vector2 origin,
+           float scale,
+           float stroke = 2f,
+           Color? outlineColor = null,
+           Color? textColor = null)
+        {
+            Color strokeColor = outlineColor ?? Color.Black;
+            Color color = textColor ?? Color.White;
+
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(-stroke, 0f), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(stroke, 0f), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, stroke), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, -stroke), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos, color, 0f, origin, scale, SpriteEffects.None, 0f);
+        }
+
+        public static void DrawOutlinedString(this SpriteBatch spriteBatch,
+            DynamicSpriteFont font,
+            string line,
+           Vector2 drawPos,
+           Vector2 origin,
+           float scale,
+           float stroke = 2f,
+           Color? outlineColor = null,
+           Color? textColor = null)
+        {
+            Color strokeColor = outlineColor ?? Color.Black;
+            Color color = textColor ?? Color.White;
+
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(-stroke, 0f), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(stroke, 0f), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, stroke), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, -stroke), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos, color, 0f, origin, scale, SpriteEffects.None, 0f);
         }
     }
 }

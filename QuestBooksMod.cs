@@ -33,7 +33,7 @@ namespace QuestBooks
         public override void PostSetupContent()
         {
             EnableDesigner();
-            VanillaQuests.AddVanillaQuests();
+            VanillaQuestBooks.AddVanillaQuests();
             AddQuestLogStyle(new BasicQuestLogStyle(), this);
         }
 
@@ -46,6 +46,18 @@ namespace QuestBooks
         public static void EnableDesigner()
         {
             DesignerEnabled = true;
+        }
+
+        /// <summary>
+        /// Deserializes a custom quest book and adds it to the log.<br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// </summary>
+        public static void AddQuestBook(string serializedQuestBook, Mod mod)
+        {
+            var questBook = JsonConvert.DeserializeObject<QuestBook>(serializedQuestBook, new JsonSerializerSettings()
+            { TypeNameHandling = TypeNameHandling.All });
+
+            AddQuestBook(questBook, mod);
         }
 
         /// <summary>
@@ -95,7 +107,7 @@ namespace QuestBooks
                             AddQuestBook(questBook, (Mod)args[2]);
                             break;
                         case string serialized:
-                            AddQuestBook(JsonConvert.DeserializeObject<BasicQuestBook>(serialized), (Mod)args[2]);
+                            AddQuestBook(serialized, (Mod)args[2]);
                             break;
                         default:
                             return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer");

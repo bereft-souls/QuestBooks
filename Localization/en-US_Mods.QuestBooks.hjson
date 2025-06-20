@@ -53,6 +53,9 @@ Tooltips: {
 		Deletes the selected chapter from the selected quest book.
 		[c/FF0000:WARNING]: This cannot be undone!
 		'''
+	QuestBookType: Quest Book Type:
+	QuestLineType: Quest Line Type:
+	LocalizationKey: Localization Key:
 }
 
 Keybinds: {

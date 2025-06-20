@@ -26,6 +26,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         public static IEnumerable<BasicQuestBook> AvailableBooks { get => QuestManager.QuestBooks.Where(b => b is BasicQuestBook).Cast<BasicQuestBook>(); }
         public static IEnumerable<BasicQuestLine> AvailableChapters { get => SelectedBook?.Chapters.Where(c => c is BasicQuestLine).Cast<BasicQuestLine>() ?? []; }
 
+        // These are registered on load
+        public static readonly List<Type> AvailableQuestBookTypes = [];
+        public static readonly List<Type> AvailableQuestLineTypes = [];
+        public static readonly List<Type> AvailableQuestElementTypes = [];
+
         // Mouse position on canvas
         public static Vector2 ScaledMousePos { get; set; }
         public static Point MouseCanvas { get; set; }

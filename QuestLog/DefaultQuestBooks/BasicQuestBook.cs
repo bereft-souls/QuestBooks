@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultQuestLines;
+using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.Quests;
 using ReLogic.Graphics;
 using System;
@@ -20,7 +21,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
     /// <summary>
     /// Represents a basic <see cref="QuestBook"/> implementation, containing a set of <see cref="QuestLine"/>s.
     /// </summary>
-    public class BasicQuestBook : QuestBook
+    public class BasicQuestBook() : QuestBook
     {
         /// <summary>
         /// The list of all quest lines contained within this book.
@@ -97,25 +98,27 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
             if (hovered)
                 color = Color.Lerp(color, Color.White, 0.1f);
 
-            Color outlineColor = Color.Lerp(color, Color.Black, 0.2f);
-            DrawBasicBook(spriteBatch, DisplayName, color, Color.White, outlineColor, designatedArea, scale);
+            Color outlineColor = BasicQuestLogStyle.UseDesigner && selected ? Color.Red : Color.Lerp(color, Color.Black, 0.2f);
+            Color textOutlineColor = Color.Lerp(color, Color.Black, 0.4f);
+            DrawBasicBook(spriteBatch, DisplayName, color, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
         }
 
         /// <summary>
         /// Performs the default book drawing code to the spritebatch. Draws a simple container with the specified colors, and text inside that container.
         /// </summary>
-        public static void DrawBasicBook(SpriteBatch spriteBatch, string text, Color bookColor, Color textColor, Color outlineColor, Rectangle area, float scale)
+        public static void DrawBasicBook(SpriteBatch spriteBatch, string text, Color bookColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
         {
             spriteBatch.Draw(QuestAssets.LogEntryBackground, area.Center(), null, bookColor, 0f, QuestAssets.LogEntryBackground.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
             spriteBatch.Draw(QuestAssets.LogEntryBorder, area.Center(), null, outlineColor, 0f, QuestAssets.LogEntryBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
-            outlineColor = Color.Lerp(outlineColor, Color.Black, 0.4f);
+            if (string.IsNullOrWhiteSpace(text))
+                return;
 
             spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.LinearClamp, depth, raster, effect, matrix);
 
-            DrawBookText(spriteBatch, text, textColor, outlineColor, area, scale);
+            DrawBookText(spriteBatch, text, textColor, textOutlineColor, area, scale);
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
@@ -135,11 +138,16 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
             var (line, drawPos, origin, textScale) = GetRectangleStringParameters(nameRectangle, font, text, offset: offset, alignment: Utilities.TextAlignment.Left)[0];
             textScale *= 0.8f;
 
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(-stroke, 0f), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(stroke, 0f), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, stroke), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, -stroke), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos, textColor, 0f, origin, textScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawOutlinedString(font, line, drawPos, origin, textScale, stroke, outlineColor, textColor);
+        }
+
+        /// <summary>
+        /// Clones the members of this quest book into a new quest book.
+        /// </summary>
+        public virtual void CloneTo(BasicQuestBook newInstance)
+        {
+            newInstance.NameKey = NameKey;
+            newInstance.QuestLines = QuestLines;
         }
     }
 }

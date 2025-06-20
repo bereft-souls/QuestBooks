@@ -11,13 +11,15 @@ using Terraria.GameContent;
 using Terraria.Localization;
 using ReLogic.Graphics;
 using Terraria;
+using QuestBooks.QuestLog.DefaultQuestLogStyles;
+using QuestBooks.QuestLog.DefaultQuestBooks;
 
 namespace QuestBooks.QuestLog.DefaultQuestLines
 {
     /// <summary>
     /// Represents a basic <see cref="QuestLine"/> implementation, with a chapter name and contained elements.
     /// </summary>
-    public class BasicQuestLine : QuestLine
+    public class BasicQuestLine() : QuestLine
     {
         /// <summary>
         /// The list of all elements contained within this quest line.
@@ -90,25 +92,24 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
             if (hovered)
                 color = Color.Lerp(color, Color.White, 0.1f);
 
-            Color outlineColor = Color.Lerp(color, Color.Black, 0.2f);
-            DrawBasicChapter(spriteBatch, DisplayName, color, Color.White, outlineColor, designatedArea, scale);
+            Color outlineColor = BasicQuestLogStyle.UseDesigner && selected ? Color.Red : Color.Lerp(color, Color.Black, 0.2f);
+            Color textOutlineColor = Color.Lerp(color, Color.Black, 0.4f);
+            DrawBasicChapter(spriteBatch, DisplayName, color, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
         }
 
         /// <summary>
         /// Performs the default chapter drawing code to the spritebatch. Draws a simple container with the specified colors, and text inside the contianer.
         /// </summary>
-        public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color outlineColor, Rectangle area, float scale)
+        public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
         {
             spriteBatch.Draw(QuestAssets.LogEntryBackground, area.Center(), null, chapterColor, 0f, QuestAssets.LogEntryBackground.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
             spriteBatch.Draw(QuestAssets.LogEntryBorder, area.Center(), null, outlineColor, 0f, QuestAssets.LogEntryBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-            
-            outlineColor = Color.Lerp(outlineColor, Color.Black, 0.4f);
 
             spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.LinearClamp, depth, raster, effect, matrix);
 
-            DrawChapterText(spriteBatch, text, textColor, outlineColor, area, scale);
+            DrawChapterText(spriteBatch, text, textColor, textOutlineColor, area, scale);
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
@@ -125,14 +126,16 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
             Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
 
             var font = FontAssets.DeathText.Value;
-            var (line, drawPos, origin, textScale) = GetRectangleStringParameters(nameRectangle, font, text, offset: offset, alignment: Utilities.TextAlignment.Left)[0];
-            textScale *= 0.8f;
+            spriteBatch.DrawOutlinedStringInRectangle(nameRectangle, font, textColor, outlineColor, text, stroke, offset: offset, extraScale: 0.8f, alignment: Utilities.TextAlignment.Left);
+        }
 
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(-stroke, 0f), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(stroke, 0f), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, stroke), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, -stroke), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, line, drawPos, textColor, 0f, origin, textScale, SpriteEffects.None, 0f);
+        /// <summary>
+        /// Clones the members of this quest book into a new quest line.
+        /// </summary>
+        public virtual void CloneTo(BasicQuestLine newInstance)
+        {
+            newInstance.NameKey = NameKey;
+            newInstance.ChapterElements = ChapterElements;
         }
     }
 }
