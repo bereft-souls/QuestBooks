@@ -1,10 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
+using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultQuestLineElements.BaseElements;
 using QuestBooks.Quests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria.GameContent;
 using Terraria.Localization;
+using ReLogic.Graphics;
+using Terraria;
 
 namespace QuestBooks.QuestLog.DefaultQuestLines
 {
@@ -29,7 +35,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// <summary>
         /// A collection of all quests contained by elements in this quest line.<br/>
         /// These quests are all the actual implemented instances, and not duplicates or templates - you can access accurate info or methods from them.<br/>
-        /// Pulls from <see cref="Elements"/>
+        /// Pulls from <see cref="Elements"/>.
         /// </summary>
         [JsonIgnore]
         public IEnumerable<Quest> QuestList => Elements.Where(e => e is QuestElement).Cast<QuestElement>().Select(e => e.Quest);
@@ -37,17 +43,30 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// <summary>
         /// The completion progress of this quest line.<br/>
         /// 0f is no quests completed, and 1f is all quests completed.<br/>
+        /// <c>float.NaN</c> is returned for quest lines with no quests in their elements.<br/>
         /// Pulls from <see cref="QuestList"/>.
         /// </summary>
         [JsonIgnore]
-        public float Progress => (float)QuestList.Count(q => q.Completed) / Math.Max(1, QuestList.Count());
+        public virtual float Progress => QuestList.Any() ? QuestList.Count(q => q.Completed) / QuestList.Count() : float.NaN;
 
         /// <summary>
         /// Whether or not all quests in this questline are complete.<br/>
-        /// Pulls from <see cref="QuestList"/>
+        /// Pulls from <see cref="QuestList"/>.
         /// </summary>
         [JsonIgnore]
-        public bool Complete => QuestList.All(q => q.Completed);
+        public virtual bool Complete => QuestList.All(q => q.Completed);
+
+        /// <summary>
+        /// Determines whether this quest line should appear in the quest log.<br/>
+        /// Useful for hiding certain chapters until progression goals are met.
+        /// </summary>
+        public virtual bool VisibleInLog() => true;
+
+        /// <summary>
+        /// Determines whether this quest line should be able to be selected in the quest log.<br/>
+        /// Useful for when you want to display a chapter, but hide its contents until progression goals are met.
+        /// </summary>
+        public virtual bool IsUnlocked() => true;
 
         /// <summary>
         /// Forwards <see cref="QuestLineElement.Update"/> calls to each element in the quest line.
@@ -56,6 +75,64 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         {
             foreach (QuestLineElement questElement in Elements)
                 questElement.Update();
+        }
+
+        /// <summary>
+        /// Performs the default drawing behavior of for this <see cref="BasicQuestLine"/>. Assigns colors and calls <see cref="DrawBasicChapter(SpriteBatch, string, Color, Color, Color, Rectangle, float)(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.
+        /// </summary>
+        public virtual void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
+        {
+            Color color = Color.MediumSeaGreen;
+
+            if (!selected)
+                color = Color.Lerp(color, Color.Black, 0.35f);
+
+            if (hovered)
+                color = Color.Lerp(color, Color.White, 0.1f);
+
+            Color outlineColor = Color.Lerp(color, Color.Black, 0.2f);
+            DrawBasicChapter(spriteBatch, DisplayName, color, Color.White, outlineColor, designatedArea, scale);
+        }
+
+        /// <summary>
+        /// Performs the default chapter drawing code to the spritebatch. Draws a simple container with the specified colors, and text inside the contianer.
+        /// </summary>
+        public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color outlineColor, Rectangle area, float scale)
+        {
+            spriteBatch.Draw(QuestAssets.LogEntryBackground, area.Center(), null, chapterColor, 0f, QuestAssets.LogEntryBackground.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(QuestAssets.LogEntryBorder, area.Center(), null, outlineColor, 0f, QuestAssets.LogEntryBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+            
+            outlineColor = Color.Lerp(outlineColor, Color.Black, 0.4f);
+
+            spriteBatch.End();
+            spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+            spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.LinearClamp, depth, raster, effect, matrix);
+
+            DrawChapterText(spriteBatch, text, textColor, outlineColor, area, scale);
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+        }
+
+        /// <summary>
+        /// Performs the default chapter text drawing code to the spritebatch. Draws the text as it should sit within the given rectangle with the specified colors.
+        /// </summary>
+        public static void DrawChapterText(SpriteBatch spriteBatch, string text, Color textColor, Color outlineColor, Rectangle area, float scale)
+        {
+            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.065f, right: 0.165f, top: 0.1f, bottom: 0.1f);
+            float scaleShift = InverseLerp(0.4f, 2f, scale) * 0.8f;
+            float stroke = MathHelper.Lerp(1f, 4f, scaleShift);
+            Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
+
+            var font = FontAssets.DeathText.Value;
+            var (line, drawPos, origin, textScale) = GetRectangleStringParameters(nameRectangle, font, text, offset: offset, alignment: Utilities.TextAlignment.Left)[0];
+            textScale *= 0.8f;
+
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(-stroke, 0f), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(stroke, 0f), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, stroke), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, -stroke), outlineColor, 0f, origin, textScale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, line, drawPos, textColor, 0f, origin, textScale, SpriteEffects.None, 0f);
         }
     }
 }

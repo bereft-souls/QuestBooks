@@ -49,7 +49,7 @@ Tooltips: {
 		'''
 	DeleteChapter:
 		'''
-		[c/CCC018:Delete Book]
+		[c/CCC018:Delete Chapter]
 		Deletes the selected chapter from the selected quest book.
 		[c/FF0000:WARNING]: This cannot be undone!
 		'''

@@ -65,12 +65,10 @@ namespace QuestBooks.Systems
                 Point achievementPositionInInventory = new Vector2(860f * Main.inventoryScale, 30f).ToPoint();
                 Rectangle achievement = new(achievementPositionInInventory.X, achievementPositionInInventory.Y, 48, 48);
 
-                Rectangle bookArea = achievement.CookieCutter(new(2f, 0f), new(0.7f, 0.7f));
-                Vector2 center = bookArea.Center();
-                float scale = (float)bookArea.Width / QuestAssets.QuestBookIcon.Asset.Width;
+                Rectangle iconArea = achievement.CookieCutter(new(2f, 0f), new(0.7f, 0.7f));
                 bool hovered = false;
                 
-                if (bookArea.Contains(Main.MouseScreen.ToPoint()))
+                if (iconArea.Contains(Main.MouseScreen.ToPoint()))
                 {
                     hovered = true;
                     Main.LocalPlayer.mouseInterface = true;
@@ -84,25 +82,7 @@ namespace QuestBooks.Systems
                     layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                         "QuestBooks: Book Prompt", () =>
                         {
-                            Main.spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-
-                            Main.spriteBatch.End();
-                            Main.spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
-
-                            float hoverScale = hovered ? 1.1f : 1f;
-                            scale *= hoverScale;
-                            Color outlineColor = hovered ? Color.Lerp(Color.Yellow, Color.White, 0.25f) : Color.LightYellow;
-
-                            Main.spriteBatch.Draw(QuestAssets.QuestBookOutline, center + new Vector2(-2, 0f) * hoverScale, null, outlineColor, 0f, QuestAssets.QuestBookIcon.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-                            Main.spriteBatch.Draw(QuestAssets.QuestBookOutline, center + new Vector2(2, 0f) * hoverScale, null, outlineColor, 0f, QuestAssets.QuestBookIcon.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-                            Main.spriteBatch.Draw(QuestAssets.QuestBookOutline, center + new Vector2(0f, -2) * hoverScale, null, outlineColor, 0f, QuestAssets.QuestBookIcon.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-                            Main.spriteBatch.Draw(QuestAssets.QuestBookOutline, center + new Vector2(0f, 2) * hoverScale, null, outlineColor, 0f, QuestAssets.QuestBookIcon.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-
-                            Main.spriteBatch.Draw(QuestAssets.QuestBookIcon, center, null, Color.White, 0f, QuestAssets.QuestBookIcon.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-
-                            Main.spriteBatch.End();
-                            Main.spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
-
+                            QuestManager.ActiveStyle.DrawQuestLogIcon(Main.spriteBatch, iconArea, hovered);
                             return true;
                         },
                         InterfaceScaleType.UI

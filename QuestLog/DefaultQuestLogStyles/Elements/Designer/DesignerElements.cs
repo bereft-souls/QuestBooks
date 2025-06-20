@@ -141,6 +141,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             Rectangle deleteBook = books.CookieCutter(new(0.85f, 1.05f), new(0.15f, 0.035f));
             Rectangle deleteChapter = chapters.CookieCutter(new(-0.85f, 1.05f), new(0.15f, 0.035f));
 
+            #region Add/Delete Book/Chapter
+
             if (addBook.Contains(MouseCanvas))
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.AddBook");
@@ -264,10 +266,14 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 AddRectangle(deleteChapter, Color.Blue * 0.5f, fill: true);
             }
 
+            #endregion
+
             Rectangle saveAll = LogArea.CookieCutter(new(-1.06f, -0.94f), new(0.05f, -0.05f));
             Rectangle saveSelected = saveAll.CookieCutter(new(0f, 2.5f), Vector2.One);
             Rectangle loadAll = saveSelected.CookieCutter(new(0f, 2.5f), Vector2.One);
             Rectangle loadSingle = loadAll.CookieCutter(new(0f, 2.5f), Vector2.One);
+
+            #region Save/Load Books
 
             AddRectangle(saveAll, Color.Magenta, fill: true);
             AddRectangle(saveSelected, Color.Purple, fill: true);
@@ -407,6 +413,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     }
                 }
             }
+
+            #endregion
 
             DrawTasks.Add(sb =>
             {

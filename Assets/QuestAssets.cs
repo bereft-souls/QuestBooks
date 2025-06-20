@@ -27,6 +27,10 @@ namespace QuestBooks.Assets
 
         public override void PostSetupContent()
         {
+            // Don't load assets on server.
+            if (Main.dedServ)
+                return;
+
             // Force an early load of lazy assets.
             foreach (var property in typeof(QuestAssets).GetProperties().Where(p => p.PropertyType.IsAssignableTo(typeof(ILazy))))
                 ((ILazy)property.GetValue(null)).WaitAction();
