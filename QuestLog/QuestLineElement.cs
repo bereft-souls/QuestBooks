@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
 {
+    [ExtendsFromMod("QuestBooks")]
     public abstract class QuestLineElement
     {
         public virtual void Update() { }

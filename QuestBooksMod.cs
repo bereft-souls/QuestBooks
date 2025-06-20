@@ -13,7 +13,6 @@ using Terraria.ModLoader;
 
 namespace QuestBooks
 {
-    [EnableDesigner]
 	public class QuestBooksMod : Mod
 	{
         public static Mod Instance { get; private set; }
@@ -22,7 +21,6 @@ namespace QuestBooks
         public override void Load()
         {
             Instance = this;
-            VanillaQuests.AddVanillaQuests();
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
@@ -34,17 +32,31 @@ namespace QuestBooks
 
         public override void PostSetupContent()
         {
-            if (ModLoader.Mods.Any(m => Attribute.GetCustomAttribute(m.GetType(), typeof(EnableDesignerAttribute)) is not null))
-                DesignerEnabled = true;
-
+            EnableDesigner();
+            VanillaQuests.AddVanillaQuests();
             AddQuestLogStyle(new BasicQuestLogStyle(), this);
         }
 
         #region API
 
-        [AttributeUsage(AttributeTargets.Class)]
-        public class EnableDesignerAttribute : Attribute
-        { }
+        /// <summary>
+        /// Enables the user of the quest book designer in game.<br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// </summary>
+        public static void EnableDesigner()
+        {
+            DesignerEnabled = true;
+        }
+
+        /// <summary>
+        /// Adds a custom quest book to the log.<br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// </summary>
+        public static void AddQuestBook(QuestBook questBook, Mod mod)
+        {
+            QuestLoader.LoadQuests(mod);
+            QuestManager.QuestBooks.Add(questBook);
+        }
 
         /// <summary>
         /// Adds a custom quest log style to be able to used.<br/>
@@ -60,24 +72,18 @@ namespace QuestBooks
             QuestLoader.LogStyleRegistry[mod].Add(questLog);
         }
 
-        /// <summary>
-        /// Adds a custom quest book to the log.<br/>
-        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
-        /// </summary>
-        public static void AddQuestBook(QuestBook questBook, Mod mod)
-        {
-            QuestLoader.LoadQuests(mod);
-            QuestManager.QuestBooks.Add(questBook);
-        }
-
         // Allows adding a questbook without hard-referencing the assembly.
         // In order to create quests, the assembly still needs to be referenced,
-        // but all quests are tagged with JITWhenModsEnabled by default, so
+        // but all quests are tagged with ExtendsFromMod by default, so
         // this saves some effort on the front of external programmers.
         public override object Call(params object[] args)
         {
             switch (((string)args[0]).ToLower())
             {
+                case "enabledesigner":
+                    EnableDesigner();
+                    return true;
+
                 case "addquestbook":
 
                     if (args[2] is not Mod)

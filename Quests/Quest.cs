@@ -6,9 +6,9 @@ namespace QuestBooks.Quests
 {
     /// <summary>
     /// Represents a quest that can be loaded into a quest book.<br/>
-    /// By default, quests are tagged with the <see cref="JITWhenModsEnabledAttribute"/> to only load when QuestBooks is enabled.
+    /// By default, quests are tagged with the <see cref="ExtendsFromModAttribute"/> to only load when QuestBooks is enabled.
     /// </summary>
-    [JITWhenModsEnabled("QuestBooks")]
+    [ExtendsFromMod("QuestBooks")]
     public abstract class Quest
     {
         /// <summary>

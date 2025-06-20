@@ -5,11 +5,13 @@ using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
 
 namespace QuestBooks.QuestLog
 {
+    [ExtendsFromMod("QuestBooks")]
     public abstract class QuestLogStyle
     {
         public virtual SamplerState CustomSamplerState { get; } = SamplerState.PointClamp;

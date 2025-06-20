@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
 {
+    [ExtendsFromMod("QuestBooks")]
     public abstract class QuestLine
     {
         public abstract IEnumerable<QuestLineElement> Elements { get; }
