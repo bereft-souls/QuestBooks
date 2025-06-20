@@ -1,0 +1,129 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.GameInput;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria;
+using Microsoft.Xna.Framework;
+
+namespace QuestBooks.QuestLog.DefaultQuestLogStyles
+{
+    public partial class BasicQuestLogStyle
+    {
+        private static bool TypingBookName = false;
+        private static bool TypingChapterName = false;
+
+        private static void HandleRenaming(Rectangle books, Rectangle chapters, Rectangle questArea)
+        {
+            Rectangle bookNameArea = books.CookieCutter(new(-0.15f, -1.25f), new(1.15f, 0.08f));
+            Rectangle chapterNameArea = chapters.CookieCutter(new(0.15f, -1.25f), new(1.15f, 0.08f));
+
+            float colorLerp = (float)(Main.timeForVisualEffects % 60);
+
+            if (colorLerp > 30)
+                colorLerp -= (colorLerp % 30) * 2;
+
+            colorLerp /= 30f;
+
+            if ((Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) || Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+                && (TypingBookName || TypingChapterName))
+            {
+                TypingBookName = false;
+                TypingChapterName = false;
+                Main.drawingPlayerChat = false;
+            }
+
+            else if (bookNameArea.Contains(MouseCanvas) && SelectedBook is not null)
+            {
+                LockMouse();
+
+                if (LeftMouseJustReleased)
+                {
+                    SoundEngine.PlaySound(SoundID.MenuTick);
+                    TypingBookName = !TypingBookName;
+                    TypingChapterName = false;
+                }
+            }
+
+            else if (chapterNameArea.Contains(MouseCanvas) && SelectedChapter is not null)
+            {
+                LockMouse();
+
+                if (LeftMouseJustReleased)
+                {
+                    SoundEngine.PlaySound(SoundID.MenuTick);
+                    TypingChapterName = !TypingChapterName;
+                    TypingBookName = false;
+                }
+            }
+
+            else if (LeftMouseJustPressed)
+            {
+                TypingBookName = false;
+                TypingChapterName = false;
+            }
+
+            if (SelectedBook is not null)
+            {
+                AddRectangle(bookNameArea, Color.Gray * 0.6f, fill: true);
+                var font = FontAssets.DeathText.Value;
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
+
+                if (TypingBookName)
+                {
+                    AddRectangle(bookNameArea, Color.Lerp(Color.Black, Color.Yellow, colorLerp), 3f);
+                    DrawTasks.Add(_ =>
+                    {
+                        PlayerInput.WritingText = true;
+                        Main.instance.HandleIME();
+                    });
+
+                    string newNameKey = Main.GetInputText(SelectedBook.NameKey);
+                    if (SelectedBook.NameKey != newNameKey)
+                    {
+                        SelectedBook.NameKey = newNameKey;
+                        SoundEngine.PlaySound(SoundID.MenuTick);
+                    }
+                }
+
+                else
+                    AddRectangle(bookNameArea, bookNameArea.Contains(MouseCanvas) ? Color.Gray : Color.Black, 3f);
+
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, SelectedBook.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
+
+                if (SelectedChapter is not null && SelectedBook.QuestLines.Contains(SelectedChapter))
+                {
+                    AddRectangle(chapterNameArea, Color.Gray * 0.6f, fill: true);
+                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
+
+                    if (TypingChapterName)
+                    {
+                        AddRectangle(chapterNameArea, Color.Lerp(Color.Yellow, Color.Black, colorLerp), 3f);
+                        DrawTasks.Add(_ =>
+                        {
+                            PlayerInput.WritingText = true;
+                            Main.instance.HandleIME();
+                        });
+
+                        string newChapterKey = Main.GetInputText(SelectedChapter.NameKey);
+                        if (SelectedChapter.NameKey != newChapterKey)
+                        {
+                            SelectedChapter.NameKey = newChapterKey;
+                            SoundEngine.PlaySound(SoundID.MenuTick);
+                        }
+                    }
+
+                    else
+                        AddRectangle(chapterNameArea, chapterNameArea.Contains(MouseCanvas) ? Color.Gray : Color.Black, 3f);
+
+                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, SelectedChapter.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
+                }
+            }
+        }
+    }
+}
