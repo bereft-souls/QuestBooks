@@ -1,4 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Quests;
+using System.Collections;
+using System.Collections.Generic;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
@@ -14,6 +18,14 @@ namespace QuestBooks.QuestLog
         /// </summary>
         public virtual float DrawPriority { get => 0.5f; }
 
-        public abstract void DrawToCanvas(Vector2 offset);
+        public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset);
+
+        public class PrioritySort : IComparer<QuestLineElement>
+        {
+            public int Compare(QuestLineElement x, QuestLineElement y)
+            {
+                return x.DrawPriority.CompareTo(y.DrawPriority);
+            }
+        }
     }
 }

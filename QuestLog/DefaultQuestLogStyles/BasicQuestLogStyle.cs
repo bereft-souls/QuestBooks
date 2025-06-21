@@ -71,6 +71,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         private static RenderTarget2D booksTarget = null;
         private static RenderTarget2D chaptersTarget = null;
         private static RenderTarget2D questAreaTarget = null;
+        private static RenderTarget2D previousQuestAreaTarget = null;
         private const float FadeDesignation = 0.025f;
 
         #region Element Referentials
@@ -102,6 +103,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             booksTarget?.Dispose();
             chaptersTarget?.Dispose();
             questAreaTarget?.Dispose();
+            previousQuestAreaTarget?.Dispose();
             wantsRetarget = true;
         }
 
@@ -284,14 +286,17 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 var oldBooks = booksTarget;
                 var oldChapters = chaptersTarget;
                 var oldQuests = questAreaTarget;
+                var oldPreviousQuests = previousQuestAreaTarget;
 
                 booksTarget = GenerateTarget(books.Width, books.Height);
                 chaptersTarget = GenerateTarget(chapters.Width, chapters.Height);
                 questAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
+                previousQuestAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
 
                 oldBooks?.Dispose();
                 oldChapters?.Dispose();
                 oldQuests?.Dispose();
+                oldPreviousQuests?.Dispose();
             }
 
             if (ThreadCheck.IsMainThread)

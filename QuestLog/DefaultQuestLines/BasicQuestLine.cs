@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultQuestLineElements.BaseElements;
 using QuestBooks.Quests;
 using System;
 using System.Collections.Generic;
@@ -13,6 +12,7 @@ using ReLogic.Graphics;
 using Terraria;
 using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.QuestLog.DefaultQuestBooks;
+using QuestBooks.QuestLog.DefaultQuestLineElements;
 
 namespace QuestBooks.QuestLog.DefaultQuestLines
 {
@@ -27,7 +27,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         [JsonIgnore]
         public override IEnumerable<QuestLineElement> Elements { get => ChapterElements; }
 
-        public List<QuestLineElement> ChapterElements = [];
+        public List<BasicQuestLineElement> ChapterElements = [];
 
         [JsonIgnore]
         public virtual string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
@@ -40,7 +40,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// Pulls from <see cref="Elements"/>.
         /// </summary>
         [JsonIgnore]
-        public IEnumerable<Quest> QuestList => Elements.Where(e => e is QuestElement).Cast<QuestElement>().Select(e => e.Quest);
+        public IEnumerable<Quest> QuestList => ChapterElements.Where(e => e is BasicQuestElement).Cast<BasicQuestElement>().Select(e => e.Quest);
 
         /// <summary>
         /// The completion progress of this quest line.<br/>
