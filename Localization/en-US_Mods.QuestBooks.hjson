@@ -55,7 +55,11 @@ Tooltips: {
 		'''
 	QuestBookType: Quest Book Type:
 	QuestLineType: Quest Line Type:
+	ChangeQuestBookType: Change QuestBook type
+	ChangeQuestLineType: Change QuestLine type
 	LocalizationKey: Localization Key:
+	ChangeQuestBookName: Change QuestBook localization key
+	ChangeQuestLineName: Change QuestLine localization key
 }
 
 Keybinds: {

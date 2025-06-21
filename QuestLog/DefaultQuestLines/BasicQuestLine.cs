@@ -71,6 +71,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         public virtual bool IsUnlocked() => true;
 
         /// <summary>
+        /// Determines whether this quest line should be "draggable" in the log. This value can be modified from the designer.
+        /// </summary>
+        public virtual bool EnableShifting { get; set; } = false;
+
+        /// <summary>
         /// Forwards <see cref="QuestLineElement.Update"/> calls to each element in the quest line.
         /// </summary>
         public override void Update()

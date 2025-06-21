@@ -32,11 +32,41 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         public static readonly List<Type> AvailableQuestElementTypes = [];
 
         // Mouse position on canvas
-        public static Vector2 ScaledMousePos { get; set; }
-        public static Point MouseCanvas { get; set; }
+        protected static Vector2 ScaledMousePos { get; set; }
+        protected static Point MouseCanvas { get; set; }
 
         // Handles the render targets for the book/chapter/quest areas,
         // as well as the faded edges handled by the shader
+        private static BlendState LayerBlending { get; } = new()
+        {
+            ColorSourceBlend = Blend.SourceAlpha,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorBlendFunction = BlendFunction.Add,
+            AlphaSourceBlend = Blend.One,
+            AlphaDestinationBlend = Blend.One,
+            AlphaBlendFunction = BlendFunction.Add,
+        };
+
+        private static BlendState LibraryBlending { get; } = new()
+        {
+            ColorSourceBlend = Blend.SourceAlpha,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorBlendFunction = BlendFunction.Add,
+            AlphaSourceBlend = Blend.SourceAlpha,
+            AlphaDestinationBlend = Blend.DestinationAlpha,
+            AlphaBlendFunction = BlendFunction.Max
+        };
+
+        private static BlendState ContentBlending { get; } = new()
+        {
+            ColorSourceBlend = Blend.SourceAlpha,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorBlendFunction = BlendFunction.Add,
+            AlphaSourceBlend = Blend.SourceAlpha,
+            AlphaDestinationBlend = Blend.One,
+            AlphaBlendFunction = BlendFunction.Add
+        };
+
         private static RenderTargetBinding[] returnTargets = null;
         private static RenderTarget2D booksTarget = null;
         private static RenderTarget2D chaptersTarget = null;
@@ -135,7 +165,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             {
                 sb.End();
                 QuestAssets.FadedEdges.Asset.Parameters["FadeSides"].SetValue(false);
-                sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState, QuestAssets.FadedEdges);
+                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, QuestAssets.FadedEdges);
 
                 float resizeScale = LogScale / targetScale;
 
@@ -144,12 +174,12 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                 sb.End();
                 QuestAssets.FadedEdges.Asset.Parameters["FadeSides"].SetValue(true);
-                sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState, QuestAssets.FadedEdges);
+                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, QuestAssets.FadedEdges);
 
                 sb.Draw(questAreaTarget, questArea.Center(), null, Color.White, 0f, questAreaTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
 
                 sb.End();
-                sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState);
+                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             });
 
             if (UseDesigner)
@@ -183,9 +213,10 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
         private static void CalculateLibraryRegions(Rectangle logArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea)
         {
-            Rectangle library = logArea.CookieCutter(new(-0.505f, -0.055f), new(0.43f, 0.84f)); // The combined area of the Books and Chapters
-            questArea = logArea.CookieCutter(new(0.505f, -0.055f), new(0.43f, 0.84f));
+            Rectangle library = logArea.CookieCutter(new(-0.5025f, -0.055f), new(0.43f, 0.84f)); // The combined area of the Books and Chapters
+            questArea = logArea.CookieCutter(new(0.485f, -0.055f), new(0.45f, 0.84f));
 
+            // Distance between books/chapters is NOT scaled
             books = library.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
             chapters = library.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
         }
@@ -194,8 +225,10 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
         #region Render Targets
 
-        private void SwitchTargets(RenderTarget2D renderTarget, Matrix? matrix = null, Effect effect = null)
+        private static void SwitchTargets(RenderTarget2D renderTarget, BlendState blendState = null)
         {
+            blendState ??= LayerBlending;
+
             if (renderTarget is null)
             {
                 DrawTasks.Add(sb =>
@@ -203,7 +236,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     sb.End();
                     sb.GraphicsDevice.SetRenderTargets(returnTargets);
                     returnTargets = null;
-                    sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState);
+                    sb.Begin(SpriteSortMode.Deferred, blendState);
                 });
 
                 return;
@@ -214,7 +247,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 sb.End();
                 returnTargets = sb.GraphicsDevice.GetRenderTargets();
                 sb.GraphicsDevice.SetRenderTarget(renderTarget);
-                sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState, effect, matrix ?? Matrix.Identity);
+                sb.Begin(SpriteSortMode.Deferred, blendState, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone);
             });
         }
 

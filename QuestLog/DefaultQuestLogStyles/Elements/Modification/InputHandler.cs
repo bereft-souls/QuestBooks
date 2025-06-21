@@ -13,15 +13,15 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles;
 
 public partial class BasicQuestLogStyle
 {
-    public static bool LeftMouseJustPressed = false;
-    public static bool LeftMouseHeld = false;
-    public static bool LeftMouseJustReleased = false;
+    protected static bool LeftMouseJustPressed = false;
+    protected static bool LeftMouseHeld = false;
+    protected static bool LeftMouseJustReleased = false;
 
-    public static bool RightMouseJustPressed = false;
-    public static bool RightMouseHeld = false;
-    public static bool RightMouseJustReleased = false;
+    protected static bool RightMouseJustPressed = false;
+    protected static bool RightMouseHeld = false;
+    protected static bool RightMouseJustReleased = false;
 
-    public static string MouseTooltip = "";
+    protected static string MouseTooltip = "";
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
@@ -35,7 +35,7 @@ public partial class BasicQuestLogStyle
             UICommon.TooltipMouseText(MouseTooltip);
     }
 
-    public static void UpdateMousePosition(Vector2 halfScreen, Vector2 halfRealScreen)
+    protected static void UpdateMousePosition(Vector2 halfScreen, Vector2 halfRealScreen)
     {
         ScaledMousePos = (Main.MouseScreen - halfScreen) / halfScreen * halfRealScreen + halfRealScreen;
         MouseCanvas = ScaledMousePos.ToPoint();
@@ -49,7 +49,7 @@ public partial class BasicQuestLogStyle
         }
     }
 
-    public static void UpdateMouseClicks()
+    protected static void UpdateMouseClicks()
     {
         if (Main.mouseLeft)
         {
@@ -74,7 +74,7 @@ public partial class BasicQuestLogStyle
         }
     }
 
-    public static void LockMouse()
+    protected static void LockMouse()
     {
         MouseTooltip ??= "";
         Main.LocalPlayer.mouseInterface = true;

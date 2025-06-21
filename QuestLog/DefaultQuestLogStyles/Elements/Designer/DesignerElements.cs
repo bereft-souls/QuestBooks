@@ -34,18 +34,19 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             DrawTasks.Add(sb =>
             {
                 sb.End();
-                sb.Begin(SpriteSortMode.Deferred, CustomBlendState, SamplerState.LinearClamp, CustomDepthStencilState, CustomRasterizerState);
+                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone);
             });
 
             HandleRenaming(books, chapters, questArea);
             HandleAddDeleteButtons(books, chapters, questArea);
             HandleSaveLoadButtons();
             HandleTypeSelection();
+            HandleQuestRegionTools();
 
             DrawTasks.Add(sb =>
             {
                 sb.End();
-                sb.Begin(SpriteSortMode.Deferred, CustomBlendState, CustomSamplerState, CustomDepthStencilState, CustomRasterizerState);
+                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
             });
         }
     }

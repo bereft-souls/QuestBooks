@@ -44,11 +44,15 @@ namespace QuestBooks.Systems
             graphics.SetRenderTarget(ScreenRenderTarget);
             graphics.Clear(Color.Transparent);
 
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred,
-                QuestManager.ActiveStyle.CustomBlendState,
-                QuestManager.ActiveStyle.CustomSamplerState,
-                QuestManager.ActiveStyle.CustomDepthStencilState,
-                QuestManager.ActiveStyle.CustomRasterizerState);
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, new()
+            {
+                ColorSourceBlend = Blend.SourceAlpha,
+                AlphaSourceBlend = Blend.One,
+                ColorDestinationBlend = Blend.InverseSourceAlpha,
+                AlphaDestinationBlend = Blend.One,
+                ColorBlendFunction = BlendFunction.Add,
+                AlphaBlendFunction = BlendFunction.Add
+            });
 
             QuestManager.ActiveStyle.DrawLog(Main.spriteBatch);
             Main.spriteBatch.End();
@@ -62,7 +66,7 @@ namespace QuestBooks.Systems
 
             if (mouseTextLayer != -1 && Main.playerInventory)
             {
-                Point achievementPositionInInventory = new Vector2(860f * Main.inventoryScale, 30f).ToPoint();
+                Point achievementPositionInInventory = new Vector2(516f, 30f).ToPoint();
                 Rectangle achievement = new(achievementPositionInInventory.X, achievementPositionInInventory.Y, 48, 48);
 
                 Rectangle iconArea = achievement.CookieCutter(new(2f, 0f), new(0.7f, 0.7f));

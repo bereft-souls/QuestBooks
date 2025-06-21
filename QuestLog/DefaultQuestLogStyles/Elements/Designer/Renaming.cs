@@ -41,6 +41,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             else if (bookNameArea.Contains(MouseCanvas) && SelectedBook is not null)
             {
                 LockMouse();
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeQuestBookName");
 
                 if (LeftMouseJustReleased)
                 {
@@ -53,6 +54,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             else if (chapterNameArea.Contains(MouseCanvas) && SelectedChapter is not null)
             {
                 LockMouse();
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeQuestLineName");
 
                 if (LeftMouseJustReleased)
                 {
@@ -72,7 +74,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             {
                 AddRectangle(bookNameArea, Color.Gray * 0.6f, fill: true);
                 var font = FontAssets.DeathText.Value;
-                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
 
                 if (TypingBookName)
                 {
@@ -92,14 +94,14 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 }
 
                 else
-                    AddRectangle(bookNameArea, bookNameArea.Contains(MouseCanvas) ? Color.Gray : Color.Black, 3f);
+                    AddRectangle(bookNameArea, bookNameArea.Contains(MouseCanvas) ? Color.LightGray : Color.Black, 3f);
 
                 DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, SelectedBook.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
 
                 if (SelectedChapter is not null && SelectedBook.QuestLines.Contains(SelectedChapter))
                 {
                     AddRectangle(chapterNameArea, Color.Gray * 0.6f, fill: true);
-                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
+                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
 
                     if (TypingChapterName)
                     {
@@ -119,7 +121,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     }
 
                     else
-                        AddRectangle(chapterNameArea, chapterNameArea.Contains(MouseCanvas) ? Color.Gray : Color.Black, 3f);
+                        AddRectangle(chapterNameArea, chapterNameArea.Contains(MouseCanvas) ? Color.LightGray : Color.Black, 3f);
 
                     DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, SelectedChapter.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
                 }

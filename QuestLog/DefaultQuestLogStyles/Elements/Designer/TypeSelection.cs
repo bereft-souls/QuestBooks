@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Win32.SafeHandles;
+using Microsoft.Xna.Framework;
 using QuestBooks.QuestLog.DefaultQuestBooks;
 using QuestBooks.QuestLog.DefaultQuestLines;
 using QuestBooks.Systems;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 
@@ -20,9 +22,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
         private static bool SelectingBookType = false;
         private static bool SelectingLineType = false;
-        private static int TypeSelectionScrollOffset = 0;
 
-        private static void HandleTypeSelection()
+        private static int BookTypeScrollOffset = 0;
+        private static int LineTypeScrollOffset = 0;
+
+        private void HandleTypeSelection()
         {
             Rectangle questBookType = LogArea.CookieCutter(new(-1.28f, -0.815f), new(0.15f, 0.05f));
             Rectangle questLineType = questBookType.CookieCutter(new(0f, 5f), Vector2.One);
@@ -46,16 +50,15 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 if (questBookType.Contains(MouseCanvas))
                 {
                     LockMouse();
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeQuestBookType");
 
                     if (LeftMouseJustReleased)
                     {
                         SelectingBookType = !SelectingBookType;
+                        SelectingLineType = false;
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
-
-                else if (LeftMouseJustPressed && !typeDropDown.Contains(MouseCanvas))
-                    SelectingBookType = false;
             }
 
             else
@@ -79,16 +82,15 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 if (questLineType.Contains(MouseCanvas))
                 {
                     LockMouse();
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeQuestLineType");
 
                     if (LeftMouseJustReleased)
                     {
                         SelectingLineType = !SelectingLineType;
+                        SelectingBookType = false;
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
-
-                else if (LeftMouseJustPressed && !typeDropDown.Contains(MouseCanvas))
-                    SelectingLineType = false;
             }
 
             else
@@ -96,14 +98,11 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
             if (SelectingBookType || SelectingLineType)
             {
-                if (typeDropDown.Contains(MouseCanvas))
-                    LockMouse();
-
                 AddRectangle(typeDropDown, Color.Gray * 0.6f, fill: true);
                 AddRectangle(typeDropDown, Color.Black, stroke: 3f);
                 TypeSelections.Clear();
 
-                Rectangle typeBox = typeDropDown.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.08f));
+                Rectangle typeBox = typeDropDown.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.078f));
                 if (SelectingBookType)
                 {
                     foreach (Type bookType in AvailableQuestBookTypes)
@@ -138,8 +137,47 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     }
                 }
 
+                if (typeDropDown.Contains(MouseCanvas))
+                {
+                    LockMouse();
+                    int data = PlayerInput.ScrollWheelDeltaForUI;
+
+                    if (data != 0)
+                    {
+                        int scrollAmount = data / 6;
+                        if (SelectingBookType)
+                            UpdateScroll(ref BookTypeScrollOffset);
+                        else
+                            UpdateScroll(ref LineTypeScrollOffset);
+
+                        void UpdateScroll(ref int scrollOffset)
+                        {
+                            int initialOffset = scrollOffset;
+                            scrollOffset += scrollAmount;
+
+                            Rectangle lastBox = TypeSelections[^1].area;
+                            int minScrollValue = -(lastBox.Bottom - (typeDropDown.Height + typeDropDown.Y));
+
+                            scrollOffset = minScrollValue < 0 ? int.Clamp(scrollOffset, minScrollValue, 0) : 0;
+                        }
+                    }
+                }
+
+                DrawTasks.Add(sb =>
+                {
+                    sb.End();
+                    sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+
+                    sb.GraphicsDevice.ScissorRectangle = typeDropDown;
+                    raster.ScissorTestEnable = true;
+                    
+                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+                });
+
                 foreach (var (box, onClick, selected, type) in TypeSelections)
                 {
+                    int offset = SelectingBookType ? BookTypeScrollOffset : LineTypeScrollOffset;
+                    box.Offset(0, offset);
                     AddRectangle(box, Color.Gray, fill: true);
 
                     if (selected)
@@ -161,6 +199,16 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                         }
                     }
                 }
+
+                DrawTasks.Add(sb =>
+                {
+                    sb.End();
+                    sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+
+                    raster.ScissorTestEnable = false;
+
+                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+                });
             }
         }
     }

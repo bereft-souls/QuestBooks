@@ -14,18 +14,6 @@ namespace QuestBooks.QuestLog
     [ExtendsFromMod("QuestBooks")]
     public abstract class QuestLogStyle
     {
-        public virtual SamplerState CustomSamplerState { get; } = SamplerState.PointClamp;
-        public virtual DepthStencilState CustomDepthStencilState { get; } = DepthStencilState.Default;
-        public virtual RasterizerState CustomRasterizerState { get; } = RasterizerState.CullNone;
-        public virtual BlendState CustomBlendState { get; } = new ()
-        {
-            ColorSourceBlend = Blend.SourceAlpha,
-            AlphaSourceBlend = Blend.SourceAlpha,
-            ColorDestinationBlend = Blend.InverseSourceAlpha,
-            AlphaDestinationBlend = Blend.DestinationColor,
-            AlphaBlendFunction = BlendFunction.Max
-        };
-
         public abstract string Key { get; }
         public abstract string DisplayName { get; }
 
