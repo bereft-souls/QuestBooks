@@ -9,8 +9,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static readonly List<(Rectangle box, Type type)> ElementSelections = [];
-        private static int ElementTypeScrollOffset = 0;
+        private static readonly List<(Rectangle box, Type type)> elementSelections = [];
+        private static int elementTypeScrollOffset = 0;
         private static ChapterElement placingElement = null;
 
         private static void HandleQuestRegionTools()
@@ -51,10 +51,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 MouseTooltip = "Show backdrop";
 
                 if (LeftMouseJustReleased)
-                    ShowBackdrop = !ShowBackdrop;
+                    BasicQuestLogStyle.showBackdrop = !BasicQuestLogStyle.showBackdrop;
             }
 
-            if (ShowBackdrop)
+            if (BasicQuestLogStyle.showBackdrop)
                 AddRectangle(showBackdrop, Color.White, 3f);
 
             if (showGrid.Contains(MouseCanvas))
@@ -63,10 +63,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 MouseTooltip = "Show grid";
 
                 if (LeftMouseJustReleased)
-                    ShowGrid = !ShowGrid;
+                    BasicQuestLogStyle.showGrid = !BasicQuestLogStyle.showGrid;
             }
 
-            if (ShowGrid)
+            if (BasicQuestLogStyle.showGrid)
                 AddRectangle(showGrid, Color.White, 3f);
 
             if (snapGrid.Contains(MouseCanvas))
@@ -75,10 +75,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 MouseTooltip = "Snap to grid";
 
                 if (LeftMouseJustReleased)
-                    SnapToGrid = !SnapToGrid;
+                    snapToGrid = !snapToGrid;
             }
 
-            if (SnapToGrid)
+            if (snapToGrid)
                 AddRectangle(snapGrid, Color.White, 3f);
 
             if (gridSize.Contains(MouseCanvas))
@@ -93,7 +93,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 MouseTooltip = "Grid size up";
 
                 if (LeftMouseJustReleased)
-                    GridSize++;
+                    BasicQuestLogStyle.gridSize++;
             }
 
             else if (gridDown.Contains(MouseCanvas))
@@ -101,8 +101,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 LockMouse();
                 MouseTooltip = "Grid size down";
 
-                if (LeftMouseJustReleased && GridSize > 3)
-                    GridSize--;
+                if (LeftMouseJustReleased && BasicQuestLogStyle.gridSize > 3)
+                    BasicQuestLogStyle.gridSize--;
             }
 
             if (SelectedChapter is not null)
@@ -115,11 +115,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(elementTypeDisplay, FontAssets.DeathText.Value, Color.White, Color.Black, "Element Selection:"));
 
                 Rectangle typeBox = elementTypeSelection.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.078f));
-                ElementSelections.Clear();
+                elementSelections.Clear();
 
                 foreach (Type elementType in AvailableQuestElementTypes.Keys)
                 {
-                    ElementSelections.Add((typeBox, elementType));
+                    elementSelections.Add((typeBox, elementType));
                     typeBox = typeBox.CookieCutter(new(0, 2.2f), Vector2.One);
                 }
 
@@ -131,13 +131,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (data != 0)
                     {
                         int scrollAmount = data / 6;
-                        int initialOffset = ElementTypeScrollOffset;
-                        ElementTypeScrollOffset += scrollAmount;
+                        int initialOffset = elementTypeScrollOffset;
+                        elementTypeScrollOffset += scrollAmount;
 
-                        Rectangle lastBox = ElementSelections[^1].box;
+                        Rectangle lastBox = elementSelections[^1].box;
                         int minScrollValue = -(lastBox.Bottom - (elementTypeSelection.Height + elementTypeSelection.Y));
 
-                        ElementTypeScrollOffset = minScrollValue < 0 ? int.Clamp(ElementTypeScrollOffset, minScrollValue, 0) : 0;
+                        elementTypeScrollOffset = minScrollValue < 0 ? int.Clamp(elementTypeScrollOffset, minScrollValue, 0) : 0;
                     }
                 }
 
@@ -152,12 +152,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
                 });
 
-                foreach (var (box, elementType) in ElementSelections)
+                foreach (var (box, elementType) in elementSelections)
                 {
                     bool placing = (placingElement?.GetType() ?? null) == elementType;
                     bool otherPlacing = !placing && placingElement is not null;
 
-                    box.Offset(0, ElementTypeScrollOffset);
+                    box.Offset(0, elementTypeScrollOffset);
 
                     if (!placing)
                     {
@@ -170,7 +170,6 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         AddRectangle(box, Color.PaleGoldenrod, fill: true);
                         AddRectangle(box, Color.Yellow);
                     }
-
 
                     Rectangle textArea = box.CookieCutter(new(0.2f, 0f), new(0.78f, 1f));
                     Rectangle iconArea = box.CookieCutter(new(-0.775f, 0f), new(0.225f, 1f)).CreateScaledMargin(0.2f);

@@ -14,14 +14,14 @@ namespace QuestBooks.QuestLog.DefaultChapters
     /// </summary>
     public class BasicChapter() : BookChapter
     {
-        public override List<ChapterElement> Elements { get; } = [];
+        public override List<ChapterElement> Elements { get; set; } = [];
+
+        public override string DisplayName => Language.GetOrRegister(NameKey).Value;
 
         /// <summary>
         /// The localization key used to display this line's title.
         /// </summary>
         public string NameKey;
-
-        public override string DisplayName => Language.GetOrRegister(NameKey).Value;
 
         /// <summary>
         /// Performs the default drawing behavior for this <see cref="BasicChapter"/>. Assigns colors and calls <see cref="DrawBasicChapter(SpriteBatch, string, Color, Color, Color, Color, Rectangle, float)(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.

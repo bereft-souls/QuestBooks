@@ -13,13 +13,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static readonly List<(Rectangle area, Action onClick, bool selected, Type type)> TypeSelections = [];
+        private static readonly List<(Rectangle area, Action onClick, bool selected, Type type)> typeSelections = [];
 
-        private static bool SelectingBookType = false;
-        private static bool SelectingLineType = false;
+        private static bool selectingBookType = false;
+        private static bool selectingLineType = false;
 
-        private static int BookTypeScrollOffset = 0;
-        private static int LineTypeScrollOffset = 0;
+        private static int bookTypeScrollOffset = 0;
+        private static int lineTypeScrollOffset = 0;
 
         private void HandleTypeSelection()
         {
@@ -30,7 +30,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (SelectedBook is not null)
             {
                 AddRectangle(questBookType, Color.Gray * 0.6f, fill: true);
-                AddRectangle(questBookType, SelectingBookType ? Color.Yellow : (questBookType.Contains(MouseCanvas) ? Color.LightGray : Color.Black), 3f);
+                AddRectangle(questBookType, selectingBookType ? Color.Yellow : (questBookType.Contains(MouseCanvas) ? Color.LightGray : Color.Black), 3f);
 
                 var font = FontAssets.DeathText.Value;
                 string typeName = SelectedBook.GetType().Name;
@@ -49,20 +49,20 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     if (LeftMouseJustReleased)
                     {
-                        SelectingBookType = !SelectingBookType;
-                        SelectingLineType = false;
+                        selectingBookType = !selectingBookType;
+                        selectingLineType = false;
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
             }
 
             else
-                SelectingBookType = false;
+                selectingBookType = false;
 
             if (SelectedChapter is not null && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
             {
                 AddRectangle(questLineType, Color.Gray * 0.6f, fill: true);
-                AddRectangle(questLineType, SelectingLineType ? Color.Yellow : (questLineType.Contains(MouseCanvas) ? Color.LightGray : Color.Black), 3f);
+                AddRectangle(questLineType, selectingLineType ? Color.Yellow : (questLineType.Contains(MouseCanvas) ? Color.LightGray : Color.Black), 3f);
 
                 var font = FontAssets.DeathText.Value;
                 string typeName = SelectedChapter.GetType().Name;
@@ -81,24 +81,24 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     if (LeftMouseJustReleased)
                     {
-                        SelectingLineType = !SelectingLineType;
-                        SelectingBookType = false;
+                        selectingLineType = !selectingLineType;
+                        selectingBookType = false;
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
             }
 
             else
-                SelectingLineType = false;
+                selectingLineType = false;
 
-            if (SelectingBookType || SelectingLineType)
+            if (selectingBookType || selectingLineType)
             {
                 AddRectangle(typeDropDown, Color.Gray * 0.6f, fill: true);
                 AddRectangle(typeDropDown, Color.Black, stroke: 3f);
-                TypeSelections.Clear();
+                typeSelections.Clear();
 
                 Rectangle typeBox = typeDropDown.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.078f));
-                if (SelectingBookType)
+                if (selectingBookType)
                 {
                     foreach (Type bookType in AvailableQuestBookTypes)
                     {
@@ -110,7 +110,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                             SelectedBook = instance;
                         }
 
-                        TypeSelections.Add((typeBox, onClick, bookType == SelectedBook.GetType(), bookType));
+                        typeSelections.Add((typeBox, onClick, bookType == SelectedBook.GetType(), bookType));
                         typeBox = typeBox.CookieCutter(new(0, 2.2f), Vector2.One);
                     }
                 }
@@ -127,7 +127,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                             SelectedChapter = instance;
                         }
 
-                        TypeSelections.Add((typeBox, onClick, lineType == SelectedChapter.GetType(), lineType));
+                        typeSelections.Add((typeBox, onClick, lineType == SelectedChapter.GetType(), lineType));
                         typeBox = typeBox.CookieCutter(new(0, 2.2f), Vector2.One);
                     }
                 }
@@ -140,17 +140,17 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (data != 0)
                     {
                         int scrollAmount = data / 6;
-                        if (SelectingBookType)
-                            UpdateScroll(ref BookTypeScrollOffset);
+                        if (selectingBookType)
+                            UpdateScroll(ref bookTypeScrollOffset);
                         else
-                            UpdateScroll(ref LineTypeScrollOffset);
+                            UpdateScroll(ref lineTypeScrollOffset);
 
                         void UpdateScroll(ref int scrollOffset)
                         {
                             int initialOffset = scrollOffset;
                             scrollOffset += scrollAmount;
 
-                            Rectangle lastBox = TypeSelections[^1].area;
+                            Rectangle lastBox = typeSelections[^1].area;
                             int minScrollValue = -(lastBox.Bottom - (typeDropDown.Height + typeDropDown.Y));
 
                             scrollOffset = minScrollValue < 0 ? int.Clamp(scrollOffset, minScrollValue, 0) : 0;
@@ -169,9 +169,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
                 });
 
-                foreach (var (box, onClick, selected, type) in TypeSelections)
+                foreach (var (box, onClick, selected, type) in typeSelections)
                 {
-                    int offset = SelectingBookType ? BookTypeScrollOffset : LineTypeScrollOffset;
+                    int offset = selectingBookType ? bookTypeScrollOffset : lineTypeScrollOffset;
                     box.Offset(0, offset);
                     AddRectangle(box, Color.Gray, fill: true);
 

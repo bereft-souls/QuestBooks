@@ -19,7 +19,7 @@ namespace QuestBooks.Quests
 
             // Load each book
             foreach (var questBook in questBooks)
-                QuestBooksMod.AddQuestBook(questBook, QuestBooksMod.Instance);
+                QuestBooksMod.AddQuestBook(questBook);
         }
     }
 }

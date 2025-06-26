@@ -1,0 +1,63 @@
+{
+  "$type": "QuestBooks.QuestLog.DefaultQuestBooks.BasicQuestBook, QuestBooks",
+  "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook3.DisplayName",
+  "Chapters": {
+    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.BookChapter, QuestBooks]], System.Private.CoreLib",
+    "$values": [
+      {
+        "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
+        "NameKey": "YourMod.QuestBooks.Chapter1",
+        "Elements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "EnableShifting": false
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
+        "NameKey": "YourMod.QuestBooks.Chapter2",
+        "Elements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "EnableShifting": false
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
+        "NameKey": "YourMod.QuestBooks.Chapter3",
+        "Elements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "EnableShifting": false
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
+        "NameKey": "YourMod.QuestBooks.Chapter4",
+        "Elements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "EnableShifting": false
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
+        "NameKey": "YourMod.QuestBooks.Chapter5",
+        "Elements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "EnableShifting": false
+      },
+      {
+        "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
+        "NameKey": "YourMod.QuestBooks.Chapter6",
+        "Elements": {
+          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+          "$values": []
+        },
+        "EnableShifting": false
+      }
+    ]
+  }
+}

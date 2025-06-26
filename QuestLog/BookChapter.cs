@@ -12,8 +12,14 @@ namespace QuestBooks.QuestLog
     [ExtendsFromMod("QuestBooks")]
     public abstract class BookChapter
     {
-        public abstract List<ChapterElement> Elements { get; }
+        /// <summary>
+        /// The collection of <see cref="ChapterElement"/>s to be displayed in the quest log.
+        /// </summary>
+        public abstract List<ChapterElement> Elements { get; set; }
 
+        /// <summary>
+        /// The string that will be displayed in the quest log. You should use localization here where applicable.
+        /// </summary>
         [JsonIgnore]
         public abstract string DisplayName { get; }
 

@@ -14,8 +14,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         // some parameters to handle "sliding" between lines
         public static BookChapter SelectedChapter { get; set; } = null;
 
-        private static int BooksScrollOffset = 0;
-        private static int ChaptersScrollOffset = 0;
+        private static int booksScrollOffset = 0;
+        private static int chaptersScrollOffset = 0;
         private static int previousChapterScrollOffset = 0;
 
         private static readonly List<(Rectangle area, BookChapter questBook)> chapterLibrary = [];
@@ -45,13 +45,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (data != 0)
                 {
                     int scrollAmount = (int)(data / 2.5f);
-                    int initialScrollOffset = ChaptersScrollOffset;
-                    ChaptersScrollOffset += scrollAmount;
+                    int initialScrollOffset = chaptersScrollOffset;
+                    chaptersScrollOffset += scrollAmount;
 
                     Rectangle lastBook = chapterLibrary[^1].area;
                     int minScrollValue = -(lastBook.Bottom - (chapters.Height + chapters.Y));
 
-                    ChaptersScrollOffset = minScrollValue < 0 ? int.Clamp(ChaptersScrollOffset, minScrollValue, 0) : 0;
+                    chaptersScrollOffset = minScrollValue < 0 ? int.Clamp(chaptersScrollOffset, minScrollValue, 0) : 0;
 
                     //if (ChaptersScrollOffset != initialScrollOffset)
                     //    SoundEngine.PlaySound(SoundID.MenuTick with { Volume = 0.3f });
@@ -59,7 +59,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             }
 
             // Lerp to the real scroll value to create smooth transitions
-            realChaptersScrollOffset = MathHelper.Lerp(realChaptersScrollOffset, ChaptersScrollOffset, scrollAcceleration);
+            realChaptersScrollOffset = MathHelper.Lerp(realChaptersScrollOffset, chaptersScrollOffset, scrollAcceleration);
 
             // Re-set the chapter library rectangles
             chapterLibrary.Clear();
@@ -76,7 +76,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 chapter = chapter.CookieCutter(new(0f, 2.25f), Vector2.One);
             }
 
-            // Add in the swiping for the previous chapters if there is any
+            // Lerp between book chapters to create smooth transitions
             if (previousBookSwipeOffset > 0f)
                 previousBookSwipeOffset = MathHelper.Lerp(previousBookSwipeOffset, 0f, 0.25f);
 
@@ -114,11 +114,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             foreach (var (rectangle, questLine) in chapterLibrary)
             {
                 rectangle.Offset((int)xOffset, (int)realChaptersScrollOffset);
-                bool hovered = hoveringChapters && rectangle.Contains(mouseChapters);
+                bool hovered = hoveringChapters && rectangle.Contains(mouseChapters) && SelectedElement is null;
 
                 if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner) && questElementSwipeOffset == 0f)
                 {
-                    QuestAreaOffset = Vector2.Zero;
+                    questAreaOffset = Vector2.Zero;
                     int sign = SelectedBook.Chapters.IndexOf(questLine) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
                     questElementSwipeOffset = questAreaTarget.Width * sign;
                     SortedElements = null;
@@ -128,7 +128,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
 
                 bool selected = SelectedChapter == questLine;
-                DrawTasks.Add(sb => questLine.Draw(sb, rectangle, targetScale, selected, hovered));
+                DrawTasks.Add(sb => questLine.Draw(sb, rectangle, TargetScale, selected, hovered));
             }
 
             SwitchTargets(null);

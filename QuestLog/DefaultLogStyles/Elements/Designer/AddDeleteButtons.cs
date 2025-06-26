@@ -14,6 +14,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
     {
         private static void HandleAddDeleteButtons(Rectangle books, Rectangle chapters, Rectangle questArea)
         {
+            // Rectangles for adding and deleting
             Rectangle addBook = books.CookieCutter(new(0, -1.05f), new(0.25f, 0.05f));
             Rectangle addChapter = chapters.CookieCutter(new(0, -1.05f), new(0.25f, 0.05f));
 
@@ -24,9 +25,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.AddBook");
 
+                // Add new questbook with placeholder localization key
                 if (LeftMouseJustReleased)
                 {
-                    BasicQuestBook newBook = new() { NameKey = $"YourMod.QuestBooks.Book{QuestManager.QuestBooks.Count + 1}" };
+                    BasicQuestBook newBook = new() { NameKey = $"YourMod.{QuestBooksMod.DesignerMod.Name}.Book{QuestManager.QuestBooks.Count + 1}" };
                     QuestManager.QuestBooks.Add(newBook);
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
@@ -36,9 +38,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.AddChapter");
 
+                // Add new chapter with placeholder localization key
                 if (LeftMouseJustReleased && SelectedBook is not null)
                 {
-                    BasicChapter newLine = new() { NameKey = $"YourMod.QuestBooks.Chapter{SelectedBook.Chapters.Count + 1}" };
+                    BasicChapter newLine = new() { NameKey = $"YourMod.{QuestBooksMod.DesignerMod.Name}.Chapter{SelectedBook.Chapters.Count + 1}" };
                     SelectedBook.Chapters.Add(newLine);
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
@@ -50,6 +53,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (LeftMouseJustReleased && SelectedBook is not null)
                 {
+                    // Display a pop up to make sure the user wants to delete the book
                     SDL.SDL_MessageBoxData message = new()
                     {
                         window = Main.instance.Window.Handle,
@@ -77,6 +81,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     SoundEngine.PlaySound(SoundID.MenuOpen);
                     int result = SDL.SDL_ShowMessageBox(ref message, out int buttonId);
 
+                    // If okay...
                     if (result == 0 && buttonId == 1)
                     {
                         QuestManager.QuestBooks.Remove(SelectedBook);
@@ -95,6 +100,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (LeftMouseJustReleased && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
                 {
+                    // Display a pop up to make sure the user wants to delete the chapter
                     SDL.SDL_MessageBoxData message = new()
                     {
                         window = Main.instance.Window.Handle,
@@ -122,6 +128,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     SoundEngine.PlaySound(SoundID.MenuOpen);
                     int result = SDL.SDL_ShowMessageBox(ref message, out int buttonId);
 
+                    // If okay...
                     if (result == 0 && buttonId == 1)
                     {
                         SelectedBook.Chapters.Remove(SelectedChapter);

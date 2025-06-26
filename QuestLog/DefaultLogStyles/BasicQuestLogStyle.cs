@@ -19,6 +19,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         // Available element retrieval
         public static IEnumerable<QuestBook> AvailableBooks { get => QuestManager.QuestBooks; }
         public static IEnumerable<BookChapter> AvailableChapters { get => SelectedBook?.Chapters ?? []; }
+        public static ChapterElement[] SortedElements { get; private set; } = null;
 
         // These are registered on load
         public static readonly List<Type> AvailableQuestBookTypes = [];
@@ -167,6 +168,29 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             UpdateChapters(chaptersTarget.Bounds.CreateScaledMargins(top: FadeDesignation, bottom: FadeDesignation), (MouseCanvas - chapters.Location).ToVector2() * (chaptersTarget.Bounds.Size() / chapters.Size()));
             UpdateQuestArea(questAreaTarget.Bounds.CreateScaledMargin(FadeDesignation), (MouseCanvas - questArea.Location).ToVector2() * (questAreaTarget.Bounds.Size() / questArea.Size()));
 
+            bool infoPage = SelectedElement is not null && (SelectedElement.HasInfoPage || UseDesigner);
+
+            if (infoPage)
+            {
+                Matrix transform = Matrix.CreateScale(TargetScale);
+                DrawTasks.Add(sb =>
+                {
+                    sb.End();
+                    sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    var targets = sb.GraphicsDevice.GetRenderTargets();
+                    sb.GraphicsDevice.SetRenderTarget(questInfoTarget);
+
+                    sb.GraphicsDevice.Clear(Color.Transparent);
+                    sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix * transform);
+                });
+
+                if (UseDesigner)
+                    HandleElementProperties();
+
+                else
+                    DrawTasks.Add(SelectedElement.DrawInfoPage);
+            }
+
             // Render all of the completed render targets with fading applied to the
             // desired edges (top/bottom on books/chapters, all edges on quest area)
             DrawTasks.Add(sb =>
@@ -175,7 +199,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 QuestAssets.FadedEdges.Asset.Parameters["FadeSides"].SetValue(false);
                 sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, QuestAssets.FadedEdges);
 
-                float resizeScale = LogScale / targetScale;
+                float resizeScale = LogScale / TargetScale;
 
                 sb.Draw(booksTarget, books.Center(), null, Color.White, 0f, booksTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
                 sb.Draw(chaptersTarget, chapters.Center(), null, Color.White, 0f, chaptersTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
@@ -263,7 +287,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         {
             QuestAssets.BasicQuestCanvas.Value.Wait();
             var basicLogArea = CalculateLogArea(out _, out _, out _, LogScale);
-            targetScale = LogScale;
+            TargetScale = LogScale;
             CalculateLibraryRegions(basicLogArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea, out Rectangle questInfo);
 
             books.Width = books.Width.ToNearestDoubleEven();

@@ -14,7 +14,8 @@ namespace QuestBooks
     public class QuestBooksMod : Mod
     {
         public static Mod Instance { get; private set; }
-        public static bool DesignerEnabled { get; set; } = false;
+        public static bool DesignerEnabled { get; private set; } = false;
+        public static Mod DesignerMod { get; private set; } = null;
 
         public override void Load()
         {
@@ -30,7 +31,11 @@ namespace QuestBooks
 
         public override void PostSetupContent()
         {
-            EnableDesigner();
+            EnableDesigner(this);
+
+            foreach (Mod mod in ModLoader.Mods)
+                QuestLoader.LoadQuests(mod);
+
             VanillaQuestBooks.AddVanillaQuests();
         }
 
@@ -40,28 +45,28 @@ namespace QuestBooks
         /// Enables the user of the quest book designer in game.<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void EnableDesigner()
+        public static void EnableDesigner(Mod enablingMod)
         {
             DesignerEnabled = true;
+            DesignerMod = enablingMod;
         }
 
         /// <summary>
         /// Deserializes a custom quest book and adds it to the log.<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void AddQuestBook(string serializedQuestBook, Mod mod)
+        public static void AddQuestBook(string serializedQuestBook)
         {
             var questBook = JsonConvert.DeserializeObject<QuestBook>(serializedQuestBook, JsonTypeResolverFix.Settings);
-            AddQuestBook((QuestBook)questBook, mod);
+            AddQuestBook(questBook);
         }
 
         /// <summary>
         /// Adds a custom quest book to the log.<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void AddQuestBook(QuestBook questBook, Mod mod)
+        public static void AddQuestBook(QuestBook questBook)
         {
-            QuestLoader.LoadQuests(mod);
             QuestManager.QuestBooks.Add(questBook);
         }
 
@@ -88,24 +93,24 @@ namespace QuestBooks
             switch (((string)args[0]).ToLower())
             {
                 case "enabledesigner":
-                    EnableDesigner();
+                    if (args[1] is not Mod enablingMod)
+                        return new ArgumentException("Invalid arguments: Second argument must the mod instance that is enabling the designer.");
+
+                    EnableDesigner(enablingMod);
                     return true;
 
                 case "addquestbook":
 
-                    if (args[2] is not Mod)
-                        return new ArgumentException("Invalid arguments: Third argument must be the mod instance that is adding this questbook");
-
                     switch (args[1])
                     {
                         case QuestBook questBook:
-                            AddQuestBook(questBook, (Mod)args[2]);
+                            AddQuestBook(questBook);
                             break;
                         case string serialized:
-                            AddQuestBook(serialized, (Mod)args[2]);
+                            AddQuestBook(serialized);
                             break;
                         default:
-                            return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer");
+                            return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer.");
                     }
 
                     return true;

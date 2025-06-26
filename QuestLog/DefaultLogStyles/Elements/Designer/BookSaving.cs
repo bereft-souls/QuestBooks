@@ -66,6 +66,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (LeftMouseJustReleased)
                 {
+                    // Show the user a message to ensure they want to overwrite data
                     SDL.SDL_MessageBoxData message = new()
                     {
                         window = Main.instance.Window.Handle,
@@ -92,6 +93,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     int result = SDL.SDL_ShowMessageBox(ref message, out int buttonId);
 
+                    // If okay...
                     if (result == 0 && buttonId == 1)
                     {
                         var files = NativeFileDialogSharp.Dialog.FileOpenMultiple("json", null);
@@ -140,14 +142,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     var file = NativeFileDialogSharp.Dialog.FileOpen("json", null);
                     if (file.IsOk)
                     {
-                        var book = QuestLoader.LoadQuestBook(file.Path);
-                        if (book is not QuestBook questBook)
-                            Main.NewText($"Unable to parse file into BasicQuestBook: {file}");
-
-                        else
+                        try
                         {
+                            var book = QuestLoader.LoadQuestBook(file.Path);
                             QuestManager.QuestBooks.Add(book);
                             Main.NewText("Quest book loaded!");
+                        }
+                        catch
+                        {
+                            Main.NewText($"Unable to parse file into BasicQuestBook: {file}");
                         }
                     }
                 }

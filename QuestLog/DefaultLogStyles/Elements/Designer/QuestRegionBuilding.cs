@@ -6,20 +6,20 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static bool ShowBackdrop = true;
-        private static bool ShowGrid = false;
-        private static bool SnapToGrid = false;
-        private static int GridSize = 20;
+        private static bool showBackdrop = true;
+        private static bool showGrid = false;
+        private static bool snapToGrid = false;
+        private static int gridSize = 20;
 
-        public void DesignerPreQuestRegion(Vector2 mousePosition)
+        private void DesignerPreQuestRegion(Vector2 mousePosition)
         {
             if (SelectedChapter is null)
                 return;
 
-            if (ShowBackdrop)
+            if (showBackdrop)
                 DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Gray * 0.15f));
 
-            if (ShowGrid)
+            if (showGrid)
             {
                 DrawTasks.Add(sb =>
                 {
@@ -28,16 +28,16 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, GridBlending, sampler, depth, raster, effect, matrix);
                 });
 
-                Color gridColor = Color.White with { A = (byte)(ShowBackdrop ? 0 : 100) };
+                Color gridColor = Color.White with { A = (byte)(showBackdrop ? 0 : 100) };
 
-                for (int xPos = 0; xPos < 600; xPos += GridSize)
+                for (int xPos = 0; xPos < 600; xPos += gridSize)
                 {
                     Vector2 drawCenter = new(xPos, 300f);
                     Rectangle rect = CenteredRectangle(drawCenter, new(1f, 600f));
                     AddRectangle(rect, gridColor);
                 }
 
-                for (int yPos = 0; yPos < 600; yPos += GridSize)
+                for (int yPos = 0; yPos < 600; yPos += gridSize)
                 {
                     Vector2 drawCenter = new(300f, yPos);
                     Rectangle rect = CenteredRectangle(drawCenter, new(600f, 1f));
@@ -53,15 +53,16 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             }
         }
 
-        public void DesignerPostQuestRegion(Vector2 mousePosition, bool mouseInBounds)
+        private void DesignerPostQuestRegion(Vector2 mousePosition, bool mouseInBounds)
         {
             if (placingElement is null)
                 return;
 
-            if (SnapToGrid)
+            // Round to grid intersections
+            if (snapToGrid)
             {
-                mousePosition.X = float.Round(mousePosition.X / GridSize, MidpointRounding.AwayFromZero) * GridSize;
-                mousePosition.Y = float.Round(mousePosition.Y / GridSize, MidpointRounding.AwayFromZero) * GridSize;
+                mousePosition.X = float.Round(mousePosition.X / gridSize, MidpointRounding.AwayFromZero) * gridSize;
+                mousePosition.Y = float.Round(mousePosition.Y / gridSize, MidpointRounding.AwayFromZero) * gridSize;
             }
 
             if (LeftMouseJustReleased && mouseInBounds)

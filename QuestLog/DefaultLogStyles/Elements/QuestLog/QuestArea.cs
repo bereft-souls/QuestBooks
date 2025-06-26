@@ -9,22 +9,25 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
     {
         // Handles the display of a selected questline element
         public static ChapterElement SelectedElement { get; set; } = null;
-        private static ChapterElement[] SortedElements = null;
 
         private static float questElementSwipeOffset = 0f;
-        private static Vector2 QuestAreaOffset = Vector2.Zero;
+        private static Vector2 questAreaOffset = Vector2.Zero;
 
         private void UpdateQuestArea(Rectangle questArea, Vector2 scaledMouse)
         {
+            // These are the things like placing new elements or region toggles
             if (UseDesigner)
                 HandleQuestRegionTools();
 
             SwitchTargets(questAreaTarget, ContentBlending);
             DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Transparent));
 
-            Matrix transform = Matrix.CreateTranslation(questElementSwipeOffset, 0f, 0f) * Matrix.CreateScale(targetScale);
-            Vector2 placementPosition = scaledMouse / targetScale;
+            // Scale based on target size
+            // This makes sure that no matter the scale, the canvas has the same "size" for elements to draw to
+            Matrix transform = Matrix.CreateTranslation(questElementSwipeOffset, 0f, 0f) * Matrix.CreateScale(TargetScale);
+            Vector2 placementPosition = scaledMouse / TargetScale + questAreaOffset;
 
+            // Switch draw matrices
             DrawTasks.Add(sb =>
             {
                 sb.End();
@@ -32,11 +35,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix * transform);
             });
 
+            // This does the backdrop, grid, etc
             if (UseDesigner)
                 DesignerPreQuestRegion(placementPosition);
 
+            // Sort the elements if requested
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
+            // Get the top-most element that is being hovered
             ChapterElement lastHoveredElement = SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition), null) ?? null;
             if (lastHoveredElement is not null && LeftMouseJustReleased)
             {
@@ -46,13 +52,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             DrawTasks.Add(sb =>
             {
+                // Draw elements
                 if (SortedElements is not null)
                     foreach (var element in SortedElements)
-                        element.DrawToCanvas(sb, QuestAreaOffset, lastHoveredElement == element);
+                        element.DrawToCanvas(sb, questAreaOffset, lastHoveredElement == element);
 
                 sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
+                // Draw the previously-rendered target along with the new elements if being swiped
                 if (questElementSwipeOffset != 0f)
                 {
                     sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, Matrix.Identity);
@@ -67,6 +75,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     return;
                 }
 
+                // Draw our content to a secondary target so that we can swipe when new elements are selected
                 sb.GraphicsDevice.SetRenderTarget(previousQuestAreaTarget);
                 sb.GraphicsDevice.Clear(Color.Transparent);
                 sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, Matrix.Identity);
@@ -78,6 +87,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
             });
 
+            // This is things like the placement preview and actually placing elements
             if (UseDesigner)
                 DesignerPostQuestRegion(placementPosition, questArea.Contains(scaledMouse.ToPoint()));
 

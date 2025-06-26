@@ -26,6 +26,8 @@ namespace QuestBooks.QuestLog
 
         public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool hovered);
 
+        public virtual void DrawInfoPage(SpriteBatch spriteBatch) { }
+
         public virtual bool IsHovered(Vector2 mousePosition) { return false; }
 
         public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition)

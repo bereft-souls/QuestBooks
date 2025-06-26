@@ -12,8 +12,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static bool TypingBookName = false;
-        private static bool TypingChapterName = false;
+        private static bool typingBookName = false;
+        private static bool typingChapterName = false;
 
         private static void HandleRenaming(Rectangle books, Rectangle chapters, Rectangle questArea)
         {
@@ -28,10 +28,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             colorLerp /= 30f;
 
             if ((Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) || Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
-                && (TypingBookName || TypingChapterName))
+                && (typingBookName || typingChapterName))
             {
-                TypingBookName = false;
-                TypingChapterName = false;
+                typingBookName = false;
+                typingChapterName = false;
                 Main.drawingPlayerChat = false;
             }
 
@@ -43,8 +43,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (LeftMouseJustReleased)
                 {
                     SoundEngine.PlaySound(SoundID.MenuTick);
-                    TypingBookName = !TypingBookName;
-                    TypingChapterName = false;
+                    typingBookName = !typingBookName;
+                    typingChapterName = false;
                 }
             }
 
@@ -56,15 +56,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (LeftMouseJustReleased)
                 {
                     SoundEngine.PlaySound(SoundID.MenuTick);
-                    TypingChapterName = !TypingChapterName;
-                    TypingBookName = false;
+                    typingChapterName = !typingChapterName;
+                    typingBookName = false;
                 }
             }
 
             else if (LeftMouseJustPressed)
             {
-                TypingBookName = false;
-                TypingChapterName = false;
+                typingBookName = false;
+                typingChapterName = false;
             }
 
             if (SelectedBook is BasicQuestBook basicBook)
@@ -73,7 +73,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 var font = FontAssets.DeathText.Value;
                 DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
 
-                if (TypingBookName)
+                if (typingBookName)
                 {
                     AddRectangle(bookNameArea, Color.Lerp(Color.Black, Color.Yellow, colorLerp), 3f);
                     DrawTasks.Add(_ =>
@@ -100,7 +100,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     AddRectangle(chapterNameArea, Color.Gray * 0.6f, fill: true);
                     DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
 
-                    if (TypingChapterName)
+                    if (typingChapterName)
                     {
                         AddRectangle(chapterNameArea, Color.Lerp(Color.Yellow, Color.Black, colorLerp), 3f);
                         DrawTasks.Add(_ =>

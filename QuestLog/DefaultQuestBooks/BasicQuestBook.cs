@@ -11,16 +11,12 @@ using Terraria.Localization;
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {
     /// <summary>
-    /// Represents a basic <see cref="QuestBook"/> implementation, containing a set of <see cref="BookChapter"/>s.
+    /// Represents a basic <see cref="QuestBook"/> implementation. Always visible, always unlocked.
     /// </summary>
     public class BasicQuestBook() : QuestBook
     {
-        /// <summary>
-        /// The list of all quest lines contained within this book.
-        /// </summary>
-        public override List<BookChapter> Chapters { get; } = [];
+        public override List<BookChapter> Chapters { get; set; } = [];
 
-        [JsonIgnore]
         public override string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
 
         public string NameKey;

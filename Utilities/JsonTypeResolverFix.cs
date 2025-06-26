@@ -6,12 +6,11 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace QuestBooks.Utilities
 {
 #nullable enable
-    public class JsonTypeResolverFix : SerializationBinder, ISerializationBinder
+    public class JsonTypeResolverFix : ISerializationBinder
     {
         /* -----------------------------------
          * 
@@ -139,7 +138,7 @@ namespace QuestBooks.Utilities
         /// <returns>
         /// The type of the object the formatter creates a new instance of.
         /// </returns>
-        public override Type BindToType(string? assemblyName, string typeName)
+        public Type BindToType(string? assemblyName, string typeName)
         {
             return GetTypeByName(new StructMultiKey<string?, string>(assemblyName, typeName));
         }
@@ -150,7 +149,7 @@ namespace QuestBooks.Utilities
         /// <param name="serializedType">The type of the object the formatter creates a new instance of.</param>
         /// <param name="assemblyName">Specifies the <see cref="Assembly"/> name of the serialized object.</param>
         /// <param name="typeName">Specifies the <see cref="System.Type"/> name of the serialized object.</param>
-        public override void BindToName(Type serializedType, out string? assemblyName, out string? typeName)
+        public void BindToName(Type serializedType, out string? assemblyName, out string? typeName)
         {
             assemblyName = serializedType.GetTypeInfo().Assembly.FullName;
             typeName = serializedType.FullName;

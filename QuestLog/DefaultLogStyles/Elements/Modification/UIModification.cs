@@ -10,10 +10,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static Vector2? CachedMouseClick = null;
-        private static bool CanvasMoving = false;
-        private static bool CanvasResizing = false;
-        private static float targetScale = 1f;
+        // The scale to draw to the render targets
+        protected static float TargetScale { get; set; } = 1f;
+
+        private static Vector2? cachedMouseClick = null;
+        private static bool canvasMoving = false;
+        private static bool canvasResizing = false;
 
         private static void UpdateDesignerToggle()
         {
@@ -40,34 +42,34 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static void UpdateCanvasMovement(Vector2 halfRealScreen, Vector2 logSize)
         {
             Rectangle moveTab = LogArea.CookieCutter(new(0f, 0f), new(0.059f, 1f));
-            if ((moveTab.Contains(MouseCanvas) || CanvasMoving) && !CanvasResizing)
+            if ((moveTab.Contains(MouseCanvas) || canvasMoving) && !canvasResizing)
             {
                 // Reset the position if right clicked.
                 if (RightMouseJustPressed)
                 {
                     LogPositionOffset = Vector2.Zero;
-                    CanvasMoving = false;
-                    CachedMouseClick = null;
+                    canvasMoving = false;
+                    cachedMouseClick = null;
                     return;
                 }
 
-                if (!LeftMouseHeld || (!CanvasMoving && !LeftMouseJustPressed))
+                if (!LeftMouseHeld || (!canvasMoving && !LeftMouseJustPressed))
                 {
-                    CanvasMoving = false;
-                    CachedMouseClick = null;
+                    canvasMoving = false;
+                    cachedMouseClick = null;
                     return;
                 }
 
-                CanvasMoving = true;
+                canvasMoving = true;
 
-                if (!CachedMouseClick.HasValue)
-                    CachedMouseClick = ScaledMousePos;
+                if (!cachedMouseClick.HasValue)
+                    cachedMouseClick = ScaledMousePos;
 
                 else
                 {
                     // Move the canvas based on mouse movement and re-size the log area to match.
-                    Vector2 mouseMovement = ScaledMousePos - CachedMouseClick.Value;
-                    CachedMouseClick = ScaledMousePos;
+                    Vector2 mouseMovement = ScaledMousePos - cachedMouseClick.Value;
+                    cachedMouseClick = ScaledMousePos;
                     LogPositionOffset += mouseMovement / halfRealScreen;
 
                     LogArea = CenteredRectangle(halfRealScreen + (LogPositionOffset * halfRealScreen), logSize);
@@ -78,7 +80,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static void UpdateCanvasResizing(Vector2 halfRealScreen)
         {
             Rectangle resizeTab = LogArea.CookieCutter(new(1.01f, 1.02f), new(0.062f, 0.09f));
-            if ((resizeTab.Contains(MouseCanvas) || CanvasResizing) && !CanvasMoving)
+            if ((resizeTab.Contains(MouseCanvas) || canvasResizing) && !canvasMoving)
             {
                 Main.LocalPlayer.mouseInterface = true;
 
@@ -86,21 +88,21 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (RightMouseJustPressed)
                 {
                     LogScale = 1f;
-                    CanvasResizing = false;
+                    canvasResizing = false;
                     wantsRetarget = true;
                     goto PostResize;
                 }
 
-                if (!LeftMouseHeld || (!CanvasResizing && !LeftMouseJustPressed))
+                if (!LeftMouseHeld || (!canvasResizing && !LeftMouseJustPressed))
                 {
-                    if (CanvasResizing)
+                    if (canvasResizing)
                         wantsRetarget = true;
 
-                    CanvasResizing = false;
+                    canvasResizing = false;
                     goto PostResize;
                 }
 
-                CanvasResizing = true;
+                canvasResizing = true;
 
                 Vector2 areaLineAngle = LogArea.BottomRight() - LogArea.Center();
                 Vector2 mouseLineAngle = areaLineAngle.RotatedBy(-MathHelper.PiOver2);

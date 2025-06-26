@@ -47,13 +47,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (data != 0)
                 {
                     int scrollAmount = data / 6;
-                    int initialOffset = BooksScrollOffset;
-                    BooksScrollOffset += scrollAmount;
+                    int initialOffset = booksScrollOffset;
+                    booksScrollOffset += scrollAmount;
 
                     Rectangle lastBook = bookLibrary[^1].area;
                     int minScrollValue = -(lastBook.Bottom - (books.Height + books.Y));
 
-                    BooksScrollOffset = minScrollValue < 0 ? int.Clamp(BooksScrollOffset, minScrollValue, 0) : 0;
+                    booksScrollOffset = minScrollValue < 0 ? int.Clamp(booksScrollOffset, minScrollValue, 0) : 0;
 
                     //if (BooksScrollOffset != initialOffset)
                     //    SoundEngine.PlaySound(SoundID.MenuTick);
@@ -61,7 +61,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             }
 
             // Smoothly interpolate between the current and next scroll destinations
-            realBooksScrollOffset = MathHelper.Lerp(realBooksScrollOffset, BooksScrollOffset, scrollAcceleration);
+            realBooksScrollOffset = MathHelper.Lerp(realBooksScrollOffset, booksScrollOffset, scrollAcceleration);
 
             // Re-set the books area
             bookLibrary.Clear();
@@ -83,7 +83,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             foreach (var (rectangle, questBook) in bookLibrary)
             {
                 rectangle.Offset(0, (int)realBooksScrollOffset);
-                bool hovered = hoveringBooks && rectangle.Contains(mouseBooks);
+                bool hovered = hoveringBooks && rectangle.Contains(mouseBooks) && SelectedElement is null;
 
                 if (hovered && LeftMouseJustReleased && (questBook.IsUnlocked() || UseDesigner) && previousBookSwipeOffset == 0f)
                 {
@@ -92,7 +92,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     SoundEngine.PlaySound(SoundID.MenuTick);
 
                     previousChapterScrollOffset = (int)realChaptersScrollOffset;
-                    ChaptersScrollOffset = 0;
+                    chaptersScrollOffset = 0;
                     realChaptersScrollOffset = 0f;
 
                     previousBookSwipeDirection = SelectedBook is null || bookLibrary.FindIndex(kvp => kvp.questBook == SelectedBook) > bookLibrary.FindIndex(kvp => kvp.questBook == previousBook);
@@ -100,7 +100,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
 
                 bool selected = SelectedBook == questBook;
-                DrawTasks.Add(sb => questBook.Draw(sb, rectangle, targetScale, selected, hovered));
+                DrawTasks.Add(sb => questBook.Draw(sb, rectangle, TargetScale, selected, hovered));
             }
 
             SwitchTargets(null);
