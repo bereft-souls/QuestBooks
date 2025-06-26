@@ -17,6 +17,9 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
         public void DesignerPreQuestRegion()
         {
+            if (SelectedChapter is null)
+                return;
+
             if (ShowBackdrop)
                 DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Gray * 0.15f));
 
@@ -25,12 +28,12 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 DrawTasks.Add(sb =>
                 {
                     sb.End();
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, LibraryBlending);
+                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, GridBlending);
                 });
 
                 float linePosition = 0f;
                 float gridSpacing = GridSize * targetScale;
-                Color gridColor = Color.White with { A = 180 };
+                Color gridColor = Color.White with { A = (byte)(ShowBackdrop ? 0 : 100) };
 
                 while (linePosition <= questAreaTarget.Width)
                 {

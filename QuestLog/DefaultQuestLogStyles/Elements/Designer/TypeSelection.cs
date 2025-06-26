@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
@@ -185,7 +186,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                     DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(box.CookieCutter(new(0f, 0.3f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, type.Name));
 
-                    if (box.Contains(MouseCanvas))
+                    if (box.Contains(MouseCanvas) && typeDropDown.Contains(MouseCanvas))
                     {
                         if (!selected)
                             AddRectangle(box, Color.White);
@@ -205,6 +206,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
+                    sb.GraphicsDevice.ScissorRectangle = new(0, 0, Main.screenWidth, Main.screenHeight);
                     raster.ScissorTestEnable = false;
 
                     sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);

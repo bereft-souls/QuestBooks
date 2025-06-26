@@ -27,7 +27,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         [JsonIgnore]
         public override IEnumerable<QuestLineElement> Elements { get => ChapterElements; }
 
-        public List<BasicQuestLineElement> ChapterElements = [];
+        public List<QuestLineElement> ChapterElements = [];
 
         [JsonIgnore]
         public virtual string DisplayName { get => Language.GetOrRegister(NameKey).Value; }

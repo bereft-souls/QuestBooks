@@ -5,6 +5,7 @@ using QuestBooks.QuestLog.DefaultQuestLineElements;
 using QuestBooks.QuestLog.DefaultQuestLines;
 using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.Quests;
+using QuestBooks.Utilities;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace QuestBooks.Systems
 
             BasicQuestLogStyle.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestBook))));
             BasicQuestLogStyle.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestLine))));
-            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestLineElement))));
+            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestLineElement))));
 
             foreach (var questType in questTypes)
             {
@@ -134,9 +135,7 @@ namespace QuestBooks.Systems
 
         public static void SaveQuestBook(QuestBook book, string filePath)
         {
-            string serialized = JsonConvert.SerializeObject(book, Formatting.Indented, new JsonSerializerSettings()
-            { TypeNameHandling = TypeNameHandling.All });
-
+            string serialized = JsonConvert.SerializeObject(book, Formatting.Indented, JsonTypeResolverFix.Settings);
             File.WriteAllText(filePath, serialized);
         }
 
@@ -146,9 +145,7 @@ namespace QuestBooks.Systems
 
             try
             {
-                QuestBook book = JsonConvert.DeserializeObject<QuestBook>(serialized, new JsonSerializerSettings()
-                { TypeNameHandling = TypeNameHandling.All });
-
+                QuestBook book = JsonConvert.DeserializeObject<QuestBook>(serialized, JsonTypeResolverFix.Settings);
                 return book;
             }
             catch

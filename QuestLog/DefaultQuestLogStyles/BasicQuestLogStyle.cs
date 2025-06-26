@@ -67,11 +67,22 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             AlphaBlendFunction = BlendFunction.Add
         };
 
+        private static BlendState GridBlending { get; } = new()
+        {
+            ColorSourceBlend = Blend.One,
+            ColorDestinationBlend = Blend.One,
+            ColorBlendFunction = BlendFunction.Max,
+            AlphaSourceBlend = Blend.One,
+            AlphaDestinationBlend = Blend.One,
+            AlphaBlendFunction = BlendFunction.Max
+        };
+
         private static RenderTargetBinding[] returnTargets = null;
         private static RenderTarget2D booksTarget = null;
         private static RenderTarget2D chaptersTarget = null;
         private static RenderTarget2D questAreaTarget = null;
         private static RenderTarget2D previousQuestAreaTarget = null;
+        private static RenderTarget2D questInfoTarget = null;
         private const float FadeDesignation = 0.025f;
 
         #region Element Referentials
@@ -104,6 +115,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             chaptersTarget?.Dispose();
             questAreaTarget?.Dispose();
             previousQuestAreaTarget?.Dispose();
+            questInfoTarget?.Dispose();
             wantsRetarget = true;
         }
 
@@ -152,7 +164,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
             // Calculate the area designation for books, chapters, and quest contents.
             // These are scaled and repositioned based on the log's screen position and scale.
-            CalculateLibraryRegions(LogArea, out var books, out var chapters, out var questArea);
+            CalculateLibraryRegions(LogArea, out var books, out var chapters, out var questArea, out var questInfo);
 
             // Render each region to it's own render target to allow for shaders.
             // We use a shader to fade out the edges of each target when drawing to the log.
@@ -213,14 +225,14 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             return CenteredRectangle(halfRealScreen + (LogPositionOffset * halfRealScreen), logSize);
         }
 
-        private static void CalculateLibraryRegions(Rectangle logArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea)
+        private static void CalculateLibraryRegions(Rectangle logArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea, out Rectangle questInfo)
         {
-            Rectangle library = logArea.CookieCutter(new(-0.5025f, -0.055f), new(0.43f, 0.84f)); // The combined area of the Books and Chapters
             questArea = logArea.CookieCutter(new(0.485f, -0.055f), new(0.45f, 0.84f));
+            questInfo = logArea.CookieCutter(new(-0.5025f, -0.055f), new(0.43f, 0.84f)); // The combined area of the Books and Chapters
 
             // Distance between books/chapters is NOT scaled
-            books = library.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
-            chapters = library.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
+            books = questInfo.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
+            chapters = questInfo.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
         }
 
         #endregion
@@ -258,7 +270,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             QuestAssets.BasicQuestCanvas.Value.Wait();
             var basicLogArea = CalculateLogArea(out _, out _, out _, LogScale);
             targetScale = LogScale;
-            CalculateLibraryRegions(basicLogArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea);
+            CalculateLibraryRegions(basicLogArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea, out Rectangle questInfo);
 
             books.Width = books.Width.ToNearestDoubleEven();
             books.Height = books.Height.ToNearestDoubleEven();
@@ -268,6 +280,9 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
             questArea.Width = questArea.Width.ToNearestDoubleEven();
             questArea.Height = questArea.Height.ToNearestDoubleEven();
+
+            questInfo.Width = questInfo.Width.ToNearestDoubleEven();
+            questInfo.Height = questInfo.Height.ToNearestDoubleEven();
 
             void TargetSetup()
             {
@@ -286,16 +301,19 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 var oldBooks = booksTarget;
                 var oldChapters = chaptersTarget;
                 var oldQuests = questAreaTarget;
+                var oldInfo = questInfoTarget;
                 var oldPreviousQuests = previousQuestAreaTarget;
 
                 booksTarget = GenerateTarget(books.Width, books.Height);
                 chaptersTarget = GenerateTarget(chapters.Width, chapters.Height);
                 questAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
+                questInfoTarget = GenerateTarget(questInfo.Width, questInfo.Height);
                 previousQuestAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
 
                 oldBooks?.Dispose();
                 oldChapters?.Dispose();
                 oldQuests?.Dispose();
+                oldInfo?.Dispose();
                 oldPreviousQuests?.Dispose();
             }
 

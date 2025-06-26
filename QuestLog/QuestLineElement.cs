@@ -10,15 +10,17 @@ namespace QuestBooks.QuestLog
     [ExtendsFromMod("QuestBooks")]
     public abstract class QuestLineElement
     {
+        public virtual bool HasInfoPage { get => false; }
+
         public virtual void Update() { }
+
+        public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset);
 
         /// <summary>
         /// Determines the layer this element should draw to.<br/>
         /// <c>0f</c> is closer to the background, <c>1f</c> the foreground.
         /// </summary>
         public virtual float DrawPriority { get => 0.5f; }
-
-        public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset);
 
         public class PrioritySort : IComparer<QuestLineElement>
         {

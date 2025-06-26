@@ -24,5 +24,11 @@ namespace QuestBooks.Systems.NetCode
                 PacketTypeCount++;
             }
         }
+
+        public override void Unload()
+        {
+            PacketToId.Clear();
+            IdToPacket.Clear();
+        }
     }
 }

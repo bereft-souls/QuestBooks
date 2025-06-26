@@ -1,14 +1,22 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Build.Framework;
+using Microsoft.Xna.Framework;
+using QuestBooks.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.GameContent;
+using Terraria.GameInput;
 
 namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 {
     public partial class BasicQuestLogStyle
     {
+        private static readonly List<(Rectangle box, Type type)> ElementSelections = [];
+        private static int ElementTypeScrollOffset = 0;
+        private static QuestLineElement placingElement = null;
+
         private static void HandleQuestRegionTools()
         {
             Rectangle enableShifting = LogArea.CookieCutter(new(0.15f, -1.1f), new(0.065f, 0.06f));
@@ -99,6 +107,90 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                 if (LeftMouseJustReleased && GridSize > 3)
                     GridSize--;
+            }
+
+            if (SelectedChapter is not null)
+            {
+                Rectangle elementTypeSelection = LogArea.CookieCutter(new(1.21f, 0f), new(0.2f, 0.9f));
+                AddRectangle(elementTypeSelection, Color.Gray * 0.6f, fill: true);
+                AddRectangle(elementTypeSelection, Color.Black, 3f);
+
+                Rectangle elementTypeDisplay = elementTypeSelection.CookieCutter(new(0f, -1.03f), new(1f, 0.075f));
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(elementTypeDisplay, FontAssets.DeathText.Value, Color.White, Color.Black, "Element Selection:"));
+
+                Rectangle typeBox = elementTypeSelection.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.078f));
+                ElementSelections.Clear();
+
+                foreach (Type elementType in AvailableQuestElementTypes)
+                {
+                    ElementSelections.Add((typeBox, elementType));
+                    typeBox = typeBox.CookieCutter(new(0, 2.2f), Vector2.One);
+                }
+
+                if (elementTypeSelection.Contains(MouseCanvas))
+                {
+                    LockMouse();
+                    int data = PlayerInput.ScrollWheelDeltaForUI;
+
+                    if (data != 0)
+                    {
+                        int scrollAmount = data / 6;
+                        int initialOffset = ElementTypeScrollOffset;
+                        ElementTypeScrollOffset += scrollAmount;
+
+                        Rectangle lastBox = ElementSelections[^1].box;
+                        int minScrollValue = -(lastBox.Bottom - (elementTypeSelection.Height + elementTypeSelection.Y));
+
+                        ElementTypeScrollOffset = minScrollValue < 0 ? int.Clamp(ElementTypeScrollOffset, minScrollValue, 0) : 0;
+                    }
+                }
+
+                DrawTasks.Add(sb =>
+                {
+                    sb.End();
+                    sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+
+                    sb.GraphicsDevice.ScissorRectangle = elementTypeSelection;
+                    raster.ScissorTestEnable = true;
+
+                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+                });
+
+                foreach (var (box, elementType) in ElementSelections)
+                {
+                    bool placing = (placingElement?.GetType() ?? null) == elementType;
+                    box.Offset(0, ElementTypeScrollOffset);
+                    AddRectangle(box, Color.Gray, fill: true);
+
+                    if (placing)
+                        AddRectangle(box, Color.Yellow);
+
+                    else if (placingElement is not null)
+                        AddRectangle(box, Color.DarkGray);
+
+                    Rectangle textArea = box.CookieCutter(new(0.2f, 0f), new(0.78f, 1f));
+                    Rectangle iconArea = box.CookieCutter(new(-0.775f, 0f), new(0.25f, 1f)).CreateScaledMargin(0.2f);
+
+                    //AddRectangle(textArea, Color.Red);
+                    AddRectangle(iconArea, Color.Blue);
+
+                    //DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(box.CreateScaledMargin(0.02f).CookieCutter(new(0f, 0.3f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, elementType.Name));
+
+                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(textArea.CookieCutter(new(0f, 0.25f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, elementType.Name));
+
+                    if (box.Contains(MouseCanvas) && elementTypeSelection.Contains(MouseCanvas))
+                    {
+                        //if (!selected)
+                        //  AddRectangle(box, Color.White);
+
+                        MouseTooltip = elementType.FullName;
+
+                        if (LeftMouseJustReleased)
+                        {
+
+                        }
+                    }
+                }
             }
         }
     }

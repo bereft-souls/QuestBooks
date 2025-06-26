@@ -1,14 +1,18 @@
 global using static QuestBooks.Utilities.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultQuestBooks;
 using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
 using QuestBooks.Systems.NetCode;
+using QuestBooks.Utilities;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Loader;
 using Terraria.ModLoader;
 
 namespace QuestBooks
@@ -54,10 +58,8 @@ namespace QuestBooks
         /// </summary>
         public static void AddQuestBook(string serializedQuestBook, Mod mod)
         {
-            var questBook = JsonConvert.DeserializeObject<QuestBook>(serializedQuestBook, new JsonSerializerSettings()
-            { TypeNameHandling = TypeNameHandling.All });
-
-            AddQuestBook(questBook, mod);
+            var questBook = JsonConvert.DeserializeObject<QuestBook>(serializedQuestBook, JsonTypeResolverFix.Settings);
+            AddQuestBook((QuestBook)questBook, mod);
         }
 
         /// <summary>

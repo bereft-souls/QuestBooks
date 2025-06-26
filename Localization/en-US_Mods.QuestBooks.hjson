@@ -55,6 +55,7 @@ Tooltips: {
 		'''
 	QuestBookType: Quest Book Type:
 	QuestLineType: Quest Line Type:
+	QuestElementType: Element Selection:
 	ChangeQuestBookType: Change QuestBook type
 	ChangeQuestLineType: Change QuestLine type
 	LocalizationKey: Localization Key:
