@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using QuestBooks.Systems;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;

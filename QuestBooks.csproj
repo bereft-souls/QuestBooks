@@ -5,10 +5,11 @@
 
 	<!-- General -->
 	<PropertyGroup>
-		
+	  <TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Folder Include="Assets\Shaders\" />
+	  <Folder Include="Quests\VanillaBooks\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="NativeFileDialogSharp" Version="0.6.0-alpha" />

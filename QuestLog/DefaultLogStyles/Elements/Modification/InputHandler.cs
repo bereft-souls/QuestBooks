@@ -1,15 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.GameInput;
 using Terraria;
+using Terraria.GameInput;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
 
-namespace QuestBooks.QuestLog.DefaultQuestLogStyles;
+namespace QuestBooks.QuestLog.DefaultLogStyles;
 
 public partial class BasicQuestLogStyle
 {

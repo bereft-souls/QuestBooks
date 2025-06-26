@@ -1,24 +1,18 @@
 global using static QuestBooks.Utilities.Utils;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using QuestBooks.QuestLog;
-using QuestBooks.QuestLog.DefaultQuestBooks;
-using QuestBooks.QuestLog.DefaultQuestLogStyles;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
 using QuestBooks.Systems.NetCode;
 using QuestBooks.Utilities;
 using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Loader;
 using Terraria.ModLoader;
 
 namespace QuestBooks
 {
-	public class QuestBooksMod : Mod
-	{
+    public class QuestBooksMod : Mod
+    {
         public static Mod Instance { get; private set; }
         public static bool DesignerEnabled { get; set; } = false;
 
@@ -38,7 +32,6 @@ namespace QuestBooks
         {
             EnableDesigner();
             VanillaQuestBooks.AddVanillaQuests();
-            AddQuestLogStyle(new BasicQuestLogStyle(), this);
         }
 
         #region API

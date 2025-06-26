@@ -1,10 +1,7 @@
 ﻿using MonoMod.Utils;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
-using QuestBooks.QuestLog.DefaultQuestBooks;
-using QuestBooks.QuestLog.DefaultQuestLineElements;
-using QuestBooks.QuestLog.DefaultQuestLines;
-using QuestBooks.QuestLog.DefaultQuestLogStyles;
+using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Quests;
 using QuestBooks.Utilities;
 using System;
@@ -13,7 +10,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 using Terraria.ModLoader.IO;
@@ -44,11 +40,11 @@ namespace QuestBooks.Systems
             var types = AssemblyManager.GetLoadableTypes(loadingAssembly);
             var questTypes = types.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
 
-            BasicQuestLogStyle.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestBook))));
-            BasicQuestLogStyle.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestLine))));
+            BasicQuestLogStyle.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))));
+            BasicQuestLogStyle.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BookChapter))));
 
-            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestLineElement)))
-                .Select(t => new KeyValuePair<Type, QuestLineElement>(t, (QuestLineElement)Activator.CreateInstance(t)))
+            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(ChapterElement)))
+                .Select(t => new KeyValuePair<Type, ChapterElement>(t, (ChapterElement)Activator.CreateInstance(t)))
                 .Select(kvp => { kvp.Value.TemplateInstance = true; return kvp; })
                 .ToDictionary());
 

@@ -2,24 +2,40 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
-using QuestBooks.Quests;
-using QuestBooks.Systems;
-using System;
+using ReLogic.Content;
 using Terraria;
+using Terraria.ModLoader;
 
-namespace QuestBooks.QuestLog.DefaultQuestLineElements
+namespace QuestBooks.QuestLog.DefaultElements
 {
     /// <summary>
     /// A simple canvas element that contains quest information.
     /// </summary>
-    public class BasicQuestElement : QuestLineElement
+    public class DisplayElement : ChapterElement
     {
+        private const string DefaultTexture = "QuestBooks/Assets/Textures/QuestionMark";
+        private string _texture = DefaultTexture;
+
         [JsonIgnore]
-        public Quest Quest => QuestManager.GetQuest(QuestKey);
+        public string Texture
+        {
+            get => _texture;
+            set
+            {
+                _texture = value;
+
+                if (ModContent.RequestIfExists<Texture2D>(_texture, out var asset))
+                    DisplayTexture = asset;
+
+                else
+                    DisplayTexture = ModContent.Request<Texture2D>(DefaultTexture);
+            }
+        }
+
+        [JsonIgnore]
+        protected Asset<Texture2D> DisplayTexture;
 
         public Vector2 CanvasPosition { get; set; }
-
-        public string QuestKey { get; set; } = "QuestKey";
 
         public float Scale { get; set; } = 1f;
 
@@ -30,7 +46,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLineElements
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool hovered)
         {
-            Texture2D texture = QuestAssets.MissingIcon;
+            Texture2D texture = DisplayTexture.Value;
 
             if (hovered)
                 spriteBatch.Draw(texture, CanvasPosition, null, Color.Yellow, 0f, texture.Size() * 0.5f, Scale * 1.1f, SpriteEffects.None, 0f);
@@ -38,7 +54,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLineElements
             spriteBatch.Draw(texture, CanvasPosition, null, Color.White, 0f, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(QuestLine chapter, Vector2 mousePosition)
+        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
         {
             CanvasPosition = mousePosition;
             chapter.Elements.Add(this);

@@ -2,16 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using QuestBooks.Quests;
-using System.Collections;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
 {
     [ExtendsFromMod("QuestBooks")]
-    public abstract class QuestLineElement
+    public abstract class ChapterElement
     {
         public bool TemplateInstance = false;
 
@@ -25,7 +22,7 @@ namespace QuestBooks.QuestLog
 
         public virtual void Update() { }
 
-        public abstract bool PlaceOnCanvas(QuestLine chapter, Vector2 mousePosition);
+        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition);
 
         public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool hovered);
 
@@ -43,5 +40,10 @@ namespace QuestBooks.QuestLog
             float scale = MathHelper.Min((float)iconArea.Width / texture.Width, (float)iconArea.Height / texture.Height);
             spriteBatch.Draw(texture, iconArea.Center.ToVector2(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
         }
+    }
+
+    public abstract class QuestElement : ChapterElement
+    {
+        public abstract Quest Quest { get; }
     }
 }

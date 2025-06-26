@@ -1,5 +1,4 @@
-﻿using QuestBooks.QuestLog.DefaultQuestLogStyles;
-using QuestBooks.Systems;
+﻿using QuestBooks.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;

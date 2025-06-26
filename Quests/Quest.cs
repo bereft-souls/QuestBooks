@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using Terraria;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Quests
@@ -27,7 +26,7 @@ namespace QuestBooks.Quests
         /// The texture this quest should use when drawing to the quest log canvas.
         /// </summary>
         public virtual string IconTexture { get => ""; }
-        
+
         /// <summary>
         /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.
         /// </summary>

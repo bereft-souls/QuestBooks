@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using QuestBooks.QuestLog.DefaultChapters;
+using QuestBooks.QuestLog.DefaultQuestBooks;
+using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
-using Terraria;
-using Microsoft.Xna.Framework;
 
-namespace QuestBooks.QuestLog.DefaultQuestLogStyles
+namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -70,7 +67,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 TypingChapterName = false;
             }
 
-            if (SelectedBook is not null)
+            if (SelectedBook is BasicQuestBook basicBook)
             {
                 AddRectangle(bookNameArea, Color.Gray * 0.6f, fill: true);
                 var font = FontAssets.DeathText.Value;
@@ -85,10 +82,10 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                         Main.instance.HandleIME();
                     });
 
-                    string newNameKey = Main.GetInputText(SelectedBook.NameKey);
-                    if (SelectedBook.NameKey != newNameKey)
+                    string newNameKey = Main.GetInputText(basicBook.NameKey);
+                    if (basicBook.NameKey != newNameKey)
                     {
-                        SelectedBook.NameKey = newNameKey;
+                        basicBook.NameKey = newNameKey;
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
@@ -96,9 +93,9 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 else
                     AddRectangle(bookNameArea, bookNameArea.Contains(MouseCanvas) ? Color.LightGray : Color.Black, 3f);
 
-                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, SelectedBook.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, basicBook.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
 
-                if (SelectedChapter is not null && SelectedBook.QuestLines.Contains(SelectedChapter))
+                if (SelectedChapter is BasicChapter basicChapter && SelectedBook.Chapters.Contains(SelectedChapter))
                 {
                     AddRectangle(chapterNameArea, Color.Gray * 0.6f, fill: true);
                     DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
@@ -112,10 +109,10 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                             Main.instance.HandleIME();
                         });
 
-                        string newChapterKey = Main.GetInputText(SelectedChapter.NameKey);
-                        if (SelectedChapter.NameKey != newChapterKey)
+                        string newChapterKey = Main.GetInputText(basicChapter.NameKey);
+                        if (basicChapter.NameKey != newChapterKey)
                         {
-                            SelectedChapter.NameKey = newChapterKey;
+                            basicChapter.NameKey = newChapterKey;
                             SoundEngine.PlaySound(SoundID.MenuTick);
                         }
                     }
@@ -123,7 +120,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     else
                         AddRectangle(chapterNameArea, chapterNameArea.Contains(MouseCanvas) ? Color.LightGray : Color.Black, 3f);
 
-                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, SelectedChapter.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
+                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, basicChapter.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
                 }
             }
         }

@@ -1,19 +1,14 @@
-﻿using QuestBooks.QuestLog.DefaultQuestBooks;
-using QuestBooks.QuestLog.DefaultQuestLines;
+﻿using Microsoft.Xna.Framework;
+using QuestBooks.QuestLog.DefaultChapters;
+using QuestBooks.QuestLog.DefaultQuestBooks;
 using QuestBooks.Systems;
 using SDL2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Localization;
 using Terraria;
-using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 
-namespace QuestBooks.QuestLog.DefaultQuestLogStyles
+namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -43,8 +38,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                 if (LeftMouseJustReleased && SelectedBook is not null)
                 {
-                    BasicQuestLine newLine = new() { NameKey = $"YourMod.QuestBooks.Chapter{SelectedBook.QuestLines.Count + 1}" };
-                    SelectedBook.QuestLines.Add(newLine);
+                    BasicChapter newLine = new() { NameKey = $"YourMod.QuestBooks.Chapter{SelectedBook.Chapters.Count + 1}" };
+                    SelectedBook.Chapters.Add(newLine);
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
             }
@@ -98,7 +93,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.DeleteChapter");
 
-                if (LeftMouseJustReleased && (SelectedBook?.QuestLines.Contains(SelectedChapter) ?? false))
+                if (LeftMouseJustReleased && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
                 {
                     SDL.SDL_MessageBoxData message = new()
                     {
@@ -129,7 +124,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                     if (result == 0 && buttonId == 1)
                     {
-                        SelectedBook.QuestLines.Remove(SelectedChapter);
+                        SelectedBook.Chapters.Remove(SelectedChapter);
                         DrawTasks.Add(_ => SelectedChapter = null);
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
@@ -146,7 +141,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 AddRectangle(addChapter, Color.Orange, fill: true);
                 AddRectangle(deleteBook, Color.Blue, fill: true);
 
-                if (SelectedBook?.QuestLines.Contains(SelectedChapter) ?? false)
+                if (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false)
                     AddRectangle(deleteChapter, Color.Blue, fill: true);
 
                 else

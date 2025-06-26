@@ -2,93 +2,39 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultQuestLines;
-using QuestBooks.QuestLog.DefaultQuestLogStyles;
-using QuestBooks.Quests;
-using ReLogic.Graphics;
-using System;
+using QuestBooks.QuestLog.DefaultLogStyles;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Localization;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {
     /// <summary>
-    /// Represents a basic <see cref="QuestBook"/> implementation, containing a set of <see cref="QuestLine"/>s.
+    /// Represents a basic <see cref="QuestBook"/> implementation, containing a set of <see cref="BookChapter"/>s.
     /// </summary>
     public class BasicQuestBook() : QuestBook
     {
         /// <summary>
         /// The list of all quest lines contained within this book.
         /// </summary>
-        [JsonIgnore]
-        public override IEnumerable<QuestLine> Chapters => QuestLines;
-
-        public List<BasicQuestLine> QuestLines = [];
+        public override List<BookChapter> Chapters { get; } = [];
 
         [JsonIgnore]
-        public virtual string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
+        public override string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
 
         public string NameKey;
 
-        /// <summary>
-        /// A collection of all quests contained by all elements in all chapters in this quest book.<br/>
-        /// These quests are all the actual implemented instances, and not duplicates or templates - you can access accurate info or methods from them.<br/>
-        /// Pulls from <see cref="BasicQuestLine.Elements"/>.
-        /// </summary>
-        [JsonIgnore]
-        public IEnumerable<Quest> QuestList => QuestLines.SelectMany(x => x.QuestList).Distinct();
-
-        /// <summary>
-        /// The completion progres of this quest book.<br/>
-        /// 0f is no quests completed, and 1f is all quests completed.<br/>
-        /// <c>float.NaN</c> is returned for quest books that contain no quests in any of their chapters.<br/>
-        /// Pulls from <see cref="BasicQuestLine.QuestList"/>.
-        /// </summary>
-        [JsonIgnore]
-        public virtual float Progress
-        {
-            get
-            {
-                float applicableCount = QuestLines.Count(x => !float.IsNaN(x.Progress));
-                return applicableCount > 0 ? QuestLines.Where(x => !float.IsNaN(x.Progress)).Sum(x => x.Progress) / applicableCount : float.NaN;
-            }
-        }
-
-        /// <summary>
-        /// Whether or not all quests in all chapters of this quest book are complete.<br/>
-        /// Pulls from <see cref="BasicQuestLine.QuestList"/>.
-        /// </summary>
-        [JsonIgnore]
-        public virtual bool Complete => QuestLines.All(x => x.Complete);
-
-        /// <summary>
-        /// Determines whether this quest line should appear in the quest log.<br/>
-        /// Useful for hiding certain chapters until progression goals are met.
-        /// </summary>
-        public virtual bool VisibleInLog() => true;
-
-        /// <summary>
-        /// Determines whether this quest line should be able to be selected in the quest log.<br/>
-        /// Useful for when you want to display a chapter, but hide its contents until progression goals are met.
-        /// </summary>
-        public virtual bool IsUnlocked() => true;
-
         public override void Update()
         {
-            foreach (BasicQuestLine questLine in QuestLines)
+            foreach (BookChapter questLine in Chapters)
                 questLine.Update();
         }
 
         /// <summary>
         /// Performs the default drawing behavior of for this <see cref="BasicQuestBook"/>. Assigns colors and calls <see cref="DrawBasicBook(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.
         /// </summary>
-        public virtual void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
+        public override void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
         {
             Color color = Color.SlateGray;
 
@@ -122,7 +68,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
-        } 
+        }
 
         /// <summary>
         /// Performs the default book text drawing code to the spritebatch. Draws the text as it should sit within the given rectangle with the specified colors.
@@ -144,10 +90,12 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// <summary>
         /// Clones the members of this quest book into a new quest book.
         /// </summary>
-        public virtual void CloneTo(BasicQuestBook newInstance)
+        public override void CloneTo(QuestBook newInstance)
         {
-            newInstance.NameKey = NameKey;
-            newInstance.QuestLines = QuestLines;
+            if (newInstance is BasicQuestBook book)
+                book.NameKey = NameKey;
+
+            base.CloneTo(newInstance);
         }
     }
 }

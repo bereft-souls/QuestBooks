@@ -6,9 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Terraria;
-using Terraria.UI;
-using static System.Net.Mime.MediaTypeNames;
-using static Terraria.GameContent.Animations.IL_Actions.Sprites;
 
 namespace QuestBooks.Utilities
 {
@@ -214,7 +211,7 @@ namespace QuestBooks.Utilities
 
         public static void DrawOutlinedString(this SpriteBatch spriteBatch,
             SpriteFont font,
-            string line, 
+            string line,
            Vector2 drawPos,
            Vector2 origin,
            float scale,

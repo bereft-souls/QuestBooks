@@ -1,13 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
-using QuestBooks.QuestLog;
-using QuestBooks.QuestLog.DefaultQuestLogStyles;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
-using Terraria.GameInput;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -71,7 +65,7 @@ namespace QuestBooks.Systems
 
                 Rectangle iconArea = achievement.CookieCutter(new(2f, 0f), new(0.7f, 0.7f));
                 bool hovered = false;
-                
+
                 if (iconArea.Contains(Main.MouseScreen.ToPoint()))
                 {
                     hovered = true;

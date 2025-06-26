@@ -1,17 +1,11 @@
-﻿using QuestBooks.QuestLog.DefaultQuestBooks;
+﻿using Microsoft.Xna.Framework;
 using QuestBooks.Systems;
 using SDL2;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Localization;
 using Terraria;
-using Microsoft.Xna.Framework;
+using Terraria.Localization;
 
-namespace QuestBooks.QuestLog.DefaultQuestLogStyles
+namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -107,9 +101,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                             foreach (var file in files.Paths)
                             {
-                                QuestBook book = QuestLoader.LoadQuestBook(file);
-
-                                if (book is not BasicQuestBook questBook)
+                                var book = QuestLoader.LoadQuestBook(file);
+                                if (book is not QuestBook questBook)
                                 {
                                     Main.NewText($"Unable to parse file into BasicQuestBook: {file}");
                                     continue;
@@ -147,9 +140,8 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     var file = NativeFileDialogSharp.Dialog.FileOpen("json", null);
                     if (file.IsOk)
                     {
-                        QuestBook book = QuestLoader.LoadQuestBook(file.Path);
-
-                        if (book is not BasicQuestBook questBook)
+                        var book = QuestLoader.LoadQuestBook(file.Path);
+                        if (book is not QuestBook questBook)
                             Main.NewText($"Unable to parse file into BasicQuestBook: {file}");
 
                         else

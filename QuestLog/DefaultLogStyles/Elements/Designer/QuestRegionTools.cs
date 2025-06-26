@@ -1,21 +1,17 @@
-﻿using Microsoft.Build.Framework;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using QuestBooks.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.GameContent;
 using Terraria.GameInput;
 
-namespace QuestBooks.QuestLog.DefaultQuestLogStyles
+namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
         private static readonly List<(Rectangle box, Type type)> ElementSelections = [];
         private static int ElementTypeScrollOffset = 0;
-        private static QuestLineElement placingElement = null;
+        private static ChapterElement placingElement = null;
 
         private static void HandleQuestRegionTools()
         {
@@ -174,7 +170,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                         AddRectangle(box, Color.PaleGoldenrod, fill: true);
                         AddRectangle(box, Color.Yellow);
                     }
-                        
+
 
                     Rectangle textArea = box.CookieCutter(new(0.2f, 0f), new(0.78f, 1f));
                     Rectangle iconArea = box.CookieCutter(new(-0.775f, 0f), new(0.225f, 1f)).CreateScaledMargin(0.2f);
@@ -188,14 +184,14 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     if (box.Contains(MouseCanvas) && elementTypeSelection.Contains(MouseCanvas))
                     {
                         if (!placing)
-                          AddRectangle(box, Color.White);
+                            AddRectangle(box, Color.White);
 
                         MouseTooltip = elementType.FullName;
 
                         if (LeftMouseJustReleased)
                         {
                             if ((placingElement?.GetType() ?? null) != elementType)
-                                placingElement = (QuestLineElement)Activator.CreateInstance(elementType);
+                                placingElement = (ChapterElement)Activator.CreateInstance(elementType);
 
                             else
                                 placingElement = null;

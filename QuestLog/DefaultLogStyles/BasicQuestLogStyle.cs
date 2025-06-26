@@ -1,21 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultQuestBooks;
-using QuestBooks.QuestLog.DefaultQuestLines;
 using QuestBooks.Systems;
-using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader.IO;
 
-namespace QuestBooks.QuestLog.DefaultQuestLogStyles
+namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle : QuestLogStyle
     {
@@ -23,13 +17,13 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         public override string DisplayName => "Book";
 
         // Available element retrieval
-        public static IEnumerable<BasicQuestBook> AvailableBooks { get => QuestManager.QuestBooks.Where(b => b is BasicQuestBook).Cast<BasicQuestBook>(); }
-        public static IEnumerable<BasicQuestLine> AvailableChapters { get => SelectedBook?.Chapters.Where(c => c is BasicQuestLine).Cast<BasicQuestLine>() ?? []; }
+        public static IEnumerable<QuestBook> AvailableBooks { get => QuestManager.QuestBooks; }
+        public static IEnumerable<BookChapter> AvailableChapters { get => SelectedBook?.Chapters ?? []; }
 
         // These are registered on load
         public static readonly List<Type> AvailableQuestBookTypes = [];
         public static readonly List<Type> AvailableQuestLineTypes = [];
-        public static readonly Dictionary<Type, QuestLineElement> AvailableQuestElementTypes = [];
+        public static readonly Dictionary<Type, ChapterElement> AvailableQuestElementTypes = [];
 
         // Mouse position on canvas
         protected static Vector2 ScaledMousePos { get; set; }
@@ -153,7 +147,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             UpdateMousePosition(halfScreen, halfRealScreen);
 
             Texture2D logTexture = QuestAssets.BasicQuestCanvas;
-            DrawTasks.Add(sb => sb.Draw(logTexture, halfRealScreen + (LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f));  
+            DrawTasks.Add(sb => sb.Draw(logTexture, halfRealScreen + (LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f));
 
             // These handle moving the canvas via dragging the book's spine,
             // resizing with the tab in the bottom-right hand corner,
@@ -169,7 +163,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             // Render each region to it's own render target to allow for shaders.
             // We use a shader to fade out the edges of each target when drawing to the log.
 
-            UpdateBooks(booksTarget.Bounds.CreateScaledMargins(top: FadeDesignation, bottom: FadeDesignation), (MouseCanvas - books.Location).ToVector2() * (booksTarget.Bounds.Size() / books.Size()));            
+            UpdateBooks(booksTarget.Bounds.CreateScaledMargins(top: FadeDesignation, bottom: FadeDesignation), (MouseCanvas - books.Location).ToVector2() * (booksTarget.Bounds.Size() / books.Size()));
             UpdateChapters(chaptersTarget.Bounds.CreateScaledMargins(top: FadeDesignation, bottom: FadeDesignation), (MouseCanvas - chapters.Location).ToVector2() * (chaptersTarget.Bounds.Size() / chapters.Size()));
             UpdateQuestArea(questAreaTarget.Bounds.CreateScaledMargin(FadeDesignation), (MouseCanvas - questArea.Location).ToVector2() * (questAreaTarget.Bounds.Size() / questArea.Size()));
 

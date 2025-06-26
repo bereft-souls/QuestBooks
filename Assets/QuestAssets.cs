@@ -1,16 +1,15 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Assets
 {
+    /// <summary>
+    /// Contains easy access to assets from the QuestBooks mod.
+    /// </summary>
     public class QuestAssets : ModSystem
     {
         public static LazyTexture MagicPixel { get; } = new("Terraria/Images/MagicPixel", true);

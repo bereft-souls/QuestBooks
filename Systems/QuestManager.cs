@@ -47,15 +47,15 @@ namespace QuestBooks.Systems
             }
 
             ActiveQuests = newActiveQuests.ToFrozenDictionary();
-            IncompleteQuests = [..ActiveQuests.Keys];
+            IncompleteQuests = [.. ActiveQuests.Keys];
             CompletedQuests = [];
 
             WorldQuests = newWorldQuests.ToFrozenDictionary();
-            IncompleteWorldQuests = [..WorldQuests.Keys];
+            IncompleteWorldQuests = [.. WorldQuests.Keys];
             CompletedWorldQuests = [];
 
             PlayerQuests = newPlayerQuests.ToFrozenDictionary();
-            IncompletePlayerQuests = [..PlayerQuests.Keys];
+            IncompletePlayerQuests = [.. PlayerQuests.Keys];
             CompletedPlayerQuests = [];
         }
 
@@ -81,7 +81,7 @@ namespace QuestBooks.Systems
         public static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest
         {
             if (QuestLoader.QuestNames.TryGetValue(typeof(TQuest), out var questName) && TryGetQuest(questName, out var questResult))
-            { 
+            {
                 result = (TQuest)questResult;
                 return true;
             }
@@ -90,7 +90,7 @@ namespace QuestBooks.Systems
             return false;
         }
 
-        public static void CompleteQuest<TQuest>() where TQuest: Quest => CompleteQuest(GetQuest<TQuest>());
+        public static void CompleteQuest<TQuest>() where TQuest : Quest => CompleteQuest(GetQuest<TQuest>());
         public static void CompleteQuest(string questName) => CompleteQuest(GetQuest(questName));
         public static void CompleteQuest(Quest quest)
         {
@@ -108,8 +108,8 @@ namespace QuestBooks.Systems
             newIncomplete.Remove(quest.Key);
             newComplete.Add(quest.Key);
 
-            IncompleteQuests = [..newIncomplete];
-            CompletedQuests = [..newComplete];
+            IncompleteQuests = [.. newIncomplete];
+            CompletedQuests = [.. newComplete];
 
             quest.Completed = true;
             quest.MarkAsComplete();

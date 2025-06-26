@@ -1,13 +1,7 @@
-﻿using Microsoft.Win32.SafeHandles;
-using Microsoft.Xna.Framework;
-using QuestBooks.QuestLog.DefaultQuestBooks;
-using QuestBooks.QuestLog.DefaultQuestLines;
+﻿using Microsoft.Xna.Framework;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -15,7 +9,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 
-namespace QuestBooks.QuestLog.DefaultQuestLogStyles
+namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -65,7 +59,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             else
                 SelectingBookType = false;
 
-            if (SelectedChapter is not null && (SelectedBook?.QuestLines.Contains(SelectedChapter) ?? false))
+            if (SelectedChapter is not null && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
             {
                 AddRectangle(questLineType, Color.Gray * 0.6f, fill: true);
                 AddRectangle(questLineType, SelectingLineType ? Color.Yellow : (questLineType.Contains(MouseCanvas) ? Color.LightGray : Color.Black), 3f);
@@ -110,7 +104,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     {
                         void onClick()
                         {
-                            var instance = (BasicQuestBook)Activator.CreateInstance(bookType);
+                            var instance = (QuestBook)Activator.CreateInstance(bookType);
                             SelectedBook.CloneTo(instance);
                             QuestManager.QuestBooks[QuestManager.QuestBooks.IndexOf(SelectedBook)] = instance;
                             SelectedBook = instance;
@@ -127,9 +121,9 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                     {
                         void onClick()
                         {
-                            var instance = (BasicQuestLine)Activator.CreateInstance(lineType);
+                            var instance = (BookChapter)Activator.CreateInstance(lineType);
                             SelectedChapter.CloneTo(instance);
-                            SelectedBook.QuestLines[SelectedBook.QuestLines.IndexOf(SelectedChapter)] = instance;
+                            SelectedBook.Chapters[SelectedBook.Chapters.IndexOf(SelectedChapter)] = instance;
                             SelectedChapter = instance;
                         }
 
@@ -171,7 +165,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
                     sb.GraphicsDevice.ScissorRectangle = typeDropDown;
                     raster.ScissorTestEnable = true;
-                    
+
                     sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
                 });
 
