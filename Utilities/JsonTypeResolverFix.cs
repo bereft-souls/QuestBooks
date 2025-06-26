@@ -164,7 +164,7 @@ namespace QuestBooks.Utilities
         #region Normally Internal Types
         private class ThreadSafeStore<TKey, TValue> where TKey : notnull
         {
-        private readonly ConcurrentDictionary<TKey, TValue> _concurrentStore;
+            private readonly ConcurrentDictionary<TKey, TValue> _concurrentStore;
 
             private readonly Func<TKey, TValue> _creator;
 
@@ -182,16 +182,10 @@ namespace QuestBooks.Utilities
             }
         }
 
-        private readonly struct StructMultiKey<T1, T2> : IEquatable<StructMultiKey<T1, T2>>
+        private readonly struct StructMultiKey<T1, T2>(T1 v1, T2 v2) : IEquatable<StructMultiKey<T1, T2>>
         {
-            public readonly T1 Value1;
-            public readonly T2 Value2;
-
-            public StructMultiKey(T1 v1, T2 v2)
-            {
-                Value1 = v1;
-                Value2 = v2;
-            }
+            public readonly T1 Value1 = v1;
+            public readonly T2 Value2 = v2;
 
             public override int GetHashCode()
             {
@@ -200,7 +194,7 @@ namespace QuestBooks.Utilities
 
             public override bool Equals(object? obj)
             {
-                if (!(obj is StructMultiKey<T1, T2> key))
+                if (obj is not StructMultiKey<T1, T2> key)
                 {
                     return false;
                 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using QuestBooks.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         private static bool SnapToGrid = false;
         private static int GridSize = 20;
 
-        public void DesignerPreQuestRegion()
+        public void DesignerPreQuestRegion(Vector2 mousePosition)
         {
             if (SelectedChapter is null)
                 return;
@@ -28,39 +29,56 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 DrawTasks.Add(sb =>
                 {
                     sb.End();
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, GridBlending);
+                    sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, GridBlending, sampler, depth, raster, effect, matrix);
                 });
 
-                float linePosition = 0f;
-                float gridSpacing = GridSize * targetScale;
                 Color gridColor = Color.White with { A = (byte)(ShowBackdrop ? 0 : 100) };
 
-                while (linePosition <= questAreaTarget.Width)
+                for (int xPos = 0; xPos < 600; xPos += GridSize)
                 {
-                    Rectangle gridLine = CenteredRectangle(new(linePosition, questAreaTarget.Height / 2), new(2f, questAreaTarget.Height));
-                    AddRectangle(gridLine, gridColor, fill: true);
-                    linePosition += gridSpacing;
+                    Vector2 drawCenter = new(xPos, 300f);
+                    Rectangle rect = CenteredRectangle(drawCenter, new(1f, 600f));
+                    AddRectangle(rect, gridColor);
                 }
 
-                linePosition = 0;
-                while (linePosition <= questAreaTarget.Height)
+                for (int yPos = 0; yPos < 600; yPos += GridSize)
                 {
-                    Rectangle gridLine = CenteredRectangle(new(questAreaTarget.Width / 2, linePosition), new(questAreaTarget.Width, 2f));
-                    AddRectangle(gridLine, gridColor, fill: true);
-                    linePosition += gridSpacing;
+                    Vector2 drawCenter = new(300f, yPos);
+                    Rectangle rect = CenteredRectangle(drawCenter, new(600f, 1f));
+                    AddRectangle(rect, gridColor);
                 }
 
                 DrawTasks.Add(sb =>
                 {
                     sb.End();
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, ContentBlending);
+                    sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, ContentBlending, sampler, depth, raster, effect, matrix);
                 });
             }
         }
 
-        public void DesignerPostQuestRegion()
+        public void DesignerPostQuestRegion(Vector2 mousePosition, bool mouseInBounds)
         {
+            if (placingElement is null)
+                return;
 
+            if (SnapToGrid)
+            {
+                mousePosition.X = float.Round(mousePosition.X / GridSize, MidpointRounding.AwayFromZero) * GridSize;
+                mousePosition.Y = float.Round(mousePosition.Y / GridSize, MidpointRounding.AwayFromZero) * GridSize;
+            }
+
+            if (LeftMouseJustReleased && mouseInBounds)
+            {
+                if (placingElement.PlaceOnCanvas(SelectedChapter, mousePosition))
+                {
+                    SortedElements = null;
+                    placingElement = null;
+                }
+            }
+
+            DrawTasks.Add(sb => placingElement?.DrawPlacementPreview(sb, mousePosition));
         }
     }
 }

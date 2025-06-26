@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MonoMod.Utils;
+using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultQuestBooks;
 using QuestBooks.QuestLog.DefaultQuestLineElements;
@@ -45,7 +46,11 @@ namespace QuestBooks.Systems
 
             BasicQuestLogStyle.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestBook))));
             BasicQuestLogStyle.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BasicQuestLine))));
-            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestLineElement))));
+
+            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestLineElement)))
+                .Select(t => new KeyValuePair<Type, QuestLineElement>(t, (QuestLineElement)Activator.CreateInstance(t)))
+                .Select(kvp => { kvp.Value.TemplateInstance = true; return kvp; })
+                .ToDictionary());
 
             foreach (var questType in questTypes)
             {

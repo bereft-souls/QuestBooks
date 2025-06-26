@@ -41,7 +41,6 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
             HandleAddDeleteButtons(books, chapters, questArea);
             HandleSaveLoadButtons();
             HandleTypeSelection();
-            HandleQuestRegionTools();
 
             DrawTasks.Add(sb =>
             {

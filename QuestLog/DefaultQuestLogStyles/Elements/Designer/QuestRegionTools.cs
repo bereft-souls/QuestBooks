@@ -111,7 +111,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
             if (SelectedChapter is not null)
             {
-                Rectangle elementTypeSelection = LogArea.CookieCutter(new(1.21f, 0f), new(0.2f, 0.9f));
+                Rectangle elementTypeSelection = LogArea.CookieCutter(new(1.24f, 0f), new(0.23f, 0.9f));
                 AddRectangle(elementTypeSelection, Color.Gray * 0.6f, fill: true);
                 AddRectangle(elementTypeSelection, Color.Black, 3f);
 
@@ -121,7 +121,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 Rectangle typeBox = elementTypeSelection.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.078f));
                 ElementSelections.Clear();
 
-                foreach (Type elementType in AvailableQuestElementTypes)
+                foreach (Type elementType in AvailableQuestElementTypes.Keys)
                 {
                     ElementSelections.Add((typeBox, elementType));
                     typeBox = typeBox.CookieCutter(new(0, 2.2f), Vector2.One);
@@ -159,39 +159,53 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
                 foreach (var (box, elementType) in ElementSelections)
                 {
                     bool placing = (placingElement?.GetType() ?? null) == elementType;
+                    bool otherPlacing = !placing && placingElement is not null;
+
                     box.Offset(0, ElementTypeScrollOffset);
-                    AddRectangle(box, Color.Gray, fill: true);
 
-                    if (placing)
+                    if (!placing)
+                    {
+                        AddRectangle(box, Color.Gray, fill: true);
+                        AddRectangle(box, Color.LightGray);
+                    }
+
+                    else
+                    {
+                        AddRectangle(box, Color.PaleGoldenrod, fill: true);
                         AddRectangle(box, Color.Yellow);
-
-                    else if (placingElement is not null)
-                        AddRectangle(box, Color.DarkGray);
+                    }
+                        
 
                     Rectangle textArea = box.CookieCutter(new(0.2f, 0f), new(0.78f, 1f));
-                    Rectangle iconArea = box.CookieCutter(new(-0.775f, 0f), new(0.25f, 1f)).CreateScaledMargin(0.2f);
+                    Rectangle iconArea = box.CookieCutter(new(-0.775f, 0f), new(0.225f, 1f)).CreateScaledMargin(0.2f);
 
-                    //AddRectangle(textArea, Color.Red);
-                    AddRectangle(iconArea, Color.Blue);
-
-                    //DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(box.CreateScaledMargin(0.02f).CookieCutter(new(0f, 0.3f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, elementType.Name));
-
-                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(textArea.CookieCutter(new(0f, 0.25f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, elementType.Name));
+                    DrawTasks.Add(sb =>
+                    {
+                        sb.DrawOutlinedStringInRectangle(textArea.CookieCutter(new(0f, 0.25f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, elementType.Name);
+                        AvailableQuestElementTypes[elementType].DrawDesignerIcon(sb, iconArea);
+                    });
 
                     if (box.Contains(MouseCanvas) && elementTypeSelection.Contains(MouseCanvas))
                     {
-                        //if (!selected)
-                        //  AddRectangle(box, Color.White);
+                        if (!placing)
+                          AddRectangle(box, Color.White);
 
                         MouseTooltip = elementType.FullName;
 
                         if (LeftMouseJustReleased)
                         {
+                            if ((placingElement?.GetType() ?? null) != elementType)
+                                placingElement = (QuestLineElement)Activator.CreateInstance(elementType);
 
+                            else
+                                placingElement = null;
                         }
                     }
                 }
             }
+
+            if (RightMouseJustReleased)
+                placingElement = null;
         }
     }
 }

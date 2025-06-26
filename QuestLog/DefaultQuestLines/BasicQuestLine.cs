@@ -24,15 +24,15 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// <summary>
         /// The list of all elements contained within this quest line.
         /// </summary>
-        [JsonIgnore]
-        public override IEnumerable<QuestLineElement> Elements { get => ChapterElements; }
+        public override List<QuestLineElement> Elements { get; } = [];
 
-        public List<QuestLineElement> ChapterElements = [];
+        /// <summary>
+        /// The localization key used to display this line's title.
+        /// </summary>
+        public string NameKey;
 
         [JsonIgnore]
         public virtual string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
-
-        public string NameKey;
 
         /// <summary>
         /// A collection of all quests contained by elements in this quest line.<br/>
@@ -40,7 +40,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         /// Pulls from <see cref="Elements"/>.
         /// </summary>
         [JsonIgnore]
-        public IEnumerable<Quest> QuestList => ChapterElements.Where(e => e is BasicQuestElement).Cast<BasicQuestElement>().Select(e => e.Quest);
+        public IEnumerable<Quest> QuestList => Elements.Where(e => e is BasicQuestElement).Cast<BasicQuestElement>().Select(e => e.Quest);
 
         /// <summary>
         /// The completion progress of this quest line.<br/>
@@ -140,7 +140,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLines
         public virtual void CloneTo(BasicQuestLine newInstance)
         {
             newInstance.NameKey = NameKey;
-            newInstance.ChapterElements = ChapterElements;
+            newInstance.Elements.AddRange(Elements);
         }
     }
 }

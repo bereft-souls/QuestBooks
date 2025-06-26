@@ -6,7 +6,7 @@ namespace QuestBooks.QuestLog
     [ExtendsFromMod("QuestBooks")]
     public abstract class QuestLine
     {
-        public abstract IEnumerable<QuestLineElement> Elements { get; }
+        public abstract List<QuestLineElement> Elements { get; }
 
         public virtual void Update() { }
 

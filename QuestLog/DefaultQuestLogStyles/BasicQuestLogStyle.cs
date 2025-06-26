@@ -29,7 +29,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
         // These are registered on load
         public static readonly List<Type> AvailableQuestBookTypes = [];
         public static readonly List<Type> AvailableQuestLineTypes = [];
-        public static readonly List<Type> AvailableQuestElementTypes = [];
+        public static readonly Dictionary<Type, QuestLineElement> AvailableQuestElementTypes = [];
 
         // Mouse position on canvas
         protected static Vector2 ScaledMousePos { get; set; }
@@ -171,7 +171,7 @@ namespace QuestBooks.QuestLog.DefaultQuestLogStyles
 
             UpdateBooks(booksTarget.Bounds.CreateScaledMargins(top: FadeDesignation, bottom: FadeDesignation), (MouseCanvas - books.Location).ToVector2() * (booksTarget.Bounds.Size() / books.Size()));            
             UpdateChapters(chaptersTarget.Bounds.CreateScaledMargins(top: FadeDesignation, bottom: FadeDesignation), (MouseCanvas - chapters.Location).ToVector2() * (chaptersTarget.Bounds.Size() / chapters.Size()));
-            UpdateQuestArea(questAreaTarget.Bounds.CreateScaledMargin(FadeDesignation));
+            UpdateQuestArea(questAreaTarget.Bounds.CreateScaledMargin(FadeDesignation), (MouseCanvas - questArea.Location).ToVector2() * (questAreaTarget.Bounds.Size() / questArea.Size()));
 
             // Render all of the completed render targets with fading applied to the
             // desired edges (top/bottom on books/chapters, all edges on quest area)
