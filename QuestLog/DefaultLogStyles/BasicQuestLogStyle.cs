@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
+using QuestBooks.Quests;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;
@@ -204,7 +205,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Transparent));
 
                 if (UseDesigner)
-                    HandleElementProperties();
+                    HandleElementProperties(new Rectangle(0, 0, (int)(questInfoTarget.Width / TargetScale), (int)(questInfoTarget.Height / TargetScale)), (MouseCanvas - questInfo.Location).ToVector2() * (questInfoTarget.Bounds.Size() / questInfo.Size()) / TargetScale);
 
                 else
                     DrawTasks.Add(SelectedElement.DrawInfoPage);

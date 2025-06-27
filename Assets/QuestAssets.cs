@@ -23,6 +23,7 @@ namespace QuestBooks.Assets
         public static LazyTexture LogEntryBorder { get; } = new("LogEntryBorder");
 
         public static LazyTexture MissingIcon { get; } = new("QuestionMark");
+        public static LazyTexture MissingIconOutline { get; } = new("QuestionMarkOutline");
 
         public static LazyShader FadedEdges { get; } = new("FadedEdges");
 

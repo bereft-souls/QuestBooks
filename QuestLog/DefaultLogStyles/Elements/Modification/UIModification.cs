@@ -31,6 +31,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (LeftMouseJustPressed)
                     {
                         UseDesigner = !UseDesigner;
+                        SelectedElement = null;
                         SoundEngine.PlaySound(UseDesigner ? SoundID.Item28 : SoundID.Item78);
                     }
                 }
