@@ -47,7 +47,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (lastHoveredElement is not null && LeftMouseJustReleased)
             {
                 ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
+                swipingBetweenInfoPages = element is not null && SelectedElement is not null;
                 SelectedElement = element;
+
+                if ((element?.HasInfoPage ?? false) || UseDesigner)
+                    questInfoSwipeOffset = questInfoTarget.Height * (element is null ? -1 : 1);
             }
 
             DrawTasks.Add(sb =>
@@ -55,7 +59,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Draw elements
                 if (SortedElements is not null)
                     foreach (var element in SortedElements)
-                        element.DrawToCanvas(sb, questAreaOffset, lastHoveredElement == element);
+                        element.DrawToCanvas(sb, questAreaOffset, SelectedElement == element, lastHoveredElement == element);
 
                 sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);

@@ -30,27 +30,43 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         protected static Vector2 ScaledMousePos { get; set; }
         protected static Point MouseCanvas { get; set; }
 
-        // Handles the render targets for the book/chapter/quest areas,
-        // as well as the faded edges handled by the shader
-        private static BlendState LayerBlending { get; } = new()
+        private static BlendState shaderControlled { get; } = new()
         {
-            ColorSourceBlend = Blend.SourceAlpha,
-            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorSourceBlend = Blend.One,
+            ColorDestinationBlend = Blend.Zero,
             ColorBlendFunction = BlendFunction.Add,
             AlphaSourceBlend = Blend.One,
-            AlphaDestinationBlend = Blend.One,
+            AlphaDestinationBlend = Blend.Zero,
             AlphaBlendFunction = BlendFunction.Add,
         };
 
-        private static BlendState LibraryBlending { get; } = new()
+        // Handles the render targets for the book/chapter/quest areas,
+        // as well as the faded edges handled by the shader
+        private static BlendState LayerBlending
         {
-            ColorSourceBlend = Blend.SourceAlpha,
-            ColorDestinationBlend = Blend.InverseSourceAlpha,
-            ColorBlendFunction = BlendFunction.Add,
-            AlphaSourceBlend = Blend.SourceAlpha,
-            AlphaDestinationBlend = Blend.DestinationAlpha,
-            AlphaBlendFunction = BlendFunction.Max
-        };
+            get => new()
+            {
+                ColorSourceBlend = Blend.One,
+                ColorDestinationBlend = Blend.InverseSourceAlpha,
+                ColorBlendFunction = BlendFunction.Add,
+                AlphaSourceBlend = Blend.One,
+                AlphaDestinationBlend = Blend.One,
+                AlphaBlendFunction = BlendFunction.Add,
+            };
+        }
+
+        private static BlendState LibraryBlending
+        {
+            get => new()
+            {
+                ColorSourceBlend = Blend.SourceAlpha,
+                ColorDestinationBlend = Blend.InverseSourceAlpha,
+                ColorBlendFunction = BlendFunction.Add,
+                AlphaSourceBlend = Blend.SourceAlpha,
+                AlphaDestinationBlend = Blend.DestinationAlpha,
+                AlphaBlendFunction = BlendFunction.Max
+            };
+        }
 
         private static BlendState ContentBlending { get; } = new()
         {
@@ -73,11 +89,25 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         };
 
         private static RenderTargetBinding[] returnTargets = null;
+        private static BlendState returnBlend = null;
+        private static SamplerState returnSampler = null;
+        private static DepthStencilState returnDepth = null;
+        private static RasterizerState returnRaster = null;
+        private static Effect returnEffect = null;
+        private static Matrix returnMatrix = Matrix.Identity;
+
         private static RenderTarget2D booksTarget = null;
         private static RenderTarget2D chaptersTarget = null;
+        private static RenderTarget2D libraryTarget = null;
+
+        private static RenderTarget2D questInfoTarget = null;
+        private static RenderTarget2D previousQuestInfoTarget = null;
+
         private static RenderTarget2D questAreaTarget = null;
         private static RenderTarget2D previousQuestAreaTarget = null;
-        private static RenderTarget2D questInfoTarget = null;
+
+        private static bool swipingBetweenInfoPages = false;
+        private static float questInfoSwipeOffset = 0f;
         private const float FadeDesignation = 0.025f;
 
         #region Element Referentials
@@ -108,9 +138,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         {
             booksTarget?.Dispose();
             chaptersTarget?.Dispose();
+            libraryTarget?.Dispose();
             questAreaTarget?.Dispose();
             previousQuestAreaTarget?.Dispose();
             questInfoTarget?.Dispose();
+            previousQuestInfoTarget?.Dispose();
             wantsRetarget = true;
         }
 
@@ -168,27 +200,31 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             UpdateChapters(chaptersTarget.Bounds.CreateScaledMargins(top: FadeDesignation, bottom: FadeDesignation), (MouseCanvas - chapters.Location).ToVector2() * (chaptersTarget.Bounds.Size() / chapters.Size()));
             UpdateQuestArea(questAreaTarget.Bounds.CreateScaledMargin(FadeDesignation), (MouseCanvas - questArea.Location).ToVector2() * (questAreaTarget.Bounds.Size() / questArea.Size()));
 
+            // We draw an "info page" if the selected element has one, or if we're in the designer
+            // The designer info page allows us to modify members of some elements
             bool infoPage = SelectedElement is not null && (SelectedElement.HasInfoPage || UseDesigner);
 
             if (infoPage)
             {
                 Matrix transform = Matrix.CreateScale(TargetScale);
-                DrawTasks.Add(sb =>
-                {
-                    sb.End();
-                    sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-                    var targets = sb.GraphicsDevice.GetRenderTargets();
-                    sb.GraphicsDevice.SetRenderTarget(questInfoTarget);
-
-                    sb.GraphicsDevice.Clear(Color.Transparent);
-                    sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix * transform);
-                });
+                SwitchTargets(questInfoTarget, matrix: transform);
+                DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Transparent));
 
                 if (UseDesigner)
                     HandleElementProperties();
 
                 else
                     DrawTasks.Add(SelectedElement.DrawInfoPage);
+
+                SwitchTargets(null);
+
+                if (previousBookSwipeOffset == 0)
+                {
+                    SwitchTargets(previousQuestInfoTarget, LayerBlending);
+                    DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Transparent));
+                    DrawTasks.Add(sb => sb.Draw(questInfoTarget, previousQuestInfoTarget.Bounds.Center(), null, Color.White, 0f, questInfoTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f));
+                    SwitchTargets(null);
+                }
             }
 
             // Render all of the completed render targets with fading applied to the
@@ -196,17 +232,84 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             DrawTasks.Add(sb =>
             {
                 sb.End();
-                QuestAssets.FadedEdges.Asset.Parameters["FadeSides"].SetValue(false);
-                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, QuestAssets.FadedEdges);
+                var fadedEdges = QuestAssets.FadedEdges.Asset;
+                fadedEdges.Parameters["FadeLeft"].SetValue(false);
+                fadedEdges.Parameters["FadeRight"].SetValue(false);
+
+                var targets = sb.GraphicsDevice.GetRenderTargets();
+                sb.GraphicsDevice.SetRenderTarget(libraryTarget);
+                sb.GraphicsDevice.Clear(Color.Transparent);
+                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
 
                 float resizeScale = LogScale / TargetScale;
+                books = libraryTarget.Bounds.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
+                chapters = libraryTarget.Bounds.CookieCutter(new(0.5f, 0f), new(0.5f, 1f)).CreateMargins(left: 4);
 
-                sb.Draw(booksTarget, books.Center(), null, Color.White, 0f, booksTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
-                sb.Draw(chaptersTarget, chapters.Center(), null, Color.White, 0f, chaptersTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
+                if (questInfoSwipeOffset != 0f)
+                {
+                    bool farFromEdge = Math.Abs(questInfoSwipeOffset) > libraryTarget.Height * FadeDesignation;
+                    fadedEdges.Parameters["FadeTop"].SetValue(false);
+                    fadedEdges.Parameters["FadeBottom"].SetValue(farFromEdge);
+
+                    questInfoSwipeOffset = MathHelper.Lerp(questInfoSwipeOffset, 0f, 0.2f);
+
+                    float libraryOffset = -float.Sign(questInfoSwipeOffset) * (questInfoTarget.Height - Math.Abs(questInfoSwipeOffset));
+                    float questInfoOffset = questInfoSwipeOffset;
+
+                    if (!infoPage)
+                        (libraryOffset, questInfoOffset) = (questInfoOffset, libraryOffset);
+
+                    if (swipingBetweenInfoPages)
+                    {
+                        sb.Draw(previousQuestInfoTarget, libraryTarget.Bounds.Center() + new Vector2(0f, libraryOffset), null, Color.White, 0f, previousQuestInfoTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                    }
+
+                    else
+                    {
+                        Vector2 offset = new(0f, libraryOffset);
+                        sb.Draw(booksTarget, books.Center() + offset, null, Color.White, 0f, booksTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                        sb.Draw(chaptersTarget, chapters.Center() + offset, null, Color.White, 0f, chaptersTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                    }
+
+                    sb.End();
+                    fadedEdges.Parameters["FadeTop"].SetValue(farFromEdge);
+                    fadedEdges.Parameters["FadeBottom"].SetValue(false);
+                    sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
+
+                    sb.Draw(questInfoTarget, libraryTarget.Bounds.Center() + new Vector2(0f, questInfoOffset), null, Color.White, 0f, questInfoTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+
+                    if (Math.Abs(questInfoSwipeOffset) < 0.1f)
+                        questInfoSwipeOffset = 0f;
+                }
+
+                else if (infoPage)
+                {
+                    fadedEdges.Parameters["FadeTop"].SetValue(false);
+                    fadedEdges.Parameters["FadeBottom"].SetValue(false);
+                    sb.Draw(questInfoTarget, libraryTarget.Bounds.Center(), null, Color.White, 0f, questInfoTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                }
+
+                else
+                {
+                    fadedEdges.Parameters["FadeTop"].SetValue(false);
+                    fadedEdges.Parameters["FadeBottom"].SetValue(false);
+
+                    sb.Draw(booksTarget, books.Center(), null, Color.White, 0f, booksTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                    sb.Draw(chaptersTarget, chapters.Center(), null, Color.White, 0f, chaptersTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                }
 
                 sb.End();
-                QuestAssets.FadedEdges.Asset.Parameters["FadeSides"].SetValue(true);
-                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, QuestAssets.FadedEdges);
+                fadedEdges.Parameters["FadeTop"].SetValue(true);
+                fadedEdges.Parameters["FadeBottom"].SetValue(true);
+                sb.GraphicsDevice.SetRenderTargets(targets);
+                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
+
+                sb.Draw(libraryTarget, questInfo.Center(), null, Color.White, 0f, libraryTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
+
+                sb.End();
+                fadedEdges.Parameters["FadeRight"].SetValue(true);
+                fadedEdges.Parameters["FadeLeft"].SetValue(true);
+                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
 
                 sb.Draw(questAreaTarget, questArea.Center(), null, Color.White, 0f, questAreaTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
 
@@ -257,10 +360,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         #region Render Targets
 
-        private static void SwitchTargets(RenderTarget2D renderTarget, BlendState blendState = null)
+        private static void SwitchTargets(RenderTarget2D renderTarget,
+            BlendState blend = null,
+            SamplerState sampler = null,
+            DepthStencilState depth = null,
+            RasterizerState raster = null,
+            Effect effect = null,
+            Matrix? matrix = null)
         {
-            blendState ??= LayerBlending;
-
             if (renderTarget is null)
             {
                 DrawTasks.Add(sb =>
@@ -268,7 +375,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.End();
                     sb.GraphicsDevice.SetRenderTargets(returnTargets);
                     returnTargets = null;
-                    sb.Begin(SpriteSortMode.Deferred, blendState);
+                    sb.Begin(SpriteSortMode.Deferred, blend ?? returnBlend, sampler ?? returnSampler, depth ?? returnDepth, raster ?? returnRaster, effect ?? returnEffect, matrix ?? returnMatrix);
                 });
 
                 return;
@@ -277,9 +384,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             DrawTasks.Add(sb =>
             {
                 sb.End();
+                sb.GetDrawParameters(out returnBlend, out returnSampler, out returnDepth, out returnRaster, out returnEffect, out returnMatrix);
                 returnTargets = sb.GraphicsDevice.GetRenderTargets();
                 sb.GraphicsDevice.SetRenderTarget(renderTarget);
-                sb.Begin(SpriteSortMode.Deferred, blendState, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone);
+                sb.Begin(SpriteSortMode.Deferred, blend ?? ContentBlending, sampler ?? SamplerState.LinearClamp, depth ?? DepthStencilState.Default, raster ?? RasterizerState.CullNone, effect ?? null, matrix ?? Matrix.Identity);
             });
         }
 
@@ -318,20 +426,26 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 var oldBooks = booksTarget;
                 var oldChapters = chaptersTarget;
-                var oldQuests = questAreaTarget;
+                var oldLibrary = libraryTarget;
                 var oldInfo = questInfoTarget;
+                var oldPreviousInfo = previousQuestInfoTarget;
+                var oldQuests = questAreaTarget;
                 var oldPreviousQuests = previousQuestAreaTarget;
 
                 booksTarget = GenerateTarget(books.Width, books.Height);
                 chaptersTarget = GenerateTarget(chapters.Width, chapters.Height);
-                questAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
+                libraryTarget = GenerateTarget(questInfo.Width, questInfo.Height);
                 questInfoTarget = GenerateTarget(questInfo.Width, questInfo.Height);
+                previousQuestInfoTarget = GenerateTarget(questInfo.Width, questInfo.Height);
+                questAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
                 previousQuestAreaTarget = GenerateTarget(questArea.Width, questArea.Height);
 
                 oldBooks?.Dispose();
                 oldChapters?.Dispose();
-                oldQuests?.Dispose();
+                oldLibrary?.Dispose();
                 oldInfo?.Dispose();
+                oldPreviousInfo?.Dispose();
+                oldQuests?.Dispose();
                 oldPreviousQuests?.Dispose();
             }
 

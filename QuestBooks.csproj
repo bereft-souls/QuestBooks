@@ -8,7 +8,6 @@
 	  <TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Folder Include="Assets\Shaders\" />
 	  <Folder Include="Quests\VanillaBooks\" />
 	</ItemGroup>
 	<ItemGroup>

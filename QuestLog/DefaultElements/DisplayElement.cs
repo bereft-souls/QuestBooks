@@ -52,7 +52,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             return CenteredRectangle(CanvasPosition, DisplayAsset.Value.Size()).Contains(mousePosition.ToPoint());
         }
 
-        public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool hovered)
+        public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
         {
             Texture2D texture = DisplayAsset.Value;
 

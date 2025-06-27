@@ -14,7 +14,7 @@ namespace QuestBooks
     public class QuestBooksMod : Mod
     {
         public static Mod Instance { get; private set; }
-        public static bool DesignerEnabled { get; private set; } = false;
+        public static bool DesignerEnabled { get; internal set; } = false;
         public static Mod DesignerMod { get; private set; } = null;
 
         public override void Load()

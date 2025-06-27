@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static bool preview = false;
+        private static bool previewElementInfo = false;
 
         private void HandleElementProperties()
         {
-            if (preview)
+            if (previewElementInfo)
             {
                 DrawTasks.Add(SelectedElement.DrawInfoPage);
                 return;
             }
 
-
+            DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Blue * 0.5f));
         }
     }
 }
