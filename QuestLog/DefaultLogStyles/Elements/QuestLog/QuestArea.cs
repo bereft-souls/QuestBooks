@@ -82,7 +82,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Draw our content to a secondary target so that we can swipe when new elements are selected
                 sb.GraphicsDevice.SetRenderTarget(previousQuestAreaTarget);
                 sb.GraphicsDevice.Clear(Color.Transparent);
-                sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, Matrix.Identity);
+                sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, TargetCopying, sampler, depth, raster, effect, Matrix.Identity);
 
                 sb.Draw(questAreaTarget, Vector2.Zero, Color.White);
 

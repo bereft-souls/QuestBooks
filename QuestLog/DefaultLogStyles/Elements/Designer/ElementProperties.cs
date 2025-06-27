@@ -16,10 +16,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (previewElementInfo)
             {
                 DrawTasks.Add(SelectedElement.DrawInfoPage);
-                return;
+                goto DrawPreviewButton;
             }
 
-            DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Blue * 0.5f));
+        DrawPreviewButton:
+            return;
         }
     }
 }

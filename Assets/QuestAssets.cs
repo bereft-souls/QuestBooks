@@ -25,7 +25,6 @@ namespace QuestBooks.Assets
         public static LazyTexture MissingIcon { get; } = new("QuestionMark");
 
         public static LazyShader FadedEdges { get; } = new("FadedEdges");
-        public static LazyShader BlendShader { get; } = new("BlendShader");
 
         public override void PostSetupContent()
         {

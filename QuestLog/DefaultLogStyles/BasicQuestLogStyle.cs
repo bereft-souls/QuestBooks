@@ -30,45 +30,38 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         protected static Vector2 ScaledMousePos { get; set; }
         protected static Point MouseCanvas { get; set; }
 
-        private static BlendState shaderControlled { get; } = new()
+        // Our blending drastically changes between content draws
+        protected static BlendState LayerBlending { get; } = new()
         {
-            ColorSourceBlend = Blend.One,
-            ColorDestinationBlend = Blend.Zero,
+            ColorSourceBlend = Blend.SourceAlpha,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
             ColorBlendFunction = BlendFunction.Add,
             AlphaSourceBlend = Blend.One,
-            AlphaDestinationBlend = Blend.Zero,
+            AlphaDestinationBlend = Blend.One,
             AlphaBlendFunction = BlendFunction.Add,
         };
 
-        // Handles the render targets for the book/chapter/quest areas,
-        // as well as the faded edges handled by the shader
-        private static BlendState LayerBlending
+        protected static BlendState TargetCopying { get; } = new()
         {
-            get => new()
-            {
-                ColorSourceBlend = Blend.One,
-                ColorDestinationBlend = Blend.InverseSourceAlpha,
-                ColorBlendFunction = BlendFunction.Add,
-                AlphaSourceBlend = Blend.One,
-                AlphaDestinationBlend = Blend.One,
-                AlphaBlendFunction = BlendFunction.Add,
-            };
-        }
+            ColorSourceBlend = Blend.One,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorBlendFunction = BlendFunction.Add,
+            AlphaSourceBlend = Blend.One,
+            AlphaDestinationBlend = Blend.One,
+            AlphaBlendFunction = BlendFunction.Add,
+        };
 
-        private static BlendState LibraryBlending
+        protected static BlendState LibraryBlending { get; } = new()
         {
-            get => new()
-            {
-                ColorSourceBlend = Blend.SourceAlpha,
-                ColorDestinationBlend = Blend.InverseSourceAlpha,
-                ColorBlendFunction = BlendFunction.Add,
-                AlphaSourceBlend = Blend.SourceAlpha,
-                AlphaDestinationBlend = Blend.DestinationAlpha,
-                AlphaBlendFunction = BlendFunction.Max
-            };
-        }
+            ColorSourceBlend = Blend.SourceAlpha,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorBlendFunction = BlendFunction.Add,
+            AlphaSourceBlend = Blend.SourceAlpha,
+            AlphaDestinationBlend = Blend.DestinationAlpha,
+            AlphaBlendFunction = BlendFunction.Max
+        };
 
-        private static BlendState ContentBlending { get; } = new()
+        protected static BlendState ContentBlending { get; } = new()
         {
             ColorSourceBlend = Blend.SourceAlpha,
             ColorDestinationBlend = Blend.InverseSourceAlpha,
@@ -78,7 +71,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             AlphaBlendFunction = BlendFunction.Add
         };
 
-        private static BlendState GridBlending { get; } = new()
+        protected static BlendState GridBlending { get; } = new()
         {
             ColorSourceBlend = Blend.One,
             ColorDestinationBlend = Blend.One,
@@ -220,7 +213,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (previousBookSwipeOffset == 0)
                 {
-                    SwitchTargets(previousQuestInfoTarget, LayerBlending);
+                    SwitchTargets(previousQuestInfoTarget, TargetCopying);
                     DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Transparent));
                     DrawTasks.Add(sb => sb.Draw(questInfoTarget, previousQuestInfoTarget.Bounds.Center(), null, Color.White, 0f, questInfoTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f));
                     SwitchTargets(null);
@@ -247,7 +240,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (questInfoSwipeOffset != 0f)
                 {
-                    bool farFromEdge = Math.Abs(questInfoSwipeOffset) > libraryTarget.Height * FadeDesignation;
+                    bool farFromEdge = Math.Abs(questInfoSwipeOffset) > libraryTarget.Height * FadeDesignation * 0.5f;
                     fadedEdges.Parameters["FadeTop"].SetValue(false);
                     fadedEdges.Parameters["FadeBottom"].SetValue(farFromEdge);
 
