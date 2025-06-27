@@ -25,7 +25,9 @@ namespace QuestBooks.Utilities
             get => new()
             {
                 TypeNameHandling = TypeNameHandling.All,
-                SerializationBinder = new JsonTypeResolverFix()
+                SerializationBinder = new JsonTypeResolverFix(),
+                PreserveReferencesHandling = PreserveReferencesHandling.All,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
             };
         }
 
