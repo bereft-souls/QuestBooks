@@ -24,8 +24,11 @@ namespace QuestBooks.Assets
         public static LazyTexture ResizeIndicator { get; } = new("ResizeIndicator");
 
         public static LazyTexture BookTab { get; } = new("BookTab");
-        public static LazyTexture BookTabOutline { get; } = new("BookTabOutline");
+        public static LazyTexture BookTabBorder { get; } = new("BookTabBorder");
         public static LazyTexture BookTabGradient { get; } = new("BookTabGradient");
+
+        public static LazyTexture BookScroll { get; } = new("BookScroll");
+        public static LazyTexture BookScrollBorder { get; } = new("BookScrollBorder");
         public static LazyTexture ChapterScroll { get; } = new("ChapterScroll");
 
         public static LazyShader FadedEdges { get; } = new("FadedEdges");

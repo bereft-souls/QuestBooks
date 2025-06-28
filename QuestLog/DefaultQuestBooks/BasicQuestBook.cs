@@ -1,19 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
-using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultLogStyles;
+﻿using System;
 using System.Collections.Generic;
-using Terraria;
-using Terraria.GameContent;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {
-    /// <summary>
-    /// Represents a basic <see cref="QuestBook"/> implementation. Always visible, always unlocked.
-    /// </summary>
-    public class BasicQuestBook() : QuestBook
+    public abstract class BasicQuestBook : QuestBook
     {
         public override List<BookChapter> Chapters { get; set; } = [];
 
@@ -27,75 +21,6 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
                 questLine.Update();
         }
 
-        /// <summary>
-        /// Performs the default drawing behavior of for this <see cref="BasicQuestBook"/>. Assigns colors and calls <see cref="DrawBasicBook(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.
-        /// </summary>
-        public override void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
-        {
-            Color color = new(255, 207, 64, 255);// new(240, 100, 100, 255);
-            Color outlineColor = new(175, 175, 175, 255);
-
-            if (selected)
-            {
-                if (BasicQuestLogStyle.UseDesigner)
-                    outlineColor = Color.Yellow;
-
-                else
-                    outlineColor = new Color(200, 200, 0, 255);
-            }
-
-            else if (hovered)
-            {
-                //color = Color.Lerp(color, Color.Yellow, 0.2f);
-                outlineColor = Color.Lerp(outlineColor, Color.White, 0.4f);
-            }
-
-            Color textOutlineColor = new(40, 40, 40, 255);
-            DrawBasicBook(spriteBatch, DisplayName, color, Color.White with { A = 50 }, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
-        }
-
-        /// <summary>
-        /// Performs the default book drawing code to the spritebatch. Draws a simple container with the specified colors, and text inside that container.
-        /// </summary>
-        public static void DrawBasicBook(SpriteBatch spriteBatch, string text, Color bookColor, Color gradientColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
-        {
-            spriteBatch.Draw(QuestAssets.BookTabOutline, area.Center(), null, outlineColor, 0f, QuestAssets.BookTabOutline.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(QuestAssets.BookTab, area.Center(), null, bookColor, 0f, QuestAssets.BookTab.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(QuestAssets.BookTabGradient, area.Center(), null, gradientColor, 0f, QuestAssets.BookTabGradient.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
-
-            if (string.IsNullOrWhiteSpace(text))
-                return;
-
-            spriteBatch.End();
-            spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-            spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.LinearClamp, depth, raster, effect, matrix);
-
-            DrawBookText(spriteBatch, text, textColor, textOutlineColor, area, scale);
-
-            spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
-        }
-
-        /// <summary>
-        /// Performs the default book text drawing code to the spritebatch. Draws the text as it should sit within the given rectangle with the specified colors.
-        /// </summary>
-        public static void DrawBookText(SpriteBatch spriteBatch, string text, Color textColor, Color outlineColor, Rectangle area, float scale)
-        {
-            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.1f, right: 0.065f, top: 0.1f, bottom: 0.1f);
-            float scaleShift = InverseLerp(0.4f, 2f, scale) * 0.8f;
-            float stroke = MathHelper.Lerp(1f, 4f, scaleShift);
-            Vector2 offset = new(0f, MathHelper.Lerp(2f, 11f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
-
-            var font = FontAssets.DeathText.Value;
-            var (line, drawPos, origin, textScale) = GetRectangleStringParameters(nameRectangle, font, text, offset: offset, alignment: Utilities.TextAlignment.Left)[0];
-            textScale *= 0.8f;
-
-            spriteBatch.DrawOutlinedString(font, line, drawPos, origin, textScale, stroke, outlineColor, textColor);
-        }
-
-        /// <summary>
-        /// Clones the members of this quest book into a new quest book.
-        /// </summary>
         public override void CloneTo(QuestBook newInstance)
         {
             if (newInstance is BasicQuestBook book)

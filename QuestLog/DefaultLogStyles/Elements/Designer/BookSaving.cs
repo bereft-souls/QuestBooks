@@ -121,6 +121,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                                     {
                                         SelectedBook = null;
                                         SelectedChapter = null;
+                                        SelectedElement = null;
+
+                                        questAreaOffset = Vector2.Zero;
+                                        questElementSwipeOffset = questAreaTarget.Width;
+                                        SortedElements = null;
+
                                         QuestManager.QuestBooks.Clear();
                                     });
 

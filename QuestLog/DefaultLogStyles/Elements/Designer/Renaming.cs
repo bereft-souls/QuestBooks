@@ -27,12 +27,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             colorLerp /= 30f;
 
-            if ((Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) || Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
-                && (typingBookName || typingChapterName))
+            if (typingBookName || typingChapterName)
             {
-                typingBookName = false;
-                typingChapterName = false;
-                Main.drawingPlayerChat = false;
+                CancelChat = true;
+
+                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) || Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+                {
+                    typingBookName = false;
+                    typingChapterName = false;
+                }
             }
 
             else if (bookNameArea.Contains(MouseCanvas) && SelectedBook is not null)
@@ -93,7 +96,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 else
                     AddRectangle(bookNameArea, bookNameArea.Contains(MouseCanvas) ? Color.LightGray : Color.Black, 3f);
 
-                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, basicBook.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CreateScaledMargins(right: 0.02f, left: 0.01f).CookieCutter(new(0f, 0.15f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, basicBook.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
 
                 if (SelectedChapter is BasicChapter basicChapter && SelectedBook.Chapters.Contains(SelectedChapter))
                 {
@@ -120,7 +123,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     else
                         AddRectangle(chapterNameArea, chapterNameArea.Contains(MouseCanvas) ? Color.LightGray : Color.Black, 3f);
 
-                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CreateScaledMargin(0.01f).CreateScaledMargins(top: 0.125f), FontAssets.DeathText.Value, Color.White, Color.Black, basicChapter.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
+                    DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CreateScaledMargins(right: 0.02f, left: 0.01f).CookieCutter(new(0f, 0.15f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, basicChapter.NameKey, minimumScale: 0.4f, alignment: Utilities.TextAlignment.Right));
                 }
             }
         }

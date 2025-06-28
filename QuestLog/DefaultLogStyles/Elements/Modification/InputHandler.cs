@@ -18,9 +18,16 @@ public partial class BasicQuestLogStyle
     protected static bool RightMouseJustReleased = false;
 
     protected static string MouseTooltip = "";
+    protected static bool CancelChat = false;
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
+        if (CancelChat)
+        {
+            Main.drawingPlayerChat = false;
+            CancelChat = false;
+        }
+
         if (MouseTooltip is null)
             return;
 

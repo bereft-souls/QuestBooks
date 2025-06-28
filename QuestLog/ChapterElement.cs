@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using QuestBooks.Assets;
 using QuestBooks.Quests;
 using ReLogic.Content;
@@ -18,14 +19,17 @@ namespace QuestBooks.QuestLog
     [ExtendsFromMod("QuestBooks")]
     public abstract class ChapterElement
     {
+        [JsonIgnore]
         public bool TemplateInstance = false;
 
+        [JsonIgnore]
         public virtual bool HasInfoPage { get => false; }
 
         /// <summary>
         /// Determines the layer this element should draw to.<br/>
         /// <c>0f</c> is closer to the background, <c>1f</c> the foreground.
         /// </summary>
+        [JsonIgnore]
         public virtual float DrawPriority { get => 0.5f; }
 
         public virtual void Update() { }
@@ -62,7 +66,7 @@ namespace QuestBooks.QuestLog
         }
 
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-        public sealed class UseCustomConverterAttribute(Type propertyConverterType) : Attribute
+        public sealed class UseConverterAttribute(Type propertyConverterType) : Attribute
         {
             public Type PropertyConverterType { get; init; } = propertyConverterType;
         }
@@ -76,7 +80,7 @@ namespace QuestBooks.QuestLog
                 return new KeyValuePair<Type, Type>(conversionType, t);
             }).ToFrozenDictionary();
 
-        public interface IPropertyConverter<T>
+        public interface IMemberConverter<T>
         {
             public bool TryParse(string input, out T result);
             public string Convert(T input);
@@ -84,7 +88,7 @@ namespace QuestBooks.QuestLog
 
         #region Default Converters
 
-        public class StringConverter : IPropertyConverter<string>
+        public class StringConverter : IMemberConverter<string>
         {
             public string Convert(string input) => input;
             public bool TryParse(string input, out string result)
@@ -94,28 +98,22 @@ namespace QuestBooks.QuestLog
             }
         }
 
-        public class IntConverter : IPropertyConverter<int>
+        public class IntConverter : IMemberConverter<int>
         {
             public string Convert(int input) => input.ToString();
             public bool TryParse(string input, out int result) => int.TryParse(input, out result);
         }
 
-        public class FloatConverter : IPropertyConverter<float>
+        public class FloatConverter : IMemberConverter<float>
         {
             public string Convert(float input) => input.ToString();
             public bool TryParse(string input, out float result) => float.TryParse(input, out result);
         }
 
-        public class BoolConverter : IPropertyConverter<bool>
+        public class BoolConverter : IMemberConverter<bool>
         {
             public string Convert(bool input) => input.ToString();
             public bool TryParse(string input, out bool result) => bool.TryParse(input, out result);
-        }
-
-        public class TextureAssetConverter : IPropertyConverter<Asset<Texture2D>>
-        {
-            public string Convert(Asset<Texture2D> input) => input.Name;
-            public bool TryParse(string input, out Asset<Texture2D> result) => ModContent.RequestIfExists(input, out result);
         }
 
         #endregion

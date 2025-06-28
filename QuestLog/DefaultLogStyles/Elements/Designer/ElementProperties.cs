@@ -141,9 +141,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 foreach (var memberInfo in memberInfos)
                 {
                     // Check if the element has been tagged to use a custom converter
-                    ChapterElement.UseCustomConverterAttribute attribute = Attribute
-                        .GetCustomAttribute(memberInfo, typeof(ChapterElement.UseCustomConverterAttribute))
-                        as ChapterElement.UseCustomConverterAttribute;
+                    ChapterElement.UseConverterAttribute attribute = Attribute
+                        .GetCustomAttribute(memberInfo, typeof(ChapterElement.UseConverterAttribute))
+                        as ChapterElement.UseConverterAttribute;
 
                     // These act as simplified get-set methods regardless of whether
                     // the member is a field or property
@@ -168,7 +168,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     // First check for an attributed converter,
                     // then check if we have a default converter for the type
                     var converterType = attribute is not null && attribute.PropertyConverterType.IsAssignableTo(
-                        typeof(ChapterElement.IPropertyConverter<>).MakeGenericType(memberType)) ?
+                        typeof(ChapterElement.IMemberConverter<>).MakeGenericType(memberType)) ?
                         attribute.PropertyConverterType :
                         ChapterElement.DefaultConverters.GetValueOrDefault(memberType, null);
 
@@ -274,6 +274,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             colorLerp /= 30f;
 
+            // Return on enter or escape
+            if (selectedMember is not null)
+            {
+                CancelChat = true;
+                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter) || Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+                    selectedMember = null;
+            }
+
             foreach (var (bundle, box) in memberBoxes)
             {
                 // Apply scroll offset
@@ -281,7 +289,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 // Designated area for value and name
                 Rectangle typeArea = box.CookieCutter(new(0.3f, 0f), new(0.7f, 1f));
-                Rectangle memberArea = box.CookieCutter(new(-0.7f, 0f), new(0.3f, 1f));
+                Rectangle memberArea = box.CookieCutter(new(-0.72f, 0f), new(0.28f, 1f));
 
                 // Draw the name
                 AddRectangle(typeArea, Color.Gray * 0.6f, fill: true);

@@ -1,6 +1,6 @@
 {
   "$id": "1",
-  "$type": "QuestBooks.QuestLog.DefaultQuestBooks.BasicQuestBook, QuestBooks",
+  "$type": "QuestBooks.QuestLog.DefaultQuestBooks.TabBook, QuestBooks",
   "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.DisplayName",
   "Chapters": {
     "$id": "2",
@@ -17,119 +17,106 @@
             {
               "$id": "5",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "120, 120",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "320, 120",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "6",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "320, 120",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "60, 260",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "7",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "60, 260",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "140, 340",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "8",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "140, 340",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "180, 360",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "9",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "180, 360",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "220, 360",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "10",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "220, 360",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "260, 360",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "11",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "260, 360",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "300, 360",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "12",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "300, 360",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "340, 340",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "13",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "340, 340",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "380, 300",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "14",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "380, 300",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "420, 260",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "15",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "420, 260",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "240, 220",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "16",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "240, 220",
+              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
+              "CanvasPosition": "100, 300",
               "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "Rotation": 0.0
             },
             {
               "$id": "17",
               "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "TemplateInstance": false,
-              "CanvasPosition": "100, 300",
-              "Scale": 1.0,
-              "HasInfoPage": false,
-              "DrawPriority": 0.5
+              "_texturePath": "QuestBooks/Assets/Textures/AddButton",
+              "CanvasPosition": "140, 120",
+              "Scale": 1.5,
+              "Rotation": 0.5
             }
           ]
         },

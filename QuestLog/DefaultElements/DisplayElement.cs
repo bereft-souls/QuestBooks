@@ -21,20 +21,20 @@ namespace QuestBooks.QuestLog.DefaultElements
         private static readonly Asset<Texture2D> DefaultOutlineAsset = ModContent.Request<Texture2D>(DefaultOutline);
 
         // Concise autoproperties coming in C# 13....
+        [JsonProperty]
         private string _texturePath = DefaultTexture;
 
         [JsonIgnore]
         private Asset<Texture2D> _texture = null;
 
         [JsonIgnore]
-        public Asset<Texture2D> DisplayAsset
+        [UseConverter(typeof(TextureChecker))]
+        public string TexturePath
         {
-            get => _texture;
-            set
-            {
-                _texture = value;
-                _texturePath = value.Name;
-            }
+            // Because of our custom converter, this will only ever be
+            // set if the texture path is valid
+            get => _texturePath;
+            set { _texturePath = value; _texture = null; }
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override bool IsHovered(Vector2 mousePosition)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
-            return BasicQuestLogStyle.UseDesigner && CenteredRectangle(CanvasPosition, DisplayAsset.Value.Size()).Contains(mousePosition.ToPoint());
+            return BasicQuestLogStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains(mousePosition.ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
@@ -76,6 +76,16 @@ namespace QuestBooks.QuestLog.DefaultElements
             CanvasPosition = mousePosition;
             chapter.Elements.Add(this);
             return true;
+        }
+
+        public class TextureChecker : IMemberConverter<string>
+        {
+            public string Convert(string input) => input;
+            public bool TryParse(string input, out string result)
+            {
+                result = input;
+                return ModContent.FileExists($"{input}.rawimg");
+            }
         }
     }
 }

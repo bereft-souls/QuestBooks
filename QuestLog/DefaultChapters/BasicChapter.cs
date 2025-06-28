@@ -32,14 +32,17 @@ namespace QuestBooks.QuestLog.DefaultChapters
 
             if (!selected)
             {
-                color = Color.Lerp(color, Color.Black, 0.2f);
+                //color = Color.Lerp(color, Color.Black, 0.2f);
 
                 if (hovered)
-                    color = Color.Lerp(color, Color.White, 0.4f);
+                    color = Color.Lerp(color, Color.LightBlue, 0.2f);
             }
 
+            else
+                color = Color.Lerp(color, Color.LightBlue, 0.3f);
+
             Color textOutlineColor = new(69, 69, 69, 255);
-            DrawBasicChapter(spriteBatch, DisplayName, color, color, textOutlineColor, designatedArea, scale);
+            DrawBasicChapter(spriteBatch, DisplayName, color, Color.Lerp(color, Color.White, 0.85f), textOutlineColor, designatedArea, scale);
         }
 
         /// <summary>
@@ -64,13 +67,11 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public static void DrawChapterText(SpriteBatch spriteBatch, string text, Color textColor, Color outlineColor, Rectangle area, float scale)
         {
-            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.09f, right: 0.165f);//.CreateScaledMargins(left: 0.1f, right: 0.165f, top: 0.1f, bottom: 0.1f);
-            float scaleShift = InverseLerp(0.4f, 2f, scale) * 0.8f;
-            float stroke = MathHelper.Lerp(1f, 4f, scaleShift);
-            Vector2 offset = new(0f, MathHelper.Lerp(2f, 11f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
+            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.09f, right: 0.32f);//.CreateScaledMargins(left: 0.1f, right: 0.165f, top: 0.1f, bottom: 0.1f);
+            //spriteBatch.DrawRectangle(nameRectangle, Color.Red);
 
             var font = FontAssets.DeathText.Value;
-            spriteBatch.DrawOutlinedStringInRectangle(nameRectangle, font, textColor, outlineColor, text, stroke, offset: offset, extraScale: 0.8f, alignment: Utilities.TextAlignment.Left);
+            spriteBatch.DrawOutlinedStringInRectangle(nameRectangle.CookieCutter(new(0f, 0.26f), Vector2.One), font, textColor, outlineColor, text, alignment: Utilities.TextAlignment.Left, clipBounds: false, maxScale: 0.5f);
         }
 
         public override void CloneTo(BookChapter newInstance)

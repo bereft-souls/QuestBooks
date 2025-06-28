@@ -178,6 +178,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (selected)
                         AddRectangle(box, Color.Yellow);
 
+                    else
+                        AddRectangle(box, Color.LightGray);
+
                     DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(box.CookieCutter(new(0f, 0.3f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, type.Name));
 
                     if (box.Contains(MouseCanvas) && typeDropDown.Contains(MouseCanvas))

@@ -57,7 +57,7 @@ namespace QuestBooks.QuestLog
         public virtual void Update() { }
 
         /// <summary>
-        /// Performs the default drawing behavior of for this <see cref="BasicQuestBook"/>. Assigns colors and calls <see cref="DrawBasicBook(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.
+        /// Performs the default drawing behavior of for this <see cref="TabBook"/>. Assigns colors and calls <see cref="DrawBasicBook(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.
         /// </summary>
         public abstract void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered);
 

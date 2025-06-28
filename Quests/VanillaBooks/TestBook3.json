@@ -1,6 +1,6 @@
 {
   "$id": "1",
-  "$type": "QuestBooks.QuestLog.DefaultQuestBooks.BasicQuestBook, QuestBooks",
+  "$type": "QuestBooks.QuestLog.DefaultQuestBooks.ScrollBook, QuestBooks",
   "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook3.DisplayName",
   "Chapters": {
     "$id": "2",
