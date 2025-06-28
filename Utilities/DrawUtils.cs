@@ -143,6 +143,14 @@ namespace QuestBooks.Utilities
                 spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
                 raster.ScissorTestEnable = true;
+                matrix.Decompose(out var scale, out _, out var translation);
+
+                rectangle = new(
+                    (int)(rectangle.X * scale.X + translation.X),
+                    (int)(rectangle.Y * scale.Y + translation.Y),
+                    (int)(rectangle.Width * scale.X),
+                    (int)(rectangle.Height * scale.Y));
+
                 spriteBatch.GraphicsDevice.ScissorRectangle = Rectangle.Intersect(cachedClipArea, rectangle);
 
                 spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);

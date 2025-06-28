@@ -23,7 +23,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private void UpdateChapters(Rectangle chapters, Vector2 scaledMouse)
         {
             SwitchTargets(chaptersTarget, LibraryBlending, SamplerState.PointClamp);
-            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.15f));
+            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.08f));
 
             // If we aren't in the middle of swiping and there are no chapters to draw,
             // return early
@@ -64,7 +64,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             // Re-set the chapter library rectangles
             chapterLibrary.Clear();
-            Rectangle chapter = chapters.CookieCutter(new(0f, -0.9f), new(1f, 0.1065f));
+            Rectangle chapter = chapters.CookieCutter(new(0f, -0.9f), new(1f, 0.092f));
             float xOffset = 0f;
 
             // Add any available chapters
@@ -130,6 +130,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 bool selected = SelectedChapter == questLine;
                 DrawTasks.Add(sb => questLine.Draw(sb, rectangle, TargetScale, selected, hovered));
+                //AddRectangle(rectangle, Color.Red * 0.5f);
             }
 
             SwitchTargets(null);

@@ -25,7 +25,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private void UpdateBooks(Rectangle books, Vector2 scaledMouse)
         {
             SwitchTargets(booksTarget, LibraryBlending, SamplerState.PointClamp);
-            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.15f));
+            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.08f));
 
             // Skip drawing books if none are available
             if (!AvailableBooks.Any())
@@ -102,7 +102,6 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 bool selected = SelectedBook == questBook;
                 DrawTasks.Add(sb => questBook.Draw(sb, rectangle, TargetScale, selected, hovered));
-                //AddRectangle(rectangle, Color.Blue);
             }
 
             SwitchTargets(null);

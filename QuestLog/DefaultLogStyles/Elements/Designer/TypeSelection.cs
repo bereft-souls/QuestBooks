@@ -128,7 +128,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         }
 
                         typeSelections.Add((typeBox, onClick, lineType == SelectedChapter.GetType(), lineType));
-                        typeBox = typeBox.CookieCutter(new(0, 2.2f), Vector2.One);
+                        typeBox = typeBox.CookieCutter(new(0f, 2.2f), Vector2.One);
                     }
                 }
 

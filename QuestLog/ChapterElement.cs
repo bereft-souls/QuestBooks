@@ -3,8 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using QuestBooks.Quests;
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.GameContent;
@@ -58,20 +60,58 @@ namespace QuestBooks.QuestLog
 
         }
 
-        public class MemberInfoComparer : IEqualityComparer<MemberInfo>
+        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+        public sealed class UseCustomConverterAttribute(Type propertyConverterType) : Attribute
         {
-            public static MemberInfoComparer Instance { get; } = new();
+            public Type PropertyConverterType { get; init; } = propertyConverterType;
+        }
 
-            public bool Equals(MemberInfo x, MemberInfo y)
-            {
-                return x.Equals(y);
-            }
+        public static readonly FrozenDictionary<Type, Type> DefaultConverters =
+            typeof(ChapterElement)
+            .GetNestedTypes()
+            .Where(t => t.GetInterfaces().Length != 0)
+            .Select(t => {
+                Type conversionType = t.GetInterfaces()[0].GetGenericArguments()[0];
+                return new KeyValuePair<Type, Type>(conversionType, t);
+            }).ToFrozenDictionary();
 
-            public int GetHashCode([DisallowNull] MemberInfo obj)
+        public interface IPropertyConverter<T>
+        {
+            public bool TryParse(string input, out T result);
+            public string Convert(T input);
+        }
+
+        #region Default Converters
+
+        public class StringConverter : IPropertyConverter<string>
+        {
+            public string Convert(string input) => input;
+            public bool TryParse(string input, out string result)
             {
-                return obj.GetHashCode();
+                result = input;
+                return true;
             }
         }
+
+        public class IntConverter : IPropertyConverter<int>
+        {
+            public string Convert(int input) => input.ToString();
+            public bool TryParse(string input, out int result) => int.TryParse(input, out result);
+        }
+
+        public class FloatConverter : IPropertyConverter<float>
+        {
+            public string Convert(float input) => input.ToString();
+            public bool TryParse(string input, out float result) => float.TryParse(input, out result);
+        }
+
+        public class BoolConverter : IPropertyConverter<bool>
+        {
+            public string Convert(bool input) => input.ToString();
+            public bool TryParse(string input, out bool result) => bool.TryParse(input, out result);
+        }
+
+        #endregion
     }
 
     public abstract class QuestElement : ChapterElement
