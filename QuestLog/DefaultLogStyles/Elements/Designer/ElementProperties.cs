@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
@@ -118,27 +119,34 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             //AddRectangle(elementProperties, Color.Red);            
             DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(propertyTitle, FontAssets.DeathText.Value, Color.White, Color.Black, "Element Properties:", alignment: Utilities.TextAlignment.Left, clipBounds: false));
 
+            // Alright, there's a lot going on here...
             var elementType = SelectedElement.GetType();
             Dictionary<MemberInfo, MemberBundle> members = [];
 
             if (!elementTypeMembers.TryGetValue(elementType, out members))
             {
+                // Set up a collection for this element type's members
                 elementTypeMembers.Add(elementType, []);
                 var ignoredAttribute = typeof(ChapterElement.HideInDesignerAttribute);
 
-                var properties = elementType.GetProperties();
-                var fields = elementType.GetFields();
+                // Get all public instanced properties and fields
+                var properties = elementType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                var fields = elementType.GetFields(BindingFlags.Instance | BindingFlags.Public);
 
+                // Get all members not implemented by the default ChapterElement class
                 IEnumerable<MemberInfo> memberInfos = properties.Where(x => x.CanWrite).Cast<MemberInfo>().Concat(fields.Cast<MemberInfo>())
                     .Where(x => !defaultMembers.Contains(MemberHash(x)))
                     .Where(x => Attribute.GetCustomAttribute(x, ignoredAttribute) is null);
 
                 foreach (var memberInfo in memberInfos)
                 {
+                    // Check if the element has been tagged to use a custom converter
                     ChapterElement.UseCustomConverterAttribute attribute = Attribute
                         .GetCustomAttribute(memberInfo, typeof(ChapterElement.UseCustomConverterAttribute))
                         as ChapterElement.UseCustomConverterAttribute;
 
+                    // These act as simplified get-set methods regardless of whether
+                    // the member is a field or property
                     Func<object> getter;
                     Action<object> setter;
                     Type memberType;
@@ -157,20 +165,28 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         memberType = property.PropertyType;
                     }
 
+                    // First check for an attributed converter,
+                    // then check if we have a default converter for the type
                     var converterType = attribute is not null && attribute.PropertyConverterType.IsAssignableTo(
                         typeof(ChapterElement.IPropertyConverter<>).MakeGenericType(memberType)) ?
                         attribute.PropertyConverterType :
                         ChapterElement.DefaultConverters.GetValueOrDefault(memberType, null);
 
+                    // If no converter works, skip over
                     if (converterType is null)
                         continue;
 
+                    // Get the converter
                     var converter = Activator.CreateInstance(converterType);
 
+                    // Get the conversion methods
                     MethodInfo toString = converterType.GetMethod("Convert", BindingFlags.Instance | BindingFlags.Public, [memberType]);
                     MethodInfo fromString = converterType.GetMethod("TryParse", BindingFlags.Instance | BindingFlags.Public, [typeof(string), memberType.MakeByRefType()]);
 
+                    // The getter is used to initially populate fields
                     string elementGetter() => (string)toString.Invoke(converter, [getter()]);
+
+                    // The setter wraps in a TryParse so that we know whether it worked
                     bool elementSetter(string value)
                     {
                         object[] param = [value, default];
@@ -184,12 +200,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         return false;
                     }
 
+                    // Set up the member modification methods
                     elementTypeMembers[elementType].Add(memberInfo, new(memberInfo, "", elementGetter, elementSetter));
                 }
 
+                // Re-get the members now that they've been added
                 members = elementTypeMembers[elementType];
             }
 
+            // Re-populate values if switching elements and reset the scroll position
             if (SelectedElement != lastElement)
             {
                 foreach (MemberInfo memberInfo in members.Keys)
@@ -198,17 +217,19 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 memberScrollOffset = 0;
             }
 
+            // Clear the current boxes
             lastElement = SelectedElement;
             memberBoxes.Clear();
 
+            // Add boxes for each modifiable member
             Rectangle memberBox = elementProperties.CreateScaledMargin(0.01f).CookieCutter(new(0f, -0.88f), new(1f, 0.1f));
-
             foreach (MemberInfo member in members.Keys)
             {
                 memberBoxes.Add(members[member], memberBox);
                 memberBox = memberBox.CookieCutter(new(0f, 2.25f), Vector2.One);
             }
 
+            // Scroll if applicable
             if (elementProperties.Contains(mouseCanvas))
             {
                 int data = PlayerInput.ScrollWheelDeltaForUI;
@@ -231,18 +252,21 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
+                // We use a transformation matrix here so we need to be careful
                 Rectangle scissor = new(
                     (int)(elementProperties.X * TargetScale),
                     (int)(elementProperties.Y * TargetScale),
                     (int)(elementProperties.Width * TargetScale),
                     (int)(elementProperties.Height * TargetScale));
 
+                // Scissor out the member area
                 sb.GraphicsDevice.ScissorRectangle = scissor;
                 raster.ScissorTestEnable = true;
 
                 sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
             });
 
+            // Used for selected members to flash red/yellow
             float colorLerp = (float)(Main.timeForVisualEffects % 60);
 
             if (colorLerp > 30)
@@ -252,11 +276,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             foreach (var (bundle, box) in memberBoxes)
             {
+                // Apply scroll offset
                 box.Offset(0, memberScrollOffset);
 
+                // Designated area for value and name
                 Rectangle typeArea = box.CookieCutter(new(0.3f, 0f), new(0.7f, 1f));
                 Rectangle memberArea = box.CookieCutter(new(-0.7f, 0f), new(0.3f, 1f));
 
+                // Draw the name
                 AddRectangle(typeArea, Color.Gray * 0.6f, fill: true);
                 DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(
                     memberArea.CookieCutter(new(0f, 0.25f), Vector2.One),
@@ -266,10 +293,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     alignment: Utilities.TextAlignment.Left,
                     clipBounds: false));
 
+                // Self explanatoru
                 bool selected = bundle.MemberInfo == selectedMember;
 
                 if (box.Contains(mouseCanvas))
                 {
+                    // If we clicked a new member, start editing it
+                    // If we clicked the same one, stop editing it
                     if (LeftMouseJustReleased)
                     {
                         MemberInfo member = selected ? null : bundle.MemberInfo;
@@ -279,12 +309,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     }
                 }
 
+                // If we were editing and clicked somewhere else, stop editing
                 else if (selected && LeftMouseJustReleased)
                 {
                     selectedMember = null;
                     selected = false;
                 }
 
+                // Modify the selected member
                 if (selected)
                 {
                    DrawTasks.Add(_ =>
@@ -296,22 +328,27 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     string value = bundle.Value;
                     string newValue = Main.GetInputText(value);
 
+                    // Only do parsing on new values (every frame would be ridiculous)
                     if (value != newValue)
                     {
                         memberValueAccepted = bundle.Setter(newValue);
                         bundle.Value = newValue;
                     }
 
+                    // Yellow for OK, red for invalid
                     Color boxColor = memberValueAccepted ? Color.Yellow : Color.Red;
                     AddRectangle(typeArea, Color.Lerp(Color.Black, boxColor, colorLerp));
                 }
 
+                // Hovering
                 else if (box.Contains(mouseCanvas))
                     AddRectangle(typeArea, Color.LightGray);
 
+                // Standard
                 else
                     AddRectangle(typeArea, Color.Black);
 
+                // Draw the element value
                 DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(
                     typeArea.CreateScaledMargin(0.01f).CookieCutter(new(0f, 0.25f), Vector2.One),
                     FontAssets.DeathText.Value,
@@ -328,6 +365,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
+                // Undo our rectangle
                 sb.GraphicsDevice.ScissorRectangle = new(0, 0, Main.screenWidth, Main.screenHeight);
                 raster.ScissorTestEnable = false;
 

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using QuestBooks.Quests;
+using ReLogic.Content;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
@@ -109,6 +110,12 @@ namespace QuestBooks.QuestLog
         {
             public string Convert(bool input) => input.ToString();
             public bool TryParse(string input, out bool result) => bool.TryParse(input, out result);
+        }
+
+        public class TextureAssetConverter : IPropertyConverter<Asset<Texture2D>>
+        {
+            public string Convert(Asset<Texture2D> input) => input.Name;
+            public bool TryParse(string input, out Asset<Texture2D> result) => ModContent.RequestIfExists(input, out result);
         }
 
         #endregion

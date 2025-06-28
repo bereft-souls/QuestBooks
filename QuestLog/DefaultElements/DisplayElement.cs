@@ -21,59 +21,54 @@ namespace QuestBooks.QuestLog.DefaultElements
         private static readonly Asset<Texture2D> DefaultOutlineAsset = ModContent.Request<Texture2D>(DefaultOutline);
 
         // Concise autoproperties coming in C# 13....
-        [HideInDesigner]
-        private string _texture = DefaultTexture;
+        private string _texturePath = DefaultTexture;
 
         [JsonIgnore]
-        public string Texture
+        private Asset<Texture2D> _texture = null;
+
+        [JsonIgnore]
+        public Asset<Texture2D> DisplayAsset
         {
             get => _texture;
             set
             {
                 _texture = value;
-
-                // Fetch the texture when the string is changed
-                if (ModContent.RequestIfExists<Texture2D>(_texture, out var asset))
-                    DisplayAsset = asset;
-
-                else
-                    DisplayAsset = DefaultAsset;
+                _texturePath = value.Name;
             }
         }
-
-        [JsonIgnore]
-        [HideInDesigner]
-        protected Asset<Texture2D> DisplayAsset = DefaultAsset;
 
         /// <summary>
         /// The position within the canvas to display this element.
         /// </summary>
-        [HideInDesigner]
         public Vector2 CanvasPosition { get; set; }
 
         public float Scale { get; set; } = 1f;
 
+        public float Rotation { get; set; } = 0f;
+
         public override bool IsHovered(Vector2 mousePosition)
         {
+            _texture ??= ModContent.Request<Texture2D>(_texturePath);
             return BasicQuestLogStyle.UseDesigner && CenteredRectangle(CanvasPosition, DisplayAsset.Value.Size()).Contains(mousePosition.ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
         {
-            Texture2D texture = DisplayAsset.Value;
+            _texture ??= ModContent.Request<Texture2D>(_texturePath);
+            Texture2D texture = _texture.Value;
 
             if (texture == DefaultAsset.Value)
             {
                 Texture2D outline = DefaultOutlineAsset.Value;
 
                 if (selected)
-                    spriteBatch.Draw(outline, CanvasPosition, null, Color.Yellow, 0f, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(outline, CanvasPosition, null, Color.Yellow, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
 
                 else if (hovered)
-                    spriteBatch.Draw(outline, CanvasPosition, null, Color.White, 0f, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(outline, CanvasPosition, null, Color.White, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
             }
 
-            spriteBatch.Draw(texture, CanvasPosition, null, Color.White, 0f, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, CanvasPosition, null, Color.White, Rotation, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 
         public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
