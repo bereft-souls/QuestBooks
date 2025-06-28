@@ -23,7 +23,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private void HandleTypeSelection()
         {
-            Rectangle questBookType = LogArea.CookieCutter(new(-1.28f, -0.815f), new(0.15f, 0.05f));
+            Rectangle questBookType = LogArea.CookieCutter(new(-1.28f, -0.82f), new(0.15f, 0.05f));
             Rectangle questLineType = questBookType.CookieCutter(new(0f, 5f), Vector2.One);
             Rectangle typeDropDown = LogArea.CookieCutter(new(-1.22f, 0.26f), new(0.21f, 0.74f));
 

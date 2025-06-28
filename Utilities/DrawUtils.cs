@@ -248,5 +248,114 @@ namespace QuestBooks.Utilities
             spriteBatch.DrawString(font, line, drawPos + new Vector2(0f, -stroke), strokeColor, 0f, origin, scale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(font, line, drawPos, color, 0f, origin, scale, SpriteEffects.None, 0f);
         }
+
+        /// <summary>
+        /// Draws a 9-patch rectangle to the specified rectangle with the specified color.
+        /// </summary>
+        public static void DrawPatchRectangle(this SpriteBatch spriteBatch, PatchRectangle patchRectangle, Rectangle rectangle, Color? color = null)
+        {
+            Color drawColor = color ?? Color.White;
+
+            int rightStart = patchRectangle.Asset.Width - patchRectangle.Right;
+            int bottomStart = patchRectangle.Asset.Height - patchRectangle.Bottom;
+
+            Rectangle patchTopLeft = new(0, 0, patchRectangle.Left, patchRectangle.Top);
+            Rectangle patchTopRight = new(rightStart, 0, patchRectangle.Right, patchRectangle.Top);
+            Rectangle patchBottomRight = new(rightStart, bottomStart, patchRectangle.Right, patchRectangle.Bottom);
+            Rectangle patchBottomLeft = new(0, bottomStart, patchRectangle.Left, patchRectangle.Bottom);
+
+            int edgeHeight = patchRectangle.Asset.Height - patchRectangle.Bottom - patchRectangle.Top;
+            int edgeWidth = patchRectangle.Asset.Width - patchRectangle.Right - patchRectangle.Left;
+
+            Rectangle patchTop = new(patchRectangle.Left, 0, edgeWidth, patchRectangle.Top);
+            Rectangle patchRight = new(rightStart, patchRectangle.Top, patchRectangle.Right, edgeHeight);
+            Rectangle patchBottom = new(patchRectangle.Left, bottomStart, edgeWidth, patchRectangle.Bottom);
+            Rectangle patchLeft = new(0, patchRectangle.Top, patchRectangle.Left, edgeHeight);
+
+            Rectangle patchCenter = new(patchRectangle.Left, patchRectangle.Top, edgeWidth, edgeHeight);
+
+            Rectangle targetCenter = new(
+                rectangle.Location.X + patchRectangle.Left,
+                rectangle.Location.Y + patchRectangle.Top,
+                rectangle.Width - patchRectangle.Right - patchRectangle.Left,
+                rectangle.Height - patchRectangle.Bottom - patchRectangle.Top);
+
+            Rectangle targetTop = new(targetCenter.Left, rectangle.Top, targetCenter.Width, patchRectangle.Top);
+            Rectangle targetRight = new(targetCenter.Right, targetCenter.Top, patchRectangle.Right, targetCenter.Height);
+            Rectangle targetBottom = new(targetCenter.Left, targetCenter.Bottom, targetCenter.Width, patchRectangle.Bottom);
+            Rectangle targetLeft = new(rectangle.Left, targetCenter.Top, patchRectangle.Left, targetCenter.Height);
+
+            Vector2 targetTopLeft = rectangle.Location.ToVector2();
+            Vector2 targetTopRight = new(targetCenter.Right, rectangle.Top);
+            Vector2 targetBottomRight = new(targetCenter.Right, targetCenter.Bottom);
+            Vector2 targetBottomLeft = new(rectangle.Left, targetCenter.Bottom);
+
+            spriteBatch.Draw(patchRectangle, targetCenter, patchCenter, drawColor);
+
+            // Draw edges in clockwise order
+            if (patchRectangle.RepeatEdges)
+            {
+                for (int i = 0; i < targetTop.Width; i += patchTop.Height)
+                {
+                    int drawPos = targetTop.Left + i;
+                    int targetWidth = targetTop.Right - drawPos;
+
+                    patchTop.Width = Math.Min(patchTop.Width, targetWidth);
+                    spriteBatch.Draw(patchRectangle, new Vector2(drawPos, targetTop.Top), patchTop, drawColor);
+                }
+
+                for (int i = 0; i < targetRight.Height; i += patchRight.Height)
+                {
+                    int drawPos = targetRight.Top + i;
+                    int targetHeight = targetRight.Bottom - drawPos;
+
+                    patchRight.Height = Math.Min(patchRight.Height, targetHeight);
+                    spriteBatch.Draw(patchRectangle, new Vector2(targetLeft.Left, drawPos), patchRight, drawColor);
+                }
+
+                for (int i = targetBottom.Width - patchBottom.Width; i > -patchBottom.Width; i -= patchBottom.Width)
+                {
+                    int drawPos = targetBottom.Left + i;
+                    int targetWidth = drawPos + patchBottom.Width;
+
+                    if (targetWidth < patchBottom.Width)
+                    {
+                        patchBottom.X += patchBottom.Width - targetWidth;
+                        patchBottom.Width = targetWidth;
+                        drawPos = targetBottom.Left;
+                    }
+
+                    spriteBatch.Draw(patchRectangle, new Vector2(drawPos, targetBottom.Top), patchBottom, drawColor);
+                }
+
+                for (int i = targetLeft.Height - patchLeft.Height; i > -patchLeft.Height; i -= patchLeft.Height)
+                {
+                    int drawPos = targetLeft.Top + i;
+                    int targetHeight = drawPos + patchLeft.Height;
+
+                    if (targetHeight < patchLeft.Height)
+                    {
+                        patchLeft.Y += patchLeft.Height - targetHeight;
+                        patchLeft.Height = targetHeight;
+                        drawPos = targetLeft.Top;
+                    }
+
+                    spriteBatch.Draw(patchRectangle, new Vector2(targetLeft.Left, drawPos), patchLeft, drawColor);
+                }
+            }
+
+            else
+            {
+                spriteBatch.Draw(patchRectangle, targetTop, patchTop, drawColor);
+                spriteBatch.Draw(patchRectangle, targetRight, patchRight, drawColor);
+                spriteBatch.Draw(patchRectangle, targetBottom, patchBottom, drawColor);
+                spriteBatch.Draw(patchRectangle, targetLeft, patchLeft, drawColor);
+            }
+
+            spriteBatch.Draw(patchRectangle, targetTopLeft, patchTopLeft, drawColor);
+            spriteBatch.Draw(patchRectangle, targetTopRight, patchTopRight, drawColor);
+            spriteBatch.Draw(patchRectangle, targetBottomRight, patchBottomRight, drawColor);
+            spriteBatch.Draw(patchRectangle, targetBottomLeft, patchBottomLeft, drawColor);
+        }
     }
 }

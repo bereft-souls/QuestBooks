@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -23,8 +24,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static readonly List<(Rectangle area, QuestBook questBook)> bookLibrary = [];
         private void UpdateBooks(Rectangle books, Vector2 scaledMouse)
         {
-            SwitchTargets(booksTarget, LibraryBlending);
-            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.1f));
+            SwitchTargets(booksTarget, LibraryBlending, SamplerState.PointClamp);
+            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.15f));
 
             // Skip drawing books if none are available
             if (!AvailableBooks.Any())
@@ -67,7 +68,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             bookLibrary.Clear();
 
             // Assign the position of the first book in the library
-            Rectangle book = books.CookieCutter(new(0f, -0.9f), new(1f, 0.1f));
+            Rectangle book = books.CookieCutter(new(0f, -0.9f), new(1f, 0.1065f));
 
             // Add each book basing location off of the first one
             foreach (var questBook in AvailableBooks)
@@ -101,6 +102,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 bool selected = SelectedBook == questBook;
                 DrawTasks.Add(sb => questBook.Draw(sb, rectangle, TargetScale, selected, hovered));
+                //AddRectangle(rectangle, Color.Blue);
             }
 
             SwitchTargets(null);

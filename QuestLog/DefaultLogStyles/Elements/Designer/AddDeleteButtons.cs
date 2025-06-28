@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultChapters;
 using QuestBooks.QuestLog.DefaultQuestBooks;
 using QuestBooks.Systems;
@@ -14,16 +16,24 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
     {
         private static void HandleAddDeleteButtons(Rectangle books, Rectangle chapters, Rectangle questArea)
         {
+            if (SelectedElement is not null)
+                return;
+
             // Rectangles for adding and deleting
             Rectangle addBook = books.CookieCutter(new(0, -1.05f), new(0.25f, 0.05f));
             Rectangle addChapter = chapters.CookieCutter(new(0, -1.05f), new(0.25f, 0.05f));
-
             Rectangle deleteBook = books.CookieCutter(new(0.85f, 1.05f), new(0.15f, 0.035f));
-            Rectangle deleteChapter = chapters.CookieCutter(new(-0.85f, 1.05f), new(0.15f, 0.035f));
+            Rectangle deleteChapter = chapters.CookieCutter(new(-0.84f, 1.05f), new(0.15f, 0.035f));
+
+            bool addBookHovered = false;
+            bool addChapterHovered = false;
+            bool deleteBookHovered = false;
+            bool deleteChapterHovered = false;
 
             if (addBook.Contains(MouseCanvas))
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.AddBook");
+                addBookHovered = true;
 
                 // Add new questbook with placeholder localization key
                 if (LeftMouseJustReleased)
@@ -37,6 +47,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             else if (addChapter.Contains(MouseCanvas))
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.AddChapter");
+                addChapterHovered = true;
 
                 // Add new chapter with placeholder localization key
                 if (LeftMouseJustReleased && SelectedBook is not null)
@@ -50,6 +61,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             else if (deleteBook.Contains(MouseCanvas))
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.DeleteBook");
+                deleteBookHovered = true;
 
                 if (LeftMouseJustReleased && SelectedBook is not null)
                 {
@@ -97,6 +109,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             else if (deleteChapter.Contains(MouseCanvas))
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.DeleteChapter");
+                deleteChapterHovered = true;
 
                 if (LeftMouseJustReleased && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
                 {
@@ -141,26 +154,52 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
             }
 
-            AddRectangle(addBook, Color.Orange, fill: true);
-
-            if (SelectedBook is not null)
+            DrawTasks.Add(sb =>
             {
-                AddRectangle(addChapter, Color.Orange, fill: true);
-                AddRectangle(deleteBook, Color.Blue, fill: true);
+                Texture2D addButton = QuestAssets.AddButton;
+                Texture2D addHovered = QuestAssets.AddButtonHovered;
+                Texture2D deleteButton = QuestAssets.DeleteButton;
+                Texture2D deleteHovered = QuestAssets.DeleteButtonHovered;
 
-                if (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false)
-                    AddRectangle(deleteChapter, Color.Blue, fill: true);
+                float addScale = addBook.Width / (float)addButton.Width;
+                float deleteScale = deleteBook.Width / (float)deleteButton.Width;
+
+                if (addBookHovered)
+                    sb.Draw(addHovered, addBook.Center(), null, Color.White, 0f, addHovered.Size() * 0.5f, addScale, SpriteEffects.None, 0f);
+                else
+                    sb.Draw(addButton, addBook.Center(), null, Color.White, 0f, addButton.Size() * 0.5f, addScale, SpriteEffects.None, 0f);
+
+                if (SelectedBook is not null)
+                {
+                    if (deleteBookHovered)
+                        sb.Draw(deleteHovered, deleteBook.Center(), null, Color.White, 0f, deleteHovered.Size() * 0.5f, deleteScale, SpriteEffects.None, 0f);
+                    else
+                        sb.Draw(deleteButton, deleteBook.Center(), null, Color.White, 0f, deleteButton.Size() * 0.5f, deleteScale, SpriteEffects.None, 0f);
+
+                    if (addChapterHovered)
+                        sb.Draw(addHovered, addChapter.Center(), null, Color.White, 0f, addHovered.Size() * 0.5f, addScale, SpriteEffects.None, 0f);
+                    else
+                        sb.Draw(addButton, addChapter.Center(), null, Color.White, 0f, addButton.Size() * 0.5f, addScale, SpriteEffects.None, 0f);
+
+                    if (SelectedBook.Chapters.Contains(SelectedChapter))
+                    {
+                        if (deleteChapterHovered)
+                            sb.Draw(deleteHovered, deleteChapter.Center(), null, Color.White, 0f, deleteHovered.Size() * 0.5f, deleteScale, SpriteEffects.None, 0f);
+                        else
+                            sb.Draw(deleteButton, deleteChapter.Center(), null, Color.White, 0f, deleteButton.Size() * 0.5f, deleteScale, SpriteEffects.None, 0f);
+                    }
+
+                    else
+                        sb.Draw(deleteButton, deleteChapter.Center(), null, Color.White * 0.5f, 0f, deleteButton.Size() * 0.5f, deleteScale, SpriteEffects.None, 0f);
+                }
 
                 else
-                    AddRectangle(deleteChapter, Color.Blue * 0.5f, fill: true);
-            }
-
-            else
-            {
-                AddRectangle(addChapter, Color.Orange * 0.5f, fill: true);
-                AddRectangle(deleteBook, Color.Blue * 0.5f, fill: true);
-                AddRectangle(deleteChapter, Color.Blue * 0.5f, fill: true);
-            }
+                {
+                    sb.Draw(addButton, addChapter.Center(), null, Color.White * 0.5f, 0f, addButton.Size() * 0.5f, addScale, SpriteEffects.None, 0f);
+                    sb.Draw(deleteButton, deleteBook.Center(), null, Color.White * 0.5f, 0f, deleteButton.Size() * 0.5f, deleteScale, SpriteEffects.None, 0f);
+                    sb.Draw(deleteButton, deleteChapter.Center(), null, Color.White * 0.5f, 0f, deleteButton.Size() * 0.5f, deleteScale, SpriteEffects.None, 0f);
+                }
+            });
         }
     }
 }

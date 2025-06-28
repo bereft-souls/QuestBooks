@@ -32,16 +32,25 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
         {
-            Color color = Color.SlateGray;
+            Color color = Color.White;
+            Color outlineColor = new(135, 135, 135, 255);
 
-            if (!selected)
-                color = Color.Lerp(color, Color.Black, 0.25f);
+            if (selected)
+            {
+                if (BasicQuestLogStyle.UseDesigner)
+                    outlineColor = Color.Red;
 
-            if (hovered)
-                color = Color.Lerp(color, Color.White, 0.1f);
+                else
+                    outlineColor = new Color(200, 200, 0, 255);
+            }
 
-            Color outlineColor = BasicQuestLogStyle.UseDesigner && selected ? Color.Red : Color.Lerp(color, Color.Black, 0.2f);
-            Color textOutlineColor = Color.Lerp(color, Color.Black, 0.4f);
+            else if (hovered)
+            {
+                //color = Color.Lerp(color, Color.Yellow, 0.2f);
+                outlineColor = Color.Lerp(outlineColor, Color.White, 0.4f);
+            }
+
+            Color textOutlineColor = new(69, 69, 69, 255);
             DrawBasicBook(spriteBatch, DisplayName, color, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
         }
 
@@ -50,8 +59,8 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// </summary>
         public static void DrawBasicBook(SpriteBatch spriteBatch, string text, Color bookColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
         {
-            spriteBatch.Draw(QuestAssets.LogEntryBackground, area.Center(), null, bookColor, 0f, QuestAssets.LogEntryBackground.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
             spriteBatch.Draw(QuestAssets.LogEntryBorder, area.Center(), null, outlineColor, 0f, QuestAssets.LogEntryBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(QuestAssets.LogEntryBackground, area.Center(), null, bookColor, 0f, QuestAssets.LogEntryBackground.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
             if (string.IsNullOrWhiteSpace(text))
                 return;
@@ -71,10 +80,10 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// </summary>
         public static void DrawBookText(SpriteBatch spriteBatch, string text, Color textColor, Color outlineColor, Rectangle area, float scale)
         {
-            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.065f, right: 0.065f, top: 0.1f, bottom: 0.1f);
+            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.1f, right: 0.065f, top: 0.1f, bottom: 0.1f);
             float scaleShift = InverseLerp(0.4f, 2f, scale) * 0.8f;
             float stroke = MathHelper.Lerp(1f, 4f, scaleShift);
-            Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
+            Vector2 offset = new(0f, MathHelper.Lerp(2f, 11f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
 
             var font = FontAssets.DeathText.Value;
             var (line, drawPos, origin, textScale) = GetRectangleStringParameters(nameRectangle, font, text, offset: offset, alignment: Utilities.TextAlignment.Left)[0];

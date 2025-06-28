@@ -54,6 +54,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     questInfoSwipeOffset = questInfoTarget.Height * (element is null ? -1 : 1);
             }
 
+            if (questElementSwipeOffset != 0f)
+            {
+                questElementSwipeOffset = MathHelper.Lerp(questElementSwipeOffset, 0f, 0.2f);
+
+                if (Math.Abs(questElementSwipeOffset) < 0.5f)
+                    questElementSwipeOffset = 0f;
+            }
+
             DrawTasks.Add(sb =>
             {
                 // Draw elements
@@ -70,12 +78,6 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, Matrix.Identity);
                     float xOffset = -float.Sign(questElementSwipeOffset) * (previousQuestAreaTarget.Width - Math.Abs(questElementSwipeOffset));
                     sb.Draw(previousQuestAreaTarget, new Vector2(xOffset, 0f), null, Color.White, 0f, Vector2.Zero, 1f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f);
-
-                    questElementSwipeOffset = MathHelper.Lerp(questElementSwipeOffset, 0f, 0.2f);
-
-                    if (Math.Abs(questElementSwipeOffset) < 2f)
-                        questElementSwipeOffset = 0f;
-
                     return;
                 }
 

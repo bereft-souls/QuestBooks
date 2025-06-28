@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace QuestBooks.Assets
     {
         public static LazyTexture MagicPixel { get; } = new("Terraria/Images/MagicPixel", true);
 
+        #region QuestLog
+
         public static LazyTexture QuestBookIcon { get; } = new("QuestBookIcon");
         public static LazyTexture QuestBookOutline { get; } = new("QuestBookOutline");
 
@@ -22,10 +25,41 @@ namespace QuestBooks.Assets
         public static LazyTexture LogEntryBackground { get; } = new("LogEntryBackground");
         public static LazyTexture LogEntryBorder { get; } = new("LogEntryBorder");
 
-        public static LazyTexture MissingIcon { get; } = new("QuestionMark");
-        public static LazyTexture MissingIconOutline { get; } = new("QuestionMarkOutline");
-
         public static LazyShader FadedEdges { get; } = new("FadedEdges");
+
+        #endregion
+
+        #region Elements
+
+        public static LazyTexture MissingIcon { get; } = new("QuestionMark", immediateLoad: false);
+        public static LazyTexture MissingIconOutline { get; } = new("QuestionMarkOutline", immediateLoad: false);
+
+        #endregion
+
+        #region Designer
+
+        public static LazyTexture DesignerOnButton { get; } = new("DesignerOnButton", immediateLoad: false);
+        public static LazyTexture DesignerOnButtonHovered { get; } = new("DesignerOnButtonHovered", immediateLoad: false);
+
+        public static LazyTexture AddButton { get; } = new("AddButton", immediateLoad: false);
+        public static LazyTexture AddButtonHovered { get; } = new("AddButtonHovered", immediateLoad: false);
+
+        public static LazyTexture DeleteButton { get; } = new("DeleteButton", immediateLoad: false);
+        public static LazyTexture DeleteButtonHovered { get; } = new("DeleteButtonHovered", immediateLoad: false);
+
+        public static LazyTexture ExportButton { get; } = new("ExportButton", immediateLoad: false);
+        public static LazyTexture ExportButtonHovered { get; } = new("ExportButtonHovered", immediateLoad: false);
+
+        public static LazyTexture ExportAllButton { get; } = new("ExportAllButton", immediateLoad: false);
+        public static LazyTexture ExportAllButtonHovered { get; } = new("ExportAllButtonHovered", immediateLoad: false);
+
+        public static LazyTexture ImportButton { get; } = new("ImportButton", immediateLoad: false);
+        public static LazyTexture ImportButtonHovered { get; } = new("ImportButtonHovered", immediateLoad: false);
+
+        public static LazyTexture ImportAllButton { get; } = new("ImportAllButton", immediateLoad: false);
+        public static LazyTexture ImportAllButtonHovered { get; } = new("ImportAllButtonHovered", immediateLoad: false);
+
+        #endregion
 
         public override void PostSetupContent()
         {
@@ -35,30 +69,64 @@ namespace QuestBooks.Assets
 
             // Force an early load of lazy assets.
             foreach (var property in typeof(QuestAssets).GetProperties().Where(p => p.PropertyType.IsAssignableTo(typeof(ILazy))))
-                ((ILazy)property.GetValue(null)).WaitAction();
+            {
+                var asset = (ILazy)property.GetValue(null);
+
+                if (asset.ImmediateLoad)
+                    asset.WaitAction();
+            }
         }
     }
 
-    public class LazyTexture(string asset, bool fullString = false) :
-        LazyAsset<Texture2D>($"{(fullString ? "" : "QuestBooks/Assets/Textures/")}{asset}")
+    public class PatchRectangle(string asset, int leftWidth, int rightWidth, int topWidth, int bottomWidth, bool repeatEdges) : LazyTexture(asset)
+    {
+        public PatchRectangle(string asset, Point cornerSize) :
+            this(asset, cornerSize.X, cornerSize.X, cornerSize.Y, cornerSize.Y, false)
+        { }
+
+        public PatchRectangle(string asset, Point topLeft, Point bottomRight) :
+            this(asset, topLeft.X, bottomRight.X, topLeft.Y, bottomRight.Y, false)
+        { }
+
+        public PatchRectangle(string asset, Point cornerSize, bool repeatEdges) :
+            this(asset, cornerSize.X, cornerSize.X, cornerSize.Y, cornerSize.Y, repeatEdges)
+        { }
+
+        public PatchRectangle(string asset, Point topLeft, Point bottomRight, bool repeatEdges) :
+            this(asset, topLeft.X, bottomRight.X, topLeft.Y, bottomRight.Y, repeatEdges)
+        { }
+
+        public int Left { get; init; } = leftWidth;
+        public int Right { get; init; } = rightWidth;
+        public int Top { get; init; } = topWidth;
+        public int Bottom { get; init; } = bottomWidth;
+        public bool RepeatEdges { get; init; } = repeatEdges;
+    }
+
+    public class LazyTexture(string asset, bool fullString = false, bool immediateLoad = true) :
+        LazyAsset<Texture2D>($"{(fullString ? "" : "QuestBooks/Assets/Textures/")}{asset}", immediateLoad)
     { }
 
     public class LazyShader(string asset) :
         LazyAsset<Effect>($"QuestBooks/Assets/Shaders/{asset}")
     { }
 
-    public class LazyAsset<T>(string asset) : Lazy<Asset<T>>(() => ModContent.Request<T>(asset)), ILazy
+    public class LazyAsset<T>(string asset, bool immediateLoad = true) : Lazy<Asset<T>>(() => ModContent.Request<T>(asset)), ILazy
         where T : class
     {
         public Asset<T> ContentAsset => Value;
         public T Asset => Value.Value;
         public Action WaitAction => Value.Wait;
 
+        private readonly bool _immediateLoad = immediateLoad;
+        public bool ImmediateLoad => _immediateLoad;
+
         public static implicit operator T(LazyAsset<T> lazyAsset) => lazyAsset.Asset;
     }
 
     public interface ILazy
     {
+        public bool ImmediateLoad { get; }
         public Action WaitAction { get; }
     }
 }

@@ -233,7 +233,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 var targets = sb.GraphicsDevice.GetRenderTargets();
                 sb.GraphicsDevice.SetRenderTarget(libraryTarget);
                 sb.GraphicsDevice.Clear(Color.Transparent);
-                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
+                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
 
                 float resizeScale = LogScale / TargetScale;
                 books = libraryTarget.Bounds.CookieCutter(new(-0.5f, 0f), new(0.5f, 1f)).CreateMargins(right: 4);
@@ -268,11 +268,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.End();
                     fadedEdges.Parameters["FadeTop"].SetValue(farFromEdge);
                     fadedEdges.Parameters["FadeBottom"].SetValue(false);
-                    sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
+                    sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
 
                     sb.Draw(questInfoTarget, libraryTarget.Bounds.Center() + new Vector2(0f, questInfoOffset), null, Color.White, 0f, questInfoTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
 
-                    if (Math.Abs(questInfoSwipeOffset) < 0.1f)
+                    if (Math.Abs(questInfoSwipeOffset) < 0.05f)
                         questInfoSwipeOffset = 0f;
                 }
 
@@ -296,7 +296,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 fadedEdges.Parameters["FadeTop"].SetValue(true);
                 fadedEdges.Parameters["FadeBottom"].SetValue(true);
                 sb.GraphicsDevice.SetRenderTargets(targets);
-                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
+                sb.Begin(SpriteSortMode.Deferred, LayerBlending, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, fadedEdges);
 
                 sb.Draw(libraryTarget, questInfo.Center(), null, Color.White, 0f, libraryTarget.Size() * 0.5f, resizeScale, SpriteEffects.None, 0f);
 

@@ -22,11 +22,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (QuestBooksMod.DesignerEnabled)
             {
                 Rectangle designerToggle = LogArea.CookieCutter(new(0.94f, -1.08f), new(0.05f, 0.06f));
+                bool designerHovered = false;
 
                 if (designerToggle.Contains(MouseCanvas))
                 {
                     MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ToggleDesigner");
                     LockMouse();
+                    designerHovered = true;
 
                     if (LeftMouseJustPressed)
                     {
@@ -36,7 +38,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     }
                 }
 
-                AddRectangle(designerToggle, Color.Yellow, fill: true);
+                DrawTasks.Add(sb =>
+                {
+                    Texture2D texture = designerHovered ? QuestAssets.DesignerOnButtonHovered : QuestAssets.DesignerOnButton;
+                    float scale = designerToggle.Width / (float)texture.Width;
+                    sb.Draw(texture, designerToggle.Center(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+                });
             }
         }
 

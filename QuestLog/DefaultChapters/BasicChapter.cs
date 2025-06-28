@@ -28,16 +28,22 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
         {
-            Color color = Color.MediumSeaGreen;
+            Color color = Color.White;
+            Color outlineColor = new(135, 135, 135, 255);
 
-            if (!selected)
-                color = Color.Lerp(color, Color.Black, 0.35f);
+            if (selected)
+            {
+                if (BasicQuestLogStyle.UseDesigner)
+                    outlineColor = Color.Red;
 
-            if (hovered)
-                color = Color.Lerp(color, Color.White, 0.1f);
+                else
+                    outlineColor = new Color(200, 200, 0, 255);
+            }
 
-            Color outlineColor = BasicQuestLogStyle.UseDesigner && selected ? Color.Red : Color.Lerp(color, Color.Black, 0.2f);
-            Color textOutlineColor = Color.Lerp(color, Color.Black, 0.4f);
+            else if (hovered)
+                outlineColor = Color.Lerp(outlineColor, Color.White, 0.4f);
+
+            Color textOutlineColor = new(69, 69, 69, 255);
             DrawBasicChapter(spriteBatch, DisplayName, color, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
         }
 
@@ -46,8 +52,8 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
         {
-            spriteBatch.Draw(QuestAssets.LogEntryBackground, area.Center(), null, chapterColor, 0f, QuestAssets.LogEntryBackground.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
             spriteBatch.Draw(QuestAssets.LogEntryBorder, area.Center(), null, outlineColor, 0f, QuestAssets.LogEntryBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(QuestAssets.LogEntryBackground, area.Center(), null, chapterColor, 0f, QuestAssets.LogEntryBackground.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
             spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
@@ -64,10 +70,10 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public static void DrawChapterText(SpriteBatch spriteBatch, string text, Color textColor, Color outlineColor, Rectangle area, float scale)
         {
-            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.065f, right: 0.165f, top: 0.1f, bottom: 0.1f);
+            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.1f, right: 0.165f, top: 0.1f, bottom: 0.1f);
             float scaleShift = InverseLerp(0.4f, 2f, scale) * 0.8f;
             float stroke = MathHelper.Lerp(1f, 4f, scaleShift);
-            Vector2 offset = new(0f, MathHelper.Lerp(2f, 10f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
+            Vector2 offset = new(0f, MathHelper.Lerp(2f, 11f, scaleShift) / MathHelper.Clamp(text.Length / 15f, 1f, 2f));
 
             var font = FontAssets.DeathText.Value;
             spriteBatch.DrawOutlinedStringInRectangle(nameRectangle, font, textColor, outlineColor, text, stroke, offset: offset, extraScale: 0.8f, alignment: Utilities.TextAlignment.Left);

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
 using QuestBooks.Systems;
 using SDL2;
 using System.IO;
@@ -16,15 +18,16 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle loadAll = saveSelected.CookieCutter(new(0f, 2.5f), Vector2.One);
             Rectangle loadSingle = loadAll.CookieCutter(new(0f, 2.5f), Vector2.One);
 
-            AddRectangle(saveAll, Color.Magenta, fill: true);
-            AddRectangle(saveSelected, Color.Purple, fill: true);
-            AddRectangle(loadAll, Color.LightSeaGreen, fill: true);
-            AddRectangle(loadSingle, Color.DarkGreen, fill: true);
+            bool saveAllHovered = false;
+            bool saveSelectedHovered = false;
+            bool loadAllHovered = false;
+            bool loadSingleHovered = false;
 
             if (saveAll.Contains(MouseCanvas))
             {
                 LockMouse();
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.SaveAll");
+                saveAllHovered = true;
 
                 if (LeftMouseJustReleased)
                 {
@@ -46,6 +49,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 LockMouse();
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.SaveSelected");
+                saveSelectedHovered = true;
 
                 if (LeftMouseJustReleased && SelectedBook is not null)
                 {
@@ -63,6 +67,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 LockMouse();
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.LoadAll");
+                loadAllHovered = true;
 
                 if (LeftMouseJustReleased)
                 {
@@ -136,6 +141,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 LockMouse();
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.LoadBook");
+                loadSingleHovered = true;
 
                 if (LeftMouseJustReleased)
                 {
@@ -155,6 +161,22 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     }
                 }
             }
+
+            DrawTasks.Add(sb =>
+            {
+                Texture2D texture = saveAllHovered ? QuestAssets.ExportAllButtonHovered : QuestAssets.ExportAllButton;
+                float scale = saveAll.Width / (float)texture.Width;
+                sb.Draw(texture, saveAll.Center(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+
+                texture = saveSelectedHovered ? QuestAssets.ExportButtonHovered : QuestAssets.ExportButton;
+                sb.Draw(texture, saveSelected.Center(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+
+                texture = loadAllHovered ? QuestAssets.ImportAllButtonHovered : QuestAssets.ImportAllButton;
+                sb.Draw(texture, loadAll.Center(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+
+                texture = loadSingleHovered ? QuestAssets.ImportButtonHovered : QuestAssets.ImportButton;
+                sb.Draw(texture, loadSingle.Center(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+            });
         }
     }
 }

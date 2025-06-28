@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -21,8 +22,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static readonly List<(Rectangle area, BookChapter questBook)> chapterLibrary = [];
         private void UpdateChapters(Rectangle chapters, Vector2 scaledMouse)
         {
-            SwitchTargets(chaptersTarget, LibraryBlending);
-            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.1f));
+            SwitchTargets(chaptersTarget, LibraryBlending, SamplerState.PointClamp);
+            DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.15f));
 
             // If we aren't in the middle of swiping and there are no chapters to draw,
             // return early
@@ -63,7 +64,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             // Re-set the chapter library rectangles
             chapterLibrary.Clear();
-            Rectangle chapter = chapters.CookieCutter(new(0f, -0.9f), new(1f, 0.1f));
+            Rectangle chapter = chapters.CookieCutter(new(0f, -0.9f), new(1f, 0.1065f));
             float xOffset = 0f;
 
             // Add any available chapters
