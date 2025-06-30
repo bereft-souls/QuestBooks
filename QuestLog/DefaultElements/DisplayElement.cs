@@ -15,8 +15,8 @@ namespace QuestBooks.QuestLog.DefaultElements
     public class DisplayElement : ChapterElement
     {
         // Used when the texture is not found or has not been assigned yet.
-        private const string DefaultTexture = "QuestBooks/Assets/Textures/QuestionMark";
-        private const string DefaultOutline = "QuestBooks/Assets/Textures/QuestionMarkOutline";
+        private const string DefaultTexture = "QuestBooks/Assets/Textures/Elements/QuestionMark";
+        private const string DefaultOutline = "QuestBooks/Assets/Textures/Elements/QuestionMarkOutline";
         private static readonly Asset<Texture2D> DefaultAsset = ModContent.Request<Texture2D>(DefaultTexture);
         private static readonly Asset<Texture2D> DefaultOutlineAsset = ModContent.Request<Texture2D>(DefaultOutline);
 

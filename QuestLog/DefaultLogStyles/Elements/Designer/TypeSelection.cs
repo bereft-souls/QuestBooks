@@ -27,6 +27,19 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle questLineType = questBookType.CookieCutter(new(0f, 5f), Vector2.One);
             Rectangle typeDropDown = LogArea.CookieCutter(new(-1.22f, 0.26f), new(0.21f, 0.74f));
 
+            Rectangle bookMovement = LogArea.CookieCutter(new(-0.955f, -0.1f), new(0.02f, 0.063f));
+            Rectangle bookUp = bookMovement.CookieCutter(new(0f, -0.5f), new(1f, 0.5f));
+            Rectangle bookDown = bookUp.CookieCutter(new(0f, 2f), Vector2.One);
+
+            Rectangle chapterUp = bookUp.CookieCutter(new(46f, 0f), Vector2.One);
+            Rectangle chapterDown = chapterUp.CookieCutter(new(0f, 2f), Vector2.One);
+
+            // 20x20
+            AddRectangle(bookUp, Color.Red, fill: true);
+            AddRectangle(bookDown, Color.Blue, fill: true);
+            AddRectangle(chapterUp, Color.Red, fill: true);
+            AddRectangle(chapterDown, Color.Blue, fill: true);
+
             if (SelectedBook is not null)
             {
                 AddRectangle(questBookType, Color.Gray * 0.6f, fill: true);
@@ -39,7 +52,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 {
                     sb.DrawOutlinedStringInRectangle(questBookType.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.QuestBookType"), maxScale: 0.5f);
                     questBookType = questBookType.CookieCutter(new(0f, 0.2f), Vector2.One);
-                    sb.DrawOutlinedStringInRectangle(questBookType.CreateScaledMargin(0.02f).CreateScaledMargins(top: 0.0f), font, Color.White, Color.Black, typeName, 2f, alignment: Utilities.TextAlignment.Left);
+                    sb.DrawOutlinedStringInRectangle(questBookType.CreateMargins(left: 2, right: 2), font, Color.White, Color.Black, typeName, 2f, alignment: Utilities.TextAlignment.Left);
                 });
 
                 if (questBookType.Contains(MouseCanvas))
@@ -71,13 +84,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 {
                     sb.DrawOutlinedStringInRectangle(questLineType.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.QuestLineType"), maxScale: 0.5f);
                     questLineType = questLineType.CookieCutter(new(0f, 0.2f), Vector2.One);
-                    sb.DrawOutlinedStringInRectangle(questLineType.CreateScaledMargin(0.02f).CreateScaledMargins(top: 0.0f), font, Color.White, Color.Black, typeName, 2f, alignment: Utilities.TextAlignment.Left);
+                    sb.DrawOutlinedStringInRectangle(questLineType.CreateMargins(left: 2, right: 2), font, Color.White, Color.Black, typeName, 2f, alignment: Utilities.TextAlignment.Left);
                 });
 
                 if (questLineType.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeQuestLineType");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeChapterType");
 
                     if (LeftMouseJustReleased)
                     {

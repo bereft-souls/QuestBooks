@@ -13,154 +13,49 @@
         "Elements": {
           "$id": "4",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
-          "$values": [
-            {
-              "$id": "5",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "320, 120",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "6",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "60, 260",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "7",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "140, 340",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "8",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "180, 360",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "9",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "220, 360",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "10",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "260, 360",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "11",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "300, 360",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "12",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "340, 340",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "13",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "380, 300",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "14",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "420, 260",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "15",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "240, 220",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "16",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/QuestionMark",
-              "CanvasPosition": "100, 300",
-              "Scale": 1.0,
-              "Rotation": 0.0
-            },
-            {
-              "$id": "17",
-              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
-              "_texturePath": "QuestBooks/Assets/Textures/AddButton",
-              "CanvasPosition": "140, 120",
-              "Scale": 1.5,
-              "Rotation": 0.5
-            }
-          ]
+          "$values": []
         },
         "EnableShifting": false
       },
       {
-        "$id": "18",
+        "$id": "5",
         "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
         "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter2",
         "Elements": {
-          "$id": "19",
+          "$id": "6",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
         "EnableShifting": false
       },
       {
-        "$id": "20",
+        "$id": "7",
         "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
         "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter3",
         "Elements": {
-          "$id": "21",
+          "$id": "8",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
         "EnableShifting": false
       },
       {
-        "$id": "22",
+        "$id": "9",
         "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
         "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter4",
         "Elements": {
-          "$id": "23",
+          "$id": "10",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
         "EnableShifting": false
       },
       {
-        "$id": "24",
+        "$id": "11",
         "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
         "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter5",
         "Elements": {
-          "$id": "25",
+          "$id": "12",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },

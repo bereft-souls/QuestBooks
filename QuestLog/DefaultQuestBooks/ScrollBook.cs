@@ -16,7 +16,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
         {
-            Color color = Color.White; //new(255, 255, 230, 255); //new(255, 207, 64, 255);// new(240, 100, 100, 255);
+            Color bookColor = Color.White; //new(255, 255, 230, 255); //new(255, 207, 64, 255);// new(240, 100, 100, 255);
             Color outlineColor = new(175, 175, 175, 255);
 
             if (selected)
@@ -35,7 +35,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
             }
 
             Color textOutlineColor = new(40, 40, 40, 255);
-            DrawBasicBook(spriteBatch, DisplayName, color, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
+            DrawBasicBook(spriteBatch, DisplayName, bookColor, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
         }
 
         /// <summary>

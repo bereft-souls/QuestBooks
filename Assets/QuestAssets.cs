@@ -17,19 +17,20 @@ namespace QuestBooks.Assets
 
         #region QuestLog
 
-        public static LazyTexture QuestBookIcon { get; } = new("QuestBookIcon");
-        public static LazyTexture QuestBookOutline { get; } = new("QuestBookOutline");
+        public static LazyTexture QuestBookIcon { get; } = new("QuestLog/QuestBookIcon");
+        public static LazyTexture QuestBookOutline { get; } = new("QuestLog/QuestBookOutline");
 
-        public static LazyTexture BasicQuestCanvas { get; } = new("QuestLogCanvas");
-        public static LazyTexture ResizeIndicator { get; } = new("ResizeIndicator");
+        public static LazyTexture BasicQuestCanvas { get; } = new("QuestLog/QuestLogCanvas");
+        public static LazyTexture ResizeIndicator { get; } = new("QuestLog/ResizeIndicator");
 
-        public static LazyTexture BookTab { get; } = new("BookTab");
-        public static LazyTexture BookTabBorder { get; } = new("BookTabBorder");
-        public static LazyTexture BookTabGradient { get; } = new("BookTabGradient");
+        public static LazyTexture BookTab { get; } = new("QuestLog/BookTab");
+        public static LazyTexture BookTabBorder { get; } = new("QuestLog/BookTabBorder");
+        public static LazyTexture BookTabGradient { get; } = new("QuestLog/BookTabGradient");
 
-        public static LazyTexture BookScroll { get; } = new("BookScroll");
-        public static LazyTexture BookScrollBorder { get; } = new("BookScrollBorder");
-        public static LazyTexture ChapterScroll { get; } = new("ChapterScroll");
+        public static LazyTexture BookScroll { get; } = new("QuestLog/BookScroll");
+        public static LazyTexture BookScrollBorder { get; } = new("QuestLog/BookScrollBorder");
+        public static LazyTexture ChapterScroll { get; } = new("QuestLog/ChapterScroll");
+        public static LazyTexture ChapterScrollBorder { get; } = new("QuestLog/ChapterScrollBorder");
 
         public static LazyShader FadedEdges { get; } = new("FadedEdges");
 
@@ -37,33 +38,59 @@ namespace QuestBooks.Assets
 
         #region Elements
 
-        public static LazyTexture MissingIcon { get; } = new("QuestionMark", immediateLoad: false);
-        public static LazyTexture MissingIconOutline { get; } = new("QuestionMarkOutline", immediateLoad: false);
+        public static LazyTexture MissingIcon { get; } = new("Elements/QuestionMark", immediateLoad: false);
+        public static LazyTexture MissingIconOutline { get; } = new("Elements/QuestionMarkOutline", immediateLoad: false);
 
         #endregion
 
         #region Designer
 
-        public static LazyTexture DesignerOnButton { get; } = new("DesignerOnButton", immediateLoad: false);
-        public static LazyTexture DesignerOnButtonHovered { get; } = new("DesignerOnButtonHovered", immediateLoad: false);
+        public static LazyTexture ToggleDesigner { get; } = new("Designer/ToggleDesigner", immediateLoad: false);
+        public static LazyTexture ToggleDesignerHovered { get; } = new("Designer/ToggleDesignerHovered", immediateLoad: false);
 
-        public static LazyTexture AddButton { get; } = new("AddButton", immediateLoad: false);
-        public static LazyTexture AddButtonHovered { get; } = new("AddButtonHovered", immediateLoad: false);
+        public static LazyTexture AddButton { get; } = new("Designer/AddButton", immediateLoad: false);
+        public static LazyTexture AddButtonHovered { get; } = new("Designer/AddButtonHovered", immediateLoad: false);
 
-        public static LazyTexture DeleteButton { get; } = new("DeleteButton", immediateLoad: false);
-        public static LazyTexture DeleteButtonHovered { get; } = new("DeleteButtonHovered", immediateLoad: false);
+        public static LazyTexture DeleteButton { get; } = new("Designer/DeleteButton", immediateLoad: false);
+        public static LazyTexture DeleteButtonHovered { get; } = new("Designer/DeleteButtonHovered", immediateLoad: false);
 
-        public static LazyTexture ExportButton { get; } = new("ExportButton", immediateLoad: false);
-        public static LazyTexture ExportButtonHovered { get; } = new("ExportButtonHovered", immediateLoad: false);
+        public static LazyTexture ExportButton { get; } = new("Designer/ExportButton", immediateLoad: false);
+        public static LazyTexture ExportButtonHovered { get; } = new("Designer/ExportButtonHovered", immediateLoad: false);
 
-        public static LazyTexture ExportAllButton { get; } = new("ExportAllButton", immediateLoad: false);
-        public static LazyTexture ExportAllButtonHovered { get; } = new("ExportAllButtonHovered", immediateLoad: false);
+        public static LazyTexture ExportAllButton { get; } = new("Designer/ExportAllButton", immediateLoad: false);
+        public static LazyTexture ExportAllButtonHovered { get; } = new("Designer/ExportAllButtonHovered", immediateLoad: false);
 
-        public static LazyTexture ImportButton { get; } = new("ImportButton", immediateLoad: false);
-        public static LazyTexture ImportButtonHovered { get; } = new("ImportButtonHovered", immediateLoad: false);
+        public static LazyTexture ImportButton { get; } = new("Designer/ImportButton", immediateLoad: false);
+        public static LazyTexture ImportButtonHovered { get; } = new("Designer/ImportButtonHovered", immediateLoad: false);
 
-        public static LazyTexture ImportAllButton { get; } = new("ImportAllButton", immediateLoad: false);
-        public static LazyTexture ImportAllButtonHovered { get; } = new("ImportAllButtonHovered", immediateLoad: false);
+        public static LazyTexture ImportAllButton { get; } = new("Designer/ImportAllButton", immediateLoad: false);
+        public static LazyTexture ImportAllButtonHovered { get; } = new("Designer/ImportAllButtonHovered", immediateLoad: false);
+
+        public static LazyTexture ShiftingCanvas { get; } = new("Designer/ShiftingCanvas", immediateLoad: false);
+        public static LazyTexture ShiftingCanvasHovered { get; } = new("Designer/ShiftingCanvasHovered", immediateLoad: false);
+
+        public static LazyTexture ToggleGrid { get; } = new("Designer/ToggleGrid", immediateLoad: false);
+        public static LazyTexture ToggleGridHovered { get; } = new("Designer/ToggleGridHovered", immediateLoad: false);
+
+        public static LazyTexture ToggleBackdropEnabled { get; } = new("Designer/ToggleBackdropEnabled", immediateLoad: false);
+        public static LazyTexture ToggleBackdropEnabledHovered { get; } = new("Designer/ToggleBackdropEnabledHovered", immediateLoad: false);
+
+        public static LazyTexture ToggleBackdropDisabled { get; } = new("Designer/ToggleBackdropDisabled", immediateLoad: false);
+        public static LazyTexture ToggleBackdropDisabledHovered { get; } = new("Designer/ToggleBackdropDisabledHovered", immediateLoad: false);
+
+        public static LazyTexture GridSnapping { get; } = new("Designer/GridSnapping", immediateLoad: false);
+        public static LazyTexture GridSnappingHovered { get; } = new("Designer/GridSnappingHovered", immediateLoad: false);
+
+        public static LazyTexture GridSize { get; } = new("Designer/GridSize", immediateLoad: false);
+        public static LazyTexture GridSizeHovered { get; } = new("Designer/GridSizeHovered", immediateLoad: false);
+
+        public static LazyTexture GridSizeUp { get; } = new("Designer/GridSizeUp", immediateLoad: false);
+        public static LazyTexture GridSizeUpHovered { get; } = new("Designer/GridSizeUpHovered", immediateLoad: false);
+
+        public static LazyTexture GridSizeDown { get; } = new("Designer/GridSizeDown", immediateLoad: false);
+        public static LazyTexture GridSizeDownHovered { get; } = new("Designer/GridSizeDownHovered", immediateLoad: false);
+
+        public static LazyTexture ToolOutline { get; } = new("Designer/ToolOutline", immediateLoad: false);
 
         #endregion
 

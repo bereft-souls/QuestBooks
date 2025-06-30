@@ -1,9 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
 using QuestBooks.Utilities;
 using System;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.GameContent;
 using Terraria.GameInput;
+using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultLogStyles
 {
@@ -15,82 +19,80 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private static void HandleQuestRegionTools()
         {
-            Rectangle enableShifting = LogArea.CookieCutter(new(0.15f, -1.1f), new(0.065f, 0.06f));
+            Rectangle enableShifting = LogArea.CookieCutter(new(0.12f, -1.1f), new(0.069f, 0.075f));
             Rectangle showBackdrop = enableShifting.CookieCutter(new(2.2f, 0f), Vector2.One);
             Rectangle showGrid = showBackdrop.CookieCutter(new(2.2f, 0f), Vector2.One);
             Rectangle snapGrid = showGrid.CookieCutter(new(2.2f, 0f), Vector2.One);
+            float scale = enableShifting.Width / (float)QuestAssets.ShiftingCanvas.Asset.Width;
 
-            Rectangle gridSize = snapGrid.CookieCutter(new(2f, 0f), new(0.8f, 1f));
-            Rectangle gridUp = gridSize.CookieCutter(new(1.3f, -0.5f), new(0.3f, 0.5f));
+            Rectangle gridSize = snapGrid.CookieCutter(new(2.2f, 0f), new(0.95f, 1f));
+            Rectangle gridUp = gridSize.CookieCutter(new(1.4f, -0.5f), new(0.4f, 0.5f));
             Rectangle gridDown = gridUp.CookieCutter(new(0f, 2f), Vector2.One);
 
-            AddRectangle(enableShifting, SelectedChapter is null ? Color.Red * 0.4f : Color.Red, fill: true);
-            AddRectangle(showBackdrop, Color.Lime, fill: true);
-            AddRectangle(showGrid, Color.Blue, fill: true);
-            AddRectangle(snapGrid, Color.Yellow, fill: true);
+            bool enableShiftingHovered = false;
+            bool showBackdropHovered = false;
+            bool showGridHovered = false;
+            bool snapGridHovered = false;
 
-            AddRectangle(gridSize, Color.Magenta, fill: true);
-            AddRectangle(gridUp, Color.Purple, fill: true);
-            AddRectangle(gridDown, Color.Violet, fill: true);
+            bool gridSizeHovered = false;
+            bool gridUpHovered = false;
+            bool gridDownHovered = false;
 
             if (enableShifting.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = "Enable shifting canvas";
+                enableShiftingHovered = true;
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftingCanvas");
 
                 if (LeftMouseJustReleased && SelectedChapter is not null)
                     SelectedChapter.EnableShifting = !SelectedChapter.EnableShifting;
             }
 
-            if (SelectedChapter?.EnableShifting ?? false)
-                AddRectangle(enableShifting, Color.White, 3f);
-
             if (showBackdrop.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = "Show backdrop";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ToggleBackdrop");
+                showBackdropHovered = true;
 
                 if (LeftMouseJustReleased)
                     BasicQuestLogStyle.showBackdrop = !BasicQuestLogStyle.showBackdrop;
             }
 
-            if (BasicQuestLogStyle.showBackdrop)
-                AddRectangle(showBackdrop, Color.White, 3f);
-
             if (showGrid.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = "Show grid";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ToggleGrid");
+                showGridHovered = true;
 
                 if (LeftMouseJustReleased)
                     BasicQuestLogStyle.showGrid = !BasicQuestLogStyle.showGrid;
             }
 
-            if (BasicQuestLogStyle.showGrid)
-                AddRectangle(showGrid, Color.White, 3f);
-
             if (snapGrid.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = "Snap to grid";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.SnapGrid");
+                snapGridHovered = true;
 
                 if (LeftMouseJustReleased)
                     snapToGrid = !snapToGrid;
             }
 
-            if (snapToGrid)
-                AddRectangle(snapGrid, Color.White, 3f);
-
             if (gridSize.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = "Grid size";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.GridSize");
+                gridSizeHovered = true;
+
+                if (LeftMouseJustReleased)
+                    BasicQuestLogStyle.gridSize = 20;
             }
 
             else if (gridUp.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = "Grid size up";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.GridSizeUp");
+                gridUpHovered = true;
 
                 if (LeftMouseJustReleased)
                     BasicQuestLogStyle.gridSize++;
@@ -99,11 +101,46 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             else if (gridDown.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = "Grid size down";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.GridSizeDown");
+                gridDownHovered = true;
 
                 if (LeftMouseJustReleased && BasicQuestLogStyle.gridSize > 3)
                     BasicQuestLogStyle.gridSize--;
             }
+
+            DrawTasks.Add(sb =>
+            {
+                void DrawToggle(Rectangle area, bool hovered, Texture2D button, Texture2D buttonHovered, float opacity = 1f, bool outline = false)
+                {
+                    Texture2D texture = hovered ? buttonHovered : button;
+                    Vector2 center = area.Center();
+
+                    if (outline)
+                        sb.Draw(QuestAssets.ToolOutline, center, null, Color.Yellow * opacity, 0f, QuestAssets.ToolOutline.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+
+                    sb.Draw(texture, center, null, Color.White * opacity, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+                }
+
+                bool active = SelectedChapter is not null;
+                DrawToggle(enableShifting, enableShiftingHovered, QuestAssets.ShiftingCanvas, active ? QuestAssets.ShiftingCanvasHovered : QuestAssets.ShiftingCanvas, active ? 1f : 0.5f, SelectedChapter?.EnableShifting ?? false);
+
+                if (BasicQuestLogStyle.showBackdrop)
+                    DrawToggle(showBackdrop, showBackdropHovered, QuestAssets.ToggleBackdropEnabled, QuestAssets.ToggleBackdropEnabledHovered, outline: true);
+
+                else
+                    DrawToggle(showBackdrop, showBackdropHovered, QuestAssets.ToggleBackdropDisabled, QuestAssets.ToggleBackdropDisabledHovered);
+
+                DrawToggle(showGrid, showGridHovered, QuestAssets.ToggleGrid, QuestAssets.ToggleGridHovered, outline: BasicQuestLogStyle.showGrid);
+                DrawToggle(snapGrid, snapGridHovered, QuestAssets.GridSnapping, QuestAssets.GridSnappingHovered, outline: BasicQuestLogStyle.snapToGrid);
+
+                DrawToggle(gridSize, gridSizeHovered, QuestAssets.GridSize, QuestAssets.GridSizeHovered);
+                DrawToggle(gridUp, gridUpHovered, QuestAssets.GridSizeUp, QuestAssets.GridSizeUpHovered);
+                DrawToggle(gridDown, gridDownHovered, QuestAssets.GridSizeDown, QuestAssets.GridSizeDownHovered);
+
+                Rectangle gridText = gridSize.CookieCutter(new(0.5f, 0.2f), new(0.75f, 0.75f));
+                sb.DrawOutlinedStringInRectangle(gridText, FontAssets.DeathText.Value, Color.White, Color.Black, BasicQuestLogStyle.gridSize.ToString(), clipBounds: false);
+            });
+
 
             if (SelectedChapter is not null)
             {

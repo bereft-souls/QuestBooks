@@ -40,7 +40,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    Texture2D texture = designerHovered ? QuestAssets.DesignerOnButtonHovered : QuestAssets.DesignerOnButton;
+                    Texture2D texture = designerHovered ? QuestAssets.ToggleDesignerHovered : QuestAssets.ToggleDesigner;
                     float scale = designerToggle.Width / (float)texture.Width;
                     sb.Draw(texture, designerToggle.Center(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
                 });

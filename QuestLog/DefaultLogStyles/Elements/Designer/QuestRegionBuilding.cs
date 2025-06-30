@@ -6,7 +6,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static bool showBackdrop = true;
+        private static bool showBackdrop = false;
         private static bool showGrid = false;
         private static bool snapToGrid = false;
         private static int gridSize = 20;

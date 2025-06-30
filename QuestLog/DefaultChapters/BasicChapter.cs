@@ -28,28 +28,27 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
         {
-            Color color = Color.White;
+            Color chapterColor = Color.White;
+            Color outlineColor = new(0, 0, 0, 0);
 
-            if (!selected)
-            {
-                //color = Color.Lerp(color, Color.Black, 0.2f);
+            if (selected)
+                outlineColor = new Color(225, 225, 0, 255);
 
-                if (hovered)
-                    color = Color.Lerp(color, Color.LightBlue, 0.2f);
-            }
-
-            else
-                color = Color.Lerp(color, Color.LightBlue, 0.3f);
+            else if (hovered)
+                outlineColor = new(200, 200, 200, 255);
 
             Color textOutlineColor = new(69, 69, 69, 255);
-            DrawBasicChapter(spriteBatch, DisplayName, color, Color.Lerp(color, Color.White, 0.85f), textOutlineColor, designatedArea, scale);
+            DrawBasicChapter(spriteBatch, DisplayName, chapterColor, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
         }
 
         /// <summary>
         /// Performs the default chapter drawing code to the spritebatch. Draws a simple container with the specified colors, and text inside the contianer.
         /// </summary>
-        public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color textOutlineColor, Rectangle area, float scale)
+        public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
         {
+            if (outlineColor.A > 0)
+                spriteBatch.Draw(QuestAssets.ChapterScrollBorder, area.Center(), null, outlineColor, 0f, QuestAssets.ChapterScrollBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+
             spriteBatch.Draw(QuestAssets.ChapterScroll, area.Center(), null, chapterColor, 0f, QuestAssets.ChapterScroll.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
             spriteBatch.End();

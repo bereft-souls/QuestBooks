@@ -24,7 +24,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static readonly List<(Rectangle area, QuestBook questBook)> bookLibrary = [];
         private void UpdateBooks(Rectangle books, Vector2 scaledMouse)
         {
-            SwitchTargets(booksTarget, LibraryBlending, SamplerState.PointClamp);
+            SwitchTargets(booksTarget, LibraryBlending, SamplerState.LinearClamp);
             DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.08f));
 
             // Skip drawing books if none are available

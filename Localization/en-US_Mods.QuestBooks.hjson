@@ -53,14 +53,53 @@ Tooltips: {
 		Deletes the selected chapter from the selected quest book.
 		[c/FF0000:WARNING]: This cannot be undone!
 		'''
+	DeleteElement:
+		'''
+		[c/CCC018:Delete Element]
+		Deletes the selected element from the selected chapter.
+		[c/FF0000:WARNING]: This cannot be undone!
+		'''
+	TogglePreview:
+		'''
+		[c/CCC018:Toggle Preview]
+		Toggles the preview for this element's info page, if it has one.
+		'''
+	ShiftingCanvas:
+		'''
+		[c/CCC018:Enable Shifting Canvas]
+		Toggles whether this chapter can be scrolled around via click-and-drag/scrolling.
+		'''
+	ToggleBackdrop:
+		'''
+		[c/CCC018:Show Backdrop]
+		Toggles a darkening backdrop to the quest area for range of visibility.
+		'''
+	ToggleGrid:
+		'''
+		[c/CCC018:Show Grid]
+		Toggles visibility of the placement grid.
+		'''
+	SnapGrid:
+		'''
+		[c/CCC018:Snap to Grid]
+		Toggles grid snapping for element placement.
+		'''
+	GridSize:
+		'''
+		[c/CCC018:Grid Size]
+		The size of the placement grid.
+		Click to reset to the default (20).
+		'''
+	GridSizeUp: Grid Size Up
+	GridSizeDown: Grid Size Down
 	QuestBookType: Quest Book Type:
 	QuestLineType: Quest Line Type:
 	QuestElementType: Element Selection:
 	ChangeQuestBookType: Change QuestBook type
-	ChangeQuestLineType: Change QuestLine type
+	ChangeChapterType: Change BookChapter type
 	LocalizationKey: Localization Key:
 	ChangeQuestBookName: Change QuestBook localization key
-	ChangeQuestLineName: Change QuestLine localization key
+	ChangeChapterName: Change BookChapter localization key
 }
 
 Keybinds: {
@@ -95,47 +134,6 @@ VanillaQuests: {
 		TestChapter7: TestChapter7
 		TestChapter8: TestChapter8
 		TestChapter9: TestChapter9
-	}
-
-	TestBook3: {
-		DisplayName: TestBook3
-		TestChapter1: TestChapter1
-		TestChapter2: TestChapter2
-		TestChapter3: TestChapter3
-		TestChapter4: TestChapter4
-		TestChapter5: TestChapter5
-		TestChapter6: TestChapter6
-		TestChapter7: TestChapter7
-		TestChapter8: TestChapter8
-	}
-
-	TestBook4: {
-		DisplayName: TestBook4
-		TestChapter1: TestChapter1
-		TestChapter2: TestChapter2
-		TestChapter3: TestChapter3
-		TestChapter4: TestChapter4
-		TestChapter5: TestChapter5
-		TestChapter6: TestChapter6
-		TestChapter7: TestChapter7
-	}
-
-	TestBook5: {
-		DisplayName: TestBook5
-		TestChapter1: TestChapter1
-		TestChapter2: TestChapter2
-		TestChapter3: TestChapter3
-		TestChapter4: TestChapter4
-		TestChapter5: TestChapter5
-		TestChapter6: TestChapter6
-	}
-
-	TestBook6: {
-		DisplayName: TestBook6
-		TestChapter1: TestChapter1
-		TestChapter2: TestChapter2
-		TestChapter3: TestChapter3
-		TestChapter4: TestChapter4
-		TestChapter5: TestChapter5
+		TestChapter10: TestChapter10
 	}
 }

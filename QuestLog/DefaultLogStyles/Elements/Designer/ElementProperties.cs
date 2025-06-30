@@ -62,7 +62,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (deleteElement.Contains(mouseCanvas))
             {
                 deleteElementHovered = true;
-                MouseTooltip = "Delete Selected Element";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.DeleteElement");
 
                 if (LeftMouseJustReleased)
                 {
@@ -390,7 +390,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (previewToggle.Contains(mouseCanvas))
             {
-                MouseTooltip = "Toggle Preview";
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.TogglePreview");
 
                 if (LeftMouseJustReleased)
                     previewElementInfo = !previewElementInfo;

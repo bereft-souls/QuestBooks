@@ -24,19 +24,10 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
             Color outlineColor = new(175, 175, 175, 255);
 
             if (selected)
-            {
-                if (BasicQuestLogStyle.UseDesigner)
-                    outlineColor = Color.Yellow;
-
-                else
-                    outlineColor = new Color(200, 200, 0, 255);
-            }
+                outlineColor = new Color(225, 225, 0, 255);
 
             else if (hovered)
-            {
-                //color = Color.Lerp(color, Color.Yellow, 0.2f);
                 outlineColor = Color.Lerp(outlineColor, Color.White, 0.4f);
-            }
 
             Color textOutlineColor = new(40, 40, 40, 255);
             DrawBasicBook(spriteBatch, DisplayName, color, Color.White with { A = 50 }, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
@@ -47,7 +38,15 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// </summary>
         public static void DrawBasicBook(SpriteBatch spriteBatch, string text, Color bookColor, Color gradientColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
         {
+            spriteBatch.End();
+            spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+            spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
+
             spriteBatch.Draw(QuestAssets.BookTabBorder, area.Center(), null, outlineColor, 0f, QuestAssets.BookTabBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+
             spriteBatch.Draw(QuestAssets.BookTab, area.Center(), null, bookColor, 0f, QuestAssets.BookTab.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
             spriteBatch.Draw(QuestAssets.BookTabGradient, area.Center(), null, gradientColor, 0f, QuestAssets.BookTabGradient.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
@@ -55,7 +54,6 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
                 return;
 
             spriteBatch.End();
-            spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.LinearClamp, depth, raster, effect, matrix);
 
             DrawBookText(spriteBatch, text, textColor, textOutlineColor, area, scale);
