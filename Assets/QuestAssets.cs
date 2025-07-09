@@ -14,6 +14,7 @@ namespace QuestBooks.Assets
     public class QuestAssets : ModSystem
     {
         public static LazyTexture MagicPixel { get; } = new("Terraria/Images/MagicPixel", true);
+        public static LazyTexture BigPixel { get; } = new("BigPixel");
 
         #region QuestLog
 
@@ -40,6 +41,8 @@ namespace QuestBooks.Assets
 
         public static LazyTexture MissingIcon { get; } = new("Elements/QuestionMark", immediateLoad: false);
         public static LazyTexture MissingIconOutline { get; } = new("Elements/QuestionMarkOutline", immediateLoad: false);
+        public static LazyTexture Connector { get; } = new("Elements/Connector", immediateLoad: false);
+        public static LazyTexture ConnectorPoint { get; } = new("Elements/ConnectorPoint");
 
         #endregion
 

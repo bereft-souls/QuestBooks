@@ -98,6 +98,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (result == 0 && buttonId == 1)
                     {
                         SelectedChapter.Elements.Remove(SelectedElement);
+                        SelectedElement.OnDelete();
                         SortedElements = null;
                         SelectedElement = null;
                         questInfoSwipeOffset = -questInfoTarget.Height;

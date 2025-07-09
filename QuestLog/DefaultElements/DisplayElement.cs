@@ -74,7 +74,6 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
         {
             CanvasPosition = mousePosition;
-            chapter.Elements.Add(this);
             return true;
         }
 

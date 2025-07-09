@@ -31,7 +31,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle bookUp = bookMovement.CookieCutter(new(0f, -0.5f), new(1f, 0.5f));
             Rectangle bookDown = bookUp.CookieCutter(new(0f, 2f), Vector2.One);
 
-            Rectangle chapterUp = bookUp.CookieCutter(new(46f, 0f), Vector2.One);
+            Rectangle chapterMovement = LogArea.CookieCutter(new(-0.05f, -0.1f), new(0.02f, 0.063f));
+            Rectangle chapterUp = chapterMovement.CookieCutter(new(0f, -0.5f), new(1f, 0.5f));
             Rectangle chapterDown = chapterUp.CookieCutter(new(0f, 2f), Vector2.One);
 
             // 20x20

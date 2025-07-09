@@ -69,6 +69,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 if (placingElement.PlaceOnCanvas(SelectedChapter, mousePosition))
                 {
+                    SelectedChapter.Elements.Add(placingElement);
                     SortedElements = null;
                     placingElement = null;
                 }

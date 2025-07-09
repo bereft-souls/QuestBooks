@@ -13,49 +13,228 @@
         "Elements": {
           "$id": "4",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
-          "$values": []
+          "$values": [
+            {
+              "$id": "5",
+              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
+              "_texturePath": "QuestBooks/Assets/Textures/Elements/QuestionMark",
+              "CanvasPosition": "67, 53.098328",
+              "Scale": 1.0,
+              "Rotation": 0.0
+            },
+            {
+              "$id": "6",
+              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
+              "_texturePath": "QuestBooks/Assets/Textures/Elements/QuestionMark",
+              "CanvasPosition": "133, 59.10946",
+              "Scale": 1.0,
+              "Rotation": 0.0
+            },
+            {
+              "$id": "7",
+              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
+              "_texturePath": "QuestBooks/Assets/Textures/Elements/QuestionMark",
+              "CanvasPosition": "80, 140",
+              "Scale": 1.0,
+              "Rotation": 0.0
+            },
+            {
+              "$id": "8",
+              "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
+              "_texturePath": "QuestBooks/Assets/Textures/Designer/ToggleGrid",
+              "CanvasPosition": "220, 100",
+              "Scale": 1.2,
+              "Rotation": 0.7
+            },
+            {
+              "$id": "9",
+              "$type": "QuestBooks.QuestLog.DefaultElements.ConnectorPoint, QuestBooks",
+              "Size": 8.0,
+              "CanvasPosition": "332, 94.17439",
+              "Connections": {
+                "$id": "10",
+                "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                "$values": [
+                  {
+                    "$id": "11",
+                    "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                    "LineThickness": 8.0,
+                    "Source": {
+                      "$ref": "9"
+                    },
+                    "Destination": {
+                      "$id": "12",
+                      "$type": "QuestBooks.QuestLog.DefaultElements.ConnectorPoint, QuestBooks",
+                      "Size": 8.0,
+                      "CanvasPosition": "232, 245.45454",
+                      "Connections": {
+                        "$id": "13",
+                        "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                        "$values": [
+                          {
+                            "$ref": "11"
+                          },
+                          {
+                            "$id": "14",
+                            "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                            "LineThickness": 8.0,
+                            "Source": {
+                              "$id": "15",
+                              "$type": "QuestBooks.QuestLog.DefaultElements.ConnectorPoint, QuestBooks",
+                              "Size": 8.0,
+                              "CanvasPosition": "121, 228.423",
+                              "Connections": {
+                                "$id": "16",
+                                "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                "$values": [
+                                  {
+                                    "$ref": "14"
+                                  }
+                                ]
+                              }
+                            },
+                            "Destination": {
+                              "$ref": "12"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "$ref": "12"
+            },
+            {
+              "$ref": "11"
+            },
+            {
+              "$ref": "15"
+            },
+            {
+              "$ref": "14"
+            },
+            {
+              "$id": "17",
+              "$type": "QuestBooks.QuestLog.DefaultElements.ConnectorPoint, QuestBooks",
+              "Size": 8.0,
+              "CanvasPosition": "380, 240",
+              "Connections": {
+                "$id": "18",
+                "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                "$values": [
+                  {
+                    "$id": "19",
+                    "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                    "LineThickness": 8.0,
+                    "Source": {
+                      "$ref": "17"
+                    },
+                    "Destination": {
+                      "$id": "20",
+                      "$type": "QuestBooks.QuestLog.DefaultElements.ConnectorPoint, QuestBooks",
+                      "Size": 8.0,
+                      "CanvasPosition": "300, 300",
+                      "Connections": {
+                        "$id": "21",
+                        "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                        "$values": [
+                          {
+                            "$ref": "19"
+                          },
+                          {
+                            "$id": "22",
+                            "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                            "LineThickness": 8.0,
+                            "Source": {
+                              "$ref": "20"
+                            },
+                            "Destination": {
+                              "$id": "23",
+                              "$type": "QuestBooks.QuestLog.DefaultElements.ConnectorPoint, QuestBooks",
+                              "Size": 8.0,
+                              "CanvasPosition": "380, 360",
+                              "Connections": {
+                                "$id": "24",
+                                "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                "$values": [
+                                  {
+                                    "$id": "25",
+                                    "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                    "LineThickness": 8.0,
+                                    "Source": {
+                                      "$ref": "17"
+                                    },
+                                    "Destination": {
+                                      "$ref": "23"
+                                    }
+                                  },
+                                  {
+                                    "$ref": "22"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "25"
+                  }
+                ]
+              }
+            },
+            {
+              "$ref": "20"
+            },
+            {
+              "$ref": "23"
+            },
+            {
+              "$ref": "19"
+            },
+            {
+              "$ref": "25"
+            },
+            {
+              "$ref": "22"
+            }
+          ]
         },
         "EnableShifting": false
       },
       {
-        "$id": "5",
+        "$id": "26",
         "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
         "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter2",
         "Elements": {
-          "$id": "6",
+          "$id": "27",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
         "EnableShifting": false
       },
       {
-        "$id": "7",
+        "$id": "28",
         "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
         "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter3",
         "Elements": {
-          "$id": "8",
+          "$id": "29",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
         "EnableShifting": false
       },
       {
-        "$id": "9",
+        "$id": "30",
         "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
         "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter4",
         "Elements": {
-          "$id": "10",
-          "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
-          "$values": []
-        },
-        "EnableShifting": false
-      },
-      {
-        "$id": "11",
-        "$type": "QuestBooks.QuestLog.DefaultChapters.BasicChapter, QuestBooks",
-        "NameKey": "Mods.QuestBooks.VanillaQuests.TestBook1.TestChapter5",
-        "Elements": {
-          "$id": "12",
+          "$id": "31",
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },

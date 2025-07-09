@@ -20,7 +20,8 @@ namespace QuestBooks.QuestLog
     public abstract class ChapterElement
     {
         [JsonIgnore]
-        public bool TemplateInstance = false;
+        [HideInDesigner]
+        public bool TemplateInstance { get; internal set; } = false;
 
         [JsonIgnore]
         public virtual bool HasInfoPage { get => false; }
@@ -32,9 +33,13 @@ namespace QuestBooks.QuestLog
         [JsonIgnore]
         public virtual float DrawPriority { get => 0.5f; }
 
+        #region Common Methods
+
         public virtual void Update() { }
 
-        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition);
+        public virtual bool IsHovered(Vector2 mousePosition) { return false; }
+
+        public virtual bool VisibleOnCanvas() { return true; }
 
         public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered);
 
@@ -44,7 +49,11 @@ namespace QuestBooks.QuestLog
             spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, "Element does not contain an info page!", clipBounds: false);
         }
 
-        public virtual bool IsHovered(Vector2 mousePosition) { return false; }
+        #endregion
+
+        #region Designer Methods
+
+        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition);
 
         public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition)
         {
@@ -52,17 +61,23 @@ namespace QuestBooks.QuestLog
             spriteBatch.Draw(texture, mousePosition, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
-        public virtual void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea)
+        public virtual void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.MissingIcon, iconArea);
+
+        protected static void DrawSimpleIcon(SpriteBatch spriteBatch, Texture2D texture, Rectangle iconArea)
         {
-            Texture2D texture = QuestAssets.MissingIcon;
             float scale = MathHelper.Min((float)iconArea.Width / texture.Width, (float)iconArea.Height / texture.Height);
             spriteBatch.Draw(texture, iconArea.Center.ToVector2(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
         }
 
+        public virtual void OnDelete() { }
+
+        #endregion
+
+        #region Designer Attributes
+
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
         public sealed class HideInDesignerAttribute : Attribute
         {
-
         }
 
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
@@ -70,6 +85,10 @@ namespace QuestBooks.QuestLog
         {
             public Type PropertyConverterType { get; init; } = propertyConverterType;
         }
+
+        #endregion
+
+        #region Converter Implementation
 
         public static readonly FrozenDictionary<Type, Type> DefaultConverters =
             typeof(ChapterElement)
@@ -85,6 +104,8 @@ namespace QuestBooks.QuestLog
             public bool TryParse(string input, out T result);
             public string Convert(T input);
         }
+
+        #endregion
 
         #region Default Converters
 

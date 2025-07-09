@@ -123,7 +123,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                                         SelectedChapter = null;
                                         SelectedElement = null;
 
-                                        questAreaOffset = Vector2.Zero;
+                                        QuestAreaOffset = Vector2.Zero;
                                         questElementSwipeOffset = questAreaTarget.Width;
                                         SortedElements = null;
 

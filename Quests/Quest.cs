@@ -20,12 +20,7 @@ namespace QuestBooks.Quests
         /// The unique identifier of this quest. Can be anything, but cannot be used by other quests.<br/>
         /// This is used when retrieving <see cref="QuestManager.GetQuest(string)"/>.
         /// </summary>
-        public abstract string Key { get; }
-
-        /// <summary>
-        /// The texture this quest should use when drawing to the quest log canvas.
-        /// </summary>
-        public virtual string IconTexture { get => ""; }
+        public virtual string Key { get => this.GetType().Name; }
 
         /// <summary>
         /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.

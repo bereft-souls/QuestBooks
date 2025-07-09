@@ -9,9 +9,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
     {
         // Handles the display of a selected questline element
         public static ChapterElement SelectedElement { get; set; } = null;
+        public static ChapterElement HoveredElement { get; set; } = null;
 
         private static float questElementSwipeOffset = 0f;
-        private static Vector2 questAreaOffset = Vector2.Zero;
+        public static Vector2 QuestAreaOffset = Vector2.Zero;
 
         private void UpdateQuestArea(Rectangle questArea, Vector2 scaledMouse)
         {
@@ -25,7 +26,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             // Scale based on target size
             // This makes sure that no matter the scale, the canvas has the same "size" for elements to draw to
             Matrix transform = Matrix.CreateTranslation(questElementSwipeOffset, 0f, 0f) * Matrix.CreateScale(TargetScale);
-            Vector2 placementPosition = scaledMouse / TargetScale + questAreaOffset;
+            Vector2 placementPosition = scaledMouse / TargetScale + QuestAreaOffset;
 
             // Switch draw matrices
             DrawTasks.Add(sb =>
@@ -42,8 +43,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             // Sort the elements if requested
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
-            // Get the top-most element that is being hovered
+            // Get the top-most element that is being hovered            
             ChapterElement lastHoveredElement = SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition), null) ?? null;
+            HoveredElement = lastHoveredElement;
+
             if (lastHoveredElement is not null && LeftMouseJustReleased)
             {
                 ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
@@ -66,8 +69,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 // Draw elements
                 if (SortedElements is not null)
-                    foreach (var element in SortedElements)
-                        element.DrawToCanvas(sb, questAreaOffset, SelectedElement == element, lastHoveredElement == element);
+                    foreach (var element in SortedElements.Where(x => x.VisibleOnCanvas()))
+                        element.DrawToCanvas(sb, QuestAreaOffset, SelectedElement == element, lastHoveredElement == element);
 
                 sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);

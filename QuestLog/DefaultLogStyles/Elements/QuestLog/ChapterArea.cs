@@ -119,7 +119,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner) && questElementSwipeOffset == 0f)
                 {
-                    questAreaOffset = Vector2.Zero;
+                    QuestAreaOffset = Vector2.Zero;
                     int sign = SelectedBook.Chapters.IndexOf(questLine) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
                     questElementSwipeOffset = questAreaTarget.Width * sign;
                     SortedElements = null;
