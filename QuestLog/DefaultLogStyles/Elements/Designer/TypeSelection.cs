@@ -35,14 +35,31 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle chapterUp = chapterMovement.CookieCutter(new(0f, -0.5f), new(1f, 0.5f));
             Rectangle chapterDown = chapterUp.CookieCutter(new(0f, 2f), Vector2.One);
 
-            // 20x20
-            AddRectangle(bookUp, Color.Red, fill: true);
-            AddRectangle(bookDown, Color.Blue, fill: true);
-            AddRectangle(chapterUp, Color.Red, fill: true);
-            AddRectangle(chapterDown, Color.Blue, fill: true);
-
             if (SelectedBook is not null)
             {
+                int bookIndex = QuestManager.QuestBooks.IndexOf(SelectedBook);
+                bool firstBook = bookIndex == 0;
+                bool lastBook = bookIndex == QuestManager.QuestBooks.Count - 1;
+
+                AddRectangle(bookUp, Color.Red with { A = (byte)(firstBook ? 100 : 255) }, fill: true);
+                AddRectangle(bookDown, Color.Blue with { A = (byte)(lastBook ? 100 : 255) }, fill: true);
+
+                if (bookUp.Contains(MouseCanvas))
+                {
+                    MouseTooltip = "Shift Book Up";
+
+                    if (LeftMouseJustReleased && !firstBook)
+                        (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
+                }
+
+                else if (bookDown.Contains(MouseCanvas))
+                {
+                    MouseTooltip = "Shift Book Down";
+
+                    if (LeftMouseJustReleased && !lastBook)
+                        (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
+                }
+
                 AddRectangle(questBookType, Color.Gray * 0.6f, fill: true);
                 AddRectangle(questBookType, selectingBookType ? Color.Yellow : (questBookType.Contains(MouseCanvas) ? Color.LightGray : Color.Black), 3f);
 
@@ -75,6 +92,29 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (SelectedChapter is not null && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
             {
+                int chapterIndex = SelectedBook.Chapters.IndexOf(SelectedChapter);
+                bool firstChapter = chapterIndex == 0;
+                bool lastChapter = chapterIndex == SelectedBook.Chapters.Count - 1;
+
+                AddRectangle(chapterUp, Color.Red with { A = (byte)(firstChapter ? 100 : 255) }, fill: true);
+                AddRectangle(chapterDown, Color.Blue with { A = (byte)(lastChapter ? 100 : 255) }, fill: true);
+
+                if (chapterUp.Contains(MouseCanvas))
+                {
+                    MouseTooltip = "Shift Chapter Up";
+
+                    if (LeftMouseJustReleased && !firstChapter)
+                        (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
+                }
+
+                else if (chapterDown.Contains(MouseCanvas))
+                {
+                    MouseTooltip = "Shift Chapter Down";
+
+                    if (LeftMouseJustReleased && !lastChapter)
+                        (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
+                }
+
                 AddRectangle(questLineType, Color.Gray * 0.6f, fill: true);
                 AddRectangle(questLineType, selectingLineType ? Color.Yellow : (questLineType.Contains(MouseCanvas) ? Color.LightGray : Color.Black), 3f);
 
