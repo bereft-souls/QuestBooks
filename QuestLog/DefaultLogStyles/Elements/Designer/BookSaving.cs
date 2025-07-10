@@ -171,7 +171,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             DrawTasks.Add(sb =>
             {
                 Texture2D texture = saveAllHovered ? QuestAssets.ExportAllButtonHovered : QuestAssets.ExportAllButton;
-                float scale = saveAll.Width / (float)texture.Width;
+                float scale = saveAll.Width / (float)QuestAssets.ExportAllButton.Asset.Width;
                 sb.Draw(texture, saveAll.Center(), null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
                 texture = saveSelectedHovered ? QuestAssets.ExportButtonHovered : QuestAssets.ExportButton;

@@ -13,10 +13,12 @@ using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
+    [ElementTooltip("Connector")]
     public class Connector : ChapterElement
     {
         public override float DrawPriority => 0.25f;
 
+        [ElementTooltip("ConnectorThickness")]
         public float LineThickness { get; set; } = 8f;
 
         public IConnectable Source { get; set; } = null;
@@ -111,13 +113,16 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.Connector, iconArea);
     }
 
+    [ElementTooltip("ConnectorPoint")]
     public class ConnectorPoint : ChapterElement, IConnectable
     {
         // +0.01 over the Connector element, draws on top of lines
         public override float DrawPriority => 0.26f;
 
+        [ElementTooltip("ConnectorPointSize")]
         public float Size { get; set; } = 8f;
 
+        [ElementTooltip("ConnectorPointFeeds")]
         public int RequiredFeeds { get; set; } = 1;
 
         public Vector2 CanvasPosition { get; set; }

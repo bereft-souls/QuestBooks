@@ -245,7 +245,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         if (!placing)
                             AddRectangle(box, Color.White);
 
-                        MouseTooltip = elementType.FullName;
+                        MouseTooltip = $"[c/CCC018:{elementType.FullName}]";
+
+                        if (Attribute.GetCustomAttribute(elementType, typeof(TooltipAttribute)) is TooltipAttribute tooltip)
+                            MouseTooltip += $"\n{Language.GetTextValue(tooltip.LocalizationKey)}";
 
                         if (LeftMouseJustReleased)
                         {

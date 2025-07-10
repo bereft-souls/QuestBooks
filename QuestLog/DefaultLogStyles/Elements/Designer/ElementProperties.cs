@@ -36,10 +36,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static bool memberValueAccepted = false;
         private static int memberScrollOffset = 0;
 
-        private class MemberBundle(MemberInfo memberInfo, string value, Func<string> getter, Func<string, bool> setter)
+        private class MemberBundle(MemberInfo memberInfo, string value, string tooltip, Func<string> getter, Func<string, bool> setter)
         {
             public MemberInfo MemberInfo = memberInfo;
             public string Value = value;
+            public string Tooltip = tooltip;
             public Func<string> Getter = getter;
             public Func<string, bool> Setter = setter;
         }
@@ -201,8 +202,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         return false;
                     }
 
+                    string tooltipKey = Attribute.GetCustomAttribute(memberInfo, typeof(TooltipAttribute)) is TooltipAttribute tooltip ?
+                        tooltip.LocalizationKey :
+                        null;
+
                     // Set up the member modification methods
-                    elementTypeMembers[elementType].Add(memberInfo, new(memberInfo, "", elementGetter, elementSetter));
+                    elementTypeMembers[elementType].Add(memberInfo, new(memberInfo, "", tooltipKey, elementGetter, elementSetter));
                 }
 
                 // Re-get the members now that they've been added
@@ -302,10 +307,16 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     alignment: Utilities.TextAlignment.Left,
                     clipBounds: false));
 
-                // Self explanatoru
+                // Self explanatory
                 bool selected = bundle.MemberInfo == selectedMember;
 
-                if (box.Contains(mouseCanvas))
+                if (memberArea.Contains(mouseCanvas))
+                {
+                    if (bundle.Tooltip is not null)
+                        MouseTooltip = Language.GetTextValue(bundle.Tooltip);
+                }
+
+                if (typeArea.Contains(mouseCanvas))
                 {
                     // If we clicked a new member, start editing it
                     // If we clicked the same one, stop editing it
@@ -350,7 +361,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
 
                 // Hovering
-                else if (box.Contains(mouseCanvas))
+                else if (typeArea.Contains(mouseCanvas))
                     AddRectangle(typeArea, Color.LightGray);
 
                 // Standard

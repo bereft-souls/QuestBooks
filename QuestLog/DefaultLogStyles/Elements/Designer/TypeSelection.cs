@@ -46,7 +46,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (bookUp.Contains(MouseCanvas))
                 {
-                    MouseTooltip = "Shift Book Up";
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookUp");
 
                     if (LeftMouseJustReleased && !firstBook)
                         (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
@@ -54,7 +54,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 else if (bookDown.Contains(MouseCanvas))
                 {
-                    MouseTooltip = "Shift Book Down";
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookDown");
 
                     if (LeftMouseJustReleased && !lastBook)
                         (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
@@ -101,7 +101,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (chapterUp.Contains(MouseCanvas))
                 {
-                    MouseTooltip = "Shift Chapter Up";
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterUp");
 
                     if (LeftMouseJustReleased && !firstChapter)
                         (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
@@ -109,7 +109,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 else if (chapterDown.Contains(MouseCanvas))
                 {
-                    MouseTooltip = "Shift Chapter Down";
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterDown");
 
                     if (LeftMouseJustReleased && !lastChapter)
                         (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
@@ -242,7 +242,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         if (!selected)
                             AddRectangle(box, Color.White);
 
-                        MouseTooltip = type.FullName;
+                        MouseTooltip = $"[c/CCC018:{type.FullName}]";
+
+                        if (Attribute.GetCustomAttribute(type, typeof(TooltipAttribute)) is TooltipAttribute tooltip)
+                            MouseTooltip += $"\n{Language.GetTextValue(tooltip.LocalizationKey)}";
 
                         if (LeftMouseJustReleased)
                         {

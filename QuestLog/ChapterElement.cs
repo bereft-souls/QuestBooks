@@ -91,6 +91,13 @@ namespace QuestBooks.QuestLog
         {
         }
 
+        /// <summary>
+        /// Intended only for QuestBooks internal use. Simplifies the tooltip attribute to only need the last part of the key.
+        /// </summary>
+        internal sealed class ElementTooltip(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Elements.{localizationKey}")
+        {
+        }
+
         #endregion
 
         #region Converter Implementation

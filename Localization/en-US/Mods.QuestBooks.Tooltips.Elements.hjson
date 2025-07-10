@@ -1,0 +1,14 @@
+Connector:
+	'''
+	Connects two "connectable" elements on the canvas. Acts as a visual and functional bridge,
+	allowing you to check for connection criteria to modify an element's behavior.
+	(Ex. only appearing after a pre-requisite is complete.)
+	'''
+ConnectorThickness: The thickness of this connector, in pixels.
+ConnectorPoint:
+	'''
+	Acts as a way to re-route connections through a corner, or to join multiple connections in a tree.
+	Essentially a simple connector extension.
+	'''
+ConnectorPointSize: The diameter of this connector point, in pixels.
+ConnectorPointFeeds: The number of "active feeds" required by this point in order to send an outgoing active signal.
