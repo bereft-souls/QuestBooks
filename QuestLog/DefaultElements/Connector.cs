@@ -6,10 +6,7 @@ using QuestBooks.QuestLog.DefaultLogStyles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
@@ -92,7 +89,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             }
 
             if (connection is not null)
-            { 
+            {
                 Destination = connection;
 
                 Source.Connections.Add(this);

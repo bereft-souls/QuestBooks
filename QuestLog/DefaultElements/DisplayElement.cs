@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
-using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultLogStyles;
 using ReLogic.Content;
 using Terraria;
@@ -12,6 +11,7 @@ namespace QuestBooks.QuestLog.DefaultElements
     /// <summary>
     /// A simple canvas element that contains a texture to display and scale.
     /// </summary>
+    [ElementTooltip("DisplayElement")]
     public class DisplayElement : ChapterElement
     {
         // Used when the texture is not found or has not been assigned yet.
@@ -29,6 +29,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         [JsonIgnore]
         [UseConverter(typeof(TextureChecker))]
+        [ElementTooltip("DisplayTexture")]
         public string TexturePath
         {
             // Because of our custom converter, this will only ever be
@@ -42,9 +43,11 @@ namespace QuestBooks.QuestLog.DefaultElements
         /// </summary>
         public Vector2 CanvasPosition { get; set; }
 
+        [ElementTooltip("DisplayScale")]
         public float Scale { get; set; } = 1f;
 
         [UseConverter(typeof(AngleConverter))]
+        [ElementTooltip("DisplayRotation")]
         public float Rotation { get; set; } = 0f;
 
         public override bool IsHovered(Vector2 mousePosition)

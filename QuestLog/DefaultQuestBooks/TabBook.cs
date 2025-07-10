@@ -1,12 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultLogStyles;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {

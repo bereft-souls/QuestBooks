@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
-using QuestBooks.Quests;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;

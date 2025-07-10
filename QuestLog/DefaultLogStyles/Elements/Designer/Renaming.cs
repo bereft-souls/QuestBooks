@@ -37,7 +37,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     typingChapterName = false;
                 }
             }
-            
+
             if (bookNameArea.Contains(MouseCanvas) && SelectedBook is not null)
             {
                 LockMouse();

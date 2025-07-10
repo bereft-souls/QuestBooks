@@ -54,7 +54,11 @@ namespace QuestBooks.QuestLog
         [JsonIgnore]
         public virtual bool Complete => Chapters.All(x => x.Complete);
 
-        public virtual void Update() { }
+        public virtual void Update()
+        {
+            foreach (BookChapter chapter in Chapters)
+                chapter.Update();
+        }
 
         /// <summary>
         /// Performs the default drawing behavior of for this <see cref="TabBook"/>. Assigns colors and calls <see cref="DrawBasicBook(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.

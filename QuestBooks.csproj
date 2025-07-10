@@ -8,6 +8,9 @@
 	  <TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
+	  <AdditionalFiles Remove="Localization\en-US\Mods.QuestBooks.Tooltips.Library.hjson" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Folder Include="Quests\VanillaBooks\" />
 	</ItemGroup>
 	<ItemGroup>

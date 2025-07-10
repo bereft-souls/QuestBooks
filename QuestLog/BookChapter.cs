@@ -81,7 +81,7 @@ namespace QuestBooks.QuestLog
         }
 
         /// <summary>
-        /// Performs the default drawing behavior of for this <see cref="BasicChapter"/>. Assigns colors and calls <see cref="DrawBasicChapter(SpriteBatch, string, Color, Color, Color, Rectangle, float)(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.
+        /// Performs the default drawing behavior of for this <see cref="ScrollChapter"/>. Assigns colors and calls <see cref="DrawBasicChapter(SpriteBatch, string, Color, Color, Color, Rectangle, float)(SpriteBatch, string, Color, Color, Color, Rectangle, float)"/>.
         /// </summary>
         public abstract void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered);
 

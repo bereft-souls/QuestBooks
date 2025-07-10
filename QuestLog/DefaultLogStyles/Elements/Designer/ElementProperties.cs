@@ -1,15 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
-using QuestBooks.Systems;
 using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -339,11 +335,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Modify the selected member
                 if (selected)
                 {
-                   DrawTasks.Add(_ =>
-                    {
-                        PlayerInput.WritingText = true;
-                        Main.instance.HandleIME();
-                    });
+                    DrawTasks.Add(_ =>
+                     {
+                         PlayerInput.WritingText = true;
+                         Main.instance.HandleIME();
+                     });
 
                     string value = bundle.Value;
                     string newValue = Main.GetInputText(value);

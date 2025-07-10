@@ -3,13 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
 using QuestBooks.Quests;
-using ReLogic.Content;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
@@ -107,7 +104,8 @@ namespace QuestBooks.QuestLog
             .GetNestedTypes()
             .Where(t => t.GetInterfaces().Length != 0)
             .Where(t => Attribute.GetCustomAttribute(t, typeof(NonDefaultAttribute)) is null)
-            .Select(t => {
+            .Select(t =>
+            {
                 Type conversionType = t.GetInterfaces()[0].GetGenericArguments()[0];
                 return new KeyValuePair<Type, Type>(conversionType, t);
             })

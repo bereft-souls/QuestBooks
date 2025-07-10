@@ -40,7 +40,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                             QuestLoader.SaveQuestBook(book, filePath);
                         }
 
-                        Main.NewText("Quest books exported!");
+                        Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.MultipleBooksExported"));
                     }
                 }
             }
@@ -58,7 +58,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (file.IsOk)
                     {
                         QuestLoader.SaveQuestBook(SelectedBook, file.Path);
-                        Main.NewText("Quest book saved!");
+                        Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.SingleBookExported"));
                     }
                 }
             }
@@ -111,7 +111,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                                 var book = QuestLoader.LoadQuestBook(file);
                                 if (book is not QuestBook questBook)
                                 {
-                                    Main.NewText($"Unable to parse file into BasicQuestBook: {file}");
+                                    Main.NewText(Language.GetTextValueWith("Mods.QuestBooks.ChatMessages.ParseError", file));
                                     continue;
                                 }
 
@@ -137,7 +137,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                             }
 
                             if (cleared)
-                                Main.NewText("Quest books loaded!");
+                                Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.MultipleBooksImported"));
                         }
                     }
                 }
@@ -158,11 +158,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         {
                             var book = QuestLoader.LoadQuestBook(file.Path);
                             QuestManager.QuestBooks.Add(book);
-                            Main.NewText("Quest book loaded!");
+                            Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.SingleBookImported"));
                         }
                         catch
                         {
-                            Main.NewText($"Unable to parse file into BasicQuestBook: {file}");
+                            Main.NewText(Language.GetTextValueWith("Mods.QuestBooks.ChatMessages.ParseError", file));
                         }
                     }
                 }

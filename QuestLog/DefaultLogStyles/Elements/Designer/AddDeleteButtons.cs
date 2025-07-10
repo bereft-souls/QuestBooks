@@ -52,7 +52,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Add new chapter with placeholder localization key
                 if (LeftMouseJustReleased && SelectedBook is not null)
                 {
-                    BasicChapter newLine = new() { NameKey = $"Mods.{QuestBooksMod.DesignerMod.Name}.Chapter{SelectedBook.Chapters.Count + 1}" };
+                    ScrollChapter newLine = new() { NameKey = $"Mods.{QuestBooksMod.DesignerMod.Name}.Chapter{SelectedBook.Chapters.Count + 1}" };
                     SelectedBook.Chapters.Add(newLine);
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }

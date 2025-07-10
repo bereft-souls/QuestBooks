@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
@@ -15,12 +11,6 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
 
         public string NameKey;
 
-        public override void Update()
-        {
-            foreach (BookChapter questLine in Chapters)
-                questLine.Update();
-        }
-
         public override void CloneTo(QuestBook newInstance)
         {
             if (newInstance is BasicQuestBook book)
@@ -28,5 +18,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
 
             base.CloneTo(newInstance);
         }
+
+        internal sealed class BookTooltip(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Library.{localizationKey}");
     }
 }
