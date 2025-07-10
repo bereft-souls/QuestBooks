@@ -44,6 +44,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public float Scale { get; set; } = 1f;
 
+        [UseConverter(typeof(AngleConverter))]
         public float Rotation { get; set; } = 0f;
 
         public override bool IsHovered(Vector2 mousePosition)
@@ -56,19 +57,20 @@ namespace QuestBooks.QuestLog.DefaultElements
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
             Texture2D texture = _texture.Value;
+            Vector2 drawPos = CanvasPosition - canvasViewOffset;
 
             if (texture == DefaultAsset.Value)
             {
                 Texture2D outline = DefaultOutlineAsset.Value;
 
                 if (selected)
-                    spriteBatch.Draw(outline, CanvasPosition, null, Color.Yellow, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(outline, drawPos, null, Color.Yellow, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
 
                 else if (hovered)
-                    spriteBatch.Draw(outline, CanvasPosition, null, Color.White, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(outline, drawPos, null, Color.White, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
             }
 
-            spriteBatch.Draw(texture, CanvasPosition, null, Color.White, Rotation, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, drawPos, null, Color.White, Rotation, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 
         public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)

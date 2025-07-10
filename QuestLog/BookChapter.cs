@@ -64,6 +64,16 @@ namespace QuestBooks.QuestLog
         /// </summary>
         public virtual bool EnableShifting { get; set; } = false;
 
+        /// <summary>
+        /// Determines the center of the view area to jump to when selecting a draggable chapter.
+        /// </summary>
+        public virtual Vector2 ViewAnchor { get; set; } = Vector2.Zero;
+
+        /// <summary>
+        /// Determines the maximum (bottom right) view window for a draggable chapter.
+        /// </summary>
+        public virtual Vector2 MaxViewPoint { get; set; } = Vector2.Zero;
+
         public virtual void Update()
         {
             foreach (ChapterElement questElement in Elements)

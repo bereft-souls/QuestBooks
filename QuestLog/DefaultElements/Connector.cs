@@ -28,7 +28,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             Color color =
                 selected ? Color.Red :
                 hovered ? Color.Yellow :
-                Source.ConnectionActive() ? Color.White : Color.Gray;
+                Source.ConnectionActive(Destination) || BasicQuestLogStyle.UseDesigner ? Color.White : Color.DimGray;
 
             DrawConnection(spriteBatch, Source.ConnectorAnchor, Destination.ConnectorAnchor, color);
         }
@@ -38,6 +38,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             if (!BasicQuestLogStyle.UseDesigner)
                 return false;
 
+            mousePosition -= BasicQuestLogStyle.QuestAreaOffset;
             Vector2 lineAngle = Destination.ConnectorAnchor - Source.ConnectorAnchor;
             Vector2 mouseAngle = lineAngle.RotatedBy(-MathHelper.PiOver2);
 
@@ -46,21 +47,21 @@ namespace QuestBooks.QuestLog.DefaultElements
                 return false;
 
             Rectangle span = CenteredRectangle(Source.ConnectorAnchor + (lineAngle * 0.5f), new(Math.Abs(lineAngle.X), Math.Abs(lineAngle.Y)));
-            return span.Contains(mousePosition.ToPoint());
+            return span.CreateMargin((int)(LineThickness * 0.5f)).Contains(mousePosition.ToPoint());
         }
 
-        public override bool VisibleOnCanvas() => Source.ConnectionVisible();
+        public override bool VisibleOnCanvas() => Source.ConnectionVisible(Destination) || BasicQuestLogStyle.UseDesigner;
 
-        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition)
+        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             if (Source is null)
             {
-                spriteBatch.Draw(QuestAssets.Connector, mousePosition, Color.White);
+                spriteBatch.Draw(QuestAssets.Connector, mousePosition - canvasViewOffset, Color.White);
                 return;
             }
 
             Vector2 source = Source.ConnectorAnchor;
-            Vector2 destination = BasicQuestLogStyle.HoveredElement is IConnectable connection ? connection.ConnectorAnchor : mousePosition;
+            Vector2 destination = BasicQuestLogStyle.HoveredElement is IConnectable connection ? connection.ConnectorAnchor : mousePosition - canvasViewOffset;
             DrawConnection(spriteBatch, source, destination, Color.LightGray);
         }
 
@@ -117,29 +118,31 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public float Size { get; set; } = 8f;
 
+        public int RequiredFeeds { get; set; } = 1;
+
         public Vector2 CanvasPosition { get; set; }
 
         public Vector2 ConnectorAnchor => CanvasPosition - BasicQuestLogStyle.QuestAreaOffset;
 
         public List<Connector> Connections { get; set; } = [];
 
-        public bool ConnectionVisible() => Connections.Any(x => x.Destination == this && x.Source.ConnectionVisible());
+        public bool ConnectionVisible(IConnectable destination) => BasicQuestLogStyle.UseDesigner || (destination != this && Connections.Any(x => x.Destination == this && x.Source.ConnectionVisible(destination)));
 
-        public bool ConnectionActive() => Connections.Any(x => x.Destination == this && x.Source.ConnectionActive());
+        public bool ConnectionActive(IConnectable destination) => destination != this && Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(destination)) >= RequiredFeeds;
 
         public override bool IsHovered(Vector2 mousePosition)
         {
             return BasicQuestLogStyle.UseDesigner && CenteredRectangle(CanvasPosition, new Vector2(Size)).Contains(mousePosition.ToPoint());
         }
 
-        public override bool VisibleOnCanvas() => ConnectionVisible();
+        public override bool VisibleOnCanvas() => BasicQuestLogStyle.UseDesigner || Connections.Any(x => x.VisibleOnCanvas());
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
         {
             Color color =
                 selected ? Color.Red :
                 hovered ? Color.Yellow :
-                ConnectionActive() ? Color.White : Color.Gray;
+                Connections.Where(x => x.Destination == this).All(x => x.Source.ConnectionActive(x.Destination)) || BasicQuestLogStyle.UseDesigner ? Color.White : Color.DimGray;
 
             spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
@@ -158,11 +161,18 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
+        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
+        {
+            Texture2D texture = QuestAssets.ConnectorPoint;
+            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 230 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+        }
+
         public override void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.ConnectorPoint, iconArea);
 
         public override void OnDelete()
         {
-            foreach (var connection in Connections)
+            // Clone the collection to allow modified enumeration
+            foreach (var connection in Connections.ToArray())
             {
                 BasicQuestLogStyle.SelectedChapter.Elements.Remove(connection);
                 connection.OnDelete();
@@ -177,8 +187,8 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public List<Connector> Connections { get; set; }
 
-        public bool ConnectionVisible();
+        public bool ConnectionVisible(IConnectable destination);
 
-        public bool ConnectionActive();
+        public bool ConnectionActive(IConnectable destination);
     }
 }

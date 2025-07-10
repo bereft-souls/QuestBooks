@@ -119,12 +119,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner) && questElementSwipeOffset == 0f)
                 {
-                    QuestAreaOffset = Vector2.Zero;
                     int sign = SelectedBook.Chapters.IndexOf(questLine) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
                     questElementSwipeOffset = questAreaTarget.Width * sign;
                     SortedElements = null;
 
                     SelectedChapter = SelectedChapter != questLine ? questLine : null;
+                    QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor - defaultAnchor : Vector2.Zero;
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 }
 

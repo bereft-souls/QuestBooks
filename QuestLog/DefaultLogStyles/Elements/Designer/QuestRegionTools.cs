@@ -20,6 +20,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static void HandleQuestRegionTools()
         {
             Rectangle enableShifting = LogArea.CookieCutter(new(0.12f, -1.1f), new(0.069f, 0.075f));
+            Rectangle showBounds = enableShifting.CookieCutter(new(0f, -2.3f), Vector2.One);
             Rectangle showBackdrop = enableShifting.CookieCutter(new(2.2f, 0f), Vector2.One);
             Rectangle showGrid = showBackdrop.CookieCutter(new(2.2f, 0f), Vector2.One);
             Rectangle snapGrid = showGrid.CookieCutter(new(2.2f, 0f), Vector2.One);
@@ -30,6 +31,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle gridDown = gridUp.CookieCutter(new(0f, 2f), Vector2.One);
 
             bool enableShiftingHovered = false;
+            bool showBoundsHovered = false;
             bool showBackdropHovered = false;
             bool showGridHovered = false;
             bool snapGridHovered = false;
@@ -45,7 +47,25 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftingCanvas");
 
                 if (LeftMouseJustReleased && SelectedChapter is not null)
+                {
                     SelectedChapter.EnableShifting = !SelectedChapter.EnableShifting;
+
+                    if (SelectedChapter.EnableShifting)
+                        SelectedChapter.ViewAnchor = defaultAnchor;
+
+                    else
+                        QuestAreaOffset = Vector2.Zero;
+                }
+            }
+
+            if (SelectedChapter is not null && showBounds.Contains(MouseCanvas))
+            {
+                LockMouse();
+                showBoundsHovered = true;
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShowBounds");
+
+                if (LeftMouseJustReleased)
+                    BasicQuestLogStyle.showBounds = !BasicQuestLogStyle.showBounds;
             }
 
             if (showBackdrop.Contains(MouseCanvas))
@@ -139,6 +159,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 Rectangle gridText = gridSize.CookieCutter(new(0.5f, 0.2f), new(0.75f, 0.75f));
                 sb.DrawOutlinedStringInRectangle(gridText, FontAssets.DeathText.Value, Color.White, Color.Black, BasicQuestLogStyle.gridSize.ToString(), clipBounds: false);
+
+                if (active && SelectedChapter.EnableShifting)
+                    sb.DrawRectangle(showBounds, showBoundsHovered ? Color.Red : BasicQuestLogStyle.showBounds ? Color.Yellow : Color.White, fill: true);
             });
 
 
@@ -186,7 +209,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.GraphicsDevice.ScissorRectangle = elementTypeSelection;
                     raster.ScissorTestEnable = true;
 
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+                    sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
                 });
 
                 foreach (var (box, elementType) in elementSelections)

@@ -15,7 +15,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       },
       {
         "$id": "5",
@@ -26,7 +28,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       },
       {
         "$id": "7",
@@ -37,7 +41,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       },
       {
         "$id": "9",
@@ -48,7 +54,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       },
       {
         "$id": "11",
@@ -59,7 +67,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       },
       {
         "$id": "13",
@@ -70,7 +80,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       },
       {
         "$id": "15",
@@ -81,7 +93,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       },
       {
         "$id": "17",
@@ -92,7 +106,9 @@
           "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
           "$values": []
         },
-        "EnableShifting": false
+        "EnableShifting": false,
+        "ViewAnchor": "0, 0",
+        "MaxViewPoint": "0, 0"
       }
     ]
   }

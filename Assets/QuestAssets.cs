@@ -71,6 +71,8 @@ namespace QuestBooks.Assets
 
         public static LazyTexture ShiftingCanvas { get; } = new("Designer/ShiftingCanvas", immediateLoad: false);
         public static LazyTexture ShiftingCanvasHovered { get; } = new("Designer/ShiftingCanvasHovered", immediateLoad: false);
+        public static LazyTexture CanvasCorner { get; } = new("Designer/CanvasCorner", immediateLoad: false);
+        public static LazyTexture CanvasCenter { get; } = new("Designer/CanvasCenter", immediateLoad: false);
 
         public static LazyTexture ToggleGrid { get; } = new("Designer/ToggleGrid", immediateLoad: false);
         public static LazyTexture ToggleGridHovered { get; } = new("Designer/ToggleGridHovered", immediateLoad: false);

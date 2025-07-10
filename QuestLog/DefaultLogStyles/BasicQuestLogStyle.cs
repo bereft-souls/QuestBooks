@@ -102,7 +102,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private static bool swipingBetweenInfoPages = false;
         private static float questInfoSwipeOffset = 0f;
-        private const float FadeDesignation = 0.025f;
+        private const float FadeDesignation = 0.024f;
 
         #region Element Referentials
 

@@ -55,10 +55,10 @@ namespace QuestBooks.QuestLog
 
         public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition);
 
-        public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition)
+        public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             Texture2D texture = QuestAssets.MissingIcon;
-            spriteBatch.Draw(texture, mousePosition, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
         public virtual void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.MissingIcon, iconArea);
@@ -86,6 +86,11 @@ namespace QuestBooks.QuestLog
             public Type PropertyConverterType { get; init; } = propertyConverterType;
         }
 
+        [AttributeUsage(AttributeTargets.Class)]
+        private sealed class NonDefaultAttribute : Attribute
+        {
+        }
+
         #endregion
 
         #region Converter Implementation
@@ -94,10 +99,12 @@ namespace QuestBooks.QuestLog
             typeof(ChapterElement)
             .GetNestedTypes()
             .Where(t => t.GetInterfaces().Length != 0)
+            .Where(t => Attribute.GetCustomAttribute(t, typeof(NonDefaultAttribute)) is null)
             .Select(t => {
                 Type conversionType = t.GetInterfaces()[0].GetGenericArguments()[0];
                 return new KeyValuePair<Type, Type>(conversionType, t);
-            }).ToFrozenDictionary();
+            })
+            .ToFrozenDictionary();
 
         public interface IMemberConverter<T>
         {
@@ -135,6 +142,20 @@ namespace QuestBooks.QuestLog
         {
             public string Convert(bool input) => input.ToString();
             public bool TryParse(string input, out bool result) => bool.TryParse(input, out result);
+        }
+
+        [NonDefault]
+        public class AngleConverter : IMemberConverter<float>
+        {
+            public string Convert(float input) => MathHelper.ToDegrees(input).ToString();
+            public bool TryParse(string input, out float result)
+            {
+                if (!float.TryParse(input, out result))
+                    return false;
+
+                result = MathHelper.ToRadians(result);
+                return true;
+            }
         }
 
         #endregion

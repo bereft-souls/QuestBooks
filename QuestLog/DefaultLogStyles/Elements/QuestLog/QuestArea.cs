@@ -13,6 +13,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private static float questElementSwipeOffset = 0f;
         public static Vector2 QuestAreaOffset = Vector2.Zero;
+        private static Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint;
+
+        private static Vector2? cachedRightClick = null;
+        private static Vector2 cachedOffset = Vector2.Zero;
 
         private void UpdateQuestArea(Rectangle questArea, Vector2 scaledMouse)
         {
@@ -20,8 +24,33 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (UseDesigner)
                 HandleQuestRegionTools();
 
+            bool mouseInBounds = questArea.Contains(scaledMouse.ToPoint());
             SwitchTargets(questAreaTarget, ContentBlending);
             DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Transparent));
+
+            if ((mouseInBounds || cachedRightClick is not null) && (SelectedChapter?.EnableShifting ?? false))
+            {
+                if (RightMouseJustPressed)
+                {
+                    cachedRightClick = scaledMouse;
+                    cachedOffset = QuestAreaOffset;
+                }
+
+                else if (RightMouseHeld)
+                    QuestAreaOffset = cachedOffset - ((scaledMouse - (cachedRightClick ?? Vector2.Zero)) / TargetScale);
+
+                else if (RightMouseJustReleased)
+                {
+                    cachedRightClick = null;
+                    cachedOffset = Vector2.Zero;
+                }
+            }
+
+            if (SelectedChapter?.EnableShifting ?? false)
+            {
+                QuestAreaOffset = new(float.Min(QuestAreaOffset.X, maxQuestAreaOffset.X), float.Min(QuestAreaOffset.Y, maxQuestAreaOffset.Y));
+                QuestAreaOffset = new(float.Max(QuestAreaOffset.X, 0f), float.Max(QuestAreaOffset.Y, 0f));
+            }
 
             // Scale based on target size
             // This makes sure that no matter the scale, the canvas has the same "size" for elements to draw to
@@ -44,10 +73,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
             // Get the top-most element that is being hovered            
-            ChapterElement lastHoveredElement = SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition), null) ?? null;
+            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition), null) ?? null : null;
             HoveredElement = lastHoveredElement;
 
-            if (lastHoveredElement is not null && LeftMouseJustReleased)
+            if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
             {
                 ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
                 swipingBetweenInfoPages = element is not null && SelectedElement is not null;
@@ -98,7 +127,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             // This is things like the placement preview and actually placing elements
             if (UseDesigner)
-                DesignerPostQuestRegion(placementPosition, questArea.Contains(scaledMouse.ToPoint()));
+                DesignerPostQuestRegion(placementPosition, mouseInBounds);
 
             SwitchTargets(null);
         }
