@@ -37,27 +37,30 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (SelectedBook is not null)
             {
-                int bookIndex = QuestManager.QuestBooks.IndexOf(SelectedBook);
-                bool firstBook = bookIndex == 0;
-                bool lastBook = bookIndex == QuestManager.QuestBooks.Count - 1;
-
-                AddRectangle(bookUp, Color.Red with { A = (byte)(firstBook ? 100 : 255) }, fill: true);
-                AddRectangle(bookDown, Color.Blue with { A = (byte)(lastBook ? 100 : 255) }, fill: true);
-
-                if (bookUp.Contains(MouseCanvas))
+                if (SelectedElement is null)
                 {
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookUp");
+                    int bookIndex = QuestManager.QuestBooks.IndexOf(SelectedBook);
+                    bool firstBook = bookIndex == 0;
+                    bool lastBook = bookIndex == QuestManager.QuestBooks.Count - 1;
 
-                    if (LeftMouseJustReleased && !firstBook)
-                        (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
-                }
+                    AddRectangle(bookUp, Color.Red with { A = (byte)(firstBook ? 100 : 255) }, fill: true);
+                    AddRectangle(bookDown, Color.Blue with { A = (byte)(lastBook ? 100 : 255) }, fill: true);
 
-                else if (bookDown.Contains(MouseCanvas))
-                {
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookDown");
+                    if (bookUp.Contains(MouseCanvas))
+                    {
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookUp");
 
-                    if (LeftMouseJustReleased && !lastBook)
-                        (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
+                        if (LeftMouseJustReleased && !firstBook)
+                            (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
+                    }
+
+                    else if (bookDown.Contains(MouseCanvas))
+                    {
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookDown");
+
+                        if (LeftMouseJustReleased && !lastBook)
+                            (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
+                    }
                 }
 
                 AddRectangle(questBookType, Color.Gray * 0.6f, fill: true);
@@ -92,27 +95,30 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (SelectedChapter is not null && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
             {
-                int chapterIndex = SelectedBook.Chapters.IndexOf(SelectedChapter);
-                bool firstChapter = chapterIndex == 0;
-                bool lastChapter = chapterIndex == SelectedBook.Chapters.Count - 1;
-
-                AddRectangle(chapterUp, Color.Red with { A = (byte)(firstChapter ? 100 : 255) }, fill: true);
-                AddRectangle(chapterDown, Color.Blue with { A = (byte)(lastChapter ? 100 : 255) }, fill: true);
-
-                if (chapterUp.Contains(MouseCanvas))
+                if (SelectedElement is null)
                 {
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterUp");
+                    int chapterIndex = SelectedBook.Chapters.IndexOf(SelectedChapter);
+                    bool firstChapter = chapterIndex == 0;
+                    bool lastChapter = chapterIndex == SelectedBook.Chapters.Count - 1;
 
-                    if (LeftMouseJustReleased && !firstChapter)
-                        (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
-                }
+                    AddRectangle(chapterUp, Color.Red with { A = (byte)(firstChapter ? 100 : 255) }, fill: true);
+                    AddRectangle(chapterDown, Color.Blue with { A = (byte)(lastChapter ? 100 : 255) }, fill: true);
 
-                else if (chapterDown.Contains(MouseCanvas))
-                {
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterDown");
+                    if (chapterUp.Contains(MouseCanvas))
+                    {
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterUp");
 
-                    if (LeftMouseJustReleased && !lastChapter)
-                        (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
+                        if (LeftMouseJustReleased && !firstChapter)
+                            (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
+                    }
+
+                    else if (chapterDown.Contains(MouseCanvas))
+                    {
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterDown");
+
+                        if (LeftMouseJustReleased && !lastChapter)
+                            (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
+                    }
                 }
 
                 AddRectangle(questLineType, Color.Gray * 0.6f, fill: true);
