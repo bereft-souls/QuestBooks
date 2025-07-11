@@ -3,6 +3,10 @@ using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {
+    /// <summary>
+    /// A simple quest book that provides a localization key for a display name.<br/>
+    /// This class is abstract and should be inherited.
+    /// </summary>
     public abstract class BasicQuestBook : QuestBook
     {
         public override List<BookChapter> Chapters { get; set; } = [];

@@ -42,8 +42,13 @@ namespace QuestBooks.QuestLog
         {
             get
             {
-                float applicableCount = Chapters.Count(x => !float.IsNaN(x.Progress));
-                return applicableCount > 0 ? Chapters.Where(x => !float.IsNaN(x.Progress)).Sum(x => x.Progress) / applicableCount : float.NaN;
+                int applicableCount = 0;
+                float totalProgress = Chapters
+                    .Where(x => !float.IsNaN(x.Progress))
+                    .Select(x => { applicableCount++; return x; })
+                    .Sum(x => x.Progress);
+
+                return applicableCount > 0 ? totalProgress / applicableCount : float.NaN;
             }
         }
 

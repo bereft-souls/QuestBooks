@@ -38,7 +38,19 @@ namespace QuestBooks.QuestLog
         /// Pulls from <see cref="QuestList"/>.
         /// </summary>
         [JsonIgnore]
-        public virtual float Progress => QuestList.Any() ? QuestList.Count(q => q.Completed) / QuestList.Count() : float.NaN;
+        public virtual float Progress
+        {
+            get
+            {
+                int applicableCount = 0;
+                float totalComplete = QuestList
+                    .Select(x => { applicableCount++; return x; })
+                    .Where(x => x.Completed)
+                    .Count();
+
+                return applicableCount > 0 ? totalComplete / applicableCount : float.NaN;
+            }
+        }
 
         /// <summary>
         /// Whether or not all quests in this questline are complete.<br/>
