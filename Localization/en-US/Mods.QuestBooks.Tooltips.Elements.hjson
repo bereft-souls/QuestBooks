@@ -13,7 +13,8 @@ ConnectorPoint:
 ConnectorPointSize: The diameter of this connector point, in pixels.
 ConnectorPointFeeds: The number of "active feeds" required by this point in order to send an outgoing active signal.
 DisplayElement: Displays a simple texture on the canvas.
-OverlayElement: Display a simple texture on the canvas that does NOT shift with moving canvases.
+OverlayElement: Displays a simple texture on top of the canvas that does NOT shift with moving canvases.
+UnderlayElement: Displays a simple texture at the back of the canvas that does NOT shift with moving canvases.
 DisplayTexture: The path of the texture to display.
 DisplayScale: The scale to display the texture at.
 DisplayRotation: The rotation of the texture, in degrees.

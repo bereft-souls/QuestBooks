@@ -14,6 +14,8 @@ namespace QuestBooks.QuestLog.DefaultElements
     [ElementTooltip("OverlayElement")]
     public class OverlayElement : ChapterElement
     {
+        public override float DrawPriority => 0.9f;
+
         // Used when the texture is not found or has not been assigned yet.
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Elements/QuestionMark";
         private const string DefaultOutline = "QuestBooks/Assets/Textures/Elements/QuestionMarkOutline";
@@ -53,7 +55,8 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override bool IsHovered(Vector2 mousePosition)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
-            return BasicQuestLogStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains(mousePosition.ToPoint());
+            return BasicQuestLogStyle.UseDesigner &&
+                CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - BasicQuestLogStyle.QuestAreaOffset).ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
