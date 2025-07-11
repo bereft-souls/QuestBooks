@@ -66,6 +66,16 @@ ShiftingCanvas:
 	[c/CCC018:Enable Shifting Canvas]
 	Toggles whether this chapter can be scrolled around via click-and-drag/scrolling.
 	'''
+MoveBounds:
+	'''
+	[c/CCC018:Move Bounds]
+	Toggles the ability to move the canvas bounds.
+	'''
+ShowMidpoint:
+	'''
+	[c/CCC018:Show Center]
+	Toggles whether to show the center of the canvas, even if moving bounds is not enabled.
+	'''
 ToggleBackdrop:
 	'''
 	[c/CCC018:Show Backdrop]

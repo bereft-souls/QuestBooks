@@ -148,15 +148,8 @@ namespace QuestBooks.QuestLog.DefaultElements
                 hovered ? Color.Yellow :
                 Connections.Where(x => x.Destination == this).All(x => x.Source.ConnectionActive(x.Destination)) || BasicQuestLogStyle.UseDesigner ? Color.White : Color.DimGray;
 
-            spriteBatch.End();
-            spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-            spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
-
             Texture2D texture = QuestAssets.ConnectorPoint;
             spriteBatch.Draw(texture, CanvasPosition - canvasViewOffset, null, color, 0f, texture.Size() * 0.5f, Size / texture.Width, SpriteEffects.None, 0f);
-            spriteBatch.End();
-
-            spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
         }
 
         public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)

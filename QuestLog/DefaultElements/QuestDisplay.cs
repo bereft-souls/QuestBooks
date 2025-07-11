@@ -29,10 +29,10 @@ namespace QuestBooks.QuestLog.DefaultElements
         public int IncomingFeeds => Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(this));
 
         [ElementTooltip("DisplayPrerequisites")]
-        public int DisplayPrerequisites { get; set; } = 0;
+        public int DisplayFeeds { get; set; } = 0;
 
         [ElementTooltip("UnlockPrerequisites")]
-        public int UnlockPrerequisites { get; set; } = 0;
+        public int UnlockFeeds { get; set; } = 0;
 
         // Used when the texture is not found or has not been assigned yet.
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Quests/Medium";
@@ -100,8 +100,8 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public List<Connector> Connections { get; set; } = [];
 
-        public override bool VisibleOnCanvas() => IncomingFeeds >= DisplayPrerequisites || BasicQuestLogStyle.UseDesigner;
-        public bool Unlocked() => IncomingFeeds >= UnlockPrerequisites;
+        public override bool VisibleOnCanvas() => IncomingFeeds >= DisplayFeeds || BasicQuestLogStyle.UseDesigner;
+        public bool Unlocked() => IncomingFeeds >= UnlockFeeds;
         public bool Completed() => Quest.Completed;
 
         public bool CompleteConnection(IConnectable source) => VisibleOnCanvas();
@@ -127,7 +127,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             if (selected)
                 DrawOutline(spriteBatch, Color.Yellow);
 
-            else if (hovered)
+            else if (hovered && HasInfoPage)
                 DrawOutline(spriteBatch, Color.LightGray);
 
             if (BasicQuestLogStyle.UseDesigner)
@@ -206,15 +206,18 @@ namespace QuestBooks.QuestLog.DefaultElements
             DrawTexture(spriteBatch, _completedTexture.Value, Color.White);
         }
 
-        protected void DrawTexture(SpriteBatch spriteBatch, Texture2D texture, Color color) =>
-            spriteBatch.Draw(texture, CanvasPosition - BasicQuestLogStyle.QuestAreaOffset, null, color, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+        protected void DrawTexture(SpriteBatch spriteBatch, Texture2D texture, Color color)
+        {
+            Vector2 drawPos = CanvasPosition - BasicQuestLogStyle.QuestAreaOffset;
+            spriteBatch.Draw(texture, drawPos, null, color, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+        }
 
         public override void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.MediumQuest, iconArea);
 
         public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             Texture2D texture = DefaultAsset.Value;
-            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 220 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
         public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)

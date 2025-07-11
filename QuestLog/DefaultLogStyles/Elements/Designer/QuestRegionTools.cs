@@ -20,7 +20,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static void HandleQuestRegionTools()
         {
             Rectangle enableShifting = LogArea.CookieCutter(new(0.12f, -1.1f), new(0.069f, 0.075f));
-            Rectangle showBounds = enableShifting.CookieCutter(new(0f, -2.3f), Vector2.One);
+            Rectangle moveBounds = enableShifting.CookieCutter(new(0f, -2.3f), Vector2.One);
+            Rectangle showMidpoint = moveBounds.CookieCutter(new(2.2f, 0f), Vector2.One);
             Rectangle showBackdrop = enableShifting.CookieCutter(new(2.2f, 0f), Vector2.One);
             Rectangle showGrid = showBackdrop.CookieCutter(new(2.2f, 0f), Vector2.One);
             Rectangle snapGrid = showGrid.CookieCutter(new(2.2f, 0f), Vector2.One);
@@ -31,7 +32,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle gridDown = gridUp.CookieCutter(new(0f, 2f), Vector2.One);
 
             bool enableShiftingHovered = false;
-            bool showBoundsHovered = false;
+            bool moveBoundsHovered = false;
+            bool showMidpointHovered = false;
             bool showBackdropHovered = false;
             bool showGridHovered = false;
             bool snapGridHovered = false;
@@ -58,14 +60,27 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
             }
 
-            if (SelectedChapter is not null && showBounds.Contains(MouseCanvas))
+            if (SelectedChapter is not null)
             {
-                LockMouse();
-                showBoundsHovered = true;
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShowBounds");
+                if (moveBounds.Contains(MouseCanvas))
+                {
+                    LockMouse();
+                    moveBoundsHovered = true;
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.MoveBounds");
 
-                if (LeftMouseJustReleased)
-                    BasicQuestLogStyle.showBounds = !BasicQuestLogStyle.showBounds;
+                    if (LeftMouseJustReleased)
+                        BasicQuestLogStyle.moveBounds = !BasicQuestLogStyle.moveBounds;
+                }
+
+                else if (showMidpoint.Contains(MouseCanvas))
+                {
+                    LockMouse();
+                    showMidpointHovered = true;
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShowMidpoint");
+
+                    if (LeftMouseJustReleased)
+                        BasicQuestLogStyle.showMidpoint = !BasicQuestLogStyle.showMidpoint;
+                }
             }
 
             if (showBackdrop.Contains(MouseCanvas))
@@ -161,7 +176,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 sb.DrawOutlinedStringInRectangle(gridText, FontAssets.DeathText.Value, Color.White, Color.Black, BasicQuestLogStyle.gridSize.ToString(), clipBounds: false);
 
                 if (active && SelectedChapter.EnableShifting)
-                    sb.DrawRectangle(showBounds, showBoundsHovered ? Color.Red : BasicQuestLogStyle.showBounds ? Color.Yellow : Color.White, fill: true);
+                {
+                    sb.DrawRectangle(moveBounds, moveBoundsHovered ? Color.Red : BasicQuestLogStyle.moveBounds ? Color.Yellow : Color.White, fill: true);
+                    sb.DrawRectangle(showMidpoint, showMidpointHovered ? Color.Red : BasicQuestLogStyle.showMidpoint ? Color.Yellow : Color.White, fill: true);
+                }
             });
 
 

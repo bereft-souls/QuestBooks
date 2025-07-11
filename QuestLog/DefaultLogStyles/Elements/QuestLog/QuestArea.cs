@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
 using Terraria;
@@ -96,33 +97,36 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             DrawTasks.Add(sb =>
             {
+                sb.End();
+                sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
+
                 // Draw elements
                 if (SortedElements is not null)
                     foreach (var element in SortedElements.Where(x => x.VisibleOnCanvas()))
                         element.DrawToCanvas(sb, QuestAreaOffset, SelectedElement == element, lastHoveredElement == element);
 
                 sb.End();
-                sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
                 // Draw the previously-rendered target along with the new elements if being swiped
                 if (questElementSwipeOffset != 0f)
                 {
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, Matrix.Identity);
+                    sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, Matrix.Identity);
                     float xOffset = -float.Sign(questElementSwipeOffset) * (previousQuestAreaTarget.Width - Math.Abs(questElementSwipeOffset));
-                    sb.Draw(previousQuestAreaTarget, new Vector2(xOffset, 0f), null, Color.White, 0f, Vector2.Zero, 1f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f);
+                    sb.Draw(previousQuestAreaTarget, new Vector2(xOffset, 0f), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     return;
                 }
 
                 // Draw our content to a secondary target so that we can swipe when new elements are selected
                 sb.GraphicsDevice.SetRenderTarget(previousQuestAreaTarget);
                 sb.GraphicsDevice.Clear(Color.Transparent);
-                sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, TargetCopying, sampler, depth, raster, effect, Matrix.Identity);
+                sb.Begin(SpriteSortMode.Deferred, TargetCopying, sampler, depth, raster, effect, Matrix.Identity);
 
                 sb.Draw(questAreaTarget, Vector2.Zero, Color.White);
 
                 sb.End();
                 sb.GraphicsDevice.SetRenderTarget(questAreaTarget);
-                sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+                sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
             });
 
             // This is things like the placement preview and actually placing elements

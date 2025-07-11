@@ -12,7 +12,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static bool snapToGrid = false;
         private static int gridSize = 20;
 
-        private static bool showBounds = true;
+        private static bool moveBounds = true;
+        private static bool showMidpoint = true;
         private static bool movingAnchor = false;
         private static bool movingMaxView = false;
 
@@ -86,7 +87,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle maxView = CenteredRectangle(maxViewPoint, new(32f));
             maxView.Offset(-16, -16);
 
-            if (LeftMouseJustReleased && showBounds)
+            if (LeftMouseJustReleased && moveBounds)
             {
                 if (mouseInBounds)
                 {
@@ -123,7 +124,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Vector2 angle = right - left;
             Vector2 center = left + (angle * 0.5f);
 
-            if (showBounds)
+            if (moveBounds)
             {
                 if (movingMaxView)
                 {
@@ -163,9 +164,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 });
             }
 
-            else
+            else if (showMidpoint)
             {
-                DrawTasks.Add(sb => sb.Draw(QuestAssets.CanvasCenter, center, null, Color.LightGray, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 1f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f));
+                Vector2 drawPos = new(float.Round(center.X), float.Round(center.Y));
+                DrawTasks.Add(sb => sb.Draw(QuestAssets.CanvasCenter, drawPos, null, Color.LightGray, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 1f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f));
             }
 
         ElementPlacement:
