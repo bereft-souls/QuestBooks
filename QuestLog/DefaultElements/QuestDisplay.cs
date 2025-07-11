@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
@@ -112,7 +113,12 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
         {
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
-            return CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
+            bool hovered = CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
+
+            if (hovered && Quest is ProgressionQuest quest && !string.IsNullOrWhiteSpace(quest.HoverTooltip))
+                mouseTooltip = Language.GetTextValue(quest.HoverTooltip);
+
+            return hovered;
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
@@ -216,7 +222,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override bool HasInfoPage => Quest is ProgressionQuest;
+        public override bool HasInfoPage => Quest is ProgressionQuest quest && (!string.IsNullOrWhiteSpace(quest.PageTitle) || !string.IsNullOrWhiteSpace(quest.PageContents));
         public override void DrawInfoPage(SpriteBatch spriteBatch)
         {
             base.DrawInfoPage(spriteBatch);

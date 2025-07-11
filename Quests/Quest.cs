@@ -49,11 +49,14 @@ namespace QuestBooks.Quests
     }
 
     /// <summary>
-    /// Represets a quest with some additional required members that allows it to be clicked inside the quest log.
+    /// Represets a quest with some additional members that allow it to be clicked inside the quest log.
     /// </summary>
     public abstract class ProgressionQuest : Quest
     {
+        public virtual string HoverTooltip => null;
 
+        public virtual string PageTitle => null;
+        public virtual string PageContents => null;
     }
 
     public enum QuestType
