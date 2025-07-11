@@ -8,6 +8,12 @@
 	  <TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 	<ItemGroup>
+	  <AdditionalFiles Remove=".vs\**" />
+	  <Compile Remove=".vs\**" />
+	  <EmbeddedResource Remove=".vs\**" />
+	  <None Remove=".vs\**" />
+	</ItemGroup>
+	<ItemGroup>
 	  <AdditionalFiles Remove="Localization\en-US\Mods.QuestBooks.Tooltips.Library.hjson" />
 	</ItemGroup>
 	<ItemGroup>

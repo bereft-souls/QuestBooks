@@ -1,0 +1,3 @@
+ScrollBook: A simple book that uses a scroll texture.
+TabBook: A simple book that uses a "pull tab" or bookmark-like texture.
+ScrollChapter: A simple chapter that uses a scroll texture.

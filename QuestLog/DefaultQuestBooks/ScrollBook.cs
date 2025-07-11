@@ -7,6 +7,7 @@ using Terraria.GameContent;
 
 namespace QuestBooks.QuestLog.DefaultQuestBooks
 {
+    [BookTooltip("ScrollBook")]
     public class ScrollBook : BasicQuestBook
     {
         /// <summary>

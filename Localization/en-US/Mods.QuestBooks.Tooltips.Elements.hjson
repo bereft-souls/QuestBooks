@@ -12,7 +12,6 @@ ConnectorPoint:
 	'''
 ConnectorPointSize: The diameter of this connector point, in pixels.
 ConnectorPointFeeds: The number of "active feeds" required by this point in order to send an outgoing active signal.
-
 DisplayElement: Displays a simple texture on the canvas.
 DisplayTexture: The path of the texture to display.
 DisplayScale: The scale to display the texture at.

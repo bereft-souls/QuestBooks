@@ -21,5 +21,7 @@ namespace QuestBooks.QuestLog.DefaultChapters
 
             base.CloneTo(newInstance);
         }
+
+        internal sealed class ChapterTooltip(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Library.{localizationKey}");
     }
 }

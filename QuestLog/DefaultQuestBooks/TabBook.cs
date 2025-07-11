@@ -9,6 +9,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
     /// <summary>
     /// Represents a basic <see cref="QuestBook"/> implementation. Always visible, always unlocked.
     /// </summary>
+    [BookTooltip("TabBook")]
     public class TabBook : BasicQuestBook
     {
         /// <summary>
