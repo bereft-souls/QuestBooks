@@ -23,6 +23,24 @@ namespace QuestBooks.Quests
         public virtual string Key { get => this.GetType().Name; }
 
         /// <summary>
+        /// The text that should display in the mouse tooltip whenever this quest is hovered over in the quest log.<br/>
+        /// This value is not required.
+        /// </summary>
+        public virtual string HoverTooltip => null;
+
+        /// <summary>
+        /// The "title" of this quest. Displays in an info page when this quest is clicked in the quest log.<br/>
+        /// Quests that do not implement this nor <see cref="Contents"/> will not be clickable in the quest log.
+        /// </summary>
+        public virtual string Title => null;
+
+        /// <summary>
+        /// A "description" for this quest. Displays in an info page when this quest is clicked in the quest log.<br/>
+        /// Quests that do not implement this nor <see cref="Title"/> will not be clickable in the quest log.
+        /// </summary>
+        public virtual string Contents => null;
+
+        /// <summary>
         /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.
         /// </summary>
         public virtual QuestType QuestType { get => QuestType.World; }
@@ -46,17 +64,6 @@ namespace QuestBooks.Quests
         /// Otherwise return <see langword="false"/>.
         /// </summary>
         public abstract bool CheckCompletion();
-    }
-
-    /// <summary>
-    /// Represets a quest with some additional members that allow it to be clicked inside the quest log.
-    /// </summary>
-    public abstract class ProgressionQuest : Quest
-    {
-        public virtual string HoverTooltip => null;
-
-        public virtual string PageTitle => null;
-        public virtual string PageContents => null;
     }
 
     public enum QuestType

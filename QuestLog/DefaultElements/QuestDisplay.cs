@@ -115,8 +115,9 @@ namespace QuestBooks.QuestLog.DefaultElements
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
             bool hovered = CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
 
-            if (hovered && Quest is ProgressionQuest quest && !string.IsNullOrWhiteSpace(quest.HoverTooltip))
-                mouseTooltip = Language.GetTextValue(quest.HoverTooltip);
+            string tooltip = Quest.HoverTooltip;
+            if (hovered && tooltip != null)
+                mouseTooltip = tooltip;
 
             return hovered;
         }
@@ -222,7 +223,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override bool HasInfoPage => Quest is ProgressionQuest quest && (!string.IsNullOrWhiteSpace(quest.PageTitle) || !string.IsNullOrWhiteSpace(quest.PageContents));
+        public override bool HasInfoPage => Quest.Title != null || Quest.Contents != null;
         public override void DrawInfoPage(SpriteBatch spriteBatch)
         {
             base.DrawInfoPage(spriteBatch);
