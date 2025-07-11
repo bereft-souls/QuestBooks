@@ -48,6 +48,14 @@ namespace QuestBooks.Quests
         public abstract bool CheckCompletion();
     }
 
+    /// <summary>
+    /// Represets a quest with some additional required members that allows it to be clicked inside the quest log.
+    /// </summary>
+    public abstract class ProgressionQuest : Quest
+    {
+
+    }
+
     public enum QuestType
     {
         World,

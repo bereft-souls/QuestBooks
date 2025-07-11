@@ -18,3 +18,17 @@ UnderlayElement: Displays a simple texture at the back of the canvas that does N
 DisplayTexture: The path of the texture to display.
 DisplayScale: The scale to display the texture at.
 DisplayRotation: The rotation of the texture, in degrees.
+CompletedTexture: The path of the texture to display when the quest has been completed.
+OutlineTexture: The path of the texture to display when this element is hovered/selected.
+LockedTexture:
+	'''
+	The path of the texture to display when this element is not yet unlocked.
+	Leave empty to use the default behavior, which draws the completed texture blacked-out.
+	'''
+IncompleteTexture:
+	'''
+	The path of the texture to display when the quest has not yet been completed.
+	Leave empty to use the default behavior, which draws the completed texture in grayscale.
+	'''
+DisplayPrerequisites: The number of "active feeds" required to this element in order for it to display on the canvas.
+UnlockPrerequisites: The number of "active feeds" required to this element in order for it to be unlocked on the canvas.

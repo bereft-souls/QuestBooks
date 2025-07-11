@@ -34,6 +34,7 @@ namespace QuestBooks.Assets
         public static LazyTexture ChapterScrollBorder { get; } = new("QuestLog/ChapterScrollBorder");
 
         public static LazyShader FadedEdges { get; } = new("FadedEdges");
+        public static LazyShader Grayscale { get; } = new("Grayscale");
 
         #endregion
 
@@ -43,6 +44,10 @@ namespace QuestBooks.Assets
         public static LazyTexture MissingIconOutline { get; } = new("Elements/QuestionMarkOutline", immediateLoad: false);
         public static LazyTexture Connector { get; } = new("Elements/Connector", immediateLoad: false);
         public static LazyTexture ConnectorPoint { get; } = new("Elements/ConnectorPoint");
+
+        public static LazyTexture SmallQuest { get; } = new("Quests/Small");
+        public static LazyTexture MediumQuest { get; } = new("Quests/Medium");
+        public static LazyTexture LargeQuest { get; } = new("Quests/Large");
 
         #endregion
 

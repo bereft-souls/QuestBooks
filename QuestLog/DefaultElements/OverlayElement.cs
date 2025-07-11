@@ -52,11 +52,10 @@ namespace QuestBooks.QuestLog.DefaultElements
         [ElementTooltip("DisplayRotation")]
         public float Rotation { get; set; } = 0f;
 
-        public override bool IsHovered(Vector2 mousePosition)
+        public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
-            return BasicQuestLogStyle.UseDesigner &&
-                CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - BasicQuestLogStyle.QuestAreaOffset).ToPoint());
+            return BasicQuestLogStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - BasicQuestLogStyle.QuestAreaOffset).ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)

@@ -34,7 +34,7 @@ namespace QuestBooks.QuestLog
 
         public virtual void Update() { }
 
-        public virtual bool IsHovered(Vector2 mousePosition) { return false; }
+        public virtual bool IsHovered(Vector2 mousePosition, ref string mouseTooltip) { return false; }
 
         public virtual bool VisibleOnCanvas() { return true; }
 
@@ -168,6 +168,7 @@ namespace QuestBooks.QuestLog
 
     public abstract class QuestElement : ChapterElement
     {
+        [JsonIgnore]
         public abstract Quest Quest { get; }
     }
 }
