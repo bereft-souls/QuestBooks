@@ -1,4 +1,6 @@
-﻿using QuestBooks.Systems;
+﻿using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Systems;
+using ReLogic.Content;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Quests
@@ -41,9 +43,22 @@ namespace QuestBooks.Quests
         public virtual string Contents => null;
 
         /// <summary>
+        /// An image to display in an info page when this quest is clicked in the quest log.<br/>
+        /// Quests that do not implement this will not draw a texture to their page.<br/>
+        /// The texture draws in the upper-righthand corner of the page.
+        /// </summary>
+        public virtual Asset<Texture2D> PageTexture => null;
+
+        /// <summary>
         /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.
         /// </summary>
         public virtual QuestType QuestType { get => QuestType.World; }
+
+        /// <summary>
+        /// This is called every frame, regardless of whether the quest is completed. You can do any logic updating, dynamic quest updating, etc. here.<br/>
+        /// This can be called on both client and server, so implement your updating accordingly.
+        /// </summary>
+        public virtual void Update() { }
 
         /// <summary>
         /// This is called the first time this quest is completed. You can do things like play sounds, spawn items, etc here.<br/>

@@ -10,10 +10,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
@@ -21,7 +18,7 @@ namespace QuestBooks.QuestLog.DefaultElements
     public class QuestDisplay : QuestElement, IConnectable
     {
         [UseConverter(typeof(QuestChecker))]
-        public string QuestKey { get; set; } = new Placeholder().Key;
+        public virtual string QuestKey { get; set; } = new Placeholder().Key;
 
         public override Quest Quest => QuestManager.GetQuest(QuestKey);
 
@@ -29,10 +26,10 @@ namespace QuestBooks.QuestLog.DefaultElements
         public int IncomingFeeds => Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(this));
 
         [ElementTooltip("DisplayPrerequisites")]
-        public int DisplayFeeds { get; set; } = 0;
+        public virtual int DisplayFeeds { get; set; } = 0;
 
         [ElementTooltip("UnlockPrerequisites")]
-        public int UnlockFeeds { get; set; } = 0;
+        public virtual int UnlockFeeds { get; set; } = 0;
 
         // Used when the texture is not found or has not been assigned yet.
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Quests/Medium";
@@ -45,15 +42,15 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonProperty] private string _incompleteTexturePath = "";
         [JsonProperty] private string _completedTexturePath = DefaultTexture;
 
-        [JsonIgnore] private Asset<Texture2D> _outlineTexture = null;
-        [JsonIgnore] private Asset<Texture2D> _lockedTexture = null;
-        [JsonIgnore] private Asset<Texture2D> _incompleteTexture = null;
-        [JsonIgnore] private Asset<Texture2D> _completedTexture = null;
+        [JsonIgnore] protected Asset<Texture2D> _outlineTexture = null;
+        [JsonIgnore] protected Asset<Texture2D> _lockedTexture = null;
+        [JsonIgnore] protected Asset<Texture2D> _incompleteTexture = null;
+        [JsonIgnore] protected Asset<Texture2D> _completedTexture = null;
 
         [JsonIgnore]
         [UseConverter(typeof(DisplayElement.TextureChecker))]
         [ElementTooltip("CompletedTexture")]
-        public string Texture
+        public virtual string Texture
         {
             // Because of our custom converter, this will only ever be
             // set if the texture path is valid
@@ -64,7 +61,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonIgnore]
         [UseConverter(typeof(DisplayElement.TextureChecker))]
         [ElementTooltip("OutlineTexture")]
-        public string OutlineTexture
+        public virtual string OutlineTexture
         {
             // Because of our custom converter, this will only ever be
             // set if the texture path is valid
@@ -75,7 +72,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonIgnore]
         [UseConverter(typeof(TextureCheckerEmptyAllowed))]
         [ElementTooltip("LockedTexture")]
-        public string LockedTexture
+        public virtual string LockedTexture
         {
             // Because of our custom converter, this will only ever be
             // set if the texture path is valid
@@ -86,7 +83,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonIgnore]
         [UseConverter(typeof(TextureCheckerEmptyAllowed))]
         [ElementTooltip("IncompleteTexture")]
-        public string IncompleteTexture
+        public virtual string IncompleteTexture
         {
             // Because of our custom converter, this will only ever be
             // set if the texture path is valid
@@ -230,6 +227,16 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override void DrawInfoPage(SpriteBatch spriteBatch)
         {
             base.DrawInfoPage(spriteBatch);
+        }
+
+        public override void OnDelete()
+        {
+            // Clone the collection to allow modified enumeration
+            foreach (var connection in Connections.ToArray())
+            {
+                BasicQuestLogStyle.SelectedChapter.Elements.Remove(connection);
+                connection.OnDelete();
+            }
         }
 
         public class QuestChecker : IMemberConverter<string>

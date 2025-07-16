@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuestBooks.QuestLog.DefaultElements
+﻿namespace QuestBooks.QuestLog.DefaultElements
 {
     [ElementTooltip("UnderlayElement")]
     public class UnderlayElement : OverlayElement

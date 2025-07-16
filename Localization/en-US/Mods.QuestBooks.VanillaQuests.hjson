@@ -1,27 +1,6 @@
-TestBook1: {
-	DisplayName: TestBook1
-	TestChapter1: TestChapter1
-	TestChapter2: TestChapter2
-	TestChapter3: TestChapter3
-	TestChapter4: TestChapter4
-	TestChapter5: TestChapter5
-	TestChapter6: TestChapter6
-	TestChapter7: TestChapter7
-	TestChapter8: TestChapter8
-	TestChapter9: TestChapter9
-	TestChapter10: TestChapter10
-}
-
-TestBook2: {
-	DisplayName: TestBook2
-	TestChapter1: TestChapter1
-	TestChapter2: TestChapter2
-	TestChapter3: TestChapter3
-	TestChapter4: TestChapter4
-	TestChapter5: TestChapter5
-	TestChapter6: TestChapter6
-	TestChapter7: TestChapter7
-	TestChapter8: TestChapter8
-	TestChapter9: TestChapter9
-	TestChapter10: TestChapter10
+Bosses: {
+	DisplayName: Bosses
+	PreHardmode: Pre-Hardmode
+	PrePlantera: Pre-Plantera
+	EndGame: End Game
 }

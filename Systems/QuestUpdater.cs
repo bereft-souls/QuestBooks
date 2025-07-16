@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using MonoMod.Utils;
+using QuestBooks.Quests;
 using QuestBooks.Systems.NetCode;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,6 +14,9 @@ namespace QuestBooks.Systems
         // Update the active quest log style.
         public override void UpdateUI(GameTime gameTime)
         {
+            foreach (var book in QuestManager.QuestBooks)
+                book.Update();
+
             QuestManager.ActiveStyle.UpdateLog();
         }
 
@@ -59,6 +64,11 @@ namespace QuestBooks.Systems
         // Loop through and check quest completion post-update.
         public override void PostUpdateEverything()
         {
+            var allQuests = QuestManager.ActiveQuests.Values.ToArray();
+
+            foreach (var quest in allQuests)
+                quest.Update();
+
             if (Main.netMode != NetmodeID.MultiplayerClient)
                 UpdateWorldQuests();
 

@@ -145,7 +145,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (result == 0 && buttonId == 1)
                     {
                         SelectedBook.Chapters.Remove(SelectedChapter);
-                        DrawTasks.Add(_ => SelectedChapter = null);
+                        DrawTasks.Add(_ =>
+                        {
+                            SelectedChapter = null;
+                            SortedElements = null;
+                        });
                         SoundEngine.PlaySound(SoundID.MenuTick);
                     }
 
