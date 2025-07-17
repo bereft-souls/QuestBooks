@@ -31,6 +31,9 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void Update()
         {
+            if (DynamicQuest is null)
+                return;
+
             _completedTexture = DynamicQuest.Texture;
             _outlineTexture = DynamicQuest.OutlineTexture;
             _incompleteTexture = DynamicQuest.IncompleteTexture;

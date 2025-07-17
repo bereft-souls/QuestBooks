@@ -16,7 +16,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override float DrawPriority => 0.25f;
 
         [ElementTooltip("ConnectorThickness")]
-        public float LineThickness { get; set; } = 6f;
+        public float LineThickness { get; set; } = 5f;
 
         public IConnectable Source { get; set; } = null;
 
@@ -117,7 +117,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override float DrawPriority => 0.26f;
 
         [ElementTooltip("ConnectorPointSize")]
-        public float Size { get; set; } = 6f;
+        public float Size { get; set; } = 5f;
 
         [ElementTooltip("ConnectorPointFeeds")]
         public int RequiredFeeds { get; set; } = 1;
