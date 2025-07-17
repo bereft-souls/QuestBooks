@@ -15,11 +15,14 @@ using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
+    [ElementTooltip("QuestDisplay")]
     public class QuestDisplay : QuestElement, IConnectable
     {
         [UseConverter(typeof(QuestChecker))]
+        [ElementTooltip("QuestKey")]
         public virtual string QuestKey { get; set; } = new Placeholder().Key;
 
+        // Already has JsonIgnore
         public override Quest Quest => QuestManager.GetQuest(QuestKey);
 
         [JsonIgnore]

@@ -322,6 +322,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         selectedMember = member;
                         memberValueAccepted = true;
                         selected = member is not null;
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                     }
                 }
 
@@ -347,6 +348,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     // Only do parsing on new values (every frame would be ridiculous)
                     if (value != newValue)
                     {
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                         memberValueAccepted = bundle.Setter(newValue);
                         bundle.Value = newValue;
                     }

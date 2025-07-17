@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
@@ -29,6 +30,34 @@ namespace QuestBooks.QuestLog
         /// </summary>
         [JsonIgnore]
         public virtual float DrawPriority { get => 0.5f; }
+
+        /// <summary>
+        /// A set of "keywords" that can be used to filter to display only certain elements.<br/>
+        /// These keywords are localized, and the collection is retrieved via <see cref="KeyWordsLocalization"/>.
+        /// </summary>
+        [JsonIgnore]
+        [HideInDesigner]
+        public virtual string[] KeyWords { get; set; }
+
+        [JsonIgnore]
+        [HideInDesigner]
+        private string _keyWordsLocaliztion = "";
+
+        /// <summary>
+        /// The localization key for the collection of "keywords" that can be used to filter for this element.<br/>
+        /// Each key should be separated by a comma <c>,</c> with no whitespace in between keys/commas (keys themselves can contain whitespace).
+        /// </summary>
+        [JsonProperty]
+        [ElementTooltip("KeyWordsLocalization")]
+        public virtual string KeyWordsLocalization
+        {
+            get => _keyWordsLocaliztion;
+            set
+            {
+                _keyWordsLocaliztion = value;
+                KeyWords = Language.GetTextValue(value).Split(',');
+            }
+        }
 
         #region Common Methods
 

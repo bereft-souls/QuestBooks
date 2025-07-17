@@ -14,6 +14,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private static float questElementSwipeOffset = 0f;
         public static Vector2 QuestAreaOffset = Vector2.Zero;
+        private static Vector2 minQuestAreaOffset => UseDesigner ? new(float.MinValue) : SelectedChapter.MinViewPoint;
         private static Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint;
 
         private static Vector2? cachedRightClick = null;
@@ -50,7 +51,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (SelectedChapter?.EnableShifting ?? false)
             {
                 QuestAreaOffset = new(float.Min(QuestAreaOffset.X, maxQuestAreaOffset.X), float.Min(QuestAreaOffset.Y, maxQuestAreaOffset.Y));
-                QuestAreaOffset = new(float.Max(QuestAreaOffset.X, 0f), float.Max(QuestAreaOffset.Y, 0f));
+                QuestAreaOffset = new(float.Max(QuestAreaOffset.X, minQuestAreaOffset.X), float.Max(QuestAreaOffset.Y, minQuestAreaOffset.Y));
             }
 
             // Scale based on target size
@@ -63,7 +64,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-                sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix * transform);
+                sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix * transform);
             });
 
             // This does the backdrop, grid, etc
@@ -89,7 +90,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (questElementSwipeOffset != 0f)
             {
-                questElementSwipeOffset = MathHelper.Lerp(questElementSwipeOffset, 0f, 0.2f);
+                questElementSwipeOffset = MathHelper.Lerp(questElementSwipeOffset, 0f, 0.22f);
 
                 if (Math.Abs(questElementSwipeOffset) < 0.5f)
                     questElementSwipeOffset = 0f;

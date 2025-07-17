@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
+    [ElementTooltip("DynamicQuestDisplay")]
     public class DynamicQuestDisplay : QuestDisplay
     {
         [HideInDesigner]

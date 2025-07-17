@@ -1,3 +1,9 @@
+KeyWordsLocalization:
+	'''
+	A localization entry that contains a set of "keywords" that can be used to filter elements on the canvas.
+	Each keyword should be separated by a comma , with no whitespace in between keywords/commas (keywords themselves can contain whitespace).
+	You can leave this empty to avoid filtering.
+	'''
 Connector:
 	'''
 	Connects two "connectable" elements on the canvas. Acts as a visual and functional bridge,
@@ -18,6 +24,18 @@ UnderlayElement: Displays a simple texture at the back of the canvas that does N
 DisplayTexture: The path of the texture to display.
 DisplayScale: The scale to display the texture at.
 DisplayRotation: The rotation of the texture, in degrees.
+QuestDisplay: Displays a quest on the canvas. Contains configuration for things like unlock pre-requisites, and texture overrides.
+DynamicQuestDisplay:
+	'''
+	Like a quest display, but many of the element parameters are actually controlled by the quest rather than the element.
+	This is useful for things like quests that change depending on the evil biome present in the world.
+	The quest supplied to a DynamicQuestDisplay MUST inherit from DynamicQuest instead of Quest.
+	'''
+QuestKey:
+	'''
+	The key for the quest you want this element to check the status of.
+	This is usually just the type name for the quest, but can be overridden.
+	'''
 CompletedTexture: The path of the texture to display when the quest has been completed.
 OutlineTexture: The path of the texture to display when this element is hovered/selected.
 LockedTexture:

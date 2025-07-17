@@ -117,7 +117,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 rectangle.Offset((int)xOffset, (int)realChaptersScrollOffset);
                 bool hovered = hoveringChapters && rectangle.Contains(mouseChapters) && SelectedElement is null;
 
-                if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner) && questElementSwipeOffset == 0f)
+                if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner))// && questElementSwipeOffset == 0f)
                 {
                     int sign = SelectedBook.Chapters.IndexOf(questLine) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
                     questElementSwipeOffset = questAreaTarget.Width * sign;

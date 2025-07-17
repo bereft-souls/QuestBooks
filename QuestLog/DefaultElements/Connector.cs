@@ -74,6 +74,12 @@ namespace QuestBooks.QuestLog.DefaultElements
 
             Texture2D texture = QuestAssets.BigPixel;
             spriteBatch.Draw(texture, center, null, color, rotation, new Vector2(1f), new Vector2(width * 0.5f, LineThickness * 0.5f), SpriteEffects.None, 0f);
+
+            if (BasicQuestLogStyle.UseDesigner)
+            {
+                Texture2D arrow = QuestAssets.ConnectorArrow;
+                spriteBatch.Draw(arrow, center, null, color, rotation - MathHelper.PiOver4, arrow.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+            }
         }
 
         public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
