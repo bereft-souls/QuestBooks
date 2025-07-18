@@ -25,6 +25,11 @@ DisplayTexture: The path of the texture to display.
 DisplayScale: The scale to display the texture at.
 DisplayRotation: The rotation of the texture, in degrees.
 QuestDisplay: Displays a quest on the canvas. Contains configuration for things like unlock pre-requisites, and texture overrides.
+HiddenQuest:
+	'''
+	Allows you to implement connection logic for certain quests without having to display an extra element on the canvas.
+	Useful for things like unlocking a quest when a condition other than its prerequisite(s) needs to be met.
+	'''
 DynamicQuestDisplay:
 	'''
 	Like a quest display, but many of the element parameters are actually controlled by the quest rather than the element.

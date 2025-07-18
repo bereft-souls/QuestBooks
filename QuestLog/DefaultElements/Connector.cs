@@ -152,7 +152,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             Color color =
                 selected ? Color.Red :
                 hovered ? Color.Yellow :
-                Connections.Where(x => x.Destination == this).All(x => x.Source.ConnectionActive(x.Destination)) || BasicQuestLogStyle.UseDesigner ? Color.White : Color.DimGray;
+                Connections.Where(x => x.Destination == this).Count(x => x.Source.ConnectionActive(x.Destination)) >= RequiredFeeds || BasicQuestLogStyle.UseDesigner ? Color.White : Color.DimGray;
 
             Texture2D texture = QuestAssets.ConnectorPoint;
             spriteBatch.Draw(texture, CanvasPosition - canvasViewOffset, null, color, 0f, texture.Size() * 0.5f, Size / texture.Width, SpriteEffects.None, 0f);
