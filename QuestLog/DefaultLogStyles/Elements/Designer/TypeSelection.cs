@@ -69,8 +69,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     DrawTasks.Add(sb =>
                     {
-                        sb.Draw(bookUpTexture, bookUp.Center(), null, Color.White * (firstBook ? 0.4f : 1f), 0f, bookUpTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
-                        sb.Draw(bookDownTexture, bookDown.Center(), null, Color.White * (lastBook ? 0.4f : 1f), 0f, bookDownTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
+                        float scale = 0.5f * LogScale;
+                        sb.Draw(bookUpTexture, bookUp.Center(), null, Color.White * (firstBook ? 0.4f : 1f), 0f, bookUpTexture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+                        sb.Draw(bookDownTexture, bookDown.Center(), null, Color.White * (lastBook ? 0.4f : 1f), 0f, bookDownTexture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
                     });
                 }
 
@@ -138,8 +139,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     DrawTasks.Add(sb =>
                     {
-                        sb.Draw(chapterUpTexture, chapterUp.Center(), null, Color.White * (firstChapter ? 0.4f : 1f), 0f, chapterUpTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
-                        sb.Draw(chapterDownTexture, chapterDown.Center(), null, Color.White * (lastChapter ? 0.4f : 1f), 0f, chapterDownTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
+                        float scale = 0.5f * LogScale;
+                        sb.Draw(chapterUpTexture, chapterUp.Center(), null, Color.White * (firstChapter ? 0.4f : 1f), 0f, chapterUpTexture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+                        sb.Draw(chapterDownTexture, chapterDown.Center(), null, Color.White * (lastChapter ? 0.4f : 1f), 0f, chapterDownTexture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
                     });
                 }
 
