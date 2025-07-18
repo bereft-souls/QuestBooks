@@ -55,10 +55,10 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public static void DrawChapterText(SpriteBatch spriteBatch, string text, Color textColor, Color outlineColor, Rectangle area, float scale)
         {
-            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.09f, right: 0.32f);//.CreateScaledMargins(left: 0.1f, right: 0.165f, top: 0.1f, bottom: 0.1f);
+            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.11f, right: 0.25f);//.CreateScaledMargins(left: 0.1f, right: 0.165f, top: 0.1f, bottom: 0.1f);
 
             var font = FontAssets.DeathText.Value;
-            spriteBatch.DrawOutlinedStringInRectangle(nameRectangle.CookieCutter(new(0f, 0.24f), Vector2.One), font, textColor, outlineColor, text, alignment: Utilities.TextAlignment.Left, clipBounds: false, maxScale: 0.5f);
+            spriteBatch.DrawOutlinedStringInRectangle(nameRectangle.CookieCutter(new(0f, 0.36f), Vector2.One), font, textColor, outlineColor, text, alignment: Utilities.TextAlignment.Left, clipBounds: false, maxScale: 0.5f);
         }
     }
 }

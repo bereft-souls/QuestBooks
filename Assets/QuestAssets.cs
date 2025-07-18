@@ -103,6 +103,22 @@ namespace QuestBooks.Assets
 
         public static LazyTexture ToolOutline { get; } = new("Designer/ToolOutline", immediateLoad: false);
 
+        public static LazyTexture DisplayMidpoint { get; } = new("Designer/DisplayMidpoint", immediateLoad: false);
+        public static LazyTexture DisplayMidpointHovered { get; } = new("Designer/DisplayMidpointHovered", immediateLoad: false);
+
+        public static LazyTexture MoveBounds { get; } = new("Designer/MoveBounds", immediateLoad: false);
+        public static LazyTexture MoveBoundsHovered { get; } = new("Designer/MoveBoundsHovered", immediateLoad: false);
+
+        public static LazyTexture ShiftBookUp { get; } = new("Designer/ShiftBookUp", immediateLoad: false);
+        public static LazyTexture ShiftBookUpHovered { get; } = new("Designer/ShiftBookUpHovered", immediateLoad: false);
+        public static LazyTexture ShiftBookDown { get; } = new("Designer/ShiftBookDown", immediateLoad: false);
+        public static LazyTexture ShiftBookDownHovered { get; } = new("Designer/ShiftBookDownHovered", immediateLoad: false);
+
+        public static LazyTexture TogglePreview { get; } = new("Designer/TogglePreview", immediateLoad: false);
+        public static LazyTexture TogglePreviewHovered { get; } = new("Designer/TogglePreviewHovered", immediateLoad: false);
+        public static LazyTexture ToggleProperties { get; } = new("Designer/ToggleProperties", immediateLoad: false);
+        public static LazyTexture TogglePropertiesHovered { get; } = new("Designer/TogglePropertiesHovered", immediateLoad: false);
+
         #endregion
 
         public override void PostSetupContent()

@@ -177,11 +177,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (active && SelectedChapter.EnableShifting)
                 {
-                    sb.DrawRectangle(moveBounds, moveBoundsHovered ? Color.Red : BasicQuestLogStyle.moveBounds ? Color.Yellow : Color.White, fill: true);
-                    sb.DrawRectangle(showMidpoint, showMidpointHovered ? Color.Red : BasicQuestLogStyle.showMidpoint ? Color.Yellow : Color.White, fill: true);
+                    DrawToggle(moveBounds, moveBoundsHovered, QuestAssets.MoveBounds, QuestAssets.MoveBoundsHovered, outline: BasicQuestLogStyle.moveBounds);
+                    DrawToggle(showMidpoint, showMidpointHovered, QuestAssets.DisplayMidpoint, QuestAssets.DisplayMidpointHovered, outline: BasicQuestLogStyle.showMidpoint);
                 }
             });
-
 
             if (SelectedChapter is not null)
             {

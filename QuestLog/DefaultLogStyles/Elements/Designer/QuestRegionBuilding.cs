@@ -94,9 +94,6 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle maxView = CenteredRectangle(maxViewPoint, new(32f));
             maxView.Offset(-16, -16);
 
-            AddRectangle(maxView, Color.Black);
-            AddRectangle(minView, Color.Black);
-
             if (LeftMouseJustReleased && moveBounds)
             {
                 if (questAreaTarget.Bounds.Contains(unsnapped.ToPoint()))

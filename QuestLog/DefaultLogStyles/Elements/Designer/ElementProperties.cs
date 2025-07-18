@@ -393,18 +393,23 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         DrawPreviewButton:
 
             Rectangle previewToggle = area.CookieCutter(new(0.82f, -0.85f), new(0.125f, 0.075f));
-            AddRectangle(previewToggle, Color.Blue, fill: true);
-
-            if (previewElementInfo)
-                AddRectangle(previewToggle, Color.White);
+            bool previewHovered = false;
 
             if (previewToggle.Contains(mouseCanvas))
             {
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.TogglePreview");
+                previewHovered = true;
 
                 if (LeftMouseJustReleased)
                     previewElementInfo = !previewElementInfo;
             }
+
+            Texture2D texture =
+                previewElementInfo ?
+                previewHovered ? QuestAssets.TogglePropertiesHovered : QuestAssets.ToggleProperties :
+                previewHovered ? QuestAssets.TogglePreviewHovered : QuestAssets.TogglePreview;
+
+            DrawTasks.Add(sb => sb.Draw(texture, previewToggle.Center(), null, Color.White, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f));
         }
     }
 }

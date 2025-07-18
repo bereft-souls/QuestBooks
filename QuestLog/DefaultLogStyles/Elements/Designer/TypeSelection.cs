@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;
@@ -43,8 +45,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     bool firstBook = bookIndex == 0;
                     bool lastBook = bookIndex == QuestManager.QuestBooks.Count - 1;
 
-                    AddRectangle(bookUp, Color.Red with { A = (byte)(firstBook ? 100 : 255) }, fill: true);
-                    AddRectangle(bookDown, Color.Blue with { A = (byte)(lastBook ? 100 : 255) }, fill: true);
+                    bool bookUpHovered = false;
+                    bool bookDownHovered = false;
 
                     if (bookUp.Contains(MouseCanvas))
                     {
@@ -61,6 +63,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         if (LeftMouseJustReleased && !lastBook)
                             (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
                     }
+
+                    Texture2D bookUpTexture = bookUpHovered && !firstBook ? QuestAssets.ShiftBookUpHovered : QuestAssets.ShiftBookUp;
+                    Texture2D bookDownTexture = bookDownHovered && !lastBook ? QuestAssets.ShiftBookDownHovered : QuestAssets.ShiftBookDown;
+
+                    DrawTasks.Add(sb =>
+                    {
+                        sb.Draw(bookUpTexture, bookUp.Center(), null, Color.White * (firstBook ? 0.4f : 1f), 0f, bookUpTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
+                        sb.Draw(bookDownTexture, bookDown.Center(), null, Color.White * (lastBook ? 0.4f : 1f), 0f, bookDownTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
+                    });
                 }
 
                 AddRectangle(questBookType, Color.Gray * 0.6f, fill: true);
@@ -101,12 +112,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     bool firstChapter = chapterIndex == 0;
                     bool lastChapter = chapterIndex == SelectedBook.Chapters.Count - 1;
 
-                    AddRectangle(chapterUp, Color.Red with { A = (byte)(firstChapter ? 100 : 255) }, fill: true);
-                    AddRectangle(chapterDown, Color.Blue with { A = (byte)(lastChapter ? 100 : 255) }, fill: true);
+                    bool chapterUpHovered = false;
+                    bool chapterDownHovered = false;
 
                     if (chapterUp.Contains(MouseCanvas))
                     {
                         MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterUp");
+                        chapterUpHovered = true;
 
                         if (LeftMouseJustReleased && !firstChapter)
                             (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
@@ -115,10 +127,20 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     else if (chapterDown.Contains(MouseCanvas))
                     {
                         MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterDown");
+                        chapterDownHovered = true;
 
                         if (LeftMouseJustReleased && !lastChapter)
                             (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
                     }
+
+                    Texture2D chapterUpTexture = chapterUpHovered && !firstChapter ? QuestAssets.ShiftBookUpHovered : QuestAssets.ShiftBookUp;
+                    Texture2D chapterDownTexture = chapterDownHovered && !lastChapter ? QuestAssets.ShiftBookDownHovered : QuestAssets.ShiftBookDown;
+
+                    DrawTasks.Add(sb =>
+                    {
+                        sb.Draw(chapterUpTexture, chapterUp.Center(), null, Color.White * (firstChapter ? 0.4f : 1f), 0f, chapterUpTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
+                        sb.Draw(chapterDownTexture, chapterDown.Center(), null, Color.White * (lastChapter ? 0.4f : 1f), 0f, chapterDownTexture.Size() * 0.5f, 0.5f, SpriteEffects.None, 0f);
+                    });
                 }
 
                 AddRectangle(questLineType, Color.Gray * 0.6f, fill: true);
