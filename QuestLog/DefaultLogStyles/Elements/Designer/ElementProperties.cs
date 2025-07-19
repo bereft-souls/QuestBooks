@@ -47,7 +47,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (previewElementInfo)
             {
-                DrawTasks.Add(SelectedElement.DrawInfoPage);
+                DrawTasks.Add(sb =>
+                {
+                    Action layerAction = null;
+                    SelectedElement.DrawInfoPage(sb, mousePosition, ref layerAction);
+                    ExtraInferfaceLayerMods.Add(layerAction);
+                });
+
                 goto DrawPreviewButton;
             }
 
@@ -392,7 +398,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         DrawPreviewButton:
 
-            Rectangle previewToggle = area.CookieCutter(new(0.82f, -0.85f), new(0.125f, 0.075f));
+            Rectangle previewToggle = area.CookieCutter(new(0.82f, -0.87f), new(0.125f, 0.075f));
             bool previewHovered = false;
 
             if (previewToggle.Contains(mouseCanvas))

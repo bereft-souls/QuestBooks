@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
@@ -19,6 +21,7 @@ public partial class BasicQuestLogStyle
 
     protected static string MouseTooltip = "";
     protected static bool CancelChat = false;
+    protected static readonly List<Action> ExtraInferfaceLayerMods = [];
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
@@ -28,7 +31,15 @@ public partial class BasicQuestLogStyle
             CancelChat = false;
         }
 
-        if (MouseTooltip is null)
+        if (MouseTooltip is not null)
+            Main.HoverItem = new Item();
+
+        foreach (var action in ExtraInferfaceLayerMods)
+            action?.Invoke();
+
+        ExtraInferfaceLayerMods.Clear();
+
+        if (MouseTooltip is null || Main.HoverItem.type >= 0)
             return;
 
         if (string.IsNullOrWhiteSpace(MouseTooltip))

@@ -5,7 +5,10 @@ using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Terraria;
+using Terraria.GameContent;
+using Terraria.UI.Chat;
 
 namespace QuestBooks.Utilities
 {
@@ -52,6 +55,145 @@ namespace QuestBooks.Utilities
             spriteBatch.Draw(pixel, new Rectangle(rectangle.Left - halfStroke, rectangle.Top - halfStroke, (int)stroke, rectangle.Height + (int)stroke), color);
             spriteBatch.Draw(pixel, new Rectangle(rectangle.Left - halfStroke, rectangle.Bottom - halfStroke, rectangle.Width + (int)stroke, (int)stroke), color);
             spriteBatch.Draw(pixel, new Rectangle(rectangle.Right - halfStroke, rectangle.Top - halfStroke, (int)stroke, rectangle.Height + (int)stroke), color);
+        }
+
+        public static void DrawParagraphText(this SpriteBatch spriteBatch, DynamicSpriteFont font, Vector2 position, string text, float scale, int maxWidth, float verticalSpacing, float stroke = 1.6f) =>
+            DrawParagraphText(spriteBatch, font, position, text, scale, maxWidth, verticalSpacing, null, out _, stroke);
+
+        public static void DrawParagraphText(this SpriteBatch spriteBatch, DynamicSpriteFont font, Vector2 position, string text, float scale, int maxWidth, float verticalSpacing, Vector2? mousePosition, out TextSnippet hoveredSnippet, float stroke = 1.6f)
+        {
+            var list = Terraria.Utils.WordwrapStringSmart(text, Color.White, font, maxWidth, -1);
+            hoveredSnippet = null;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                DrawColorCodedStringNoColorWave(spriteBatch,
+                    font,
+                    list[i].ToArray(),
+                    position + new Vector2(0f, verticalSpacing * scale * i),
+                    0f,
+                    Vector2.Zero,
+                    Vector2.One * scale,
+                    mousePosition,
+                    out int hoveredSnippetIndex,
+                    spread: stroke);
+
+                if (hoveredSnippetIndex >= 0)
+                    hoveredSnippet = list[i][hoveredSnippetIndex];
+            }
+        }
+
+        public static Vector2 DrawColorCodedStringNoColorWave(SpriteBatch spriteBatch, DynamicSpriteFont font, TextSnippet[] snippets, Vector2 position, float rotation, Vector2 origin, Vector2 baseScale, Vector2? mousePosition, out int hoveredSnippet, float maxWidth = -1f, float spread = 2f)
+        {
+            DrawColorCodedStringShadow(spriteBatch, font, snippets, position, Color.Black, rotation, origin, baseScale, maxWidth, spread);
+            return DrawColorCodedString(spriteBatch, font, snippets, position, Color.White, rotation, origin, baseScale, mousePosition, out hoveredSnippet, maxWidth);//, ignoreColors: true);
+        }
+
+        public static void DrawColorCodedStringShadow(SpriteBatch spriteBatch, DynamicSpriteFont font, TextSnippet[] snippets, Vector2 position, Color baseColor, float rotation, Vector2 origin, Vector2 baseScale, float maxWidth = -1f, float spread = 2f)
+        {
+            for (int i = 0; i < ChatManager.ShadowDirections.Length; i++)
+                DrawColorCodedString(spriteBatch, font, snippets, position + ChatManager.ShadowDirections[i] * spread, baseColor, rotation, origin, baseScale, null, out var _, maxWidth, ignoreColors: true);
+        }
+
+        public static Vector2 DrawColorCodedString(SpriteBatch spriteBatch, DynamicSpriteFont font, TextSnippet[] snippets, Vector2 position, Color baseColor, float rotation, Vector2 origin, Vector2 baseScale, Vector2? mousePosition, out int hoveredSnippet, float maxWidth, bool ignoreColors = false)
+        {
+            int num = -1;
+            Vector2 vec = mousePosition ?? -Vector2.One;
+            Vector2 vector = position;
+            Vector2 result = vector;
+            float x = font.MeasureString(" ").X;
+            Color color = baseColor;
+            float num2 = 1f;
+            float num3 = 0f;
+            for (int i = 0; i < snippets.Length; i++)
+            {
+                TextSnippet textSnippet = snippets[i];
+                textSnippet.Update();
+                if (!ignoreColors)
+                    color = textSnippet.Color;
+
+                num2 = textSnippet.Scale;
+
+                if (textSnippet.GetType() != typeof(TextSnippet))
+                    num2 /= baseScale.X;
+
+                /*
+                if (textSnippet.UniqueDraw(justCheckingString: false, out var size, spriteBatch, vector, color, num2)) {
+                */
+                if (textSnippet.UniqueDraw(justCheckingString: false, out Vector2 size, spriteBatch, vector, color, baseScale.X * num2))
+                {
+                    if (vec.Between(vector, vector + size))
+                        num = i;
+
+                    /*
+                    vector.X += size.X * baseScale.X * num2;
+                    */
+                    vector.X += size.X;
+
+                    result.X = Math.Max(result.X, vector.X);
+                    continue;
+                }
+
+                string[] array = textSnippet.Text.Split('\n');
+                array = Regex.Split(textSnippet.Text, "(\n)");
+                bool flag = true;
+                foreach (string text in array)
+                {
+                    string[] array2 = Regex.Split(text, "( )");
+                    array2 = text.Split(' ');
+                    if (text == "\n")
+                    {
+                        vector.Y += (float)font.LineSpacing * num3 * baseScale.Y;
+                        vector.X = position.X;
+                        result.Y = Math.Max(result.Y, vector.Y);
+                        num3 = 0f;
+                        flag = false;
+                        continue;
+                    }
+
+                    for (int k = 0; k < array2.Length; k++)
+                    {
+                        if (k != 0)
+                            vector.X += x * baseScale.X * num2;
+
+                        if (maxWidth > 0f)
+                        {
+                            float num4 = font.MeasureString(array2[k]).X * baseScale.X * num2;
+                            if (vector.X - position.X + num4 > maxWidth)
+                            {
+                                vector.X = position.X;
+                                vector.Y += (float)font.LineSpacing * num3 * baseScale.Y;
+                                result.Y = Math.Max(result.Y, vector.Y);
+                                num3 = 0f;
+                            }
+                        }
+
+                        if (num3 < num2)
+                            num3 = num2;
+
+                        spriteBatch.DrawString(font, array2[k], vector, color, rotation, origin, baseScale * textSnippet.Scale * num2, SpriteEffects.None, 0f);
+                        Vector2 vector2 = font.MeasureString(array2[k]);
+                        if (vec.Between(vector, vector + vector2))
+                            num = i;
+
+                        vector.X += vector2.X * baseScale.X * num2;
+                        result.X = Math.Max(result.X, vector.X);
+                    }
+
+                    if (array.Length > 1 && flag)
+                    {
+                        vector.Y += (float)font.LineSpacing * num3 * baseScale.Y;
+                        vector.X = position.X;
+                        result.Y = Math.Max(result.Y, vector.Y);
+                        num3 = 0f;
+                    }
+
+                    flag = true;
+                }
+            }
+
+            hoveredSnippet = num;
+            return result;
         }
 
         public static List<(string line, Vector2 drawPos, Vector2 origin, float scale)> GetRectangleStringParameters(
@@ -117,6 +259,7 @@ namespace QuestBooks.Utilities
 
             return results;
         }
+
         public static void DrawOutlinedStringInRectangle(this SpriteBatch spriteBatch,
             Rectangle rectangle,
             DynamicSpriteFont font,
@@ -226,8 +369,8 @@ namespace QuestBooks.Utilities
         }
 
         public static void DrawOutlinedString(this SpriteBatch spriteBatch,
-            SpriteFont font,
-            string line,
+           SpriteFont font,
+           string line,
            Vector2 drawPos,
            Vector2 origin,
            float scale,

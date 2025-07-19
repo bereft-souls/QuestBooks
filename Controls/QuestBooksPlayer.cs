@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.QuestLog.DefaultLogStyles;
+using QuestBooks.Systems;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameInput;
@@ -73,6 +74,11 @@ namespace QuestBooks.Controls
         {
             // Hide the log on world entry.
             QuestLogDrawer.Toggle(false);
+
+            BasicQuestLogStyle.SelectedBook = null;
+            BasicQuestLogStyle.SelectedChapter = null;
+            BasicQuestLogStyle.SelectedElement = null;
+            BasicQuestLogStyle.SortedElements = null;
         }
 
         public override void SaveData(TagCompound tag) => QuestManager.ActiveStyle.SavePlayerData(tag);

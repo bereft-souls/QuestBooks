@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using System;
 using Terraria;
@@ -62,7 +63,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 {
                     sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, ContentBlending, sampler, depth, raster, effect, matrix);
+                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, BlendState.AlphaBlend, sampler, depth, raster, effect, matrix);
                 });
             }
         }

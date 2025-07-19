@@ -19,7 +19,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         // Available element retrieval
         public static IEnumerable<QuestBook> AvailableBooks { get => QuestManager.QuestBooks; }
         public static IEnumerable<BookChapter> AvailableChapters { get => SelectedBook?.Chapters ?? []; }
-        public static ChapterElement[] SortedElements { get; private set; } = null;
+        public static ChapterElement[] SortedElements { get; set; } = null;
 
         // These are registered on load
         public static readonly List<Type> AvailableQuestBookTypes = [];
@@ -41,6 +41,16 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             AlphaBlendFunction = BlendFunction.Add,
         };
 
+        protected static BlendState ContentBlending { get; } = new()
+        {
+            ColorSourceBlend = Blend.SourceAlpha,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorBlendFunction = BlendFunction.Add,
+            AlphaSourceBlend = Blend.SourceAlpha,
+            AlphaDestinationBlend = Blend.One,
+            AlphaBlendFunction = BlendFunction.Add
+        };
+
         protected static BlendState TargetCopying { get; } = new()
         {
             ColorSourceBlend = Blend.One,
@@ -59,16 +69,6 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             AlphaSourceBlend = Blend.SourceAlpha,
             AlphaDestinationBlend = Blend.DestinationAlpha,
             AlphaBlendFunction = BlendFunction.Max
-        };
-
-        protected static BlendState ContentBlending { get; } = new()
-        {
-            ColorSourceBlend = Blend.SourceAlpha,
-            ColorDestinationBlend = Blend.InverseSourceAlpha,
-            ColorBlendFunction = BlendFunction.Add,
-            AlphaSourceBlend = Blend.SourceAlpha,
-            AlphaDestinationBlend = Blend.One,
-            AlphaBlendFunction = BlendFunction.Add
         };
 
         protected static BlendState GridBlending { get; } = new()
@@ -200,20 +200,26 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (infoPage)
             {
                 Matrix transform = Matrix.CreateScale(TargetScale);
-                SwitchTargets(questInfoTarget, matrix: transform);
+                SwitchTargets(questInfoTarget, matrix: transform, blend: BlendState.AlphaBlend);
                 DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Transparent));
+                Vector2 infoMousePosition = (MouseCanvas - questInfo.Location).ToVector2() * (questInfoTarget.Bounds.Size() / questInfo.Size()) / TargetScale;
 
                 if (UseDesigner)
-                    HandleElementProperties(new Rectangle(0, 0, (int)(questInfoTarget.Width / TargetScale), (int)(questInfoTarget.Height / TargetScale)), (MouseCanvas - questInfo.Location).ToVector2() * (questInfoTarget.Bounds.Size() / questInfo.Size()) / TargetScale);
+                    HandleElementProperties(new Rectangle(0, 0, (int)(questInfoTarget.Width / TargetScale), (int)(questInfoTarget.Height / TargetScale)), infoMousePosition);
 
                 else
-                    DrawTasks.Add(SelectedElement.DrawInfoPage);
+                    DrawTasks.Add(sb =>
+                    {
+                        Action layerAction = null;
+                        SelectedElement.DrawInfoPage(sb, infoMousePosition, ref layerAction);
+                        ExtraInferfaceLayerMods.Add(layerAction);
+                    });
 
                 SwitchTargets(null);
 
                 if (previousBookSwipeOffset == 0)
                 {
-                    SwitchTargets(previousQuestInfoTarget, TargetCopying);
+                    SwitchTargets(previousQuestInfoTarget, BlendState.AlphaBlend);
                     DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Transparent));
                     DrawTasks.Add(sb => sb.Draw(questInfoTarget, previousQuestInfoTarget.Bounds.Center(), null, Color.White, 0f, questInfoTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f));
                     SwitchTargets(null);
@@ -380,7 +386,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 sb.GetDrawParameters(out returnBlend, out returnSampler, out returnDepth, out returnRaster, out returnEffect, out returnMatrix);
                 returnTargets = sb.GraphicsDevice.GetRenderTargets();
                 sb.GraphicsDevice.SetRenderTarget(renderTarget);
-                sb.Begin(SpriteSortMode.Deferred, blend ?? ContentBlending, sampler ?? SamplerState.LinearClamp, depth ?? DepthStencilState.Default, raster ?? RasterizerState.CullNone, effect ?? null, matrix ?? Matrix.Identity);
+                sb.Begin(SpriteSortMode.Deferred, blend ?? BlendState.AlphaBlend, sampler ?? SamplerState.LinearClamp, depth ?? DepthStencilState.Default, raster ?? RasterizerState.CullNone, effect ?? null, matrix ?? Matrix.Identity);
             });
         }
 

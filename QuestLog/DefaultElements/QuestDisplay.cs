@@ -7,11 +7,14 @@ using QuestBooks.Quests;
 using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using ReLogic.Content;
+using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Core;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
@@ -226,10 +229,52 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override bool HasInfoPage => Quest.Title != null || Quest.Contents != null;
-        public override void DrawInfoPage(SpriteBatch spriteBatch)
+        public override bool HasInfoPage => Quest.HasInfoPage;
+
+        public override void DrawInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action updateAction)
         {
-            base.DrawInfoPage(spriteBatch);
+            var quest = Quest;
+
+            // Custom info page drawing, if overridden
+            if (LoaderUtils.HasOverride(quest, q => q.DrawCustomInfoPage))
+            {
+                quest.DrawCustomInfoPage(spriteBatch, mousePosition);
+                return;
+            }
+
+            // Get info parameters
+            quest.MakeSimpleInfoPage(out var title, out var contents, out var texture);
+
+            if (title is null && contents is null)
+                return;
+
+            // Default page drawing
+            Rectangle titleArea = new(8, 10, 430, 64);
+            //spriteBatch.DrawRectangle(titleArea, Color.Black);
+
+            Rectangle underline = titleArea.CookieCutter(new(0f, 0.6f), new(1f, 0.05f));
+            spriteBatch.DrawRectangle(underline, Color.Gray, fill: true);
+
+            spriteBatch.DrawOutlinedStringInRectangle(titleArea.CookieCutter(new(0f, 0.25f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, title, stroke: 2.3f, clipBounds: false, alignment: Utilities.TextAlignment.Left);
+
+            Rectangle contentArea = new(8, 80, 430, 450);
+            const float scale = 0.5f;
+
+            //spriteBatch.DrawOutlinedStringInRectangle(contentArea, FontAssets.DeathText.Value, Color.White, Color.Black, contents, stroke: 1.5f, maxScale: 0.5f, alignment: Utilities.TextAlignment.Left);
+            spriteBatch.DrawParagraphText(FontAssets.DeathText.Value, contentArea.Location.ToVector2(), contents, scale, (int)(contentArea.Width / scale), 50f, mousePosition, out var snippet, stroke: 1.8f);
+
+            if (snippet is not null)
+            {
+                updateAction = () =>
+                {
+                    snippet.OnHover();
+
+                    if (Main.mouseLeft && Main.mouseLeftRelease)
+                        snippet.OnClick();
+                };
+            }
+
+            //spriteBatch.DrawRectangle(contentArea, Color.Black);
         }
 
         public override void OnDelete()

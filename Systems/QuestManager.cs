@@ -111,6 +111,30 @@ namespace QuestBooks.Systems
             IncompleteQuests = [.. newIncomplete];
             CompletedQuests = [.. newComplete];
 
+            if (quest.QuestType == QuestType.World)
+            {
+                var newWorldIncomplete = new List<string>(IncompleteWorldQuests);
+                var newWorldComplete = new List<string>(CompletedWorldQuests);
+
+                newWorldIncomplete.Remove(quest.Key);
+                newWorldComplete.Add(quest.Key);
+
+                IncompleteWorldQuests = [.. newWorldIncomplete];
+                CompletedWorldQuests = [.. newWorldComplete];
+            }
+
+            else
+            {
+                var newPlayerIncomplete = new List<string>(IncompletePlayerQuests);
+                var newPlayerComplete = new List<string>(CompletedPlayerQuests);
+
+                newPlayerIncomplete.Remove(quest.Key);
+                newPlayerComplete.Add(quest.Key);
+
+                IncompletePlayerQuests = [.. newPlayerIncomplete];
+                CompletedPlayerQuests = [.. newPlayerComplete];
+            }
+
             quest.Completed = true;
             quest.MarkAsComplete();
         }

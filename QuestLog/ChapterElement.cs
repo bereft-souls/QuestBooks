@@ -69,7 +69,7 @@ namespace QuestBooks.QuestLog
 
         public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered);
 
-        public virtual void DrawInfoPage(SpriteBatch spriteBatch)
+        public virtual void DrawInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action layerAction)
         {
             Rectangle area = new(10, 0, 420, 540);
             spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, "Element does not contain an info page!", clipBounds: false);

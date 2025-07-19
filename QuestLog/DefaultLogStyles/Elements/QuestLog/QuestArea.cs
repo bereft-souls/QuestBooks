@@ -27,7 +27,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 HandleQuestRegionTools();
 
             bool mouseInBounds = questArea.Contains(scaledMouse.ToPoint());
-            SwitchTargets(questAreaTarget, ContentBlending);
+            SwitchTargets(questAreaTarget, BlendState.AlphaBlend);
             DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Transparent));
 
             if ((mouseInBounds || cachedRightClick is not null) && (SelectedChapter?.EnableShifting ?? false))
@@ -81,10 +81,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
             {
                 ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
+                element = (element?.HasInfoPage ?? false || UseDesigner) ? element : null;
                 swipingBetweenInfoPages = element is not null && SelectedElement is not null;
                 SelectedElement = (element?.HasInfoPage ?? false) || UseDesigner ? element : null;
 
-                if ((element?.HasInfoPage ?? false) || UseDesigner)
+                if ((element?.HasInfoPage ?? true) || UseDesigner)
                     questInfoSwipeOffset = questInfoTarget.Height * (element is null ? -1 : 1);
             }
 

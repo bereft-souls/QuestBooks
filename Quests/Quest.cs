@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Systems;
-using ReLogic.Content;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Quests
@@ -31,23 +31,38 @@ namespace QuestBooks.Quests
         public virtual string HoverTooltip => null;
 
         /// <summary>
-        /// The "title" of this quest. Displays in an info page when this quest is clicked in the quest log.<br/>
-        /// Quests that do not implement this nor <see cref="Contents"/> will not be clickable in the quest log.
+        /// Override this to indicate whether the quest should display an "info page" in the quest log when clicked.
         /// </summary>
-        public virtual string Title => null;
+        public virtual bool HasInfoPage => false;
 
         /// <summary>
-        /// A "description" for this quest. Displays in an info page when this quest is clicked in the quest log.<br/>
-        /// Quests that do not implement this nor <see cref="Title"/> will not be clickable in the quest log.
+        /// Override this method to implement your own custom drawing for info pages in the quest log.<br/>
+        /// Note that your logic NOT scale with any UI parameters, as scaling is handled via matrices and render targets here.
         /// </summary>
-        public virtual string Contents => null;
+        public virtual void DrawCustomInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition) { }
 
         /// <summary>
-        /// An image to display in an info page when this quest is clicked in the quest log.<br/>
+        /// Override this method to modify the parameters for a "simple info page" drawing.<br/>
+        /// This will use the default info page draw logic.<br/>
+        /// You can return <see langword="null"/> for any of the parameters if you do not want to assign them.
+        /// </summary>
+        /// 
+        /// <param name="title">The "title" of this quest. Displays in an info page when this quest is clicked in the quest log.<br/>
+        /// Quests that do not implement this nor <paramref name="contents"/> will not be clickable in the quest log.</param>
+        /// 
+        /// <param name="contents">A "description" for this quest. Displays in an info page when this quest is clicked in the quest log.<br/>
+        /// Quests that do not implement this nor <paramref name="title"/> will not be clickable in the quest log.</param>
+        /// 
+        /// <param name="texture">An image to display in an info page when this quest is clicked in the quest log.<br/>
         /// Quests that do not implement this will not draw a texture to their page.<br/>
-        /// The texture draws in the upper-righthand corner of the page.
-        /// </summary>
-        public virtual Asset<Texture2D> PageTexture => null;
+        /// The texture draws in the upper-righthand corner of the page.</param>
+        /// 
+        public virtual void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
+        {
+            title = null;
+            contents = null;
+            texture = null;
+        }
 
         /// <summary>
         /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.

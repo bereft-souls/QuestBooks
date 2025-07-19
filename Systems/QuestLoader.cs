@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 using Terraria.ModLoader.IO;
@@ -92,9 +93,18 @@ namespace QuestBooks.Systems
             // Attempt to fetch completed quest data from world.
             // If it does not exist, leave all quests as incomplete.
             if (!tag.TryGet(TagKey, out string[] quests))
-                return;
+                goto PostLoad;
 
             LoadCompletedQuests(quests);
+
+        PostLoad:
+
+            // Immediately mark any quests that should have previously been completed
+            foreach (var quest in QuestManager.IncompleteWorldQuests.Select(QuestManager.GetQuest).ToArray())
+            {
+                if (quest.CheckCompletion())
+                    QuestManager.MarkComplete(quest);
+            }
         }
 
         public partial class PlayerQuestLoader : ModPlayer
@@ -107,6 +117,15 @@ namespace QuestBooks.Systems
                     return;
 
                 LoadCompletedQuests(quests);
+            }
+
+            public override void OnEnterWorld()
+            {
+                foreach (var quest in QuestManager.IncompletePlayerQuests.Select(QuestManager.GetQuest).ToArray())
+                {
+                    if (quest.CheckCompletion())
+                        QuestManager.MarkComplete(quest);
+                }
             }
         }
 
