@@ -127,12 +127,6 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
         {
-            if (selected)
-                DrawOutline(spriteBatch, Color.Yellow);
-
-            else if (hovered && HasInfoPage)
-                DrawOutline(spriteBatch, Color.LightGray);
-
             if (BasicQuestLogStyle.UseDesigner)
             {
                 int cycle = (int)(Main.timeForVisualEffects % 180 / 60);
@@ -147,7 +141,7 @@ namespace QuestBooks.QuestLog.DefaultElements
                         return;
 
                     default:
-                        DrawCompleted(spriteBatch);
+                        DrawCompleted(spriteBatch, hovered, selected);
                         return;
                 }
             }
@@ -159,7 +153,7 @@ namespace QuestBooks.QuestLog.DefaultElements
                 DrawIncomplete(spriteBatch);
 
             else
-                DrawCompleted(spriteBatch);
+                DrawCompleted(spriteBatch, hovered, selected);
         }
 
         protected virtual void DrawOutline(SpriteBatch spriteBatch, Color color)
@@ -178,6 +172,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             }
 
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
+            DrawOutline(spriteBatch, Color.Black);
             DrawTexture(spriteBatch, _completedTexture.Value, Color.Black);
         }
 
@@ -197,14 +192,24 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, grayscale, matrix);
+            DrawOutline(spriteBatch, Color.Gray);
             DrawTexture(spriteBatch, _completedTexture.Value, Color.White);
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
         }
 
-        protected virtual void DrawCompleted(SpriteBatch spriteBatch)
+        protected virtual void DrawCompleted(SpriteBatch spriteBatch, bool hovered, bool selected)
         {
+            if (selected)
+                DrawOutline(spriteBatch, Color.Yellow);
+
+            else if (hovered && HasInfoPage)
+                DrawOutline(spriteBatch, Color.LightGray);
+
+            else
+                DrawOutline(spriteBatch, new(108, 118, 199, 255));
+
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
             DrawTexture(spriteBatch, _completedTexture.Value, Color.White);
         }

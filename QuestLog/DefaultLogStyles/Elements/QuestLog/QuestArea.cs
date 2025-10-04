@@ -75,17 +75,18 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
             // Get the top-most element that is being hovered            
-            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition, ref MouseTooltip), null) ?? null : null;
+            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition, ref MouseTooltip) && x != SelectedElement, null) ?? null : null;
             HoveredElement = lastHoveredElement;
 
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
             {
                 ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
-                element = (element?.HasInfoPage ?? false || UseDesigner) ? element : null;
+                element = ((element?.HasInfoPage ?? false) || UseDesigner) ? element : null;
                 swipingBetweenInfoPages = element is not null && SelectedElement is not null;
+                bool swiping = swipingBetweenInfoPages || (element is null != SelectedElement is null);
                 SelectedElement = (element?.HasInfoPage ?? false) || UseDesigner ? element : null;
 
-                if ((element?.HasInfoPage ?? true) || UseDesigner)
+                if (swiping)
                     questInfoSwipeOffset = questInfoTarget.Height * (element is null ? -1 : 1);
             }
 

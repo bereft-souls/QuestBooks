@@ -1,6 +1,11 @@
-Bosses: {
-	DisplayName: Bosses
+Progression: {
+	DisplayName: Progression
+	PreBoss: Pre-Boss
 	PreHardmode: Pre-Hardmode
 	PrePlantera: Pre-Plantera
 	EndGame: End Game
 }
+
+NPCs.DisplayName: NPCs
+CraftingTrees.DisplayName: Crafting Trees
+Challenges.DisplayName: Challenges

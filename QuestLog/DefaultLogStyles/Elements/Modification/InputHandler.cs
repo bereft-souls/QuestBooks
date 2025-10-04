@@ -39,7 +39,7 @@ public partial class BasicQuestLogStyle
 
         ExtraInferfaceLayerMods.Clear();
 
-        if (MouseTooltip is null || Main.HoverItem.type >= 0)
+        if (MouseTooltip is null || Main.HoverItem.type > 0)
             return;
 
         if (string.IsNullOrWhiteSpace(MouseTooltip))

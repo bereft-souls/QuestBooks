@@ -1,0 +1,10 @@
+{
+  "$id": "1",
+  "$type": "QuestBooks.QuestLog.DefaultQuestBooks.TabBook, QuestBooks",
+  "NameKey": "Mods.QuestBooks.VanillaQuests.NPCs.DisplayName",
+  "Chapters": {
+    "$id": "2",
+    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.BookChapter, QuestBooks]], System.Private.CoreLib",
+    "$values": []
+  }
+}
