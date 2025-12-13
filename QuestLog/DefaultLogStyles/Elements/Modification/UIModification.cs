@@ -11,13 +11,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
     public partial class BasicQuestLogStyle
     {
         // The scale to draw to the render targets
-        protected static float TargetScale { get; set; } = 1f;
+        protected float TargetScale { get; set; } = 1f;
 
-        private static Vector2? cachedMouseClick = null;
-        private static bool canvasMoving = false;
-        private static bool canvasResizing = false;
+        private Vector2? cachedMouseClick = null;
+        private bool canvasMoving = false;
+        private bool canvasResizing = false;
 
-        private static void UpdateDesignerToggle()
+        private void UpdateDesignerToggle()
         {
             if (QuestBooksMod.DesignerEnabled)
             {
@@ -47,7 +47,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             }
         }
 
-        private static void UpdateCanvasMovement(Vector2 halfRealScreen, Vector2 logSize)
+        private void UpdateCanvasMovement(Vector2 halfRealScreen, Vector2 logSize)
         {
             Rectangle moveTab = LogArea.CookieCutter(new(0f, 0f), new(0.059f, 1f));
             if ((moveTab.Contains(MouseCanvas) || canvasMoving) && !canvasResizing)
@@ -85,7 +85,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             }
         }
 
-        private static void UpdateCanvasResizing(Vector2 halfRealScreen)
+        private void UpdateCanvasResizing(Vector2 halfRealScreen)
         {
             Rectangle resizeTab = LogArea.CookieCutter(new(1.01f, 1.02f), new(0.062f, 0.09f));
             if ((resizeTab.Contains(MouseCanvas) || canvasResizing) && !canvasMoving)

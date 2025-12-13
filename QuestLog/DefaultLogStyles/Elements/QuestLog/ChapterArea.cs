@@ -13,13 +13,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
     {
         // These keep track of the selected QuestLine, as well as
         // some parameters to handle "sliding" between lines
-        public static BookChapter SelectedChapter { get; set; } = null;
+        private int booksScrollOffset = 0;
+        private int chaptersScrollOffset = 0;
+        private int previousChapterScrollOffset = 0;
 
-        private static int booksScrollOffset = 0;
-        private static int chaptersScrollOffset = 0;
-        private static int previousChapterScrollOffset = 0;
-
-        private static readonly List<(Rectangle area, BookChapter questBook)> chapterLibrary = [];
+        private readonly List<(Rectangle area, BookChapter questBook)> chapterLibrary = [];
         private void UpdateChapters(Rectangle chapters, Vector2 scaledMouse)
         {
             SwitchTargets(chaptersTarget, LibraryBlending, SamplerState.PointClamp);
@@ -118,15 +116,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 bool hovered = hoveringChapters && rectangle.Contains(mouseChapters) && SelectedElement is null;
 
                 if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner))// && questElementSwipeOffset == 0f)
-                {
-                    int sign = SelectedBook.Chapters.IndexOf(questLine) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
-                    questElementSwipeOffset = questAreaTarget.Width * sign;
-                    SortedElements = null;
-
-                    SelectedChapter = SelectedChapter != questLine ? questLine : null;
-                    QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor - defaultAnchor : Vector2.Zero;
-                    SoundEngine.PlaySound(SoundID.MenuTick);
-                }
+                    SelectChapter(questLine);
 
                 bool selected = SelectedChapter == questLine;
                 DrawTasks.Add(sb => questLine.Draw(sb, rectangle, TargetScale, selected, hovered));

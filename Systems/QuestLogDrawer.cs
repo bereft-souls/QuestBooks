@@ -13,6 +13,7 @@ namespace QuestBooks.Systems
         public static RenderTarget2D ScreenRenderTarget { get; private set; }
         public static Vector2 RealScreenSize => ScreenRenderTarget.Size();
         public static bool DisplayLog { get; private set; } = false;
+        public static bool UseDesigner { get; set; } = false;
 
         public static void Toggle(bool? active = null)
         {

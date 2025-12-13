@@ -11,17 +11,17 @@ namespace QuestBooks.QuestLog.DefaultLogStyles;
 
 public partial class BasicQuestLogStyle
 {
-    protected static bool LeftMouseJustPressed = false;
-    protected static bool LeftMouseHeld = false;
-    protected static bool LeftMouseJustReleased = false;
+    protected bool LeftMouseJustPressed = false;
+    protected bool LeftMouseHeld = false;
+    protected bool LeftMouseJustReleased = false;
 
-    protected static bool RightMouseJustPressed = false;
-    protected static bool RightMouseHeld = false;
-    protected static bool RightMouseJustReleased = false;
+    protected bool RightMouseJustPressed = false;
+    protected bool RightMouseHeld = false;
+    protected bool RightMouseJustReleased = false;
 
-    protected static string MouseTooltip = "";
-    protected static bool CancelChat = false;
-    protected static readonly List<Action> ExtraInferfaceLayerMods = [];
+    protected string MouseTooltip = "";
+    protected bool CancelChat = false;
+    protected readonly List<Action> ExtraInferfaceLayerMods = [];
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
@@ -49,7 +49,7 @@ public partial class BasicQuestLogStyle
             UICommon.TooltipMouseText(MouseTooltip);
     }
 
-    protected static void UpdateMousePosition(Vector2 halfScreen, Vector2 halfRealScreen)
+    protected void UpdateMousePosition(Vector2 halfScreen, Vector2 halfRealScreen)
     {
         ScaledMousePos = (Main.MouseScreen - halfScreen) / halfScreen * halfRealScreen + halfRealScreen;
         MouseCanvas = ScaledMousePos.ToPoint();
@@ -63,7 +63,7 @@ public partial class BasicQuestLogStyle
         }
     }
 
-    protected static void UpdateMouseClicks()
+    protected void UpdateMouseClicks()
     {
         if (Main.mouseLeft)
         {
@@ -88,7 +88,7 @@ public partial class BasicQuestLogStyle
         }
     }
 
-    protected static void LockMouse()
+    protected void LockMouse()
     {
         MouseTooltip ??= "";
         Main.LocalPlayer.mouseInterface = true;

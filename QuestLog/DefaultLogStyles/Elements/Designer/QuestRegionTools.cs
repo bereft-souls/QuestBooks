@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
+using QuestBooks.Systems;
 using QuestBooks.Utilities;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static readonly List<(Rectangle box, Type type)> elementSelections = [];
-        private static int elementTypeScrollOffset = 0;
-        private static ChapterElement placingElement = null;
+        private readonly List<(Rectangle box, Type type)> elementSelections = [];
+        private int elementTypeScrollOffset = 0;
+        private ChapterElement placingElement = null;
 
-        private static void HandleQuestRegionTools()
+        private void HandleQuestRegionTools()
         {
             Rectangle enableShifting = LogArea.CookieCutter(new(0.12f, -1.1f), new(0.069f, 0.075f));
             Rectangle moveBounds = enableShifting.CookieCutter(new(0f, -2.3f), Vector2.One);
@@ -69,7 +70,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.MoveBounds");
 
                     if (LeftMouseJustReleased)
-                        BasicQuestLogStyle.moveBounds = !BasicQuestLogStyle.moveBounds;
+                        this.moveBounds = !this.moveBounds;
                 }
 
                 else if (showMidpoint.Contains(MouseCanvas))
@@ -79,7 +80,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShowMidpoint");
 
                     if (LeftMouseJustReleased)
-                        BasicQuestLogStyle.showMidpoint = !BasicQuestLogStyle.showMidpoint;
+                        this.showMidpoint = !this.showMidpoint;
                 }
             }
 
@@ -90,7 +91,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 showBackdropHovered = true;
 
                 if (LeftMouseJustReleased)
-                    BasicQuestLogStyle.showBackdrop = !BasicQuestLogStyle.showBackdrop;
+                    this.showBackdrop = !this.showBackdrop;
             }
 
             if (showGrid.Contains(MouseCanvas))
@@ -100,7 +101,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 showGridHovered = true;
 
                 if (LeftMouseJustReleased)
-                    BasicQuestLogStyle.showGrid = !BasicQuestLogStyle.showGrid;
+                    this.showGrid = !this.showGrid;
             }
 
             if (snapGrid.Contains(MouseCanvas))
@@ -120,7 +121,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 gridSizeHovered = true;
 
                 if (LeftMouseJustReleased)
-                    BasicQuestLogStyle.gridSize = 20;
+                    this.gridSize = 20;
             }
 
             else if (gridUp.Contains(MouseCanvas))
@@ -130,7 +131,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 gridUpHovered = true;
 
                 if (LeftMouseJustReleased)
-                    BasicQuestLogStyle.gridSize++;
+                    this.gridSize++;
             }
 
             else if (gridDown.Contains(MouseCanvas))
@@ -139,8 +140,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.GridSizeDown");
                 gridDownHovered = true;
 
-                if (LeftMouseJustReleased && BasicQuestLogStyle.gridSize > 3)
-                    BasicQuestLogStyle.gridSize--;
+                if (LeftMouseJustReleased && this.gridSize > 3)
+                    this.gridSize--;
             }
 
             DrawTasks.Add(sb =>
@@ -159,26 +160,26 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 bool active = SelectedChapter is not null;
                 DrawToggle(enableShifting, enableShiftingHovered, QuestAssets.ShiftingCanvas, active ? QuestAssets.ShiftingCanvasHovered : QuestAssets.ShiftingCanvas, active ? 1f : 0.5f, SelectedChapter?.EnableShifting ?? false);
 
-                if (BasicQuestLogStyle.showBackdrop)
+                if (this.showBackdrop)
                     DrawToggle(showBackdrop, showBackdropHovered, QuestAssets.ToggleBackdropEnabled, QuestAssets.ToggleBackdropEnabledHovered, outline: true);
 
                 else
                     DrawToggle(showBackdrop, showBackdropHovered, QuestAssets.ToggleBackdropDisabled, QuestAssets.ToggleBackdropDisabledHovered);
 
-                DrawToggle(showGrid, showGridHovered, QuestAssets.ToggleGrid, QuestAssets.ToggleGridHovered, outline: BasicQuestLogStyle.showGrid);
-                DrawToggle(snapGrid, snapGridHovered, QuestAssets.GridSnapping, QuestAssets.GridSnappingHovered, outline: BasicQuestLogStyle.snapToGrid);
+                DrawToggle(showGrid, showGridHovered, QuestAssets.ToggleGrid, QuestAssets.ToggleGridHovered, outline: this.showGrid);
+                DrawToggle(snapGrid, snapGridHovered, QuestAssets.GridSnapping, QuestAssets.GridSnappingHovered, outline: this.snapToGrid);
 
                 DrawToggle(gridSize, gridSizeHovered, QuestAssets.GridSize, QuestAssets.GridSizeHovered);
                 DrawToggle(gridUp, gridUpHovered, QuestAssets.GridSizeUp, QuestAssets.GridSizeUpHovered);
                 DrawToggle(gridDown, gridDownHovered, QuestAssets.GridSizeDown, QuestAssets.GridSizeDownHovered);
 
                 Rectangle gridText = gridSize.CookieCutter(new(0.5f, 0.2f), new(0.75f, 0.75f));
-                sb.DrawOutlinedStringInRectangle(gridText, FontAssets.DeathText.Value, Color.White, Color.Black, BasicQuestLogStyle.gridSize.ToString(), clipBounds: false);
+                sb.DrawOutlinedStringInRectangle(gridText, FontAssets.DeathText.Value, Color.White, Color.Black, this.gridSize.ToString(), clipBounds: false);
 
                 if (active && SelectedChapter.EnableShifting)
                 {
-                    DrawToggle(moveBounds, moveBoundsHovered, QuestAssets.MoveBounds, QuestAssets.MoveBoundsHovered, outline: BasicQuestLogStyle.moveBounds);
-                    DrawToggle(showMidpoint, showMidpointHovered, QuestAssets.DisplayMidpoint, QuestAssets.DisplayMidpointHovered, outline: BasicQuestLogStyle.showMidpoint);
+                    DrawToggle(moveBounds, moveBoundsHovered, QuestAssets.MoveBounds, QuestAssets.MoveBoundsHovered, outline: this.moveBounds);
+                    DrawToggle(showMidpoint, showMidpointHovered, QuestAssets.DisplayMidpoint, QuestAssets.DisplayMidpointHovered, outline: this.showMidpoint);
                 }
             });
 
@@ -194,7 +195,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 Rectangle typeBox = elementTypeSelection.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.078f));
                 elementSelections.Clear();
 
-                foreach (Type elementType in AvailableQuestElementTypes.Keys)
+                foreach (Type elementType in QuestManager.AvailableQuestElementTypes.Keys)
                 {
                     elementSelections.Add((typeBox, elementType));
                     typeBox = typeBox.CookieCutter(new(0, 2.2f), Vector2.One);
@@ -254,7 +255,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     DrawTasks.Add(sb =>
                     {
                         sb.DrawOutlinedStringInRectangle(textArea.CookieCutter(new(0f, 0.25f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, elementType.Name);
-                        AvailableQuestElementTypes[elementType].DrawDesignerIcon(sb, iconArea);
+                        QuestManager.AvailableQuestElementTypes[elementType].DrawDesignerIcon(sb, iconArea);
                     });
 
                     if (box.Contains(MouseCanvas) && elementTypeSelection.Contains(MouseCanvas))

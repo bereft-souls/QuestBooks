@@ -11,17 +11,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        // These keep track of the selected QuestBook, as well as
-        // some parameters to handle "sliding" between books
-        private static bool previousBookSwipeDirection = false;
-        private static float previousBookSwipeOffset = 0f;
-        private static QuestBook previousBook = null;
-        public static QuestBook SelectedBook { get; set; } = null;
+        private bool previousBookSwipeDirection = false;
+        private float previousBookSwipeOffset = 0f;
+        private QuestBook previousBook = null;
 
-        private static float realBooksScrollOffset = 0;
-        private static float realChaptersScrollOffset = 0;
+        private float realBooksScrollOffset = 0;
+        private float realChaptersScrollOffset = 0;
 
-        private static readonly List<(Rectangle area, QuestBook questBook)> bookLibrary = [];
+        private readonly List<(Rectangle area, QuestBook questBook)> bookLibrary = [];
         private void UpdateBooks(Rectangle books, Vector2 scaledMouse)
         {
             SwitchTargets(booksTarget, LibraryBlending, SamplerState.LinearClamp);
@@ -87,18 +84,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 bool hovered = hoveringBooks && rectangle.Contains(mouseBooks) && SelectedElement is null;
 
                 if (hovered && LeftMouseJustReleased && (questBook.IsUnlocked() || UseDesigner) && previousBookSwipeOffset == 0f)
-                {
-                    previousBook = SelectedBook;
-                    SelectedBook = SelectedBook != questBook ? questBook : null;
-                    SoundEngine.PlaySound(SoundID.MenuTick);
-
-                    previousChapterScrollOffset = (int)realChaptersScrollOffset;
-                    chaptersScrollOffset = 0;
-                    realChaptersScrollOffset = 0f;
-
-                    previousBookSwipeDirection = SelectedBook is null || bookLibrary.FindIndex(kvp => kvp.questBook == SelectedBook) > bookLibrary.FindIndex(kvp => kvp.questBook == previousBook);
-                    previousBookSwipeOffset = 1f;
-                }
+                    SelectBook(questBook);
 
                 bool selected = SelectedBook == questBook;
                 DrawTasks.Add(sb => questBook.Draw(sb, rectangle, TargetScale, selected, hovered));

@@ -11,7 +11,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static void HandleSaveLoadButtons()
+        private void HandleSaveLoadButtons()
         {
             Rectangle saveAll = LogArea.CookieCutter(new(-1.06f, -0.94f), new(0.05f, 0.05f));
             Rectangle saveSelected = saveAll.CookieCutter(new(0f, 2.5f), Vector2.One);

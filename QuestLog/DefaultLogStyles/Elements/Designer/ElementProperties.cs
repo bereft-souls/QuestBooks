@@ -17,8 +17,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static ChapterElement lastElement = null;
-        private static bool previewElementInfo = false;
+        private ChapterElement lastElement = null;
+        private bool previewElementInfo = false;
 
         private static object MemberHash(MemberInfo memberInfo) => memberInfo is FieldInfo field ? field.FieldHandle : memberInfo;
 
@@ -26,11 +26,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             .GetProperties().Cast<MemberInfo>().Concat(typeof(ChapterElement).GetFields().Cast<MemberInfo>())
             .Select(MemberHash).ToArray();
 
-        private static readonly Dictionary<Type, Dictionary<MemberInfo, MemberBundle>> elementTypeMembers = [];
-        private static readonly Dictionary<MemberBundle, Rectangle> memberBoxes = [];
-        private static MemberInfo selectedMember = null;
-        private static bool memberValueAccepted = false;
-        private static int memberScrollOffset = 0;
+        private readonly Dictionary<Type, Dictionary<MemberInfo, MemberBundle>> elementTypeMembers = [];
+        private readonly Dictionary<MemberBundle, Rectangle> memberBoxes = [];
+        private MemberInfo selectedMember = null;
+        private bool memberValueAccepted = false;
+        private int memberScrollOffset = 0;
 
         private class MemberBundle(MemberInfo memberInfo, string value, string tooltip, Func<string> getter, Func<string, bool> setter)
         {

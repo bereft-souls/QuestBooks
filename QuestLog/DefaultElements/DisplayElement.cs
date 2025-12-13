@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog.DefaultLogStyles;
+using QuestBooks.Systems;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ModLoader;
@@ -53,7 +54,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
-            return BasicQuestLogStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains(mousePosition.ToPoint());
+            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains(mousePosition.ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)

@@ -12,10 +12,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static bool typingBookName = false;
-        private static bool typingChapterName = false;
+        private bool typingBookName = false;
+        private bool typingChapterName = false;
 
-        private static void HandleRenaming(Rectangle books, Rectangle chapters, Rectangle questArea)
+        private void HandleRenaming(Rectangle books, Rectangle chapters, Rectangle questArea)
         {
             Rectangle bookNameArea = books.CookieCutter(new(-0.15f, -1.25f), new(1.15f, 0.08f));
             Rectangle chapterNameArea = chapters.CookieCutter(new(0.15f, -1.25f), new(1.15f, 0.08f));

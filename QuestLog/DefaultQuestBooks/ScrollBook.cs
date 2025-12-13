@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultLogStyles;
+using QuestBooks.Systems;
 using Terraria;
 using Terraria.GameContent;
 
@@ -20,7 +21,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
 
             if (selected)
             {
-                if (BasicQuestLogStyle.UseDesigner)
+                if (QuestManager.ActiveStyle.UseDesigner)
                     outlineColor = Color.Yellow;
 
                 else

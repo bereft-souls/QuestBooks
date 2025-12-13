@@ -15,13 +15,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static readonly List<(Rectangle area, Action onClick, bool selected, Type type)> typeSelections = [];
+        private readonly List<(Rectangle area, Action onClick, bool selected, Type type)> typeSelections = [];
 
-        private static bool selectingBookType = false;
-        private static bool selectingLineType = false;
+        private bool selectingBookType = false;
+        private bool selectingLineType = false;
 
-        private static int bookTypeScrollOffset = 0;
-        private static int lineTypeScrollOffset = 0;
+        private int bookTypeScrollOffset = 0;
+        private int lineTypeScrollOffset = 0;
 
         private void HandleTypeSelection()
         {
@@ -184,7 +184,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 Rectangle typeBox = typeDropDown.CreateScaledMargin(0.025f).CookieCutter(new(0f, -0.95f), new(1f, 0.078f));
                 if (selectingBookType)
                 {
-                    foreach (Type bookType in AvailableQuestBookTypes)
+                    foreach (Type bookType in QuestManager.AvailableQuestBookTypes)
                     {
                         void onClick()
                         {
@@ -201,7 +201,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 else
                 {
-                    foreach (Type lineType in AvailableQuestLineTypes)
+                    foreach (Type lineType in QuestManager.AvailableQuestLineTypes)
                     {
                         void onClick()
                         {

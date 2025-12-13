@@ -8,17 +8,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        // Handles the display of a selected questline element
-        public static ChapterElement SelectedElement { get; set; } = null;
-        public static ChapterElement HoveredElement { get; set; } = null;
+        private float questElementSwipeOffset = 0f;
+        private Vector2 minQuestAreaOffset => UseDesigner ? new(float.MinValue) : SelectedChapter.MinViewPoint;
+        private Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint;
 
-        private static float questElementSwipeOffset = 0f;
-        public static Vector2 QuestAreaOffset = Vector2.Zero;
-        private static Vector2 minQuestAreaOffset => UseDesigner ? new(float.MinValue) : SelectedChapter.MinViewPoint;
-        private static Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint;
-
-        private static Vector2? cachedRightClick = null;
-        private static Vector2 cachedOffset = Vector2.Zero;
+        private Vector2? cachedRightClick = null;
+        private Vector2 cachedOffset = Vector2.Zero;
 
         private void UpdateQuestArea(Rectangle questArea, Vector2 scaledMouse)
         {

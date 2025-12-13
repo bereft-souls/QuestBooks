@@ -99,11 +99,11 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public Vector2 CanvasPosition { get; set; }
 
-        public Vector2 ConnectorAnchor => CanvasPosition - BasicQuestLogStyle.QuestAreaOffset;
+        public Vector2 ConnectorAnchor => CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
 
         public List<Connector> Connections { get; set; } = [];
 
-        public override bool VisibleOnCanvas() => IncomingFeeds >= DisplayFeeds || BasicQuestLogStyle.UseDesigner;
+        public override bool VisibleOnCanvas() => IncomingFeeds >= DisplayFeeds || QuestManager.ActiveStyle.UseDesigner;
         public bool Unlocked() => IncomingFeeds >= UnlockFeeds;
         public bool Completed() => Quest.Completed;
 
@@ -127,7 +127,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
         {
-            if (BasicQuestLogStyle.UseDesigner)
+            if (QuestManager.ActiveStyle.UseDesigner)
             {
                 int cycle = (int)(Main.timeForVisualEffects % 180 / 60);
                 switch (cycle)
@@ -216,7 +216,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         protected void DrawTexture(SpriteBatch spriteBatch, Texture2D texture, Color color)
         {
-            Vector2 drawPos = CanvasPosition - BasicQuestLogStyle.QuestAreaOffset;
+            Vector2 drawPos = CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
             spriteBatch.Draw(texture, drawPos, null, color, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
@@ -287,7 +287,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             // Clone the collection to allow modified enumeration
             foreach (var connection in Connections.ToArray())
             {
-                BasicQuestLogStyle.SelectedChapter.Elements.Remove(connection);
+                QuestManager.ActiveStyle.SelectedChapter.Elements.Remove(connection);
                 connection.OnDelete();
             }
         }

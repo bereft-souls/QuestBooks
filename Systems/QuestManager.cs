@@ -27,6 +27,11 @@ namespace QuestBooks.Systems
         public static Dictionary<string, QuestLogStyle> QuestLogStyles = null;
         public static QuestLogStyle ActiveStyle = null;
 
+        // These are registered on load
+        public static readonly List<Type> AvailableQuestBookTypes = [];
+        public static readonly List<Type> AvailableQuestLineTypes = [];
+        public static readonly Dictionary<Type, ChapterElement> AvailableQuestElementTypes = [];
+
         // Reset "completed" quests
         public static void LoadActiveQuests()
         {

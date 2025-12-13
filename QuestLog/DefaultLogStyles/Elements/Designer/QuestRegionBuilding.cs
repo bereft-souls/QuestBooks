@@ -8,20 +8,20 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static bool showBackdrop = false;
-        private static bool showGrid = false;
-        private static bool snapToGrid = false;
-        private static int gridSize = 20;
+        private bool showBackdrop = false;
+        private bool showGrid = false;
+        private bool snapToGrid = false;
+        private int gridSize = 20;
 
-        private static bool moveBounds = true;
-        private static bool showMidpoint = true;
-        private static bool movingAnchor = false;
-        private static bool movingMinView = false;
-        private static bool movingMaxView = false;
+        private bool moveBounds = true;
+        private bool showMidpoint = true;
+        private bool movingAnchor = false;
+        private bool movingMinView = false;
+        private bool movingMaxView = false;
 
-        private static Vector2 chapterAnchor = Vector2.Zero;
-        private static Vector2 chapterMinView = Vector2.Zero;
-        private static Vector2 chapterMaxView = Vector2.Zero;
+        private Vector2 chapterAnchor = Vector2.Zero;
+        private Vector2 chapterMinView = Vector2.Zero;
+        private Vector2 chapterMaxView = Vector2.Zero;
 
         private static readonly Vector2 defaultAnchor = new(230f, 270f);
         private static readonly Vector2 defaultCanvasSize = new(450, 530);
@@ -40,7 +40,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 {
                     sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, GridBlending, sampler, depth, raster, effect, matrix);
+                    sb.Begin(SpriteSortMode.Deferred, GridBlending, sampler, depth, raster, effect, matrix);
                 });
 
                 Color gridColor = Color.White with { A = (byte)(showBackdrop ? 0 : 100) };
@@ -63,7 +63,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 {
                     sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, BlendState.AlphaBlend, sampler, depth, raster, effect, matrix);
+                    sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, sampler, depth, raster, effect, matrix);
                 });
             }
         }

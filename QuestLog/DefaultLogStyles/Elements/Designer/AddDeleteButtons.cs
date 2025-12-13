@@ -14,7 +14,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private static void HandleAddDeleteButtons(Rectangle books, Rectangle chapters, Rectangle questArea)
+        private void HandleAddDeleteButtons(Rectangle books, Rectangle chapters, Rectangle questArea)
         {
             if (SelectedElement is not null)
                 return;

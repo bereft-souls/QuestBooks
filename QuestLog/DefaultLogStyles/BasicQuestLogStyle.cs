@@ -18,13 +18,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         // Available element retrieval
         public static IEnumerable<QuestBook> AvailableBooks { get => QuestManager.QuestBooks; }
-        public static IEnumerable<BookChapter> AvailableChapters { get => SelectedBook?.Chapters ?? []; }
-        public static ChapterElement[] SortedElements { get; set; } = null;
-
-        // These are registered on load
-        public static readonly List<Type> AvailableQuestBookTypes = [];
-        public static readonly List<Type> AvailableQuestLineTypes = [];
-        public static readonly Dictionary<Type, ChapterElement> AvailableQuestElementTypes = [];
+        public IEnumerable<BookChapter> AvailableChapters { get => SelectedBook?.Chapters ?? []; }
+        public ChapterElement[] SortedElements { get; set; } = null;
 
         // Mouse position on canvas
         protected static Vector2 ScaledMousePos { get; set; }
@@ -81,43 +76,42 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             AlphaBlendFunction = BlendFunction.Max
         };
 
-        private static RenderTargetBinding[] returnTargets = null;
-        private static BlendState returnBlend = null;
-        private static SamplerState returnSampler = null;
-        private static DepthStencilState returnDepth = null;
-        private static RasterizerState returnRaster = null;
-        private static Effect returnEffect = null;
-        private static Matrix returnMatrix = Matrix.Identity;
+        private RenderTargetBinding[] returnTargets = null;
+        private BlendState returnBlend = null;
+        private SamplerState returnSampler = null;
+        private DepthStencilState returnDepth = null;
+        private RasterizerState returnRaster = null;
+        private Effect returnEffect = null;
+        private Matrix returnMatrix = Matrix.Identity;
 
-        private static RenderTarget2D booksTarget = null;
-        private static RenderTarget2D chaptersTarget = null;
-        private static RenderTarget2D libraryTarget = null;
+        private RenderTarget2D booksTarget = null;
+        private RenderTarget2D chaptersTarget = null;
+        private RenderTarget2D libraryTarget = null;
 
-        private static RenderTarget2D questInfoTarget = null;
-        private static RenderTarget2D previousQuestInfoTarget = null;
+        private RenderTarget2D questInfoTarget = null;
+        private RenderTarget2D previousQuestInfoTarget = null;
 
-        private static RenderTarget2D questAreaTarget = null;
-        private static RenderTarget2D previousQuestAreaTarget = null;
+        private RenderTarget2D questAreaTarget = null;
+        private RenderTarget2D previousQuestAreaTarget = null;
 
-        private static bool swipingBetweenInfoPages = false;
-        private static float questInfoSwipeOffset = 0f;
+        private bool swipingBetweenInfoPages = false;
+        private float questInfoSwipeOffset = 0f;
         private const float FadeDesignation = 0.024f;
 
         #region Element Referentials
 
-        private static bool wantsRetarget = true;
+        private bool wantsRetarget = true;
         private const float scrollAcceleration = 0.2f;
 
         #endregion
 
         #region Draw Parameters
 
-        public static Vector2 LogPositionOffset { get; set; } = Vector2.Zero;
-        public static float LogScale { get; set; } = 1f;
-        public static bool UseDesigner { get; set; } = false;
+        public Vector2 LogPositionOffset { get; set; } = Vector2.Zero;
+        public float LogScale { get; set; } = 1f;
 
-        private static Rectangle LogArea;
-        private static readonly List<Action<SpriteBatch>> DrawTasks = [];
+        private Rectangle LogArea;
+        private readonly List<Action<SpriteBatch>> DrawTasks = [];
 
         #endregion
 
@@ -328,16 +322,43 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 drawAction(spriteBatch);
         }
 
+        public override void SelectBook(QuestBook book)
+        {
+            previousBook = SelectedBook;
+            SelectedBook = SelectedBook != book ? book : null;
+            SoundEngine.PlaySound(SoundID.MenuTick);
+
+            previousChapterScrollOffset = (int)realChaptersScrollOffset;
+            chaptersScrollOffset = 0;
+            realChaptersScrollOffset = 0f;
+
+            previousBookSwipeDirection = SelectedBook is null || bookLibrary.FindIndex(kvp => kvp.questBook == SelectedBook) > bookLibrary.FindIndex(kvp => kvp.questBook == previousBook);
+            previousBookSwipeOffset = 1f;
+        }
+
+        public override void SelectChapter(BookChapter chapter)
+        {
+            int sign = SelectedBook.Chapters.IndexOf(chapter) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
+            questElementSwipeOffset = questAreaTarget.Width * sign;
+            SortedElements = null;
+
+            SelectedChapter = SelectedChapter != chapter ? chapter : null;
+            QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor - defaultAnchor : Vector2.Zero;
+            SoundEngine.PlaySound(SoundID.MenuTick);
+        }
+
+        public override void OnEnterWorld() => SortedElements = null;
+
         #region Area Calculation
 
         // Queues a rectangle for drawing.
-        private static Rectangle AddRectangle(Rectangle rectangle, Color color, float stroke = 2f, bool fill = false)
+        private Rectangle AddRectangle(Rectangle rectangle, Color color, float stroke = 2f, bool fill = false)
         {
             DrawTasks.Add(sb => sb.DrawRectangle(rectangle, color, stroke, fill));
             return rectangle;
         }
 
-        private static Rectangle CalculateLogArea(out Vector2 logSize, out Vector2 halfScreen, out Vector2 halfRealScreen, float? scaleOverride = null)
+        private Rectangle CalculateLogArea(out Vector2 logSize, out Vector2 halfScreen, out Vector2 halfRealScreen, float? scaleOverride = null)
         {
             halfScreen = Main.ScreenSize.ToVector2() * 0.5f;
             halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
@@ -359,7 +380,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         #region Render Targets
 
-        private static void SwitchTargets(RenderTarget2D renderTarget,
+        private void SwitchTargets(RenderTarget2D renderTarget,
             BlendState blend = null,
             SamplerState sampler = null,
             DepthStencilState depth = null,
@@ -390,7 +411,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             });
         }
 
-        private static void SetupTargets()
+        private void SetupTargets()
         {
             QuestAssets.BasicQuestCanvas.Value.Wait();
             var basicLogArea = CalculateLogArea(out _, out _, out _, LogScale);

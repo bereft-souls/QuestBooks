@@ -41,10 +41,10 @@ namespace QuestBooks.Systems
             var types = AssemblyManager.GetLoadableTypes(loadingAssembly);
             var questTypes = types.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
 
-            BasicQuestLogStyle.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))).OrderBy(t => t.Name));
-            BasicQuestLogStyle.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BookChapter))).OrderBy(t => t.Name));
+            QuestManager.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))).OrderBy(t => t.Name));
+            QuestManager.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BookChapter))).OrderBy(t => t.Name));
 
-            BasicQuestLogStyle.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(ChapterElement)))
+            QuestManager.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(ChapterElement)))
                 .Select(t => new KeyValuePair<Type, ChapterElement>(t, (ChapterElement)Activator.CreateInstance(t)))
                 .Select(kvp => { kvp.Value.TemplateInstance = true; return kvp; })
                 .OrderBy(kvp => kvp.Key.Name)

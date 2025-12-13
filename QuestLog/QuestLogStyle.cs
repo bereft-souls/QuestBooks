@@ -15,10 +15,19 @@ namespace QuestBooks.QuestLog
     {
         public abstract string Key { get; }
         public abstract string DisplayName { get; }
+        public virtual bool UseDesigner { get; set; } = false;
+
+        public virtual QuestBook SelectedBook { get; set; } = null;
+        public virtual BookChapter SelectedChapter { get; set; } = null;
+
+        public virtual ChapterElement SelectedElement { get; set; } = null;
+        public virtual ChapterElement HoveredElement { get; set; } = null;
+        public virtual Vector2 QuestAreaOffset { get; set; } = Vector2.Zero;
 
         public virtual void OnSelect() { }
         public virtual void OnDeselect() { }
 
+        public virtual void OnEnterWorld() { }
         public virtual void OnToggle(bool active) { }
 
         public virtual void UpdateLog() { }
@@ -66,6 +75,9 @@ namespace QuestBooks.QuestLog
         {
             spriteBatch.Draw(texture, center, null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
         }
+
+        public abstract void SelectBook(QuestBook book);
+        public abstract void SelectChapter(BookChapter chapter);
 
         public virtual void SavePlayerData(TagCompound tag) { }
         public virtual void SaveWorldData(TagCompound tag) { }
