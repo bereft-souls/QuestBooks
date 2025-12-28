@@ -14,8 +14,8 @@ namespace QuestBooks.Systems
         // Update the active quest log style.
         public override void UpdateUI(GameTime gameTime)
         {
-            foreach (var book in QuestManager.QuestBooks)
-                book.Update();
+            foreach (var questBook in QuestManager.QuestBooks)
+                questBook.Update();
 
             QuestManager.ActiveStyle.UpdateLog();
         }

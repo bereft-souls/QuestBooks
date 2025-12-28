@@ -66,14 +66,8 @@ namespace QuestBooks.Assets
         public static LazyTexture ExportButton { get; } = new("Designer/ExportButton", immediateLoad: false);
         public static LazyTexture ExportButtonHovered { get; } = new("Designer/ExportButtonHovered", immediateLoad: false);
 
-        public static LazyTexture ExportAllButton { get; } = new("Designer/ExportAllButton", immediateLoad: false);
-        public static LazyTexture ExportAllButtonHovered { get; } = new("Designer/ExportAllButtonHovered", immediateLoad: false);
-
         public static LazyTexture ImportButton { get; } = new("Designer/ImportButton", immediateLoad: false);
         public static LazyTexture ImportButtonHovered { get; } = new("Designer/ImportButtonHovered", immediateLoad: false);
-
-        public static LazyTexture ImportAllButton { get; } = new("Designer/ImportAllButton", immediateLoad: false);
-        public static LazyTexture ImportAllButtonHovered { get; } = new("Designer/ImportAllButtonHovered", immediateLoad: false);
 
         public static LazyTexture ShiftingCanvas { get; } = new("Designer/ShiftingCanvas", immediateLoad: false);
         public static LazyTexture ShiftingCanvasHovered { get; } = new("Designer/ShiftingCanvasHovered", immediateLoad: false);

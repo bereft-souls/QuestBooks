@@ -6,6 +6,7 @@ using QuestBooks.Systems;
 using QuestBooks.Systems.NetCode;
 using QuestBooks.Utilities;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Terraria.ModLoader;
 
@@ -42,7 +43,7 @@ namespace QuestBooks
         #region API
 
         /// <summary>
-        /// Enables the user of the quest book designer in game.<br/>
+        /// Enables the use of the quest book designer in game.<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
         public static void EnableDesigner(Mod enablingMod)
@@ -52,22 +53,32 @@ namespace QuestBooks
         }
 
         /// <summary>
-        /// Deserializes a custom quest book and adds it to the log.<br/>
+        /// Deserializes a custom quest log and adds it to the UI.<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void AddQuestBook(string serializedQuestBook)
+        public static void AddQuestLog(string questLogName, string serializedQuestLog)
         {
-            var questBook = JsonConvert.DeserializeObject<QuestBook>(serializedQuestBook, JsonTypeResolverFix.Settings);
-            AddQuestBook(questBook);
+            var questBook = JsonConvert.DeserializeObject<List<QuestBook>>(serializedQuestLog, JsonTypeResolverFix.Settings);
+            AddQuestLog(questLogName, questBook);
         }
 
         /// <summary>
-        /// Adds a custom quest book to the log.<br/>
+        /// Adds a custom quest log to the UI.<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void AddQuestBook(QuestBook questBook)
+        public static void AddQuestLog(string questLogName, IList<QuestBook> questLog)
         {
-            QuestManager.QuestBooks.Add(questBook);
+            QuestManager.QuestLogs.Add(questLogName, questLog);
+        }
+
+        /// <summary>
+        /// Disabled another quest log (i.e. for replacing the vanilla log).<br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// </summary>
+        /// <param name="questLogName"></param>
+        public static void DisableQuestLog(string questLogName)
+        {
+            QuestManager.DisabledQuestLogs.Add(questLogName);
         }
 
         /// <summary>
@@ -82,55 +93,6 @@ namespace QuestBooks
 
             QuestLoader.LogStyleRegistry.TryAdd(mod, []);
             QuestLoader.LogStyleRegistry[mod].Add(questLog);
-        }
-
-        // Allows adding a questbook without hard-referencing the assembly.
-        // In order to create quests, the assembly still needs to be referenced,
-        // but all quests are tagged with ExtendsFromMod by default, so
-        // this saves some effort on the front of external programmers.
-        public override object Call(params object[] args)
-        {
-            switch (((string)args[0]).ToLower())
-            {
-                case "enabledesigner":
-                    if (args[1] is not Mod enablingMod)
-                        return new ArgumentException("Invalid arguments: Second argument must the mod instance that is enabling the designer.");
-
-                    EnableDesigner(enablingMod);
-                    return true;
-
-                case "addquestbook":
-
-                    switch (args[1])
-                    {
-                        case QuestBook questBook:
-                            AddQuestBook(questBook);
-                            break;
-                        case string serialized:
-                            AddQuestBook(serialized);
-                            break;
-                        default:
-                            return new ArgumentException("Invalid arguments: Second argument must either be a QuestBook object, or a serialized QuestBook as outputted by the designer.");
-                    }
-
-                    return true;
-
-                case "addquestlogstyle":
-                    if (args[2] is not Mod)
-                        return new ArgumentException("Invalid arguments: Third argument must be the mod instance that is adding this quest log style");
-
-                    bool styleExclusive = args.Length < 4 || args[3] is not bool exclusive || !exclusive;
-
-                    if (args[1] is QuestLogStyle logStyle)
-                        AddQuestLogStyle(logStyle, (Mod)args[2], styleExclusive);
-
-                    else
-                        return new ArgumentException("Invalid arguments: Second argument must be a quest log style implementation");
-
-                    return true;
-            }
-
-            return new ArgumentException("No matching ModCall was found", (string)args[0]);
         }
 
         public static Quest GetQuest(string questName) => QuestManager.GetQuest(questName);

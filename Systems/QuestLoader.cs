@@ -92,12 +92,8 @@ namespace QuestBooks.Systems
         {
             // Attempt to fetch completed quest data from world.
             // If it does not exist, leave all quests as incomplete.
-            if (!tag.TryGet(TagKey, out string[] quests))
-                goto PostLoad;
-
-            LoadCompletedQuests(quests);
-
-        PostLoad:
+            if (tag.TryGet(TagKey, out string[] quests))
+                LoadCompletedQuests(quests);
 
             // Immediately mark any quests that should have previously been completed
             foreach (var quest in QuestManager.IncompleteWorldQuests.Select(QuestManager.GetQuest).ToArray())
@@ -113,10 +109,8 @@ namespace QuestBooks.Systems
             {
                 // Attempt to fetch completed quest data from player.
                 // If it does not exist, leave all player quests as incomplete.
-                if (!tag.TryGet(TagKey, out string[] quests))
-                    return;
-
-                LoadCompletedQuests(quests);
+                if (tag.TryGet(TagKey, out string[] quests))
+                    LoadCompletedQuests(quests);
             }
 
             public override void OnEnterWorld()
@@ -154,19 +148,19 @@ namespace QuestBooks.Systems
                 QuestManager.MarkComplete(quest);
         }
 
-        public static void SaveQuestBook(QuestBook book, string filePath)
+        public static void SaveQuestLog(IList<QuestBook> questLog, string filePath)
         {
-            string serialized = JsonConvert.SerializeObject(book, Formatting.Indented, JsonTypeResolverFix.Settings);
+            string serialized = JsonConvert.SerializeObject(questLog, Formatting.Indented, JsonTypeResolverFix.Settings);
             File.WriteAllText(filePath, serialized);
         }
 
-        public static QuestBook LoadQuestBook(string filePath)
+        public static List<QuestBook> LoadQuestLog(string filePath)
         {
             string serialized = File.ReadAllText(filePath);
 
             try
             {
-                QuestBook book = JsonConvert.DeserializeObject<QuestBook>(serialized, JsonTypeResolverFix.Settings);
+                List<QuestBook> book = JsonConvert.DeserializeObject<List<QuestBook>>(serialized, JsonTypeResolverFix.Settings);
                 return book;
             }
             catch

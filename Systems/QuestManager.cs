@@ -3,6 +3,7 @@ using QuestBooks.Quests;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 
 namespace QuestBooks.Systems
@@ -23,7 +24,12 @@ namespace QuestBooks.Systems
         public static string[] CompletedPlayerQuests { get; internal set; }
         public static string[] IncompletePlayerQuests { get; internal set; }
 
-        public static List<QuestBook> QuestBooks { get; internal set; } = [];
+        public static IList<QuestBook> QuestBooks { get; internal set; } = [];
+        public static Dictionary<string, IList<QuestBook>> QuestLogs { get; internal set; } = [];
+
+        public static IEnumerable<KeyValuePair<string, IList<QuestBook>>> AvailableQuestLogs { get => QuestLogs.Where(kvp => !DisabledQuestLogs.Contains(kvp.Key)); }
+        public static List<string> DisabledQuestLogs { get; internal set; } = [];
+
         public static Dictionary<string, QuestLogStyle> QuestLogStyles = null;
         public static QuestLogStyle ActiveStyle = null;
 
@@ -78,6 +84,8 @@ namespace QuestBooks.Systems
             CompletedPlayerQuests = null;
             IncompletePlayerQuests = null;
         }
+
+        public static void SelectQuestLog(string questLog) => QuestBooks = QuestLogs[questLog];
 
         public static Quest GetQuest(string questName) => ActiveQuests[questName];
         public static Quest GetQuest<TQuest>() where TQuest : Quest => GetQuest(QuestLoader.QuestNames[typeof(TQuest)]);
