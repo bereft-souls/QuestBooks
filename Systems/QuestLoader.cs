@@ -84,6 +84,8 @@ namespace QuestBooks.Systems
                 QuestManager.ActiveStyle = QuestManager.QuestLogStyles.First().Value;
 
             QuestManager.ActiveStyle.OnSelect();
+
+            QuestManager.SelectQuestLog(QuestManager.AvailableQuestLogs.First().Key);
         }
 
         #region Quest Loading

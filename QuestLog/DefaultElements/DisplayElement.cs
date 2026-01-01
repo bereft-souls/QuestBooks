@@ -88,8 +88,8 @@ namespace QuestBooks.QuestLog.DefaultElements
             public string Convert(string input) => input;
             public bool TryParse(string input, out string result)
             {
-                result = input;
-                return ModContent.FileExists($"{input}.rawimg");
+                result = input.Replace('\\', '/');
+                return ModContent.FileExists($"{result}.rawimg");
             }
         }
     }
