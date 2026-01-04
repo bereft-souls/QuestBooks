@@ -129,11 +129,19 @@ namespace QuestBooks.Systems
 
         #region Quest Saving
 
-        public override void SaveWorldData(TagCompound tag) => tag[TagKey] = QuestManager.CompletedWorldQuests.ToList();
+        public override void SaveWorldData(TagCompound tag)
+        {
+            if (QuestManager.CompletedWorldQuests is not null)
+                tag[TagKey] = QuestManager.CompletedWorldQuests.ToList();
+        }
 
         public partial class PlayerQuestLoader : ModPlayer
         {
-            public override void SaveData(TagCompound tag) => tag[TagKey] = QuestManager.CompletedPlayerQuests.ToList();
+            public override void SaveData(TagCompound tag)
+            {
+                if (QuestManager.CompletedPlayerQuests is not null)
+                    tag[TagKey] = QuestManager.CompletedPlayerQuests.ToList();
+            }
         }
 
         #endregion
