@@ -22,6 +22,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private static object MemberHash(MemberInfo memberInfo) => memberInfo is FieldInfo field ? field.FieldHandle : memberInfo;
 
+
+
         private static readonly object[] defaultMembers = typeof(ChapterElement)
             .GetProperties().Cast<MemberInfo>().Concat(typeof(ChapterElement).GetFields().Cast<MemberInfo>())
             .Select(MemberHash).ToArray();
@@ -32,13 +34,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private bool memberValueAccepted = false;
         private int memberScrollOffset = 0;
 
-        private class MemberBundle(MemberInfo memberInfo, string value, string tooltip, Func<string> getter, Func<string, bool> setter)
+        private class MemberBundle(MemberInfo memberInfo, string value, string tooltip, Func<string> getter, Func<string, bool> setter, object converter)
         {
             public MemberInfo MemberInfo = memberInfo;
             public string Value = value;
             public string Tooltip = tooltip;
             public Func<string> Getter = getter;
             public Func<string, bool> Setter = setter;
+            public object Converter = converter;
         }
 
         private void HandleElementProperties(Rectangle area, Vector2 mousePosition)
@@ -171,8 +174,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     // First check for an attributed converter,
                     // then check if we have a default converter for the type
-                    var converterType = attribute is not null && attribute.PropertyConverterType.IsAssignableTo(
-                        typeof(ChapterElement.IMemberConverter<>).MakeGenericType(memberType)) ?
+                    var converterType = (attribute is not null && attribute.PropertyConverterType.IsAssignableTo(
+                        typeof(ChapterElement.IMemberConverter<>).MakeGenericType(memberType))) ?
                         attribute.PropertyConverterType :
                         ChapterElement.DefaultConverters.GetValueOrDefault(memberType, null);
 
@@ -209,7 +212,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         null;
 
                     // Set up the member modification methods
-                    elementTypeMembers[elementType].Add(memberInfo, new(memberInfo, "", tooltipKey, elementGetter, elementSetter));
+                    elementTypeMembers[elementType].Add(memberInfo, new(memberInfo, "", tooltipKey, elementGetter, elementSetter, converter));
                 }
 
                 // Re-get the members now that they've been added
@@ -219,8 +222,23 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             // Re-populate values if switching elements and reset the scroll position
             if (SelectedElement != lastElement)
             {
-                foreach (MemberInfo memberInfo in members.Keys)
-                    members[memberInfo].Value = members[memberInfo].Getter();
+                foreach (MemberBundle bundle in members.Values)
+                {
+                    var field = bundle.Converter.GetType().GetField("CallingElement", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                    if (field is not null && field.FieldType == typeof(ChapterElement))
+                        field.SetValue(bundle.Converter, SelectedElement);
+
+                    else
+                    {
+                        var property = bundle.Converter.GetType().GetProperty("CallingElement", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                        if (property is not null && property.PropertyType == typeof(ChapterElement) && property.CanWrite)
+                            property.SetValue(bundle.Converter, SelectedElement);
+                    }
+
+                    bundle.Value = bundle.Getter();
+                }
 
                 memberScrollOffset = 0;
             }

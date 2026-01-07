@@ -50,6 +50,8 @@ namespace QuestBooks.Assets
         public static LazyTexture MediumQuest { get; } = new("Quests/Medium");
         public static LazyTexture LargeQuest { get; } = new("Quests/Large");
 
+        public static LazyTexture QuestJump { get; } = new("Quests/Diamond");
+
         #endregion
 
         #region Designer

@@ -325,8 +325,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         public override void SelectBook(QuestBook book)
         {
+            if (book == SelectedBook)
+                return;
+
             previousBook = SelectedBook;
-            SelectedBook = SelectedBook != book ? book : null;
+            SelectedBook = book;
             SoundEngine.PlaySound(SoundID.MenuTick);
 
             previousChapterScrollOffset = (int)realChaptersScrollOffset;
@@ -339,11 +342,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         public override void SelectChapter(BookChapter chapter)
         {
-            int sign = SelectedBook.Chapters.IndexOf(chapter) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
+            if (chapter == SelectedChapter)
+                return;
+
+            int sign = SelectedBook.Chapters.IndexOf(chapter ?? SelectedChapter) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
             questElementSwipeOffset = questAreaTarget.Width * sign;
             SortedElements = null;
 
-            SelectedChapter = SelectedChapter != chapter ? chapter : null;
+            SelectedChapter = chapter;
             QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor - defaultAnchor : Vector2.Zero;
             SoundEngine.PlaySound(SoundID.MenuTick);
         }

@@ -116,7 +116,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 bool hovered = hoveringChapters && rectangle.Contains(mouseChapters) && SelectedElement is null;
 
                 if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner))// && questElementSwipeOffset == 0f)
+                {
+                    BookChapter selectedChapter = (questLine == SelectedChapter) ? null : questLine;
                     SelectChapter(questLine);
+                }
 
                 bool selected = SelectedChapter == questLine;
                 DrawTasks.Add(sb => questLine.Draw(sb, rectangle, TargetScale, selected, hovered));

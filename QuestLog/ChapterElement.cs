@@ -31,39 +31,13 @@ namespace QuestBooks.QuestLog
         [JsonIgnore]
         public virtual float DrawPriority { get => 0.5f; }
 
-        /// <summary>
-        /// A set of "keywords" that can be used to filter to display only certain elements.<br/>
-        /// These keywords are localized, and the collection is retrieved via <see cref="KeyWordsLocalization"/>.
-        /// </summary>
-        [JsonIgnore]
-        [HideInDesigner]
-        public virtual string[] KeyWords { get; set; }
-
-        [JsonIgnore]
-        [HideInDesigner]
-        private string _keyWordsLocaliztion = "";
-
-        /// <summary>
-        /// The localization key for the collection of "keywords" that can be used to filter for this element.<br/>
-        /// Each key should be separated by a comma <c>,</c> with no whitespace in between keys/commas (keys themselves can contain whitespace).
-        /// </summary>
-        [JsonProperty]
-        [ElementTooltip("KeyWordsLocalization")]
-        public virtual string KeyWordsLocalization
-        {
-            get => _keyWordsLocaliztion;
-            set
-            {
-                _keyWordsLocaliztion = value;
-                KeyWords = Language.GetTextValue(value).Split(',');
-            }
-        }
-
         #region Common Methods
 
         public virtual void Update() { }
 
         public virtual bool IsHovered(Vector2 mousePosition, ref string mouseTooltip) { return false; }
+
+        public virtual void OnSelect() { }
 
         public virtual bool VisibleOnCanvas() { return true; }
 
@@ -102,9 +76,7 @@ namespace QuestBooks.QuestLog
         #region Designer Attributes
 
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-        public sealed class HideInDesignerAttribute : Attribute
-        {
-        }
+        public sealed class HideInDesignerAttribute : Attribute;
 
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
         public sealed class UseConverterAttribute(Type propertyConverterType) : Attribute
@@ -112,17 +84,13 @@ namespace QuestBooks.QuestLog
             public Type PropertyConverterType { get; init; } = propertyConverterType;
         }
 
-        [AttributeUsage(AttributeTargets.Class)]
-        private sealed class NonDefaultAttribute : Attribute
-        {
-        }
+        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
+        private sealed class NonDefaultAttribute : Attribute;
 
         /// <summary>
         /// Intended only for QuestBooks internal use. Simplifies the tooltip attribute to only need the last part of the key.
         /// </summary>
-        internal sealed class ElementTooltip(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Elements.{localizationKey}")
-        {
-        }
+        internal sealed class ElementTooltip(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Elements.{localizationKey}");
 
         #endregion
 
@@ -188,6 +156,30 @@ namespace QuestBooks.QuestLog
                     return false;
 
                 result = MathHelper.ToRadians(result);
+                return true;
+            }
+        }
+
+        [NonDefault]
+        public class Vector2Converter : IMemberConverter<Vector2>
+        {
+            public string Convert(Vector2 input) => $"{input.X},{input.Y}";
+            public bool TryParse(string input, out Vector2 result)
+            {
+                string[] xy = input.Split(',');
+                if (xy.Length != 2)
+                {
+                    result = default;
+                    return false;
+                }
+
+                if (!float.TryParse(xy[0], out float x) || !float.TryParse(xy[1], out float y))
+                {
+                    result = default;
+                    return false;
+                }
+
+                result = new(x, y);
                 return true;
             }
         }

@@ -25,9 +25,6 @@ namespace QuestBooks.QuestLog.DefaultElements
         private static readonly Asset<Texture2D> DefaultAsset = ModContent.Request<Texture2D>(DefaultTexture);
         private static readonly Asset<Texture2D> DefaultOutlineAsset = ModContent.Request<Texture2D>(DefaultOutline);
 
-        [HideInDesigner]
-        public override string KeyWordsLocalization { get => base.KeyWordsLocalization; set => base.KeyWordsLocalization = value; }
-
         public Vector2 CanvasPosition { get; set; }
 
         public Vector2 ConnectorAnchor => CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;

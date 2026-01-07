@@ -84,7 +84,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 bool hovered = hoveringBooks && rectangle.Contains(mouseBooks) && SelectedElement is null;
 
                 if (hovered && LeftMouseJustReleased && (questBook.IsUnlocked() || UseDesigner) && previousBookSwipeOffset == 0f)
+                {
+                    QuestBook selectedBook = (SelectedBook == questBook) ? null : questBook;
                     SelectBook(questBook);
+                }
 
                 bool selected = SelectedBook == questBook;
                 DrawTasks.Add(sb => questBook.Draw(sb, rectangle, TargetScale, selected, hovered));

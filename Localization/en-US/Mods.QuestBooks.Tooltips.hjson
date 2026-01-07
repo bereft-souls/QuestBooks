@@ -4,29 +4,17 @@ ToggleDesigner:
 	[c/CCC018:Toggle Designer]
 	Toggles whether the quest log designer is active.
 	'''
-SaveAll:
+SaveLog:
 	'''
-	[c/CCC018:Save All]
+	[c/CCC018:Save Quest Log]
 	Saves all books currently open in the designer.
-	Select a folder for the books to be exported to.
+	Select a file for the books to be exported to.
 	'''
-SaveSelected:
+LoadLog:
 	'''
-	[c/CCC018:Save Selected Book]
-	Exports the selected quest book.
-	Choose a file to export to.
-	'''
-LoadAll:
-	'''
-	[c/CCC018:Load All Books]
-	Loads multiple quest books into the designer.
+	[c/CCC018:Load Quest Log]
+	Loads quest books into the designer.
 	[c/FF0000:WARNING]: This will clear the books currently in the designer, so be sure to save your progress!
-	'''
-LoadBook:
-	'''
-	[c/CCC018:Load Quest Book]
-	Loads a quest book from a file.
-	Choose a file to import from.
 	'''
 AddBook:
 	'''
