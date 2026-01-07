@@ -55,3 +55,11 @@ IncompleteTexture:
 	'''
 DisplayPrerequisites: The number of "active feeds" required to this element in order for it to display on the canvas.
 UnlockPrerequisites: The number of "active feeds" required to this element in order for it to be unlocked on the canvas.
+QuestJump: Clicking this element will automatically jump the player to a different position in the quest log.
+JumpBook: The 0-based index of the book you want to jump to in the active list of quest books.
+JumpChapter: The 0-based index of the chapter you want to jump to in the specified book's list of chapters.
+JumpOffset:
+	'''
+	The position offset you want to jump to in the specified chapter. Listed as "X,Y"
+	'''
+TooltipLocalization: The localization key for this element's hover tooltip.

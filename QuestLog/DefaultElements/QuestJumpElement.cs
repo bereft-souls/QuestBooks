@@ -39,14 +39,17 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         [JsonProperty]
         [UseConverter(typeof(QuestBookChecker))]
+        [ElementTooltip("JumpBook")]
         public virtual QuestBook JumpBook { get; set; } = QuestManager.QuestBooks.FirstOrDefault(defaultValue: null);
 
         [JsonProperty]
         [UseConverter(typeof(QuestChapterChecker))]
+        [ElementTooltip("JumpChapter")]
         public virtual BookChapter JumpChapter { get; set; } = QuestManager.QuestBooks.FirstOrDefault(defaultValue: null)?.Chapters.FirstOrDefault(defaultValue: null) ?? null;
 
         [JsonProperty]
         [UseConverter(typeof(Vector2Converter))]
+        [ElementTooltip("JumpOffset")]
         public virtual Vector2 JumpOffset { get; set; } = Vector2.Zero;
 
         [JsonIgnore]
@@ -81,7 +84,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         [JsonIgnore]
         [HideInDesigner]
-        public string Tooltip { get => Language.GetOrRegister(TooltipLocalization).Value; }
+        public string Tooltip { get => string.IsNullOrWhiteSpace(TooltipLocalization) ? null : Language.GetOrRegister(TooltipLocalization).Value; }
 
         public Vector2 CanvasPosition { get; set; }
 
@@ -102,7 +105,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             bool hovered = CenteredRectangle(CanvasPosition, _unlockedTexture.Size()).Contains(mousePosition.ToPoint());
 
             string tooltip = Tooltip;
-            if (hovered && !string.IsNullOrEmpty(tooltip))
+            if (hovered && tooltip is not null)
                 mouseTooltip = tooltip;
 
             return hovered;
