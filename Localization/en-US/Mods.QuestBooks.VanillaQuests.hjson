@@ -6,6 +6,31 @@ Progression: {
 	EndGame: End Game
 }
 
+BookNames: {
+	Book0: Before the Journey
+	Book1: Journey's Beginning
+	Book2: IDK
+	Book3: Player & Side Content
+	Book4: Base, Towns and Arenas
+}
+
+ChapterNames: {
+	0Prologue: Prologue
+	0RecProg: Recommended Combat Progression
+	1Surface: Surface
+	1Caving: Caving
+	2Trials: Journey's Trials
+	2End: Journey's End
+	2AfterEnd: After the Journey
+	3MainProg: Main Player Progression
+	3SideProg: Side Content Progress
+	3CraftTrees: Major Crafting Recipes
+	3Extras: Extra Challenges
+	4Base: Base Building
+	4Town: Town Establishing 
+	4Arenas: Arena Construction & Utilities
+}
+
 NPCs.DisplayName: NPCs
 CraftingTrees.DisplayName: Crafting Trees
 Challenges.DisplayName: Challenges
