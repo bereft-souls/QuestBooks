@@ -4,22 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.Achievements;
+using Terraria.ModLoader;
+
 
 namespace QuestBooks.Quests.VanillaQuests.Book0
 {
-    public class ChopTree : Quest
+    public class CraftWorkbench : Quest
     {
         public override bool CheckCompletion()
         {
-            return false;  // TODO: checked when player chops tree, could piggyback off the existing achievement?
-                          // couldnt figure out how to access player data yet lol
+            return false ; // TODO: check for player crafting / acquiring workbench, achievement exists aswell
         }
         public override bool HasInfoPage => true;
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "Timber!";
-            contents = $"Chop down a nearby tree using your trusted Copper Axe!\n" +
-                $"Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.";
+            title = "Benched";
+            contents = "Using the wood you collected, craft an all-purpose Workbench to unlock more recipes!\n" +
+                "(To view the new recipes, you must stand closeby to the station)"; // Should change for 1.4.5's crafting UIs
             texture = null;
         }
     }

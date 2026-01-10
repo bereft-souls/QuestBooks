@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0
 {
-    public class ChopTree : Quest
+    public class CraftAnyGear : Quest
     {
         public override bool CheckCompletion()
         {
-            return false;  // TODO: checked when player chops tree, could piggyback off the existing achievement?
-                          // couldnt figure out how to access player data yet lol
+            return false;  // TODO: Needs to check for crafting any weapon or armor.
+                          // Probably best to simply check when the player crafts any item with a damage or defense value?
         }
         public override bool HasInfoPage => true;
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "Timber!";
-            contents = $"Chop down a nearby tree using your trusted Copper Axe!\n" +
-                $"Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.";
+            title = "Preparing for Trouble";
+            contents = $"Craft yourself a piece of equipment to better your chances in combat!\r\n" +
+                $"Any Broadsword, Bow or armorpiece should do.";
             texture = null;
         }
     }

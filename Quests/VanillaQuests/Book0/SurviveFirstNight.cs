@@ -7,19 +7,17 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0
 {
-    public class ChopTree : Quest
+    public class SurviveFirstNight : Quest
     {
         public override bool CheckCompletion()
         {
-            return false;  // TODO: checked when player chops tree, could piggyback off the existing achievement?
-                          // couldnt figure out how to access player data yet lol
+            return false; // TODO: Check for first night passed, probably a timer? achievement mirror
         }
         public override bool HasInfoPage => true;
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "Timber!";
-            contents = $"Chop down a nearby tree using your trusted Copper Axe!\n" +
-                $"Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.";
+            title = "You can do it!";
+            contents = "Survive your first night in the wild and dangerous world of Terraria!";
             texture = null;
         }
     }

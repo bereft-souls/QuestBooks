@@ -7,19 +7,18 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0
 {
-    public class ChopTree : Quest
+    public class CraftHammer : Quest
     {
         public override bool CheckCompletion()
         {
-            return false;  // TODO: checked when player chops tree, could piggyback off the existing achievement?
-                          // couldnt figure out how to access player data yet lol
+            return false; // TODO: Check for hammer craft / acquisation, achievement mirror
         }
         public override bool HasInfoPage => true;
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "Timber!";
-            contents = $"Chop down a nearby tree using your trusted Copper Axe!\n" +
-                $"Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.";
+            title = "Hammer time!";
+            contents = $"Craft a Wooden Hammer.\r\n" +
+                $"Hammers are used to break apart background wall tiles, and allows the reshaping of tiles by hitting them";
             texture = null;
         }
     }
