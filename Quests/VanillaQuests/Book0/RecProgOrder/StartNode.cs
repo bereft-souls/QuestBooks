@@ -13,7 +13,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.RecProgOrder
         {
             return true; // Start
         }
-        public override bool HasInfoPage => true;
+        
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = " ";      // TODO: Short explanation of this page, idea being all of the quests are blacked out until they are *FOUND* on their original trees.

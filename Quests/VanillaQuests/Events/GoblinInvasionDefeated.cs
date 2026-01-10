@@ -14,7 +14,7 @@ namespace QuestBooks.Quests.VanillaQuests.Events
         {
             return NPC.downedGoblins;
         }
-        public override bool HasInfoPage => true;
+        
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "Goblin Punter";

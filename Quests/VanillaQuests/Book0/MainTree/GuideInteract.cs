@@ -13,7 +13,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
         {
             return true; // Should be a check for interacting with the guide (right clicking him)
         }
-        public override bool HasInfoPage => true;
+        
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "The Guide";

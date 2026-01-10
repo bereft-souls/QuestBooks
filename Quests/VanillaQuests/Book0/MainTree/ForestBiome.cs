@@ -15,7 +15,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
             return false;  // TODO: Should be a check for being in the forest biome
                          // which would still be an insta-check 99% of the time (in non-special seed worlds) but yeah
         }
-        public override bool HasInfoPage => true;
+        
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "The Forest";

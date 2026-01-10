@@ -14,7 +14,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
             return false;  // TODO: Needs to check for crafting any weapon or armor.
                           // Probably best to simply check when the player crafts any item with a damage or defense value?
         }
-        public override bool HasInfoPage => true;
+        
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "Preparing for Trouble";

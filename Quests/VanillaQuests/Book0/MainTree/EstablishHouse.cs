@@ -13,7 +13,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
         {
             return false; // TODO: Check for a valid house being constructed, achievement mirror
         }
-        public override bool HasInfoPage => true;
+        
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "No Hobo";

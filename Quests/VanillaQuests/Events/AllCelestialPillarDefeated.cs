@@ -15,7 +15,7 @@ namespace QuestBooks.Quests.VanillaQuests.Events
             return (NPC.downedTowerSolar && NPC.downedTowerVortex && NPC.downedTowerNebula && NPC.downedTowerStardust); //i saw theres a .downedTowers but the doc
                                                                                                                        //confused me on wether its just a bool or not
         }
-        public override bool HasInfoPage => true;
+        
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "";     // TODO: Desc
