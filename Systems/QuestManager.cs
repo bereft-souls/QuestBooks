@@ -45,7 +45,7 @@ namespace QuestBooks.Systems
             Dictionary<string, Quest> newWorldQuests = [];
             Dictionary<string, Quest> newPlayerQuests = [];
 
-            foreach (var kvp in QuestLoader.QuestNames)
+            foreach (var kvp in QuestLoader.QuestKeys)
             {
                 var quest = (Quest)Activator.CreateInstance(kvp.Key);
                 newActiveQuests.Add(kvp.Value, quest);
@@ -88,12 +88,12 @@ namespace QuestBooks.Systems
         public static void SelectQuestLog(string questLog) => QuestBooks = QuestLogs[questLog];
 
         public static Quest GetQuest(string questName) => ActiveQuests[questName];
-        public static Quest GetQuest<TQuest>() where TQuest : Quest => GetQuest(QuestLoader.QuestNames[typeof(TQuest)]);
+        public static Quest GetQuest<TQuest>() where TQuest : Quest => GetQuest(QuestLoader.QuestKeys[typeof(TQuest)]);
 
         public static bool TryGetQuest(string questName, out Quest result) => ActiveQuests.TryGetValue(questName, out result);
         public static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest
         {
-            if (QuestLoader.QuestNames.TryGetValue(typeof(TQuest), out var questName) && TryGetQuest(questName, out var questResult))
+            if (QuestLoader.QuestKeys.TryGetValue(typeof(TQuest), out var questName) && TryGetQuest(questName, out var questResult))
             {
                 result = (TQuest)questResult;
                 return true;
