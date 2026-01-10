@@ -5,19 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
-    public class InventoryInfo : Quest
+    public class SurviveFirstNight : Quest
     {
         public override bool CheckCompletion()
         {
-            return true; // Info node
+            return false; // TODO: Check for first night passed, probably a timer? achievement mirror
         }
         public override bool HasInfoPage => true;
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "Your Inventory";
-            contents = $""; // TODO: Write this later
+            title = "You can do it!";
+            contents = "Survive your first night in the wild and dangerous world of Terraria!";
             texture = null;
         }
     }

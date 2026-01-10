@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
     public class ForestBiome : Quest
     {

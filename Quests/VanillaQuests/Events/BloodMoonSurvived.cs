@@ -5,22 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Events
 {
-    public class StartNode : Quest
+    public class BloodMoonSurvived : Quest
     {
         public override bool CheckCompletion()
         {
-            return true;
+            return false; // TODO: Check for Blood Moon "defeat"
         }
         public override bool HasInfoPage => true;
-
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
-        {
-            title = "First Steps";
-            contents = $"Welcome to the wonderful, yet cruel world of Terraria!" +
-                $"\n" +
-                $"Explore diverse biomes, face off dangerous foes, loot structures and craft weapons all to aid you in your journey!";
+        { // TODO desc
+            title = "";
+            contents = "";
             texture = null;
         }
     }

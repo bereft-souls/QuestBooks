@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
     public class ChopTree : Quest
     {

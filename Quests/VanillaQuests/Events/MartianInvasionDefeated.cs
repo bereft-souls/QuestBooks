@@ -4,20 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Events
 {
-    public class DayNightInfo : Quest
+    public class MartianInvasionDefeated : Quest
     {
         public override bool CheckCompletion()
         {
-            return true; // info
+            return NPC.downedMartians;
         }
         public override bool HasInfoPage => true;
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "The Day / Night Cycle and its effects on you";
-            contents = string.Empty; // TODO: write this up
+            title = "";     // TODO: Desc
+            contents = "";
             texture = null;
         }
     }

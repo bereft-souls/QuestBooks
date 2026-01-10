@@ -5,20 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Events
 {
-    public class CraftHammer : Quest
+    public class SolarEclipseSurvived : Quest
     {
         public override bool CheckCompletion()
         {
-            return false; // TODO: Check for hammer craft / acquisation, achievement mirror
+            return false; // TODO: Check for Solar Eclipse "defeat"
         }
         public override bool HasInfoPage => true;
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "Hammer time!";
-            contents = $"Craft a Wooden Hammer.\r\n" +
-                $"Hammers are used to break apart background wall tiles, and allows the reshaping of tiles by hitting them";
+            title = "";     // TODO: Desc
+            contents = "";
             texture = null;
         }
     }

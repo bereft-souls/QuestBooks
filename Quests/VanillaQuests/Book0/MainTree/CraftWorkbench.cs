@@ -8,7 +8,7 @@ using Terraria.Achievements;
 using Terraria.ModLoader;
 
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
     public class CraftWorkbench : Quest
     {

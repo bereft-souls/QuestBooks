@@ -5,19 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
-    public class BasicsCompleteInfo : Quest
+    public class StartNode : Quest
     {
         public override bool CheckCompletion()
         {
-            return true; // Info node
+            return true;
         }
         public override bool HasInfoPage => true;
+
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = "Basically a Professional";
-            contents = $"Now that you have finished the basics, go explore the world of Terraria to your hearts content!";
+            title = "First Steps";
+            contents = $"Welcome to the wonderful, yet cruel world of Terraria!" +
+                $"\n" +
+                $"Explore diverse biomes, face off dangerous foes, loot structures and craft weapons all to aid you in your journey!";
             texture = null;
         }
     }
