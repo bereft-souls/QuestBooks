@@ -23,14 +23,14 @@ namespace QuestBooks.Systems
 
         // We use a separate dictionary for loading and accessing to
         // improve performance and ensure that quests are not modified post-setup.
-        private static readonly Dictionary<string, Type> loadingQuests = [];
-        private static readonly List<Assembly> checkedAssemblies = [];
-        public static FrozenDictionary<Type, string> QuestNames { get; internal set; }
+        private static readonly HashSet<Assembly> checkedAssemblies = [];
+        internal static readonly Dictionary<Type, string> loadingQuests = [];
+        public static FrozenDictionary<Type, string> QuestKeys { get; internal set; }
 
         public static QuestLogStyle ExclusiveOverrideStyle = null;
         public static Dictionary<Mod, List<QuestLogStyle>> LogStyleRegistry = [];
 
-        public static void LoadQuests(Mod mod)
+        internal static void LoadQuests(Mod mod)
         {
             var loadingAssembly = mod.Code;
 
@@ -39,7 +39,7 @@ namespace QuestBooks.Systems
 
             checkedAssemblies.Add(loadingAssembly);
             var types = AssemblyManager.GetLoadableTypes(loadingAssembly);
-            var questTypes = types.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
+            //var questTypes = types.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
 
             QuestManager.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))).OrderBy(t => t.Name));
             QuestManager.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BookChapter))).OrderBy(t => t.Name));
@@ -50,18 +50,18 @@ namespace QuestBooks.Systems
                 .OrderBy(kvp => kvp.Key.Name)
                 .ToDictionary());
 
-            foreach (var questType in questTypes)
-            {
-                var quest = (Quest)Activator.CreateInstance(questType);
-                loadingQuests.TryAdd(quest.Key, questType);
-            }
+            //foreach (var questType in questTypes)
+            //{
+            //    var quest = (Quest)Activator.CreateInstance(questType);
+            //    loadingQuests.TryAdd(quest.Key, questType);
+            //}
         }
 
         // Mods should load their quests in PostSetupContent().
         // Following that, we freeze the dictionary and reset the loading.
         public override void PostAddRecipes()
         {
-            QuestNames = loadingQuests.Select(kvp => new KeyValuePair<Type, string>(kvp.Value, kvp.Key)).ToFrozenDictionary();
+            QuestKeys = loadingQuests.ToFrozenDictionary();
             loadingQuests.Clear();
             checkedAssemblies.Clear();
 

@@ -6,8 +6,6 @@ namespace QuestBooks.Quests.VanillaQuests.Bosses
 {
     public class EyeOfCthulhuDefeated : Quest
     {
-        public override bool HasInfoPage => true;
-
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "The Eye of Cthulhu";

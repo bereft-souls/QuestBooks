@@ -234,10 +234,11 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override bool HasInfoPage => Quest.HasInfoPage;
+        public override bool HasInfoPage => true;
 
         public override void DrawInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action updateAction)
         {
+            // Only fetch once
             var quest = Quest;
 
             // Custom info page drawing, if overridden

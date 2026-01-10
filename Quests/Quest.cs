@@ -10,7 +10,7 @@ namespace QuestBooks.Quests
     /// By default, quests are tagged with the <see cref="ExtendsFromModAttribute"/> to only load when QuestBooks is enabled.
     /// </summary>
     [ExtendsFromMod("QuestBooks")]
-    public abstract class Quest
+    public abstract class Quest : ModType, ILocalizedModType
     {
         /// <summary>
         /// Whether this quest has been completed.<br/>
@@ -22,7 +22,7 @@ namespace QuestBooks.Quests
         /// The unique identifier of this quest. Can be anything, but cannot be used by other quests.<br/>
         /// This is used when retrieving <see cref="QuestManager.GetQuest(string)"/>.
         /// </summary>
-        public virtual string Key { get => this.GetType().Name; }
+        public virtual string Key { get => GetType().Name; }
 
         /// <summary>
         /// The text that should display in the mouse tooltip whenever this quest is hovered over in the quest log.<br/>
@@ -31,20 +31,17 @@ namespace QuestBooks.Quests
         public virtual string HoverTooltip => null;
 
         /// <summary>
-        /// Override this to indicate whether the quest should display an "info page" in the quest log when clicked.
-        /// </summary>
-        public virtual bool HasInfoPage => false;
-
-        /// <summary>
         /// Override this method to implement your own custom drawing for info pages in the quest log.<br/>
         /// Note that your logic NOT scale with any UI parameters, as scaling is handled via matrices and render targets here.
         /// </summary>
         public virtual void DrawCustomInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition) { }
 
         /// <summary>
-        /// Override this method to modify the parameters for a "simple info page" drawing.<br/>
-        /// This will use the default info page draw logic.<br/>
-        /// You can return <see langword="null"/> for any of the parameters if you do not want to assign them.
+        /// Override this method to modify the parameters for a "simple info page" drawing. This will use the default info page draw logic.<br/>
+        /// You can return <see langword="null"/> for any of the parameters if you do not want to assign them.<br/>
+        /// <br/>
+        /// If you do not override this method, default values will be fetched based on localized <c>Mods.ModName.QuestBooks.QuestName.{Title / Contents}</c>.<br/>
+        /// You can alternatively override <see cref="LocalizationCategory"/> to change only the localization category ("QuestBooks") and keep other details default.
         /// </summary>
         /// 
         /// <param name="title">The "title" of this quest. Displays in an info page when this quest is clicked in the quest log.<br/>
@@ -59,15 +56,25 @@ namespace QuestBooks.Quests
         /// 
         public virtual void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = null;
-            contents = null;
-            texture = null;
+            title = this.GetLocalizedValue("Title");
+            contents = this.GetLocalizedValue("Contents");
+            texture = ModContent.RequestIfExists<Texture2D>($"{Mod.Name}/{TextureCategory}/{Name}", out var asset, ReLogic.Content.AssetRequestMode.ImmediateLoad) ? asset.Value : null;
         }
 
         /// <summary>
         /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.
         /// </summary>
         public virtual QuestType QuestType { get => QuestType.World; }
+
+        public virtual string LocalizationCategory { get => "QuestBooks"; }
+
+        /// <summary>
+        /// The folder path that will be used to fetch the default texture for use in <see cref="MakeSimpleInfoPage(out string, out string, out Texture2D)"/>.<br/>
+        /// If you override <see cref="MakeSimpleInfoPage(out string, out string, out Texture2D)"/>, you can supply any arbitrary texture instead.<br/>
+        /// <br/>
+        /// Default is <c>{YourModName}/Assets/Texture/QuestBooks</c>
+        /// </summary>
+        public virtual string TextureCategory { get => "Assets/Textures/QuestBooks"; }
 
         /// <summary>
         /// This is called every frame, regardless of whether the quest is completed. You can do any logic updating, dynamic quest updating, etc. here.<br/>
@@ -94,6 +101,12 @@ namespace QuestBooks.Quests
         /// Otherwise return <see langword="false"/>.
         /// </summary>
         public abstract bool CheckCompletion();
+
+        protected sealed override void Register() => QuestLoader.loadingQuests.Add(GetType(), Key);
+
+        public sealed override void SetupContent() => SetStaticDefaults();
+
+        protected sealed override void InitTemplateInstance() => base.InitTemplateInstance();
     }
 
     public enum QuestType
