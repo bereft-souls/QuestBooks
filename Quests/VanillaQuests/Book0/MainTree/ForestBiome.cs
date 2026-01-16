@@ -24,6 +24,6 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
                 $"Between the lush greenery and comfy breeze, it seems like the perfect spot to set up base in!";
             texture = null;
         }
-
+        // May just use this one for the forest quest dupe in book1, depends on if the extra lines there are worth or not
     }
 }
