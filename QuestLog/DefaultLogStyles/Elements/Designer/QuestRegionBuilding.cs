@@ -78,6 +78,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 mousePosition.Y = float.Round(mousePosition.Y / gridSize, MidpointRounding.AwayFromZero) * gridSize;
             }
 
+            // Otherwise round to integers (helps with drawing)
+            else
+            {
+                mousePosition.X = float.Round(mousePosition.X, MidpointRounding.AwayFromZero);
+                mousePosition.Y = float.Round(mousePosition.Y, MidpointRounding.AwayFromZero);
+            }
+
             if (!(SelectedChapter?.EnableShifting ?? false))
                 goto ElementPlacement;
 
