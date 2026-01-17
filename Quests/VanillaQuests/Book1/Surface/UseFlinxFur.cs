@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Surface
 {
-    internal class UseFlinxFur
+    internal class UseFlinxFur : Quest
     {
         public override bool CheckCompletion()
         {

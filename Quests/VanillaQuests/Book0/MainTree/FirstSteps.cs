@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
-    public class StartNode : Quest
+    public class FirstSteps : Quest
     {
         public override bool CheckCompletion()
         {
