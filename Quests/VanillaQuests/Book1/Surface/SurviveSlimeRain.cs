@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Surface
 {
-    internal class SlimeRainSurvived : Quest
+    internal class SurviveSlimeRain : Quest
     {
         public override bool CheckCompletion()
         {
