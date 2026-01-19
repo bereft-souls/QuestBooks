@@ -125,10 +125,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (LeftMouseJustReleased)
                 {
+                    if (placingElement == SelectedElement)
+                        return;
+
                     placingElement = SelectedElement;
                     SelectedChapter.Elements.Remove(SelectedElement);
                     SortedElements = null;
-                    SelectedElement = null;
                     questInfoSwipeOffset = -questInfoTarget.Height;
                     SoundEngine.PlaySound(SoundID.MenuTick);
                     return;
