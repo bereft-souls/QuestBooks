@@ -84,13 +84,13 @@ namespace QuestBooks.QuestLog
             public Type PropertyConverterType { get; init; } = propertyConverterType;
         }
 
-        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
+        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
         private sealed class NonDefaultAttribute : Attribute;
 
         /// <summary>
         /// Intended only for QuestBooks internal use. Simplifies the tooltip attribute to only need the last part of the key.
         /// </summary>
-        internal sealed class ElementTooltip(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Elements.{localizationKey}");
+        internal sealed class ElementTooltipAttribute(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Elements.{localizationKey}");
 
         #endregion
 
