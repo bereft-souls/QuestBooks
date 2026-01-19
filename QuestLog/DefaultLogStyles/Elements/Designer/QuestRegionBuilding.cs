@@ -195,19 +195,19 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    sb.Draw(QuestAssets.BigPixel, center, null, Color.DarkGray, angle.ToRotation(), Vector2.One, new Vector2(angle.Length() * 0.5f, 1f), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f);
-                    sb.Draw(QuestAssets.CanvasCenter, center, null, Color.DarkGray, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 2f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f);
+                    sb.Draw(QuestAssets.BigPixel, center, null, Color.DarkGray, angle.ToRotation(), Vector2.One, new Vector2(angle.Length() * 0.5f, 1f), SpriteEffects.None, 0f);
+                    sb.Draw(QuestAssets.CanvasCenter, center, null, Color.DarkGray, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 2f, SpriteEffects.None, 0f);
 
                     sb.Draw(QuestAssets.CanvasCenter, anchor.Location.ToVector2(), movingAnchor ? Color.Red : Color.Yellow);
-                    sb.Draw(QuestAssets.CanvasCorner, left, null, movingMinView ? Color.Red : Color.Yellow, 0f, Vector2.Zero, 1f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f);
-                    sb.Draw(QuestAssets.CanvasCorner, right, null, movingMaxView ? Color.Red : Color.Yellow, MathHelper.Pi, Vector2.Zero, 1f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f);
+                    sb.Draw(QuestAssets.CanvasCorner, left, null, movingMinView ? Color.Red : Color.Yellow, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                    sb.Draw(QuestAssets.CanvasCorner, right, null, movingMaxView ? Color.Red : Color.Yellow, MathHelper.Pi, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 });
             }
 
             else if (showMidpoint)
             {
                 Vector2 drawPos = new(float.Round(center.X), float.Round(center.Y));
-                DrawTasks.Add(sb => sb.Draw(QuestAssets.CanvasCenter, drawPos, null, Color.LightGray, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 1f, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0f));
+                DrawTasks.Add(sb => sb.Draw(QuestAssets.CanvasCenter, drawPos, null, Color.LightGray, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 1f, SpriteEffects.None, 0f));
             }
 
         ElementPlacement:
@@ -217,7 +217,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (LeftMouseJustReleased && mouseInBounds)
             {
-                if (placingElement.PlaceOnCanvas(SelectedChapter, mousePosition))
+                if (placingElement.PlaceOnCanvas(SelectedChapter, mousePosition, QuestAreaOffset))
                 {
                     SelectedChapter.Elements.Add(placingElement);
                     SortedElements = null;
