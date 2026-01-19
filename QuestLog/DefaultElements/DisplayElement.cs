@@ -52,7 +52,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         [ElementTooltip("DisplayRotation")]
         public float Rotation { get; set; } = 0f;
 
-        public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
             return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains(mousePosition.ToPoint());
@@ -78,7 +78,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, drawPos, null, Color.White, Rotation, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
+        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;
@@ -93,6 +93,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             }
 
             Texture2D texture = _texture.Value;
+            CanvasPosition = mousePosition;
             spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 

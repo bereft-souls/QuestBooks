@@ -35,7 +35,7 @@ namespace QuestBooks.QuestLog
 
         public virtual void Update() { }
 
-        public virtual bool IsHovered(Vector2 mousePosition, ref string mouseTooltip) { return false; }
+        public virtual bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip) { return false; }
 
         public virtual void OnSelect() { }
 
@@ -53,7 +53,7 @@ namespace QuestBooks.QuestLog
 
         #region Designer Methods
 
-        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition);
+        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset);
 
         public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
         {

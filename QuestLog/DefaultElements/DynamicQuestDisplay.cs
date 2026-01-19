@@ -44,18 +44,6 @@ namespace QuestBooks.QuestLog.DefaultElements
             _lockedTexture = DynamicQuest.LockedTexture;
         }
 
-        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
-        {
-            if (_completedTexture is null || _completedTexture.Value is null)
-            {
-                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset);
-                return;
-            }
-
-            Texture2D texture = _completedTexture.Value;
-            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
-        }
-
         public class DynamicQuestChecker : IMemberConverter<string>
         {
             public string Convert(string input) => input;

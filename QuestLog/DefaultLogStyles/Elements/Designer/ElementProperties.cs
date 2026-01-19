@@ -22,8 +22,6 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private static object MemberHash(MemberInfo memberInfo) => memberInfo is FieldInfo field ? field.FieldHandle : memberInfo;
 
-
-
         private static readonly object[] defaultMembers = typeof(ChapterElement)
             .GetProperties().Cast<MemberInfo>().Concat(typeof(ChapterElement).GetFields().Cast<MemberInfo>())
             .Select(MemberHash).ToArray();
