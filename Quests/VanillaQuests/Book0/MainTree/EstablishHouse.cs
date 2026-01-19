@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
@@ -13,7 +8,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
         {
             return false; // TODO: Check for a valid house being constructed, achievement mirror
         }
-        
+
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "No Hobo";

@@ -1,11 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.Achievements;
-using Terraria.ModLoader;
 
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
@@ -14,9 +7,9 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
     {
         public override bool CheckCompletion()
         {
-            return false ; // TODO: check for player crafting / acquiring workbench, achievement exists aswell
+            return false; // TODO: check for player crafting / acquiring workbench, achievement exists aswell
         }
-        
+
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
             title = "Benched";

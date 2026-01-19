@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;

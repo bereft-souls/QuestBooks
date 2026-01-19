@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
 {
@@ -18,7 +13,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
         {
             title = "Events and occurances throughout Terraria";
             contents = null; // TODO: Write this up, this probably shouldnt be JUST combat events (goblins, pirates..) but also smaller things / single time things
-                            // like star showers, ladybugs, meteor crashes etc. should be written generically though (dont mention Goblin Invasion or Meteor by name)
+                             // like star showers, ladybugs, meteor crashes etc. should be written generically though (dont mention Goblin Invasion or Meteor by name)
             texture = null;
         }
     }
