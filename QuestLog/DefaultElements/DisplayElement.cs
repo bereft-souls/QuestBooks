@@ -52,6 +52,11 @@ namespace QuestBooks.QuestLog.DefaultElements
         [ElementTooltip("DisplayRotation")]
         public float Rotation { get; set; } = 0f;
 
+        [ElementTooltip("DrawLayer")]
+        public float Layer { get; set; } = 0.5f;
+
+        public override float DrawPriority => Layer;
+
         public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
