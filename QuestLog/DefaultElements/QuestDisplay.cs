@@ -2,12 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Quests;
 using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using ReLogic.Content;
-using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,8 +1,6 @@
 ﻿using MonoMod.Utils;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
-using QuestBooks.QuestLog.DefaultLogStyles;
-using QuestBooks.Quests;
 using QuestBooks.Utilities;
 using System;
 using System.Collections.Frozen;
@@ -10,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 using Terraria.ModLoader.IO;

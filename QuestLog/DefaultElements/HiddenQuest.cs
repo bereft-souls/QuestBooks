@@ -1,14 +1,13 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using ReLogic.Content;
 using System.Collections.Generic;
-using Terraria.ModLoader;
 using Terraria;
+using Terraria.ModLoader;
 using static QuestBooks.QuestLog.DefaultElements.QuestDisplay;
-using Microsoft.Xna.Framework;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
