@@ -166,7 +166,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         protected virtual void DrawUnlocked(SpriteBatch spriteBatch, Vector2 canvasOffset, bool hovered, bool selected)
         {
-            if (hovered)
+            if (hovered )
                 DrawOutline(spriteBatch, canvasOffset, Color.LightGray);
 
             else

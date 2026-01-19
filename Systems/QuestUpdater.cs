@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using MonoMod.Utils;
+using QuestBooks.Quests;
 using QuestBooks.Systems.NetCode;
 using System.Linq;
 using Terraria;

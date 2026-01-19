@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
+using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Systems;
 using Terraria;
 using Terraria.GameContent;

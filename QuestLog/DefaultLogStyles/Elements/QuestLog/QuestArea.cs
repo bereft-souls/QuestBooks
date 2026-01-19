@@ -76,7 +76,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
             {
                 ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
-
+                
                 if (!UseDesigner)
                     element?.OnSelect();
 
