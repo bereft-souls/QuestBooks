@@ -85,6 +85,18 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
+        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
+        {
+            if (_texture is null || _texture.Value is null)
+            {
+                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset);
+                return;
+            }
+
+            Texture2D texture = _texture.Value;
+            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+        }
+
         public class TextureChecker : IMemberConverter<string>
         {
             public string Convert(string input) => input;
