@@ -60,8 +60,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             Rectangle elementProperties = area.CookieCutter(new(0f, 0.05f), new(0.95f, 0.8f));
             Rectangle deleteElement = elementProperties.CookieCutter(new(-0.9f, 1.075f), new(0.1f, 0.06f));
+            Rectangle moveElement = deleteElement.CookieCutter(new(3.5f, 0f), Vector2.One);
             Rectangle propertyTitle = elementProperties.CookieCutter(new(-0.13f, -1.06f), new(0.85f, 0.1f));
+
             bool deleteElementHovered = false;
+            bool moveElementHovered = false;
 
             if (deleteElement.Contains(mouseCanvas))
             {
@@ -115,10 +118,30 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
             }
 
+            if (moveElement.Contains(mouseCanvas))
+            {
+                moveElementHovered = true;
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.MoveElement");
+
+                if (LeftMouseJustReleased)
+                {
+                    placingElement = SelectedElement;
+                    SelectedChapter.Elements.Remove(SelectedElement);
+                    SortedElements = null;
+                    SelectedElement = null;
+                    questInfoSwipeOffset = -questInfoTarget.Height;
+                    SoundEngine.PlaySound(SoundID.MenuTick);
+                    return;
+                }
+            }
+
             DrawTasks.Add(sb =>
             {
                 Texture2D texture = deleteElementHovered ? QuestAssets.DeleteButtonHovered : QuestAssets.DeleteButton;
                 sb.Draw(texture, deleteElement.Center(), null, Color.White, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+
+                texture = moveElementHovered ? QuestAssets.MoveButtonHovered : QuestAssets.MoveButton;
+                sb.Draw(texture, moveElement.Center(), null, Color.White, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
             });
 
             //AddRectangle(elementProperties, Color.Red);            
