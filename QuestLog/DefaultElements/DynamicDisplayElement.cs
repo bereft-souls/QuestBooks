@@ -9,6 +9,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 {
     public class DynamicDisplayElement : DisplayElement, IConnectable
     {
+        [ElementTooltip("ShowConnections")]
         public virtual bool ShowConnections { get; set; } = false;
 
         [ElementTooltip("DisplayPrerequisites")]
