@@ -186,7 +186,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
-            Texture2D texture = DefaultAsset.Value;
+            Texture2D texture = _unlockedTexture?.Value ?? DefaultAsset.Value;
             spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 220 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 

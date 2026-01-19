@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
@@ -39,6 +42,18 @@ namespace QuestBooks.QuestLog.DefaultElements
             _outlineTexture = DynamicQuest.OutlineTexture;
             _incompleteTexture = DynamicQuest.IncompleteTexture;
             _lockedTexture = DynamicQuest.LockedTexture;
+        }
+
+        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
+        {
+            if (_completedTexture is null || _completedTexture.Value is null)
+            {
+                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset);
+                return;
+            }
+
+            Texture2D texture = _completedTexture.Value;
+            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
         public class DynamicQuestChecker : IMemberConverter<string>
