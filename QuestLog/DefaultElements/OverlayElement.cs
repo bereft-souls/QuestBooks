@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
-using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Systems;
 using ReLogic.Content;
 using Terraria;
@@ -53,10 +52,10 @@ namespace QuestBooks.QuestLog.DefaultElements
         [ElementTooltip("DisplayRotation")]
         public float Rotation { get; set; } = 0f;
 
-        public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
-            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - QuestManager.ActiveStyle.QuestAreaOffset).ToPoint());
+            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - canvasViewOffset).ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
@@ -79,10 +78,22 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, drawPos, null, Color.White, Rotation, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
+        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
-            CanvasPosition = mousePosition - QuestManager.ActiveStyle.QuestAreaOffset;
+            CanvasPosition = mousePosition - canvasViewOffset;
             return true;
+        }
+
+        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
+        {
+            if (_texture is null || _texture.Value is null)
+            {
+                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset);
+                return;
+            }
+
+            Texture2D texture = _texture.Value;
+            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 
         public class TextureChecker : IMemberConverter<string>

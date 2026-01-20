@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
@@ -35,7 +34,7 @@ namespace QuestBooks.QuestLog
 
         public virtual void Update() { }
 
-        public virtual bool IsHovered(Vector2 mousePosition, ref string mouseTooltip) { return false; }
+        public virtual bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip) { return false; }
 
         public virtual void OnSelect() { }
 
@@ -53,7 +52,7 @@ namespace QuestBooks.QuestLog
 
         #region Designer Methods
 
-        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition);
+        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset);
 
         public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
@@ -84,13 +83,13 @@ namespace QuestBooks.QuestLog
             public Type PropertyConverterType { get; init; } = propertyConverterType;
         }
 
-        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
+        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
         private sealed class NonDefaultAttribute : Attribute;
 
         /// <summary>
         /// Intended only for QuestBooks internal use. Simplifies the tooltip attribute to only need the last part of the key.
         /// </summary>
-        internal sealed class ElementTooltip(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Elements.{localizationKey}");
+        internal sealed class ElementTooltipAttribute(string localizationKey) : TooltipAttribute($"Mods.QuestBooks.Tooltips.Elements.{localizationKey}");
 
         #endregion
 

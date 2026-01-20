@@ -99,7 +99,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         public bool ConnectionVisible(IConnectable destination) => VisibleOnCanvas();
         public bool ConnectionActive(IConnectable destination) => true;
 
-        public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
         {
             _unlockedTexture ??= ModContent.Request<Texture2D>(_unlockedTexturePath);
             bool hovered = CenteredRectangle(CanvasPosition, _unlockedTexture.Size()).Contains(mousePosition.ToPoint());
@@ -128,57 +128,57 @@ namespace QuestBooks.QuestLog.DefaultElements
                 switch (cycle)
                 {
                     case 0:
-                        DrawLocked(spriteBatch);
+                        DrawLocked(spriteBatch, canvasViewOffset);
                         return;
 
                     default:
-                        DrawUnlocked(spriteBatch, hovered, selected);
+                        DrawUnlocked(spriteBatch, canvasViewOffset, hovered, selected);
                         return;
                 }
             }
 
             if (!Unlocked())
-                DrawLocked(spriteBatch);
+                DrawLocked(spriteBatch, canvasViewOffset);
 
             else
-                DrawUnlocked(spriteBatch, hovered, selected);
+                DrawUnlocked(spriteBatch, canvasViewOffset, hovered, selected);
         }
 
-        protected virtual void DrawOutline(SpriteBatch spriteBatch, Color color)
+        protected virtual void DrawOutline(SpriteBatch spriteBatch, Vector2 canvasOffset, Color color)
         {
             _outlineTexture ??= ModContent.Request<Texture2D>(_outlineTexturePath);
-            DrawTexture(spriteBatch, _outlineTexture.Value, color);
+            DrawTexture(spriteBatch, _outlineTexture.Value, canvasOffset, color);
         }
 
-        protected virtual void DrawLocked(SpriteBatch spriteBatch)
+        protected virtual void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasOffset)
         {
             if (!string.IsNullOrWhiteSpace(_lockedTexturePath))
             {
                 _lockedTexture ??= ModContent.Request<Texture2D>(_lockedTexturePath);
-                DrawTexture(spriteBatch, _lockedTexture.Value, Color.White);
+                DrawTexture(spriteBatch, _lockedTexture.Value, canvasOffset, Color.White);
                 return;
             }
 
             _unlockedTexture ??= ModContent.Request<Texture2D>(_unlockedTexturePath);
-            DrawOutline(spriteBatch, Color.Black);
-            DrawTexture(spriteBatch, _unlockedTexture.Value, Color.Black);
+            DrawOutline(spriteBatch, canvasOffset, Color.Black);
+            DrawTexture(spriteBatch, _unlockedTexture.Value, canvasOffset, Color.Black);
         }
 
-        protected virtual void DrawUnlocked(SpriteBatch spriteBatch, bool hovered, bool selected)
+        protected virtual void DrawUnlocked(SpriteBatch spriteBatch, Vector2 canvasOffset, bool hovered, bool selected)
         {
-            if (hovered )
-                DrawOutline(spriteBatch, Color.LightGray);
+            if (hovered)
+                DrawOutline(spriteBatch, canvasOffset, Color.LightGray);
 
             else
-                DrawOutline(spriteBatch, new(108, 118, 199, 255));
+                DrawOutline(spriteBatch, canvasOffset, new(108, 118, 199, 255));
 
             _unlockedTexture ??= ModContent.Request<Texture2D>(_unlockedTexturePath);
-            DrawTexture(spriteBatch, _unlockedTexture.Value, Color.White);
+            DrawTexture(spriteBatch, _unlockedTexture.Value, canvasOffset, Color.White);
         }
 
-        protected void DrawTexture(SpriteBatch spriteBatch, Texture2D texture, Color color)
+        protected void DrawTexture(SpriteBatch spriteBatch, Texture2D texture, Vector2 canvasOffset, Color color)
         {
-            Vector2 drawPos = CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
+            Vector2 drawPos = CanvasPosition - canvasOffset;
             spriteBatch.Draw(texture, drawPos, null, color, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
@@ -186,11 +186,12 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
-            Texture2D texture = DefaultAsset.Value;
+            Texture2D texture = _unlockedTexture?.Value ?? DefaultAsset.Value;
+            CanvasPosition = mousePosition;
             spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 220 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
+        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;

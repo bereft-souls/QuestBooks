@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
 
@@ -39,7 +39,7 @@ public partial class BasicQuestLogStyle
 
         ExtraInferfaceLayerMods.Clear();
 
-        if (MouseTooltip is null || Main.HoverItem.type > 0)
+        if (MouseTooltip is null || Main.HoverItem.type > ItemID.None)
             return;
 
         if (string.IsNullOrWhiteSpace(MouseTooltip))

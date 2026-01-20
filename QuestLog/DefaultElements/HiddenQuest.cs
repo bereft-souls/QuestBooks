@@ -1,14 +1,13 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using ReLogic.Content;
 using System.Collections.Generic;
-using Terraria.ModLoader;
 using Terraria;
+using Terraria.ModLoader;
 using static QuestBooks.QuestLog.DefaultElements.QuestDisplay;
-using Microsoft.Xna.Framework;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
@@ -39,22 +38,22 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public bool ConnectionActive(IConnectable destination) => QuestManager.GetQuest(QuestKey).Completed;
 
-        public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip) => CenteredRectangle(CanvasPosition, DefaultAsset.Size()).Contains(mousePosition.ToPoint());
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip) => CenteredRectangle(CanvasPosition, DefaultAsset.Size()).Contains(mousePosition.ToPoint());
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
         {
             if (selected)
-                DrawTexture(spriteBatch, DefaultOutlineAsset.Value, Color.Yellow);
+                DrawTexture(spriteBatch, DefaultOutlineAsset.Value, canvasViewOffset, Color.Yellow);
 
             else if (hovered)
-                DrawTexture(spriteBatch, DefaultOutlineAsset.Value, Color.LightGray);
+                DrawTexture(spriteBatch, DefaultOutlineAsset.Value, canvasViewOffset, Color.LightGray);
 
-            DrawTexture(spriteBatch, DefaultAsset.Value, Color.White);
+            DrawTexture(spriteBatch, DefaultAsset.Value, canvasViewOffset, Color.White);
         }
 
-        protected void DrawTexture(SpriteBatch spriteBatch, Texture2D texture, Color color)
+        protected void DrawTexture(SpriteBatch spriteBatch, Texture2D texture, Vector2 canvasOffset, Color color)
         {
-            Vector2 drawPos = CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
+            Vector2 drawPos = CanvasPosition - canvasOffset;
             spriteBatch.Draw(texture, drawPos, null, color, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
@@ -66,7 +65,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 220 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
+        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;

@@ -65,6 +65,9 @@ namespace QuestBooks.Assets
         public static LazyTexture DeleteButton { get; } = new("Designer/DeleteButton", immediateLoad: false);
         public static LazyTexture DeleteButtonHovered { get; } = new("Designer/DeleteButtonHovered", immediateLoad: false);
 
+        public static LazyTexture MoveButton { get; } = new("Designer/MoveButton", immediateLoad: false);
+        public static LazyTexture MoveButtonHovered { get; } = new("Designer/MoveButtonHovered", immediateLoad: false);
+
         public static LazyTexture ExportButton { get; } = new("Designer/ExportButton", immediateLoad: false);
         public static LazyTexture ExportButtonHovered { get; } = new("Designer/ExportButtonHovered", immediateLoad: false);
 

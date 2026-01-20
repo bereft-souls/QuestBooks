@@ -70,13 +70,13 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
             // Get the top-most element that is being hovered            
-            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition, ref MouseTooltip) && x != SelectedElement, null) ?? null : null;
+            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition, QuestAreaOffset, ref MouseTooltip) && x != SelectedElement, null) ?? null : null;
             HoveredElement = lastHoveredElement;
 
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
             {
                 ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
-                
+
                 if (!UseDesigner)
                     element?.OnSelect();
 

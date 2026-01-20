@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Assets;
-using QuestBooks.QuestLog.DefaultLogStyles;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;
@@ -23,12 +22,12 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public IConnectable Destination { get; set; } = null;
 
-        public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
         {
             if (!QuestManager.ActiveStyle.UseDesigner)
                 return false;
 
-            mousePosition -= QuestManager.ActiveStyle.QuestAreaOffset;
+            mousePosition -= canvasViewOffset;
             Vector2 lineAngle = Destination.ConnectorAnchor - Source.ConnectorAnchor;
             Vector2 mouseAngle = lineAngle.RotatedBy(-MathHelper.PiOver2);
 
@@ -83,7 +82,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             }
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
+        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             IConnectable connection = QuestManager.ActiveStyle.HoveredElement as IConnectable;
 
@@ -141,7 +140,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public bool ConnectionActive(IConnectable destination) => destination != this && Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(destination)) >= RequiredFeeds;
 
-        public override bool IsHovered(Vector2 mousePosition, ref string mouseTooltip)
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
         {
             return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, new Vector2(Size)).Contains(mousePosition.ToPoint());
         }
@@ -159,7 +158,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, CanvasPosition - canvasViewOffset, null, color, 0f, texture.Size() * 0.5f, Size / texture.Width, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition)
+        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;
