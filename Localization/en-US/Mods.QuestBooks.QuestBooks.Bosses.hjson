@@ -1,1 +1,122 @@
+KingSlime: {
+	Title: Slippery Shinobi
+	Contents: ``` 
+	Defeat King Slime, the lord of all things slimy. 
+	
+	King Slime can be found after surviving through the Slime Rain, or summoned using a gel-based item called the Slimy Crown.
+	```
+}
 
+EyeofCthulhu: {
+	Title: Eye on You
+	Contents: ``` 
+	Defeat the Eye of Cthulhu, an ocular menace who only appears at night.
+
+	The Eye of Cthulhu can occasionally arrive during the night, or summoned with a lens-based idol known as the Suspicious Looking Eye.
+	```
+}
+
+EaterofWorlds: {
+	Title: Worm Fodder
+	Contents: ```
+	Defeat the Eater of Worlds, a massive worm who dwells in the corruption.
+
+	The Eater of Worlds will appear after the shattering of 3 Shadow Orbs, or lured in using rotten Worm Food.
+}
+
+BrainofCthulhu: {
+	Title: Mastermind
+	Contents: ```
+	Defeat the Brain of Cthulhu, an enormous demon brain which haunts the creeping crimson.
+	
+	The Brain of Cthulhu will manifest after the destruction of 3 Crimson Hearts, or summoned using a Bloody Spine.
+	```
+}
+
+QueenBee: {
+	Title: Sting Operation
+	Contents: ```
+	Defeat the Queen Bee, the matriarch of the jungle hives.
+
+	The Queen Bee will defend her hive if yoy hurt one of her larvae, or can be called upon using an Abeemination.
+	```
+}
+
+Deerclops: {
+	Title: An Eye For An Eye
+	Contents: ```
+	Defeat Deerclops, the chilly one-eyed monstrosity from a foreign land.
+
+	The Deerclops will rummage through the cold blizzards of the tundra at night, or summoned using a Deer Thing.
+	```
+}
+
+Skeletron: {
+	Title: Boned
+	Contents: ```
+	Defeat Skeletron, the cursed guardian of the dungeon.
+
+	Skeletron will manifest by taking a part of the Old Man's Curse, or by killing the Clothier using a Clothier Voodoo Doll.
+	```
+}
+
+WallofFlesh: {
+	Title: Still Hungry
+	Contents:```
+	Defeat the Wall of Flesh, the master and core of the world who arises after a great, burning sacrifice.
+
+	The Wall of Flesh will emerge after the sacrifice of a tennant in the deep lava pools of the underworld.
+	Perhaps using a Voodoo Doll would suffice?
+	```
+}
+
+
+QueenSlime: {
+	Title: 
+	Contents:
+}
+
+TheDestroyer: {
+	Title:
+	Contents:
+}
+
+TheTwins: {
+	Title:
+	Contents:
+}
+
+SkeletronPrime: {
+	Title:
+	Contents:
+}
+
+Plantera: {
+	Title:
+	Contents:
+}
+
+Golem: {
+	Title:
+	Contents:
+}
+
+DukeFishron: {
+	Title:
+	Contents:
+}
+
+EmpressOfLight: {
+	Title:
+	Contents:
+}
+
+LunaticCultist: {
+	Title:
+	Contents:
+}
+
+MoonLord: {
+	Title:
+	Contents:
+}
