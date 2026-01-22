@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Events
 {
-    public class SolarEclipseSurvived : Quest
+    public class SurviveSolarEclipse : Quest
     {
         public override bool CheckCompletion()
         {

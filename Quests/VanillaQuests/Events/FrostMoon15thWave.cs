@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Events
 {
-    internal class FrostMoon15thWaveWon : Quest
+    internal class FrostMoon15thWave : Quest
     {
         public override bool CheckCompletion()
         {
