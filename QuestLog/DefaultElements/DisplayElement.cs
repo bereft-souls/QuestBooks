@@ -55,30 +55,32 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override float DrawPriority => Layer;
 
-        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip)
         {
+            // mousePosition is already in logical canvas coordinates (zoom factored out)
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
-            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains(mousePosition.ToPoint());
+            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size() * Scale).Contains(mousePosition.ToPoint());
         }
 
-        public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
+        public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
             Texture2D texture = _texture.Value;
-            Vector2 drawPos = CanvasPosition - canvasViewOffset;
+            Vector2 drawPos = (CanvasPosition - canvasViewOffset) * zoom;
+            float scaledScale = Scale * zoom;
 
             if (texture == DefaultAsset.Value)
             {
                 Texture2D outline = DefaultOutlineAsset.Value;
 
                 if (selected)
-                    spriteBatch.Draw(outline, drawPos, null, Color.Yellow, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(outline, drawPos, null, Color.Yellow, Rotation, outline.Size() * 0.5f, scaledScale, SpriteEffects.None, 0f);
 
                 else if (hovered)
-                    spriteBatch.Draw(outline, drawPos, null, Color.White, Rotation, outline.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(outline, drawPos, null, Color.White, Rotation, outline.Size() * 0.5f, scaledScale, SpriteEffects.None, 0f);
             }
 
-            spriteBatch.Draw(texture, drawPos, null, Color.White, Rotation, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, drawPos, null, Color.White, Rotation, texture.Size() * 0.5f, scaledScale, SpriteEffects.None, 0f);
         }
 
         public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
@@ -87,17 +89,18 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset, float zoom)
         {
             if (_texture is null || _texture.Value is null)
             {
-                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset);
+                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset, zoom);
                 return;
             }
 
             Texture2D texture = _texture.Value;
             CanvasPosition = mousePosition;
-            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
+            Vector2 drawPos = (mousePosition - canvasViewOffset) * zoom;
+            spriteBatch.Draw(texture, drawPos, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, Scale * zoom, SpriteEffects.None, 0f);
         }
 
         public class TextureChecker : IMemberConverter<string>

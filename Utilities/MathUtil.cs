@@ -112,5 +112,11 @@ namespace QuestBooks.Utilities
                 value += 2;
             return value;
         }
+
+        public static void Round(ref this Vector2 vector)
+        {
+            vector.X = float.Round(vector.X);
+            vector.Y = float.Round(vector.Y);
+        }
     }
 }

@@ -84,7 +84,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (hovered && LeftMouseJustReleased && (questBook.IsUnlocked() || UseDesigner) && previousBookSwipeOffset == 0f)
                 {
                     QuestBook selectedBook = (SelectedBook == questBook) ? null : questBook;
-                    SelectBook(questBook);
+                    SelectBook(selectedBook);
                 }
 
                 bool selected = SelectedBook == questBook;

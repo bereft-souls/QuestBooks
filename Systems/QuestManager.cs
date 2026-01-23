@@ -4,7 +4,9 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace QuestBooks.Systems
 {
@@ -38,6 +40,8 @@ namespace QuestBooks.Systems
         public static readonly List<Type> AvailableQuestLineTypes = [];
         public static readonly Dictionary<Type, ChapterElement> AvailableQuestElementTypes = [];
 
+        private static readonly PropertyInfo modProperty = typeof(Quest).GetProperty("Mod", BindingFlags.Instance | BindingFlags.Public)!;
+
         // Reset "completed" quests
         public static void LoadActiveQuests()
         {
@@ -48,6 +52,7 @@ namespace QuestBooks.Systems
             foreach (var kvp in QuestLoader.QuestKeys)
             {
                 var quest = (Quest)Activator.CreateInstance(kvp.Key);
+                modProperty.SetValue(quest, QuestLoader.questMods[kvp.Key]);
                 newActiveQuests.Add(kvp.Value, quest);
 
                 if (quest.QuestType == QuestType.World)

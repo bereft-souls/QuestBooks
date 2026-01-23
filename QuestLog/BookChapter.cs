@@ -91,6 +91,11 @@ namespace QuestBooks.QuestLog
         /// </summary>
         public virtual Vector2 MinViewPoint { get; set; } = Vector2.Zero;
 
+        /// <summary>
+        /// Determines the default zoom level for a draggable chapter.
+        /// </summary>
+        public virtual float DefaultZoom { get; set; } = 1f;
+
         public virtual void Update()
         {
             foreach (ChapterElement questElement in Elements)

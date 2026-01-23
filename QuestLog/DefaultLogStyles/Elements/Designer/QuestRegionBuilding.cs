@@ -24,7 +24,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private Vector2 chapterMaxView = Vector2.Zero;
 
         private static readonly Vector2 defaultAnchor = new(230f, 270f);
-        private static readonly Vector2 defaultCanvasSize = new(450, 530);
+        private static readonly Vector2 defaultCanvasSize = new(460, 540);
 
         private void DesignerPreQuestRegion(Vector2 mousePosition)
         {
@@ -44,17 +44,18 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 });
 
                 Color gridColor = Color.White with { A = (byte)(showBackdrop ? 0 : 100) };
+                float scaledGridSize = gridSize * Zoom;
 
-                for (int xPos = 0; xPos < 500; xPos += gridSize)
+                for (float xPos = 0; xPos < 500; xPos += scaledGridSize)
                 {
-                    Vector2 drawCenter = new(xPos - (QuestAreaOffset.X % gridSize), 300f);
+                    Vector2 drawCenter = new(xPos - (QuestAreaOffset.X % gridSize) * Zoom, 300f);
                     Rectangle rect = CenteredRectangle(drawCenter, new(1f, 600f));
                     AddRectangle(rect, gridColor);
                 }
 
-                for (int yPos = 0; yPos < 600; yPos += gridSize)
+                for (float yPos = 0; yPos < 600; yPos += scaledGridSize)
                 {
-                    Vector2 drawCenter = new(300f, yPos - (QuestAreaOffset.Y % gridSize));
+                    Vector2 drawCenter = new(300f, yPos - (QuestAreaOffset.Y % gridSize) * Zoom);
                     Rectangle rect = CenteredRectangle(drawCenter, new(600f, 1f));
                     AddRectangle(rect, gridColor);
                 }
@@ -71,7 +72,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private void DesignerPostQuestRegion(Vector2 mousePosition, bool mouseInBounds)
         {
             // Round to grid intersections
-            Vector2 unsnapped = mousePosition - QuestAreaOffset;
+            Vector2 unsnapped = (mousePosition - QuestAreaOffset) * Zoom;
             if (snapToGrid)
             {
                 mousePosition.X = float.Round(mousePosition.X / gridSize, MidpointRounding.AwayFromZero) * gridSize;
@@ -89,18 +90,21 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 goto ElementPlacement;
 
             Vector2 anchorPoint = movingAnchor ? chapterAnchor : SelectedChapter.ViewAnchor;
-            anchorPoint -= QuestAreaOffset;
+            anchorPoint = (anchorPoint - QuestAreaOffset) * Zoom;
             Rectangle anchor = CenteredRectangle(anchorPoint, new(14f));
 
+            Vector2 cornerSize = new(32f);
+            Point cornerOffset = (cornerSize * 0.5f).ToPoint();
+
             Vector2 minViewPoint = movingMinView ? chapterMinView : SelectedChapter.MinViewPoint;
-            minViewPoint -= QuestAreaOffset;
-            Rectangle minView = CenteredRectangle(minViewPoint, new(32f));
-            minView.Offset(24, 24);
+            minViewPoint = (minViewPoint - QuestAreaOffset) * Zoom;
+            Rectangle minView = CenteredRectangle(minViewPoint, cornerSize);
+            minView.Offset(cornerOffset);
 
             Vector2 maxViewPoint = movingMaxView ? chapterMaxView : SelectedChapter.MaxViewPoint + defaultCanvasSize;
-            maxViewPoint -= QuestAreaOffset;
-            Rectangle maxView = CenteredRectangle(maxViewPoint, new(32f));
-            maxView.Offset(-16, -16);
+            maxViewPoint = (maxViewPoint - QuestAreaOffset) * Zoom;
+            Rectangle maxView = CenteredRectangle(maxViewPoint, cornerSize);
+            maxView.Offset(Point.Zero - cornerOffset);
 
             if (LeftMouseJustReleased && moveBounds)
             {
@@ -138,25 +142,21 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 movingAnchor = !movingAnchor && anchor.Contains(unsnapped.ToPoint()) && placingElement is null && SelectedElement is null;
             }
 
-            Vector2 cornerSize = new(32f);
-
-            Rectangle leftCorner = CenteredRectangle(minViewPoint + new Vector2(10f), cornerSize);
-            leftCorner.Offset((cornerSize * 0.5f).ToPoint());
-
-            Rectangle rightCorner = CenteredRectangle(maxViewPoint, cornerSize);
-            rightCorner.Offset((-cornerSize * 0.5f).ToPoint());
-
-            Vector2 left = leftCorner.Location.ToVector2();
-            Vector2 right = rightCorner.BottomRight();
+            Vector2 left = minView.Location.ToVector2();
+            Vector2 right = maxView.BottomRight();
 
             Vector2 angle = right - left;
             Vector2 center = left + (angle * 0.5f);
+
+            center.Round();
+            bool anchorCentered = false;
 
             if (moveBounds)
             {
                 if (movingMinView)
                 {
-                    chapterMinView = mousePosition - new Vector2(16f);
+                    chapterMinView = mousePosition;
+                    chapterMinView.Round();
 
                     if (RightMouseJustReleased)
                     {
@@ -169,6 +169,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 else if (movingMaxView)
                 {
                     chapterMaxView = mousePosition;
+                    chapterMaxView.Round();
 
                     if (RightMouseJustReleased)
                     {
@@ -183,7 +184,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     chapterAnchor = mousePosition;
 
                     if (CenteredRectangle(center, new(28f)).Contains(unsnapped.ToPoint()))
-                        chapterAnchor = center + QuestAreaOffset;
+                    {
+                        chapterAnchor = center / Zoom + QuestAreaOffset;
+                        chapterAnchor.Round();
+                        anchorCentered = true;
+                    }
 
                     if (RightMouseJustReleased)
                     {
@@ -196,9 +201,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 DrawTasks.Add(sb =>
                 {
                     sb.Draw(QuestAssets.BigPixel, center, null, Color.DarkGray, angle.ToRotation(), Vector2.One, new Vector2(angle.Length() * 0.5f, 1f), SpriteEffects.None, 0f);
-                    sb.Draw(QuestAssets.CanvasCenter, center, null, Color.DarkGray, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 2f, SpriteEffects.None, 0f);
+                    sb.Draw(QuestAssets.CanvasCenter, center, null, Color.Black, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
 
-                    sb.Draw(QuestAssets.CanvasCenter, anchor.Location.ToVector2(), movingAnchor ? Color.Red : Color.Yellow);
+                    if (anchorCentered)
+                        sb.Draw(QuestAssets.CanvasCenter, center, null, movingAnchor ? Color.Red : Color.Yellow, 0f, QuestAssets.CanvasCenter.Asset.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+
+                    else
+                        sb.Draw(QuestAssets.CanvasCenter, anchor.Location.ToVector2(), movingAnchor ? Color.Red : Color.Yellow);
+
                     sb.Draw(QuestAssets.CanvasCorner, left, null, movingMinView ? Color.Red : Color.Yellow, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     sb.Draw(QuestAssets.CanvasCorner, right, null, movingMaxView ? Color.Red : Color.Yellow, MathHelper.Pi, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 });
@@ -225,7 +235,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
             }
 
-            DrawTasks.Add(sb => placingElement?.DrawPlacementPreview(sb, mousePosition, QuestAreaOffset));
+            DrawTasks.Add(sb => placingElement?.DrawPlacementPreview(sb, mousePosition, QuestAreaOffset, Zoom));
         }
     }
 }

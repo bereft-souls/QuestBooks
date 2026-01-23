@@ -23,6 +23,7 @@ namespace QuestBooks.QuestLog
         public virtual ChapterElement SelectedElement { get; set; } = null;
         public virtual ChapterElement HoveredElement { get; set; } = null;
         public virtual Vector2 QuestAreaOffset { get; set; } = Vector2.Zero;
+        public virtual float Zoom { get; set; } = 1f;
 
         public virtual void OnSelect() { }
         public virtual void OnDeselect() { }

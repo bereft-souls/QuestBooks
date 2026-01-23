@@ -94,11 +94,14 @@ namespace QuestBooks.Assets
         public static LazyTexture GridSize { get; } = new("Designer/GridSize", immediateLoad: false);
         public static LazyTexture GridSizeHovered { get; } = new("Designer/GridSizeHovered", immediateLoad: false);
 
-        public static LazyTexture GridSizeUp { get; } = new("Designer/GridSizeUp", immediateLoad: false);
-        public static LazyTexture GridSizeUpHovered { get; } = new("Designer/GridSizeUpHovered", immediateLoad: false);
+        public static LazyTexture ZoomScale { get; } = new("Designer/ZoomScale", immediateLoad: false);
+        public static LazyTexture ZoomScaleHovered { get; } = new("Designer/ZoomScaleHovered", immediateLoad: false);
 
-        public static LazyTexture GridSizeDown { get; } = new("Designer/GridSizeDown", immediateLoad: false);
-        public static LazyTexture GridSizeDownHovered { get; } = new("Designer/GridSizeDownHovered", immediateLoad: false);
+        public static LazyTexture ScaleUp { get; } = new("Designer/ScaleUp", immediateLoad: false);
+        public static LazyTexture ScaleUpHovered { get; } = new("Designer/ScaleUpHovered", immediateLoad: false);
+
+        public static LazyTexture ScaleDown { get; } = new("Designer/ScaleDown", immediateLoad: false);
+        public static LazyTexture ScaleDownHovered { get; } = new("Designer/ScaleDownHovered", immediateLoad: false);
 
         public static LazyTexture ToolOutline { get; } = new("Designer/ToolOutline", immediateLoad: false);
 

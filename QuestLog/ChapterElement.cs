@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
@@ -34,18 +35,18 @@ namespace QuestBooks.QuestLog
 
         public virtual void Update() { }
 
-        public virtual bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip) { return false; }
+        public virtual bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip) { return false; }
 
         public virtual void OnSelect() { }
 
         public virtual bool VisibleOnCanvas() { return true; }
 
-        public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered);
+        public abstract void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered);
 
         public virtual void DrawInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action layerAction)
         {
             Rectangle area = new(10, 0, 420, 540);
-            spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, "Element does not contain an info page!", clipBounds: false);
+            spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.NoInfoPage"), clipBounds: false);
         }
 
         #endregion
@@ -54,10 +55,11 @@ namespace QuestBooks.QuestLog
 
         public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset);
 
-        public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset, float zoom)
         {
             Texture2D texture = QuestAssets.MissingIcon;
-            spriteBatch.Draw(texture, mousePosition - canvasViewOffset, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+            Vector2 drawPos = (mousePosition - canvasViewOffset) * zoom;
+            spriteBatch.Draw(texture, drawPos, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
         }
 
         public virtual void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.MissingIcon, iconArea);

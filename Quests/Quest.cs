@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Systems;
+using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Quests
@@ -25,10 +27,16 @@ namespace QuestBooks.Quests
         public virtual string Key { get => GetType().Name; }
 
         /// <summary>
+        /// Allows you to modify the collection of objects passed to all of this quest's localization retrievals.<br/>
+        /// The default contains only 1 entry, which is a color string (green if the quest is completed, yellow if not).
+        /// </summary>
+        public virtual object[] LocalizationArgs { get => []; }
+
+        /// <summary>
         /// The text that should display in the mouse tooltip whenever this quest is hovered over in the quest log.<br/>
         /// This value is not required.
         /// </summary>
-        public virtual string HoverTooltip => null;
+        public virtual string HoverTooltip => Language.Exists(this.GetLocalizationKey("Tooltip")) ? this.GetLocalization("Tooltip").Format(LocalizationArgs) : null;
 
         /// <summary>
         /// Override this method to implement your own custom drawing for info pages in the quest log.<br/>
@@ -56,8 +64,8 @@ namespace QuestBooks.Quests
         /// 
         public virtual void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
         {
-            title = this.GetLocalizedValue("Title");
-            contents = this.GetLocalizedValue("Contents");
+            title = this.GetLocalization("Title").Format(LocalizationArgs);
+            contents = this.GetLocalization("Contents").Format(LocalizationArgs);
             texture = ModContent.RequestIfExists<Texture2D>($"{Mod.Name}/{TextureCategory}/{Name}", out var asset, ReLogic.Content.AssetRequestMode.ImmediateLoad) ? asset.Value : null;
         }
 
@@ -106,7 +114,7 @@ namespace QuestBooks.Quests
 
         public sealed override void SetupContent() => SetStaticDefaults();
 
-        protected sealed override void InitTemplateInstance() => base.InitTemplateInstance();
+        protected sealed override void InitTemplateInstance() => QuestLoader.questMods[GetType()] = Mod;
     }
 
     public enum QuestType

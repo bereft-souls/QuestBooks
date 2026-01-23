@@ -349,7 +349,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             SortedElements = null;
 
             SelectedChapter = chapter;
-            QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor - defaultAnchor : Vector2.Zero;
+            Zoom = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.DefaultZoom : 1f;
+            QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor * Zoom - defaultAnchor : Vector2.Zero;
             SoundEngine.PlaySound(SoundID.MenuTick);
         }
 
