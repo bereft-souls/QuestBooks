@@ -44,6 +44,11 @@ DeleteElement:
 	Deletes the selected element from the selected chapter.
 	[c/FF0000:WARNING]: This cannot be undone!
 	'''
+MoveElement:
+	'''
+	[c/CCC018:Move Element]
+	Takes the selected element off of the canvas and allows you to replace it.
+	'''
 TogglePreview:
 	'''
 	[c/CCC018:Toggle Preview]
@@ -85,8 +90,16 @@ GridSize:
 	The size of the placement grid.
 	Click to reset to the default (20).
 	'''
+ZoomScale:
+	'''
+	[c/CCC018:Default Zoom]
+	The zoom level the quest area should be set to when this chapter is selected.
+	Click to set to the current zoom level of the quest area.
+	'''
 GridSizeUp: Grid Size Up
 GridSizeDown: Grid Size Down
+ZoomUp: Default Zoom Up
+ZoomDown: Default Zoom Down
 ShiftBookUp: Shift Book Up
 ShiftBookDown: Shift Book Down
 ShiftChapterUp: Shift Chapter Up
@@ -99,3 +112,4 @@ ChangeChapterType: Change BookChapter type
 LocalizationKey: Localization Key:
 ChangeQuestBookName: Change QuestBook localization key
 ChangeChapterName: Change BookChapter localization key
+NoInfoPage: Element does not contain an info page!

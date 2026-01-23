@@ -22,6 +22,7 @@ namespace QuestBooks.Systems
         // improve performance and ensure that quests are not modified post-setup.
         private static readonly HashSet<Assembly> checkedAssemblies = [];
         internal static readonly Dictionary<Type, string> loadingQuests = [];
+        internal static readonly Dictionary<Type, Mod> questMods = [];
         public static FrozenDictionary<Type, string> QuestKeys { get; internal set; }
 
         public static QuestLogStyle ExclusiveOverrideStyle = null;

@@ -94,7 +94,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 else if (zoomScale.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.ToolTips.ZoomScale");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ZoomScale");
                     zoomScaleHovered = true;
 
                     if (LeftMouseJustReleased)
@@ -104,7 +104,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 else if (zoomUp.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.ToolTips.ZoomUp");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ZoomUp");
                     zoomUpHovered = true;
 
                     if (LeftMouseJustReleased && SelectedChapter.DefaultZoom < 2f)
@@ -114,7 +114,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 else if (zoomDown.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.ToolTips.ZoomDown");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ZoomDown");
                     zoomDownHovered = true;
 
                     if (LeftMouseJustReleased && SelectedChapter.DefaultZoom > 0.1f)
