@@ -22,7 +22,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         [ElementTooltip("DisplayPrerequisites")]
         public virtual int DisplayFeeds { get; set; } = 0;
 
-        [ElementTooltip("UnlockPrerequisistes")]
+        [ElementTooltip("UnlockPrerequisites")]
         public virtual int UnlockFeeds { get; set; } = 0;
 
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Quests/Diamond";
@@ -54,7 +54,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         [JsonIgnore]
         [UseConverter(typeof(DisplayElement.TextureChecker))]
-        [ElementTooltip("UnlockedTexture")]
+        [ElementTooltip("QuestJumpTexture")]
         public virtual string Texture
         {
             get => _unlockedTexturePath;

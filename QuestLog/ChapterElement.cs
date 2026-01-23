@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
@@ -45,7 +46,7 @@ namespace QuestBooks.QuestLog
         public virtual void DrawInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action layerAction)
         {
             Rectangle area = new(10, 0, 420, 540);
-            spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, "Element does not contain an info page!", clipBounds: false);
+            spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.NoInfoPage"), clipBounds: false);
         }
 
         #endregion
