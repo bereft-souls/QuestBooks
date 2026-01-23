@@ -49,8 +49,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (mouseInBounds && scrollAmount != 0 && cachedRightClick is null && (SelectedChapter?.EnableShifting ?? false))
             {
                 float oldZoom = Zoom;
-                Zoom += scrollAmount * 0.01f;
-                Zoom = float.Max(Zoom, 0.1f); // Minimum zoom constraint
+                Zoom += scrollAmount * 0.005f;
+                Zoom = float.Min(Zoom, 1.8f); // Minimum zoom constraint
 
                 // Adjust offset to keep the mouse's canvas position stable
                 QuestAreaOffset += scaledMouse / TargetScale * (1 / oldZoom - 1 / Zoom);
@@ -126,7 +126,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Draw the previously-rendered target along with the new elements if being swiped
                 if (questElementSwipeOffset != 0f)
                 {
-                    sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, Matrix.Identity);
+                    sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
                     float xOffset = -float.Sign(questElementSwipeOffset) * (previousQuestAreaTarget.Width - Math.Abs(questElementSwipeOffset));
                     sb.Draw(previousQuestAreaTarget, new Vector2(xOffset, 0f), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     return;

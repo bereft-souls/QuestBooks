@@ -96,7 +96,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Vector2 minViewPoint = movingMinView ? chapterMinView : SelectedChapter.MinViewPoint;
             minViewPoint = (minViewPoint - QuestAreaOffset) * Zoom;
             Rectangle minView = CenteredRectangle(minViewPoint, new(32f));
-            minView.Offset(24, 24);
+            minView.Offset(16, 16);
 
             Vector2 maxViewPoint = movingMaxView ? chapterMaxView : SelectedChapter.MaxViewPoint + defaultCanvasSize;
             maxViewPoint = (maxViewPoint - QuestAreaOffset) * Zoom;
