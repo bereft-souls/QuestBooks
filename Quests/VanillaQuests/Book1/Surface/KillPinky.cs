@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Surface
 {
-    internal class PinkyKilled : Quest
+    internal class KillPinky : Quest
     {
         public override bool CheckCompletion()
         {
