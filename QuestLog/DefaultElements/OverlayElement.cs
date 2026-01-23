@@ -52,13 +52,14 @@ namespace QuestBooks.QuestLog.DefaultElements
         [ElementTooltip("DisplayRotation")]
         public float Rotation { get; set; } = 0f;
 
-        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, ref string mouseTooltip)
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
+            // Overlay elements ignore zoom
             return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - canvasViewOffset).ToPoint());
         }
 
-        public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, bool selected, bool hovered)
+        public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
             Texture2D texture = _texture.Value;
@@ -84,11 +85,12 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset, float zoom)
         {
+            // Overlay elements ignore zoom
             if (_texture is null || _texture.Value is null)
             {
-                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset);
+                base.DrawPlacementPreview(spriteBatch, mousePosition, canvasViewOffset, 1f);
                 return;
             }
 

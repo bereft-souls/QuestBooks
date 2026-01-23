@@ -350,6 +350,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             SelectedChapter = chapter;
             QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor - defaultAnchor : Vector2.Zero;
+            Zoom = 1f;
             SoundEngine.PlaySound(SoundID.MenuTick);
         }
 

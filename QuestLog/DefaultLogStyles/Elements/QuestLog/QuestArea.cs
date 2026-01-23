@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
 using Terraria;
+using Terraria.GameInput;
 
 namespace QuestBooks.QuestLog.DefaultLogStyles
 {
@@ -10,7 +11,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
     {
         private float questElementSwipeOffset = 0f;
         private Vector2 minQuestAreaOffset => UseDesigner ? new(float.MinValue) : SelectedChapter.MinViewPoint;
-        private Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint;
+        private Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint + defaultCanvasSize * (1 - 1 / Zoom);
 
         private Vector2? cachedRightClick = null;
         private Vector2 cachedOffset = Vector2.Zero;
@@ -34,13 +35,25 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
 
                 else if (RightMouseHeld)
-                    QuestAreaOffset = cachedOffset - ((scaledMouse - (cachedRightClick ?? Vector2.Zero)) / TargetScale);
+                    QuestAreaOffset = cachedOffset - ((scaledMouse - (cachedRightClick ?? Vector2.Zero)) / TargetScale) / Zoom;
 
                 else if (RightMouseJustReleased)
                 {
                     cachedRightClick = null;
                     cachedOffset = Vector2.Zero;
                 }
+            }
+
+            int scrollAmount = PlayerInput.ScrollWheelDeltaForUI / 6;
+
+            if (mouseInBounds && scrollAmount != 0 && cachedRightClick is null && (SelectedChapter?.EnableShifting ?? false))
+            {
+                float oldZoom = Zoom;
+                Zoom += scrollAmount * 0.01f;
+                Zoom = float.Max(Zoom, 0.1f); // Minimum zoom constraint
+
+                // Adjust offset to keep the mouse's canvas position stable
+                QuestAreaOffset += scaledMouse / TargetScale * (1 / oldZoom - 1 / Zoom);
             }
 
             if (SelectedChapter?.EnableShifting ?? false)
@@ -52,7 +65,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             // Scale based on target size
             // This makes sure that no matter the scale, the canvas has the same "size" for elements to draw to
             Matrix transform = Matrix.CreateTranslation(questElementSwipeOffset, 0f, 0f) * Matrix.CreateScale(TargetScale);
-            Vector2 placementPosition = scaledMouse / TargetScale + QuestAreaOffset;
+            Vector2 placementPosition = scaledMouse / TargetScale / Zoom + QuestAreaOffset;
 
             // Switch draw matrices
             DrawTasks.Add(sb =>
@@ -69,8 +82,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             // Sort the elements if requested
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
-            // Get the top-most element that is being hovered            
-            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition, QuestAreaOffset, ref MouseTooltip) && x != SelectedElement, null) ?? null : null;
+            // Get the top-most element that is being hovered
+            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition, QuestAreaOffset, Zoom, ref MouseTooltip) && x != SelectedElement, null) ?? null : null;
             HoveredElement = lastHoveredElement;
 
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
@@ -106,7 +119,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Draw elements
                 if (SortedElements is not null)
                     foreach (var element in SortedElements.Where(x => x.VisibleOnCanvas()))
-                        element.DrawToCanvas(sb, QuestAreaOffset, SelectedElement == element, lastHoveredElement == element);
+                        element.DrawToCanvas(sb, QuestAreaOffset, Zoom, SelectedElement == element, lastHoveredElement == element);
 
                 sb.End();
 
