@@ -116,7 +116,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner))// && questElementSwipeOffset == 0f)
                 {
                     BookChapter selectedChapter = (questLine == SelectedChapter) ? null : questLine;
-                    SelectChapter(questLine);
+                    SelectChapter(selectedChapter);
                 }
 
                 bool selected = SelectedChapter == questLine;

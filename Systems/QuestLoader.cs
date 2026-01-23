@@ -151,7 +151,7 @@ namespace QuestBooks.Systems
 
         public static void LoadCompletedQuests(IEnumerable<string> completedQuests)
         {
-            foreach (string quest in completedQuests)
+            foreach (string quest in completedQuests.Where(q => QuestManager.TryGetQuest(q, out _)))
                 QuestManager.MarkComplete(quest);
         }
 
