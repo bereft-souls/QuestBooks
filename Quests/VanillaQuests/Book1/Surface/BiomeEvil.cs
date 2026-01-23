@@ -15,7 +15,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Surface
 
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
