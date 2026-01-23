@@ -93,15 +93,18 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             anchorPoint = (anchorPoint - QuestAreaOffset) * Zoom;
             Rectangle anchor = CenteredRectangle(anchorPoint, new(14f));
 
+            Vector2 cornerSize = new(32f);
+            Point cornerOffset = (cornerSize * 0.5f).ToPoint();
+
             Vector2 minViewPoint = movingMinView ? chapterMinView : SelectedChapter.MinViewPoint;
             minViewPoint = (minViewPoint - QuestAreaOffset) * Zoom;
-            Rectangle minView = CenteredRectangle(minViewPoint, new(32f));
-            minView.Offset(16, 16);
+            Rectangle minView = CenteredRectangle(minViewPoint, cornerSize);
+            minView.Offset(cornerOffset);
 
             Vector2 maxViewPoint = movingMaxView ? chapterMaxView : SelectedChapter.MaxViewPoint + defaultCanvasSize;
             maxViewPoint = (maxViewPoint - QuestAreaOffset) * Zoom;
-            Rectangle maxView = CenteredRectangle(maxViewPoint, new(32f));
-            maxView.Offset(-16, -16);
+            Rectangle maxView = CenteredRectangle(maxViewPoint, cornerSize);
+            maxView.Offset(Point.Zero - cornerOffset);
 
             if (LeftMouseJustReleased && moveBounds)
             {
@@ -139,16 +142,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 movingAnchor = !movingAnchor && anchor.Contains(unsnapped.ToPoint()) && placingElement is null && SelectedElement is null;
             }
 
-            Vector2 cornerSize = new(32f);
-
-            Rectangle leftCorner = CenteredRectangle(minViewPoint, cornerSize);
-            leftCorner.Location = leftCorner.Center;
-
-            Rectangle rightCorner = CenteredRectangle(maxViewPoint, cornerSize);
-            rightCorner.Location = rightCorner.Center - new Point(rightCorner.Width, rightCorner.Height);
-
-            Vector2 left = leftCorner.Location.ToVector2();
-            Vector2 right = rightCorner.BottomRight();
+            Vector2 left = minView.Location.ToVector2();
+            Vector2 right = maxView.BottomRight();
 
             Vector2 angle = right - left;
             Vector2 center = left + (angle * 0.5f);
@@ -160,7 +155,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 if (movingMinView)
                 {
-                    chapterMinView = mousePosition - new Vector2(16f);
+                    chapterMinView = mousePosition;
                     chapterMinView.Round();
 
                     if (RightMouseJustReleased)

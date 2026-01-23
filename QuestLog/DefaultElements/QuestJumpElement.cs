@@ -118,7 +118,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             QuestManager.ActiveStyle.SelectChapter(JumpChapter);
 
             if (JumpChapter.EnableShifting)
-                QuestManager.ActiveStyle.QuestAreaOffset = JumpOffset;
+                QuestManager.ActiveStyle.QuestAreaOffset = JumpOffset * QuestManager.ActiveStyle.Zoom;
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
