@@ -50,7 +50,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 float oldZoom = Zoom;
                 Zoom += scrollAmount * 0.005f;
-                Zoom = float.Min(Zoom, 1.8f); // Minimum zoom constraint
+                Zoom = float.Min(Zoom, 2f);
+                Zoom = float.Max(Zoom, 0.1f);
 
                 // Adjust offset to keep the mouse's canvas position stable
                 QuestAreaOffset += scaledMouse / TargetScale * (1 / oldZoom - 1 / Zoom);
