@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Underground
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Caverns
 {
-    internal class GetWhoopieCushion : Quest
+    internal class SubbiomeUGGlowingMushroom : Quest
     {
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
-            // Get a Whoopie Cushion
+            return false; // todo
         }
     }
 }

@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Underground
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Caverns
 {
-    internal class PlantGemcorn : Quest
+    internal class SubbiomeGranite : Quest
     {
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
-            // Plant any type of Gemcorn
+            return false; // TODO
         }
     }
 }

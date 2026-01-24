@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Underground
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Caverns
 {
-    internal class FindAFairy : Quest
+    internal class GetSpartaSet : Quest
     {
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
-            // Find a fairy, direct achievement mirror
+            return false; // TODO get full gladiators armor + use Gladius
         }
     }
 }

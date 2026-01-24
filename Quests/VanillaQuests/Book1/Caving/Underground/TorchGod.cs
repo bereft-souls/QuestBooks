@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Underground
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Underground
 {
-    internal class SubbiomeAbandonedTrack : Quest
+    internal class TorchGod : Quest
     {
         public override bool CheckCompletion()
         {
             throw new NotImplementedException();
-            // Enter an Abandoned Railtrack structure / subbiome and ride along the rails
+            // same as achievement
         }
     }
 }

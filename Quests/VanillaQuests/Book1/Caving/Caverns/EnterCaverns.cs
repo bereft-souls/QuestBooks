@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Underground
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Caverns
 {
-    internal class EnterUnderground : Quest
+    internal class EnterCaverns : Quest
     {
         public override bool CheckCompletion()
         {
-            return false; // TODO: Reach Underground layer (dirt background)
+            return false; // TODO: Reach Caverns 
         }
 
         public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)

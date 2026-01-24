@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Underground
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Underground
 {
-    internal class MineOre : Quest
+    internal class PlantGemcorn : Quest
     {
         public override bool CheckCompletion()
         {
             throw new NotImplementedException();
-            // physically mine and collect ANY ore, achievement mirror
+            // Plant any type of Gemcorn
         }
     }
 }

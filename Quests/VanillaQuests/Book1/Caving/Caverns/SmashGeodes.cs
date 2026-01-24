@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Underground
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Caverns
 {
-    internal class TorchGod : Quest
+    internal class SmashGeodes : Quest
     {
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
-            // same as achievement
+            return false; // TODO smash 10 geodes (dropped by granite enemies)
         }
     }
 }
