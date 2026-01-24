@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Systems;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameInput;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -23,7 +24,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             DrawTasks.Add(_ => Main.graphics.GraphicsDevice.Clear(Color.Black * 0.08f));
 
             // Skip drawing books if none are available
-            if (!AvailableBooks.Any())
+            if (!QuestManager.QuestBooks.Any())
             {
                 SwitchTargets(null);
                 return;
@@ -66,7 +67,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             Rectangle book = books.CookieCutter(new(0f, -0.9f), new(1f, 0.1065f));
 
             // Add each book basing location off of the first one
-            foreach (var questBook in AvailableBooks)
+            foreach (var questBook in QuestManager.QuestBooks)
             {
                 if (!questBook.VisibleInLog() && !UseDesigner)
                     continue;

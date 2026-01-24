@@ -14,36 +14,34 @@ namespace QuestBooks.Systems
     {
         // These are only string values so that the quests don't have a chance to end
         // up being duplicated by user-error. We only want one loaded copy of each quest.
-        public static FrozenDictionary<string, Quest> ActiveQuests { get; internal set; }
-        public static string[] CompletedQuests { get; internal set; }
-        public static string[] IncompleteQuests { get; internal set; }
+        public static FrozenDictionary<string, Quest> ActiveQuests { get; internal set; } = null;
+        public static string[] CompletedQuests { get; internal set; } = null;
+        public static string[] IncompleteQuests { get; internal set; } = null;
 
-        public static FrozenDictionary<string, Quest> WorldQuests { get; internal set; }
-        public static string[] CompletedWorldQuests { get; internal set; }
-        public static string[] IncompleteWorldQuests { get; internal set; }
+        public static FrozenDictionary<string, Quest> WorldQuests { get; internal set; } = null;
+        public static string[] CompletedWorldQuests { get; internal set; } = null;
+        public static string[] IncompleteWorldQuests { get; internal set; } = null;
 
-        public static FrozenDictionary<string, Quest> PlayerQuests { get; internal set; }
-        public static string[] CompletedPlayerQuests { get; internal set; }
-        public static string[] IncompletePlayerQuests { get; internal set; }
+        public static FrozenDictionary<string, Quest> PlayerQuests { get; internal set; } = null;
+        public static string[] CompletedPlayerQuests { get; internal set; } = null;
+        public static string[] IncompletePlayerQuests { get; internal set; } = null;
 
-        public static IList<QuestBook> QuestBooks { get; internal set; } = [];
-        public static Dictionary<string, IList<QuestBook>> QuestLogs { get; internal set; } = [];
+        public static IList<QuestBook> QuestBooks { get; internal set; } = null;
+        public static Dictionary<string, IList<QuestBook>> QuestLogs { get; } = [];
+        public static string ActiveQuestLog { get; internal set; } = null;
 
         public static IEnumerable<KeyValuePair<string, IList<QuestBook>>> AvailableQuestLogs { get => QuestLogs.Where(kvp => !DisabledQuestLogs.Contains(kvp.Key)); }
-        public static List<string> DisabledQuestLogs { get; internal set; } = [];
-
-        public static Dictionary<string, QuestLogStyle> QuestLogStyles = null;
-        public static QuestLogStyle ActiveStyle = null;
+        public static List<string> DisabledQuestLogs { get; } = [];
 
         // These are registered on load
-        public static readonly List<Type> AvailableQuestBookTypes = [];
-        public static readonly List<Type> AvailableQuestLineTypes = [];
-        public static readonly Dictionary<Type, ChapterElement> AvailableQuestElementTypes = [];
+        public static List<Type> AvailableQuestBookTypes { get; internal set; } = null;
+        public static List<Type> AvailableQuestLineTypes { get; internal set; } = null;
+        public static Dictionary<Type, QuestLogElement> AvailableQuestElementTypes { get; internal set; } = null;
 
         private static readonly PropertyInfo modProperty = typeof(Quest).GetProperty("Mod", BindingFlags.Instance | BindingFlags.Public)!;
 
         // Reset "completed" quests
-        public static void LoadActiveQuests()
+        public static void ResetActiveQuests()
         {
             Dictionary<string, Quest> newActiveQuests = [];
             Dictionary<string, Quest> newWorldQuests = [];
@@ -90,7 +88,11 @@ namespace QuestBooks.Systems
             IncompletePlayerQuests = null;
         }
 
-        public static void SelectQuestLog(string questLog) => QuestBooks = QuestLogs[questLog];
+        public static void SelectQuestLog(string questLog)
+        {
+            ActiveQuestLog = questLog;
+            QuestBooks = QuestLogs[questLog];
+        }
 
         public static Quest GetQuest(string questName) => ActiveQuests[questName];
         public static Quest GetQuest<TQuest>() where TQuest : Quest => GetQuest(QuestLoader.QuestKeys[typeof(TQuest)]);

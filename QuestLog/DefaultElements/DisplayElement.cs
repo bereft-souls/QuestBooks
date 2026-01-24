@@ -12,7 +12,7 @@ namespace QuestBooks.QuestLog.DefaultElements
     /// A simple canvas element that contains a texture to display and scale.
     /// </summary>
     [ElementTooltip("DisplayElement")]
-    public class DisplayElement : ChapterElement
+    public class DisplayElement : QuestLogElement
     {
         // Used when the texture is not found or has not been assigned yet.
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Elements/QuestionMark";
@@ -59,7 +59,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         {
             // mousePosition is already in logical canvas coordinates (zoom factored out)
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
-            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size() * Scale).Contains(mousePosition.ToPoint());
+            return QuestLogDrawer.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size() * Scale).Contains(mousePosition.ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
@@ -83,7 +83,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, drawPos, null, Color.White, Rotation, texture.Size() * 0.5f, scaledScale, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override bool PlaceOnCanvas(QuestChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;

@@ -19,7 +19,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonIgnore]
         public int IncomingFeeds => Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(this));
 
-        public virtual Vector2 ConnectorAnchor => CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
+        public virtual Vector2 ConnectorAnchor => CanvasPosition - QuestLogDrawer.ActiveStyle.QuestAreaOffset;
 
         public List<Connector> Connections { get; set; } = [];
 

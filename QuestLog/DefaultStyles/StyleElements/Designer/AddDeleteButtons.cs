@@ -10,7 +10,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {

@@ -25,8 +25,8 @@ namespace QuestBooks.Systems
         internal static readonly Dictionary<Type, Mod> questMods = [];
         public static FrozenDictionary<Type, string> QuestKeys { get; internal set; }
 
-        public static QuestLogStyle ExclusiveOverrideStyle = null;
-        public static Dictionary<Mod, List<QuestLogStyle>> LogStyleRegistry = [];
+        public static QuestLogStyle ExclusiveOverrideStyle { get; internal set; } = null;
+        public static Dictionary<Mod, List<QuestLogStyle>> LogStyleRegistry { get; } = [];
 
         internal static void LoadQuests(Mod mod)
         {
@@ -39,14 +39,14 @@ namespace QuestBooks.Systems
             var types = AssemblyManager.GetLoadableTypes(loadingAssembly);
             //var questTypes = types.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
 
-            QuestManager.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))).OrderBy(t => t.Name));
-            QuestManager.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(BookChapter))).OrderBy(t => t.Name));
+            QuestManager.AvailableQuestBookTypes = [.. types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))).OrderBy(t => t.Name)];
+            QuestManager.AvailableQuestLineTypes = [.. types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestChapter))).OrderBy(t => t.Name)];
 
-            QuestManager.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(ChapterElement)))
-                .Select(t => new KeyValuePair<Type, ChapterElement>(t, (ChapterElement)Activator.CreateInstance(t)))
+            QuestManager.AvailableQuestElementTypes = types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestLogElement)))
+                .Select(t => new KeyValuePair<Type, QuestLogElement>(t, (QuestLogElement)Activator.CreateInstance(t)))
                 .Select(kvp => { kvp.Value.TemplateInstance = true; return kvp; })
                 .OrderBy(kvp => kvp.Key.Name)
-                .ToDictionary());
+                .ToDictionary();
 
             //foreach (var questType in questTypes)
             //{
@@ -66,7 +66,7 @@ namespace QuestBooks.Systems
             //if (QuestManager.QuestBooks.Count == 0)
             //    VanillaQuests.AddVanillaQuests();
 
-            QuestManager.QuestLogStyles = LogStyleRegistry
+            QuestLogDrawer.QuestLogStyles = LogStyleRegistry
                 .SelectMany(kvp => kvp.Value)
                 .Select(q => new KeyValuePair<string, QuestLogStyle>(q.Key, q))
                 .ToDictionary();
@@ -74,16 +74,15 @@ namespace QuestBooks.Systems
 
         public override void PostSetupRecipes()
         {
-            if (ExclusiveOverrideStyle != null)
-                QuestManager.ActiveStyle = ExclusiveOverrideStyle;
+            if (ExclusiveOverrideStyle is not null)
+                QuestLogDrawer.ActiveStyle = ExclusiveOverrideStyle;
 
             // TODO: Change this for config loading
             else
-                QuestManager.ActiveStyle = QuestManager.QuestLogStyles.First().Value;
-
-            QuestManager.ActiveStyle.OnSelect();
+                QuestLogDrawer.ActiveStyle = QuestLogDrawer.QuestLogStyles.First().Value;
 
             QuestManager.SelectQuestLog(QuestManager.AvailableQuestLogs.First().Key);
+            QuestLogDrawer.ActiveStyle.OnSelect();
         }
 
         #region Quest Loading
@@ -146,7 +145,7 @@ namespace QuestBooks.Systems
 
         // This is the first loading related method called on world entry.
         // We use it to reset which quests are considered "complete".
-        public override void OnWorldLoad() => QuestManager.LoadActiveQuests();
+        public override void OnWorldLoad() => QuestManager.ResetActiveQuests();
 
         public override void OnWorldUnload() => QuestManager.UnloadActiveQuests();
 

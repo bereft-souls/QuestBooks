@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -120,14 +120,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (intersection.X < LogArea.Center().X)
                     goto PostResize;
 
-                Vector2 defaultLogSize = QuestAssets.BasicQuestCanvas.Asset.Size();
+                Vector2 defaultLogSize = QuestAssets.QuestLogCanvas.Asset.Size();
                 float scale = (intersection - LogArea.Center()).Length() / (defaultLogSize * 0.5f).Length();
 
                 // Clamped scale
                 if (scale is >= 0.4f and <= 2f)
                     LogScale = scale;
 
-                Vector2 logSize = QuestAssets.BasicQuestCanvas.Asset.Size() * LogScale;
+                Vector2 logSize = QuestAssets.QuestLogCanvas.Asset.Size() * LogScale;
                 LogArea = CenteredRectangle(halfRealScreen + (LogPositionOffset * halfRealScreen), logSize);
             }
 

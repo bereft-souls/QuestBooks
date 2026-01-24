@@ -3,9 +3,9 @@ using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultChapters
 {
-    public abstract class BasicChapter : BookChapter
+    public abstract class BasicChapter : QuestChapter
     {
-        public override List<ChapterElement> Elements { get; set; } = [];
+        public override List<QuestLogElement> Elements { get; set; } = [];
 
         public override string DisplayName => Language.GetOrRegister(NameKey).Value;
 
@@ -14,7 +14,7 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public string NameKey;
 
-        public override void CloneTo(BookChapter newInstance)
+        public override void CloneTo(QuestChapter newInstance)
         {
             if (newInstance is BasicChapter chapter)
                 chapter.NameKey = NameKey;

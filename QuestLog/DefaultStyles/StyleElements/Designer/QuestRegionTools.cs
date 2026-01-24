@@ -10,13 +10,13 @@ using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Localization;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
         private readonly List<(Rectangle box, Type type)> elementSelections = [];
         private int elementTypeScrollOffset = 0;
-        private ChapterElement placingElement = null;
+        private QuestLogElement placingElement = null;
         private const float zoomIncrement = 0.1f;
 
         private void HandleQuestRegionTools()
@@ -367,7 +367,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         {
                             if ((placingElement?.GetType() ?? null) != elementType)
                             {
-                                placingElement = (ChapterElement)Activator.CreateInstance(elementType);
+                                placingElement = (QuestLogElement)Activator.CreateInstance(elementType);
                                 placingElement.PreviouslyPlaced = false;
                             }
 

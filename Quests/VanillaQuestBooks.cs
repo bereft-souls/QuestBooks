@@ -1,4 +1,4 @@
-﻿using QuestBooks.QuestLog.DefaultLogStyles;
+﻿using QuestBooks.QuestLog.DefaultStyles;
 using System.Text;
 
 namespace QuestBooks.Quests

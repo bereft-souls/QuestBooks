@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 namespace QuestBooks.QuestLog.DefaultElements
 {
     [ElementTooltip("QuestJump")]
-    internal class QuestJumpElement : ChapterElement, IConnectable
+    internal class QuestJumpElement : QuestLogElement, IConnectable
     {
         [JsonIgnore]
         public int IncomingFeeds => Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(this));
@@ -45,7 +45,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonProperty]
         [UseConverter(typeof(QuestChapterChecker))]
         [ElementTooltip("JumpChapter")]
-        public virtual BookChapter JumpChapter { get; set; } = QuestManager.QuestBooks.FirstOrDefault(defaultValue: null)?.Chapters.FirstOrDefault(defaultValue: null) ?? null;
+        public virtual QuestChapter JumpChapter { get; set; } = QuestManager.QuestBooks.FirstOrDefault(defaultValue: null)?.Chapters.FirstOrDefault(defaultValue: null) ?? null;
 
         [JsonProperty]
         [UseConverter(typeof(Vector2Converter))]
@@ -88,11 +88,11 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public Vector2 CanvasPosition { get; set; }
 
-        public Vector2 ConnectorAnchor => CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
+        public Vector2 ConnectorAnchor => CanvasPosition - QuestLogDrawer.ActiveStyle.QuestAreaOffset;
 
         public List<Connector> Connections { get; set; } = [];
 
-        public override bool VisibleOnCanvas() => IncomingFeeds >= DisplayFeeds || QuestManager.ActiveStyle.UseDesigner;
+        public override bool VisibleOnCanvas() => IncomingFeeds >= DisplayFeeds || QuestLogDrawer.ActiveStyle.UseDesigner;
         public bool Unlocked() => IncomingFeeds >= UnlockFeeds;
 
         public bool CompleteConnection(IConnectable source) => VisibleOnCanvas();
@@ -114,16 +114,16 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void OnSelect()
         {
-            QuestManager.ActiveStyle.SelectBook(JumpBook);
-            QuestManager.ActiveStyle.SelectChapter(JumpChapter);
+            QuestLogDrawer.ActiveStyle.SelectBook(JumpBook);
+            QuestLogDrawer.ActiveStyle.SelectChapter(JumpChapter);
 
             if (JumpChapter.EnableShifting)
-                QuestManager.ActiveStyle.QuestAreaOffset = JumpOffset * QuestManager.ActiveStyle.Zoom;
+                QuestLogDrawer.ActiveStyle.QuestAreaOffset = JumpOffset * QuestLogDrawer.ActiveStyle.Zoom;
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
-            if (QuestManager.ActiveStyle.UseDesigner)
+            if (QuestLogDrawer.ActiveStyle.UseDesigner)
             {
                 int cycle = (int)(Main.timeForVisualEffects % 120 / 60);
                 switch (cycle)
@@ -192,7 +192,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, drawPos, null, Color.White with { A = 220 }, 0f, texture.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override bool PlaceOnCanvas(QuestChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;
@@ -202,7 +202,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public class QuestBookChecker : IMemberConverter<QuestBook>
         {
-            public ChapterElement CallingElement { set => JumpElement = value as QuestJumpElement; }
+            public QuestLogElement CallingElement { set => JumpElement = value as QuestJumpElement; }
             public QuestJumpElement JumpElement;
 
             public string Convert(QuestBook input) => input is null ? "0" : QuestManager.QuestBooks.IndexOf(input).ToString();
@@ -237,13 +237,13 @@ namespace QuestBooks.QuestLog.DefaultElements
             }
         }
 
-        public class QuestChapterChecker : IMemberConverter<BookChapter>
+        public class QuestChapterChecker : IMemberConverter<QuestChapter>
         {
-            public ChapterElement CallingElement { set => JumpElement = value as QuestJumpElement; }
+            public QuestLogElement CallingElement { set => JumpElement = value as QuestJumpElement; }
             public QuestJumpElement JumpElement;
 
-            public string Convert(BookChapter input) => input is null ? "0" : JumpElement.JumpBook.Chapters.IndexOf(input).ToString();
-            public bool TryParse(string input, out BookChapter result)
+            public string Convert(QuestChapter input) => input is null ? "0" : JumpElement.JumpBook.Chapters.IndexOf(input).ToString();
+            public bool TryParse(string input, out QuestChapter result)
             {
                 if (!int.TryParse(input, out int index))
                 {

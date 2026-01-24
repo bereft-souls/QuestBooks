@@ -1,6 +1,9 @@
 global using static QuestBooks.Utilities.Utils;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
+using QuestBooks.QuestLog.DefaultStyles;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
 using QuestBooks.Systems.NetCode;
@@ -54,21 +57,24 @@ namespace QuestBooks
 
         /// <summary>
         /// Deserializes a custom quest log and adds it to the UI.<br/>
-        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.<br/>
+        /// You can supply <paramref name="coverDrawAction"/> to change the icon that draws on the cover of the default quest book.
         /// </summary>
-        public static void AddQuestLog(string questLogName, string serializedQuestLog)
+        public static void AddQuestLog(string questLogName, string serializedQuestLog, Action<SpriteBatch, Vector2, float> coverDrawAction = null)
         {
             var questBook = JsonConvert.DeserializeObject<List<QuestBook>>(serializedQuestLog, JsonTypeResolverFix.Settings);
-            AddQuestLog(questLogName, questBook);
+            AddQuestLog(questLogName, questBook, coverDrawAction);
         }
 
         /// <summary>
         /// Adds a custom quest log to the UI.<br/>
-        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.<br/>
+        /// You can supply <paramref name="coverDrawAction"/> to change the icon that draws on the cover of the default quest book.
         /// </summary>
-        public static void AddQuestLog(string questLogName, IList<QuestBook> questLog)
+        public static void AddQuestLog(string questLogName, IList<QuestBook> questLog, Action<SpriteBatch, Vector2, float> coverDrawAction = null)
         {
             QuestManager.QuestLogs.Add(questLogName, questLog);
+            QuestLogDrawer.CoverDrawCalls.Add(questLogName, coverDrawAction ?? BasicQuestLogStyle.DrawDefaultCover);
         }
 
         /// <summary>

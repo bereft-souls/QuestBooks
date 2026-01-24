@@ -13,17 +13,17 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
-        private ChapterElement lastElement = null;
+        private QuestLogElement lastElement = null;
         private bool previewElementInfo = false;
 
         private static object MemberHash(MemberInfo memberInfo) => memberInfo is FieldInfo field ? field.FieldHandle : memberInfo;
 
-        private static readonly object[] defaultMembers = typeof(ChapterElement)
-            .GetProperties().Cast<MemberInfo>().Concat(typeof(ChapterElement).GetFields().Cast<MemberInfo>())
+        private static readonly object[] defaultMembers = typeof(QuestLogElement)
+            .GetProperties().Cast<MemberInfo>().Concat(typeof(QuestLogElement).GetFields().Cast<MemberInfo>())
             .Select(MemberHash).ToArray();
 
         private readonly Dictionary<Type, Dictionary<MemberInfo, MemberBundle>> elementTypeMembers = [];
@@ -150,7 +150,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
             }
 
-            bool TryGetCanvasPosition(ChapterElement element, out MemberInfo member)
+            bool TryGetCanvasPosition(QuestLogElement element, out MemberInfo member)
             {
                 var property = element.GetType().GetProperty("CanvasPosition", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
@@ -172,9 +172,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 return false;
             }
 
-            Vector2 CanvasPosition(ChapterElement element, MemberInfo member) => member is PropertyInfo property ? (Vector2)property.GetValue(element) : (Vector2)(member as FieldInfo).GetValue(element);
+            Vector2 CanvasPosition(QuestLogElement element, MemberInfo member) => member is PropertyInfo property ? (Vector2)property.GetValue(element) : (Vector2)(member as FieldInfo).GetValue(element);
 
-            void SetCanvasPosition(ChapterElement element, MemberInfo member, Vector2 value)
+            void SetCanvasPosition(QuestLogElement element, MemberInfo member, Vector2 value)
             {
                 if (member is PropertyInfo property)
                     property.SetValue(element, value);
@@ -297,7 +297,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 // Set up a collection for this element type's members
                 elementTypeMembers.Add(elementType, []);
-                var ignoredAttribute = typeof(ChapterElement.HideInDesignerAttribute);
+                var ignoredAttribute = typeof(QuestLogElement.HideInDesignerAttribute);
 
                 // Get all public instanced properties and fields
                 var properties = elementType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
@@ -311,9 +311,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 foreach (var memberInfo in memberInfos)
                 {
                     // Check if the element has been tagged to use a custom converter
-                    ChapterElement.UseConverterAttribute attribute = Attribute
-                        .GetCustomAttribute(memberInfo, typeof(ChapterElement.UseConverterAttribute))
-                        as ChapterElement.UseConverterAttribute;
+                    QuestLogElement.UseConverterAttribute attribute = Attribute
+                        .GetCustomAttribute(memberInfo, typeof(QuestLogElement.UseConverterAttribute))
+                        as QuestLogElement.UseConverterAttribute;
 
                     // These act as simplified get-set methods regardless of whether
                     // the member is a field or property
@@ -338,9 +338,9 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     // First check for an attributed converter,
                     // then check if we have a default converter for the type
                     var converterType = (attribute is not null && attribute.PropertyConverterType.IsAssignableTo(
-                        typeof(ChapterElement.IMemberConverter<>).MakeGenericType(memberType))) ?
+                        typeof(QuestLogElement.IMemberConverter<>).MakeGenericType(memberType))) ?
                         attribute.PropertyConverterType :
-                        ChapterElement.DefaultConverters.GetValueOrDefault(memberType, null);
+                        QuestLogElement.DefaultConverters.GetValueOrDefault(memberType, null);
 
                     // If no converter works, skip over
                     if (converterType is null)
@@ -389,14 +389,14 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 {
                     var field = bundle.Converter.GetType().GetField("CallingElement", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-                    if (field is not null && field.FieldType == typeof(ChapterElement))
+                    if (field is not null && field.FieldType == typeof(QuestLogElement))
                         field.SetValue(bundle.Converter, SelectedElement);
 
                     else
                     {
                         var property = bundle.Converter.GetType().GetProperty("CallingElement", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-                        if (property is not null && property.PropertyType == typeof(ChapterElement) && property.CanWrite)
+                        if (property is not null && property.PropertyType == typeof(QuestLogElement) && property.CanWrite)
                             property.SetValue(bundle.Converter, SelectedElement);
                     }
 

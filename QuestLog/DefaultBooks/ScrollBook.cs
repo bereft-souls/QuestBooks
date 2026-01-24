@@ -20,7 +20,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
 
             if (selected)
             {
-                if (QuestManager.ActiveStyle.UseDesigner)
+                if (QuestLogDrawer.ActiveStyle.UseDesigner)
                     outlineColor = Color.Yellow;
 
                 else

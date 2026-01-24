@@ -12,7 +12,7 @@ using static QuestBooks.QuestLog.DefaultElements.QuestDisplay;
 namespace QuestBooks.QuestLog.DefaultElements
 {
     [ElementTooltip("HiddenQuest")]
-    public class HiddenQuest : ChapterElement, IConnectable
+    public class HiddenQuest : QuestLogElement, IConnectable
     {
         [UseConverter(typeof(QuestChecker))]
         [ElementTooltip("QuestKey")]
@@ -26,11 +26,11 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public Vector2 CanvasPosition { get; set; }
 
-        public Vector2 ConnectorAnchor => CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
+        public Vector2 ConnectorAnchor => CanvasPosition - QuestLogDrawer.ActiveStyle.QuestAreaOffset;
 
         public List<Connector> Connections { get; set; } = [];
 
-        public override bool VisibleOnCanvas() => QuestManager.ActiveStyle.UseDesigner;
+        public override bool VisibleOnCanvas() => QuestLogDrawer.ActiveStyle.UseDesigner;
 
         public bool CompleteConnection(IConnectable source) => false;
 
@@ -67,7 +67,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, drawPos, null, Color.White with { A = 220 }, 0f, texture.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override bool PlaceOnCanvas(QuestChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;

@@ -5,7 +5,7 @@ using System.Linq;
 using Terraria;
 using Terraria.GameInput;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -15,7 +15,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private int chaptersScrollOffset = 0;
         private int previousChapterScrollOffset = 0;
 
-        private readonly List<(Rectangle area, BookChapter questBook)> chapterLibrary = [];
+        private readonly List<(Rectangle area, QuestChapter questBook)> chapterLibrary = [];
         private void UpdateChapters(Rectangle chapters, Vector2 scaledMouse)
         {
             SwitchTargets(chaptersTarget, LibraryBlending, SamplerState.PointClamp);
@@ -23,7 +23,8 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             // If we aren't in the middle of swiping and there are no chapters to draw,
             // return early
-            if (previousBookSwipeOffset == 0f && !AvailableChapters.Any())
+            var availableChapters = SelectedBook?.Chapters ?? [];
+            if (previousBookSwipeOffset == 0f && availableChapters.Count == 0)
             {
                 SwitchTargets(null);
                 return;
@@ -64,7 +65,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             float xOffset = 0f;
 
             // Add any available chapters
-            foreach (var questLine in AvailableChapters)
+            foreach (var questLine in availableChapters)
             {
                 if (!questLine.VisibleInLog() && !UseDesigner)
                     continue;
@@ -115,7 +116,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (hovered && LeftMouseJustReleased && (questLine.IsUnlocked() || UseDesigner))// && questElementSwipeOffset == 0f)
                 {
-                    BookChapter selectedChapter = (questLine == SelectedChapter) ? null : questLine;
+                    QuestChapter selectedChapter = (questLine == SelectedChapter) ? null : questLine;
                     SelectChapter(selectedChapter);
                 }
 

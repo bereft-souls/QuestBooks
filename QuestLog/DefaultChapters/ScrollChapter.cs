@@ -7,7 +7,7 @@ using Terraria.GameContent;
 namespace QuestBooks.QuestLog.DefaultChapters
 {
     /// <summary>
-    /// Represents a basic <see cref="BookChapter"/> implementation. Always visible, always unlocked.
+    /// Represents a basic <see cref="QuestChapter"/> implementation. Always visible, always unlocked.
     /// </summary>
     [ChapterTooltip("ScrollChapter")]
     public class ScrollChapter : BasicChapter

@@ -12,7 +12,7 @@ namespace QuestBooks.QuestLog.DefaultElements
     /// A simple canvas element that overlays a texture above your canvas and does NOT shift with moving canvases.
     /// </summary>
     [ElementTooltip("OverlayElement")]
-    public class OverlayElement : ChapterElement
+    public class OverlayElement : QuestLogElement
     {
         // Used when the texture is not found or has not been assigned yet.
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Elements/QuestionMark";
@@ -59,7 +59,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         {
             _texture ??= ModContent.Request<Texture2D>(_texturePath);
             // Overlay elements ignore zoom
-            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - canvasViewOffset).ToPoint());
+            return QuestLogDrawer.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, _texture.Size()).Contains((mousePosition - canvasViewOffset).ToPoint());
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
@@ -82,7 +82,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, drawPos, null, Color.White, Rotation, texture.Size() * 0.5f, Scale, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override bool PlaceOnCanvas(QuestChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition - canvasViewOffset;
             return true;

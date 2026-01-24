@@ -9,21 +9,20 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader.IO;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle : QuestLogStyle
     {
         public override string Key => "DefaultQuestLog";
         public override string DisplayName => "Book";
 
-        // Available element retrieval
-        public static IEnumerable<QuestBook> AvailableBooks { get => QuestManager.QuestBooks; }
-        public IEnumerable<BookChapter> AvailableChapters { get => SelectedBook?.Chapters ?? []; }
-        public ChapterElement[] SortedElements { get; set; } = null;
+        public QuestLogElement[] SortedElements { get; set; } = null;
 
         // Mouse position on canvas
-        protected static Vector2 ScaledMousePos { get; set; }
-        protected static Point MouseCanvas { get; set; }
+        protected Vector2 ScaledMousePos { get; set; }
+        protected Point MouseCanvas { get; set; }
+
+        protected bool PreviouslyOpened { get; set; } = false;
 
         // Our blending drastically changes between content draws
         protected static BlendState LayerBlending { get; } = new()
@@ -147,7 +146,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             UpdateMouseClicks();
             DrawTasks.Clear();
 
-            if (!QuestLogDrawer.DisplayLog)
+            if (!QuestLogDrawer.DisplayLog || !PreviouslyOpened)
                 return;
 
             if (wantsRetarget)
@@ -166,7 +165,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             LogArea = CalculateLogArea(out var logSize, out var halfScreen, out var halfRealScreen);
             UpdateMousePosition(halfScreen, halfRealScreen);
 
-            Texture2D logTexture = QuestAssets.BasicQuestCanvas;
+            Texture2D logTexture = QuestAssets.QuestLogCanvas;
             DrawTasks.Add(sb => sb.Draw(logTexture, halfRealScreen + (LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f));
 
             // These handle moving the canvas via dragging the book's spine,
@@ -318,8 +317,62 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         // while skipping over performing the actual draw work when it is not necessary.
         public override void DrawLog(SpriteBatch spriteBatch)
         {
+            if (!PreviouslyOpened)
+            {
+                if (DrawBookOpening(spriteBatch))
+                    PreviouslyOpened = true;
+
+                return;
+            }
+
             foreach (var drawAction in DrawTasks)
                 drawAction(spriteBatch);
+        }
+
+        private float? verticalDrawPos = null;
+        private int frozenFrames = 60;
+        private float bookRotation = -MathHelper.PiOver4;
+
+        // Draws the book animation opening.
+        // Returns true when the animation is complete.
+        protected virtual bool DrawBookOpening(SpriteBatch spriteBatch)
+        {
+            // Assign initial draw position just off the bottom of the screen.
+            // This is immediately lerped into the screen bounds.
+            verticalDrawPos ??= QuestLogDrawer.RealScreenSize.Y + (QuestAssets.ClosedBook.Asset.Height * 0.5f);
+            float targetDrawPos = QuestLogDrawer.RealScreenSize.Y * 0.5f;
+
+            if (verticalDrawPos.Value != targetDrawPos)
+            {
+                verticalDrawPos = float.Lerp(verticalDrawPos.Value, targetDrawPos, 0.05f);
+
+                if (verticalDrawPos.Value - targetDrawPos < 0.01f)
+                    verticalDrawPos = targetDrawPos;
+            }
+            else
+            {
+                frozenFrames--;
+            }
+
+            if (bookRotation != 0f)
+            {
+                bookRotation = float.Lerp(bookRotation, 0f, 0.05f);
+                if (bookRotation < 0.01f)
+                    bookRotation = 0f;
+            }
+
+            Vector2 drawPos = new(QuestLogDrawer.RealScreenSize.X * 0.5f, verticalDrawPos.Value);
+            Texture2D closedBook = QuestAssets.ClosedBook;
+            spriteBatch.Draw(closedBook, drawPos, null, Color.White, bookRotation, closedBook.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+
+            QuestLogDrawer.CoverDrawCalls[QuestManager.ActiveQuestLog].Invoke(spriteBatch, drawPos, bookRotation);
+            return frozenFrames == 0;
+        }
+
+        public static void DrawDefaultCover(SpriteBatch spriteBatch, Vector2 drawPos, float rotation)
+        {
+            Texture2D tree = QuestAssets.CoverTree;
+            spriteBatch.Draw(tree, drawPos, null, Color.White, rotation, tree.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
         }
 
         public override void SelectBook(QuestBook book)
@@ -348,7 +401,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             }
         }
 
-        public override void SelectChapter(BookChapter chapter)
+        public override void SelectChapter(QuestChapter chapter)
         {
             if (chapter == SelectedChapter)
                 return;
@@ -387,7 +440,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         {
             halfScreen = Main.ScreenSize.ToVector2() * 0.5f;
             halfRealScreen = QuestLogDrawer.RealScreenSize * 0.5f;
-            logSize = QuestAssets.BasicQuestCanvas.Asset.Size() * (scaleOverride ?? LogScale);
+            logSize = QuestAssets.QuestLogCanvas.Asset.Size() * (scaleOverride ?? LogScale);
             return CenteredRectangle(halfRealScreen + (LogPositionOffset * halfRealScreen), logSize);
         }
 
@@ -438,7 +491,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private void SetupTargets()
         {
-            QuestAssets.BasicQuestCanvas.Value.Wait();
+            QuestAssets.QuestLogCanvas.Value.Wait();
             var basicLogArea = CalculateLogArea(out _, out _, out _, LogScale);
             TargetScale = LogScale;
             CalculateLibraryRegions(basicLogArea, out Rectangle books, out Rectangle chapters, out Rectangle questArea, out Rectangle questInfo);
@@ -507,25 +560,28 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
         private const string ScaleKey = "QuestBooksScale";
         private const string OffsetKey = "QuestBooksOffset";
+        private const string PreviouslyOpenedKey = "QuestLogPreviouslyOpened";
 
         public override void SavePlayerData(TagCompound tag)
         {
             tag[ScaleKey] = LogScale;
             tag[OffsetKey] = LogPositionOffset;
+            tag[PreviouslyOpenedKey] = PreviouslyOpened;
         }
 
         public override void LoadPlayerData(TagCompound tag)
         {
-            if (tag.TryGet(ScaleKey, out float scale))
+            if (tag.TryGet(ScaleKey, out float scale) && LogScale != scale)
             {
-                if (LogScale != scale)
-                    SetupTargets();
-
                 LogScale = scale;
+                SetupTargets();
             }
 
             if (tag.TryGet(OffsetKey, out Vector2 offset))
                 LogPositionOffset = offset;
+
+            if (tag.TryGet(PreviouslyOpenedKey, out bool previouslyOpened))
+                PreviouslyOpened = previouslyOpened;
         }
 
         #endregion

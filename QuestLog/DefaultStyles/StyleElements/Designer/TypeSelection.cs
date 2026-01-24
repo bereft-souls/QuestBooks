@@ -13,7 +13,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -257,7 +257,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         void onClick()
                         {
                             var oldType = SelectedChapter.GetType();
-                            var instance = (BookChapter)Activator.CreateInstance(lineType);
+                            var instance = (QuestChapter)Activator.CreateInstance(lineType);
                             SelectedChapter.CloneTo(instance);
                             instance.CloneFrom(SelectedChapter);
 
@@ -267,12 +267,12 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                             SelectedChapter = instance;
 
                             AddHistory(() => {
-                                var oldInstance = (BookChapter)Activator.CreateInstance(oldType);
+                                var oldInstance = (QuestChapter)Activator.CreateInstance(oldType);
                                 instance.CloneTo(oldInstance);
                                 oldInstance.CloneFrom(instance);
                                 book.Chapters[index] = oldInstance;
                             }, () => {
-                                var newInstance = (BookChapter)Activator.CreateInstance(lineType);
+                                var newInstance = (QuestChapter)Activator.CreateInstance(lineType);
                                 var instance = book.Chapters[index];
                                 instance.CloneTo(newInstance);
                                 newInstance.CloneFrom(instance);

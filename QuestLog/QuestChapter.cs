@@ -10,12 +10,12 @@ using Terraria.ModLoader;
 namespace QuestBooks.QuestLog
 {
     [ExtendsFromMod("QuestBooks")]
-    public abstract class BookChapter
+    public abstract class QuestChapter
     {
         /// <summary>
-        /// The collection of <see cref="ChapterElement"/>s to be displayed in the quest log.
+        /// The collection of <see cref="QuestLogElement"/>s to be displayed in the quest log.
         /// </summary>
-        public abstract List<ChapterElement> Elements { get; set; }
+        public abstract List<QuestLogElement> Elements { get; set; }
 
         /// <summary>
         /// The string that will be displayed in the quest log. You should use localization here where applicable.
@@ -98,7 +98,7 @@ namespace QuestBooks.QuestLog
 
         public virtual void Update()
         {
-            foreach (ChapterElement questElement in Elements)
+            foreach (QuestLogElement questElement in Elements)
                 questElement.Update();
         }
 
@@ -128,7 +128,7 @@ namespace QuestBooks.QuestLog
         /// <summary>
         /// Clones the members of this quest book into a new quest line.
         /// </summary>
-        public virtual void CloneTo(BookChapter newInstance)
+        public virtual void CloneTo(QuestChapter newInstance)
         {
             newInstance.Elements.AddRange(Elements);
         }
@@ -136,7 +136,7 @@ namespace QuestBooks.QuestLog
         /// <summary>
         /// Clones the members of an old quest line into this new quest line.
         /// </summary>
-        public virtual void CloneFrom(BookChapter oldInstance)
+        public virtual void CloneFrom(QuestChapter oldInstance)
         {
             
         }

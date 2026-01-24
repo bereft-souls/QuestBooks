@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.QuestLog;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
@@ -11,9 +13,22 @@ namespace QuestBooks.Systems
     internal class QuestLogDrawer : ModSystem
     {
         public static RenderTarget2D ScreenRenderTarget { get; private set; }
-        public static Vector2 RealScreenSize => ScreenRenderTarget.Size();
+        public static BlendState BlendState { get; } = new()
+        {
+            ColorSourceBlend = Blend.SourceAlpha,
+            AlphaSourceBlend = Blend.One,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            AlphaDestinationBlend = Blend.One,
+            ColorBlendFunction = BlendFunction.Add,
+            AlphaBlendFunction = BlendFunction.Add
+        };
+
         public static bool DisplayLog { get; private set; } = false;
-        public static bool UseDesigner { get; set; } = false;
+        public static Vector2 RealScreenSize => ScreenRenderTarget.Size();
+
+        public static Dictionary<string, QuestLogStyle> QuestLogStyles { get; internal set; } = null;
+        public static QuestLogStyle ActiveStyle { get; internal set; } = null;
+        public static Dictionary<string, Action<SpriteBatch, Vector2, float>> CoverDrawCalls { get; } = [];
 
         public static void Toggle(bool? active = null)
         {
@@ -26,7 +41,16 @@ namespace QuestBooks.Systems
             if (DisplayLog && Main.playerInventory)
                 Main.playerInventory = false;
 
-            QuestManager.ActiveStyle.OnToggle(display);
+            ActiveStyle.OnToggle(display);
+        }
+
+        public static void SelectLogStyle(string style) => SelectLogStyle(QuestLogStyles[style]);
+
+        public static void SelectLogStyle(QuestLogStyle style)
+        {
+            ActiveStyle.OnDeselect();
+            ActiveStyle = style;
+            style.OnSelect();
         }
 
         // This draws the actual quest log to the RenderTarget2D
@@ -39,17 +63,9 @@ namespace QuestBooks.Systems
             graphics.SetRenderTarget(ScreenRenderTarget);
             graphics.Clear(Color.Transparent);
 
-            Main.spriteBatch.Begin(SpriteSortMode.Deferred, new()
-            {
-                ColorSourceBlend = Blend.SourceAlpha,
-                AlphaSourceBlend = Blend.One,
-                ColorDestinationBlend = Blend.InverseSourceAlpha,
-                AlphaDestinationBlend = Blend.One,
-                ColorBlendFunction = BlendFunction.Add,
-                AlphaBlendFunction = BlendFunction.Add
-            });
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState);
 
-            QuestManager.ActiveStyle.DrawLog(Main.spriteBatch);
+            ActiveStyle.DrawLog(Main.spriteBatch);
             Main.spriteBatch.End();
 
             graphics.SetRenderTargets(null);
@@ -81,7 +97,7 @@ namespace QuestBooks.Systems
                     layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                         "QuestBooks: Book Prompt", () =>
                         {
-                            QuestManager.ActiveStyle.DrawQuestLogIcon(Main.spriteBatch, iconArea, hovered);
+                            ActiveStyle.DrawQuestLogIcon(Main.spriteBatch, iconArea, hovered);
                             return true;
                         },
                         InterfaceScaleType.UI
@@ -103,7 +119,7 @@ namespace QuestBooks.Systems
                 ));
             }
 
-            QuestManager.ActiveStyle.ModifyInterfaceLayers(layers);
+            ActiveStyle.ModifyInterfaceLayers(layers);
         }
 
         public override void Load()

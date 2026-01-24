@@ -15,7 +15,7 @@ namespace QuestBooks.QuestLog
         /// <summary>
         /// The list of all quest lines contained within this book.
         /// </summary>
-        public abstract List<BookChapter> Chapters { get; set; }
+        public abstract List<QuestChapter> Chapters { get; set; }
 
         /// <summary>
         /// The string that will be displayed in the quest log. You should use localization here where applicable.
@@ -61,7 +61,7 @@ namespace QuestBooks.QuestLog
 
         public virtual void Update()
         {
-            foreach (BookChapter chapter in Chapters)
+            foreach (QuestChapter chapter in Chapters)
                 chapter.Update();
         }
 
