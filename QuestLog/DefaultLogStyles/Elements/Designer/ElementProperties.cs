@@ -190,6 +190,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
                     {
                         Vector2 direction = new(-1f, 0f);
+
+                        if (Main.keyState.PressingShift())
+                            direction *= gridSize;
+
                         SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
                         AddHistory(() =>
                         {
@@ -208,6 +212,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
                     {
                         Vector2 direction = new(1f, 0f);
+
+                        if (Main.keyState.PressingShift())
+                            direction *= gridSize;
+
                         SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
                         AddHistory(() =>
                         {
@@ -226,6 +234,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
                     {
                         Vector2 direction = new(0f, -1f);
+
+                        if (Main.keyState.PressingShift())
+                            direction *= gridSize;
+
                         SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
                         AddHistory(() =>
                         {
@@ -244,6 +256,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
                     {
                         Vector2 direction = new(0f, 1f);
+
+                        if (Main.keyState.PressingShift())
+                            direction *= gridSize;
+
                         SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
                         AddHistory(() =>
                         {
