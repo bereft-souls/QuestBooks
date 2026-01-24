@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
+namespace QuestBooks.Quests.VanillaQuests.Book1.Surface.Tundra
 {
-    public class StartFirstSteps : Quest
+    internal class BiomeTundra : Quest
     {
         public override bool CheckCompletion()
         {
-            return true; // Start of tree, always unlocked
+            return false; // TODO: Check for entering tundra
         }
     }
 }
