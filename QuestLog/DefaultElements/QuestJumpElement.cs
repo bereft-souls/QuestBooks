@@ -40,12 +40,12 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonProperty]
         [UseConverter(typeof(QuestBookChecker))]
         [ElementTooltip("JumpBook")]
-        public virtual QuestBook JumpBook { get; set; } = QuestManager.QuestBooks.FirstOrDefault(defaultValue: null);
+        public virtual QuestBook JumpBook { get; set; } = QuestManager.QuestBooks?.FirstOrDefault(defaultValue: null) ?? null;
 
         [JsonProperty]
         [UseConverter(typeof(QuestChapterChecker))]
         [ElementTooltip("JumpChapter")]
-        public virtual QuestChapter JumpChapter { get; set; } = QuestManager.QuestBooks.FirstOrDefault(defaultValue: null)?.Chapters.FirstOrDefault(defaultValue: null) ?? null;
+        public virtual QuestChapter JumpChapter { get; set; } = QuestManager.QuestBooks?.FirstOrDefault(defaultValue: null)?.Chapters.FirstOrDefault(defaultValue: null) ?? null;
 
         [JsonProperty]
         [UseConverter(typeof(Vector2Converter))]

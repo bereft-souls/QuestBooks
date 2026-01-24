@@ -54,28 +54,47 @@ namespace QuestBooks.Systems
         }
 
         // This draws the actual quest log to the RenderTarget2D
+        private static bool targetCleared = false;
         public static void DrawQuestLog()
         {
             if (!DisplayLog)
+            {
+                if (targetCleared)
+                    return;
+
+                var graphicsDevice = Main.spriteBatch.GraphicsDevice;
+                var oldTargets = graphicsDevice.GetRenderTargets();
+
+                graphicsDevice.SetRenderTarget(ScreenRenderTarget);
+                graphicsDevice.Clear(Color.Transparent);
+                graphicsDevice.SetRenderTargets(oldTargets);
+
+                targetCleared = true;
                 return;
+            }
 
             var graphics = Main.spriteBatch.GraphicsDevice;
+            var targets = graphics.GetRenderTargets();
+
             graphics.SetRenderTarget(ScreenRenderTarget);
             graphics.Clear(Color.Transparent);
 
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState);
-
             ActiveStyle.DrawLog(Main.spriteBatch);
             Main.spriteBatch.End();
 
-            graphics.SetRenderTargets(null);
+            graphics.SetRenderTargets(targets);
+            targetCleared = false;
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             int mouseTextLayer = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
 
-            if (mouseTextLayer != -1 && Main.playerInventory)
+            if (mouseTextLayer == -1)
+                return;
+
+            if (Main.playerInventory)
             {
                 Point achievementPositionInInventory = new Vector2(516f, 30f).ToPoint();
                 Rectangle achievement = new(achievementPositionInInventory.X, achievementPositionInInventory.Y, 48, 48);
@@ -107,17 +126,14 @@ namespace QuestBooks.Systems
             if (!DisplayLog)
                 return;
 
-            if (mouseTextLayer != -1)
-            {
-                layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
-                    "QuestBooks: Quest Log", () =>
-                    {
-                        Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() * 0.5f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
-                        return true;
-                    },
-                    InterfaceScaleType.None
-                ));
-            }
+            layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
+                "QuestBooks: Quest Log", () =>
+                {
+                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() * 0.5f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                    return true;
+                },
+                InterfaceScaleType.None
+            ));
 
             ActiveStyle.ModifyInterfaceLayers(layers);
         }
