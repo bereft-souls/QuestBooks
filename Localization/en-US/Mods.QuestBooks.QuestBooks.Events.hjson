@@ -1,1 +1,75 @@
+AllCelestialPillarsDefeated: {
+	Title: Star Destroyer
+	Contents: 
+		'''
+		Defeat the four celestial towers of the moon.
+		'''
+}
 
+SurviveBloodMoon: {
+	Title: Bloodbath
+	Contents: 
+		'''
+		Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
+		'''
+}
+
+FrostMoon: {
+	EverscreamDefeated: {
+		Title: I Scream, You Scream, We All Screamed at the terrible house fire at the family reunion
+		// most specific reference ever so definitely not keeping this name
+		Contents: Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
+	}
+	
+	Santa-NK1Defeated: {
+		Title: Ho- Ho- Horror
+		Contents: Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and caring appearance of Santa.
+	}
+
+	IceQueenDefeated: {
+		Title: Frigid Ruler
+		Contents: Defeat the Ice Queen, the cold and elegant ruler of the Frost Moon.
+	}
+
+	FrostMoon15thWave: {
+		Title: Ice Scream
+		Contents: Reach the 15th wave of a frost moon, where the festive season quickly degrades into madness.
+	}
+}
+
+HarvestMoon: {
+	MourningWoodDefeated: {
+		Title: Not that kind.
+		Contents: Defeat a Mourning Wood, a terrifying charred tree trunk roaming the Harvest Moon.
+	}
+
+	Pumpking: {
+		Title: Ruler of the Harvest
+		Contents: Defeat the Pumpking, a massive pumpkin menace ruling over the Harvest Moon.
+	}
+
+	HarvestMoon15thWave: {
+		Title: Baleful Harvest
+		Content: Reach the 15th wave of a pumpkin moon, where evil lurks among the autumn harvest.
+	}
+}
+
+PirateInvasionDefeated: {
+	Title: Walk the Plank
+	Contents: Triumph over a pirate invasion, a group of pillagers from the sea out for your booty... and your life!
+}
+
+GoblinInvasionDefeated: {
+	Title: Goblin Punter
+	Contents: Triumph over a goblin invasion, a ragtag regiment of crude, barbaric, pointy-eared warriors and their shadowflame sorcerers.
+}
+
+SurviveSolarEclipse: {
+	Title: Kill the Sun
+	Contents: Survive a solar eclipse, a day darker than night filled with creatures of horror that can occur after the defeat of any Mechanical Boss.
+}
+
+MartianInvasionDefeated: {
+	Title: Tin-Foil Hatter
+	Contents: Triumph over a martian invasion, when beings from out of this world come to scramble your brains and probe you in uncomfortable places.
+}

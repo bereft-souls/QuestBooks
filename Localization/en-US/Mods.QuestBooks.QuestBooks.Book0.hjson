@@ -1,3 +1,156 @@
+
+MainTree: {
+	StartFirstSteps: {
+		Title: Hello World
+		Contents: 
+			'''
+			Welcome to the wonderful, yet cruel world of Terraria!
+
+			Explore diverse biomes, face off dangerous foes, loot structures and craft weapons all to aid you in your journey!
+			'''
+	}
+
+	StartQBInfo: {
+		Title: Questbooks and You
+		Contents: (insert explanation here)
+	}
+
+	ForestBiome: {
+		Title: The Forest
+		Contents:
+			'''
+			The starting location of all Terrarians.
+			Between the lush greenery and comfy breeze, it seems like the perfect spot to set up base in!
+			'''
+	}
+
+	GuideInteract: {
+		Title: The Guide
+		Contents:
+			'''
+			A trusty guide to help you along the way with their incredible crafting knowledge and varying useful tips.
+			If you ever find an item labeled as a "Material", be sure to check it up with him!
+			'''
+	}
+
+	ChopTree: {
+		Title: Timber!
+		Contents:
+			'''
+			Chop down a nearby tree using your trusted Copper Axe!
+			Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.
+			'''
+	}
+
+	CraftWorkbench: {
+		Title: Benched
+		Contents: 
+			'''
+			Using the wood you collected, craft an all-purpose Workbench to unlock more recipes!
+			(To view the new recipes, you must stand closeby to the station)
+			'''
+			// Needs to be changed for 1.4.5
+	}
+
+	CraftHammer: {
+		Title: Hammer Time!
+		Contents:
+			'''
+			Craft a Wooden Hammer.
+			Hammers are used to break apart background wall tiles, and allows shaping blocks to varying shapes by clicking on them.
+			'''
+	}
+
+	EstablishHouse: {
+		Title: No Hobo
+		Contents:
+			'''
+			Build a safe shelter for you and your Guide!
+
+			In Terraria, Houses require specific conditions to function:
+			- 60 blocks of space, covered with Background Walls.
+			- A Chair and Table (your workbench works too!)
+			- A lightsource.
+			- An entryway (try Doors or Platforms)
+			'''
+	}
+
+	BasicsCompleteInfo: {
+		Title: Basically a Pro
+		Contents:
+			'''
+			Now that you have finished the basics, go explore the world of Terraria to your hearts content!
+			'''
+	}
+
+	WorldEventsInfo: {
+		Title: Events and occurances throughout Terraria
+		Contents:
+			'''
+
+			'''
+			// TODO: Write this up, this probably shouldnt be JUST combat events (goblins, pirates..) but also smaller things / single time things
+           // like star showers, ladybugs, meteor crashes etc. should be written generically though (dont mention Goblin Invasion or Meteor by name)
+	}
+
+	InventoryInfo: {
+		Title: 
+		Contents:
+			'''
+
+			'''
+	}
+
+	ClassInfo: {
+		Title: Damage Types, or "Classes"
+		Contents: // TODO: The armor / accessory thing is a bit awkward here, probably rewrite it to the bottom later.
+			'''
+			In Terraria, all weapons are categorized into archetypes. That is, each weapon deals a specific type of damage.
+            Several equipments and armors in the game may only benefit 1 archetype, denoted by the class' name. 
+			The 4 different archetypes are:
+				
+            - The Melee -
+            Often utilizing a variety of close combat or short ranged weapons such as flails and boomerangs.
+            A tough and defensive Class.
+
+            - The Ranger -
+            Slinging guns, Drawing bows, blasting rockets and more. A versatile archetype that requires the use of Ammo which can grant their weaponry an extra edge.
+            A well rounded Class
+
+            - The Mage -
+            Conjuring spells and casting magic with a variety of arcane staves, books and more. Weapons require the use of your Mana.
+            Usually has lower defense for higher damage output
+
+            - The Summoner -
+            Commanding an army of minions with a tight grip using supportive whips to fight your battles, allowing you to focus on surviving.
+            A Fragile yet powerful Class.
+
+            With that said, the differences between classes arent set in the sand; Mages may still get to use magical guns while Melee can acquire magical swords.
+            So dont worry too much about locking into 1 weapon style, and you can always freely switch between classes at any time!
+			'''
+		Tooltip: Information 
+	}
+}
+
+RecProgOrder: {
+	StartNode: {
+		Title: Recommended Combat Progression
+		Contents: 
+			'''
+			Unsure what the next major goal should be? Lost in all the options?
+			Terraria isnt 100% linear, and plenty of things can be done ahead of their "comabt level".
+			If you feel stuck on a certain foe, or are curious about rough power levels of things: then use this handy recommended progression for you to follow (or avoid!)
+
+			Check back often! New goals will appear as you unlock them on the main books.
+		Tooltip: Condensing progression, all for you!
+	}
+
+	AllBossesDefeated: {
+		Title:
+		Contents:
+	}
+}
+
 Name: Before the Journey
 Chapter0: Prologue
 Chapter1: Progression
