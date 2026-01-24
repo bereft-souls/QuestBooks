@@ -11,7 +11,7 @@ using Terraria;
 namespace QuestBooks.QuestLog.DefaultElements
 {
     [ElementTooltip("Connector")]
-    public class Connector : ChapterElement
+    public class Connector : QuestLogElement
     {
         public override float DrawPriority => 0.25f;
 
@@ -24,7 +24,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip)
         {
-            if (!QuestManager.ActiveStyle.UseDesigner)
+            if (!QuestLogDrawer.ActiveStyle.UseDesigner)
                 return false;
 
             // mousePosition is already in logical canvas coordinates (zoom factored out)
@@ -41,14 +41,14 @@ namespace QuestBooks.QuestLog.DefaultElements
             return span.CreateMargin((int)(LineThickness * 0.5f)).Contains(mousePosition.ToPoint());
         }
 
-        public override bool VisibleOnCanvas() => (Source.ConnectionVisible(Destination) && Destination.CompleteConnection(Source)) || QuestManager.ActiveStyle.UseDesigner;
+        public override bool VisibleOnCanvas() => (Source.ConnectionVisible(Destination) && Destination.CompleteConnection(Source)) || QuestLogDrawer.ActiveStyle.UseDesigner;
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
             Color color =
                 selected ? Color.Red :
                 hovered ? Color.Yellow :
-                Source.ConnectionActive(Destination) || QuestManager.ActiveStyle.UseDesigner ? Color.White : Color.DimGray;
+                Source.ConnectionActive(Destination) || QuestLogDrawer.ActiveStyle.UseDesigner ? Color.White : Color.DimGray;
 
             DrawConnection(spriteBatch, Source.ConnectorAnchor * zoom, Destination.ConnectorAnchor * zoom, color, zoom);
         }
@@ -63,7 +63,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             }
 
             Vector2 source = Source.ConnectorAnchor * zoom;
-            Vector2 destination = QuestManager.ActiveStyle.HoveredElement is IConnectable connection ? connection.ConnectorAnchor * zoom : (mousePosition - canvasViewOffset) * zoom;
+            Vector2 destination = QuestLogDrawer.ActiveStyle.HoveredElement is IConnectable connection ? connection.ConnectorAnchor * zoom : (mousePosition - canvasViewOffset) * zoom;
             DrawConnection(spriteBatch, source, destination, Color.LightGray, zoom);
         }
 
@@ -79,16 +79,16 @@ namespace QuestBooks.QuestLog.DefaultElements
             Texture2D texture = QuestAssets.BigPixel;
             spriteBatch.Draw(texture, center, null, color, rotation, new Vector2(1f), new Vector2(width * 0.5f, scaledThickness * 0.5f), SpriteEffects.None, 0f);
 
-            if (QuestManager.ActiveStyle.UseDesigner)
+            if (QuestLogDrawer.ActiveStyle.UseDesigner)
             {
                 Texture2D arrow = QuestAssets.ConnectorArrow;
                 spriteBatch.Draw(arrow, center, null, color, rotation - MathHelper.PiOver4, arrow.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
             }
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override bool PlaceOnCanvas(QuestChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
-            IConnectable connection = QuestManager.ActiveStyle.HoveredElement as IConnectable;
+            IConnectable connection = QuestLogDrawer.ActiveStyle.HoveredElement as IConnectable;
 
             if (Source is null || Source == connection)
             {
@@ -121,7 +121,7 @@ namespace QuestBooks.QuestLog.DefaultElements
     }
 
     [ElementTooltip("ConnectorPoint")]
-    public class ConnectorPoint : ChapterElement, IConnectable
+    public class ConnectorPoint : QuestLogElement, IConnectable
     {
         // +0.01 over the Connector element, draws on top of lines
         public override float DrawPriority => 0.26f;
@@ -134,30 +134,30 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public Vector2 CanvasPosition { get; set; }
 
-        public Vector2 ConnectorAnchor => CanvasPosition - QuestManager.ActiveStyle.QuestAreaOffset;
+        public Vector2 ConnectorAnchor => CanvasPosition - QuestLogDrawer.ActiveStyle.QuestAreaOffset;
 
         public List<Connector> Connections { get; set; } = [];
 
         public bool CompleteConnection(IConnectable source) => source != this && Connections.Any(x => x.Source == this && x.Destination.CompleteConnection(this));
 
-        public bool ConnectionVisible(IConnectable destination) => (destination != this && Connections.Any(x => x.Destination == this && x.Source.ConnectionVisible(destination))) || QuestManager.ActiveStyle.UseDesigner;
+        public bool ConnectionVisible(IConnectable destination) => (destination != this && Connections.Any(x => x.Destination == this && x.Source.ConnectionVisible(destination))) || QuestLogDrawer.ActiveStyle.UseDesigner;
 
         public bool ConnectionActive(IConnectable destination) => destination != this && Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(destination)) >= RequiredFeeds;
 
         public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip)
         {
             // mousePosition is already in logical canvas coordinates (zoom factored out)
-            return QuestManager.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, new Vector2(Size)).Contains(mousePosition.ToPoint());
+            return QuestLogDrawer.ActiveStyle.UseDesigner && CenteredRectangle(CanvasPosition, new Vector2(Size)).Contains(mousePosition.ToPoint());
         }
 
-        public override bool VisibleOnCanvas() => QuestManager.ActiveStyle.UseDesigner || Connections.Any(x => x.VisibleOnCanvas());
+        public override bool VisibleOnCanvas() => QuestLogDrawer.ActiveStyle.UseDesigner || Connections.Any(x => x.VisibleOnCanvas());
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
             Color color =
                 selected ? Color.Red :
                 hovered ? Color.Yellow :
-                Connections.Where(x => x.Destination == this).Count(x => x.Source.ConnectionActive(x.Destination)) >= RequiredFeeds || QuestManager.ActiveStyle.UseDesigner ? Color.White : Color.DimGray;
+                Connections.Where(x => x.Destination == this).Count(x => x.Source.ConnectionActive(x.Destination)) >= RequiredFeeds || QuestLogDrawer.ActiveStyle.UseDesigner ? Color.White : Color.DimGray;
 
             Texture2D texture = QuestAssets.ConnectorPoint;
             Vector2 drawPos = (CanvasPosition - canvasViewOffset) * zoom;
@@ -165,7 +165,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.Draw(texture, drawPos, null, color, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
         }
 
-        public override bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
+        public override bool PlaceOnCanvas(QuestChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset)
         {
             CanvasPosition = mousePosition;
             return true;
@@ -204,7 +204,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             // Clone the collection to allow modified enumeration
             foreach (var connection in connectable.Connections.ToArray())
             {
-                QuestManager.ActiveStyle.SelectedChapter.Elements.Remove(connection);
+                QuestLogDrawer.ActiveStyle.SelectedChapter.Elements.Remove(connection);
                 connection.OnDelete();
             }
         }

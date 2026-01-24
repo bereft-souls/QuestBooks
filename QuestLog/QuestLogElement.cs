@@ -15,7 +15,7 @@ using Terraria.ModLoader;
 namespace QuestBooks.QuestLog
 {
     [ExtendsFromMod("QuestBooks")]
-    public abstract class ChapterElement
+    public abstract class QuestLogElement
     {
         [JsonIgnore]
         [HideInDesigner]
@@ -64,7 +64,7 @@ namespace QuestBooks.QuestLog
 
         #region Designer Methods
 
-        public abstract bool PlaceOnCanvas(BookChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset);
+        public abstract bool PlaceOnCanvas(QuestChapter chapter, Vector2 mousePosition, Vector2 canvasViewOffset);
 
         public virtual void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset, float zoom)
         {
@@ -111,7 +111,7 @@ namespace QuestBooks.QuestLog
         #region Converter Implementation
 
         public static readonly FrozenDictionary<Type, Type> DefaultConverters =
-            typeof(ChapterElement)
+            typeof(QuestLogElement)
             .GetNestedTypes()
             .Where(t => t.GetInterfaces().Length != 0)
             .Where(t => Attribute.GetCustomAttribute(t, typeof(NonDefaultAttribute)) is null)
@@ -201,7 +201,7 @@ namespace QuestBooks.QuestLog
         #endregion
     }
 
-    public abstract class QuestElement : ChapterElement
+    public abstract class QuestElement : QuestLogElement
     {
         [JsonIgnore]
         public abstract Quest Quest { get; }

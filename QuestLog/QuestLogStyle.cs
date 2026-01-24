@@ -18,10 +18,10 @@ namespace QuestBooks.QuestLog
         public virtual bool UseDesigner { get; set; } = false;
 
         public virtual QuestBook SelectedBook { get; set; } = null;
-        public virtual BookChapter SelectedChapter { get; set; } = null;
+        public virtual QuestChapter SelectedChapter { get; set; } = null;
 
-        public virtual ChapterElement SelectedElement { get; set; } = null;
-        public virtual ChapterElement HoveredElement { get; set; } = null;
+        public virtual QuestLogElement SelectedElement { get; set; } = null;
+        public virtual QuestLogElement HoveredElement { get; set; } = null;
         public virtual Vector2 QuestAreaOffset { get; set; } = Vector2.Zero;
         public virtual float Zoom { get; set; } = 1f;
 
@@ -78,7 +78,7 @@ namespace QuestBooks.QuestLog
         }
 
         public abstract void SelectBook(QuestBook book);
-        public abstract void SelectChapter(BookChapter chapter);
+        public abstract void SelectChapter(QuestChapter chapter);
 
         public virtual void SavePlayerData(TagCompound tag) { }
         public virtual void SaveWorldData(TagCompound tag) { }

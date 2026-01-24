@@ -16,7 +16,7 @@ namespace QuestBooks.Systems
             foreach (var questBook in QuestManager.QuestBooks)
                 questBook.Update();
 
-            QuestManager.ActiveStyle.UpdateLog();
+            QuestLogDrawer.ActiveStyle.UpdateLog();
         }
 
         // World quests are updated in singleplayer and on the server.

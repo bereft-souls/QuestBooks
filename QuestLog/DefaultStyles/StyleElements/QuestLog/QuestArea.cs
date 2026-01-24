@@ -5,7 +5,7 @@ using System.Linq;
 using Terraria;
 using Terraria.GameInput;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -169,7 +169,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
             // Get the top-most element that is being hovered
-            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x =>
+            QuestLogElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x =>
                 x.IsHovered(placementPosition, QuestAreaOffset, Zoom, ref MouseTooltip) &&
                 (SelectedElement is null || (Array.FindIndex(SortedElements, e => e == x) < Array.FindIndex(SortedElements, e => e == SelectedElement))), null)
                 ?? null : null;
@@ -178,7 +178,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
             {
-                ChapterElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
+                QuestLogElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
 
                 if (!UseDesigner)
                     element?.OnSelect();

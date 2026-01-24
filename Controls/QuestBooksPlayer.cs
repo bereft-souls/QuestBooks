@@ -74,14 +74,14 @@ namespace QuestBooks.Controls
             // Hide the log on world entry.
             QuestLogDrawer.Toggle(false);
 
-            QuestManager.ActiveStyle.SelectedBook = null;
-            QuestManager.ActiveStyle.SelectedChapter = null;
-            QuestManager.ActiveStyle.SelectedElement = null;
+            QuestLogDrawer.ActiveStyle.SelectedBook = null;
+            QuestLogDrawer.ActiveStyle.SelectedChapter = null;
+            QuestLogDrawer.ActiveStyle.SelectedElement = null;
 
-            QuestManager.ActiveStyle.OnEnterWorld();
+            QuestLogDrawer.ActiveStyle.OnEnterWorld();
         }
 
-        public override void SaveData(TagCompound tag) => QuestManager.ActiveStyle.SavePlayerData(tag);
-        public override void LoadData(TagCompound tag) => QuestManager.ActiveStyle.LoadPlayerData(tag);
+        public override void SaveData(TagCompound tag) => QuestLogDrawer.ActiveStyle.SavePlayerData(tag);
+        public override void LoadData(TagCompound tag) => QuestLogDrawer.ActiveStyle.LoadPlayerData(tag);
     }
 }

@@ -10,7 +10,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles
+namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {
@@ -42,7 +42,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             RedoActions.Clear();
         }
 
-        protected static Dictionary<MemberInfo, object> GetMemberwiseValues(ChapterElement element)
+        protected static Dictionary<MemberInfo, object> GetMemberwiseValues(QuestLogElement element)
         {
             Dictionary<MemberInfo, object> result = [];
 
@@ -55,7 +55,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             return result;
         }
 
-        protected static void ApplyMemberwiseValues(ChapterElement element,  Dictionary<MemberInfo, object> values)
+        protected static void ApplyMemberwiseValues(QuestLogElement element,  Dictionary<MemberInfo, object> values)
         {
             foreach (var member in values.Keys)
             {

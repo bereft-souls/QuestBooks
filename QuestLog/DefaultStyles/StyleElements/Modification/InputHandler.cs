@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
 
-namespace QuestBooks.QuestLog.DefaultLogStyles;
+namespace QuestBooks.QuestLog.DefaultStyles;
 
 public partial class BasicQuestLogStyle
 {
