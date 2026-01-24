@@ -114,7 +114,7 @@ namespace QuestBooks.Quests
 
         public sealed override void SetupContent() => SetStaticDefaults();
 
-        protected sealed override void InitTemplateInstance() => QuestLoader.questMods[GetType()] = Mod;
+        protected sealed override void InitTemplateInstance() => QuestLoader.QuestMods[GetType()] = Mod;
     }
 
     public enum QuestType

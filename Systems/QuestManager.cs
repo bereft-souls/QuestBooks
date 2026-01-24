@@ -50,7 +50,7 @@ namespace QuestBooks.Systems
             foreach (var kvp in QuestLoader.QuestKeys)
             {
                 var quest = (Quest)Activator.CreateInstance(kvp.Key);
-                modProperty.SetValue(quest, QuestLoader.questMods[kvp.Key]);
+                modProperty.SetValue(quest, QuestLoader.QuestMods[kvp.Key]);
                 newActiveQuests.Add(kvp.Value, quest);
 
                 if (quest.QuestType == QuestType.World)

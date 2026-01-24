@@ -558,9 +558,9 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         #region State Caching
 
-        private const string ScaleKey = "QuestBooksScale";
-        private const string OffsetKey = "QuestBooksOffset";
-        private const string PreviouslyOpenedKey = "QuestLogPreviouslyOpened";
+        private const string ScaleKey = "QuestBooks:QuestBooksScale";
+        private const string OffsetKey = "QuestBooks:QuestBooksOffset";
+        private const string PreviouslyOpenedKey = "QuestBooks:QuestLogPreviouslyOpened";
 
         public override void SavePlayerData(TagCompound tag)
         {
