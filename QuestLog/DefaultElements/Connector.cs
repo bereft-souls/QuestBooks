@@ -180,15 +180,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.ConnectorPoint, iconArea);
 
-        public override void OnDelete()
-        {
-            // Clone the collection to allow modified enumeration
-            foreach (var connection in Connections.ToArray())
-            {
-                QuestManager.ActiveStyle.SelectedChapter.Elements.Remove(connection);
-                connection.OnDelete();
-            }
-        }
+        public override void OnDelete() => this.DeleteConnections();
     }
 
     public interface IConnectable
@@ -203,5 +195,18 @@ namespace QuestBooks.QuestLog.DefaultElements
         public bool ConnectionVisible(IConnectable destination);
 
         public bool ConnectionActive(IConnectable destination);
+    }
+
+    public static class ConnectableExtensions
+    {
+        public static void DeleteConnections(this IConnectable connectable)
+        {
+            // Clone the collection to allow modified enumeration
+            foreach (var connection in connectable.Connections.ToArray())
+            {
+                QuestManager.ActiveStyle.SelectedChapter.Elements.Remove(connection);
+                connection.OnDelete();
+            }
+        }
     }
 }

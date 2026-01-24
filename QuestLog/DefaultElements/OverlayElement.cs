@@ -14,8 +14,6 @@ namespace QuestBooks.QuestLog.DefaultElements
     [ElementTooltip("OverlayElement")]
     public class OverlayElement : ChapterElement
     {
-        public override float DrawPriority => 0.9f;
-
         // Used when the texture is not found or has not been assigned yet.
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Elements/QuestionMark";
         private const string DefaultOutline = "QuestBooks/Assets/Textures/Elements/QuestionMarkOutline";
@@ -51,6 +49,11 @@ namespace QuestBooks.QuestLog.DefaultElements
         [UseConverter(typeof(AngleConverter))]
         [ElementTooltip("DisplayRotation")]
         public float Rotation { get; set; } = 0f;
+
+        [ElementTooltip("DrawLayer")]
+        public float Layer { get; set; } = 0.5f;
+
+        public override float DrawPriority => Layer;
 
         public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip)
         {

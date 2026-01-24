@@ -31,6 +31,17 @@ namespace QuestBooks.QuestLog
         [JsonIgnore]
         public virtual float DrawPriority { get => 0.5f; }
 
+        /// <summary>
+        /// Indicates whether this element has previously been place on the canvas. For editor use only.
+        /// </summary>
+        //
+        // IMPORTANT:
+        // The default here is true so that the json serializer doesn't need to keep track of this property.
+        // We manually set it to false when constructing new elements for placement.
+        [JsonIgnore]
+        [HideInDesigner]
+        public bool PreviouslyPlaced { get; set; } = true;
+
         #region Common Methods
 
         public virtual void Update() { }
@@ -71,6 +82,8 @@ namespace QuestBooks.QuestLog
         }
 
         public virtual void OnDelete() { }
+
+        public virtual void OnUndoMove() { }
 
         #endregion
 

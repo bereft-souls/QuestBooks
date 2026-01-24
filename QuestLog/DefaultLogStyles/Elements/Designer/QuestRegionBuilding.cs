@@ -1,8 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using QuestBooks.Assets;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 
 namespace QuestBooks.QuestLog.DefaultLogStyles
 {
@@ -26,8 +32,75 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private static readonly Vector2 defaultAnchor = new(230f, 270f);
         private static readonly Vector2 defaultCanvasSize = new(460, 540);
 
+        protected readonly Stack<(Action undo, Action redo)> ActionHistory = [];
+        protected readonly Stack<(Action undo, Action redo)> RedoActions = [];
+        protected bool HistoryAccessed { get; set; } = false; // Prevents repeated history access on consecutive frames
+
+        protected void AddHistory(Action undo, Action redo)
+        {
+            ActionHistory.Push((undo, redo));
+            RedoActions.Clear();
+        }
+
+        protected static Dictionary<MemberInfo, object> GetMemberwiseValues(ChapterElement element)
+        {
+            Dictionary<MemberInfo, object> result = [];
+
+            foreach (var property in element.GetType().GetProperties().Where(p => p.CanWrite && p.CanRead && !p.PropertyType.IsByRef))
+                result.Add(property, property.GetValue(element));
+
+            foreach (var field in element.GetType().GetFields().Where(f => !f.FieldType.IsByRef))
+                result.Add(field, field.GetValue(element));
+
+            return result;
+        }
+
+        protected static void ApplyMemberwiseValues(ChapterElement element,  Dictionary<MemberInfo, object> values)
+        {
+            foreach (var member in values.Keys)
+            {
+                if (member is PropertyInfo property)
+                    property.SetValue(element, values[member]);
+
+                else
+                    (member as FieldInfo).SetValue(element, values[member]);
+            }
+        }
+
         private void DesignerPreQuestRegion(Vector2 mousePosition)
         {
+            // Action history (undo/redo)
+            if (Main.keyState.PressingControl())
+            {
+                if (Main.keyState.IsKeyDown(Keys.Z) && // ctrl+Z
+                    !Main.keyState.PressingShift())
+                {
+                    if (!HistoryAccessed && ActionHistory.TryPop(out var action))
+                    {
+                        action.undo();
+                        RedoActions.Push(action);
+                        HistoryAccessed = true;
+                        SoundEngine.PlaySound(SoundID.MenuTick);
+                    }
+                }
+
+                else if (Main.keyState.IsKeyDown(Keys.Y) || // ctrl+Y
+                    (Main.keyState.PressingShift() && // ctrl+shift+Z
+                    Main.keyState.IsKeyDown(Keys.Z)))
+                {
+                    if (!HistoryAccessed && RedoActions.TryPop(out var action))
+                    {
+                        action.redo();
+                        ActionHistory.Push(action);
+                        HistoryAccessed = true;
+                        SoundEngine.PlaySound(SoundID.MenuTick);
+                    }
+                }
+
+                else
+                    HistoryAccessed = false;
+            }
+
             if (SelectedChapter is null)
                 return;
 
@@ -112,28 +185,61 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 {
                     if (movingMinView)
                     {
-                        SelectedChapter.MinViewPoint = chapterMinView;
-                        SelectedChapter.MinViewPoint = new(
-                            float.Min(SelectedChapter.MinViewPoint.X, SelectedChapter.MaxViewPoint.X),
-                            float.Min(SelectedChapter.MinViewPoint.Y, SelectedChapter.MaxViewPoint.Y));
+                        var chapter = SelectedChapter;
+                        Vector2 oldMinView = chapter.MinViewPoint;
+
+                        chapter.MinViewPoint = chapterMinView;
+                        chapter.MinViewPoint = new(
+                            float.Min(chapter.MinViewPoint.X, chapter.MaxViewPoint.X),
+                            float.Min(chapter.MinViewPoint.Y, chapter.MaxViewPoint.Y));
 
                         chapterMinView = Vector2.Zero;
+                        Vector2 newMinView = chapter.MinViewPoint;
+
+                        if (oldMinView != newMinView)
+                            AddHistory(() => {
+                                chapter.MinViewPoint = oldMinView;
+                            }, () => {
+                                chapter.MinViewPoint = newMinView;
+                            });
                     }
 
                     else if (movingMaxView)
                     {
-                        SelectedChapter.MaxViewPoint = chapterMaxView - defaultCanvasSize;
-                        SelectedChapter.MaxViewPoint = new(
-                            float.Max(SelectedChapter.MaxViewPoint.X, SelectedChapter.MinViewPoint.X),
-                            float.Max(SelectedChapter.MaxViewPoint.Y, SelectedChapter.MinViewPoint.Y));
+                        var chapter = SelectedChapter;
+                        Vector2 oldMaxView = chapter.MaxViewPoint;
+
+                        chapter.MaxViewPoint = chapterMaxView - defaultCanvasSize;
+                        chapter.MaxViewPoint = new(
+                            float.Max(chapter.MaxViewPoint.X, chapter.MinViewPoint.X),
+                            float.Max(chapter.MaxViewPoint.Y, chapter.MinViewPoint.Y));
 
                         chapterMaxView = Vector2.Zero;
+                        Vector2 newMaxView = chapter.MaxViewPoint;
+
+                        if (oldMaxView != newMaxView)
+                            AddHistory(() => {
+                                chapter.MaxViewPoint = oldMaxView;
+                            }, () => {
+                                chapter.MaxViewPoint = newMaxView;
+                            });
                     }
 
                     else if (movingAnchor)
                     {
-                        SelectedChapter.ViewAnchor = chapterAnchor;
+                        var chapter = SelectedChapter;
+                        Vector2 oldAnchor = chapter.ViewAnchor;
+
+                        chapter.ViewAnchor = chapterAnchor;
                         chapterAnchor = Vector2.Zero;
+                        Vector2 newAnchor = chapter.ViewAnchor;
+
+                        if (oldAnchor != newAnchor)
+                            AddHistory(() => {
+                                chapter.ViewAnchor = oldAnchor;
+                            }, () => {
+                                chapter.ViewAnchor = newAnchor;
+                            });
                     }
                 }
 
@@ -160,9 +266,19 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     if (RightMouseJustReleased)
                     {
-                        SelectedChapter.MinViewPoint = Vector2.Zero;
+                        var chapter = SelectedChapter;
+                        Vector2 oldMinView = chapterMinView;
+
+                        chapter.MinViewPoint = Vector2.Zero;
                         chapterMinView = Vector2.Zero;
                         movingMinView = false;
+
+                        if (oldMinView != Vector2.Zero)
+                            AddHistory(() => {
+                                chapter.MinViewPoint = oldMinView;
+                            }, () => {
+                                chapter.MinViewPoint = Vector2.Zero;
+                            });
                     }
                 }
 
@@ -173,9 +289,19 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     if (RightMouseJustReleased)
                     {
-                        SelectedChapter.MaxViewPoint = Vector2.Zero;
+                        var chapter = SelectedChapter;
+                        Vector2 oldMaxView = chapter.MaxViewPoint;
+
+                        chapter.MaxViewPoint = Vector2.Zero;
                         chapterMaxView = Vector2.Zero;
                         movingMaxView = false;
+
+                        if (oldMaxView != Vector2.Zero)
+                            AddHistory(() => {
+                                chapter.MaxViewPoint = oldMaxView;
+                            }, () => {
+                                chapter.MaxViewPoint = Vector2.Zero;
+                            });
                     }
                 }
 
@@ -192,9 +318,19 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                     if (RightMouseJustReleased)
                     {
-                        SelectedChapter.ViewAnchor = defaultAnchor;
+                        var chapter = SelectedChapter;
+                        Vector2 oldAnchor = chapter.ViewAnchor;
+
+                        chapter.ViewAnchor = defaultAnchor;
                         chapterAnchor = Vector2.Zero;
                         movingAnchor = false;
+
+                        if (oldAnchor != defaultAnchor)
+                            AddHistory(() => {
+                                chapter.ViewAnchor = oldAnchor;
+                            }, () => {
+                                chapter.ViewAnchor = defaultAnchor;
+                            });
                     }
                 }
 
@@ -227,15 +363,53 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
             if (LeftMouseJustReleased && mouseInBounds)
             {
+                var oldMemberwiseValues = GetMemberwiseValues(placingElement);
+
                 if (placingElement.PlaceOnCanvas(SelectedChapter, mousePosition, QuestAreaOffset))
                 {
-                    SelectedChapter.Elements.Add(placingElement);
+                    var chapter = SelectedChapter;
+                    var element = placingElement;
+
+                    chapter.Elements.Add(element);
                     SortedElements = null;
                     placingElement = null;
+
+                    if (!element.PreviouslyPlaced)
+                        AddHistory(() =>
+                        {
+                            chapter.Elements.Remove(element);
+                            SortedElements = null;
+                        }, () =>
+                        {
+                            chapter.Elements.Add(element);
+                            SortedElements = null;
+                        });
+
+                    else
+                    {
+                        var newMemberwiseValues = GetMemberwiseValues(element);
+                        AddHistory(() => {
+                            ApplyMemberwiseValues(element, oldMemberwiseValues);
+                        }, () => {
+                            ApplyMemberwiseValues(element, newMemberwiseValues);
+                        });
+                    }
+
+                    element.PreviouslyPlaced = true;
                 }
             }
 
-            DrawTasks.Add(sb => placingElement?.DrawPlacementPreview(sb, mousePosition, QuestAreaOffset, Zoom));
+            DrawTasks.Add(sb =>
+            {
+                sb.End();
+                sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
+
+                placingElement?.DrawPlacementPreview(sb, mousePosition, QuestAreaOffset, Zoom);
+
+                sb.End();
+                sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+            });
         }
     }
 }

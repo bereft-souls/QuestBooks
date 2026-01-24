@@ -30,19 +30,16 @@ DeleteBook:
 	'''
 	[c/CCC018:Delete Book]
 	Deletes the selected quest book.
-	[c/FF0000:WARNING]: This cannot be undone!
 	'''
 DeleteChapter:
 	'''
 	[c/CCC018:Delete Chapter]
 	Deletes the selected chapter from the selected quest book.
-	[c/FF0000:WARNING]: This cannot be undone!
 	'''
 DeleteElement:
 	'''
 	[c/CCC018:Delete Element]
 	Deletes the selected element from the selected chapter.
-	[c/FF0000:WARNING]: This cannot be undone!
 	'''
 MoveElement:
 	'''
