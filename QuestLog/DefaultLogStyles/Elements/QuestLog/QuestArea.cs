@@ -21,10 +21,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 if (UseDesigner || SelectedChapter is null)
                     return 0.1f;
 
-                Vector2 canvasSize = (SelectedChapter.MaxViewPoint + defaultCanvasSize) - SelectedChapter.MinViewPoint;
+                Vector2 canvasSize = SelectedChapter.MaxViewPoint + defaultCanvasSize - SelectedChapter.MinViewPoint;
                 float fitZoomX = defaultCanvasSize.X / canvasSize.X;
                 float fitZoomY = defaultCanvasSize.Y / canvasSize.Y;
-                return float.Min(fitZoomX, fitZoomY);
+                return float.Max(float.Min(fitZoomX, fitZoomY), 0.1f);
             }
         }
 

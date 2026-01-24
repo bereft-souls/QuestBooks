@@ -98,7 +98,6 @@ namespace QuestBooks.QuestLog.DefaultElements
             }
 
             Texture2D texture = _texture.Value;
-            CanvasPosition = mousePosition;
             Vector2 drawPos = (mousePosition - canvasViewOffset) * zoom;
             spriteBatch.Draw(texture, drawPos, null, Color.White with { A = 180 }, 0f, texture.Size() * 0.5f, Scale * zoom, SpriteEffects.None, 0f);
         }

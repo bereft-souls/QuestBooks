@@ -327,16 +327,25 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (book == SelectedBook)
                 return;
 
-            previousBook = SelectedBook;
-            SelectedBook = book;
-            SoundEngine.PlaySound(SoundID.MenuTick);
+            if (book == null)
+                DrawTasks.Add(_ => Select());
 
-            previousChapterScrollOffset = (int)realChaptersScrollOffset;
-            chaptersScrollOffset = 0;
-            realChaptersScrollOffset = 0f;
+            else
+                Select();
 
-            previousBookSwipeDirection = SelectedBook is null || bookLibrary.FindIndex(kvp => kvp.questBook == SelectedBook) > bookLibrary.FindIndex(kvp => kvp.questBook == previousBook);
-            previousBookSwipeOffset = 1f;
+            void Select()
+            {
+                previousBook = SelectedBook;
+                SelectedBook = book;
+                SoundEngine.PlaySound(SoundID.MenuTick);
+
+                previousChapterScrollOffset = (int)realChaptersScrollOffset;
+                chaptersScrollOffset = 0;
+                realChaptersScrollOffset = 0f;
+
+                previousBookSwipeDirection = SelectedBook is null || bookLibrary.FindIndex(kvp => kvp.questBook == SelectedBook) > bookLibrary.FindIndex(kvp => kvp.questBook == previousBook);
+                previousBookSwipeOffset = 1f;
+            }
         }
 
         public override void SelectChapter(BookChapter chapter)
@@ -344,14 +353,23 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             if (chapter == SelectedChapter)
                 return;
 
-            int sign = SelectedBook.Chapters.IndexOf(chapter ?? SelectedChapter) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
-            questElementSwipeOffset = questAreaTarget.Width * sign;
-            SortedElements = null;
+            if (chapter == null)
+                DrawTasks.Add(_ => Select());
 
-            SelectedChapter = chapter;
-            Zoom = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.DefaultZoom : 1f;
-            QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor * Zoom - defaultAnchor : Vector2.Zero;
-            SoundEngine.PlaySound(SoundID.MenuTick);
+            else
+                Select();
+
+            void Select()
+            {
+                int sign = SelectedBook.Chapters.IndexOf(chapter ?? SelectedChapter) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
+                questElementSwipeOffset = questAreaTarget.Width * sign;
+                SortedElements = null;
+
+                SelectedChapter = chapter;
+                Zoom = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.DefaultZoom : 1f;
+                QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.ViewAnchor * Zoom - defaultAnchor : Vector2.Zero;
+                SoundEngine.PlaySound(SoundID.MenuTick);
+            }
         }
 
         public override void OnEnterWorld() => SortedElements = null;

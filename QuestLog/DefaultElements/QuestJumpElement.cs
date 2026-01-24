@@ -188,7 +188,6 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override void DrawPlacementPreview(SpriteBatch spriteBatch, Vector2 mousePosition, Vector2 canvasViewOffset, float zoom)
         {
             Texture2D texture = _unlockedTexture?.Value ?? DefaultAsset.Value;
-            CanvasPosition = mousePosition;
             Vector2 drawPos = (mousePosition - canvasViewOffset) * zoom;
             spriteBatch.Draw(texture, drawPos, null, Color.White with { A = 220 }, 0f, texture.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
         }
@@ -199,15 +198,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override void OnDelete()
-        {
-            // Clone the collection to allow modified enumeration
-            foreach (var connection in Connections.ToArray())
-            {
-                QuestManager.ActiveStyle.SelectedChapter.Elements.Remove(connection);
-                connection.OnDelete();
-            }
-        }
+        public override void OnDelete() => this.DeleteConnections();
 
         public class QuestBookChecker : IMemberConverter<QuestBook>
         {

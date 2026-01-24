@@ -73,14 +73,6 @@ namespace QuestBooks.QuestLog.DefaultElements
             return true;
         }
 
-        public override void OnDelete()
-        {
-            // Clone the collection to allow modified enumeration
-            foreach (var connection in Connections.ToArray())
-            {
-                QuestManager.ActiveStyle.SelectedChapter.Elements.Remove(connection);
-                connection.OnDelete();
-            }
-        }
+        public override void OnDelete() => this.DeleteConnections();
     }
 }

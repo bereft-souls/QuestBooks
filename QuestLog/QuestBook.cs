@@ -109,5 +109,13 @@ namespace QuestBooks.QuestLog
         {
             newInstance.Chapters.AddRange(Chapters);
         }
+
+        /// <summary>
+        /// Clones the members of an old quest book into this new quest book.
+        /// </summary>
+        public virtual void CloneFrom(QuestBook oldInstance)
+        {
+
+        }
     }
 }
