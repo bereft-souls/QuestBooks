@@ -32,6 +32,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private bool memberValueAccepted = false;
         private int memberScrollOffset = 0;
         private bool holdingPaste = false;
+        private bool holdingMove = false;
 
         private class MemberBundle(MemberInfo memberInfo, string value, string tooltip, Func<string> getter, Func<string, bool> setter, object converter)
         {
@@ -147,6 +148,117 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     SoundEngine.PlaySound(SoundID.MenuTick);
                     return;
                 }
+            }
+
+            bool TryGetCanvasPosition(ChapterElement element, out MemberInfo member)
+            {
+                var property = element.GetType().GetProperty("CanvasPosition", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+                if (property is not null && property.CanRead && property.CanWrite && property.PropertyType == typeof(Vector2))
+                {
+                    member = property;
+                    return true;
+                }
+
+                var field = element.GetType().GetField("CanvasPosition", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+                if (field is not null && field.FieldType == typeof(Vector2))
+                {
+                    member = field;
+                    return true;
+                }
+
+                member = null;
+                return false;
+            }
+
+            Vector2 CanvasPosition(ChapterElement element, MemberInfo member) => member is PropertyInfo property ? (Vector2)property.GetValue(element) : (Vector2)(member as FieldInfo).GetValue(element);
+
+            void SetCanvasPosition(ChapterElement element, MemberInfo member, Vector2 value)
+            {
+                if (member is PropertyInfo property)
+                    property.SetValue(element, value);
+
+                else
+                    (member as FieldInfo).SetValue(element, value);
+            }
+
+            if (SelectedElement is not null)
+            {
+                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left))
+                {
+                    if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
+                    {
+                        Vector2 direction = new(-1f, 0f);
+                        SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        AddHistory(() =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) - direction);
+                        }, () =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        });
+                    }
+
+                    holdingMove = true;
+                }
+
+                else if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Right))
+                {
+                    if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
+                    {
+                        Vector2 direction = new(1f, 0f);
+                        SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        AddHistory(() =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) - direction);
+                        }, () =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        });
+                    }
+
+                    holdingMove = true;
+                }
+
+                else if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Up))
+                {
+                    if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
+                    {
+                        Vector2 direction = new(0f, -1f);
+                        SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        AddHistory(() =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) - direction);
+                        }, () =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        });
+                    }
+
+                    holdingMove = true;
+                }
+
+                else if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Down))
+                {
+                    if (!holdingMove && TryGetCanvasPosition(SelectedElement, out var member))
+                    {
+                        Vector2 direction = new(0f, 1f);
+                        SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        AddHistory(() =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) - direction);
+                        }, () =>
+                        {
+                            SetCanvasPosition(SelectedElement, member, CanvasPosition(SelectedElement, member) + direction);
+                        });
+                    }
+
+                    holdingMove = true;
+                }
+
+                else
+                    holdingMove = false;
             }
 
             DrawTasks.Add(sb =>

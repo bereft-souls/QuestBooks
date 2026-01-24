@@ -399,7 +399,17 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 }
             }
 
-            DrawTasks.Add(sb => placingElement?.DrawPlacementPreview(sb, mousePosition, QuestAreaOffset, Zoom));
+            DrawTasks.Add(sb =>
+            {
+                sb.End();
+                sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
+
+                placingElement?.DrawPlacementPreview(sb, mousePosition, QuestAreaOffset, Zoom);
+
+                sb.End();
+                sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+            });
         }
     }
 }
