@@ -715,7 +715,7 @@
             "EnableShifting": true,
             "ViewAnchor": "247, 368",
             "MaxViewPoint": "20, 140",
-            "MinViewPoint": "0, -160",
+            "MinViewPoint": "3, -160",
             "DefaultZoom": 0.96
           },
           {
