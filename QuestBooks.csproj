@@ -16,6 +16,11 @@
 	<ItemGroup>
 	  <PackageReference Include="NativeFileDialogSharp" Version="0.6.0-alpha" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Quests\VanillaQuests\Book2\Pre3Mechs\BiomeContent\" />
+	  <Folder Include="Quests\VanillaQuests\Book2\Pre3Mechs\NewThreats\" />
+	  <Folder Include="Quests\VanillaQuests\Book2\PreCultist\" />
+	</ItemGroup>
 
 	<!-- References -->
 

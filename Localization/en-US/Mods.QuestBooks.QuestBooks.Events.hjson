@@ -1,13 +1,15 @@
 AllCelestialPillarsDefeated: {
 	Title: Star Destroyer
-	Contents: '''
+	Contents: 
+		'''
 		Defeat the four celestial towers of the moon.
 		'''
 }
 
 SurviveBloodMoon: {
 	Title: Bloodbath
-	Contents: '''
+	Contents: 
+		'''
 		Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
 		'''
 }
