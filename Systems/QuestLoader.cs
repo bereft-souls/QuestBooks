@@ -22,7 +22,8 @@ namespace QuestBooks.Systems
         // improve performance and ensure that quests are not modified post-setup.
         private static readonly HashSet<Assembly> checkedAssemblies = [];
         internal static readonly Dictionary<Type, string> loadingQuests = [];
-        internal static readonly Dictionary<Type, Mod> questMods = [];
+
+        public static Dictionary<Type, Mod> QuestMods { get; } = [];
         public static FrozenDictionary<Type, string> QuestKeys { get; internal set; }
 
         public static QuestLogStyle ExclusiveOverrideStyle { get; internal set; } = null;
@@ -55,7 +56,7 @@ namespace QuestBooks.Systems
             //}
         }
 
-        // Mods should load their quests in PostSetupContent().
+        // Mods should load their quest logs in PostSetupContent().
         // Following that, we freeze the dictionary and reset the loading.
         public override void PostAddRecipes()
         {
@@ -74,15 +75,8 @@ namespace QuestBooks.Systems
 
         public override void PostSetupRecipes()
         {
-            if (ExclusiveOverrideStyle is not null)
-                QuestLogDrawer.ActiveStyle = ExclusiveOverrideStyle;
-
-            // TODO: Change this for config loading
-            else
-                QuestLogDrawer.ActiveStyle = QuestLogDrawer.QuestLogStyles.First().Value;
-
             QuestManager.SelectQuestLog(QuestManager.AvailableQuestLogs.First().Key);
-            QuestLogDrawer.ActiveStyle.OnSelect();
+            QuestLogDrawer.SelectLogStyle(ExclusiveOverrideStyle ?? QuestLogDrawer.QuestLogStyles.First().Value);
         }
 
         #region Quest Loading
@@ -100,6 +94,8 @@ namespace QuestBooks.Systems
                 if (quest.CheckCompletion())
                     QuestManager.MarkComplete(quest);
             }
+
+            QuestLogDrawer.ActiveStyle.LoadWorldData(tag);
         }
 
         public partial class PlayerQuestLoader : ModPlayer
@@ -110,6 +106,8 @@ namespace QuestBooks.Systems
                 // If it does not exist, leave all player quests as incomplete.
                 if (tag.TryGet(TagKey, out string[] quests))
                     LoadCompletedQuests(quests);
+
+                QuestLogDrawer.ActiveStyle.LoadPlayerData(tag);
             }
 
             public override void OnEnterWorld()
@@ -130,6 +128,8 @@ namespace QuestBooks.Systems
         {
             if (QuestManager.CompletedWorldQuests is not null)
                 tag[TagKey] = QuestManager.CompletedWorldQuests.ToList();
+
+            QuestLogDrawer.ActiveStyle.SaveWorldData(tag);
         }
 
         public partial class PlayerQuestLoader : ModPlayer
@@ -138,6 +138,8 @@ namespace QuestBooks.Systems
             {
                 if (QuestManager.CompletedPlayerQuests is not null)
                     tag[TagKey] = QuestManager.CompletedPlayerQuests.ToList();
+
+                QuestLogDrawer.ActiveStyle.SavePlayerData(tag);
             }
         }
 

@@ -48,7 +48,7 @@ namespace QuestBooks.Systems
 
         public static void SelectLogStyle(QuestLogStyle style)
         {
-            ActiveStyle.OnDeselect();
+            ActiveStyle?.OnDeselect();
             ActiveStyle = style;
             style.OnSelect();
         }
