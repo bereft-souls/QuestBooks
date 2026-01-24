@@ -1,1 +1,740 @@
-[]
+{
+  "$id": "1",
+  "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestBook, QuestBooks]], System.Private.CoreLib",
+  "$values": [
+    {
+      "$id": "2",
+      "$type": "QuestBooks.QuestLog.DefaultQuestBooks.TabBook, QuestBooks",
+      "NameKey": "Mods.QuestBooks.QuestBooks.Book0.Name",
+      "Chapters": {
+        "$id": "3",
+        "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.BookChapter, QuestBooks]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$id": "4",
+            "$type": "QuestBooks.QuestLog.DefaultChapters.ScrollChapter, QuestBooks",
+            "NameKey": "Mods.QuestBooks.QuestBooks.Book0.Chapter0",
+            "Elements": {
+              "$id": "5",
+              "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+              "$values": [
+                {
+                  "$id": "6",
+                  "$type": "QuestBooks.QuestLog.DefaultElements.DisplayElement, QuestBooks",
+                  "_texturePath": "QuestBooks/Assets/Textures/Quests/Book0/Tree",
+                  "CanvasPosition": "240, 280",
+                  "Scale": 1.0,
+                  "Rotation": 0.0,
+                  "Layer": 0.01
+                },
+                {
+                  "$id": "7",
+                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                  "_lockedTexturePath": "",
+                  "_incompleteTexturePath": "",
+                  "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                  "QuestKey": "Placeholder",
+                  "DisplayFeeds": 0,
+                  "UnlockFeeds": 0,
+                  "CanvasPosition": "187, 541",
+                  "Connections": {
+                    "$id": "8",
+                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                    "$values": [
+                      {
+                        "$id": "9",
+                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                        "LineThickness": 5.0,
+                        "Source": {
+                          "$ref": "7"
+                        },
+                        "Destination": {
+                          "$id": "10",
+                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                          "_lockedTexturePath": "",
+                          "_incompleteTexturePath": "",
+                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                          "QuestKey": "Placeholder",
+                          "DisplayFeeds": 0,
+                          "UnlockFeeds": 0,
+                          "CanvasPosition": "299, 541",
+                          "Connections": {
+                            "$id": "11",
+                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                            "$values": [
+                              {
+                                "$ref": "9"
+                              },
+                              {
+                                "$id": "12",
+                                "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                "LineThickness": 5.0,
+                                "Source": {
+                                  "$ref": "10"
+                                },
+                                "Destination": {
+                                  "$id": "13",
+                                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/LargeOutline",
+                                  "_lockedTexturePath": "",
+                                  "_incompleteTexturePath": "",
+                                  "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Large",
+                                  "QuestKey": "Placeholder",
+                                  "DisplayFeeds": 0,
+                                  "UnlockFeeds": 0,
+                                  "CanvasPosition": "245, 469",
+                                  "Connections": {
+                                    "$id": "14",
+                                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                    "$values": [
+                                      {
+                                        "$id": "15",
+                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                        "LineThickness": 5.0,
+                                        "Source": {
+                                          "$ref": "7"
+                                        },
+                                        "Destination": {
+                                          "$ref": "13"
+                                        }
+                                      },
+                                      {
+                                        "$ref": "12"
+                                      },
+                                      {
+                                        "$id": "16",
+                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                        "LineThickness": 5.0,
+                                        "Source": {
+                                          "$ref": "13"
+                                        },
+                                        "Destination": {
+                                          "$id": "17",
+                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                          "_lockedTexturePath": "",
+                                          "_incompleteTexturePath": "",
+                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                          "QuestKey": "Placeholder",
+                                          "DisplayFeeds": 0,
+                                          "UnlockFeeds": 0,
+                                          "CanvasPosition": "341, 413",
+                                          "Connections": {
+                                            "$id": "18",
+                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                            "$values": [
+                                              {
+                                                "$ref": "16"
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "$id": "19",
+                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                        "LineThickness": 5.0,
+                                        "Source": {
+                                          "$ref": "13"
+                                        },
+                                        "Destination": {
+                                          "$id": "20",
+                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                          "_lockedTexturePath": "",
+                                          "_incompleteTexturePath": "",
+                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                          "QuestKey": "Placeholder",
+                                          "DisplayFeeds": 0,
+                                          "UnlockFeeds": 0,
+                                          "CanvasPosition": "245, 367",
+                                          "Connections": {
+                                            "$id": "21",
+                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                            "$values": [
+                                              {
+                                                "$ref": "19"
+                                              },
+                                              {
+                                                "$id": "22",
+                                                "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                "LineThickness": 5.0,
+                                                "Source": {
+                                                  "$ref": "20"
+                                                },
+                                                "Destination": {
+                                                  "$id": "23",
+                                                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                  "_lockedTexturePath": "",
+                                                  "_incompleteTexturePath": "",
+                                                  "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                  "QuestKey": "Placeholder",
+                                                  "DisplayFeeds": 0,
+                                                  "UnlockFeeds": 0,
+                                                  "CanvasPosition": "245, 287",
+                                                  "Connections": {
+                                                    "$id": "24",
+                                                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                    "$values": [
+                                                      {
+                                                        "$ref": "22"
+                                                      },
+                                                      {
+                                                        "$id": "25",
+                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                        "LineThickness": 5.0,
+                                                        "Source": {
+                                                          "$ref": "23"
+                                                        },
+                                                        "Destination": {
+                                                          "$id": "26",
+                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                          "_lockedTexturePath": "",
+                                                          "_incompleteTexturePath": "",
+                                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                          "QuestKey": "Placeholder",
+                                                          "DisplayFeeds": 0,
+                                                          "UnlockFeeds": 0,
+                                                          "CanvasPosition": "143, 261",
+                                                          "Connections": {
+                                                            "$id": "27",
+                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                            "$values": [
+                                                              {
+                                                                "$ref": "25"
+                                                              }
+                                                            ]
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "$id": "28",
+                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                        "LineThickness": 5.0,
+                                                        "Source": {
+                                                          "$ref": "23"
+                                                        },
+                                                        "Destination": {
+                                                          "$id": "29",
+                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                          "_lockedTexturePath": "",
+                                                          "_incompleteTexturePath": "",
+                                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                          "QuestKey": "Placeholder",
+                                                          "DisplayFeeds": 0,
+                                                          "UnlockFeeds": 0,
+                                                          "CanvasPosition": "313, 207",
+                                                          "Connections": {
+                                                            "$id": "30",
+                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                            "$values": [
+                                                              {
+                                                                "$ref": "28"
+                                                              }
+                                                            ]
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "$id": "31",
+                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                        "LineThickness": 5.0,
+                                                        "Source": {
+                                                          "$ref": "23"
+                                                        },
+                                                        "Destination": {
+                                                          "$id": "32",
+                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                          "_lockedTexturePath": "",
+                                                          "_incompleteTexturePath": "",
+                                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                          "QuestKey": "Placeholder",
+                                                          "DisplayFeeds": 0,
+                                                          "UnlockFeeds": 0,
+                                                          "CanvasPosition": "245, 207",
+                                                          "Connections": {
+                                                            "$id": "33",
+                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                            "$values": [
+                                                              {
+                                                                "$ref": "31"
+                                                              },
+                                                              {
+                                                                "$id": "34",
+                                                                "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                "LineThickness": 5.0,
+                                                                "Source": {
+                                                                  "$ref": "32"
+                                                                },
+                                                                "Destination": {
+                                                                  "$id": "35",
+                                                                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/LargeOutline",
+                                                                  "_lockedTexturePath": "",
+                                                                  "_incompleteTexturePath": "",
+                                                                  "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Large",
+                                                                  "QuestKey": "Placeholder",
+                                                                  "DisplayFeeds": 0,
+                                                                  "UnlockFeeds": 0,
+                                                                  "CanvasPosition": "245, 33",
+                                                                  "Connections": {
+                                                                    "$id": "36",
+                                                                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                    "$values": [
+                                                                      {
+                                                                        "$ref": "34"
+                                                                      },
+                                                                      {
+                                                                        "$id": "37",
+                                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                        "LineThickness": 5.0,
+                                                                        "Source": {
+                                                                          "$ref": "35"
+                                                                        },
+                                                                        "Destination": {
+                                                                          "$id": "38",
+                                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestJumpElement, QuestBooks",
+                                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/DiamondOutline",
+                                                                          "_lockedTexturePath": "",
+                                                                          "_unlockedTexturePath": "QuestBooks/Assets/Textures/Quests/Diamond",
+                                                                          "DisplayFeeds": 0,
+                                                                          "UnlockFeeds": 0,
+                                                                          "JumpBook": {
+                                                                            "$ref": "2"
+                                                                          },
+                                                                          "JumpChapter": {
+                                                                            "$ref": "4"
+                                                                          },
+                                                                          "JumpOffset": "0, 0",
+                                                                          "TooltipLocalization": "Mods.QuestBooks.Tooltips.Elements.QuestJumpHover",
+                                                                          "CanvasPosition": "308, -65",
+                                                                          "Connections": {
+                                                                            "$id": "39",
+                                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                            "$values": [
+                                                                              {
+                                                                                "$ref": "37"
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      {
+                                                                        "$id": "40",
+                                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                        "LineThickness": 5.0,
+                                                                        "Source": {
+                                                                          "$ref": "35"
+                                                                        },
+                                                                        "Destination": {
+                                                                          "$id": "41",
+                                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                                          "_lockedTexturePath": "",
+                                                                          "_incompleteTexturePath": "",
+                                                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                                          "QuestKey": "Placeholder",
+                                                                          "DisplayFeeds": 0,
+                                                                          "UnlockFeeds": 0,
+                                                                          "CanvasPosition": "347, 53",
+                                                                          "Connections": {
+                                                                            "$id": "42",
+                                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                            "$values": [
+                                                                              {
+                                                                                "$ref": "40"
+                                                                              },
+                                                                              {
+                                                                                "$id": "43",
+                                                                                "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                                "LineThickness": 5.0,
+                                                                                "Source": {
+                                                                                  "$ref": "41"
+                                                                                },
+                                                                                "Destination": {
+                                                                                  "$id": "44",
+                                                                                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                                                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                                                  "_lockedTexturePath": "",
+                                                                                  "_incompleteTexturePath": "",
+                                                                                  "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                                                  "QuestKey": "Placeholder",
+                                                                                  "DisplayFeeds": 0,
+                                                                                  "UnlockFeeds": 0,
+                                                                                  "CanvasPosition": "363, -19",
+                                                                                  "Connections": {
+                                                                                    "$id": "45",
+                                                                                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                                    "$values": [
+                                                                                      {
+                                                                                        "$ref": "43"
+                                                                                      }
+                                                                                    ]
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      {
+                                                                        "$id": "46",
+                                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                        "LineThickness": 5.0,
+                                                                        "Source": {
+                                                                          "$ref": "35"
+                                                                        },
+                                                                        "Destination": {
+                                                                          "$id": "47",
+                                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                                          "_lockedTexturePath": "",
+                                                                          "_incompleteTexturePath": "",
+                                                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                                          "QuestKey": "Placeholder",
+                                                                          "DisplayFeeds": 0,
+                                                                          "UnlockFeeds": 0,
+                                                                          "CanvasPosition": "157, -57",
+                                                                          "Connections": {
+                                                                            "$id": "48",
+                                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                            "$values": [
+                                                                              {
+                                                                                "$ref": "46"
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      {
+                                                                        "$id": "49",
+                                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                        "LineThickness": 5.0,
+                                                                        "Source": {
+                                                                          "$ref": "35"
+                                                                        },
+                                                                        "Destination": {
+                                                                          "$id": "50",
+                                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                                          "_lockedTexturePath": "",
+                                                                          "_incompleteTexturePath": "",
+                                                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                                          "QuestKey": "Placeholder",
+                                                                          "DisplayFeeds": 0,
+                                                                          "UnlockFeeds": 0,
+                                                                          "CanvasPosition": "141, 53",
+                                                                          "Connections": {
+                                                                            "$id": "51",
+                                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                            "$values": [
+                                                                              {
+                                                                                "$ref": "49"
+                                                                              },
+                                                                              {
+                                                                                "$id": "52",
+                                                                                "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                                "LineThickness": 5.0,
+                                                                                "Source": {
+                                                                                  "$ref": "50"
+                                                                                },
+                                                                                "Destination": {
+                                                                                  "$id": "53",
+                                                                                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                                                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                                                  "_lockedTexturePath": "",
+                                                                                  "_incompleteTexturePath": "",
+                                                                                  "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                                                  "QuestKey": "Placeholder",
+                                                                                  "DisplayFeeds": 0,
+                                                                                  "UnlockFeeds": 0,
+                                                                                  "CanvasPosition": "113, -10",
+                                                                                  "Connections": {
+                                                                                    "$id": "54",
+                                                                                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                                    "$values": [
+                                                                                      {
+                                                                                        "$ref": "52"
+                                                                                      }
+                                                                                    ]
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              {
+                                                                                "$id": "55",
+                                                                                "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                                "LineThickness": 5.0,
+                                                                                "Source": {
+                                                                                  "$ref": "50"
+                                                                                },
+                                                                                "Destination": {
+                                                                                  "$id": "56",
+                                                                                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestJumpElement, QuestBooks",
+                                                                                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/DiamondOutline",
+                                                                                  "_lockedTexturePath": "",
+                                                                                  "_unlockedTexturePath": "QuestBooks/Assets/Textures/Quests/Diamond",
+                                                                                  "DisplayFeeds": 0,
+                                                                                  "UnlockFeeds": 0,
+                                                                                  "JumpBook": {
+                                                                                    "$ref": "2"
+                                                                                  },
+                                                                                  "JumpChapter": {
+                                                                                    "$ref": "4"
+                                                                                  },
+                                                                                  "JumpOffset": "0, 0",
+                                                                                  "TooltipLocalization": "Mods.QuestBooks.Tooltips.Elements.QuestJumpHover",
+                                                                                  "CanvasPosition": "187, 113",
+                                                                                  "Connections": {
+                                                                                    "$id": "57",
+                                                                                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                                    "$values": [
+                                                                                      {
+                                                                                        "$ref": "55"
+                                                                                      }
+                                                                                    ]
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      },
+                                                                      {
+                                                                        "$id": "58",
+                                                                        "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                        "LineThickness": 5.0,
+                                                                        "Source": {
+                                                                          "$ref": "35"
+                                                                        },
+                                                                        "Destination": {
+                                                                          "$id": "59",
+                                                                          "$type": "QuestBooks.QuestLog.DefaultElements.QuestDisplay, QuestBooks",
+                                                                          "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/MediumOutline",
+                                                                          "_lockedTexturePath": "",
+                                                                          "_incompleteTexturePath": "",
+                                                                          "_completedTexturePath": "QuestBooks/Assets/Textures/Quests/Medium",
+                                                                          "QuestKey": "Placeholder",
+                                                                          "DisplayFeeds": 0,
+                                                                          "UnlockFeeds": 0,
+                                                                          "CanvasPosition": "231, -75",
+                                                                          "Connections": {
+                                                                            "$id": "60",
+                                                                            "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                            "$values": [
+                                                                              {
+                                                                                "$ref": "58"
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              },
+                                                              {
+                                                                "$id": "61",
+                                                                "$type": "QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks",
+                                                                "LineThickness": 5.0,
+                                                                "Source": {
+                                                                  "$ref": "32"
+                                                                },
+                                                                "Destination": {
+                                                                  "$id": "62",
+                                                                  "$type": "QuestBooks.QuestLog.DefaultElements.QuestJumpElement, QuestBooks",
+                                                                  "_outlineTexturePath": "QuestBooks/Assets/Textures/Quests/DiamondOutline",
+                                                                  "_lockedTexturePath": "",
+                                                                  "_unlockedTexturePath": "QuestBooks/Assets/Textures/Quests/Diamond",
+                                                                  "DisplayFeeds": 0,
+                                                                  "UnlockFeeds": 0,
+                                                                  "JumpBook": {
+                                                                    "$ref": "2"
+                                                                  },
+                                                                  "JumpChapter": {
+                                                                    "$ref": "4"
+                                                                  },
+                                                                  "JumpOffset": "0, 0",
+                                                                  "TooltipLocalization": "Mods.QuestBooks.Tooltips.Elements.QuestJumpHover",
+                                                                  "CanvasPosition": "305, 113",
+                                                                  "Connections": {
+                                                                    "$id": "63",
+                                                                    "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.DefaultElements.Connector, QuestBooks]], System.Private.CoreLib",
+                                                                    "$values": [
+                                                                      {
+                                                                        "$ref": "61"
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              }
+                                                            ]
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "15"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "$ref": "10"
+                },
+                {
+                  "$ref": "13"
+                },
+                {
+                  "$ref": "17"
+                },
+                {
+                  "$ref": "20"
+                },
+                {
+                  "$ref": "23"
+                },
+                {
+                  "$ref": "26"
+                },
+                {
+                  "$ref": "32"
+                },
+                {
+                  "$ref": "29"
+                },
+                {
+                  "$ref": "35"
+                },
+                {
+                  "$ref": "62"
+                },
+                {
+                  "$ref": "41"
+                },
+                {
+                  "$ref": "44"
+                },
+                {
+                  "$ref": "38"
+                },
+                {
+                  "$ref": "56"
+                },
+                {
+                  "$ref": "50"
+                },
+                {
+                  "$ref": "9"
+                },
+                {
+                  "$ref": "15"
+                },
+                {
+                  "$ref": "12"
+                },
+                {
+                  "$ref": "16"
+                },
+                {
+                  "$ref": "19"
+                },
+                {
+                  "$ref": "22"
+                },
+                {
+                  "$ref": "25"
+                },
+                {
+                  "$ref": "28"
+                },
+                {
+                  "$ref": "31"
+                },
+                {
+                  "$ref": "34"
+                },
+                {
+                  "$ref": "37"
+                },
+                {
+                  "$ref": "40"
+                },
+                {
+                  "$ref": "43"
+                },
+                {
+                  "$ref": "61"
+                },
+                {
+                  "$ref": "46"
+                },
+                {
+                  "$ref": "49"
+                },
+                {
+                  "$ref": "52"
+                },
+                {
+                  "$ref": "55"
+                },
+                {
+                  "$ref": "53"
+                },
+                {
+                  "$ref": "47"
+                },
+                {
+                  "$ref": "59"
+                },
+                {
+                  "$ref": "58"
+                }
+              ]
+            },
+            "EnableShifting": true,
+            "ViewAnchor": "247, 368",
+            "MaxViewPoint": "20, 140",
+            "MinViewPoint": "0, -160",
+            "DefaultZoom": 0.96
+          },
+          {
+            "$id": "64",
+            "$type": "QuestBooks.QuestLog.DefaultChapters.ScrollChapter, QuestBooks",
+            "NameKey": "Mods.QuestBooks.QuestBooks.Book0.Chapter1",
+            "Elements": {
+              "$id": "65",
+              "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.ChapterElement, QuestBooks]], System.Private.CoreLib",
+              "$values": []
+            },
+            "EnableShifting": false,
+            "ViewAnchor": "0, 0",
+            "MaxViewPoint": "0, 0",
+            "MinViewPoint": "0, 0",
+            "DefaultZoom": 1.0
+          }
+        ]
+      }
+    }
+  ]
+}
