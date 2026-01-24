@@ -114,7 +114,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             {
                 float oldZoom = Zoom;
                 Zoom += scrollAmount * 0.005f;
-                Zoom = float.Min(Zoom, 2f);
+                Zoom = float.Min(Zoom, 4f);
                 Zoom = float.Max(Zoom, MinFitZoom);
 
                 // Adjust offset to keep the mouse's canvas position stable
@@ -169,7 +169,11 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
             SortedElements ??= SelectedChapter?.Elements.OrderBy(x => x.DrawPriority).ToArray() ?? null;
 
             // Get the top-most element that is being hovered
-            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x => x.IsHovered(placementPosition, QuestAreaOffset, Zoom, ref MouseTooltip) && x != SelectedElement, null) ?? null : null;
+            ChapterElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x =>
+                x.IsHovered(placementPosition, QuestAreaOffset, Zoom, ref MouseTooltip) &&
+                (SelectedElement is null || (Array.FindIndex(SortedElements, e => e == x) < Array.FindIndex(SortedElements, e => e == SelectedElement))), null)
+                ?? null : null;
+
             HoveredElement = lastHoveredElement;
 
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
