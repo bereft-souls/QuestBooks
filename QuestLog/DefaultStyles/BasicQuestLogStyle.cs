@@ -329,9 +329,10 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 drawAction(spriteBatch);
         }
 
-        private float? verticalDrawPos = null;
-        private int frozenFrames = 60;
-        private float bookRotation = -MathHelper.PiOver4;
+        // Set in LoadPlayerData()
+        private float? verticalDrawPos;
+        private int frozenFrames;
+        private float bookRotation;
 
         // Draws the book animation opening.
         // Returns true when the animation is complete.
@@ -344,9 +345,9 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             if (verticalDrawPos.Value != targetDrawPos)
             {
-                verticalDrawPos = float.Lerp(verticalDrawPos.Value, targetDrawPos, 0.05f);
+                verticalDrawPos = float.Lerp(verticalDrawPos.Value, targetDrawPos, 0.09f);
 
-                if (verticalDrawPos.Value - targetDrawPos < 0.01f)
+                if (verticalDrawPos.Value - targetDrawPos < 0.25f)
                     verticalDrawPos = targetDrawPos;
             }
             else
@@ -356,8 +357,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             if (bookRotation != 0f)
             {
-                bookRotation = float.Lerp(bookRotation, 0f, 0.05f);
-                if (bookRotation < 0.01f)
+                bookRotation = float.Lerp(bookRotation, 0f, 0.09f);
+                if (bookRotation < 0.001f)
                     bookRotation = 0f;
             }
 
@@ -560,13 +561,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         private const string ScaleKey = "QuestBooks:QuestBooksScale";
         private const string OffsetKey = "QuestBooks:QuestBooksOffset";
-        private const string PreviouslyOpenedKey = "QuestBooks:QuestLogPreviouslyOpened";
 
         public override void SavePlayerData(TagCompound tag)
         {
             tag[ScaleKey] = LogScale;
             tag[OffsetKey] = LogPositionOffset;
-            tag[PreviouslyOpenedKey] = PreviouslyOpened;
         }
 
         public override void LoadPlayerData(TagCompound tag)
@@ -580,8 +579,10 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (tag.TryGet(OffsetKey, out Vector2 offset))
                 LogPositionOffset = offset;
 
-            if (tag.TryGet(PreviouslyOpenedKey, out bool previouslyOpened))
-                PreviouslyOpened = previouslyOpened;
+            PreviouslyOpened = false;
+            verticalDrawPos = null;
+            frozenFrames = 60;
+            bookRotation = MathHelper.PiOver4;
         }
 
         #endregion
