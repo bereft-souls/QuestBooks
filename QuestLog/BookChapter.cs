@@ -132,5 +132,13 @@ namespace QuestBooks.QuestLog
         {
             newInstance.Elements.AddRange(Elements);
         }
+
+        /// <summary>
+        /// Clones the members of an old quest line into this new quest line.
+        /// </summary>
+        public virtual void CloneFrom(BookChapter oldInstance)
+        {
+            
+        }
     }
 }

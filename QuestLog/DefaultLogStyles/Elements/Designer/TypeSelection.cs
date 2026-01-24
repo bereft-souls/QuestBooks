@@ -4,12 +4,14 @@ using QuestBooks.Assets;
 using QuestBooks.Systems;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultLogStyles
 {
@@ -53,7 +55,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookUp");
 
                         if (LeftMouseJustReleased && !firstBook)
+                        {
                             (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
+
+                            AddHistory(() => {
+                                (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
+                            }, () => {
+                                (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
+                            });
+                        }
                     }
 
                     else if (bookDown.Contains(MouseCanvas))
@@ -61,7 +71,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookDown");
 
                         if (LeftMouseJustReleased && !lastBook)
+                        {
                             (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
+
+                            AddHistory(() => {
+                                (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
+                            }, () => {
+                                (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
+                            });
+                        }
                     }
 
                     Texture2D bookUpTexture = bookUpHovered && !firstBook ? QuestAssets.ShiftBookUpHovered : QuestAssets.ShiftBookUp;
@@ -122,7 +140,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         chapterUpHovered = true;
 
                         if (LeftMouseJustReleased && !firstChapter)
+                        {
                             (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
+
+                            AddHistory(() => {
+                                (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
+                            }, () => {
+                                (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
+                            });
+                        }
                     }
 
                     else if (chapterDown.Contains(MouseCanvas))
@@ -131,7 +157,15 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         chapterDownHovered = true;
 
                         if (LeftMouseJustReleased && !lastChapter)
+                        {
                             (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
+
+                            AddHistory(() => {
+                                (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
+                            }, () => {
+                                (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
+                            });
+                        }
                     }
 
                     Texture2D chapterUpTexture = chapterUpHovered && !firstChapter ? QuestAssets.ShiftBookUpHovered : QuestAssets.ShiftBookUp;
@@ -188,10 +222,27 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     {
                         void onClick()
                         {
+                            var oldType = SelectedBook.GetType();
                             var instance = (QuestBook)Activator.CreateInstance(bookType);
                             SelectedBook.CloneTo(instance);
-                            QuestManager.QuestBooks[QuestManager.QuestBooks.IndexOf(SelectedBook)] = instance;
+                            instance.CloneFrom(SelectedBook);
+
+                            int index = QuestManager.QuestBooks.IndexOf(SelectedBook);
+                            QuestManager.QuestBooks[index] = instance;
                             SelectedBook = instance;
+
+                            AddHistory(() => {
+                                var oldInstance = (QuestBook)Activator.CreateInstance(oldType);
+                                instance.CloneTo(oldInstance);
+                                oldInstance.CloneFrom(instance);
+                                QuestManager.QuestBooks[index] = oldInstance;
+                            }, () => {
+                                var newInstance = (QuestBook)Activator.CreateInstance(bookType);
+                                var instance = QuestManager.QuestBooks[index];
+                                instance.CloneTo(newInstance);
+                                newInstance.CloneFrom(instance);
+                                QuestManager.QuestBooks[index] = newInstance;
+                            });
                         }
 
                         typeSelections.Add((typeBox, onClick, bookType == SelectedBook.GetType(), bookType));
@@ -205,10 +256,28 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     {
                         void onClick()
                         {
+                            var oldType = SelectedChapter.GetType();
                             var instance = (BookChapter)Activator.CreateInstance(lineType);
                             SelectedChapter.CloneTo(instance);
-                            SelectedBook.Chapters[SelectedBook.Chapters.IndexOf(SelectedChapter)] = instance;
+                            instance.CloneFrom(SelectedChapter);
+
+                            var book = SelectedBook;
+                            int index = book.Chapters.IndexOf(SelectedChapter);
+                            book.Chapters[index] = instance;
                             SelectedChapter = instance;
+
+                            AddHistory(() => {
+                                var oldInstance = (BookChapter)Activator.CreateInstance(oldType);
+                                instance.CloneTo(oldInstance);
+                                oldInstance.CloneFrom(instance);
+                                book.Chapters[index] = oldInstance;
+                            }, () => {
+                                var newInstance = (BookChapter)Activator.CreateInstance(lineType);
+                                var instance = book.Chapters[index];
+                                instance.CloneTo(newInstance);
+                                newInstance.CloneFrom(instance);
+                                book.Chapters[index] = newInstance;
+                            });
                         }
 
                         typeSelections.Add((typeBox, onClick, lineType == SelectedChapter.GetType(), lineType));
@@ -293,7 +362,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     sb.GraphicsDevice.ScissorRectangle = new(0, 0, Main.screenWidth, Main.screenHeight);
                     raster.ScissorTestEnable = false;
 
-                    sb.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
+                    sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
                 });
             }
         }

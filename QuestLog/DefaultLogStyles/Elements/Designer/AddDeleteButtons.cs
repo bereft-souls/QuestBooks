@@ -38,9 +38,17 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Add new questbook with placeholder localization key
                 if (LeftMouseJustReleased)
                 {
-                    TabBook newBook = new() { NameKey = $"Mods.{QuestBooksMod.DesignerMod.Name}.Book{QuestManager.QuestBooks.Count + 1}" };
+                    TabBook newBook = new() { NameKey = $"Mods.{QuestBooksMod.DesignerMod.Name}.QuestBooks.Book{QuestManager.QuestBooks.Count}.Name" };
                     QuestManager.QuestBooks.Add(newBook);
                     SoundEngine.PlaySound(SoundID.MenuTick);
+
+                    AddHistory(() => {
+                        QuestManager.QuestBooks.Remove(newBook);
+                        if (newBook == SelectedBook)
+                            SelectBook(null);
+                    }, () => {
+                        QuestManager.QuestBooks.Add(newBook);
+                    });
                 }
             }
 
@@ -52,9 +60,19 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                 // Add new chapter with placeholder localization key
                 if (LeftMouseJustReleased && SelectedBook is not null)
                 {
-                    ScrollChapter newLine = new() { NameKey = $"Mods.{QuestBooksMod.DesignerMod.Name}.Chapter{SelectedBook.Chapters.Count + 1}" };
-                    SelectedBook.Chapters.Add(newLine);
+                    int bookIndex = QuestManager.QuestBooks.Contains(SelectedBook) ? QuestManager.QuestBooks.IndexOf(SelectedBook) : 0;
+                    ScrollChapter newLine = new() { NameKey = $"Mods.{QuestBooksMod.DesignerMod.Name}.QuestBooks.Book{bookIndex}.Chapter{SelectedBook.Chapters.Count}" };
+                    var book = SelectedBook;
+                    book.Chapters.Add(newLine);
                     SoundEngine.PlaySound(SoundID.MenuTick);
+
+                    AddHistory(() => {
+                        book.Chapters.Remove(newLine);
+                        if (SelectedChapter == newLine)
+                            SelectChapter(null);
+                    }, () => {
+                        book.Chapters.Add(newLine);
+                    });
                 }
             }
 
@@ -70,8 +88,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     {
                         window = Main.instance.Window.Handle,
                         title = "Delete Quest Book",
-                        message = $"Are you sure you want to delete the selected quest book: {SelectedBook.DisplayName}?\n" +
-                        "This action cannot be undone!",
+                        message = $"Are you sure you want to delete the selected quest book: {SelectedBook.DisplayName}?",
                         flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                         numbuttons = 2,
                         buttons = [
@@ -96,9 +113,18 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     // If okay...
                     if (result == 0 && buttonId == 1)
                     {
-                        QuestManager.QuestBooks.Remove(SelectedBook);
-                        DrawTasks.Add(_ => SelectedBook = null);
+                        var book = SelectedBook;
+                        QuestManager.QuestBooks.Remove(book);
+                        SelectBook(null);
                         SoundEngine.PlaySound(SoundID.MenuTick);
+
+                        AddHistory(() => {
+                            QuestManager.QuestBooks.Add(book);
+                        }, () => {
+                            QuestManager.QuestBooks.Remove(book);
+                            if (book == SelectedBook)
+                                SelectBook(null);
+                        });
                     }
 
                     else
@@ -118,8 +144,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     {
                         window = Main.instance.Window.Handle,
                         title = "Delete Chapter",
-                        message = $"Are you sure you want to delete the selected chapter: {SelectedChapter.DisplayName}?\n" +
-                        "This action cannot be undone!",
+                        message = $"Are you sure you want to delete the selected chapter: {SelectedChapter.DisplayName}?",
                         flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                         numbuttons = 2,
                         buttons = [
@@ -144,13 +169,21 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     // If okay...
                     if (result == 0 && buttonId == 1)
                     {
-                        SelectedBook.Chapters.Remove(SelectedChapter);
-                        DrawTasks.Add(_ =>
-                        {
-                            SelectedChapter = null;
-                            SortedElements = null;
-                        });
+                        var book = SelectedBook;
+                        var chapter = SelectedChapter;
+
+                        book.Chapters.Remove(chapter);
+                        SelectChapter(null);
+
                         SoundEngine.PlaySound(SoundID.MenuTick);
+
+                        AddHistory(() => {
+                            book.Chapters.Add(chapter);
+                        }, () => {
+                            book.Chapters.Remove(chapter);
+                            if (chapter == SelectedChapter)
+                                SelectChapter(null);
+                        });
                     }
 
                     else

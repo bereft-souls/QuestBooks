@@ -31,6 +31,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private MemberInfo selectedMember = null;
         private bool memberValueAccepted = false;
         private int memberScrollOffset = 0;
+        private bool holdingPaste = false;
 
         private class MemberBundle(MemberInfo memberInfo, string value, string tooltip, Func<string> getter, Func<string, bool> setter, object converter)
         {
@@ -104,12 +105,24 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     // If okay...
                     if (result == 0 && buttonId == 1)
                     {
-                        SelectedChapter.Elements.Remove(SelectedElement);
-                        SelectedElement.OnDelete();
+                        var chapter = SelectedChapter;
+                        var element = SelectedElement;
+
+                        chapter.Elements.Remove(element);
+                        element.OnDelete();
                         SortedElements = null;
                         SelectedElement = null;
                         questInfoSwipeOffset = -questInfoTarget.Height;
                         SoundEngine.PlaySound(SoundID.MenuTick);
+
+                        AddHistory(() => {
+                            chapter.Elements.Add(element);
+                            SortedElements = null;
+                        }, () => {
+                            chapter.Elements.Remove(element);
+                            element.OnDelete();
+                        });
+
                         return;
                     }
 
@@ -131,7 +144,6 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     placingElement = SelectedElement;
                     SelectedChapter.Elements.Remove(SelectedElement);
                     SortedElements = null;
-                    questInfoSwipeOffset = -questInfoTarget.Height;
                     SoundEngine.PlaySound(SoundID.MenuTick);
                     return;
                 }
@@ -390,7 +402,10 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                      });
 
                     string value = bundle.Value;
-                    string newValue = Main.GetInputText(value);
+                    bool pasting = Main.keyState.PressingControl() && Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.V);
+
+                    string newValue = Main.GetInputText(pasting && !holdingPaste ? "" : value);
+                    holdingPaste = pasting;
 
                     // Only do parsing on new values (every frame would be ridiculous)
                     if (value != newValue)

@@ -17,6 +17,7 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
         private readonly List<(Rectangle box, Type type)> elementSelections = [];
         private int elementTypeScrollOffset = 0;
         private ChapterElement placingElement = null;
+        private const float zoomIncrement = 0.1f;
 
         private void HandleQuestRegionTools()
         {
@@ -59,13 +60,29 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
 
                 if (LeftMouseJustReleased && SelectedChapter is not null)
                 {
-                    SelectedChapter.EnableShifting = !SelectedChapter.EnableShifting;
+                    var chapter = SelectedChapter;
+                    Vector2 oldAnchor = chapter.ViewAnchor;
+                    chapter.EnableShifting = !chapter.EnableShifting;
 
-                    if (SelectedChapter.EnableShifting)
-                        SelectedChapter.ViewAnchor = defaultAnchor;
+                    if (chapter.EnableShifting)
+                        chapter.ViewAnchor = defaultAnchor;
 
                     else
                         QuestAreaOffset = Vector2.Zero;
+
+                    AddHistory(() => {
+                        chapter.EnableShifting = !chapter.EnableShifting;
+                        if (chapter.EnableShifting)
+                            chapter.ViewAnchor = oldAnchor;
+                        else
+                            QuestAreaOffset = Vector2.Zero;
+                    }, () => {
+                        chapter.EnableShifting = !chapter.EnableShifting;
+                        if (chapter.EnableShifting)
+                            chapter.ViewAnchor = defaultAnchor;
+                        else
+                            QuestAreaOffset = Vector2.Zero;
+                    });
                 }
             }
 
@@ -98,7 +115,20 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     zoomScaleHovered = true;
 
                     if (LeftMouseJustReleased)
-                        SelectedChapter.DefaultZoom = Zoom;
+                    {
+                        var chapter = SelectedChapter;
+                        float oldZoom = chapter.DefaultZoom;
+
+                        chapter.DefaultZoom = Zoom;
+                        float newZoom = chapter.DefaultZoom;
+
+                        if (oldZoom != newZoom)
+                            AddHistory(() => {
+                                chapter.DefaultZoom = oldZoom;
+                            }, () => {
+                                chapter.DefaultZoom = newZoom;
+                            });
+                    }
                 }
 
                 else if (zoomUp.Contains(MouseCanvas))
@@ -108,7 +138,16 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     zoomUpHovered = true;
 
                     if (LeftMouseJustReleased && SelectedChapter.DefaultZoom < 2f)
-                        SelectedChapter.DefaultZoom += 0.1f;
+                    {
+                        var chapter = SelectedChapter;
+                        chapter.DefaultZoom += zoomIncrement;
+
+                        AddHistory(() => {
+                            chapter.DefaultZoom -= zoomIncrement;
+                        }, () => {
+                            chapter.DefaultZoom += zoomIncrement;
+                        });
+                    }
                 }
 
                 else if (zoomDown.Contains(MouseCanvas))
@@ -118,7 +157,16 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                     zoomDownHovered = true;
 
                     if (LeftMouseJustReleased && SelectedChapter.DefaultZoom > 0.1f)
-                        SelectedChapter.DefaultZoom -= 0.1f;
+                    {
+                        var chapter = SelectedChapter;
+                        chapter.DefaultZoom -= 0.1f;
+
+                        AddHistory(() => {
+                            chapter.DefaultZoom += zoomIncrement;
+                        }, () => {
+                            chapter.DefaultZoom -= zoomIncrement;
+                        });
+                    }
                 }
 
                 SelectedChapter.DefaultZoom = float.Round(SelectedChapter.DefaultZoom, 2);
@@ -318,12 +366,21 @@ namespace QuestBooks.QuestLog.DefaultLogStyles
                         if (LeftMouseJustReleased)
                         {
                             if ((placingElement?.GetType() ?? null) != elementType)
+                            {
                                 placingElement = (ChapterElement)Activator.CreateInstance(elementType);
+                                placingElement.PreviouslyPlaced = false;
+                            }
 
                             else
                                 placingElement = null;
                         }
                     }
+                }
+
+                if (RightMouseJustReleased && (placingElement?.PreviouslyPlaced ?? false))
+                {
+                    SelectedChapter.Elements.Add(placingElement);
+                    SortedElements = null;
                 }
             }
 
