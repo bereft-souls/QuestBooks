@@ -13,13 +13,5 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1
         {
             return true; // Info
         }
-
-        public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
-        {
-            title = "Events and occurances throughout Terraria";
-            contents = null; // TODO: Write this up, this probably shouldnt be JUST combat events (goblins, pirates..) but also smaller things / single time things
-                            // like star showers, ladybugs, meteor crashes etc. should be written generically though (dont mention Goblin Invasion or Meteor by name)
-            texture = null;
-        }
     }
 }
