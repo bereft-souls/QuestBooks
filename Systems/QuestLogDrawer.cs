@@ -10,7 +10,7 @@ using Terraria.UI;
 
 namespace QuestBooks.Systems
 {
-    internal class QuestLogDrawer : ModSystem
+    public class QuestLogDrawer : ModSystem
     {
         public static RenderTarget2D ScreenRenderTarget { get; private set; }
         public static BlendState BlendState { get; } = new()
@@ -28,7 +28,13 @@ namespace QuestBooks.Systems
 
         public static Dictionary<string, QuestLogStyle> QuestLogStyles { get; internal set; } = null;
         public static QuestLogStyle ActiveStyle { get; internal set; } = null;
-        public static Dictionary<string, Action<SpriteBatch, Vector2, float>> CoverDrawCalls { get; } = [];
+
+        public static Dictionary<string, QuestBooksMod.CoverDrawDelegate> CoverDrawCalls { get; } = [];
+        public static Dictionary<string, QuestBooksMod.LogTitleRetrievalDelegate> LogTitleRetrievalCalls { get; } = [];
+        public static Dictionary<string, QuestBooksMod.LogTitleDrawDelegate> LogTitleDrawCalls { get; } = [];
+
+        public static Vector2 QuestLogDrawOffset { get; set; } = Vector2.Zero;
+        public static float QuestLogDrawOpacity { get; set; } = 1f;
 
         public static void Toggle(bool? active = null)
         {
@@ -129,7 +135,16 @@ namespace QuestBooks.Systems
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
-                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() * 0.5f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(ScreenRenderTarget,
+                        Main.ScreenSize.ToVector2() * 0.5f + QuestLogDrawOffset,
+                        null,
+                        Color.White * QuestLogDrawOpacity,
+                        0f,
+                        ScreenRenderTarget.Size() * 0.5f,
+                        1f,
+                        SpriteEffects.None,
+                        0f);
+
                     return true;
                 },
                 InterfaceScaleType.None

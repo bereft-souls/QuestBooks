@@ -21,7 +21,7 @@ namespace QuestBooks.Systems
 
         // World quests are updated in singleplayer and on the server.
         // Not on multiplayer clients.
-        public static void UpdateWorldQuests()
+        public void UpdateWorldQuests()
         {
             // Save the original array copy so that even if collection modification
             // occurs, enumeration can still continue.
@@ -38,7 +38,7 @@ namespace QuestBooks.Systems
                     // If this is running on the server, send a packet to each client
                     // containing the quest that was just completed.
                     if (Main.dedServ)
-                        QuestPacket.Send<QuestCompletionPacket>((packet) => packet.WriteNullTerminatedString(questName));
+                        QuestPacket.Send<QuestCompletionPacket>(packet => packet.WriteNullTerminatedString(questName));
                 }
             }
         }

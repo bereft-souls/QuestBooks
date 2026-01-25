@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader.IO;
 
 namespace QuestBooks.QuestLog.DefaultStyles
@@ -97,6 +99,10 @@ namespace QuestBooks.QuestLog.DefaultStyles
         private float questInfoSwipeOffset = 0f;
         private const float FadeDesignation = 0.024f;
 
+        private bool onCoverPage;
+        private int pageFlippingTimer;
+        private int openTimer;
+
         #region Element Referentials
 
         private bool wantsRetarget = true;
@@ -139,6 +145,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             else
                 SoundEngine.PlaySound(SoundID.MenuClose);
+
+            openTimer = 20;
         }
 
         public override void UpdateLog()
@@ -146,7 +154,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             UpdateMouseClicks();
             DrawTasks.Clear();
 
-            if (!QuestLogDrawer.DisplayLog || !PreviouslyOpened)
+            if (!QuestLogDrawer.DisplayLog)
                 return;
 
             if (wantsRetarget)
@@ -163,10 +171,71 @@ namespace QuestBooks.QuestLog.DefaultStyles
             // MouseCanvas is the position within the bounds of the canvas itself, even if said canvas does not exactly
             // match the bounds of the screen.
             LogArea = CalculateLogArea(out var logSize, out var halfScreen, out var halfRealScreen);
+            Vector2 questLogCenter = halfRealScreen + (LogPositionOffset * halfRealScreen);
             UpdateMousePosition(halfScreen, halfRealScreen);
 
+            if (!PreviouslyOpened)
+            {
+                if (DrawBookOpening(questLogCenter))
+                    PreviouslyOpened = true;
+
+                openTimer = 0;
+                return;
+            }
+
+            if (openTimer > 0)
+            {
+                openTimer--;
+
+                LeftMouseHeld = false;
+                LeftMouseJustPressed = false;
+                LeftMouseJustReleased = false;
+                RightMouseHeld = false;
+                RightMouseJustPressed = false;
+                RightMouseJustReleased = false;
+
+                ScaledMousePos = new(-10000f, -10000f);
+                MouseCanvas = new(-10000, -10000);
+
+                if (openTimer > 0)
+                {
+                    QuestLogDrawer.QuestLogDrawOpacity = (20f - openTimer) / openTimer;
+                    QuestLogDrawer.QuestLogDrawOffset = new(0f, openTimer);
+                }
+
+                else
+                {
+                    QuestLogDrawer.QuestLogDrawOpacity = 1f;
+                    QuestLogDrawer.QuestLogDrawOffset = Vector2.Zero;
+                }
+            }
+
+            if (pageFlippingTimer > 0)
+            {
+                pageFlippingTimer--;
+
+                DrawTasks.Add(sb =>
+                {
+                    Texture2D cover = QuestAssets.ClosedBook;
+                    sb.Draw(cover, questLogCenter, null, Color.White, 0f, cover.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
+                    return;
+
+                    Texture2D flippingTexture = null;
+                    Rectangle frame = new(0, 0, 0, 0);
+                    sb.Draw(flippingTexture, questLogCenter, frame, Color.White, 0f, frame.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
+                });
+
+                return;
+            }
+
+            if (onCoverPage)
+            {
+                HandleBookCover(questLogCenter);
+                return;
+            }
+
             Texture2D logTexture = QuestAssets.QuestLogCanvas;
-            DrawTasks.Add(sb => sb.Draw(logTexture, halfRealScreen + (LogPositionOffset * halfRealScreen), null, Color.White, 0f, logTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f));
+            DrawTasks.Add(sb => sb.Draw(logTexture, questLogCenter, null, Color.White, 0f, logTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f));
 
             // These handle moving the canvas via dragging the book's spine,
             // resizing with the tab in the bottom-right hand corner,
@@ -311,20 +380,15 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             if (UseDesigner)
                 UpdateDesigner(books, chapters, questArea);
+
+            else
+                HandleCoverToggle();
         }
 
         // This allows us to practically handle updating and drawing at the same time,
         // while skipping over performing the actual draw work when it is not necessary.
         public override void DrawLog(SpriteBatch spriteBatch)
         {
-            if (!PreviouslyOpened)
-            {
-                if (DrawBookOpening(spriteBatch))
-                    PreviouslyOpened = true;
-
-                return;
-            }
-
             foreach (var drawAction in DrawTasks)
                 drawAction(spriteBatch);
         }
@@ -336,19 +400,19 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         // Draws the book animation opening.
         // Returns true when the animation is complete.
-        protected virtual bool DrawBookOpening(SpriteBatch spriteBatch)
+        protected virtual bool DrawBookOpening(Vector2 questLogCenter)
         {
             // Assign initial draw position just off the bottom of the screen.
             // This is immediately lerped into the screen bounds.
             verticalDrawPos ??= QuestLogDrawer.RealScreenSize.Y + (QuestAssets.ClosedBook.Asset.Height * 0.5f);
-            float targetDrawPos = QuestLogDrawer.RealScreenSize.Y * 0.5f;
+            float targetDrawHeight = questLogCenter.Y;
 
-            if (verticalDrawPos.Value != targetDrawPos)
+            if (verticalDrawPos.Value != targetDrawHeight)
             {
-                verticalDrawPos = float.Lerp(verticalDrawPos.Value, targetDrawPos, 0.09f);
+                verticalDrawPos = float.Lerp(verticalDrawPos.Value, targetDrawHeight, 0.09f);
 
-                if (verticalDrawPos.Value - targetDrawPos < 0.25f)
-                    verticalDrawPos = targetDrawPos;
+                if (verticalDrawPos.Value - targetDrawHeight < 0.25f)
+                    verticalDrawPos = targetDrawHeight;
             }
             else
             {
@@ -362,18 +426,33 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     bookRotation = 0f;
             }
 
-            Vector2 drawPos = new(QuestLogDrawer.RealScreenSize.X * 0.5f, verticalDrawPos.Value);
-            Texture2D closedBook = QuestAssets.ClosedBook;
-            spriteBatch.Draw(closedBook, drawPos, null, Color.White, bookRotation, closedBook.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+            DrawTasks.Add(spriteBatch =>
+            {
+                Vector2 drawPos = new(questLogCenter.X, verticalDrawPos.Value);
+                Texture2D closedBook = QuestAssets.ClosedBook;
+                spriteBatch.Draw(closedBook, drawPos, null, Color.White, bookRotation, closedBook.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
+                QuestLogDrawer.CoverDrawCalls[QuestManager.ActiveQuestLog].Invoke(spriteBatch, drawPos, LogScale, bookRotation);
+            });
 
-            QuestLogDrawer.CoverDrawCalls[QuestManager.ActiveQuestLog].Invoke(spriteBatch, drawPos, bookRotation);
             return frozenFrames == 0;
         }
 
-        public static void DrawDefaultCover(SpriteBatch spriteBatch, Vector2 drawPos, float rotation)
+        public static void DrawDefaultCover(SpriteBatch spriteBatch, Vector2 drawPos, float scale, float rotation)
         {
             Texture2D tree = QuestAssets.CoverTree;
-            spriteBatch.Draw(tree, drawPos, null, Color.White, rotation, tree.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(tree, drawPos, null, Color.White, rotation, tree.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+        }
+
+        public static string RetrieveDefaultLogTitle(string questLogKey)
+        {
+            string localizationKey = $"Mods.{QuestManager.QuestLogMods[questLogKey].Name}.QuestBooks.{questLogKey}.Name";
+            return Language.Exists(localizationKey) ? Language.GetTextValue(localizationKey) : questLogKey;
+        }
+
+        public static void DrawDefaultLogTitle(SpriteBatch spriteBatch, Rectangle drawArea, string title, float opacity, bool hovered, bool selected)
+        {
+            //spriteBatch.DrawRectangle(drawArea, hovered ? Color.Yellow : Color.LightBlue, fill: true);
+            spriteBatch.DrawOutlinedStringInRectangle(drawArea, FontAssets.DeathText.Value, hovered ? Color.Yellow : Color.White, Color.Black, title, extraScale: 1.2f, clipBounds: false, offset: new(0f, 12f));
         }
 
         public override void SelectBook(QuestBook book)
@@ -583,6 +662,9 @@ namespace QuestBooks.QuestLog.DefaultStyles
             verticalDrawPos = null;
             frozenFrames = 60;
             bookRotation = MathHelper.PiOver4;
+
+            onCoverPage = false;
+            pageFlippingTimer = 60;
         }
 
         #endregion
