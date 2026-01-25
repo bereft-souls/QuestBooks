@@ -1,18 +1,20 @@
 
 MainTree: {
 	StartFirstSteps: {
-		Title: Hello World
+		Title: First Steps
 		Contents: 
 			'''
 			Welcome to the wonderful, yet cruel world of Terraria!
 
 			Explore diverse biomes, face off dangerous foes, loot structures and craft weapons all to aid you in your journey!
 			'''
+		Tooltip: Hello World!
 	}
 
 	StartQBInfo: {
 		Title: Questbooks and You
 		Contents: (insert explanation here)
+		Tooltip: Information about the mod
 	}
 
 	ForestBiome: {
@@ -22,6 +24,7 @@ MainTree: {
 			The starting location of all Terrarians.
 			Between the lush greenery and comfy breeze, it seems like the perfect spot to set up base in!
 			'''
+		Tooltip: Calm and pure!
 	}
 
 	GuideInteract: {
@@ -31,6 +34,7 @@ MainTree: {
 			A trusty guide to help you along the way with their incredible crafting knowledge and varying useful tips.
 			If you ever find an item labeled as a "Material", be sure to check it up with him!
 			'''
+		Tooltip: Always here for you
 	}
 
 	ChopTree: {
@@ -40,6 +44,7 @@ MainTree: {
 			Chop down a nearby tree using your trusted Copper Axe!
 			Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.
 			'''
+		Tooltip: Chop chop!
 	}
 
 	CraftWorkbench: {
@@ -50,6 +55,7 @@ MainTree: {
 			(To view the new recipes, you must stand closeby to the station)
 			'''
 			// Needs to be changed for 1.4.5
+		Tooltip: Let me in coach!
 	}
 
 	CraftHammer: {
@@ -59,6 +65,7 @@ MainTree: {
 			Craft a Wooden Hammer.
 			Hammers are used to break apart background wall tiles, and allows shaping blocks to varying shapes by clicking on them.
 			'''
+		Tooltip: -
 	}
 
 	EstablishHouse: {
@@ -73,6 +80,7 @@ MainTree: {
 			- A lightsource.
 			- An entryway (try Doors or Platforms)
 			'''
+		Tooltip: Housing guide
 	}
 
 	BasicsCompleteInfo: {
@@ -80,7 +88,9 @@ MainTree: {
 		Contents:
 			'''
 			Now that you have finished the basics, go explore the world of Terraria to your hearts content!
+			Go ahead and check out the multiple facets of Terraria through the additional branches off of this node.
 			'''
+		
 	}
 
 	WorldEventsInfo: {
@@ -94,11 +104,12 @@ MainTree: {
 	}
 
 	InventoryInfo: {
-		Title: 
+		Title: Inventory Info
 		Contents:
 			'''
-
+			
 			'''
+		Tooltip: Invent Tory? Why's that MY job!
 	}
 
 	ClassInfo: {
@@ -126,9 +137,9 @@ MainTree: {
             A Fragile yet powerful Class.
 
             With that said, the differences between classes arent set in the sand; Mages may still get to use magical guns while Melee can acquire magical swords.
-            So dont worry too much about locking into 1 weapon style, and you can always freely switch between classes at any time!
+            So dont worry too much about locking into 1 weapon style, and you can always freely switch between classes at any time, or even mix gear between multiple!
 			'''
-		Tooltip: Information 
+		Tooltip: Information about Classes
 	}
 }
 
@@ -146,11 +157,12 @@ RecProgOrder: {
 	}
 
 	AllBossesDefeated: {
-		Title:
-		Contents:
+		Title: Slayer of Worlds
+		Contents: Defeat every boss in Terraria! // rest of the desc would probably a dynamic list of bosses will appear and beaten bosses cross off?
+		Tooltip: They'll all cower..
 	}
 }
 
 Name: Before the Journey
 Chapter0: Prologue
-Chapter1: Progression
+Chapter1: Recommended Progression
