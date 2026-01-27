@@ -26,6 +26,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         protected bool PreviouslyOpened { get; set; } = false;
 
+        // Indicates whether ANY part of the log has just been moved
+        // Could be the log itself, could be resizing, could be the quest area
+        // Used to keep track of whether the right click was intended to "reset" the current action, or the result of some other action
+        protected bool JustMoved { get; set; } = false;
+
         // Our blending drastically changes between content draws
         protected static BlendState LayerBlending { get; } = new()
         {
@@ -240,6 +245,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             // These handle moving the canvas via dragging the book's spine,
             // resizing with the tab in the bottom-right hand corner,
             // and toggling between the designer and normal log.
+            JustMoved = false;
             UpdateCanvasMovement(halfRealScreen, logSize);
             UpdateCanvasResizing(halfRealScreen);
             UpdateDesignerToggle();

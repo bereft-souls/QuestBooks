@@ -264,7 +264,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     chapterMinView = mousePosition;
                     chapterMinView.Round();
 
-                    if (RightMouseJustReleased)
+                    if (RightMouseJustReleased && !JustMoved)
                     {
                         var chapter = SelectedChapter;
                         Vector2 oldMinView = chapterMinView;
@@ -287,7 +287,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     chapterMaxView = mousePosition;
                     chapterMaxView.Round();
 
-                    if (RightMouseJustReleased)
+                    if (RightMouseJustReleased && !JustMoved)
                     {
                         var chapter = SelectedChapter;
                         Vector2 oldMaxView = chapter.MaxViewPoint;
@@ -316,7 +316,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         anchorCentered = true;
                     }
 
-                    if (RightMouseJustReleased)
+                    if (RightMouseJustReleased && !JustMoved)
                     {
                         var chapter = SelectedChapter;
                         Vector2 oldAnchor = chapter.ViewAnchor;

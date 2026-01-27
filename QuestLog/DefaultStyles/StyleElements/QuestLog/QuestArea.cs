@@ -103,6 +103,9 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 else if (RightMouseJustReleased)
                 {
+                    if (QuestAreaOffset == cachedOffset)
+                        JustMoved = true;
+
                     cachedRightClick = null;
                     cachedOffset = Vector2.Zero;
                 }

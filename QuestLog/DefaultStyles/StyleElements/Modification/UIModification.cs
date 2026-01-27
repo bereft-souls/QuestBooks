@@ -53,13 +53,17 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if ((moveTab.Contains(MouseCanvas) || canvasMoving) && !canvasResizing)
             {
                 // Reset the position if right clicked.
-                if (RightMouseJustPressed)
+                if (RightMouseJustPressed && !canvasResizing)
                 {
                     LogPositionOffset = Vector2.Zero;
                     canvasMoving = false;
                     cachedMouseClick = null;
+                    JustMoved = true;
                     return;
                 }
+
+                if (LeftMouseJustReleased && canvasMoving)
+                    JustMoved = true;
 
                 if (!LeftMouseHeld || (!canvasMoving && !LeftMouseJustPressed))
                 {
@@ -90,7 +94,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             Rectangle resizeTab = LogArea.CookieCutter(new(1.01f, 1.02f), new(0.062f, 0.09f));
             if ((resizeTab.Contains(MouseCanvas) || canvasResizing) && !canvasMoving)
             {
-                Main.LocalPlayer.mouseInterface = true;
+                LockMouse();
 
                 // Reset the scale on right click.
                 if (RightMouseJustPressed)
@@ -98,8 +102,12 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     LogScale = 1f;
                     canvasResizing = false;
                     wantsRetarget = true;
+                    JustMoved = true;
                     goto PostResize;
                 }
+
+                if (LeftMouseJustReleased && canvasResizing)
+                    JustMoved = true;
 
                 if (!LeftMouseHeld || (!canvasResizing && !LeftMouseJustPressed))
                 {

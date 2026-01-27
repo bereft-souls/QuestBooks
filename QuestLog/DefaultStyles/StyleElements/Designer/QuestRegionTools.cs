@@ -377,14 +377,14 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     }
                 }
 
-                if (RightMouseJustReleased && (placingElement?.PreviouslyPlaced ?? false))
+                if (RightMouseJustReleased && (placingElement?.PreviouslyPlaced ?? false) && !JustMoved)
                 {
                     SelectedChapter.Elements.Add(placingElement);
                     SortedElements = null;
                 }
             }
 
-            if (RightMouseJustReleased)
+            if (RightMouseJustReleased && !JustMoved)
                 placingElement = null;
         }
     }
