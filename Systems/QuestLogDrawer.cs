@@ -23,7 +23,14 @@ namespace QuestBooks.Systems
             AlphaBlendFunction = BlendFunction.Add
         };
 
+        /// <summary>
+        /// Whether the log will be drawn on this frame.
+        /// </summary>
         public static bool DisplayLog { get; private set; } = false;
+        /// <summary>
+        /// Whether the player is wanting to display the log. This could be <see langword="false"/> while <see cref="DisplayLog"/> is <see langword="true"/> if the log drawer is currently in its closing animation.
+        /// </summary>
+        public static bool TargetDisplayLog { get; private set; } = false;
         public static Vector2 RealScreenSize => ScreenRenderTarget.Size();
 
         public static Dictionary<string, QuestLogStyle> QuestLogStyles { get; internal set; } = null;
@@ -33,21 +40,37 @@ namespace QuestBooks.Systems
         public static Dictionary<string, QuestBooksMod.LogTitleRetrievalDelegate> LogTitleRetrievalCalls { get; } = [];
         public static Dictionary<string, QuestBooksMod.LogTitleDrawDelegate> LogTitleDrawCalls { get; } = [];
 
+        /// <summary>
+        /// The total length of the opening/closing animation, in frames. This can be changed.
+        /// </summary>
+        public static int OpenAnimationLength { get; set; } = 20;
+        /// <summary>
+        /// The current timer for the open/closing animation. Counts down from <see cref="OpenAnimationLength"/> to 0.
+        /// </summary>
+        public static int OpenTimer { get; set; } = 0;
         public static Vector2 QuestLogDrawOffset { get; set; } = Vector2.Zero;
         public static float QuestLogDrawOpacity { get; set; } = 1f;
 
-        public static void Toggle(bool? active = null)
+        public static void Toggle(bool? active = null, bool skipAnimation = false)
         {
             bool display = active ?? !DisplayLog;
-            DisplayLog = display;
+
+            if (display != DisplayLog && !skipAnimation && OpenTimer == 0)
+                OpenTimer = OpenAnimationLength;
 
             // If the inventory is currently open, close it.
             // We can't guarantee the log won't overlap with the inventory,
             // so the easiest way to reduce mouse overlap conflict is just close it.
-            if (DisplayLog && Main.playerInventory)
+            if (display && Main.playerInventory)
                 Main.playerInventory = false;
 
-            ActiveStyle.OnToggle(display);
+            TargetDisplayLog = display;
+
+            if (display || skipAnimation)
+            {
+                ActiveStyle.OnToggle(display);
+                DisplayLog = display;
+            }
         }
 
         public static void SelectLogStyle(string style) => SelectLogStyle(QuestLogStyles[style]);
@@ -59,10 +82,36 @@ namespace QuestBooks.Systems
             style.OnSelect();
         }
 
-        // This draws the actual quest log to the RenderTarget2D
         private static bool targetCleared = false;
         public static void DrawQuestLog()
         {
+            if (OpenTimer > 0)
+            {
+                if (TargetDisplayLog)
+                {
+                    QuestLogDrawOpacity = (OpenAnimationLength - OpenTimer) / (float)OpenAnimationLength;
+                    QuestLogDrawOffset = new(0f, OpenTimer);
+                }
+
+                else
+                {
+                    QuestLogDrawOpacity = OpenTimer / (float)OpenAnimationLength;
+                    QuestLogDrawOffset = new(0f, OpenAnimationLength - OpenTimer);
+                }
+            }
+
+            else
+            {
+                QuestLogDrawOpacity = 1f;
+                QuestLogDrawOffset = Vector2.Zero;
+
+                if (DisplayLog != TargetDisplayLog)
+                {
+                    DisplayLog = TargetDisplayLog;
+                    ActiveStyle.OnToggle(DisplayLog);
+                }
+            }
+
             if (!DisplayLog)
             {
                 if (targetCleared)
@@ -91,6 +140,9 @@ namespace QuestBooks.Systems
 
             graphics.SetRenderTargets(targets);
             targetCleared = false;
+
+            if (OpenTimer > 0)
+                OpenTimer--;
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
@@ -158,7 +210,7 @@ namespace QuestBooks.Systems
             SetupRenderTarget();
 
             // Prepare render targets.
-            Main.OnPreDraw += (_) => DrawQuestLog();
+            Main.OnPreDraw += _ => DrawQuestLog();
             Main.OnResolutionChanged += _ => SetupRenderTarget();
         }
 

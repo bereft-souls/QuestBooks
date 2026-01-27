@@ -40,7 +40,7 @@ namespace QuestBooks.Quests
 
         /// <summary>
         /// Override this method to implement your own custom drawing for info pages in the quest log.<br/>
-        /// Note that your logic NOT scale with any UI parameters, as scaling is handled via matrices and render targets here.<br/>
+        /// Note that your logic should NOT scale with any UI parameters, as scaling is handled via matrices and render targets here.<br/>
         /// Return <see langword="true"/> if your did custom drawing, otherwise <see langword="false"/>.
         /// </summary>
         public virtual bool DrawCustomInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition) => false;

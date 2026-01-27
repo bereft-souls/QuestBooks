@@ -106,7 +106,6 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         private bool onCoverPage;
         private int pageFlippingTimer;
-        private int openTimer;
 
         #region Element Referentials
 
@@ -150,8 +149,6 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             else
                 SoundEngine.PlaySound(SoundID.MenuClose);
-
-            openTimer = 20;
         }
 
         public override void UpdateLog()
@@ -184,14 +181,14 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 if (DrawBookOpening(questLogCenter))
                     PreviouslyOpened = true;
 
-                openTimer = 0;
+                QuestLogDrawer.OpenTimer = 0;
+                QuestLogDrawer.QuestLogDrawOpacity = 1f;
+                QuestLogDrawer.QuestLogDrawOffset = Vector2.Zero;
                 return;
             }
 
-            if (openTimer > 0)
+            if (QuestLogDrawer.OpenTimer > 0)
             {
-                openTimer--;
-
                 LeftMouseHeld = false;
                 LeftMouseJustPressed = false;
                 LeftMouseJustReleased = false;
@@ -201,18 +198,6 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 ScaledMousePos = new(-10000f, -10000f);
                 MouseCanvas = new(-10000, -10000);
-
-                if (openTimer > 0)
-                {
-                    QuestLogDrawer.QuestLogDrawOpacity = (20f - openTimer) / openTimer;
-                    QuestLogDrawer.QuestLogDrawOffset = new(0f, openTimer);
-                }
-
-                else
-                {
-                    QuestLogDrawer.QuestLogDrawOpacity = 1f;
-                    QuestLogDrawer.QuestLogDrawOffset = Vector2.Zero;
-                }
             }
 
             if (pageFlippingTimer > 0)

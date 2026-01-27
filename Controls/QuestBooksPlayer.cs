@@ -39,8 +39,8 @@ namespace QuestBooks.Controls
 
         public override void SetControls()
         {
-            // If we aren't currently displaying the log, do nothing.
-            if (!QuestLogDrawer.DisplayLog)
+            // If we aren't currently displaying the log, OR in the closing animation, do nothing.
+            if (!QuestLogDrawer.DisplayLog || (!QuestLogDrawer.TargetDisplayLog && QuestLogDrawer.OpenTimer > 0))
                 return;
 
             // If player just attempted to toggle the inventory, and their inventory is
@@ -72,7 +72,7 @@ namespace QuestBooks.Controls
         public override void OnEnterWorld()
         {
             // Hide the log on world entry.
-            QuestLogDrawer.Toggle(false);
+            QuestLogDrawer.Toggle(false, true);
 
             QuestLogDrawer.ActiveStyle.SelectedBook = null;
             QuestLogDrawer.ActiveStyle.SelectedChapter = null;
