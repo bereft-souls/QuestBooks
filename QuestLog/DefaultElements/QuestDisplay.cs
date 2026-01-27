@@ -242,11 +242,8 @@ namespace QuestBooks.QuestLog.DefaultElements
             var quest = Quest;
 
             // Custom info page drawing, if overridden
-            if (LoaderUtils.HasOverride(quest, q => q.DrawCustomInfoPage))
-            {
-                quest.DrawCustomInfoPage(spriteBatch, mousePosition);
+            if (quest.DrawCustomInfoPage(spriteBatch, mousePosition))
                 return;
-            }
 
             // Get info parameters
             quest.MakeSimpleInfoPage(out var title, out var contents, out var texture);
