@@ -54,8 +54,9 @@ namespace QuestBooks.Systems
         public static void Toggle(bool? active = null, bool skipAnimation = false)
         {
             bool display = active ?? !DisplayLog;
+            bool changed = display != DisplayLog;
 
-            if (display != DisplayLog && !skipAnimation && OpenTimer == 0)
+            if (changed && !skipAnimation && OpenTimer == 0)
                 OpenTimer = OpenAnimationLength;
 
             // If the inventory is currently open, close it.
@@ -66,7 +67,7 @@ namespace QuestBooks.Systems
 
             TargetDisplayLog = display;
 
-            if (display || skipAnimation)
+            if (changed && (display || skipAnimation))
             {
                 ActiveStyle.OnToggle(display);
                 DisplayLog = display;
