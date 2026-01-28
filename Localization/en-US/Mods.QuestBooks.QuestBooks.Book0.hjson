@@ -113,7 +113,7 @@ MainTree: {
 	}
 
 	ClassInfo: {
-		Title: Damage Types, or "Classes"
+		Title: Damage Types; or, "Classes"
 		Contents: // TODO: The armor / accessory thing is a bit awkward here, probably rewrite it to the bottom later.
 			'''
 			In Terraria, all weapons are categorized into archetypes. That is, each weapon deals a specific type of damage.

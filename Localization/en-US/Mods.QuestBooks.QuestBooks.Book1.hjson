@@ -1,9 +1,739 @@
+blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
 
 Surface:{
+	StartTheWorldInfo:{
+		Title: The World
+		Contents: '''
+			As you embark the world of terraria, you will find treasures, landmarks and structures to pillage and explore!
 
+			Some tips:
+			If you want to pinpoint a location to a friend, you can double click on the map to set a temporary ping!
+			Quickly toggle the map-mode via {Tab}
+			Alter the map's opacity with {Pgdwn / PgUp}
+			'''
+		Tooltip:
+	}
+
+	// ------------------
+	// <-> The Forst <->
+
+	// EnterForest quest key is in book 0
+	
+	EnterLivingTree:{
+		Title: Towers of Nature
+		Contents: '''
+			Venture deep into a Living Tree's trunk and explore the chambers within its roots.
+			'''
+		Tooltip: Their canopies touching the heavens..
+	}
+
+	GardenGnome:{
+		Title: Heliophobia
+		Contents: '''
+			Trick a gnome into turning into stone!
+			'''
+		Tooltip: gnot an elf! gnot a goblin!
+	}
+
+	FlyKite:{
+		Title: A Rather Blustery Day
+		Contents: '''
+			Acquire and fly a kite on a windy day.
+			Basic kites are occasionally dropped by Balloon Slimes who spawn on windy days in the forest, while other kites may be harder to find..
+			'''
+		Tooltip: Might just blow in the wind!
+	}
+
+	KillPinky:{
+		Title: Pretty In Pink
+		Contents: '''
+			Kill Pinky, a small yet deadly slime rarely found hopping through the Forest.
+			'''
+		Tooltip:
+	}
+
+	CraftPeaceCandle:{
+		Title: Tender Love and Candle
+		Contents: '''
+			Craft a Peace Candle, it's calming flames lowering the spawnrate of all enemies around it.
+			'''
+		Tooltip: 
+	}
+
+	LootSurfaceChest:{
+		Title: A Little Extra
+		Contents: '''
+			Discover a surface chest and take a peek at its content.
+			'''
+		Tooltip: 
+	}
+
+	SurviveSlimeRain:{
+		Title: Sticky Situation
+		Contents: '''
+			Survive the slime rain, where gelatinous organisms fall from the sky in droves.
+			'''
+		Tooltip:
+	}
+
+	GetEoCSummon:{
+		Title: Eye on Me
+		Contents: '''
+			Acquire a Suspicious Looking Eye, capable of luring the Eye of Cthulhu forcefully.
+			'''
+		Tooltip:
+	}
+
+	GetNinjaSet:{
+		Title: -
+		Contents: '''
+			Loot a full set of Ninja Gear from King Slime and fire shuriken like a true ninja!.
+			'''
+		Tooltip:
+	}
+
+	UseBinoculars:{
+		Title: I Spy With my Binocular Eyes
+		Contents: '''
+			Get the Binoculars, a rare drop from the Eye of Cthulhu and use them to see further than normal.
+			'''
+		Tooltip:
+	}
+
+	GetEvilBars:{
+		Title: -
+		Contents: '''
+			Smelt the {Demonite / Crimtane} ore dropped by the Eye of Cthulhu and make yourself some wicked new gear.
+			'''
+		Tooltip:
+	}
+
+	// --------------------
+	// <-> The Desert <->
+
+	BiomeDesert:{
+		Title: The Desert
+		Contents: '''
+			A Barren and arid expanse home to a giant antlion nest within.
+			'''
+		Tooltip:
+	}
+
+	CraftCactusGear:{
+		Title: Its The Quenchiest!
+		Contents: '''
+			Chop down some Cactus and make yourself some prickly new gear!
+			'''
+		Tooltip:
+	}
+
+	LootDesertChest:{
+		Title: I Am Sandy Loot!
+		Contents: '''
+			Discover a Sandstone Chest and take a peek at its content.
+			'''
+		Tooltip:
+	}
+
+	SturdyFossils:{
+		Title: Archeologist In The Making
+		Contents: '''
+			Find an Extractinator in any underground cabin and excavate Desert Fossils to extract, giving you Sturdy Fossils.
+			Sturdy Fossils can be used for various gear, craft yourself something nice!
+			'''
+		Tooltip: 
+	}
+
+	PinkPearl:{
+		Title: Pearls Before Oysters
+		Contents: '''
+			Fish up Oysters in the desert to find a Pink Pearl, the rarest kind!
+			'''
+		Tooltip:
+	}
+
+	// ------------------
+	// <-> The Tundra <->
+
+	BiomeTundra:{
+		Title: The Tundra
+		Contents: '''
+			A frigid wonderland home to __.
+			'''
+		Tooltip:
+	}
+
+	GetSnowArmor:{
+		Title: The Cold Doesn't Bother Me Anyway
+		Contents: '''
+			Occasionally dropped from Snow Zombies, the Snow set provides immunity to chilled and freezing debuffs while also looking extremely fashionable!
+			'''
+		Tooltip: But the hypothermia might
+	}
+
+	KillFlinx:{
+		Title: 
+		Contents: '''
+			Kill some Snow Flinxes found deep in the undrground Tundra and use their fur.
+			'''
+		Tooltip:
+	}
+
+	LootTundraChest:{
+		Title: I Am Icy Loot!
+		Contents: '''
+			Discover a Frozen Chest and take a peek at its content.
+			'''
+		Tooltip:
+	}
+
+	EquipEyeBone:{
+		Title: Oculus Mysterium
+		Contents: '''
+			Acquire the Eye Bone, an uncommon drop from Deerclops capable of summoning a pet Chester.
+			Chester will mimic a piggy bank, allowing you constant access to it!
+			'''
+		Tooltip: Chester is short for Otto von Chesterfield, Esq.
+	}
+
+	// ------------------
+	// <-> Evil Biome <->
+
+	BiomeEvilCorruption:{
+		Title: -
+		Contents: '''
+			-
+			'''
+		Tooltip:
+	}
+
+	BiomeEvilCrimson:{
+		Title: +
+		Contents: '''
+			+
+			'''
+		Tooltip:
+	}
+
+	SmashEvilCore:{
+		Title: Smashing Poppet
+		Contents: '''
+			Using explosives or your trusty hammer, smash a Shadow Orb or Crimson Heart in the evil parts of your world.
+			'''
+		Tooltip:
+	}
+
+	CraftAtEvilAltar:{
+		Title: O' Cursed Altar
+		Contents: '''
+			Manifest any item at a {Demon / Crimtane} Altar.
+			'''
+		Tooltip: I Bring An Offering
+	}
+
+	GetEvilBarArmor:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	SubbiomeMeteor:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	CraftMeteorGear:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+	
+	// ------------------
+	// <-> The Jungle <->
+
+	BiomeJungle:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	KillDoctorBones:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	LootJungleChest:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	GetJungleSpores:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	SubbiomeHive:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	FishInHoney:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	GetBeeSet:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	// -------------------
+	// <-> The Dungeon <->
+
+	BiomeDungeon:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	CrumbleDungeonBricks:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	GetGoldenKey:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	GetShadowKey:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	GetWaterCandle:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	LootDungeonChest:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	// -----------------
+	// <-> The Ocean <->
+
+	BiomeOcean:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	GetDivingHelmet:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	LootOceanChest:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	// ---------------
+	// <-> The Sky <->
+
+	BiomeSky:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	LootSkywareChest:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	ReachSpace:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	// ------------------
+	// <-> Blood Moon <->
+
+	GetMoneyTrough:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	KillMarriage:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	KillBloodMoonReel1:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
 }
 
 
 Caving:{
-	
+		// -------------------
+		// <-> Underground <->
+
+		EnterUnderground:{
+			Title: Subterrenean
+			Contents: '''
+				Beneath the surface of Terraria lay massive cave systems filled with ores, loot, special biomes and new enemies to encounter!
+				'''
+		}
+
+		MineOre:{
+			Title: Ooo! Shiny!
+			Contents: '''
+				Venture into a nearby cave and mine your first ore!
+				Ores can be smelted into metal bars at a Furnace, and can be used for stronger gear, chests, and various other things!
+				'''
+			
+		}
+
+		GetGems:{
+			Title: Gem in the Rough
+			Contents: '''
+				Find some Gems, a unique set of materials useful for staves and hooks among other colorful curios!
+				'''
+			Tooltip: 
+		}
+
+		PlantGemcorn:{
+			Title: Crystalline Trees
+			Contents: '''
+				Obtain or craft a Gemcorn and plant them in the Caverns to grow your very own gemtree! 
+				'''
+			Tooltip: 
+		}
+
+		LootGoldenChest:{
+			Title: I Am Loot!
+			Contents: '''
+				Discover a Golden Chest and take a peek at its contents.
+				'''
+			Tooltip: 
+		}
+
+		SubbiomeAbandonedTrack:{
+			Title: - -
+			Contents: '''
+				Find an Abandoned Minecart Track and follow its path!
+				'''
+			Tooltip: 
+		}
+
+		VehicularManslaughter:{
+			Title: Vehicular Manslaugher
+			Contents: '''
+				Defeat an enemy by running it over with a minecart.
+				'''
+			Tooltip: 
+		}
+
+		FindAFairy:{
+			Title: Hey! Listen!
+			Contents: '''
+				Encounter a Fairy.
+				'''
+			Tooltip: 
+		}
+
+		GetWhoopieCushion:{
+			Title: One who dealt it..
+			Contents: '''
+				Obtain a Whoopie Cushion... from underground worms? 
+				
+				..did I read that right?
+				'''
+			Tooltip: 
+		}
+
+		TorchGod:{
+			Title: Torch God
+			Contents: '''
+
+				'''
+			Tooltip: 
+		}
+
+		// ---------------
+		// <-> Caverns <->
+
+		EnterCaverns:{
+			Title: Deep Down Under
+			Contents: '''
+				Reach the Cavern Layer, where the bulk of Terrarias cave systems reside with plenty of loot to find and foes to encounter.
+				'''
+			Tooltip: 
+		}
+
+		InteractSkeletonMerchant:{
+			Title: 
+			Contents: '''
+				Happen across the Skeleton Merchant, a wandering salesman with some interesting wares!
+				'''
+			Tooltip: 
+		}
+
+		SubbiomeUGGlowingMushroom:{
+			Title: Much Room For Some Mushrooms
+			Contents: '''
+				Discover an underground Gllowing Mushroom Biome, a flat cavern blanketed with glistening blue mycelium.
+				'''
+			Tooltip: 
+		}
+
+		SubbiomeMarble:{
+			Title: A Marble to Behold
+			Contents: '''
+				Discover a Marble Cave, the ruins of an old mythological civilization.
+				'''
+			Tooltip: 
+		}
+
+		GetSparta:{
+			Title: This. Is. Sparta!!
+			Contents: '''
+				Obtain and use the Gladius while wearing a full Gladiators Set.
+				'''
+			Tooltip: 
+		}
+
+		SubbiomeGranite:{
+			Title: Taken for Granite
+			Contents: '''
+				Discover a Granite Cave, (inser filler text).
+				'''
+			Tooltip: 
+		}
+
+		SmashGeodes:{
+			Title: Nature's Lootbox
+			Contents: '''
+				Smash open 10 Geodes and collect the precious gems within.
+				'''
+			Tooltip: 
+		}
+
+		KillNymph:{
+			Title: Deciever of Fools
+ 			Contents: '''
+				Kill a Nymph, often masquerading as a young lady lost within the caves.
+				'''
+			Tooltip: 
+		}
+
+		GetObsidian:{
+			Title: - -
+			Contents: '''
+				Combine water and lava together and get a decent amount of Obsidian, a tough glass-like material.
+				Also seems to have great alloying potential..
+				'''
+			Tooltip: This one wont take hours, promise! 
+		}
+
+		SubbiomeAether:{
+			Title: No Glowstone Involved
+			Contents: '''
+				Discover the Aether, a secret shimmer lake capable of dissasembling almost anything.
+				Ancient fables tell tales of critters turning into faes, worms to gummy and even turning coins into pure luck..
+				'''
+			Tooltip: 
+		}
+
+		ShimmerTransmute:{
+			Title: A Shimmer In The Dark
+			Contents: '''
+				Shimmer an item into another item. 
+				What other transmutations can you find?
+				'''
+			Tooltip: 
+		}
+
+		ShimmerNPCAlt:{
+			Title: New Digs
+			Contents: '''
+				Give any villager a new look.
+				'''
+			Tooltip: 
+		}
+
+		ShimmerPhase:{
+			Title: Glass Camera Conspiracy
+			Contents: '''
+				Phase through 200~ of blocks at once using shimmerphasing.
+				'''
+			Tooltip: 
+		}
+
+		ShimmerCoinluck:{
+			Title: I'm Feeling Lucky
+			Contents: '''
+				Throw 249,000 Copper Coin's worth of Coins to drastically improve your luck!
+				'''
+			Tooltip: 
+		}
+
+		SubbiomeSpiders:{
+			Title: Jeepers Creepers
+			Contents: '''
+				Stubmle into a spider cavern in the underground.
+				'''
+			Tooltip: 
+		}
+
+		LootWebChest:{
+			Title: Weaver's Hook
+			Contents: '''
+				Find a Web Covered Chest inside a spider cavern and obtain the Web Slinger, a unique hook with 8 individual clings!
+				'''
+			Tooltip: 
+		}
+
+		KillUndeadMiner:{
+			Title:
+			Contents: '''
+				Kill an Undead Miner and take their mining gear!
+				'''
+			Tooltip: 
+		}
+
+		KillTim:{
+			Title: There are Some Who Call Him...
+			Contents: '''
+				Kill Tim, a rogue enchanter found rarely zipping about the Underground.
+				'''
+			Tooltip: 
+		}
+
+		// -------------------------
+		// <-> Underworld / Hell <->
+
+		GetAshwood:{
+			Title: Ashen Logs
+			Contents: '''
+			Find the Ashwood Forest in the outer regions of the Underworld and chop down some Ashwood Trees.
+			Ashwood is special due to its ability to withstand lava without breaking, perfect for using to bridge across large lava lakes!
+				'''
+			Tooltip: 
+		}
+
+		GetHellstoneGear:{
+			Title: Hell's Alloy
+			Contents: '''
+				Using Hellstone ore and Obsidian at a Hellforge, alloy yourself a scorching bar of Hellstone and craft yourself some blazing new gear!
+				'''
+			Tooltip: 
+		}
+
+		LootShadowGear:{
+			Title: Hellish Arsenal
+			Contents: '''
+				Open a Locked Shadow Chest with a Shadow Key and take a peek at its content.
+				'''
+			Tooltip: 
+		}
+
+		ReachRockBottom:{
+			Title: Rock Bottom
+			Contents: '''
+				The only way is up!
+				'''
+			Tooltip: 
+		}
+
+		GetGuideVoodooDoll:{
+			Title: Terrible Omen
+			Contents: '''
+				Fight a Voodoo Doll Demon and secure the Guide Voodoo Doll before any harm is done to it.
+
+				Feels like you should still get rid of it, though..
+				'''
+			Tooltip: 
+		}
 }

@@ -6,6 +6,7 @@ KingSlime: {
 
 		King Slime can be found after surviving through the Slime Rain, or summoned using a gel-based item called the Slimy Crown.
 		'''
+	Tooltip: King Slime
 }
 
 EyeofCthulhu: {
@@ -16,6 +17,7 @@ EyeofCthulhu: {
 
 		The Eye of Cthulhu can occasionally arrive during the night, or summoned with a lens-based idol known as the Suspicious Looking Eye.
 		'''
+	Tooltip: Eye of Cthulhu
 }
 
 EaterofWorlds: {
@@ -26,6 +28,7 @@ EaterofWorlds: {
 
 		The Eater of Worlds will appear after the shattering of 3 Shadow Orbs, or lured in using rotten Worm Food.
 		'''
+	Tooltip: Eater of Worlds
 }
 
 BrainofCthulhu: {
@@ -36,6 +39,7 @@ BrainofCthulhu: {
 
 		The Brain of Cthulhu will manifest after the destruction of 3 Crimson Hearts, or summoned using a Bloody Spine.
 		'''
+	Tooltip: Brain of Cthulhu
 }
 
 QueenBee: {
@@ -46,6 +50,7 @@ QueenBee: {
 
 		The Queen Bee will defend her hive if yoy hurt one of her larvae, or can be called upon using an Abeemination.
 		'''
+	Tooltip: Queen Bee
 }
 
 Deerclops: {
@@ -56,6 +61,7 @@ Deerclops: {
 
 		The Deerclops will rummage through the cold blizzards of the tundra at night, or summoned using a Deer Thing.
 		'''
+	Tooltip: Deerclops
 }
 
 Skeletron: {
@@ -66,6 +72,7 @@ Skeletron: {
 
 		Skeletron will manifest by taking a part of the Old Man's Curse, or by killing the Clothier using a Clothier Voodoo Doll.
 		'''
+	Tooltip: Skeletron
 }
 
 WallofFlesh: {
@@ -77,6 +84,7 @@ WallofFlesh: {
 		The Wall of Flesh will emerge after the sacrifice of a tennant in the deep lava pools of the underworld.
 		Perhaps using a Voodoo Doll would suffice?
 		'''
+	Tooltip: Wall of Flesh
 }
 
 QueenSlime.Title: Contents:
