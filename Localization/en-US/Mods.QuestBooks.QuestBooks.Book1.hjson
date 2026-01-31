@@ -239,25 +239,25 @@ Surface:{
 	}
 
 	GetEvilBarArmor:{
-		Title:
+		Title: Coated in Evil
 		Contents: '''
-			
+			Using the {Shadow Scaled / Tissue Samples}, craft yourself a {Shadow / Crimtane} armorset to prepare for the challenges ahead.
 			'''
 		Tooltip:
 	}
 
 	SubbiomeMeteor:{
-		Title:
+		Title: Wish Upon a Flaming Rock
 		Contents: '''
-			
+			Stumble upon a Meteor crash-site!
 			'''
 		Tooltip:
 	}
 
 	CraftMeteorGear:{
-		Title:
+		Title: Meet-e-your New Ore
 		Contents: '''
-			
+			Carve out some of the crashed Meteorite and smith yourself new gear!
 			'''
 		Tooltip:
 	}
@@ -266,57 +266,58 @@ Surface:{
 	// <-> The Jungle <->
 
 	BiomeJungle:{
-		Title:
+		Title: The Jungle
 		Contents: '''
-			
+			A Massive spread of tropic land covered in vegetation, infested with large Beehives.
+			Some say an ancient civilization used to reside deep within its caves..
 			'''
 		Tooltip:
 	}
 
 	KillDoctorBones:{
-		Title:
+		Title: Archeologist
 		Contents: '''
-			
+			Kill Doctor Bones, an adventurous undead exploring the deadly Jungle.
 			'''
 		Tooltip:
 	}
 
 	LootJungleChest:{
-		Title:
+		Title: I Am Itchy Loot!
 		Contents: '''
-			
+			Discover an Ivy Chest and take a peek at its content.
 			'''
 		Tooltip:
 	}
 
 	GetJungleSpores:{
-		Title:
+		Title: Ready Your Allergenics
 		Contents: '''
-			
+			Acquire some Jungle Spores deep within the Underground Jungle, useful for crafting some overgrown gear.
 			'''
 		Tooltip:
 	}
 
 	SubbiomeHive:{
-		Title:
+		Title: Where's My Honey?
 		Contents: '''
-			
+			Discover a large bee's hive deep in the jungle.
 			'''
 		Tooltip:
 	}
 
 	FishInHoney:{
-		Title:
+		Title: Sweet Reels!
 		Contents: '''
-			
+			Drop a lure in a pool of honey for a pre-sweetened catch!
 			'''
 		Tooltip:
 	}
 
 	GetBeeSet:{
-		Title:
+		Title: Not The Bees!
 		Contents: '''
-			
+			Fire a Bee Gun while wearing a full set of Bee Armor.
 			'''
 		Tooltip:
 	}
@@ -325,49 +326,51 @@ Surface:{
 	// <-> The Dungeon <->
 
 	BiomeDungeon:{
-		Title:
+		Title: The Dungeon
 		Contents: '''
-			
+			Once protected by the Old Man's Curse, the Dungeon is a sprawling catacomb of the necrotic and undead with great treasures stashed within..
 			'''
 		Tooltip:
 	}
 
 	CrumbleDungeonBricks:{
-		Title:
+		Title: Falling Apart
 		Contents: '''
-			
+			Open up new pathways (or traps..) by breaking away Crumbling Brick paths.
 			'''
 		Tooltip:
 	}
 
 	GetGoldenKey:{
-		Title:
+		Title: Dungeon Heist
 		Contents: '''
-			
+			Steal a key from the dungeon's undead denizens, and unlock one of their precious golden chests.
 			'''
 		Tooltip:
 	}
 
 	GetShadowKey:{
-		Title:
+		Title: Key-nception
 		Contents: '''
-			
+			Acquire a different, peculiar key stashed away in the dungeon's depths.
+			Wonder what it could be used for?
 			'''
 		Tooltip:
 	}
 
 	GetWaterCandle:{
-		Title:
+		Title: Call of The Flame
 		Contents: '''
-			
+			Pick up a Water Candle from the Dungeon.
+			Its mystical fire raises the spawnrate of enemies.
 			'''
 		Tooltip:
 	}
 
 	LootDungeonChest:{
-		Title:
+		Title: Prisoner's Arsenal
 		Contents: '''
-			
+			Open a Locked Gold Chest with a Golden Key and take a peek at its content.
 			'''
 		Tooltip:
 	}
@@ -376,25 +379,26 @@ Surface:{
 	// <-> The Ocean <->
 
 	BiomeOcean:{
-		Title:
+		Title: The Ocean
 		Contents: '''
-			
+			A cozy beach before the large ocean surrounding the Terraria island.
 			'''
 		Tooltip:
 	}
 
 	GetDivingHelmet:{
-		Title:
+		Title: Swimmin' With The Fishes
 		Contents: '''
-			
+			Obtain a Diving Helmet, occasionally dropped by Sharks.
+			The Diving Helmet can be upgrades with various other swimming gear using a Tinker's Station, ask the guide!
 			'''
 		Tooltip:
 	}
 
 	LootOceanChest:{
-		Title:
+		Title: I Am Soggy Loot!
 		Contents: '''
-			
+			Discover a Water Chest and take a peek at its content.
 			'''
 		Tooltip:
 	}
@@ -403,25 +407,25 @@ Surface:{
 	// <-> The Sky <->
 
 	BiomeSky:{
-		Title:
+		Title: On Cloud Nine-Hundred
 		Contents: '''
-			
+			Reach to the skies where the air grows stale and gravity starts to falter.
 			'''
 		Tooltip:
 	}
 
 	LootSkywareChest:{
-		Title:
+		Title: Heavenly Arsenal
 		Contents: '''
-			
+			Discover a Skyware Chest and take a peek at its content.
 			'''
 		Tooltip:
 	}
 
 	ReachSpace:{
-		Title:
+		Title: Into Orbit
 		Contents: '''
-			
+			You can only go down from here!
 			'''
 		Tooltip:
 	}
@@ -430,25 +434,25 @@ Surface:{
 	// <-> Blood Moon <->
 
 	GetMoneyTrough:{
-		Title:
+		Title: When Piggybanks Float
 		Contents: '''
-			
+			Obtain the rare Money Trough, an item that can summon a portable Piggybank for extra space and convenience!
 			'''
 		Tooltip:
 	}
 
 	KillMarriage:{
-		Title:
+		Title: Till Death...
 		Contents: '''
-			
+			Kill the Groom and Bride, an unfortunate couple's honeymoon gone horribly wrong.
 			'''
 		Tooltip:
 	}
 
 	KillBloodMoonReel1:{
-		Title:
+		Title: Bloody Fish!
 		Contents: '''
-			
+			Fish up a Bloodmoon monster and defeat it for special loot.
 			'''
 		Tooltip:
 	}
