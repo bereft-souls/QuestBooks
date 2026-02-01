@@ -1,0 +1,508 @@
+blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+
+WoFto1Mech:{
+	StartHM:{
+		Title: It's Hard!
+		Contents: '''
+			Unleash the ancient spirits of light and darkness across your world, enabling much stronger foes and showering the world with dazzling treasures (and rainbows!).
+			'''
+		Tooltip:
+	}
+
+	InfoHM:{
+		Title: -
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	// --------------------
+	// <-> Main Pathway <->
+	SmashEvilAltar:{
+		Title: Begone, Evil!
+		Contents: '''
+			Smash a demon or crimson altar with a powerful, holy hammer.
+			'''
+		Tooltip:
+	}
+
+	MineHMOre:{
+		Title: Extra Shiny!
+		Contents: '''
+			Mine a powerful ore that has been newly blessed upon your world.
+			'''
+		Tooltip:
+	}
+
+	GetMechBossSummon:{
+		Title: Mechanical Lures
+		Contents: '''
+			Craft or Find a Mechanical Summon, each capabale of summoning a different Mechanical Menace.
+			'''
+		Tooltip:
+	}
+
+	DefeatAnyMech:{
+		Title: One Down, Two To Go
+		Contents: '''
+			Defeat one of the Mechanical Menaces, opening new materials and events to fight in.
+			'''
+		Tooltip:
+	}
+
+	GetHallowedGear:{
+		Title: Hallow, Hallowed Bar!
+		Contents: '''
+			Acquire some Hallowed Bars by defeating any Mechanical Menace.
+			Hallowed Bars are a potent metal, capable of crafting great legendary items and an armor set for any class.
+			'''
+		Tooltip:
+	}
+
+	// -------------------
+	// <-> New Threats <->
+
+	InfoNewThreats:{
+		Title: some better name is due
+		Contents: '''
+			With the release of the spirits of Light and Dark, greater enemies and monsters have arrived in the world of Terraria in both new and old places.
+			These are some of the major new encounters, but youre encouraged to visit old biomes as theyve almost certainly got new things within!
+			'''
+		Tooltip:
+	}
+
+	DefeatGoblinSummoner:{
+		Title: Hexes and Flames
+		Contents: '''
+			Defeat the Goblin Warlock, a powerful conjurer gifted with darkest of magic.
+			Beware her summoned army of shadowflame ghasts!
+			'''
+		Tooltip:
+	}
+
+	GetSpiderFangs:{
+		Title: Crawling Black
+		Contents: '''
+			Within a Spider's Nest, defeat Black Recluses and collect their Spider Fangs.
+			Spider Fangs are a special material useful for many summoner based gear.
+			'''
+		Tooltip:
+	}
+
+	DefeatWeatherMiniboss:{
+		Title: Weather the Storms
+		Contents: '''
+			Defeat a great weather entity residing in either the harshest Sandstorms or the coldest Snowstorms.
+			'''
+		Tooltip:
+	}
+
+	DefeatWyvern:{
+		Title: Soaring with Sky Serpants
+		Contents: '''
+			Defeat a Wyvern, a giant sky dragon soaring high in the stratosphere.
+			Wyverns drop Souls of Flight, an essential material for most craftable wings.
+			'''
+		Tooltip:
+	}
+
+	DefeatFlyingDutchman:{
+		Title: Liddle-liddle-lee
+		Contents: '''
+			Defeat the Flying Dutchman, a soaring pirate ship fit with plenty of cannons to knock any who rival it.
+			'''
+		Tooltip:
+	}
+
+	KillBloodMoonReel2:{
+		Title: It Came From The Blood Lake
+		Contents: '''
+			Fish up a Hardmode Bloodmoon monster and defeat it for special loot.
+			'''
+		Tooltip:
+	}
+
+	GetHMWingMat:{
+		Title: Foes of a feather flock together
+		Contents: '''
+			Many foes will occasionally drop a large Feather item or some special ingredient that will be able to craft a Pair of Wings, Collect any one of these!
+			'''
+		Tooltip:
+	}
+
+	DefeatMothron:{
+		Title: Kaiju Beatdown
+		Contents: '''
+			Defeat the buzzing Mothron, a massive moth-like monstrosity roaming the advanced Solar Eclipse.
+			'''
+		Tooltip:
+	}
+
+	// ------------------
+	// <-> Biome Content <->
+
+	BiomeHMEvil:{
+		Title: Evil Up
+		Contents: '''
+			-
+			'''
+		Tooltip:
+	}
+
+	GetEvilEssence:{
+		Title: Essence of Evil
+		Contents: '''
+			Fight new monsters lurking in the newly erected underground {Corruption / Crimson} and collect {Cursed Flames / Ichor}, the essence of the infection.
+			'''
+		Tooltip:
+	}
+
+	GetInfectionSouls:{
+		Title: Light and Dark
+		Contents: '''
+			Collect the souls of the dark night and the glimmering light from the enemies of the underground {Corruption / Crimson} and Hallow biomes
+			'''
+		Tooltip:
+	}
+
+	GetDesertShard:{
+		Title: Ill Deserts And Glistening Dunes
+		Contents: '''
+			Deserts struck by the infection of either light or dark will house special infected variants of various enemies, some of which can drop special materials..
+			'''
+		Tooltip:
+	}
+
+	GetKeyOfNight:{
+		Title: Key of Night
+		Contents: '''
+			Deserts struck by the infection of either light or dark will house special infected variants of various enemies, some of which can drop special materials..
+			'''
+		Tooltip:
+	}
+
+	GetKeyOfLight:{
+		Title: Key of Light
+		Contents: '''
+			Craft a Key of Light, capable of awakening a chest into a monstrous Hallow form..
+			'''
+		Tooltip:
+	}
+
+	DefeatBiomeMimic:{
+		Title: I'm Not Loot.
+		Contents: '''
+			Defeat a powerful Biome Mimic, a great impostor of the underground Hallowed or {Corruption / Crimson}.
+			'''
+		Tooltip:
+	}
+
+	// <-> The Hallow <->
+
+	BiomeHallow:{
+		Title: The Hallow
+		Contents: '''
+			A land of fairy-tales and magic turned vicious, The Hallow is the antithesis to the evil biome and will spread just like it unless stopped.
+			'''
+		Tooltip:
+	}
+
+	GetPearlwood:{
+		Title: Pearlescent Timber
+		Contents: '''
+			Chop down some Pearlwood Trees, they may be of little use by now; but theyre great wood!
+			'''
+		Tooltip:
+	}
+
+	GetAFairyCritter:{
+		Title: Faecatching
+		Contents: '''
+			Shake up a Pearlwood tree and net any Fairy that flies out.
+			You can then send them out in the caves and they will find new loot for you!
+			'''
+		Tooltip:
+	}
+
+	GetGelaticCrystal:{
+		Title: A Gelatin in The Rough
+		Contents: '''
+			Find a Gelatin Crystal deep within the underground Hallow, glistening brightly among the rest.
+			'''
+		Tooltip:
+	}
+
+	GetCrystalAssasinSet:{
+		Title: Shining Shinobi
+		Contents: '''
+			Loot a full set of Crystal Assassin armor and dash around with style!
+			'''
+		Tooltip:
+	}
+
+	DefeatRainbowSlime:{
+		Title: Across The Rainbow
+		Contents: '''
+			Defeat a Rainbow Slime, rarely seen hopping in the iridescent rainfalls of the Hallow.
+			'''
+		Tooltip:
+	}
+
+	DefeatChaosElemental:{
+		Title: Chaotic Evil
+		Contents: '''
+			Defeat a Chaos Elemental, an uncommon yet extremely evasive enemy found in the Underground Hallow.
+			Rumors say these erratic beings use a special rod to blink about..
+			'''
+		Tooltip:
+	}
+}
+
+
+
+3MechtoGolem:{
+	// --------------------
+	// <-> Main Pathway <->
+
+	GetHallowedPick:{
+		Title: Drax Attax
+		Contents: '''
+			Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
+			'''
+		Tooltip:
+	}
+
+	GetChlorophyteBars:{
+		Title: Photosynthesis
+		Contents: '''
+			Mine chlorophyte, an organic ore found deep among the thickest of flora.
+			Chlorophyte is an extremely versatile ore, used in a lot of advanced crafts and alloying, be sure to get a bunch!
+			'''
+		Tooltip:
+	}
+
+	GetTurtleShells:{
+		Title: Shell Armor
+		Contents: '''
+			Collect Turtle Shells from Giant Turtles in the Jungle and use them alongside Chlorophyte to create the Turtle Armor, a melee armorset that can be upgraded into the penultimate melee set.
+			'''
+		Tooltip:
+	}
+
+	GetTheAxe:{
+		Title: Shreddin' Fiber Cords
+		Contents: '''
+			Obtain The Axe, a rare drop from Plantera capable of easily chopping trees with its hardcore vibes.
+			'''
+		Tooltip:
+	}
+
+	GetShroomite:{
+		Title: Mycelially Reinforced
+		Contents: '''
+			Alloy together Chlorophyte and Glowing Mushrooms at an Autohammer to create Shroomite Bars, a military grade metal capable of crafting a penultimate Ranged armor-set.
+			'''
+		Tooltip:
+	}
+
+	GetDungeonDrop:{
+		Title: Robbing The Grave
+		Contents: '''
+			Obtain a rare treasure from a difficult monster in the dungeon.
+			'''
+		Tooltip:
+	}
+
+	LootBiomeChest:{
+		Title: Big Booty
+		Contents: '''
+			Unlock one of the dungeon's large, mysterious chests with a special key.
+			'''
+		Tooltip:
+	}
+
+	GetSpectre:{
+		Title: Half-living Bar
+		Contents: '''
+			Alloy together Chlorophyte and Ectoplasm to create Spectre Bars, a magically charged metal capable of crafting a penultimate Mage armor-set.
+			'''
+		Tooltip:
+	}
+
+	GetSpookyWood:{
+		Title: Ooky Spooky
+		Contents: '''
+			Kill the enemies of the Harvest Moon and collect a bunch of Spooky Wood.
+			Spooky Wood can be used to craft a powerful penultimate Summoner armor set.
+			'''
+		Tooltip:
+	}
+
+	SubbiomeTemple:{
+		Title: Temple Raider
+		Contents: '''
+			Breach the impenetrable walls of the jungle temple.
+			'''
+		Tooltip:
+	}
+
+	LootTempleChest:{
+		Title: I Ahm Loohte!
+		Contents: '''
+			Discover an Lihzahrd Chest within the Temple and take the special Power Cell within.
+			You may also find Solar Tablets, and fight stronger enemies within the Solar Eclipse.
+			'''
+		Tooltip:
+	}
+
+	// --------------
+	// <-> Extras <->
+	
+	AlertMartiansProbe:{
+		Title: Outer Scouter
+		Contents: '''
+			Get observed by a Martian Probe, found more frequently the higher up in the world you are.
+			Getting spotted may alert an armada of inter-planetary madness..
+			'''
+		Tooltip:
+	}
+
+	CatchTruffleWorm:{
+		Title: Trufflesome Critter
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	CatchPrismaticLacewing:{
+		Title: Glorious Flutter
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	PenultimateWings:{
+		Title: Soaring Through Sunray-waves
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+}
+
+
+
+LCtoML:{
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	blueprint:{
+		Title:
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+}
+
+
+
+
+Postgame:{
+
+}

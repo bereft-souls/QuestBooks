@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuestBooks.Quests.VanillaQuests.Book2.Pre3Mechs
+namespace QuestBooks.Quests.VanillaQuests.Book2.WoFto1Mech.NewThreats
 {
     internal class DefeatMothron : Quest
     {

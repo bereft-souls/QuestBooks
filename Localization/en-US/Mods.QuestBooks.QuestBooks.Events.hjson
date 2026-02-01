@@ -16,8 +16,7 @@ SurviveBloodMoon: {
 
 FrostMoon: {
 	EverscreamDefeated: {
-		Title: I Scream, You Scream, We All Screamed at the terrible house fire at the family reunion
-		// most specific reference ever so definitely not keeping this name
+		Title: In The Pines
 		Contents: Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
 	}
 	
