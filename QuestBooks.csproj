@@ -16,6 +16,28 @@
 	<ItemGroup>
 	  <PackageReference Include="NativeFileDialogSharp" Version="0.6.0-alpha" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Quests\VanillaQuests\Book3\ExtraContentProgression\Bestiary\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\ExtraContentProgression\Fishing\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\ExtraContentProgression\PotionsAndBuffs\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\ExtraContentProgression\OldOnesArmy\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\ExtraChallenges\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\MajorCraftingTrees\AnkhShield\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\MajorCraftingTrees\TerrasparkBoots\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\MajorCraftingTrees\Shellphone\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\PlayerProgression\Equipment\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\PlayerProgression\Stats\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\PlayerProgression\PermanentUpgrades\" />
+	  <Folder Include="Quests\VanillaQuests\Book3\PlayerProgression\Pickaxe\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\ArenaMaking\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\BaseAndCrafting\HM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\BaseAndCrafting\Storage\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\BaseAndCrafting\PreHM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\TownSlimes\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\NPCsHM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\NPCsPreHM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\Pylons\" />
+	</ItemGroup>
 
 	<!-- References -->
 
