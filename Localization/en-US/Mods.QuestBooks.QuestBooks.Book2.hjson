@@ -392,9 +392,9 @@ WoFto1Mech:{
 	}
 
 	PenultimateWings:{
-		Title: Soaring Through Sunray-waves
+		Title: -
 		Contents: '''
-			
+			Obtain powerful rare wings from either the Empress of Light, Duke Fishron or Betsy.
 			'''
 		Tooltip:
 	}
@@ -403,98 +403,104 @@ WoFto1Mech:{
 
 
 LCtoML:{
-	blueprint:{
-		Title:
+	EncounterCultists:{
+		Title: Invoking the Cultists
 		Contents: '''
-			
+			After the defeat of the Golem deep within the Temple, you will find the dungeon's Cult enacting a terrible ritual, intending to bring the end of Terraria.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	// -------------------
+	// <-> Lunar Event <->
+
+	InfoLunarPillars:{
+		Title: The Lunar Event & Its Pillars
 		Contents: '''
-			
+			(explanation of what this event is)
+
+			After the defeat of a Lunar Pillar, you will get its Lunar Fragments.
+			Each one is associated with a certain class, making powerful gear for it.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	KillSolarPillar:{
+		Title: Solar Seal
 		Contents: '''
-			
+			Destroy the Solar Pillar, one of the seals of an ancient terrible tyrant.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	UseSolarFragments:{
+		Title: Solar Powered
 		Contents: '''
-			
+			Conjure yourself celestial Melee gear out of Solar Fragments using the Ancient Manipulator.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	KillVortexPillar:{
+		Title: Vortex Seal
 		Contents: '''
-			
+			Destroy the Vortex Pillar, one of the seals of an ancient terrible tyrant.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	UseVortexFragments:{
+		Title: Stuck in The Vortex
 		Contents: '''
-			
+			Conjure yourself celestial Ranger gear out of Vortex Fragments using the Ancient Manipulator.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	KillNebulaPillar:{
+		Title: Nebula Seal
 		Contents: '''
-			
+			Destroy the Nebula Pillar, one of the seals of an ancient terrible tyrant.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	UseNebulaFragments:{
+		Title: Nebulous aiosjoasi
 		Contents: '''
-			
+			Conjure yourself celestial Mage gear out of Nebula Fragments using the Ancient Manipulator.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	KillStardustPillar:{
+		Title: Stardust Seal
 		Contents: '''
-			
+			Destroy the Stardust Pillar, one of the seals of an ancient terrible tyrant.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	UseStardustFragments:{
+		Title: Foes to Ashes, Stars to Dust
 		Contents: '''
-			
+			Conjure yourself celestial Summoner gear out of Stardust Fragments using the Ancient Manipulator.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	CraftLunarHook:{
+		Title: Next, We are going to steal.. THE MOON!
 		Contents: '''
-			
+			Using all 4 of the powerful Lunar Fragments, conjure a most powerful Grappling Hook in the form of the Lunar Hook.
 			'''
 		Tooltip:
 	}
 
-	blueprint:{
-		Title:
+	CraftCelestialSigil:{
+		Title: Retry
 		Contents: '''
-			
+			Using all 4 of the powerful Lunar Fragments, Conjure a Celestial Sigil to bring forth the terrible tyrant directly, cutting the need to destroy the Lunar Pillars each time.
 			'''
 		Tooltip:
 	}
@@ -504,5 +510,73 @@ LCtoML:{
 
 
 Postgame:{
+	GetLuminiteBars:{
+		Title: -
+		Contents: '''
+			Using the ore dropped by the Moon Lord; Forge yourself some Luminite Bars, a celestial metal with immense lunar amplification potential.
+			'''
+		Tooltip:
+	}
 
+	// ----------------
+	// <-> End Gear <->
+
+	GetSolarSet:{
+		Title: Force of a Solar Eruption
+		Contents: '''
+			Using Luminite Bars and Solar Fragments, conjure an ultimate Warrior armor set fueled by the cosmos.
+			'''
+		Tooltip:
+	}
+
+	GetVortexSet:{
+		Title: Pull of a Black Hole's Vortex
+		Contents: '''
+			Using Luminite Bars and Vortex Fragments, conjure an ultimate Ranger armor set fueled by the cosmos.
+			'''
+		Tooltip:
+	}
+
+	GetNebulaSet:{
+		Title: Energy of a Luminescent Nebula
+		Contents: '''
+			Using Luminite Bars and Nebula Fragments, conjure an ultimate Mage armor set fueled by the cosmos.
+			'''
+		Tooltip:
+	}
+
+	GetStardustSet:{
+		Title: () from a Planet's Stardust
+		Contents: '''
+			Using Luminite Bars and Stardust Fragments, conjure an ultimate Summoner armor set fueled by the cosmos.
+			'''
+		Tooltip:
+	}
+
+	// ---------------------
+	// <-> Epilogue Info <->
+
+	InfoBook3:{
+		Title: -
+		Contents: '''
+			-
+			'''
+		Tooltip:
+	}
+
+	Info100%Game:{
+		Title: -
+		Contents: '''
+			-
+			'''
+		Tooltip:
+	}
+
+	InfoNextTime:{
+		Title: -
+		Contents: '''
+			-
+			'''
+		Tooltip:
+	}
 }
