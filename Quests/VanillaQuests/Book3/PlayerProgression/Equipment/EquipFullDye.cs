@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria;
 
-namespace QuestBooks.Quests.VanillaQuests.Book2.Endgame
+namespace QuestBooks.Quests.VanillaQuests.Book3.PlayerProgression.Equipment
 {
-    internal class KillStardustPillar : Quest
+    internal class EquipFullDye : Quest
     {
         public override bool CheckCompletion()
         {
-            return NPC.downedTowerStardust;
+            return false; // Equip a dye in all possible slots, achievement mirror
         }
     }
 }

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria;
 
-namespace QuestBooks.Quests.VanillaQuests.Book2.Endgame
+namespace QuestBooks.Quests.VanillaQuests.Book3.ExtraContentProgression.Bestiary
 {
-    internal class KillStardustPillar : Quest
+    internal class Bestiary25 : Quest
     {
         public override bool CheckCompletion()
         {
-            return NPC.downedTowerStardust;
+            return false; 
         }
     }
 }

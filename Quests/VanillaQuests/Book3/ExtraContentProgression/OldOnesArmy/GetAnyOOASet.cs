@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria;
 
-namespace QuestBooks.Quests.VanillaQuests.Book2.Endgame
+namespace QuestBooks.Quests.VanillaQuests.Book3.ExtraContentProgression.OldOnesArmy
 {
-    internal class KillStardustPillar : Quest
+    internal class GetAnyOOASet : Quest
     {
         public override bool CheckCompletion()
         {
-            return NPC.downedTowerStardust;
+            return false; //buy any full OOA armorset
         }
     }
 }

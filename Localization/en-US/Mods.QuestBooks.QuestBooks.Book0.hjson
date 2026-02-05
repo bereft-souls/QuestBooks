@@ -1,3 +1,11 @@
+blueprint:{
+		Title: Placeholder / Blueprint Quest
+		Contents: '''
+			This is how the quest's text looks like in the localization.
+			'''
+		Tooltip: Hello!
+	}
+
 
 MainTree: {
 	StartFirstSteps: {
@@ -24,7 +32,7 @@ MainTree: {
 			The starting location of all Terrarians.
 			Between the lush greenery and comfy breeze, it seems like the perfect spot to set up base in!
 			'''
-		Tooltip: Calm and pure!
+		Tooltip:
 	}
 
 	GuideInteract: {
@@ -44,7 +52,7 @@ MainTree: {
 			Chop down a nearby tree using your trusted Copper Axe!
 			Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.
 			'''
-		Tooltip: Chop chop!
+		Tooltip:
 	}
 
 	CraftWorkbench: {
@@ -65,7 +73,7 @@ MainTree: {
 			Craft a Wooden Hammer.
 			Hammers are used to break apart background wall tiles, and allows shaping blocks to varying shapes by clicking on them.
 			'''
-		Tooltip: -
+		Tooltip:
 	}
 
 	EstablishHouse: {
