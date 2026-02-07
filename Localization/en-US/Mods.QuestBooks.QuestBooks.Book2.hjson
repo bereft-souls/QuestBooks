@@ -17,7 +17,7 @@ WoFto1Mech:{
 	}
 
 	InfoHM:{
-		Title: -
+		Title: ---
 		Contents: '''
 			
 			'''
@@ -392,7 +392,7 @@ WoFto1Mech:{
 	}
 
 	PenultimateWings:{
-		Title: -
+		Title: ---
 		Contents: '''
 			Obtain powerful rare wings from either the Empress of Light, Duke Fishron or Betsy.
 			'''
@@ -511,7 +511,7 @@ LCtoML:{
 
 Postgame:{
 	GetLuminiteBars:{
-		Title: -
+		Title: ---
 		Contents: '''
 			Using the ore dropped by the Moon Lord; Forge yourself some Luminite Bars, a celestial metal with immense lunar amplification potential.
 			'''
@@ -557,7 +557,7 @@ Postgame:{
 	// <-> Epilogue Info <->
 
 	InfoBook3:{
-		Title: -
+		Title: ---
 		Contents: '''
 			-
 			'''
@@ -565,7 +565,7 @@ Postgame:{
 	}
 
 	Info100%Game:{
-		Title: -
+		Title: ---
 		Contents: '''
 			-
 			'''
@@ -573,7 +573,7 @@ Postgame:{
 	}
 
 	InfoNextTime:{
-		Title: -
+		Title: ---
 		Contents: '''
 			-
 			'''

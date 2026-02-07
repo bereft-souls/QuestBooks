@@ -415,7 +415,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             void Select()
             {
-                int sign = SelectedBook.Chapters.IndexOf(chapter ?? SelectedChapter) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : -1;
+                int sign = SelectedBook.Chapters.IndexOf(chapter ?? SelectedChapter) >= SelectedBook.Chapters.IndexOf(SelectedChapter) ? 1 : ---1;
                 questElementSwipeOffset = questAreaTarget.Width * sign;
                 SortedElements = null;
 

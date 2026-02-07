@@ -92,7 +92,7 @@ Surface:{
 	}
 
 	GetNinjaSet:{
-		Title: -
+		Title: ---
 		Contents: '''
 			Loot a full set of Ninja Gear from King Slime and fire shuriken like a true ninja!.
 			'''
@@ -108,7 +108,7 @@ Surface:{
 	}
 
 	GetEvilBars:{
-		Title: -
+		Title: ---
 		Contents: '''
 			Smelt the {Demonite / Crimtane} ore dropped by the Eye of Cthulhu and make yourself some wicked new gear.
 			'''
@@ -207,7 +207,7 @@ Surface:{
 	// <-> Evil Biome <->
 
 	BiomeEvilCorruption:{
-		Title: -
+		Title: ---
 		Contents: '''
 			-
 			'''
@@ -505,7 +505,7 @@ Caving:{
 		}
 
 		SubbiomeAbandonedTrack:{
-			Title: - -
+			Title: --- -
 			Contents: '''
 				Find an Abandoned Minecart Track and follow its path!
 				'''
@@ -614,7 +614,7 @@ Caving:{
 		}
 
 		GetObsidian:{
-			Title: - -
+			Title: --- -
 			Contents: '''
 				Combine water and lava together and get a decent amount of Obsidian, a tough glass-like material.
 				Also seems to have great alloying potential..

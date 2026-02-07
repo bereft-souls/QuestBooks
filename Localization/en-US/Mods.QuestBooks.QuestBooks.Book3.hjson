@@ -8,23 +8,863 @@ blueprint:{
 
 
 PlayerProgression:{
+	// -------------
+	// <-> Stats <->
+
+	UseLifeCrystal:{
+		Title: Heart Breaker
+		Contents: '''
+			Discover and smash your first heart crystal underground, allowing you to further increase your health!
+			'''
+		Tooltip:
+	}
+
+	UseManaCrystal:{
+		Title: Star Power
+		Contents: '''
+			Craft a mana crystal out of fallen stars, and consume it.
+			'''
+		Tooltip:
+	}
 	
+	GetFullHP:{
+		Title: Cordis Maxima
+		Contents: '''
+			Gather and shatter 15 Life Crystals to fill your health up to 400 HP!
+			'''
+		Tooltip:
+	}
+	
+	UseLifeFruit:{
+		Title: Get a life
+		Contents: '''
+			Consume a life fruit, which grows in the thick of subterranean jungle grass.
+			'''
+		Tooltip:
+	}
+
+	FullHPAndMana:{
+		Title: Topped Off
+		Contents: '''
+			Attain maximum life and mana possible without accessories or buffs.
+			'''
+		Tooltip:
+	}
+
+	// -----------------
+	// <-> Equipment <->
+
+	EquipArmor:{
+		Title: Matching Attire
+		Contents: '''
+			Equip 3 pieces of armor to fully protect yourself!
+			(explain armor and setbonus)
+			'''
+		Tooltip:
+	}
+
+	EquipHook:{
+		Title: Hold on Tight!
+		Contents: '''
+			Equip your first grappling hook.
+			(explain hooks)
+			'''
+		Tooltip:
+	}
+
+	EquipMount:{
+		Title: The Cavalry
+		Contents: '''
+			Equip a Mount.
+			(explain mounts)
+			'''
+		Tooltip:
+	}
+
+	EquipPet:{
+		Title: Little Friends!
+		Contents: '''
+			Equip a Pet item.
+			Some pets are considered "Light pets" and have more functional uses, and take a seperate slot. allowing you to have 2 pets at once!
+			'''
+		Tooltip:
+	}
+
+	EquipWings:{
+		Title: Head in the Clouds
+		Contents: '''
+			Equip a pair of Wings.
+			(explain wing accessories)
+			'''
+		Tooltip:
+	}
+
+	EquipFullDye:{
+		Title: Dye Hard
+		Contents: '''
+			Equip a dye in every possible dye slot.
+			This includes:
+			- Armor slots
+			- Accessory slots
+			- Pet slots
+			- Hook slot
+			- Minecart slot
+			'''
+		Tooltip:
+	}
+
+	// --------------------------
+	// <-> Permanent Upgrades <->
+
+	InfoOtherUpgrades:{
+		Title: Consumable Upgrades
+		Contents: '''
+			(explain what these are)
+			'''
+		Tooltip:
+	}
+
+	// ------------
+	// <-> Misc <->
+
+	UseArtisanLoaf:{
+		Title: Delectible!
+		Contents: '''
+			Consume the Artisan Loaf, occasionally sold by the Skeleton Merchant.
+			Consuming it will grant you increased reach for all crafting stations.
+			'''
+		Tooltip:
+	}
+
+	UseTorchGodsFavor:{
+		Title: Omni-Torch
+		Contents: '''
+			Consume the Torch God's Favor, enabling you the option to convert all placed torches into torches of the respective biome.
+			Lucky you!
+			'''
+		Tooltip:
+	}
+
+	// ---------------
+	// <-> Expert+ <->
+
+	UseDemonHeart:{
+		Title: Demonic Influence
+		Contents: '''
+			Rip out and consume the Demon Heart straight from the Monstrous Wall of Flesh, permanently increasing your accessory slots by 1.
+			'''
+		Tooltip:
+	}
+
+	UseMechCartKit:{
+		Title: Engine Powered
+		Contents: '''
+			Construct the Mechanical Cart Kit, improving the speed of all of your Minecarts.
+			'''
+		Tooltip:
+	}
+
+	// ------------------------
+	// <-> Shimmer Upgrades <->
+
+	UseVitalCrystal:{
+		Title: Vitality
+		Contents: '''
+			Transmute a Heart Crystal into a Vital Crystal, permanently increasing your life regeneration.
+			'''
+		Tooltip:
+	}
+
+	UseArcaneCrystal:{
+		Title: Arcana
+		Contents: '''
+			Transmute a Mana Crystal into a Arcane Crystal, permanently increasing your mana regeneration.
+			'''
+		Tooltip:
+	}
+
+	UseAmbrosia:{
+		Title: Longevity
+		Contents: '''
+			Transmute any fruit into the Ambrosia, permanently increasing your mining and placing speeds.
+			'''
+		Tooltip:
+	}
+
+	UseGummyWorm:{
+		Title: Luring
+		Contents: '''
+			Transmute a Golden Worm into a Gummy Worm, permanently increasing your fishing power.
+			'''
+		Tooltip:
+	}
+
+	UseGalaxyPearl:{
+		Title: Prosperity
+		Contents: '''
+			Transmute a Pink Pearl into a Galaxy Pearl, permanently increasing your luck.
+			'''
+		Tooltip:
+	}
+
+	UsePeddlersSatchel:{
+		Title: Abundance
+		Contents: '''
+			Transmute a Peddler's hat into a Peddler's Satchel, permanently increasing the number of items sold by the Traveling Merchant by 1.
+			'''
+		Tooltip:
+	}
+
+	UseAegisFruit:{
+		Title: Warding
+		Contents: '''
+			Transmute a Life Fruit into an Aegis Fruit, permanently increasing your defense.
+			'''
+		Tooltip:
+	}
+
+
+	// ---------------------
+	// <-> Pickaxe Tiers <->
+
+	InfoTools:{
+		Title: Tool Power
+		Contents: '''
+			(explain tool power and what it means, how it differs from speed)
+			'''
+		Tooltip:
+	}
+
+	GetOrePickaxe:{
+		Title: Getting an Upgrade
+		Contents: '''
+			Craft yourself a shinier pickaxe using any ore you may have found.
+			'''
+		Tooltip:
+	}
+
+	GetEvilPickaxe:{
+		Title: Macabre Miner
+		Contents: '''
+			Craft a wretched pickaxe using the {darkest of scales / freshest tissue samples}
+			'''
+		Tooltip:
+	}
+
+	GetMoltenPickaxe:{
+		Title: Miner for Fire
+		Contents: '''
+			Craft a molten pickaxe using the hottest of materials.
+			'''
+		Tooltip:
+	}
+
+	GetHMOrePickaxes:{
+		Title: Back-to-back, Pick-to-axe
+		Contents: '''
+			Progress through the newly generated Hardmode ores and acquire a mining tool from each.
+			'''
+		Tooltip:
+	}
+
+	GetHallowedPickaxe:{
+		Title: Drax Attax
+		Contents: '''
+			Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
+			'''
+		Tooltip:
+	}
+
+	GetShroomiteDiggingClaws:{
+		Title: Shroomverine
+		Contents: '''
+			Craft the Shroomite Digging Claws, a rapid mining tool making tunneling as easy as plucking a mushroom!
+			'''
+		Tooltip:
+	}
+
+	GetPicksaw:{
+		Title: Ancient Excavator
+		Contents: '''
+			Obtain the Picksaw, a marvel of ancient Lihzahrd technology capable of plowing through all tiles with its special design.
+			'''
+		Tooltip:
+	}
+
+	GetLaserDrill:{
+		Title: Im'a firing ma lazahh!!
+		Contents: '''
+			Obtain the Laser Drill, a martian Hi-Tech drill with incredible reach.
+			'''
+		Tooltip:
+	}
+
+	GetLunarPickaxe:{
+		Title: Lunar Excavation
+		Contents: '''
+			Craft yourself a celestial pickaxe or drill using Luminite and any Celestial Fragment.
+			'''
+		Tooltip:
+	}
+
+	CraftDrillContainmentUnit:{
+		Title: Special Containment Pulverization
+		Contents: '''
+			Construct the Drill Containment Unit, a mount capable of destroying whole chunks of terrain with ease.
+			'''
+		Tooltip:
+	}
 }
 
 
 
 ExtraContentProgression:{
+	// ---------------
+	// <-> Bestiary <->
+
+	InfoBestiary:{
+		Title: The Bestiary
+		Contents: '''
+			The Bestiary is a special catalogue of all the characters, critters, foes and more you may encounter!
+
+			It will list various pieces of information in each entry. like its Biome, stats or even drop tables and their chances!
+			The more you kill of a certain enemy, the more information unlocks!
+			'''
+		Tooltip:
+	}
+
+	Bestiary25:{
+		Title: Catalogue of Critters
+		Contents: '''
+			Complete 25% of your Bestiary, showing you newer information and opening new sells at the Zoologist!
+			'''
+		Tooltip:
+	}
+
+	Bestiary50:{
+		Title: Compendium of Creatures
+		Contents: '''
+			Complete 50% of the Bestiary, furthering your information of the world and opening new sells at the Zoologist.
+			'''
+		Tooltip:
+	}
+
+	Bestiary100:{
+		Title: Book Worm
+		Contents: '''
+			Completely fill your Bestiary, showing your mastery of the inhabitants of the world of Terraria and truly impressing the Zoologist, providing you with one final reward!
+			'''
+		Tooltip:
+	}
+
+	// ---------------------
+	// <-> Old Ones Army <->
+
+	SetupOOA:{
+		Title: Otherworldy Seige
+		Contents: '''
+			Acquire the Eternia Crystal Stand and Eternia Crystal from the Tavernkeep and prepare a flat land for the Old One's Army invasion.
+			{explain length requirement}
+
+			During and after the defeat of the event, you will be granted Defender's Medals, which you can use at the Tavernkeep's shop.
+			'''
+		Tooltip:
+	}
+
+	GetAnyOOASet:{
+		Title: Dressing like a Defender
+		Contents: '''
+			(flavour description)
+			'''
+		Tooltip:
+	}
+
+	GetWarTable:{
+		Title: Planning an Icursion
+		Contents: '''
+			Acquire a War Table from the Old One's Army event, granting you another sentry slot!
+			'''
+		Tooltip:
+	}
+
+	DefeatDarkMage:{
+		Title: Etherian Soldier
+		Contents: '''
+			Stop the Old One's Army's first invasion by defeating the Dark Mage, (flavour).
+			'''
+		Tooltip:
+	}
+
+	DefeatOgre:{
+		Title: Etheria's Defender
+		Contents: '''
+			Stop the Old One's Army once more by defeating the Ogre, A nasty brute who appears after the defeat of any Mechanical Boss.
+			'''
+		Tooltip:
+	}
+
+	DefeatBetsy:{
+		Title: Hero of Etheria
+		Contents: '''
+			Repel the strongest forces the Old One's Army can muster by felling the great Betsy, which arrives after the defeat of Golem.
+			'''
+		Tooltip:
+	}
+
+	// ---------------
+	// <-> Fishing <->
+
+	FishingStarter:{
+		Title: MA! I Caught Somethin'!
+		Contents: '''
+			Using a fishing rod and some bait, drop a lure in a large pool of water and get a hit!
+			'''
+		Tooltip:
+	}
+
+	InfoFishingPower:{
+		Title: Fishing Power
+		Contents: '''
+			(explain it)
+			'''
+		Tooltip:
+	}
+
+	InfoCrates:{
+		Title: Crates
+		Contents: '''
+			(explain crates and their rewards / purposes)
+			'''
+		Tooltip:
+	}
+
+	InfoSpecialFish:{
+		Title: Special Reels
+		Contents: '''
+			(mention special reels like accessories weapons and etc)
+			'''
+		Tooltip:
+	}
+
+	GetT3Crate:{
+		Title: Better Lootbox Economy Than CS2
+		Contents: '''
+			Hook up a Golden Crate, filled with riches and goodies!
+			'''
+		Tooltip:
+	}
+
+	GetGoldenCarp:{
+		Title: Gilded Scales
+		Contents: '''
+			Fish up the elusive Golden Carp, this fella must be worth a fortune!
+			'''
+		Tooltip:
+	}
+
+	GetAnglerTackleBox:{
+		Title: Tackling Head On
+		Contents: '''
+			Combine various fishing accessories provided by the Angler into a single all-in-one Angler Tackle Box.
+			It may be able to further improve with a hellish lure..
+			'''
+		Tooltip:
+	}
+
+	FishInLava:{
+		Title: Hot Reels!
+		Contents: '''
+			Drop a lure in a pool of lava for a pre-fried haul!
+			To fish in Lava, you will need specialized gear or bait that can withstand the intense heat.
+			You may be able to find critters in the Underworld for that job..
+			'''
+		Tooltip:
+	}
+
+	GetGoldenFishingRod:{
+		Title: Golden Glorious Pole
+		Contents: '''
+			Obtain a golden fishing rod.
+			'''
+		Tooltip:
+	}
+
+	GetAnglerSet:{
+		Title: Fishing with Style
+		Contents: '''
+			Acquire all 3 pieces of the Angler Set from the Angler, improving your fishing power and decreasing spawnrates for calmer times at sea!
+			'''
+		Tooltip:
+	}
+
+	FishQuest1:{
+		Title: Servant-in-Training
+		Contents: '''
+			Complete your 1st quest for the angler.
+			'''
+		Tooltip:
+	}
+
+	FishQuest10:{
+		Title: Good Little Slave
+		Contents: '''
+			Complete your 10th quest for the angler.
+			'''
+		Tooltip:
+	}
+
+
+	FishQuest25:{
+		Title: Trout Monkey
+		Contents: '''
+			Complete your 25th quest for the angler.
+			'''
+		Tooltip:
+	}
+
+	FishQuest50:{
+		Title: Fast and Fishious
+		Contents: '''
+			Complete your 50th quest for the angler.
+			'''
+		Tooltip:
+	}
+
+	FishQuest200:{
+		Title: Supreme Helper Minion!
+		Contents: '''
+			Complete a grand total of 200 quests for the angler.
+			'''
+		Tooltip:
+	}
+
+	// -----------------------
+	// <-> Potions & Buffs <->
+
+	TBD:{
+		Title: ---
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
 
 }
 
 
 
 MajorCraftingTrees:{
+	InfoComplexRecipes:{
+		Title: ---
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
 
+	// ------------------
+	// <-> Shellphone <->
+
+	GetGPS:{
+		Title: Who Needs Maps Anymore?
+		Contents: '''
+			Craft the GPS using a Compass, Depth Meter and a {Gold / Platinum} Watch.
+
+			Watches can be crafted at home using tough metals and chains.
+			Depth Meters are occasionally dropped by Bats.
+			Compasses are dropped by a variety of cavern enemies, most commonly from Flinxes or Vikings in the Tundra or Piranhas in the Jungle.
+			'''
+		Tooltip:
+	}
+
+	GetGoblinTech:{
+		Title: No Goblin was involved in the making of this doohickey
+		Contents: '''
+			Craft the Goblin Tech, an advanced goblin thingamajig made from a DPS Meter, a Stopwatch and a Metal Detector.
+
+			Stopwatches and DPS Meters are occasionally sold by the Traveling Merchant.
+			Metal Detectors are dropped by a rare Cavern monster. 
+			'''
+		Tooltip:
+	}
+
+	GetFishFinder{
+		Title: Hot Fish in Your Area
+		Contents: '''
+			Craft the Fish Finder, a marvel of fishing technlogy made from a Sextant, Weather Radio and a Fisherman's Calender.
+			
+			All three of these items can be acquired from the Angler by completing their quests.
+			'''
+		Tooltip:
+	}
+
+	GetREK:{
+		Title: Rare, Enemies, Kills
+		Contents: '''
+			Craft the R.E.K. 3000 using a Tally Counter, Radar and a Lifeform Analyzer to truly keep atab on any foe you come across.
+			
+			Tally Counters can be dropped by some of the enemies of the Dungeon.
+			Radars are commonly found in Surface Chests or Wooden Crates.
+			Lifeform Analyzer is occasionally sold by the Traveling Merchant.
+			'''
+		Tooltip:
+	}
+
+	GetCellphone:{
+		Title: Black Mirror
+		Contents: '''
+			Craft the Cell Phone using your PDA and a Magic Mirror. You'll never leave home without it again.
+			'''
+		Tooltip:
+	}
+
+	GetShellphone:{
+		Title: ---
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	// ------------------------
+	// <-> Terraspark Boots <->
+
+	GetAnyRunningBoots:{
+		Title: Swift Toes
+		Contents: '''
+			Obtain any running shoes, allowing you to run quickly across terrain!
+
+			They can be found in chests in a few biomes, or through crates.
+			'''
+		Tooltip:
+	}
+
+	GetSpectreBoots:{
+		Title: Soaring like a Spectre
+		Contents: '''
+			Craft the Spectre Boots using your running shoes and Rocket Boots sold by the Goblin Tinkerer!
+			'''
+		Tooltip:
+	}
+
+	GetLightningBoots:{
+		Title: Zipping like a Lightning Bolt
+		Contents: '''
+			Craft the Lightning Boots, an improvement of the Spectre Boots using an Aglet and an Anklet of the Wind.
+
+			Aglets are found in surface chests or crates.
+			Anklet of the Wind can be found in Jungle chests or crates.
+			'''
+		Tooltip:
+	}
+
+	GetObsidianBoots:{
+		Title: The floor may be lava, But my feet are obsidian!
+		Contents: '''
+			Craft the Obsidian Water Walking Boots by combining normal Water Walking Boots with an Obsidian Skull.
+
+			Water Walking Boots can be found in Ocean chests or crates.
+			'''
+		Tooltip:
+	}
+
+	GetFrostsparkBoots:{
+		Title: Terraria.. On Ice!
+		Contents: '''
+			Craft the Frostspark Boots by adding Ice Skates to your Lightning Boots
+
+			Ice Skates can also be found in Tundra chests or crates.
+			'''
+		Tooltip:
+	}
+
+	GetLavaWaders:{
+		Title: Hell's Jesus
+		Contents: '''
+			Craft the Lava Waders, an upgrade of the Obsidian Water Walking Boots using a Lava Charm (or variants) and an Obsidian Rose.
+
+			Lava Charms can be found in chests found near the Underworld, or within Obsidian Crates fished in Lava.
+			Obsidian Roses are rarely dropped by Fire Imps in the Underworld.
+			'''
+		Tooltip:
+	}
+
+	GetTerrasparkBoots:{
+		Title: Boots of the Hero
+		Contents: '''
+			Obtain the Terraspark Boots, forged from the finest boots of fire and ice.
+			'''
+		Tooltip:
+	}
+
+	// -------------------
+	// <-> Ankh Shield <->
+
+	GetObsidianShield:{
+		Title: Tougher than Diamonds
+		Contents: '''
+			Craft the Obsidian Shield, using an Obsidian Skull and a Cobalt Shield found in the dungeon's locked chests
+			'''
+		Tooltip:
+	}
+
+	GetArmorPolish:{
+		Title: Brace Yourself
+		Contents: '''
+			Craft the Armor Bracing using Armor Polish and Vitamins.
+			Armor Polish can drop Armored Skeletons in the Dungeon.
+			Vitamins can drop from {Corruptors / Floaty Grosses} within the evil biome.
+			'''
+		Tooltip:
+	}
+
+	GetReflectiveShades:{
+		Title: Slick Shades
+		Contents: '''
+			Craft the Reflective Shades using a Pocket Mirror and a Blindfold.
+			Pocket Mirrors can be dropped by Medusas.
+			Blindfolds can be dropped by infected Mummies or Slimes.
+			'''
+		Tooltip:
+	}
+
+	GetMedicatedBandaid:{
+		Title: Is That Hygenic..?
+		Contents: '''
+			Craft the Medicated Bandaid using Bezoar and an Adhesive Bandage.
+			Bezoar drops from Hornets in the Jungle.
+			Adhesive Bandaid can drop from Werewolves.
+			'''
+		Tooltip:
+	}
+
+	GetCountercoureMantra:{
+		Title: Tongue of the Devil
+		Contents: '''
+			Craft the Countercourse Mantra, made from a Nazar and a Megaphone
+			{how to get both; i got lazy}
+			'''
+		Tooltip:
+	}
+
+	GetThePlan:{
+		Title: This is the greeaatest plaaaaan!
+		Contents: '''
+			Craft The Plan, made from a a Trifold Map and an Alarm Clock
+			{how to get both; i got lazy}
+			'''
+		Tooltip:
+	}
+
+	GetAnkhCharm:{
+		Title: Th-ankh me Later
+		Contents: '''
+			Craft the Ankh Charm, a powerful protective item providing immunity to 10 different common debuffs!
+			'''
+		Tooltip:
+	}
+
+	GetAnkhShield:{
+		Title: Ankhumulation Complete
+		Contents: '''
+			Obtain the Ankh Shield, the finest protection from unpleasant maladies and ailments.
+			'''
+		Tooltip:
+	}
 }
 
 
 
 ExtraChallenges:{
+	InfoExtraChallenges:{
+		Title: Extra Challenges
+		Contents: '''
+			Here are some extra challenges you could try and complete throughout the game!
+			Be sure to check here every now and then as new challenges may open up!
+			'''
+		Tooltip:
+	}
+
+	// ------------------------
+	// <-> Always Available <->
+
+	SurviveLongFall:{
+		Title: Lucky Break
+		Contents: '''
+			Survive a long fall with just a sliver of health remaining.
+			'''
+		Tooltip:
+	}
+
+	RunMarathon:{
+		Title: Marathon Medalist
+		Contents: '''
+			Travel a total of 26.2 miles (roughly 69,200 tiles) on foot.
+			'''
+		Tooltip:
+	}
+
+	Break10kTiles:{
+		Title: Bulldozer
+		Contents: '''
+			Destroy a total of 10,000 tiles.
+			'''
+		Tooltip:
+	}
+
+	DefeatEverySlime:{
+		Title: Gelatin World Tour
+		Contents: '''
+			Defeat every type of slime there is!
+			{Optionally, can include a list of all slimes and ~cross through~ the ones already defeated}
+			'''
+		Tooltip:
+	}
+
+	// ----------------------
+	// <-> Unlocked Later <->
+
+	PurifyWorld:{
+		Title: And Good Riddance!
+		Contents: '''
+			Completely purify all Corruption, Crimson, and Hallow from your world, until the Dryad is satisfied!
+			'''
+		Tooltip:
+	}
+
+	ObtainHighDefense:{
+		Title: NEO is known for its high defense!
+		Contents: '''
+			Amass a substantial count of Defense to truly protect you from major harm.
+			'''
+		Tooltip:
+	}
+
+	DefeatMechaMayhem:{
+		Title: Mecha Mayhem
+		Contents: '''
+			Do battle against the Twins, the Destroyer, and Skeletron Prime simultaneously and emerge victorious.
+			'''
+		Tooltip:
+	}
+
+	DefeatDayEmpress:{
+		Title: Evershining
+		Contents: '''
+			Defeat the Empress of Light at her apex during the daylight.
+			'''
+		Tooltip:
+	}
+
+	GetEveryTrophy:{
+		Title: A Show of Strength
+		Contents: '''
+			Acquire a Boss Trophy from every single boss or event boss.
+			Boss Trophies are a special type of furniture that drops from bosses at a 10% chance, showing just how savage you can be.
+			'''
+		Tooltip:
+	}
+
+
 
 }

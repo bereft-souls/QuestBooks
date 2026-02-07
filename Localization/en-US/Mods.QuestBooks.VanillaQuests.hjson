@@ -9,7 +9,7 @@ Progression: {
 BookNames: {
 	Book0: Before the Journey
 	Book1: Journey's Beginning
-	Book2: -
+	Book2: ---
 	Book3: Player & Side Content
 	Book4: Base, Towns and Arenas
 }
@@ -19,8 +19,8 @@ ChapterNames: {
 	0RecProg: Recommended Combat Progression
 	1Surface: Surface
 	1Caving: Caving
-	2Trials: -
-	2Middle: -
+	2Trials: ---
+	2Middle: ---
 	2End: Journey's End
 	2AfterEnd: After the Journey
 	3MainProg: Main Player Progression

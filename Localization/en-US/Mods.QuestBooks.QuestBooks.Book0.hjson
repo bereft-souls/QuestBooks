@@ -8,6 +8,9 @@ blueprint:{
 
 
 MainTree: {
+	// -------------
+	// <-> Trunk <->
+
 	StartFirstSteps: {
 		Title: First Steps
 		Contents: 
@@ -91,6 +94,9 @@ MainTree: {
 		Tooltip: Housing guide
 	}
 
+	// --------------
+	// <-> Canopy <->
+
 	BasicsCompleteInfo: {
 		Title: Basically a Pro
 		Contents:
@@ -117,8 +123,17 @@ MainTree: {
 			'''
 			
 			'''
-		Tooltip: Invent Tory? Why's that MY job!
+		Tooltip:
 	}
+
+	CraftAnyGear:{
+		Title: ---
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
 
 	ClassInfo: {
 		Title: Damage Types; or, "Classes"
@@ -149,6 +164,23 @@ MainTree: {
 			'''
 		Tooltip: Information about Classes
 	}
+
+	DayNightInfo:{
+		Title: ---
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
+	SurviveFirstNight:{
+		Title: ---
+		Contents: '''
+			
+			'''
+		Tooltip:
+	}
+
 }
 
 RecProgOrder: {
