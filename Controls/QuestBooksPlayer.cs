@@ -40,7 +40,7 @@ namespace QuestBooks.Controls
         public override void SetControls()
         {
             // If we aren't currently displaying the log, OR in the closing animation, do nothing.
-            if (!QuestLogDrawer.DisplayLog || (!QuestLogDrawer.TargetDisplayLog && QuestLogDrawer.OpenTimer > 0))
+            if (!QuestLogDrawer.DisplayLog || (!QuestLogDrawer.TargetDisplayLog && QuestLogDrawer.AnimationInProgress))
                 return;
 
             // If player just attempted to toggle the inventory, and their inventory is

@@ -45,9 +45,14 @@ namespace QuestBooks.Systems
         /// </summary>
         public static int OpenAnimationLength { get; set; } = 20;
         /// <summary>
-        /// The current timer for the open/closing animation. Counts down from <see cref="OpenAnimationLength"/> to 0.
+        /// The current timer for the opening/closing animation. Counts down from <see cref="OpenAnimationLength"/> to 0.
         /// </summary>
         public static int OpenTimer { get; set; } = 0;
+        /// <summary>
+        /// Determines whether the opening/closing animation is currently in progress.
+        /// </summary>
+        public static bool AnimationInProgress { get => OpenTimer > 0; }
+
         public static Vector2 QuestLogDrawOffset { get; set; } = Vector2.Zero;
         public static float QuestLogDrawOpacity { get; set; } = 1f;
 
@@ -56,7 +61,7 @@ namespace QuestBooks.Systems
             bool display = active ?? !DisplayLog;
             bool changed = display != DisplayLog;
 
-            if (changed && !skipAnimation && OpenTimer == 0)
+            if (changed && !skipAnimation && !AnimationInProgress)
                 OpenTimer = OpenAnimationLength;
 
             // If the inventory is currently open, close it.
@@ -74,6 +79,16 @@ namespace QuestBooks.Systems
             }
         }
 
+        /// <summary>
+        /// Skips the opening/closing animation, if it is currently ongoing.
+        /// </summary>
+        public static void SkipAnimation()
+        {
+            OpenTimer = 0;
+            QuestLogDrawOpacity = 1f;
+            QuestLogDrawOffset = Vector2.Zero;
+        }
+
         public static void SelectLogStyle(string style) => SelectLogStyle(QuestLogStyles[style]);
 
         public static void SelectLogStyle(QuestLogStyle style)
@@ -86,7 +101,7 @@ namespace QuestBooks.Systems
         private static bool targetCleared = false;
         public static void DrawQuestLog()
         {
-            if (OpenTimer > 0)
+            if (AnimationInProgress)
             {
                 if (TargetDisplayLog)
                 {
@@ -142,7 +157,7 @@ namespace QuestBooks.Systems
             graphics.SetRenderTargets(targets);
             targetCleared = false;
 
-            if (OpenTimer > 0)
+            if (AnimationInProgress)
                 OpenTimer--;
         }
 

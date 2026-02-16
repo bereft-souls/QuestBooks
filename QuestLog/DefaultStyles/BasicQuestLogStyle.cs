@@ -181,13 +181,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 if (DrawBookOpening(questLogCenter))
                     PreviouslyOpened = true;
 
-                QuestLogDrawer.OpenTimer = 0;
-                QuestLogDrawer.QuestLogDrawOpacity = 1f;
-                QuestLogDrawer.QuestLogDrawOffset = Vector2.Zero;
+                QuestLogDrawer.SkipAnimation();
                 return;
             }
 
-            if (QuestLogDrawer.OpenTimer > 0)
+            if (QuestLogDrawer.AnimationInProgress)
             {
                 LeftMouseHeld = false;
                 LeftMouseJustPressed = false;
@@ -196,8 +194,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 RightMouseJustPressed = false;
                 RightMouseJustReleased = false;
 
-                ScaledMousePos = new(-10000f, -10000f);
-                MouseCanvas = new(-10000, -10000);
+                ScaledMousePos = new(-100000f, -100000f);
+                MouseCanvas = new(-100000, -100000);
             }
 
             if (pageFlippingTimer > 0)
