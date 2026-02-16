@@ -16,6 +16,17 @@
 	<ItemGroup>
 	  <PackageReference Include="NativeFileDialogSharp" Version="0.6.0-alpha" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Quests\VanillaQuests\Book3\ExtraContentProgression\PotionsAndBuffs\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\ArenaMaking\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\BaseAndCrafting\HM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\BaseAndCrafting\Storage\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\BaseAndCrafting\PreHM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\TownSlimes\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\NPCsHM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\NPCsPreHM\" />
+	  <Folder Include="Quests\VanillaQuests\Book4\TownsAndNPCs\Pylons\" />
+	</ItemGroup>
 
 	<!-- References -->
 

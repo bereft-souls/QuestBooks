@@ -51,7 +51,8 @@ namespace QuestBooks
 
         /// <summary>
         /// Deserializes a custom quest log and adds it to the UI.<br/>
-        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.<br/>
+        /// You can supply <paramref name="coverDrawAction"/> to change the icon that draws on the cover of the default quest book.
         /// </summary>
         public static void AddQuestLog(string questLogKey, string serializedQuestLog, Mod mod)
         {
@@ -61,7 +62,8 @@ namespace QuestBooks
 
         /// <summary>
         /// Adds a custom quest log to the UI.<br/>
-        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.<br/>
+        /// You can supply <paramref name="coverDrawAction"/> to change the icon that draws on the cover of the default quest book.
         /// </summary>
         public static void AddQuestLog(string questLogKey, IList<QuestBook> questLog, Mod mod)
         {
