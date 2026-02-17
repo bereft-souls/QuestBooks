@@ -10,7 +10,7 @@ using Terraria.UI;
 
 namespace QuestBooks.Systems
 {
-    internal class QuestLogDrawer : ModSystem
+    public class QuestLogDrawer : ModSystem
     {
         public static RenderTarget2D ScreenRenderTarget { get; private set; }
         public static BlendState BlendState { get; } = new()
@@ -23,25 +23,70 @@ namespace QuestBooks.Systems
             AlphaBlendFunction = BlendFunction.Add
         };
 
+        /// <summary>
+        /// Whether the log will be drawn on this frame.
+        /// </summary>
         public static bool DisplayLog { get; private set; } = false;
+        /// <summary>
+        /// Whether the player is wanting to display the log. This could be <see langword="false"/> while <see cref="DisplayLog"/> is <see langword="true"/> if the log drawer is currently in its closing animation.
+        /// </summary>
+        public static bool TargetDisplayLog { get; private set; } = false;
         public static Vector2 RealScreenSize => ScreenRenderTarget.Size();
 
         public static Dictionary<string, QuestLogStyle> QuestLogStyles { get; internal set; } = null;
         public static QuestLogStyle ActiveStyle { get; internal set; } = null;
-        public static Dictionary<string, Action<SpriteBatch, Vector2, float>> CoverDrawCalls { get; } = [];
 
-        public static void Toggle(bool? active = null)
+        public static Dictionary<string, QuestBooksMod.CoverDrawDelegate> CoverDrawCalls { get; } = [];
+        public static Dictionary<string, QuestBooksMod.LogTitleRetrievalDelegate> LogTitleRetrievalCalls { get; } = [];
+        public static Dictionary<string, QuestBooksMod.LogTitleDrawDelegate> LogTitleDrawCalls { get; } = [];
+
+        /// <summary>
+        /// The total length of the opening/closing animation, in frames. This can be changed.
+        /// </summary>
+        public static int OpenAnimationLength { get; set; } = 20;
+        /// <summary>
+        /// The current timer for the opening/closing animation. Counts down from <see cref="OpenAnimationLength"/> to 0.
+        /// </summary>
+        public static int OpenTimer { get; set; } = 0;
+        /// <summary>
+        /// Determines whether the opening/closing animation is currently in progress.
+        /// </summary>
+        public static bool AnimationInProgress { get => OpenTimer > 0; }
+
+        public static Vector2 QuestLogDrawOffset { get; set; } = Vector2.Zero;
+        public static float QuestLogDrawOpacity { get; set; } = 1f;
+
+        public static void Toggle(bool? active = null, bool skipAnimation = false)
         {
             bool display = active ?? !DisplayLog;
-            DisplayLog = display;
+            bool changed = display != DisplayLog;
+
+            if (changed && !skipAnimation && !AnimationInProgress)
+                OpenTimer = OpenAnimationLength;
 
             // If the inventory is currently open, close it.
             // We can't guarantee the log won't overlap with the inventory,
             // so the easiest way to reduce mouse overlap conflict is just close it.
-            if (DisplayLog && Main.playerInventory)
+            if (display && Main.playerInventory)
                 Main.playerInventory = false;
 
-            ActiveStyle.OnToggle(display);
+            TargetDisplayLog = display;
+
+            if (changed && (display || skipAnimation))
+            {
+                ActiveStyle.OnToggle(display);
+                DisplayLog = display;
+            }
+        }
+
+        /// <summary>
+        /// Skips the opening/closing animation, if it is currently ongoing.
+        /// </summary>
+        public static void SkipAnimation()
+        {
+            OpenTimer = 0;
+            QuestLogDrawOpacity = 1f;
+            QuestLogDrawOffset = Vector2.Zero;
         }
 
         public static void SelectLogStyle(string style) => SelectLogStyle(QuestLogStyles[style]);
@@ -53,10 +98,36 @@ namespace QuestBooks.Systems
             style.OnSelect();
         }
 
-        // This draws the actual quest log to the RenderTarget2D
         private static bool targetCleared = false;
         public static void DrawQuestLog()
         {
+            if (AnimationInProgress)
+            {
+                if (TargetDisplayLog)
+                {
+                    QuestLogDrawOpacity = (OpenAnimationLength - OpenTimer) / (float)OpenAnimationLength;
+                    QuestLogDrawOffset = new(0f, OpenTimer);
+                }
+
+                else
+                {
+                    QuestLogDrawOpacity = OpenTimer / (float)OpenAnimationLength;
+                    QuestLogDrawOffset = new(0f, OpenAnimationLength - OpenTimer);
+                }
+            }
+
+            else
+            {
+                QuestLogDrawOpacity = 1f;
+                QuestLogDrawOffset = Vector2.Zero;
+
+                if (DisplayLog != TargetDisplayLog)
+                {
+                    DisplayLog = TargetDisplayLog;
+                    ActiveStyle.OnToggle(DisplayLog);
+                }
+            }
+
             if (!DisplayLog)
             {
                 if (targetCleared)
@@ -85,6 +156,15 @@ namespace QuestBooks.Systems
 
             graphics.SetRenderTargets(targets);
             targetCleared = false;
+                ColorBlendFunction = BlendFunction.Add,
+            if (AnimationInProgress)
+                OpenTimer--;
+            });
+
+            QuestManager.ActiveStyle.DrawLog(Main.spriteBatch);
+            Main.spriteBatch.End();
+
+            graphics.SetRenderTargets(null);
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
@@ -120,20 +200,29 @@ namespace QuestBooks.Systems
                             return true;
                         },
                         InterfaceScaleType.UI
-                    ));
-            }
-
-            if (!DisplayLog)
-                return;
-
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
-                    Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() * 0.5f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(ScreenRenderTarget,
+                        Main.ScreenSize.ToVector2() * 0.5f + QuestLogDrawOffset,
+                        null,
+                        Color.White * QuestLogDrawOpacity,
+                        0f,
+                        ScreenRenderTarget.Size() * 0.5f,
+                        1f,
+                        SpriteEffects.None,
+                        0f);
+
                     return true;
                 },
                 InterfaceScaleType.None
             ));
+                        Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() * 0.5f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+                        return true;
+                    },
+                    InterfaceScaleType.None
+                ));
+            }
 
             ActiveStyle.ModifyInterfaceLayers(layers);
         }
@@ -143,7 +232,7 @@ namespace QuestBooks.Systems
             SetupRenderTarget();
 
             // Prepare render targets.
-            Main.OnPreDraw += (_) => DrawQuestLog();
+            Main.OnPreDraw += _ => DrawQuestLog();
             Main.OnResolutionChanged += _ => SetupRenderTarget();
         }
 

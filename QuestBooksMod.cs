@@ -17,20 +17,14 @@ namespace QuestBooks
 {
     public class QuestBooksMod : Mod
     {
-        public static Mod Instance { get; private set; }
         public static bool DesignerEnabled { get; internal set; } = false;
         public static Mod DesignerMod { get; private set; } = null;
-
-        public override void Load()
-        {
-            Instance = this;
-        }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
             var packetType = PacketManager.IdToPacket[reader.ReadByte()];
             var packet = (QuestPacket)Activator.CreateInstance(packetType)!;
-            packet.HandlePacket(reader, whoAmI);
+            packet.HandlePacket(in reader, whoAmI);
         }
 
         public override void PostSetupContent()
@@ -40,7 +34,7 @@ namespace QuestBooks
             foreach (Mod mod in ModLoader.Mods)
                 QuestLoader.LoadQuests(mod);
 
-            VanillaQuestBooks.AddVanillaQuests();
+            VanillaQuestBooks.AddVanillaQuests(this);
         }
 
         #region API
@@ -57,34 +51,93 @@ namespace QuestBooks
 
         /// <summary>
         /// Deserializes a custom quest log and adds it to the UI.<br/>
-        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.<br/>
-        /// You can supply <paramref name="coverDrawAction"/> to change the icon that draws on the cover of the default quest book.
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void AddQuestLog(string questLogName, string serializedQuestLog, Action<SpriteBatch, Vector2, float> coverDrawAction = null)
+        public static void AddQuestLog(string questLogKey, string serializedQuestLog, Mod mod)
         {
-            var questBook = JsonConvert.DeserializeObject<List<QuestBook>>(serializedQuestLog, JsonTypeResolverFix.Settings);
-            AddQuestLog(questLogName, questBook, coverDrawAction);
+            var questLog = JsonConvert.DeserializeObject<List<QuestBook>>(serializedQuestLog, JsonTypeResolverFix.Settings);
+            AddQuestLog(questLogKey, questLog, mod);
         }
 
         /// <summary>
         /// Adds a custom quest log to the UI.<br/>
-        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.<br/>
-        /// You can supply <paramref name="coverDrawAction"/> to change the icon that draws on the cover of the default quest book.
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void AddQuestLog(string questLogName, IList<QuestBook> questLog, Action<SpriteBatch, Vector2, float> coverDrawAction = null)
+        public static void AddQuestLog(string questLogKey, IList<QuestBook> questLog, Mod mod)
         {
-            QuestManager.QuestLogs.Add(questLogName, questLog);
-            QuestLogDrawer.CoverDrawCalls.Add(questLogName, coverDrawAction ?? BasicQuestLogStyle.DrawDefaultCover);
+            QuestManager.QuestLogs.Add(questLogKey, questLog);
+            QuestManager.QuestLogMods.Add(questLogKey, mod);
+
+            QuestLogDrawer.CoverDrawCalls.Add(questLogKey, BasicQuestLogStyle.DrawDefaultCover);
+            QuestLogDrawer.LogTitleRetrievalCalls.Add(questLogKey, BasicQuestLogStyle.RetrieveDefaultLogTitle);
+            QuestLogDrawer.LogTitleDrawCalls.Add(questLogKey, BasicQuestLogStyle.DrawDefaultLogTitle);
         }
 
         /// <summary>
-        /// Disabled another quest log (i.e. for replacing the vanilla log).<br/>
+        /// Represents a draw delegate for the icon on the cover of the default quest log style implementation.
+        /// </summary>
+        public delegate void CoverDrawDelegate(SpriteBatch spriteBatch, Vector2 drawCenter, float scale, float rotation);
+
+        /// <summary>
+        /// Allows you to modify the drawing logic for the icon on the cover of the book in the default quest log style.<br/>
+        /// <br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>, <b>AFTER</b> adding your quest log.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException">Thrown when attempting to register a draw delegate for a quest log that has not been registered.</exception>
+        public static void RegisterCoverDrawDelegate(string questLogKey, CoverDrawDelegate coverDrawDelegate)
+        {
+            if (!QuestManager.QuestLogs.ContainsKey(questLogKey))
+                throw new KeyNotFoundException($"Quest log with key {questLogKey} has not been registered!");
+
+            QuestLogDrawer.CoverDrawCalls[questLogKey] = coverDrawDelegate;
+        }
+
+        /// <summary>
+        /// Represents a delegate used to retrieve the title for a given quest log.
+        /// </summary>
+        public delegate string LogTitleRetrievalDelegate(string questLogKey);
+
+        /// <summary>
+        /// Allows you to modify how the title of the given quest log is retrieved.<br/>
+        /// <br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>, <b>AFTER</b> adding your quest log.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException">Thrown when attempting to register a draw delegate for a quest log that has not been registered.</exception>
+        public static void RegisterLogTitle(string questLogKey, LogTitleRetrievalDelegate logTitleRetrievalDelegate)
+        {
+            if (!QuestManager.QuestLogs.ContainsKey(questLogKey))
+                throw new KeyNotFoundException($"Quest log with key {questLogKey} has not been registered!");
+
+            QuestLogDrawer.LogTitleRetrievalCalls[questLogKey] = logTitleRetrievalDelegate;
+        }
+
+        /// <summary>
+        /// Represents a draw delegate for the title of a quest log when the user is selecting which quest log to interact with.
+        /// </summary>
+        public delegate void LogTitleDrawDelegate(SpriteBatch spriteBatch, Rectangle drawArea, string title, float opacity, bool hovered, bool selected);
+
+        /// <summary>
+        /// Allows you to modify the drawing logic for the name of your quest log when the user is choosing which log to select.<br/>
+        /// <br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>, <b>AFTER</b> adding your quest log.
+        /// </summary>
+        /// <exception cref="KeyNotFoundException">Thrown when attempting to register a draw delegate for a quest log that has not been registered.</exception>
+        public static void RegisterLogTitleDrawDelegate(string questLogKey, LogTitleDrawDelegate logTitleDrawDelegate)
+        {
+            if (!QuestManager.QuestLogs.ContainsKey(questLogKey))
+                throw new KeyNotFoundException($"Quest log with key {questLogKey} has not been registered!");
+
+            QuestLogDrawer.LogTitleDrawCalls[questLogKey] = logTitleDrawDelegate;
+        }
+
+        /// <summary>
+        /// Disables another quest log (i.e. for replacing the vanilla log).<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        /// <param name="questLogName"></param>
-        public static void DisableQuestLog(string questLogName)
+        public static void DisableQuestLog(string questLogKey)
         {
-            QuestManager.DisabledQuestLogs.Add(questLogName);
+            if (!QuestManager.DisabledQuestLogs.Contains(questLogKey))
+                QuestManager.DisabledQuestLogs.Add(questLogKey);
         }
 
         /// <summary>
@@ -92,13 +145,13 @@ namespace QuestBooks
         /// If <paramref name="exclusive"/> is <see langword="true"/>, the passed in style will be the only one able to be used.<br/>
         /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
         /// </summary>
-        public static void AddQuestLogStyle(QuestLogStyle questLog, Mod mod, bool exclusive = false)
+        public static void AddQuestLogStyle(QuestLogStyle questLogStyle, Mod mod, bool exclusive = false)
         {
             if (exclusive)
-                QuestLoader.ExclusiveOverrideStyle = questLog;
+                QuestLoader.ExclusiveOverrideStyle = questLogStyle;
 
             QuestLoader.LogStyleRegistry.TryAdd(mod, []);
-            QuestLoader.LogStyleRegistry[mod].Add(questLog);
+            QuestLoader.LogStyleRegistry[mod].Add(questLogStyle);
         }
 
         public static Quest GetQuest(string questName) => QuestManager.GetQuest(questName);

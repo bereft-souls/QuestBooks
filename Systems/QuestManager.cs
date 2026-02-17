@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace QuestBooks.Systems
 {
-    internal static class QuestManager
+    public static class QuestManager
     {
         // These are only string values so that the quests don't have a chance to end
         // up being duplicated by user-error. We only want one loaded copy of each quest.
@@ -28,6 +28,7 @@ namespace QuestBooks.Systems
 
         public static IList<QuestBook> QuestBooks { get; internal set; } = null;
         public static Dictionary<string, IList<QuestBook>> QuestLogs { get; } = [];
+        public static Dictionary<string, Mod> QuestLogMods { get; } = [];
         public static string ActiveQuestLog { get; internal set; } = null;
 
         public static IEnumerable<KeyValuePair<string, IList<QuestBook>>> AvailableQuestLogs { get => QuestLogs.Where(kvp => !DisabledQuestLogs.Contains(kvp.Key)); }

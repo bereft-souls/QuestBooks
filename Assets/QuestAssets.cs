@@ -22,6 +22,7 @@ namespace QuestBooks.Assets
         public static LazyTexture QuestBookOutline { get; } = new("QuestLog/QuestBookOutline");
 
         public static LazyTexture ClosedBook { get; } = new("QuestLog/ClosedBook");
+        public static LazyTexture ClosedBookOutline { get; } = new("QuestLog/ClosedBookOutline");
         public static LazyTexture CoverTree { get; } = new("QuestLog/CoverTree");
         public static LazyTexture QuestLogCanvas { get; } = new("QuestLog/QuestLogCanvas");
         public static LazyTexture ResizeIndicator { get; } = new("QuestLog/ResizeIndicator");

@@ -7,6 +7,8 @@ namespace QuestBooks.Systems.NetCode
 {
     internal class PacketManager : ModSystem
     {
+        public static Mod QuestBooks = null;
+
         public static byte PacketTypeCount = 0;
 
         public static Dictionary<Type, byte> PacketToId = [];
@@ -14,6 +16,8 @@ namespace QuestBooks.Systems.NetCode
 
         public override void Load()
         {
+            QuestBooks = Mod;
+
             var types = GetType().Assembly.GetTypes().Where(
                 t => !t.IsAbstract && t.IsSubclassOf(typeof(QuestPacket)));
 
