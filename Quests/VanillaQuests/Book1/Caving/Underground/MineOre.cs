@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Underground
+{
+    internal class MineOre : Quest
+    {
+        public override bool CheckCompletion()
+        {
+            return false;
+            // physically mine and collect ANY ore, achievement mirror
+        }
+    }
+}

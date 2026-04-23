@@ -4,7 +4,9 @@ using QuestBooks.Assets;
 using QuestBooks.Systems;
 using SDL2;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
+using Terraria.IO;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultStyles
@@ -31,8 +33,47 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                     if (file.IsOk)
                     {
-                        QuestLoader.SaveQuestLog(QuestManager.QuestBooks, file.Path);
-                        Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.QuestLogExported"));
+                        string path = file.Path;
+
+                        if (Path.GetExtension(path) != ".json")
+                        {
+                            path += ".json";
+                            if (File.Exists(path))
+                            {
+                                SDL.SDL_MessageBoxData message = new()
+                                {
+                                    window = Main.instance.Window.Handle,
+                                    title = Language.GetTextValue("Mods.QuestBooks.Tooltips"),
+                                    message = Language.GetText("Mods.QuestBooks.Tooltips").Format(path),
+                                    flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
+                                    numbuttons = 2,
+                                    buttons = [
+                                        new SDL.SDL_MessageBoxButtonData()
+                                        {
+                                            buttonid = 2,
+                                            flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
+                                            text = Language.GetTextValue("Mods.QuestBooks.Tooltips"),
+                                        },
+                                        new SDL.SDL_MessageBoxButtonData()
+                                        {
+                                            buttonid = 1,
+                                            flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
+                                            text = Language.GetTextValue("Mods.QuestBooks.Tooltips"),
+                                        }
+                                    ]
+                                };
+
+                                int result = SDL.SDL_ShowMessageBox(ref message, out int buttonid);
+                                if (result != 0 || buttonid != 1)
+                                    path = null;
+                            }
+                        }
+
+                        if (path is not null)
+                        {
+                            QuestLoader.SaveQuestLog(QuestManager.QuestBooks, path);
+                            Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.QuestLogExported"));
+                        }
                     }
                 }
             }

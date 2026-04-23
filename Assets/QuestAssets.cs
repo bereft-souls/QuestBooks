@@ -182,11 +182,10 @@ namespace QuestBooks.Assets
         public Asset<T> ContentAsset => Value;
         public T Asset => Value.Value;
         public Action WaitAction => Value.Wait;
-
-        private readonly bool _immediateLoad = immediateLoad;
-        public bool ImmediateLoad => _immediateLoad;
+        public bool ImmediateLoad { get; } = immediateLoad;
 
         public static implicit operator T(LazyAsset<T> lazyAsset) => lazyAsset.Asset;
+        public static implicit operator Asset<T>(LazyAsset<T> lazyAsset) => lazyAsset.ContentAsset;
     }
 
     public interface ILazy

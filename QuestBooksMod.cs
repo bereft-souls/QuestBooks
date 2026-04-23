@@ -11,6 +11,7 @@ using QuestBooks.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace QuestBooks
@@ -76,7 +77,7 @@ namespace QuestBooks
         /// <summary>
         /// Represents a draw delegate for the icon on the cover of the default quest log style implementation.
         /// </summary>
-        public delegate void CoverDrawDelegate(SpriteBatch spriteBatch, Vector2 drawCenter, float scale, float rotation);
+        public delegate void CoverDrawDelegate(SpriteBatch spriteBatch, Vector2 drawCenter, float rotation, float scale, float opacity);
 
         /// <summary>
         /// Allows you to modify the drawing logic for the icon on the cover of the book in the default quest log style.<br/>

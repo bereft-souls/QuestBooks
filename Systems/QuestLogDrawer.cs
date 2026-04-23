@@ -105,14 +105,17 @@ namespace QuestBooks.Systems
             {
                 if (TargetDisplayLog)
                 {
+                    if (OpenTimer == OpenAnimationLength)
+                        QuestLogDrawOffset = new(0f, OpenTimer);
+
                     QuestLogDrawOpacity = (OpenAnimationLength - OpenTimer) / (float)OpenAnimationLength;
-                    QuestLogDrawOffset = new(0f, OpenTimer);
+                    QuestLogDrawOffset = new(0f, float.Lerp(QuestLogDrawOffset.Y, 0f, 0.15f));
                 }
 
                 else
                 {
                     QuestLogDrawOpacity = OpenTimer / (float)OpenAnimationLength;
-                    QuestLogDrawOffset = new(0f, OpenAnimationLength - OpenTimer);
+                    QuestLogDrawOffset = new(0f, float.Lerp(QuestLogDrawOffset.Y, OpenAnimationLength - OpenTimer, 0.15f));
                 }
             }
 

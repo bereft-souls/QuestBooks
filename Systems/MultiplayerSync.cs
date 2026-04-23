@@ -52,7 +52,10 @@ namespace QuestBooks.Systems
                 completedQuests.Add(packet.ReadNullTerminatedString());
 
             // Mark each completed quest as completed.
-            QuestLoader.LoadCompletedQuests(completedQuests);
+            QuestLoader.LoadCompletedQuests(completedQuests, out var unloaded);
+
+            foreach (string quest in unloaded)
+                QuestManager.UnloadedCompletedWorldQuests.Add(quest);
         }
     }
 

@@ -86,7 +86,12 @@ namespace QuestBooks.Systems
             // Attempt to fetch completed quest data from world.
             // If it does not exist, leave all quests as incomplete.
             if (tag.TryGet(TagKey, out string[] quests))
-                LoadCompletedQuests(quests);
+            {
+                LoadCompletedQuests(quests, out var unloaded);
+
+                foreach (string quest in unloaded)
+                    QuestManager.UnloadedCompletedWorldQuests.Add(quest);
+            }
 
             // Immediately mark any quests that should have previously been completed
             foreach (var quest in QuestManager.IncompleteWorldQuests.Select(QuestManager.GetQuest).ToArray())
@@ -105,7 +110,12 @@ namespace QuestBooks.Systems
                 // Attempt to fetch completed quest data from player.
                 // If it does not exist, leave all player quests as incomplete.
                 if (tag.TryGet(TagKey, out string[] quests))
-                    LoadCompletedQuests(quests);
+                {
+                    LoadCompletedQuests(quests, out var unloaded);
+
+                    foreach (string quest in unloaded)
+                        QuestManager.UnloadedCompletedPlayerQuests.Add(quest);
+                }
 
                 QuestLogDrawer.ActiveStyle.LoadPlayerData(tag);
             }
@@ -126,9 +136,8 @@ namespace QuestBooks.Systems
 
         public override void SaveWorldData(TagCompound tag)
         {
-            if (QuestManager.CompletedWorldQuests is not null)
-                tag[TagKey] = QuestManager.CompletedWorldQuests.ToList();
-
+            var worldQuests = QuestManager.CompletedWorldQuests?.Concat(QuestManager.UnloadedCompletedWorldQuests) ?? QuestManager.UnloadedCompletedWorldQuests;
+            tag[TagKey] = worldQuests.ToArray();
             QuestLogDrawer.ActiveStyle.SaveWorldData(tag);
         }
 
@@ -136,9 +145,8 @@ namespace QuestBooks.Systems
         {
             public override void SaveData(TagCompound tag)
             {
-                if (QuestManager.CompletedPlayerQuests is not null)
-                    tag[TagKey] = QuestManager.CompletedPlayerQuests.ToList();
-
+                var playerQuests = QuestManager.CompletedPlayerQuests?.Concat(QuestManager.UnloadedCompletedPlayerQuests) ?? QuestManager.UnloadedCompletedPlayerQuests;
+                tag[TagKey] = playerQuests.ToArray();
                 QuestLogDrawer.ActiveStyle.SavePlayerData(tag);
             }
         }
@@ -151,10 +159,20 @@ namespace QuestBooks.Systems
 
         public override void OnWorldUnload() => QuestManager.UnloadActiveQuests();
 
-        public static void LoadCompletedQuests(IEnumerable<string> completedQuests)
+        public static void LoadCompletedQuests(IEnumerable<string> completedQuests, out IEnumerable<string> unloadedQuests)
         {
-            foreach (string quest in completedQuests.Where(q => QuestManager.TryGetQuest(q, out _)))
-                QuestManager.MarkComplete(quest);
+            List<string> unloaded = [];
+
+            foreach (string key in completedQuests)
+            {
+                if (QuestManager.TryGetQuest(key, out var quest))
+                    QuestManager.MarkComplete(quest);
+
+                else
+                    unloaded.Add(key);
+            }
+
+            unloadedQuests = unloaded;
         }
 
         public static void SaveQuestLog(IList<QuestBook> questLog, string filePath)

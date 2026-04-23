@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
+using ReLogic.Content;
+
+namespace QuestBooks.Quests.VanillaQuests.Book1.Surface.EvilBiome
+{
+    internal class BiomeEvil : DynamicQuest
+    {
+        // TODO, this entire thing
+        // i ASSUME it would need to be a dynamic quest
+        public override Asset<Texture2D> Texture => QuestAssets.MagicPixel;
+
+        public override bool CheckCompletion()
+        {
+            return false;
+        }
+    }
+}
