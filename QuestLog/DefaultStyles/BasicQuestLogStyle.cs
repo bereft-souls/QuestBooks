@@ -202,15 +202,18 @@ namespace QuestBooks.QuestLog.DefaultStyles
             {
                 pageFlippingTimer--;
 
+                const int sheetFrames = 2;
+                const int frameLength = 5;
+
                 DrawTasks.Add(sb =>
                 {
-                    Texture2D cover = QuestAssets.ClosedBook;
-                    sb.Draw(cover, questLogCenter, null, Color.White, 0f, cover.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
-                    return;
+                    Texture2D pageFlipping = QuestAssets.PageFlippingSheet;
+                    Rectangle source = pageFlipping.Frame(verticalFrames: 2, frameY: (pageFlippingTimer / frameLength) % sheetFrames);
 
-                    Texture2D flippingTexture = null;
-                    Rectangle frame = new(0, 0, 0, 0);
-                    sb.Draw(flippingTexture, questLogCenter, frame, Color.White, 0f, frame.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
+                    Vector2 bookSize = QuestAssets.QuestLogCanvas.Asset.Size();
+                    Rectangle bookArea = CenteredRectangle(questLogCenter, bookSize);
+
+                    sb.Draw(pageFlipping, bookArea.Bottom(), source, Color.White, 0f, source.Bottom() - source.Location.ToVector2(), LogScale, SpriteEffects.None, 0f);
                 });
 
                 return;
