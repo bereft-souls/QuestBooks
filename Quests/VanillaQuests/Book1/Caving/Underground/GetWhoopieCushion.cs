@@ -10,7 +10,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Underground
     {
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
+            return false;
             // Get a Whoopie Cushion
         }
     }

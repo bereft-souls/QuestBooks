@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Surface.EvilBiome
     {
         // TODO, this entire thing
         // i ASSUME it would need to be a dynamic quest
-        public override Asset<Texture2D> Texture => throw new NotImplementedException();
+        public override Asset<Texture2D> Texture => QuestAssets.MagicPixel;
 
         public override bool CheckCompletion()
         {

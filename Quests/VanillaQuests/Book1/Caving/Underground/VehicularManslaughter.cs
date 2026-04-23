@@ -10,7 +10,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Underground
     {
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
+            return false;
             // Kill something while riding a minecart, direct achievement mirror
         }
     }

@@ -105,14 +105,17 @@ namespace QuestBooks.Systems
             {
                 if (TargetDisplayLog)
                 {
+                    if (OpenTimer == OpenAnimationLength)
+                        QuestLogDrawOffset = new(0f, OpenTimer);
+
                     QuestLogDrawOpacity = (OpenAnimationLength - OpenTimer) / (float)OpenAnimationLength;
-                    QuestLogDrawOffset = new(0f, OpenTimer);
+                    QuestLogDrawOffset = new(0f, float.Lerp(QuestLogDrawOffset.Y, 0f, 0.15f));
                 }
 
                 else
                 {
                     QuestLogDrawOpacity = OpenTimer / (float)OpenAnimationLength;
-                    QuestLogDrawOffset = new(0f, OpenAnimationLength - OpenTimer);
+                    QuestLogDrawOffset = new(0f, float.Lerp(QuestLogDrawOffset.Y, OpenAnimationLength - OpenTimer, 0.15f));
                 }
             }
 
@@ -156,15 +159,9 @@ namespace QuestBooks.Systems
 
             graphics.SetRenderTargets(targets);
             targetCleared = false;
-                ColorBlendFunction = BlendFunction.Add,
+
             if (AnimationInProgress)
                 OpenTimer--;
-            });
-
-            QuestManager.ActiveStyle.DrawLog(Main.spriteBatch);
-            Main.spriteBatch.End();
-
-            graphics.SetRenderTargets(null);
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
@@ -200,6 +197,12 @@ namespace QuestBooks.Systems
                             return true;
                         },
                         InterfaceScaleType.UI
+                    ));
+            }
+
+            if (!DisplayLog)
+                return;
+
             layers.Insert(mouseTextLayer, new LegacyGameInterfaceLayer(
                 "QuestBooks: Quest Log", () =>
                 {
@@ -217,12 +220,6 @@ namespace QuestBooks.Systems
                 },
                 InterfaceScaleType.None
             ));
-                        Main.spriteBatch.Draw(ScreenRenderTarget, Main.ScreenSize.ToVector2() * 0.5f, null, Color.White, 0f, ScreenRenderTarget.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
-                        return true;
-                    },
-                    InterfaceScaleType.None
-                ));
-            }
 
             ActiveStyle.ModifyInterfaceLayers(layers);
         }

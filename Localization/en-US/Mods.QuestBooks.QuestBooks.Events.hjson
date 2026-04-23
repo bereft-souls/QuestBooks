@@ -1,17 +1,11 @@
 AllCelestialPillarsDefeated: {
 	Title: Star Destroyer
-	Contents: 
-		'''
-		Defeat the four celestial towers of the moon.
-		'''
+	Contents: Defeat the four celestial towers of the moon.
 }
 
 SurviveBloodMoon: {
 	Title: Bloodbath
-	Contents: 
-		'''
-		Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
-		'''
+	Contents: Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
 }
 
 FrostMoon: {
@@ -19,7 +13,7 @@ FrostMoon: {
 		Title: In The Pines
 		Contents: Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
 	}
-	
+
 	Santa-NK1Defeated: {
 		Title: Ho- Ho- Horror
 		Contents: Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and caring appearance of Santa.

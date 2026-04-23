@@ -26,6 +26,10 @@ namespace QuestBooks.Systems
         public static string[] CompletedPlayerQuests { get; internal set; } = null;
         public static string[] IncompletePlayerQuests { get; internal set; } = null;
 
+        // Used to remember quests that were previously completed but now unloaded
+        public static HashSet<string> UnloadedCompletedWorldQuests { get; internal set; } = [];
+        public static HashSet<string> UnloadedCompletedPlayerQuests { get; internal set; } = [];
+
         public static IList<QuestBook> QuestBooks { get; internal set; } = null;
         public static Dictionary<string, IList<QuestBook>> QuestLogs { get; } = [];
         public static Dictionary<string, Mod> QuestLogMods { get; } = [];
@@ -87,6 +91,9 @@ namespace QuestBooks.Systems
             PlayerQuests = null;
             CompletedPlayerQuests = null;
             IncompletePlayerQuests = null;
+
+            UnloadedCompletedPlayerQuests.Clear();
+            UnloadedCompletedWorldQuests.Clear();
         }
 
         public static void SelectQuestLog(string questLog)
@@ -123,6 +130,9 @@ namespace QuestBooks.Systems
         public static void MarkComplete(string questName) => MarkComplete(GetQuest(questName));
         public static void MarkComplete(Quest quest)
         {
+            if (quest.Completed)
+                return;
+
             var newIncomplete = new List<string>(IncompleteQuests);
             var newComplete = new List<string>(CompletedQuests);
 

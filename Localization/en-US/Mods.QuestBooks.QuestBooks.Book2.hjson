@@ -1,582 +1,478 @@
-blueprint:{
-		Title: Placeholder / Blueprint Quest
-		Contents: '''
-			This is how the quest's text looks like in the localization.
-			'''
-		Tooltip: Hello!
-	}
+blueprint: {
+	Title: Placeholder / Blueprint Quest
+	Contents: This is how the quest's text looks like in the localization.
+	Tooltip: Hello!
+}
 
-
-WoFto1Mech:{
-	StartHM:{
+WoFto1Mech: {
+	StartHM: {
 		Title: It's Hard!
-		Contents: '''
-			Unleash the ancient spirits of light and darkness across your world, enabling much stronger foes and showering the world with dazzling treasures (and rainbows!).
-			'''
-		Tooltip:
+		Contents: Unleash the ancient spirits of light and darkness across your world, enabling much stronger foes and showering the world with dazzling treasures (and rainbows!).
+		Tooltip: ---
 	}
 
-	InfoHM:{
+	InfoHM: {
 		Title: ---
-		Contents: '''
-			
-			'''
-		Tooltip:
+		Contents: ""
+		Tooltip: ---
 	}
 
 	// --------------------
 	// <-> Main Pathway <->
-	SmashEvilAltar:{
+	SmashEvilAltar: {
 		Title: Begone, Evil!
-		Contents: '''
-			Smash a demon or crimson altar with a powerful, holy hammer.
-			'''
-		Tooltip:
+		Contents: Smash a demon or crimson altar with a powerful, holy hammer.
+		Tooltip: ---
 	}
 
-	MineHMOre:{
+	MineHMOre: {
 		Title: Extra Shiny!
-		Contents: '''
-			Mine a powerful ore that has been newly blessed upon your world.
-			'''
-		Tooltip:
+		Contents: Mine a powerful ore that has been newly blessed upon your world.
+		Tooltip: ---
 	}
 
-	GetMechBossSummon:{
+	GetMechBossSummon: {
 		Title: Mechanical Lures
-		Contents: '''
-			Craft or Find a Mechanical Summon, each capabale of summoning a different Mechanical Menace.
-			'''
-		Tooltip:
+		Contents: Craft or Find a Mechanical Summon, each capabale of summoning a different Mechanical Menace.
+		Tooltip: ---
 	}
 
-	DefeatAnyMech:{
+	DefeatAnyMech: {
 		Title: One Down, Two To Go
-		Contents: '''
-			Defeat one of the Mechanical Menaces, opening new materials and events to fight in.
-			'''
-		Tooltip:
+		Contents: Defeat one of the Mechanical Menaces, opening new materials and events to fight in.
+		Tooltip: ---
 	}
 
-	GetHallowedGear:{
+	GetHallowedGear: {
 		Title: Hallow, Hallowed Bar!
-		Contents: '''
+		Contents:
+			'''
 			Acquire some Hallowed Bars by defeating any Mechanical Menace.
 			Hallowed Bars are a potent metal, capable of crafting great legendary items and an armor set for any class.
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
 	// -------------------
 	// <-> New Threats <->
-
-	InfoNewThreats:{
+	
+	InfoNewThreats: {
 		Title: some better name is due
-		Contents: '''
+		Contents:
+			'''
 			With the release of the spirits of Light and Dark, greater enemies and monsters have arrived in the world of Terraria in both new and old places.
 			These are some of the major new encounters, but youre encouraged to visit old biomes as theyve almost certainly got new things within!
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	DefeatGoblinSummoner:{
+	DefeatGoblinSummoner: {
 		Title: Hexes and Flames
-		Contents: '''
+		Contents:
+			'''
 			Defeat the Goblin Warlock, a powerful conjurer gifted with darkest of magic.
 			Beware her summoned army of shadowflame ghasts!
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	GetSpiderFangs:{
+	GetSpiderFangs: {
 		Title: Crawling Black
-		Contents: '''
+		Contents:
+			'''
 			Within a Spider's Nest, defeat Black Recluses and collect their Spider Fangs.
 			Spider Fangs are a special material useful for many summoner based gear.
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	DefeatWeatherMiniboss:{
+	DefeatWeatherMiniboss: {
 		Title: Weather the Storms
-		Contents: '''
-			Defeat a great weather entity residing in either the harshest Sandstorms or the coldest Snowstorms.
-			'''
-		Tooltip:
+		Contents: Defeat a great weather entity residing in either the harshest Sandstorms or the coldest Snowstorms.
+		Tooltip: ---
 	}
 
-	DefeatWyvern:{
+	DefeatWyvern: {
 		Title: Soaring with Sky Serpants
-		Contents: '''
+		Contents:
+			'''
 			Defeat a Wyvern, a giant sky dragon soaring high in the stratosphere.
 			Wyverns drop Souls of Flight, an essential material for most craftable wings.
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	DefeatFlyingDutchman:{
+	DefeatFlyingDutchman: {
 		Title: Liddle-liddle-lee
-		Contents: '''
-			Defeat the Flying Dutchman, a soaring pirate ship fit with plenty of cannons to knock any who rival it.
-			'''
-		Tooltip:
+		Contents: Defeat the Flying Dutchman, a soaring pirate ship fit with plenty of cannons to knock any who rival it.
+		Tooltip: ---
 	}
 
-	KillBloodMoonReel2:{
+	KillBloodMoonReel2: {
 		Title: It Came From The Blood Lake
-		Contents: '''
-			Fish up a Hardmode Bloodmoon monster and defeat it for special loot.
-			'''
-		Tooltip:
+		Contents: Fish up a Hardmode Bloodmoon monster and defeat it for special loot.
+		Tooltip: ---
 	}
 
-	GetHMWingMat:{
+	GetHMWingMat: {
 		Title: Foes of a feather flock together
-		Contents: '''
-			Many foes will occasionally drop a large Feather item or some special ingredient that will be able to craft a Pair of Wings, Collect any one of these!
-			'''
-		Tooltip:
+		Contents: Many foes will occasionally drop a large Feather item or some special ingredient that will be able to craft a Pair of Wings, Collect any one of these!
+		Tooltip: ---
 	}
 
-	DefeatMothron:{
+	DefeatMothron: {
 		Title: Kaiju Beatdown
-		Contents: '''
-			Defeat the buzzing Mothron, a massive moth-like monstrosity roaming the advanced Solar Eclipse.
-			'''
-		Tooltip:
+		Contents: Defeat the buzzing Mothron, a massive moth-like monstrosity roaming the advanced Solar Eclipse.
+		Tooltip: ---
 	}
 
 	// ------------------
 	// <-> Biome Content <->
-
-	BiomeHMEvil:{
+	
+	BiomeHMEvil: {
 		Title: Evil Up
-		Contents: '''
-			-
-			'''
-		Tooltip:
+		Contents: -
+		Tooltip: ---
 	}
 
-	GetEvilEssence:{
+	GetEvilEssence: {
 		Title: Essence of Evil
-		Contents: '''
-			Fight new monsters lurking in the newly erected underground {Corruption / Crimson} and collect {Cursed Flames / Ichor}, the essence of the infection.
-			'''
-		Tooltip:
+		Contents: Fight new monsters lurking in the newly erected underground {Corruption / Crimson} and collect {Cursed Flames / Ichor}, the essence of the infection.
+		Tooltip: ---
 	}
 
-	GetInfectionSouls:{
+	GetInfectionSouls: {
 		Title: Light and Dark
-		Contents: '''
-			Collect the souls of the dark night and the glimmering light from the enemies of the underground {Corruption / Crimson} and Hallow biomes
-			'''
-		Tooltip:
+		Contents: Collect the souls of the dark night and the glimmering light from the enemies of the underground {Corruption / Crimson} and Hallow biomes
+		Tooltip: ---
 	}
 
-	GetDesertShard:{
+	GetDesertShard: {
 		Title: Ill Deserts And Glistening Dunes
-		Contents: '''
-			Deserts struck by the infection of either light or dark will house special infected variants of various enemies, some of which can drop special materials..
-			'''
-		Tooltip:
+		Contents: Deserts struck by the infection of either light or dark will house special infected variants of various enemies, some of which can drop special materials..
+		Tooltip: ---
 	}
 
-	GetKeyOfNight:{
+	GetKeyOfNight: {
 		Title: Key of Night
-		Contents: '''
-			Deserts struck by the infection of either light or dark will house special infected variants of various enemies, some of which can drop special materials..
-			'''
-		Tooltip:
+		Contents: Deserts struck by the infection of either light or dark will house special infected variants of various enemies, some of which can drop special materials..
+		Tooltip: ---
 	}
 
-	GetKeyOfLight:{
+	GetKeyOfLight: {
 		Title: Key of Light
-		Contents: '''
-			Craft a Key of Light, capable of awakening a chest into a monstrous Hallow form..
-			'''
-		Tooltip:
+		Contents: Craft a Key of Light, capable of awakening a chest into a monstrous Hallow form..
+		Tooltip: ---
 	}
 
-	DefeatBiomeMimic:{
+	DefeatBiomeMimic: {
 		Title: I'm Not Loot.
-		Contents: '''
-			Defeat a powerful Biome Mimic, a great impostor of the underground Hallowed or {Corruption / Crimson}.
-			'''
-		Tooltip:
+		Contents: Defeat a powerful Biome Mimic, a great impostor of the underground Hallowed or {Corruption / Crimson}.
+		Tooltip: ---
 	}
 
 	// <-> The Hallow <->
-
-	BiomeHallow:{
+	
+	BiomeHallow: {
 		Title: The Hallow
-		Contents: '''
-			A land of fairy-tales and magic turned vicious, The Hallow is the antithesis to the evil biome and will spread just like it unless stopped.
-			'''
-		Tooltip:
+		Contents: A land of fairy-tales and magic turned vicious, The Hallow is the antithesis to the evil biome and will spread just like it unless stopped.
+		Tooltip: ---
 	}
 
-	GetPearlwood:{
+	GetPearlwood: {
 		Title: Pearlescent Timber
-		Contents: '''
-			Chop down some Pearlwood Trees, they may be of little use by now; but theyre great wood!
-			'''
-		Tooltip:
+		Contents: Chop down some Pearlwood Trees, they may be of little use by now; but theyre great wood!
+		Tooltip: ---
 	}
 
-	GetAFairyCritter:{
+	GetAFairyCritter: {
 		Title: Faecatching
-		Contents: '''
+		Contents:
+			'''
 			Shake up a Pearlwood tree and net any Fairy that flies out.
 			You can then send them out in the caves and they will find new loot for you!
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	GetGelaticCrystal:{
+	GetGelaticCrystal: {
 		Title: A Gelatin in The Rough
-		Contents: '''
-			Find a Gelatin Crystal deep within the underground Hallow, glistening brightly among the rest.
-			'''
-		Tooltip:
+		Contents: Find a Gelatin Crystal deep within the underground Hallow, glistening brightly among the rest.
+		Tooltip: ---
 	}
 
-	GetCrystalAssasinSet:{
+	GetCrystalAssasinSet: {
 		Title: Shining Shinobi
-		Contents: '''
-			Loot a full set of Crystal Assassin armor and dash around with style!
-			'''
-		Tooltip:
+		Contents: Loot a full set of Crystal Assassin armor and dash around with style!
+		Tooltip: ---
 	}
 
-	DefeatRainbowSlime:{
+	DefeatRainbowSlime: {
 		Title: Across The Rainbow
-		Contents: '''
-			Defeat a Rainbow Slime, rarely seen hopping in the iridescent rainfalls of the Hallow.
-			'''
-		Tooltip:
+		Contents: Defeat a Rainbow Slime, rarely seen hopping in the iridescent rainfalls of the Hallow.
+		Tooltip: ---
 	}
 
-	DefeatChaosElemental:{
+	DefeatChaosElemental: {
 		Title: Chaotic Evil
-		Contents: '''
+		Contents:
+			'''
 			Defeat a Chaos Elemental, an uncommon yet extremely evasive enemy found in the Underground Hallow.
 			Rumors say these erratic beings use a special rod to blink about..
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 }
 
-
-
-3MechtoGolem:{
+3MechtoGolem: {
 	// --------------------
 	// <-> Main Pathway <->
-
-	GetHallowedPick:{
+	
+	GetHallowedPick: {
 		Title: Drax Attax
-		Contents: '''
-			Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
-			'''
-		Tooltip:
+		Contents: Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
+		Tooltip: ---
 	}
 
-	GetChlorophyteBars:{
+	GetChlorophyteBars: {
 		Title: Photosynthesis
-		Contents: '''
+		Contents:
+			'''
 			Mine chlorophyte, an organic ore found deep among the thickest of flora.
 			Chlorophyte is an extremely versatile ore, used in a lot of advanced crafts and alloying, be sure to get a bunch!
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	GetTurtleShells:{
+	GetTurtleShells: {
 		Title: Shell Armor
-		Contents: '''
-			Collect Turtle Shells from Giant Turtles in the Jungle and use them alongside Chlorophyte to create the Turtle Armor, a melee armorset that can be upgraded into the penultimate melee set.
-			'''
-		Tooltip:
+		Contents: Collect Turtle Shells from Giant Turtles in the Jungle and use them alongside Chlorophyte to create the Turtle Armor, a melee armorset that can be upgraded into the penultimate melee set.
+		Tooltip: ---
 	}
 
-	GetTheAxe:{
+	GetTheAxe: {
 		Title: Shreddin' Fiber Cords
-		Contents: '''
-			Obtain The Axe, a rare drop from Plantera capable of easily chopping trees with its hardcore vibes.
-			'''
-		Tooltip:
+		Contents: Obtain The Axe, a rare drop from Plantera capable of easily chopping trees with its hardcore vibes.
+		Tooltip: ---
 	}
 
-	GetShroomite:{
+	GetShroomite: {
 		Title: Mycelially Reinforced
-		Contents: '''
-			Alloy together Chlorophyte and Glowing Mushrooms at an Autohammer to create Shroomite Bars, a military grade metal capable of crafting a penultimate Ranged armor-set.
-			'''
-		Tooltip:
+		Contents: Alloy together Chlorophyte and Glowing Mushrooms at an Autohammer to create Shroomite Bars, a military grade metal capable of crafting a penultimate Ranged armor-set.
+		Tooltip: ---
 	}
 
-	GetDungeonDrop:{
+	GetDungeonDrop: {
 		Title: Robbing The Grave
-		Contents: '''
-			Obtain a rare treasure from a difficult monster in the dungeon.
-			'''
-		Tooltip:
+		Contents: Obtain a rare treasure from a difficult monster in the dungeon.
+		Tooltip: ---
 	}
 
-	LootBiomeChest:{
+	LootBiomeChest: {
 		Title: Big Booty
-		Contents: '''
-			Unlock one of the dungeon's large, mysterious chests with a special key.
-			'''
-		Tooltip:
+		Contents: Unlock one of the dungeon's large, mysterious chests with a special key.
+		Tooltip: ---
 	}
 
-	GetSpectre:{
+	GetSpectre: {
 		Title: Half-living Bar
-		Contents: '''
-			Alloy together Chlorophyte and Ectoplasm to create Spectre Bars, a magically charged metal capable of crafting a penultimate Mage armor-set.
-			'''
-		Tooltip:
+		Contents: Alloy together Chlorophyte and Ectoplasm to create Spectre Bars, a magically charged metal capable of crafting a penultimate Mage armor-set.
+		Tooltip: ---
 	}
 
-	GetSpookyWood:{
+	GetSpookyWood: {
 		Title: Ooky Spooky
-		Contents: '''
+		Contents:
+			'''
 			Kill the enemies of the Harvest Moon and collect a bunch of Spooky Wood.
 			Spooky Wood can be used to craft a powerful penultimate Summoner armor set.
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	SubbiomeTemple:{
+	SubbiomeTemple: {
 		Title: Temple Raider
-		Contents: '''
-			Breach the impenetrable walls of the jungle temple.
-			'''
-		Tooltip:
+		Contents: Breach the impenetrable walls of the jungle temple.
+		Tooltip: ---
 	}
 
-	LootTempleChest:{
+	LootTempleChest: {
 		Title: I Ahm Loohte!
-		Contents: '''
+		Contents:
+			'''
 			Discover an Lihzahrd Chest within the Temple and take the special Power Cell within.
 			You may also find Solar Tablets, and fight stronger enemies within the Solar Eclipse.
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
 	// --------------
 	// <-> Extras <->
 	
-	AlertMartiansProbe:{
+	AlertMartiansProbe: {
 		Title: Outer Scouter
-		Contents: '''
+		Contents:
+			'''
 			Get observed by a Martian Probe, found more frequently the higher up in the world you are.
 			Getting spotted may alert an armada of inter-planetary madness..
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	CatchTruffleWorm:{
+	CatchTruffleWorm: {
 		Title: Trufflesome Critter
-		Contents: '''
-			
-			'''
-		Tooltip:
+		Contents: ""
+		Tooltip: ---
 	}
 
-	CatchPrismaticLacewing:{
+	CatchPrismaticLacewing: {
 		Title: Glorious Flutter
-		Contents: '''
-			
-			'''
-		Tooltip:
+		Contents: ""
+		Tooltip: ---
 	}
 
-	PenultimateWings:{
+	PenultimateWings: {
 		Title: ---
-		Contents: '''
-			Obtain powerful rare wings from either the Empress of Light, Duke Fishron or Betsy.
-			'''
-		Tooltip:
+		Contents: Obtain powerful rare wings from either the Empress of Light, Duke Fishron or Betsy.
+		Tooltip: ---
 	}
 }
 
-
-
-LCtoML:{
-	EncounterCultists:{
+LCtoML: {
+	EncounterCultists: {
 		Title: Invoking the Cultists
-		Contents: '''
-			After the defeat of the Golem deep within the Temple, you will find the dungeon's Cult enacting a terrible ritual, intending to bring the end of Terraria.
-			'''
-		Tooltip:
+		Contents: After the defeat of the Golem deep within the Temple, you will find the dungeon's Cult enacting a terrible ritual, intending to bring the end of Terraria.
+		Tooltip: ---
 	}
 
 	// -------------------
 	// <-> Lunar Event <->
-
-	InfoLunarPillars:{
+	
+	InfoLunarPillars: {
 		Title: The Lunar Event & Its Pillars
-		Contents: '''
+		Contents:
+			'''
 			(explanation of what this event is)
 
 			After the defeat of a Lunar Pillar, you will get its Lunar Fragments.
 			Each one is associated with a certain class, making powerful gear for it.
 			'''
-		Tooltip:
+		Tooltip: ---
 	}
 
-	KillSolarPillar:{
+	KillSolarPillar: {
 		Title: Solar Seal
-		Contents: '''
-			Destroy the Solar Pillar, one of the seals of an ancient terrible tyrant.
-			'''
-		Tooltip:
+		Contents: Destroy the Solar Pillar, one of the seals of an ancient terrible tyrant.
+		Tooltip: ---
 	}
 
-	UseSolarFragments:{
+	UseSolarFragments: {
 		Title: Solar Powered
-		Contents: '''
-			Conjure yourself celestial Melee gear out of Solar Fragments using the Ancient Manipulator.
-			'''
-		Tooltip:
+		Contents: Conjure yourself celestial Melee gear out of Solar Fragments using the Ancient Manipulator.
+		Tooltip: ---
 	}
 
-	KillVortexPillar:{
+	KillVortexPillar: {
 		Title: Vortex Seal
-		Contents: '''
-			Destroy the Vortex Pillar, one of the seals of an ancient terrible tyrant.
-			'''
-		Tooltip:
+		Contents: Destroy the Vortex Pillar, one of the seals of an ancient terrible tyrant.
+		Tooltip: ---
 	}
 
-	UseVortexFragments:{
+	UseVortexFragments: {
 		Title: Stuck in The Vortex
-		Contents: '''
-			Conjure yourself celestial Ranger gear out of Vortex Fragments using the Ancient Manipulator.
-			'''
-		Tooltip:
+		Contents: Conjure yourself celestial Ranger gear out of Vortex Fragments using the Ancient Manipulator.
+		Tooltip: ---
 	}
 
-	KillNebulaPillar:{
+	KillNebulaPillar: {
 		Title: Nebula Seal
-		Contents: '''
-			Destroy the Nebula Pillar, one of the seals of an ancient terrible tyrant.
-			'''
-		Tooltip:
+		Contents: Destroy the Nebula Pillar, one of the seals of an ancient terrible tyrant.
+		Tooltip: ---
 	}
 
-	UseNebulaFragments:{
+	UseNebulaFragments: {
 		Title: Nebulous aiosjoasi
-		Contents: '''
-			Conjure yourself celestial Mage gear out of Nebula Fragments using the Ancient Manipulator.
-			'''
-		Tooltip:
+		Contents: Conjure yourself celestial Mage gear out of Nebula Fragments using the Ancient Manipulator.
+		Tooltip: ---
 	}
 
-	KillStardustPillar:{
+	KillStardustPillar: {
 		Title: Stardust Seal
-		Contents: '''
-			Destroy the Stardust Pillar, one of the seals of an ancient terrible tyrant.
-			'''
-		Tooltip:
+		Contents: Destroy the Stardust Pillar, one of the seals of an ancient terrible tyrant.
+		Tooltip: ---
 	}
 
-	UseStardustFragments:{
+	UseStardustFragments: {
 		Title: Foes to Ashes, Stars to Dust
-		Contents: '''
-			Conjure yourself celestial Summoner gear out of Stardust Fragments using the Ancient Manipulator.
-			'''
-		Tooltip:
+		Contents: Conjure yourself celestial Summoner gear out of Stardust Fragments using the Ancient Manipulator.
+		Tooltip: ---
 	}
 
-	CraftLunarHook:{
+	CraftLunarHook: {
 		Title: Next, We are going to steal.. THE MOON!
-		Contents: '''
-			Using all 4 of the powerful Lunar Fragments, conjure a most powerful Grappling Hook in the form of the Lunar Hook.
-			'''
-		Tooltip:
+		Contents: Using all 4 of the powerful Lunar Fragments, conjure a most powerful Grappling Hook in the form of the Lunar Hook.
+		Tooltip: ---
 	}
 
-	CraftCelestialSigil:{
+	CraftCelestialSigil: {
 		Title: Retry
-		Contents: '''
-			Using all 4 of the powerful Lunar Fragments, Conjure a Celestial Sigil to bring forth the terrible tyrant directly, cutting the need to destroy the Lunar Pillars each time.
-			'''
-		Tooltip:
+		Contents: Using all 4 of the powerful Lunar Fragments, Conjure a Celestial Sigil to bring forth the terrible tyrant directly, cutting the need to destroy the Lunar Pillars each time.
+		Tooltip: ---
 	}
 }
 
-
-
-
-Postgame:{
-	GetLuminiteBars:{
+Postgame: {
+	GetLuminiteBars: {
 		Title: ---
-		Contents: '''
-			Using the ore dropped by the Moon Lord; Forge yourself some Luminite Bars, a celestial metal with immense lunar amplification potential.
-			'''
-		Tooltip:
+		Contents: Using the ore dropped by the Moon Lord; Forge yourself some Luminite Bars, a celestial metal with immense lunar amplification potential.
+		Tooltip: ---
 	}
 
 	// ----------------
 	// <-> End Gear <->
-
-	GetSolarSet:{
+	
+	GetSolarSet: {
 		Title: Force of a Solar Eruption
-		Contents: '''
-			Using Luminite Bars and Solar Fragments, conjure an ultimate Warrior armor set fueled by the cosmos.
-			'''
-		Tooltip:
+		Contents: Using Luminite Bars and Solar Fragments, conjure an ultimate Warrior armor set fueled by the cosmos.
+		Tooltip: ---
 	}
 
-	GetVortexSet:{
+	GetVortexSet: {
 		Title: Pull of a Black Hole's Vortex
-		Contents: '''
-			Using Luminite Bars and Vortex Fragments, conjure an ultimate Ranger armor set fueled by the cosmos.
-			'''
-		Tooltip:
+		Contents: Using Luminite Bars and Vortex Fragments, conjure an ultimate Ranger armor set fueled by the cosmos.
+		Tooltip: ---
 	}
 
-	GetNebulaSet:{
+	GetNebulaSet: {
 		Title: Energy of a Luminescent Nebula
-		Contents: '''
-			Using Luminite Bars and Nebula Fragments, conjure an ultimate Mage armor set fueled by the cosmos.
-			'''
-		Tooltip:
+		Contents: Using Luminite Bars and Nebula Fragments, conjure an ultimate Mage armor set fueled by the cosmos.
+		Tooltip: ---
 	}
 
-	GetStardustSet:{
+	GetStardustSet: {
 		Title: () from a Planet's Stardust
-		Contents: '''
-			Using Luminite Bars and Stardust Fragments, conjure an ultimate Summoner armor set fueled by the cosmos.
-			'''
-		Tooltip:
+		Contents: Using Luminite Bars and Stardust Fragments, conjure an ultimate Summoner armor set fueled by the cosmos.
+		Tooltip: ---
 	}
 
 	// ---------------------
 	// <-> Epilogue Info <->
-
-	InfoBook3:{
+	
+	InfoBook3: {
 		Title: ---
-		Contents: '''
-			-
-			'''
-		Tooltip:
+		Contents: -
+		Tooltip: ---
 	}
 
-	Info100%Game:{
+	Info100%Game: {
 		Title: ---
-		Contents: '''
-			-
-			'''
-		Tooltip:
+		Contents: -
+		Tooltip: ---
 	}
 
-	InfoNextTime:{
+	InfoNextTime: {
 		Title: ---
-		Contents: '''
-			-
-			'''
-		Tooltip:
+		Contents: -
+		Tooltip: ---
 	}
 }

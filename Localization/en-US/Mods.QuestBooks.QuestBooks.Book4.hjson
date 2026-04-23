@@ -1,24 +1,14 @@
-blueprint:{
-		Title: Placeholder / Blueprint Quest
-		Contents: '''
-			This is how the quest's text looks like in the localization.
-			'''
-		Tooltip: Hello!
-	}
-
-
-BaseAndCrafting:{
-
+blueprint: {
+	Title: Placeholder / Blueprint Quest
+	Contents: This is how the quest's text looks like in the localization.
+	Tooltip: Hello!
 }
 
-
-
-ArenaMaking:{
-
+BaseAndCrafting: {
 }
 
+ArenaMaking: {
+}
 
-
-TownsAndNPCs:{
-
+TownsAndNPCs: {
 }

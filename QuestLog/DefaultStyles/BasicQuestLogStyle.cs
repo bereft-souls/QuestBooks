@@ -31,8 +31,6 @@ namespace QuestBooks.QuestLog.DefaultStyles
         // Used to keep track of whether the right click was intended to "reset" the current action, or the result of some other action
         protected bool JustMoved { get; set; } = false;
 
-        protected bool PreviouslyOpened { get; set; } = false;
-
         // Our blending drastically changes between content draws
         protected static BlendState LayerBlending { get; } = new()
         {
@@ -422,16 +420,16 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 Vector2 drawPos = new(questLogCenter.X, verticalDrawPos.Value);
                 Texture2D closedBook = QuestAssets.ClosedBook;
                 spriteBatch.Draw(closedBook, drawPos, null, Color.White, bookRotation, closedBook.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
-                QuestLogDrawer.CoverDrawCalls[QuestManager.ActiveQuestLog].Invoke(spriteBatch, drawPos, LogScale, bookRotation);
+                QuestLogDrawer.CoverDrawCalls[QuestManager.ActiveQuestLog].Invoke(spriteBatch, drawPos, bookRotation, LogScale, 1f);
             });
 
             return frozenFrames == 0;
         }
 
-        public static void DrawDefaultCover(SpriteBatch spriteBatch, Vector2 drawPos, float scale, float rotation)
+        public static void DrawDefaultCover(SpriteBatch spriteBatch, Vector2 drawPos, float rotation, float scale, float opacity)
         {
             Texture2D tree = QuestAssets.CoverTree;
-            spriteBatch.Draw(tree, drawPos, null, Color.White, rotation, tree.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(tree, drawPos, null, Color.White * opacity, rotation, tree.Size() * 0.5f, scale, SpriteEffects.None, 0f);
         }
 
         public static string RetrieveDefaultLogTitle(string questLogKey)
@@ -442,8 +440,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         public static void DrawDefaultLogTitle(SpriteBatch spriteBatch, Rectangle drawArea, string title, float opacity, bool hovered, bool selected)
         {
-            //spriteBatch.DrawRectangle(drawArea, hovered ? Color.Yellow : Color.LightBlue, fill: true);
-            spriteBatch.DrawOutlinedStringInRectangle(drawArea, FontAssets.DeathText.Value, hovered ? Color.Yellow : Color.White, Color.Black, title, extraScale: 1.2f, clipBounds: false, offset: new(0f, 12f));
+            //spriteBatch.DrawRectangle(drawArea, (hovered ? Color.Yellow : Color.LightBlue) * opacity);
+            spriteBatch.DrawOutlinedStringInRectangle(drawArea, FontAssets.DeathText.Value, (hovered ? Color.Yellow : Color.White) * opacity, Color.Black * opacity, title, extraScale: 1.2f, clipBounds: false, offset: new(0f, 12f));
         }
 
         public override void SelectBook(QuestBook book)

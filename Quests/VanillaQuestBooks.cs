@@ -13,7 +13,11 @@ namespace QuestBooks.Quests
             var questLogBytes = mod.GetFileBytes("Quests/VanillaQuestLog.json");
             var questLogString = Encoding.UTF8.GetString(questLogBytes);
 
-            QuestBooksMod.AddQuestLog("Terraria", questLogString, mod);
+            //QuestBooksMod.AddQuestLog("Terraria", questLogString, mod);
+            QuestBooksMod.AddQuestLog("Terraria", [], mod);
+            QuestBooksMod.AddQuestLog("TESTRARIA1", [], mod);
+            QuestBooksMod.AddQuestLog("TESTRARIA2", [], mod);
+            QuestBooksMod.AddQuestLog("TESTRARIA3", [], mod);
         }
     }
 }

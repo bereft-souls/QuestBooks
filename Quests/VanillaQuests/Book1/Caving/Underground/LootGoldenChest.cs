@@ -10,7 +10,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Caving.Underground
     {
         public override bool CheckCompletion()
         {
-            throw new NotImplementedException();
+            return false;
             // loot a golden chest and..
             /* Get any 1 of: (theres 3 loot tables depending on depth, hence the gaps)
                     # Mace
