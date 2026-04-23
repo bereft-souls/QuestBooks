@@ -17,13 +17,8 @@ namespace QuestBooks.Quests
             var questLogBytes = mod.GetFileBytes("Quests/VanillaQuestLog.json");
             var questLogString = Encoding.UTF8.GetString(questLogBytes);
 
-            //QuestBooksMod.AddQuestLog("Terraria", questLogString, mod);
-            QuestBooksMod.AddQuestLog("Terraria", [], mod);
+            QuestBooksMod.AddQuestLog("Terraria", questLogString, mod);
             QuestBooksMod.RegisterLogTitleDrawDelegate("Terraria", DrawTerrariaLogo);
-
-            QuestBooksMod.AddQuestLog("TESTRARIA1", [], mod);
-            QuestBooksMod.AddQuestLog("TESTRARIA2", [], mod);
-            QuestBooksMod.AddQuestLog("TESTRARIA3", [], mod);
         }
 
         public static void DrawTerrariaLogo(SpriteBatch spriteBatch, Rectangle drawArea, string title, float opacity, bool hovered, bool selected)

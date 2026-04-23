@@ -1,1 +1,5 @@
-{}
+{
+  "$id": "1",
+  "$type": "System.Collections.Generic.List`1[[QuestBooks.QuestLog.QuestBook, QuestBooks]], System.Private.CoreLib",
+  "$values": []
+}

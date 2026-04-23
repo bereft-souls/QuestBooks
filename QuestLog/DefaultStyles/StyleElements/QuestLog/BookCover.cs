@@ -162,7 +162,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         private void HandleCoverToggle()
         {
-            Rectangle coverToggle = LogArea.CookieCutter(new(-1f, 1f), new(0.1f, 0.1f));
+            Rectangle coverToggle = LogArea.CookieCutter(new(-1f, 1.03f), new(0.075f, 0.05f));
             bool coverToggleHovered = false;
 
             if (coverToggle.Contains(MouseCanvas))
