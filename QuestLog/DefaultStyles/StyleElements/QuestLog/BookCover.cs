@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Assets;
 using QuestBooks.Systems;
+using System;
 using System.Linq;
 using Terraria;
 using Terraria.Localization;
@@ -110,7 +111,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             DrawTasks.Add(sb =>
             {
                 Texture2D coverTexture = QuestAssets.ClosedBook;
-                float coverOpacity = 1f - logSelectionOpacity;
+                float coverOpacity = (float)Math.Pow(1d - logSelectionOpacity, 2d);
                 sb.Draw(coverTexture, questLogCenter, null, Color.White * coverOpacity, 0f, coverTexture.Size() * 0.5f, LogScale, SpriteEffects.None, 0f);
                 QuestLogDrawer.CoverDrawCalls[QuestManager.ActiveQuestLog](sb, questLogCenter, 0f, LogScale, coverOpacity);
             });
@@ -141,7 +142,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     }
                 }
 
-                bool logAreaHovered = logArea.Contains(MouseCanvas);
+                bool logAreaHovered = (!newLogSelected && logArea.Contains(MouseCanvas)) || (newLogSelected && log == QuestManager.ActiveQuestLog);
                 if (logAreaHovered && LeftMouseJustReleased)
                 {
                     QuestManager.SelectQuestLog(log);

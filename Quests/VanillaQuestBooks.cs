@@ -1,5 +1,9 @@
-﻿using QuestBooks.QuestLog.DefaultStyles;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
+using QuestBooks.QuestLog.DefaultStyles;
 using System.Text;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Quests
@@ -15,9 +19,26 @@ namespace QuestBooks.Quests
 
             //QuestBooksMod.AddQuestLog("Terraria", questLogString, mod);
             QuestBooksMod.AddQuestLog("Terraria", [], mod);
+            QuestBooksMod.RegisterLogTitleDrawDelegate("Terraria", DrawTerrariaLogo);
+
             QuestBooksMod.AddQuestLog("TESTRARIA1", [], mod);
             QuestBooksMod.AddQuestLog("TESTRARIA2", [], mod);
             QuestBooksMod.AddQuestLog("TESTRARIA3", [], mod);
+        }
+
+        public static void DrawTerrariaLogo(SpriteBatch spriteBatch, Rectangle drawArea, string title, float opacity, bool hovered, bool selected)
+        {
+            Texture2D logo = QuestAssets.TerrariaLogo;
+            Texture2D outline = QuestAssets.TerrariaLogoOutline;
+
+            float scale = float.Min(drawArea.Width / (float)logo.Width, drawArea.Height / (float)logo.Height);
+            Vector2 drawPos = drawArea.Center();
+            Vector2 origin = logo.Size() * 0.5f;
+
+            if (hovered)
+                spriteBatch.Draw(outline, drawPos, null, Color.White * opacity, 0f, origin, scale, SpriteEffects.None, 0f);
+
+            spriteBatch.Draw(logo, drawPos, null, Color.White * opacity, 0f, origin, scale, SpriteEffects.None, 0f);
         }
     }
 }
