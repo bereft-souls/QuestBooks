@@ -1,4 +1,24 @@
 OpenQuestLog: Open Quest Log
+FileExistsTitle: Replace File
+FileExistsMessage:
+	'''
+	The file {0} already exists.
+	Do you want to replace it?
+	'''
+ConfirmDeleteBookTitle: Delete Quest Book
+ConfirmDeleteBookMessage: Are you sure you want to delete the selected quest book: {0}?
+ConfirmDeleteChapterTitle: Delete Chapter
+ConfirmDeleteChapterMessage: Are you sure you want to delete the selected chapter: {0}?
+ConfirmDeleteElementTitle: Delete Element
+ConfirmDeleteElementMessage: Are you sure you want to delete the selected element: {0}?
+ConfirmLoadLogTitle: Load Quest Log
+ConfirmLoadLogMessage:
+	'''
+	Are you sure you want to load a new QuestLog?
+	This will clear any quest books currently in the editor, so make sure to save your progress!
+	'''
+Yes: Yes
+No: No
 ToggleDesigner:
 	'''
 	[c/CCC018:Toggle Designer]

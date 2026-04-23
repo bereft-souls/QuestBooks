@@ -24,7 +24,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (saveBook.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.SaveLog");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.SaveLog");
                 saveBookHovered = true;
 
                 if (LeftMouseJustReleased)
@@ -43,8 +43,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
                                 SDL.SDL_MessageBoxData message = new()
                                 {
                                     window = Main.instance.Window.Handle,
-                                    title = Language.GetTextValue("Mods.QuestBooks.Tooltips"),
-                                    message = Language.GetText("Mods.QuestBooks.Tooltips").Format(path),
+                                    title = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.FileExistsTitle"),
+                                    message = Language.GetText("Mods.QuestBooks.Tooltips.Designer.FileExistsMessage").Format(path),
                                     flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                                     numbuttons = 2,
                                     buttons = [
@@ -52,13 +52,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                                         {
                                             buttonid = 2,
                                             flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
-                                            text = Language.GetTextValue("Mods.QuestBooks.Tooltips"),
+                                            text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.No"),
                                         },
                                         new SDL.SDL_MessageBoxButtonData()
                                         {
                                             buttonid = 1,
                                             flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
-                                            text = Language.GetTextValue("Mods.QuestBooks.Tooltips"),
+                                            text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.Yes"),
                                         }
                                     ]
                                 };
@@ -72,7 +72,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         if (path is not null)
                         {
                             QuestLoader.SaveQuestLog(QuestManager.QuestBooks, path);
-                            Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.QuestLogExported"));
+                            Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.Designer.QuestLogExported"));
                         }
                     }
                 }
@@ -81,7 +81,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             else if (loadBook.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.LoadLog");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.LoadLog");
                 loadBookHovered = true;
 
                 if (LeftMouseJustReleased)
@@ -90,9 +90,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     SDL.SDL_MessageBoxData message = new()
                     {
                         window = Main.instance.Window.Handle,
-                        title = "Load Multiple",
-                        message = "Are you sure you want to load a new QuestLog?\n" +
-                        "This will clear any quest books currently in the editor, so make sure to save your progress!",
+                        title = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ConfirmLoadLogTitle"),
+                        message = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ConfirmLoadLogMessage"),
                         flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                         numbuttons = 2,
                         buttons = [
@@ -100,13 +99,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                             {
                                 buttonid = 2,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
-                                text = "Cancel"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.No")
                             },
                             new SDL.SDL_MessageBoxButtonData()
                             {
                                 buttonid = 1,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
-                                text = "Continue"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.Yes")
                             }
                         ]
                     };
@@ -124,11 +123,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                             try
                             {
                                 questLog = QuestLoader.LoadQuestLog(file.Path);
-                                Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.QuestLogImported"));
+                                Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.Designer.QuestLogImported"));
                             }
                             catch
                             {
-                                Main.NewText(Language.GetTextValueWith("Mods.QuestBooks.ChatMessages.ParseError", file));
+                                Main.NewText(Language.GetText("Mods.QuestBooks.ChatMessages.Designer.ParseError").Format(file));
                             }
                         }
 

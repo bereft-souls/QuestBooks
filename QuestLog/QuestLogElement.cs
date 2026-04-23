@@ -57,7 +57,7 @@ namespace QuestBooks.QuestLog
         public virtual void DrawInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action layerAction)
         {
             Rectangle area = new(10, 0, 420, 540);
-            spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.NoInfoPage"), clipBounds: false);
+            spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.NoInfoPage"), clipBounds: false);
         }
 
         #endregion

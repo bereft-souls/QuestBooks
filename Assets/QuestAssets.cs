@@ -30,6 +30,7 @@ namespace QuestBooks.Assets
         public static LazyTexture QuestLogCanvas { get; } = new("QuestLog/QuestLogCanvas");
         public static LazyTexture PageFlippingSheet { get; } = new("QuestLog/PageFlippingSheet");
         public static LazyTexture ResizeIndicator { get; } = new("QuestLog/ResizeIndicator");
+        public static LazyTexture BackToCover { get; } = new("QuestLog/BackToCover");
 
         public static LazyTexture BookTab { get; } = new("QuestLog/BookTab");
         public static LazyTexture BookTabBorder { get; } = new("QuestLog/BookTabBorder");

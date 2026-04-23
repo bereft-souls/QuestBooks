@@ -48,7 +48,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             {
                 LockMouse();
                 switchLogHovered = true;
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.SelectQuestLog");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.SelectQuestLog");
 
                 if (LeftMouseJustReleased)
                 {
@@ -169,7 +169,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             {
                 LockMouse();
                 coverToggleHovered = true;
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.BackToCover");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Library.BackToCover");
 
                 if (LeftMouseJustReleased)
                 {
@@ -178,7 +178,12 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 }
             }
 
-            AddRectangle(coverToggle, coverToggleHovered ? Color.Yellow : Color.LightBlue, fill: true);
+            DrawTasks.Add(sb =>
+            {
+                Texture2D backToCover = QuestAssets.BackToCover;
+                float scale = coverToggle.Width / (float)backToCover.Width;
+                sb.Draw(backToCover, coverToggle.Center(), null, coverToggleHovered ? Color.LightCyan : Color.White, 0f, backToCover.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+            });
         }
     }
 }

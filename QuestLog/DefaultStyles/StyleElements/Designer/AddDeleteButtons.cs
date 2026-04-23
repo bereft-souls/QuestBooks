@@ -32,7 +32,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             if (addBook.Contains(MouseCanvas))
             {
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.AddBook");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.AddBook");
                 addBookHovered = true;
 
                 // Add new questbook with placeholder localization key
@@ -54,7 +54,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             else if (addChapter.Contains(MouseCanvas))
             {
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.AddChapter");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.AddChapter");
                 addChapterHovered = true;
 
                 // Add new chapter with placeholder localization key
@@ -78,7 +78,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             else if (deleteBook.Contains(MouseCanvas))
             {
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.DeleteBook");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.DeleteBook");
                 deleteBookHovered = true;
 
                 if (LeftMouseJustReleased && SelectedBook is not null)
@@ -87,8 +87,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     SDL.SDL_MessageBoxData message = new()
                     {
                         window = Main.instance.Window.Handle,
-                        title = "Delete Quest Book",
-                        message = $"Are you sure you want to delete the selected quest book: {SelectedBook.DisplayName}?",
+                        title = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteBookTitle"),
+                        message = Language.GetText("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteBookMessage").Format(SelectedBook.DisplayName),
                         flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                         numbuttons = 2,
                         buttons = [
@@ -96,13 +96,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                             {
                                 buttonid = 2,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
-                                text = "Cancel"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.No")
                             },
                             new SDL.SDL_MessageBoxButtonData()
                             {
                                 buttonid = 1,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
-                                text = "Delete"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.Yes")
                             }
                         ]
                     };
@@ -134,7 +134,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             else if (deleteChapter.Contains(MouseCanvas))
             {
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.DeleteChapter");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.DeleteChapter");
                 deleteChapterHovered = true;
 
                 if (LeftMouseJustReleased && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
@@ -143,8 +143,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     SDL.SDL_MessageBoxData message = new()
                     {
                         window = Main.instance.Window.Handle,
-                        title = "Delete Chapter",
-                        message = $"Are you sure you want to delete the selected chapter: {SelectedChapter.DisplayName}?",
+                        title = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteChapterTitle"),
+                        message = Language.GetText("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteChapterMessage").Format(SelectedChapter.DisplayName),
                         flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                         numbuttons = 2,
                         buttons = [
@@ -152,13 +152,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                             {
                                 buttonid = 2,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
-                                text = "Cancel"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.No")
                             },
                             new SDL.SDL_MessageBoxButtonData()
                             {
                                 buttonid = 1,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
-                                text = "Delete"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.Yes")
                             }
                         ]
                     };

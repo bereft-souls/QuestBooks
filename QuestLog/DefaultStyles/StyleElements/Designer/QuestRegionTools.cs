@@ -56,7 +56,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             {
                 LockMouse();
                 enableShiftingHovered = true;
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftingCanvas");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ShiftingCanvas");
 
                 if (LeftMouseJustReleased && SelectedChapter is not null)
                 {
@@ -92,7 +92,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 {
                     LockMouse();
                     moveBoundsHovered = true;
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.MoveBounds");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.MoveBounds");
 
                     if (LeftMouseJustReleased)
                         this.moveBounds = !this.moveBounds;
@@ -102,7 +102,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 {
                     LockMouse();
                     showMidpointHovered = true;
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShowMidpoint");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ShowMidpoint");
 
                     if (LeftMouseJustReleased)
                         this.showMidpoint = !this.showMidpoint;
@@ -111,7 +111,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 else if (zoomScale.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ZoomScale");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ZoomScale");
                     zoomScaleHovered = true;
 
                     if (LeftMouseJustReleased)
@@ -134,7 +134,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 else if (zoomUp.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ZoomUp");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ZoomUp");
                     zoomUpHovered = true;
 
                     if (LeftMouseJustReleased && SelectedChapter.DefaultZoom < 2f)
@@ -153,7 +153,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 else if (zoomDown.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ZoomDown");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ZoomDown");
                     zoomDownHovered = true;
 
                     if (LeftMouseJustReleased && SelectedChapter.DefaultZoom > 0.1f)
@@ -175,7 +175,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (showBackdrop.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ToggleBackdrop");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ToggleBackdrop");
                 showBackdropHovered = true;
 
                 if (LeftMouseJustReleased)
@@ -185,7 +185,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (showGrid.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ToggleGrid");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ToggleGrid");
                 showGridHovered = true;
 
                 if (LeftMouseJustReleased)
@@ -195,7 +195,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (snapGrid.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.SnapGrid");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.SnapGrid");
                 snapGridHovered = true;
 
                 if (LeftMouseJustReleased)
@@ -205,7 +205,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (gridSize.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.GridSize");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.GridSize");
                 gridSizeHovered = true;
 
                 if (LeftMouseJustReleased)
@@ -215,7 +215,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             else if (gridUp.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.GridSizeUp");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.GridSizeUp");
                 gridUpHovered = true;
 
                 if (LeftMouseJustReleased)
@@ -225,7 +225,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             else if (gridDown.Contains(MouseCanvas))
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.GridSizeDown");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.GridSizeDown");
                 gridDownHovered = true;
 
                 if (LeftMouseJustReleased && this.gridSize > 3)

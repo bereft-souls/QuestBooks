@@ -42,7 +42,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (bookNameArea.Contains(MouseCanvas) && SelectedBook is BasicQuestBook book)
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeQuestBookName");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ChangeQuestBookName");
 
                 if (LeftMouseJustReleased)
                 {
@@ -59,7 +59,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             else if (chapterNameArea.Contains(MouseCanvas) && SelectedChapter is BasicChapter chapter)
             {
                 LockMouse();
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeChapterName");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ChangeChapterName");
 
                 if (LeftMouseJustReleased)
                 {
@@ -115,7 +115,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (SelectedBook is BasicQuestBook basicBook)
             {
                 AddRectangle(bookNameArea, Color.Gray * 0.6f, fill: true);
-                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(bookNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.LocalizationKey"), maxScale: 0.5f));
 
                 if (typingBookName)
                 {
@@ -144,7 +144,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (SelectedChapter is BasicChapter basicChapter && (SelectedBook?.Chapters.Contains(SelectedChapter) ?? false))
             {
                 AddRectangle(chapterNameArea, Color.Gray * 0.6f, fill: true);
-                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.LocalizationKey"), maxScale: 0.5f));
+                DrawTasks.Add(sb => sb.DrawOutlinedStringInRectangle(chapterNameArea.CookieCutter(new(0f, -1.5f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.LocalizationKey"), maxScale: 0.5f));
 
                 if (typingChapterName)
                 {

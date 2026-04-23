@@ -52,7 +52,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                     if (bookUp.Contains(MouseCanvas))
                     {
-                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookUp");
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ShiftBookUp");
 
                         if (LeftMouseJustReleased && !firstBook)
                         {
@@ -68,7 +68,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                     else if (bookDown.Contains(MouseCanvas))
                     {
-                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftBookDown");
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ShiftBookDown");
 
                         if (LeftMouseJustReleased && !lastBook)
                         {
@@ -101,7 +101,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    sb.DrawOutlinedStringInRectangle(questBookType.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.QuestBookType"), maxScale: 0.5f);
+                    sb.DrawOutlinedStringInRectangle(questBookType.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.QuestBookType"), maxScale: 0.5f);
                     questBookType = questBookType.CookieCutter(new(0f, 0.2f), Vector2.One);
                     sb.DrawOutlinedStringInRectangle(questBookType.CreateMargins(left: 2, right: 2), font, Color.White, Color.Black, typeName, 2f, alignment: Utilities.TextAlignment.Left);
                 });
@@ -109,7 +109,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 if (questBookType.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeQuestBookType");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ChangeQuestBookType");
 
                     if (LeftMouseJustReleased)
                     {
@@ -136,7 +136,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                     if (chapterUp.Contains(MouseCanvas))
                     {
-                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterUp");
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ShiftChapterUp");
                         chapterUpHovered = true;
 
                         if (LeftMouseJustReleased && !firstChapter)
@@ -153,7 +153,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                     else if (chapterDown.Contains(MouseCanvas))
                     {
-                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ShiftChapterDown");
+                        MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ShiftChapterDown");
                         chapterDownHovered = true;
 
                         if (LeftMouseJustReleased && !lastChapter)
@@ -187,7 +187,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    sb.DrawOutlinedStringInRectangle(questLineType.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.QuestLineType"), maxScale: 0.5f);
+                    sb.DrawOutlinedStringInRectangle(questLineType.CookieCutter(new(0f, -1.6f), Vector2.One), font, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.QuestLineType"), maxScale: 0.5f);
                     questLineType = questLineType.CookieCutter(new(0f, 0.2f), Vector2.One);
                     sb.DrawOutlinedStringInRectangle(questLineType.CreateMargins(left: 2, right: 2), font, Color.White, Color.Black, typeName, 2f, alignment: Utilities.TextAlignment.Left);
                 });
@@ -195,7 +195,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 if (questLineType.Contains(MouseCanvas))
                 {
                     LockMouse();
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ChangeChapterType");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ChangeChapterType");
 
                     if (LeftMouseJustReleased)
                     {

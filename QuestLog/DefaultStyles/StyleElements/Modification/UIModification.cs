@@ -26,7 +26,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 if (designerToggle.Contains(MouseCanvas))
                 {
-                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.ToggleDesigner");
+                    MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ToggleDesigner");
                     LockMouse();
                     designerHovered = true;
 

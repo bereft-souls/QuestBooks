@@ -71,7 +71,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (deleteElement.Contains(mouseCanvas))
             {
                 deleteElementHovered = true;
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.DeleteElement");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.DeleteElement");
 
                 if (LeftMouseJustReleased)
                 {
@@ -79,9 +79,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     SDL.SDL_MessageBoxData message = new()
                     {
                         window = Main.instance.Window.Handle,
-                        title = "Delete Element",
-                        message = $"Are you sure you want to delete the selected element: {SelectedElement.GetType().Name}?\n" +
-                        "This action cannot be undone!",
+                        title = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteElementTitle"),
+                        message = Language.GetText("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteElementMEssage").Format(SelectedElement.GetType().Name),
                         flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                         numbuttons = 2,
                         buttons = [
@@ -89,13 +88,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                             {
                                 buttonid = 2,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
-                                text = "Cancel"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.No")
                             },
                             new SDL.SDL_MessageBoxButtonData()
                             {
                                 buttonid = 1,
                                 flags = SDL.SDL_MessageBoxButtonFlags.SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
-                                text = "Delete"
+                                text = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.Yes")
                             }
                         ]
                     };
@@ -135,7 +134,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (moveElement.Contains(mouseCanvas))
             {
                 moveElementHovered = true;
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.MoveElement");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.MoveElement");
 
                 if (LeftMouseJustReleased)
                 {
@@ -587,7 +586,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             if (previewToggle.Contains(mouseCanvas))
             {
-                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.TogglePreview");
+                MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.TogglePreview");
                 previewHovered = true;
 
                 if (LeftMouseJustReleased)
