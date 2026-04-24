@@ -14,10 +14,6 @@
 	  <None Remove=".vs\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Remove="C:\Users\Nycro\.nuget\packages\nativefiledialogsharp\0.6.0-alpha\contentFiles\any\netstandard2.0\nfd.dll" />
-	  <Content Remove="C:\Users\Nycro\.nuget\packages\nativefiledialogsharp\0.6.0-alpha\contentFiles\any\netstandard2.0\nfd_x86.dll" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Folder Include="Quests\VanillaQuests\Book3\ExtraContentProgression\PotionsAndBuffs\" />
 	  <Folder Include="Quests\VanillaQuests\Book4\ArenaMaking\" />
 	  <Folder Include="Quests\VanillaQuests\Book4\BaseAndCrafting\HM\" />
