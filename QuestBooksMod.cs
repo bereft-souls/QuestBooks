@@ -11,7 +11,6 @@ using QuestBooks.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Terraria;
 using Terraria.ModLoader;
 
 namespace QuestBooks
@@ -72,6 +71,17 @@ namespace QuestBooks
             QuestLogDrawer.CoverDrawCalls.Add(questLogKey, BasicQuestLogStyle.DrawDefaultCover);
             QuestLogDrawer.LogTitleRetrievalCalls.Add(questLogKey, BasicQuestLogStyle.RetrieveDefaultLogTitle);
             QuestLogDrawer.LogTitleDrawCalls.Add(questLogKey, BasicQuestLogStyle.DrawDefaultLogTitle);
+        }
+
+        /// <summary>
+        /// Adds a set of books that should appear in all other quest logs, as opposed to being its own quest log.<br/>
+        /// These "global" books can still be disabled via <see cref="DisableQuestLog(string)"/> using <paramref name="questLogKey"/>.<br/>
+        /// You should call this inside of <see cref="ModSystem.PostSetupContent"/>.
+        /// </summary>
+        public static void AddGlobalQuestBooks(string questLogKey, IList<QuestBook> questBooks, Mod mod)
+        {
+            QuestManager.GlobalQuestBooks.Add(questLogKey, questBooks);
+            QuestManager.QuestLogMods.Add(questLogKey, mod);
         }
 
         /// <summary>

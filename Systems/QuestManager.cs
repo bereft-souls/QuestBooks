@@ -32,6 +32,7 @@ namespace QuestBooks.Systems
 
         public static IList<QuestBook> QuestBooks { get; internal set; } = null;
         public static Dictionary<string, IList<QuestBook>> QuestLogs { get; } = [];
+        public static Dictionary<string, IList<QuestBook>> GlobalQuestBooks { get; } = [];
         public static Dictionary<string, Mod> QuestLogMods { get; } = [];
         public static string ActiveQuestLog { get; internal set; } = null;
 
@@ -99,7 +100,11 @@ namespace QuestBooks.Systems
         public static void SelectQuestLog(string questLog)
         {
             ActiveQuestLog = questLog;
-            QuestBooks = QuestLogs[questLog];
+
+            var globalBooks = GlobalQuestBooks.Where(kvp => !DisabledQuestLogs.Contains(kvp.Key)).Select(kvp => kvp.Value);
+            var newLog = QuestLogs[questLog].Concat(globalBooks.SelectMany(l => l));
+
+            QuestBooks = [..newLog];
         }
 
         public static Quest GetQuest(string questName) => ActiveQuests[questName];

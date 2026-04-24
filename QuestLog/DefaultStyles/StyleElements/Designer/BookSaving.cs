@@ -29,12 +29,10 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 if (LeftMouseJustReleased)
                 {
-                    var file = NativeFileDialogSharp.Dialog.FileSave("json", null);
+                    var file = nativefiledialog.NFD_SaveDialog("json", null, out string path);
 
-                    if (file.IsOk)
+                    if (file == nativefiledialog.nfdresult_t.NFD_OKAY)
                     {
-                        string path = file.Path;
-
                         if (Path.GetExtension(path) != ".json")
                         {
                             path += ".json";
@@ -115,14 +113,14 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     // If okay...
                     if (result == 0 && buttonId == 1)
                     {
-                        var file = NativeFileDialogSharp.Dialog.FileOpen("json", null);
+                        var file = nativefiledialog.NFD_OpenDialog("json", null, out string path);
                         List<QuestBook> questLog = null;
 
-                        if (file.IsOk)
+                        if (file == nativefiledialog.nfdresult_t.NFD_OKAY)
                         {
                             try
                             {
-                                questLog = QuestLoader.LoadQuestLog(file.Path);
+                                questLog = QuestLoader.LoadQuestLog(path);
                                 Main.NewText(Language.GetTextValue("Mods.QuestBooks.ChatMessages.Designer.QuestLogImported"));
                             }
                             catch
