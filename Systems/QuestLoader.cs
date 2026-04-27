@@ -172,7 +172,7 @@ namespace QuestBooks.Systems
 
         public static void SaveQuestLog(IList<QuestBook> questLog, string filePath)
         {
-            string serialized = JsonConvert.SerializeObject(questLog, Formatting.Indented, JsonTypeResolverFix.Settings);
+            string serialized = JsonConvert.SerializeObject(questLog, Formatting.None, JsonTypeResolverFix.Settings);
             File.WriteAllText(filePath, serialized);
         }
 
