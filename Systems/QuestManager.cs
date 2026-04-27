@@ -40,9 +40,9 @@ namespace QuestBooks.Systems
         public static List<string> DisabledQuestLogs { get; } = [];
 
         // These are registered on load
-        public static List<Type> AvailableQuestBookTypes { get; internal set; } = null;
-        public static List<Type> AvailableQuestLineTypes { get; internal set; } = null;
-        public static Dictionary<Type, QuestLogElement> AvailableQuestElementTypes { get; internal set; } = null;
+        public static List<Type> AvailableQuestBookTypes { get; internal set; } = [];
+        public static List<Type> AvailableQuestLineTypes { get; internal set; } = [];
+        public static Dictionary<Type, QuestLogElement> AvailableQuestElementTypes { get; internal set; } = [];
 
         private static readonly PropertyInfo modProperty = typeof(Quest).GetProperty("Mod", BindingFlags.Instance | BindingFlags.Public)!;
 

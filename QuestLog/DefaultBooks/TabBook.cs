@@ -64,7 +64,7 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// </summary>
         public static void DrawBookText(SpriteBatch spriteBatch, string text, Color textColor, Color outlineColor, Rectangle area, float scale)
         {
-            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.1f, right: 0.4f, top: 0.1f, bottom: 0.1f).CookieCutter(new(0f, 0.2f), Vector2.One);
+            Rectangle nameRectangle = area.CreateScaledMargins(left: 0.1f, right: 0.2f, top: 0.1f, bottom: 0.1f).CookieCutter(new(0f, 0.2f), Vector2.One);
             var font = FontAssets.DeathText.Value;
             spriteBatch.DrawOutlinedStringInRectangle(nameRectangle, font, textColor, outlineColor, text, alignment: Utilities.TextAlignment.Left, clipBounds: false);
         }

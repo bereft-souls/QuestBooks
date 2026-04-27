@@ -38,22 +38,17 @@ namespace QuestBooks.Systems
 
             checkedAssemblies.Add(loadingAssembly);
             var types = AssemblyManager.GetLoadableTypes(loadingAssembly);
-            //var questTypes = types.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Quest)));
 
-            QuestManager.AvailableQuestBookTypes = [.. types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))).OrderBy(t => t.Name)];
-            QuestManager.AvailableQuestLineTypes = [.. types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestChapter))).OrderBy(t => t.Name)];
+            QuestManager.AvailableQuestBookTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestBook))).OrderBy(t => t.Name));
+            QuestManager.AvailableQuestLineTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestChapter))).OrderBy(t => t.Name));
 
-            QuestManager.AvailableQuestElementTypes = types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestLogElement)))
+            QuestManager.AvailableQuestElementTypes.AddRange(types.Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(QuestLogElement)))
                 .Select(t => new KeyValuePair<Type, QuestLogElement>(t, (QuestLogElement)Activator.CreateInstance(t)))
                 .Select(kvp => { kvp.Value.TemplateInstance = true; return kvp; })
                 .OrderBy(kvp => kvp.Key.Name)
-                .ToDictionary();
+                .ToDictionary());
 
-            //foreach (var questType in questTypes)
-            //{
-            //    var quest = (Quest)Activator.CreateInstance(questType);
-            //    loadingQuests.TryAdd(quest.Key, questType);
-            //}
+            // "Quest" objects are registered via ModType functionality and do not need manual registering here.
         }
 
         // Mods should load their quest logs in PostSetupContent().

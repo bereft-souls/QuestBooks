@@ -228,7 +228,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 MouseTooltip = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.GridSizeDown");
                 gridDownHovered = true;
 
-                if (LeftMouseJustReleased && this.gridSize > 3)
+                if (LeftMouseJustReleased && this.gridSize > 2)
                     this.gridSize--;
             }
 
