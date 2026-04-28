@@ -80,7 +80,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     {
                         window = Main.instance.Window.Handle,
                         title = Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteElementTitle"),
-                        message = Language.GetText("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteElementMEssage").Format(SelectedElement.GetType().Name),
+                        message = Language.GetText("Mods.QuestBooks.Tooltips.Designer.ConfirmDeleteElementMessage").Format(SelectedElement.GetType().Name),
                         flags = SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_WARNING,
                         numbuttons = 2,
                         buttons = [

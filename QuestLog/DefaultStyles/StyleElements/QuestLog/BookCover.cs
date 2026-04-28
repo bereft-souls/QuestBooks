@@ -142,12 +142,19 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     }
                 }
 
-                bool logAreaHovered = (!newLogSelected && logArea.Contains(MouseCanvas)) || (newLogSelected && log == QuestManager.ActiveQuestLog);
-                if (logAreaHovered && LeftMouseJustReleased)
+                bool logAreaHovered = false;
+
+                if ((!newLogSelected && logArea.Contains(MouseCanvas)) || (newLogSelected && log == QuestManager.ActiveQuestLog))
                 {
-                    QuestManager.SelectQuestLog(log);
-                    newLogSelected = true;
-                    logSelectionOffset = logArea.Y - switchLogLocation.Y;
+                    LockMouse();
+                    logAreaHovered = true;
+
+                    if (LeftMouseJustReleased)
+                    {
+                        QuestManager.SelectQuestLog(log);
+                        newLogSelected = true;
+                        logSelectionOffset = logArea.Y - switchLogLocation.Y;
+                    }
                 }
 
                 DrawTasks.Add(sb =>
