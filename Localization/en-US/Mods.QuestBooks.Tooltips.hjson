@@ -1,3 +1,15 @@
+Placeholder: {
+	Name: Placeholder Quest
+	Contents:
+	'''
+	This is a placeholder quest.
+
+	Please fill out the "Quest" field with the quest key
+	you want to use!
+	'''
+	Tooltip: Placeholder! Placeholder! Get your Placeholder!
+}
+
 Designer: {
 	OpenQuestLog: Open Quest Log
 	FileExistsTitle: Replace File

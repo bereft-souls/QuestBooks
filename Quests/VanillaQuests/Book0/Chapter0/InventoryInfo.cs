@@ -1,0 +1,24 @@
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0
+{
+    public class InventoryInfo : QBQuest
+    {
+        public override bool CheckCompletion()
+        {
+            return true; // Info node
+        }
+        
+        public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
+        {
+            title = "Your Inventory";
+            contents = $""; // TODO: Write this later
+            texture = null;
+        }
+    }
+}
