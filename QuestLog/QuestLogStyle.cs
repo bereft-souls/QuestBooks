@@ -77,6 +77,7 @@ namespace QuestBooks.QuestLog
             spriteBatch.Draw(texture, center, null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
         }
 
+        public virtual void SelectQuestLog(string questLogKey) { }
         public abstract void SelectBook(QuestBook book);
         public abstract void SelectChapter(QuestChapter chapter);
 

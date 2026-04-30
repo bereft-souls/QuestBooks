@@ -183,7 +183,7 @@ namespace QuestBooks.Systems
                 {
                     hovered = true;
                     Main.LocalPlayer.mouseInterface = true;
-                    Main.instance.MouseTextNoOverride(Language.GetTextValue("Mods.QuestBooks.Tooltips.OpenQuestLog"));
+                    Main.instance.MouseTextNoOverride(Language.GetTextValue("Mods.QuestBooks.Tooltips.Library.OpenQuestLog"));
                 }
 
                 if (hovered && Main.mouseLeftRelease && Main.mouseLeft)

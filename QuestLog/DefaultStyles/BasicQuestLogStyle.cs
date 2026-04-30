@@ -447,6 +447,26 @@ namespace QuestBooks.QuestLog.DefaultStyles
             spriteBatch.DrawOutlinedStringInRectangle(drawArea, FontAssets.DeathText.Value, (hovered ? Color.Yellow : Color.White) * opacity, Color.Black * opacity, title, extraScale: 1.2f, clipBounds: false, offset: new(0f, 12f));
         }
 
+        public override void SelectQuestLog(string questLogKey)
+        {
+            // Book area is reset automatically
+
+            // Reset chapters area
+            previousBook = null;
+            SelectedBook = null;
+            previousChapterScrollOffset = 0;
+            chaptersScrollOffset = 0;
+            realChaptersScrollOffset = 0;
+            previousBookSwipeOffset = 0f;
+
+            // Reset quest area
+            questElementSwipeOffset = 0f;
+            SortedElements = null;
+            SelectedChapter = null;
+            Zoom = 1f;
+            QuestAreaOffset = Vector2.Zero;
+        }
+
         public override void SelectBook(QuestBook book)
         {
             if (book == SelectedBook)

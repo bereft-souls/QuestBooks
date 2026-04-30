@@ -105,6 +105,7 @@ namespace QuestBooks.Systems
             var newLog = QuestLogs[questLog].Concat(globalBooks.SelectMany(l => l));
 
             QuestBooks = [..newLog];
+            QuestLogDrawer.ActiveStyle?.SelectQuestLog(questLog);
         }
 
         public static Quest GetQuest(string questName) => ActiveQuests[questName];

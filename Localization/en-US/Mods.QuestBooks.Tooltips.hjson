@@ -1,0 +1,209 @@
+Designer: {
+	OpenQuestLog: Open Quest Log
+	FileExistsTitle: Replace File
+	FileExistsMessage:
+		'''
+		The file {0} already exists.
+		Do you want to replace it?
+		'''
+	ConfirmDeleteBookTitle: Delete Quest Book
+	ConfirmDeleteBookMessage: Are you sure you want to delete the selected quest book: {0}?
+	ConfirmDeleteChapterTitle: Delete Chapter
+	ConfirmDeleteChapterMessage: Are you sure you want to delete the selected chapter: {0}?
+	ConfirmDeleteElementTitle: Delete Element
+	ConfirmDeleteElementMessage: Are you sure you want to delete the selected element: {0}?
+	ConfirmLoadLogTitle: Load Quest Log
+	ConfirmLoadLogMessage:
+		'''
+		Are you sure you want to load a new QuestLog?
+		This will clear any quest books currently in the editor, so make sure to save your progress!
+		'''
+	Yes: Yes
+	No: No
+	ToggleDesigner:
+		'''
+		[c/CCC018:Toggle Designer]
+		Toggles whether the quest log designer is active.
+		'''
+	SaveLog:
+		'''
+		[c/CCC018:Save Quest Log]
+		Saves all books currently open in the designer.
+		Select a file for the books to be exported to.
+		'''
+	LoadLog:
+		'''
+		[c/CCC018:Load Quest Log]
+		Loads quest books into the designer.
+		[c/FF0000:WARNING]: This will clear the books currently in the designer, so be sure to save your progress!
+		'''
+	AddBook:
+		'''
+		[c/CCC018:Add Book]
+		Adds a book to the designer.
+		'''
+	AddChapter:
+		'''
+		[c/CCC018:Add Chapter]
+		Adds a chapter to the selected quest book.
+		'''
+	DeleteBook:
+		'''
+		[c/CCC018:Delete Book]
+		Deletes the selected quest book.
+		'''
+	DeleteChapter:
+		'''
+		[c/CCC018:Delete Chapter]
+		Deletes the selected chapter from the selected quest book.
+		'''
+	DeleteElement:
+		'''
+		[c/CCC018:Delete Element]
+		Deletes the selected element from the selected chapter.
+		'''
+	MoveElement:
+		'''
+		[c/CCC018:Move Element]
+		Takes the selected element off of the canvas and allows you to replace it.
+		'''
+	TogglePreview:
+		'''
+		[c/CCC018:Toggle Preview]
+		Toggles the preview for this element's info page, if it has one.
+		'''
+	ShiftingCanvas:
+		'''
+		[c/CCC018:Enable Shifting Canvas]
+		Toggles whether this chapter can be scrolled around via click-and-drag/scrolling.
+		'''
+	MoveBounds:
+		'''
+		[c/CCC018:Move Bounds]
+		Toggles the ability to move the canvas bounds.
+		'''
+	ShowMidpoint:
+		'''
+		[c/CCC018:Show Center]
+		Toggles whether to show the center of the canvas, even if moving bounds is not enabled.
+		'''
+	ToggleBackdrop:
+		'''
+		[c/CCC018:Show Backdrop]
+		Toggles a darkening backdrop to the quest area for range of visibility.
+		'''
+	ToggleGrid:
+		'''
+		[c/CCC018:Show Grid]
+		Toggles visibility of the placement grid.
+		'''
+	SnapGrid:
+		'''
+		[c/CCC018:Snap to Grid]
+		Toggles grid snapping for element placement.
+		'''
+	GridSize:
+		'''
+		[c/CCC018:Grid Size]
+		The size of the placement grid.
+		Click to reset to the default (20).
+		'''
+	ZoomScale:
+		'''
+		[c/CCC018:Default Zoom]
+		The zoom level the quest area should be set to when this chapter is selected.
+		Click to set to the current zoom level of the quest area.
+		'''
+	GridSizeUp: Grid Size Up
+	GridSizeDown: Grid Size Down
+	ZoomUp: Default Zoom Up
+	ZoomDown: Default Zoom Down
+	ShiftBookUp: Shift Book Up
+	ShiftBookDown: Shift Book Down
+	ShiftChapterUp: Shift Chapter Up
+	ShiftChapterDown: Shift Chapter Down
+	QuestBookType: Quest Book Type:
+	QuestLineType: Quest Line Type:
+	QuestElementType: Element Selection:
+	ChangeQuestBookType: Change QuestBook type
+	ChangeChapterType: Change BookChapter type
+	LocalizationKey: Localization Key:
+	ChangeQuestBookName: Change QuestBook localization key
+	ChangeChapterName: Change BookChapter localization key
+	NoInfoPage: Element does not contain an info page!
+}
+
+Elements: {
+	KeyWordsLocalization:
+		'''
+		A localization entry that contains a set of "keywords" that can be used to filter elements on the canvas.
+		Each keyword should be separated by a comma , with no whitespace in between keywords/commas (keywords themselves can contain whitespace).
+		You can leave this empty to avoid filtering.
+		'''
+	Connector:
+		'''
+		Connects two "connectable" elements on the canvas. Acts as a visual and functional bridge,
+		allowing you to check for connection criteria to modify an element's behavior.
+		(Ex. only appearing after a pre-requisite is complete.)
+		'''
+	ConnectorThickness: The thickness of this connector, in pixels.
+	ConnectorPoint:
+		'''
+		Acts as a way to re-route connections through a corner, or to join multiple connections in a tree.
+		Essentially a simple connector extension.
+		'''
+	ConnectorPointSize: The diameter of this connector point, in pixels.
+	ConnectorPointFeeds: The number of "active feeds" required by this point in order to send an outgoing active signal.
+	DisplayElement: Displays a simple texture on the canvas.
+	OverlayElement: Displays a simple texture on top of the canvas that does NOT shift with moving canvases.
+	UnderlayElement: Displays a simple texture at the back of the canvas that does NOT shift with moving canvases.
+	DisplayTexture: The path of the texture to display.
+	DisplayScale: The scale to display the texture at.
+	DisplayRotation: The rotation of the texture, in degrees.
+	QuestDisplay: Displays a quest on the canvas. Contains configuration for things like unlock pre-requisites, and texture overrides.
+	HiddenQuest:
+		'''
+		Allows you to implement connection logic for certain quests without having to display an extra element on the canvas.
+		Useful for things like unlocking a quest when a condition other than its prerequisite(s) needs to be met.
+		'''
+	DynamicQuestDisplay:
+		'''
+		Like a quest display, but many of the element parameters are actually controlled by the quest rather than the element.
+		This is useful for things like quests that change depending on the evil biome present in the world.
+		The quest supplied to a DynamicQuestDisplay MUST inherit from DynamicQuest instead of Quest.
+		'''
+	QuestKey:
+		'''
+		The key for the quest you want this element to check the status of.
+		This is usually just the type name for the quest, but can be overridden.
+		'''
+	CompletedTexture: The path of the texture to display when the quest has been completed.
+	OutlineTexture: The path of the texture to display when this element is hovered/selected.
+	LockedTexture:
+		'''
+		The path of the texture to display when this element is not yet unlocked.
+		Leave empty to use the default behavior, which draws the unlocked texture blacked-out.
+		'''
+	IncompleteTexture:
+		'''
+		The path of the texture to display when the quest has not yet been completed.
+		Leave empty to use the default behavior, which draws the completed texture in grayscale.
+		'''
+	DisplayPrerequisites: The number of "active feeds" required to this element in order for it to display on the canvas.
+	UnlockPrerequisites: The number of "active feeds" required to this element in order for it to be unlocked on the canvas.
+	QuestJump: Clicking this element will automatically jump the player to a different position in the quest log.
+	QuestJumpTexture: The path of the texture to display when this quest jump is clickable.
+	JumpBook: The 0-based index of the book you want to jump to in the active list of quest books.
+	JumpChapter: The 0-based index of the chapter you want to jump to in the specified book's list of chapters.
+	JumpOffset: The position offset you want to jump to in the specified chapter. Listed as "X,Y"
+	TooltipLocalization: The localization key for this element's hover tooltip.
+	QuestJumpHover: Quest Jump
+}
+
+Library: {
+	OpenQuestLog: Open Quest Log
+	ScrollBook: A simple book that uses a scroll texture.
+	TabBook: A simple book that uses a "pull tab" or bookmark-like texture.
+	ScrollChapter: A simple chapter that uses a scroll texture.
+	BackToCover: Return to Cover
+}
