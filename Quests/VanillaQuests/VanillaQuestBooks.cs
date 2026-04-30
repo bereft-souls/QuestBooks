@@ -6,18 +6,19 @@ using System.Text;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace QuestBooks.Quests
+namespace QuestBooks.Quests.VanillaQuests
 {
     public static class VanillaQuestBooks
     {
+        /// <summary>
+        /// The JSON representation of the vanilla quest log.
+        /// </summary>
+        public static string VanillaLog => Encoding.UTF8.GetString(QuestBooksMod.Instance.GetFileBytes("Quests/VanillaQuests/VanillaQuestLog.json"));
+
         public static void AddVanillaQuests(Mod mod)
         {
             QuestBooksMod.AddQuestLogStyle(new BasicQuestLogStyle(), mod);
-
-            var questLogBytes = mod.GetFileBytes("Quests/VanillaQuestLog.json");
-            var questLogString = Encoding.UTF8.GetString(questLogBytes);
-
-            QuestBooksMod.AddQuestLog("Terraria", questLogString, mod);
+            QuestBooksMod.AddQuestLog("Terraria", VanillaLog, mod);
             QuestBooksMod.RegisterLogTitleDrawDelegate("Terraria", DrawTerrariaLogo);
         }
 

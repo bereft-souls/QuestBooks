@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultStyles;
 using QuestBooks.Quests;
+using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using QuestBooks.Systems.NetCode;
 using QuestBooks.Utilities;
@@ -17,15 +18,11 @@ namespace QuestBooks
 {
     public class QuestBooksMod : Mod
     {
+        public static Mod Instance { get; private set; } = null;
         public static bool DesignerEnabled { get; internal set; } = false;
         public static Mod DesignerMod { get; private set; } = null;
 
-        public override void HandlePacket(BinaryReader reader, int whoAmI)
-        {
-            var packetType = PacketManager.IdToPacket[reader.ReadByte()];
-            var packet = (QuestPacket)Activator.CreateInstance(packetType)!;
-            packet.HandlePacket(in reader, whoAmI);
-        }
+        public override void Load() => Instance = this;
 
         public override void PostSetupContent()
         {
@@ -35,6 +32,13 @@ namespace QuestBooks
                 QuestLoader.LoadQuests(mod);
 
             VanillaQuestBooks.AddVanillaQuests(this);
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            var packetType = PacketManager.IdToPacket[reader.ReadByte()];
+            var packet = (QuestPacket)Activator.CreateInstance(packetType)!;
+            packet.HandlePacket(in reader, whoAmI);
         }
 
         #region API
