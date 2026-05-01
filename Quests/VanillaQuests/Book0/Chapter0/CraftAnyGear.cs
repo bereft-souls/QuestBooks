@@ -1,26 +1,28 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuestBooks.Systems;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ModLoader;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
+
+public class CraftAnyGear : QBQuest
 {
-    public class CraftAnyGear : QBQuest
+    public override bool CheckCompletion() => false;
+
+    public class ItemCheck : GlobalItem
     {
-        public override bool CheckCompletion()
+        public override void OnCreated(Item item, ItemCreationContext context)
         {
-            return false;  // TODO: Needs to check for crafting any weapon or armor.
-                          // Probably best to simply check when the player crafts any item with a damage or defense value?
-        }
-        
-        public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
-        {
-            title = "Preparing for Trouble";
-            contents = $"Craft yourself a piece of equipment to better your chances in combat!\r\n" +
-                $"Any Broadsword, Bow or armorpiece should do.";
-            texture = null;
+            if (context is not RecipeItemCreationContext)
+                return;
+
+            if (item.pick > 0 || item.hammer > 0 || item.axe > 0)
+                return;
+
+            if (item.defense == 0 && item.damage <= 0)
+                return;
+
+            QuestManager.CompleteQuest<CraftAnyGear>();
         }
     }
 }

@@ -109,7 +109,7 @@ namespace QuestBooks.Systems
         }
 
         public static Quest GetQuest(string questName) => ActiveQuests[questName];
-        public static Quest GetQuest<TQuest>() where TQuest : Quest => GetQuest(QuestLoader.QuestKeys[typeof(TQuest)]);
+        public static TQuest GetQuest<TQuest>() where TQuest : Quest => (TQuest)GetQuest(QuestLoader.QuestKeys[typeof(TQuest)]);
 
         public static bool TryGetQuest(string questName, out Quest result) => ActiveQuests.TryGetValue(questName, out result);
         public static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest

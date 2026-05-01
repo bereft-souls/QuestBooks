@@ -19,6 +19,7 @@ namespace QuestBooks
     public class QuestBooksMod : Mod
     {
         public static Mod Instance { get; private set; } = null;
+
         public static bool DesignerEnabled { get; internal set; } = false;
         public static Mod DesignerMod { get; private set; } = null;
 
@@ -170,7 +171,7 @@ namespace QuestBooks
         }
 
         public static Quest GetQuest(string questName) => QuestManager.GetQuest(questName);
-        public static Quest GetQuest<TQuest>() where TQuest : Quest => QuestManager.GetQuest<TQuest>();
+        public static TQuest GetQuest<TQuest>() where TQuest : Quest => QuestManager.GetQuest<TQuest>();
 
         public static bool TryGetQuest(string questName, out Quest result) => QuestManager.TryGetQuest(questName, out result);
         public static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest => QuestManager.TryGetQuest(out result);

@@ -1,4 +1,6 @@
-﻿namespace QuestBooks.Quests.VanillaQuests;
+﻿using Microsoft.Xna.Framework.Graphics;
+
+namespace QuestBooks.Quests.VanillaQuests;
 
 /// <summary>
 /// Intended for internal QuestBooks use.<br/>
@@ -16,6 +18,23 @@ public abstract class QBQuest : Quest
             return _localizationCategory;
         }
     }
+}
+
+/// <summary>
+/// Intended for internal QuestBooks use.<br/>
+/// Acts as a quest that is marked as completed once it has been opened.
+/// </summary>
+public abstract class InfoQuest : QBQuest
+{
+    public bool Read { get; set; } = false;
+
+    public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
+    {
+        base.MakeSimpleInfoPage(out title, out contents, out texture);
+        Read = true;
+    }
+
+    public override bool CheckCompletion() => Read;
 }
 
 internal class Placeholder : Quest

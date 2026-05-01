@@ -1,24 +1,21 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuestBooks.Systems;
+using Terraria;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
+
+public class SurviveFirstNight : QBQuest
 {
-    public class SurviveFirstNight : QBQuest
-    {
-        public override bool CheckCompletion()
-        {
-            return false; // TODO: Check for first night passed, probably a timer? achievement mirror
-        }
+    public bool CachedNight { get; set; } = false;
 
-        public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
-        {
-            title = "You can do it!";
-            contents = "Survive your first night in the wild and dangerous world of Terraria!";
-            texture = null;
-        }
+    public override bool CheckCompletion() => false;
+
+    public override void Update()
+    {
+        bool day = Main.IsItDay();
+
+        if (day && CachedNight)
+            QuestManager.CompleteQuest<SurviveFirstNight>();
+
+        CachedNight = !day;
     }
 }

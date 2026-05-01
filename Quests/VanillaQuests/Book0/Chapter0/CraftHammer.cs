@@ -1,25 +1,22 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuestBooks.Systems;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ModLoader;
 
-namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
+
+public class CraftHammer : QBQuest
 {
-    public class CraftHammer : QBQuest
+    public override bool CheckCompletion() => false;
+
+    public class ItemCheck : GlobalItem
     {
-        public override bool CheckCompletion()
+        public override void OnCreated(Item item, ItemCreationContext context)
         {
-            return false; // TODO: Check for hammer craft / acquisation, achievement mirror
-        }
-        
-        public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)
-        {
-            title = "Hammer time!";
-            contents = $"Craft a Wooden Hammer.\r\n" +
-                $"Hammers are used to break apart background wall tiles, and allows the reshaping of tiles by hitting them";
-            texture = null;
+            if (context is not RecipeItemCreationContext || item.hammer <= 0)
+                return;
+
+            QuestManager.CompleteQuest<CraftHammer>();
         }
     }
 }

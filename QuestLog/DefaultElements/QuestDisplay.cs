@@ -12,7 +12,6 @@ using System.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Core;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {

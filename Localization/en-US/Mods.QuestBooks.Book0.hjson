@@ -20,13 +20,13 @@ Chapter0: {
 
 			Explore diverse biomes, face off dangerous foes, loot structures and craft weapons all to aid you in your journey!
 			'''
-		Tooltip: Hello World!
+		Tooltip: Welcome to Terraria!
 	}
 
 	StartQBInfo: {
 		Title: Questbooks and You
 		Contents: (insert explanation here)
-		Tooltip: Information about the mod
+		Tooltip: QuestBooks Info
 	}
 
 	ForestBiome: {
@@ -34,9 +34,9 @@ Chapter0: {
 		Contents:
 			'''
 			The starting location of all Terrarians.
-			Between the lush greenery and comfy breeze, it seems like the perfect spot to set up base in!
+			Between the lush greenery and comfy breeze, it seems like the perfect spot to set up base!
 			'''
-		Tooltip: Hello world!
+		Tooltip: The Forest
 	}
 
 	GuideInteract: {
