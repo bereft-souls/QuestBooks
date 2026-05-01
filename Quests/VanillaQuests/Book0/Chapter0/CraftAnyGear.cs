@@ -7,9 +7,11 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 
 public class CraftAnyGear : QBQuest
 {
+    public override QuestType QuestType => QuestType.Player;
+
     public override bool CheckCompletion() => false;
 
-    public class ItemCheck : GlobalItem
+    public class GearItemCheck : GlobalItem
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {

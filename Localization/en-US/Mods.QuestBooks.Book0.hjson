@@ -8,10 +8,10 @@ Name: Before the Journey
 
 Chapter0: {
 	Name: Prologue
-	
+
 	// --------------
 	// <-> Trunk <->
-
+	
 	StartFirstSteps: {
 		Title: First Steps
 		Contents:
@@ -190,10 +190,5 @@ Chapter1: {
 	}
 }
 
-Chapter2: {
-	Name: Hardmode
-}
-
-Chapter3: {
-	Name: Endgame
-}
+Chapter2.Name: Hardmode
+Chapter3.Name: Endgame

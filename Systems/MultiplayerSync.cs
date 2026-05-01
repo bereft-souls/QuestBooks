@@ -65,7 +65,15 @@ namespace QuestBooks.Systems
         public override void HandlePacket(in BinaryReader packet, int sender)
         {
             string questName = packet.ReadNullTerminatedString();
-            QuestManager.CompleteQuest(questName);
+            var quest = QuestManager.GetQuest(questName);
+
+            // Forward world completion packets from server to other clients
+            if (Main.dedServ && quest.QuestType == Quests.QuestType.World)
+                Send<QuestCompletionPacket>(packet => packet.WriteNullTerminatedString(questName));
+
+            // This prevents a packet sending loop between client and server
+            if (!quest.Completed)
+                QuestManager.CompleteQuest(quest);
         }
     }
 }

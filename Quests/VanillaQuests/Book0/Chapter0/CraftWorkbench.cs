@@ -10,9 +10,12 @@ namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 
 public class CraftWorkbench : QBQuest
 {
+    // Despite being a "craft" quest, this is more related to world state,
+    // and thus remains a world quest instead of a player quest.
+
     public override bool CheckCompletion() => false;
 
-    public class ItemCheck : GlobalItem
+    public class WorkbenchItemCheck : GlobalItem
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {

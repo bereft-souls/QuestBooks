@@ -26,6 +26,8 @@ public abstract class QBQuest : Quest
 /// </summary>
 public abstract class InfoQuest : QBQuest
 {
+    public override QuestType QuestType => QuestType.Player;
+
     public bool Read { get; set; } = false;
 
     public override void MakeSimpleInfoPage(out string title, out string contents, out Texture2D texture)

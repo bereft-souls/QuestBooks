@@ -1,11 +1,14 @@
-﻿using QuestBooks.QuestLog;
+﻿using MonoMod.Utils;
+using QuestBooks.QuestLog;
 using QuestBooks.Quests;
+using QuestBooks.Systems.NetCode;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace QuestBooks.Systems
@@ -128,6 +131,14 @@ namespace QuestBooks.Systems
         public static void CompleteQuest(string questName) => CompleteQuest(GetQuest(questName));
         public static void CompleteQuest(Quest quest)
         {
+            // Always attempt to sync world quests across server and client.
+            // If a quest is already completed, this packet will be ignored.
+            if (quest.QuestType == QuestType.World && Main.netMode != NetmodeID.SinglePlayer)
+                QuestPacket.Send<QuestCompletionPacket>(packet => packet.WriteNullTerminatedString(quest.Key));
+
+            if (quest.Completed)
+                return;
+
             quest.OnCompletion();
             MarkComplete(quest);
         }
@@ -136,6 +147,8 @@ namespace QuestBooks.Systems
         public static void MarkComplete(string questName) => MarkComplete(GetQuest(questName));
         public static void MarkComplete(Quest quest)
         {
+            // This is not redundant because MarkComplete() can be called separately
+            // from CompleteQuest().
             if (quest.Completed)
                 return;
 

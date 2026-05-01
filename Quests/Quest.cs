@@ -87,7 +87,7 @@ namespace QuestBooks.Quests
 
         /// <summary>
         /// This is called every frame, regardless of whether the quest is completed. You can do any logic updating, dynamic quest updating, etc. here.<br/>
-        /// This can be called on both client and server, so implement your updating accordingly.
+        /// This will be called on both client and server, despite CompletionCheck() being netmode-dependent; implement your updating accordingly.
         /// </summary>
         public virtual void Update() { }
 
