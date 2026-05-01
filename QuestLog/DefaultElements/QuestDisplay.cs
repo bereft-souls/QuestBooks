@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
@@ -100,8 +101,8 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public List<Connector> Connections { get; set; } = [];
 
-        public override bool VisibleOnCanvas() => IncomingFeeds >= DisplayFeeds || QuestLogDrawer.ActiveStyle.UseDesigner;
-        public bool Unlocked() => IncomingFeeds >= UnlockFeeds;
+        public override bool VisibleOnCanvas() => Quest.Completed || IncomingFeeds >= DisplayFeeds || QuestLogDrawer.ActiveStyle.UseDesigner;
+        public bool Unlocked() => Quest.Completed || IncomingFeeds >= UnlockFeeds;
         public bool Completed() => Quest.Completed;
 
         public bool CompleteConnection(IConnectable source) => VisibleOnCanvas();
@@ -116,7 +117,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
             bool hovered = CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
 
-            string tooltip = Quest.HoverTooltip;
+            string tooltip = Unlocked() ? Quest.HoverTooltip : Language.GetTextValue("Mods.QuestBooks.Tooltip.Library.LockedTooltip");
             if (hovered && tooltip != null)
                 mouseTooltip = tooltip;
 
