@@ -20,13 +20,13 @@ Chapter0: {
 
 			Explore diverse biomes, face off dangerous foes, loot structures and craft weapons all to aid you in your journey!
 			'''
-		Tooltip: Welcome to Terraria!
+		Tooltip: Info: Terraria
 	}
 
 	StartQBInfo: {
 		Title: Questbooks and You
 		Contents: (insert explanation here)
-		Tooltip: QuestBooks Info
+		Tooltip: Info: QuestBooks
 	}
 
 	ForestBiome: {
@@ -46,7 +46,7 @@ Chapter0: {
 			A trusty guide to help you along the way with their incredible crafting knowledge and varying useful tips.
 			If you ever find an item labeled as a "Material", be sure to check it up with him!
 			'''
-		Tooltip: Always here for you
+		Tooltip: Talk to the Guide
 	}
 
 	ChopTree: {
@@ -67,7 +67,7 @@ Chapter0: {
 			(To view the new recipes, you must stand closeby to the station)
 			'''
 		// Needs to be changed for 1.4.5
-		Tooltip: Let me in coach!
+		Tooltip: Craft a workbench
 	}
 
 	CraftHammer: {
@@ -92,7 +92,7 @@ Chapter0: {
 			- A lightsource.
 			- An entryway (try Doors or Platforms)
 			'''
-		Tooltip: Housing guide
+		Tooltip: Build and move an NPC into a house
 	}
 
 	// --------------
@@ -110,18 +110,19 @@ Chapter0: {
 	WorldEventsInfo: {
 		Title: Events and occurances throughout Terraria
 		Contents: ""
+		Tooltip: Info: Events
 	}
 
 	InventoryInfo: {
 		Title: Inventory Info
 		Contents: ""
-		Tooltip: ---
+		Tooltip: Info: Inventory
 	}
 
 	CraftAnyGear: {
-		Title: ---
+		Title: Gearing Up
 		Contents: ""
-		Tooltip: ---
+		Tooltip: Craft any gear
 	}
 
 	ClassInfo: {
@@ -151,19 +152,19 @@ Chapter0: {
 			         With that said, the differences between classes arent set in the sand; Mages may still get to use magical guns while Melee can acquire magical swords.
 			         So dont worry too much about locking into 1 weapon style, and you can always freely switch between classes at any time, or even mix gear between multiple!
 			'''
-		Tooltip: Information about Classes
+		Tooltip: Info: Classes
 	}
 
 	DayNightInfo: {
 		Title: ---
 		Contents: ""
-		Tooltip: ---
+		Tooltip: Info: Day/Night Cycle
 	}
 
 	SurviveFirstNight: {
 		Title: ---
 		Contents: ""
-		Tooltip: ---
+		Tooltip: Survive a full night
 	}
 }
 
@@ -180,13 +181,13 @@ Chapter1: {
 
 			Check back often! New goals will appear as you unlock them on the main books.
 			'''
-		Tooltip: Condensing progression, all for you!
+		Tooltip: Info: Progression
 	}
 
 	AllBossesDefeated: {
 		Title: Slayer of Worlds
 		Contents: Defeat every boss in Terraria! // rest of the desc would probably a dynamic list of bosses will appear and beaten bosses cross off?
-		Tooltip: They'll all cower...
+		Tooltip: Defeat every boss
 	}
 }
 

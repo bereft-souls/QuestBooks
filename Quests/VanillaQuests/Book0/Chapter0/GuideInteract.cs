@@ -1,9 +1,26 @@
-﻿namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
+﻿using QuestBooks.Systems;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 
 public class GuideInteract : QBQuest
 {
-    public override bool CheckCompletion()
+    public override QuestType QuestType => QuestType.Player;
+
+    public override bool CheckCompletion() => false;
+
+    public class GuideInteractCheck : GlobalNPC
     {
-        return false; // TODO: Should be a check for interacting with the guide (right clicking him)
+        // TODO: Test this
+
+        public override void OnChatButtonClicked(NPC npc, bool firstButton)
+        {
+            if (npc.type != NPCID.Guide)
+                return;
+
+            QuestManager.CompleteQuest<GuideInteract>();
+        }
     }
 }

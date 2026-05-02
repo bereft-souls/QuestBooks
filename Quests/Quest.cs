@@ -39,6 +39,12 @@ namespace QuestBooks.Quests
         public virtual string HoverTooltip => Language.Exists(this.GetLocalizationKey("Tooltip")) ? this.GetLocalization("Tooltip").Format(LocalizationArgs) : null;
 
         /// <summary>
+        /// The text that should display in the mouse tooltip whenever this quest is both locked and being hovered over in the quest log.<br/>
+        /// This value is not required.
+        /// </summary>
+        public virtual string LockedTooltip => Language.Exists(this.GetLocalizationKey("LockedTooltip")) ? this.GetLocalization("LockedTooltip").Format(LocalizationArgs) : Language.GetTextValue("Mods.QuestBooks.Tooltip.Library.LockedTooltip");
+
+        /// <summary>
         /// Override this method to implement your own custom drawing for info pages in the quest log.<br/>
         /// Note that your logic should NOT scale with any UI parameters, as scaling is handled via matrices and render targets here.<br/>
         /// Return <see langword="true"/> if your did custom drawing, otherwise <see langword="false"/>.

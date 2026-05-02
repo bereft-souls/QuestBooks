@@ -117,7 +117,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
             bool hovered = CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
 
-            string tooltip = Unlocked() ? Quest.HoverTooltip : Language.GetTextValue("Mods.QuestBooks.Tooltip.Library.LockedTooltip");
+            string tooltip = Unlocked() ? Quest.HoverTooltip : Quest.LockedTooltip;
             if (hovered && tooltip != null)
                 mouseTooltip = tooltip;
 
