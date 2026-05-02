@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.Utilities;
+using Stubble.Core.Classes;
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
@@ -100,11 +101,17 @@ namespace QuestBooks.Systems
 
         public partial class PlayerQuestLoader : ModPlayer
         {
-            public override void LoadData(TagCompound tag)
+            // Cache the tag compound as we only want to read it for the actual player
+            // entering the world.
+            private TagCompound tagCompound = null;
+
+            public override void LoadData(TagCompound tag) => tagCompound = tag?.ContainsKey(TagKey) ?? false ? tag : null;
+
+            public override void OnEnterWorld()
             {
                 // Attempt to fetch completed quest data from player.
                 // If it does not exist, leave all player quests as incomplete.
-                if (tag.TryGet(TagKey, out string[] quests))
+                if (tagCompound?.TryGet(TagKey, out string[] quests) ?? false)
                 {
                     LoadCompletedQuests(quests, out var unloaded);
 
@@ -112,11 +119,8 @@ namespace QuestBooks.Systems
                         QuestManager.UnloadedCompletedPlayerQuests.Add(quest);
                 }
 
-                QuestLogDrawer.ActiveStyle.LoadPlayerData(tag);
-            }
+                QuestLogDrawer.ActiveStyle.LoadPlayerData(tagCompound);
 
-            public override void OnEnterWorld()
-            {
                 foreach (var quest in QuestManager.IncompletePlayerQuests.Select(QuestManager.GetQuest).ToArray())
                 {
                     if (quest.CheckCompletion())

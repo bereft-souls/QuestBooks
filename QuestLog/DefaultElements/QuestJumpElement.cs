@@ -82,9 +82,16 @@ namespace QuestBooks.QuestLog.DefaultElements
         [ElementTooltip("TooltipLocalization")]
         public string TooltipLocalization { get; set; } = "Mods.QuestBooks.Tooltips.Elements.QuestJumpHover";
 
+        [ElementTooltip("LockedTooltipLocalization")]
+        public string LockedTooltipLocalization { get; set; } = "Mods.QuestBooks.Tooltips.Library.LockedTooltip";
+
         [JsonIgnore]
         [HideInDesigner]
         public string Tooltip { get => string.IsNullOrWhiteSpace(TooltipLocalization) ? null : Language.GetOrRegister(TooltipLocalization).Value; }
+
+        [JsonIgnore]
+        [HideInDesigner]
+        public string LockedTooltip { get => string.IsNullOrWhiteSpace(LockedTooltipLocalization) ? null : Language.GetOrRegister(LockedTooltipLocalization).Value; }
 
         public Vector2 CanvasPosition { get; set; }
 
@@ -104,12 +111,13 @@ namespace QuestBooks.QuestLog.DefaultElements
             // mousePosition is already in logical canvas coordinates (zoom factored out)
             _unlockedTexture ??= ModContent.Request<Texture2D>(_unlockedTexturePath);
             bool hovered = CenteredRectangle(CanvasPosition, _unlockedTexture.Size()).Contains(mousePosition.ToPoint());
+            bool unlocked = Unlocked() || QuestLogDrawer.ActiveStyle.UseDesigner;
 
-            string tooltip = Tooltip;
+            string tooltip = unlocked ? Tooltip : LockedTooltip;
             if (hovered && tooltip is not null)
                 mouseTooltip = tooltip;
 
-            return hovered;
+            return hovered && unlocked;
         }
 
         public override void OnSelect()

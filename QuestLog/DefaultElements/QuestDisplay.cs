@@ -116,12 +116,13 @@ namespace QuestBooks.QuestLog.DefaultElements
             // mousePosition is already in logical canvas coordinates (zoom factored out)
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
             bool hovered = CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
+            bool unlocked = Unlocked() || QuestLogDrawer.ActiveStyle.UseDesigner;
 
-            string tooltip = Unlocked() ? Quest.HoverTooltip : Quest.LockedTooltip;
+            string tooltip = unlocked ? Quest.HoverTooltip : Quest.LockedTooltip;
             if (hovered && tooltip != null)
                 mouseTooltip = tooltip;
 
-            return hovered;
+            return hovered && unlocked;
         }
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)

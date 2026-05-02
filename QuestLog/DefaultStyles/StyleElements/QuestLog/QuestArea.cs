@@ -174,7 +174,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             // Get the top-most element that is being hovered
             QuestLogElement lastHoveredElement = mouseInBounds ? SortedElements?.LastOrDefault(x =>
                 x.IsHovered(placementPosition, QuestAreaOffset, Zoom, ref MouseTooltip) &&
-                (SelectedElement is null || (Array.FindIndex(SortedElements, e => e == x) < Array.FindIndex(SortedElements, e => e == SelectedElement))), null)
+                (SelectedElement is null || !UseDesigner || (Array.FindIndex(SortedElements, e => e == x) < Array.FindIndex(SortedElements, e => e == SelectedElement))), null)
                 ?? null : null;
 
             HoveredElement = lastHoveredElement;

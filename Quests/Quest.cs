@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QuestBooks.Systems;
-using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -30,7 +29,7 @@ namespace QuestBooks.Quests
         /// Allows you to modify the collection of objects passed to all of this quest's localization retrievals.<br/>
         /// The default contains only 1 entry, which is a color string (green if the quest is completed, yellow if not).
         /// </summary>
-        public virtual object[] LocalizationArgs { get => []; }
+        public virtual object[] LocalizationArgs { get => [(Completed ? new Color(20, 210, 70) : new Color(255, 240, 0))]; }
 
         /// <summary>
         /// The text that should display in the mouse tooltip whenever this quest is hovered over in the quest log.<br/>
@@ -42,7 +41,7 @@ namespace QuestBooks.Quests
         /// The text that should display in the mouse tooltip whenever this quest is both locked and being hovered over in the quest log.<br/>
         /// This value is not required.
         /// </summary>
-        public virtual string LockedTooltip => Language.Exists(this.GetLocalizationKey("LockedTooltip")) ? this.GetLocalization("LockedTooltip").Format(LocalizationArgs) : Language.GetTextValue("Mods.QuestBooks.Tooltip.Library.LockedTooltip");
+        public virtual string LockedTooltip => Language.Exists(this.GetLocalizationKey("LockedTooltip")) ? this.GetLocalization("LockedTooltip").Format(LocalizationArgs) : Language.GetTextValue("Mods.QuestBooks.Tooltips.Library.LockedTooltip");
 
         /// <summary>
         /// Override this method to implement your own custom drawing for info pages in the quest log.<br/>

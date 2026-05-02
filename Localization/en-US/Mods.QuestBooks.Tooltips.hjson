@@ -209,6 +209,7 @@ Elements: {
 	JumpChapter: The 0-based index of the chapter you want to jump to in the specified book's list of chapters.
 	JumpOffset: The position offset you want to jump to in the specified chapter. Listed as "X,Y"
 	TooltipLocalization: The localization key for this element's hover tooltip.
+	LockedTooltipLocalization: The localization key for this element's hover tooltip while locked.
 	QuestJumpHover: Quest Jump
 }
 
