@@ -1,16 +1,29 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace QuestBooks.Quests
 {
     public abstract class DynamicQuest : Quest
     {
-        public abstract Asset<Texture2D> Texture { get; }
+        /// <summary>
+        /// Draws the "completed" quest icon to the canvas.
+        /// </summary>
+        public abstract void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
 
-        public virtual Asset<Texture2D> OutlineTexture => null;
+        /// <summary>
+        /// Draws the "incompleted" quest icon to the canvas.
+        /// </summary>
+        public abstract void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
 
-        public virtual Asset<Texture2D> IncompleteTexture => null;
+        /// <summary>
+        /// Draws the "locked" quest icon to the canvas.
+        /// </summary>
+        public abstract void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
 
-        public virtual Asset<Texture2D> LockedTexture => null;
+        /// <summary>
+        /// Determines how big the "hoverable" area for this element should be.<br/>
+        /// Typically just the size of your icon asset (or frame size if the icon is animated).
+        /// </summary>
+        public abstract Vector2 HoverAreaSize(bool unlocked);
     }
 }

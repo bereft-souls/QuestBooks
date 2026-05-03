@@ -1,6 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
@@ -25,15 +29,26 @@ namespace QuestBooks.QuestLog.DefaultElements
         [JsonIgnore]
         public DynamicQuest DynamicQuest { get => base.Quest as DynamicQuest; }
 
-        public override void Update()
-        {
-            if (DynamicQuest is null)
-                return;
+        protected override void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected) =>
+            DynamicQuest.DrawCompleted(spriteBatch, canvasOffset, zoom, hovered, selected);
 
-            _completedTexture = DynamicQuest.Texture;
-            _outlineTexture = DynamicQuest.OutlineTexture;
-            _incompleteTexture = DynamicQuest.IncompleteTexture;
-            _lockedTexture = DynamicQuest.LockedTexture;
+        protected override void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected) =>
+            DynamicQuest.DrawLocked(spriteBatch, canvasOffset, zoom, hovered, selected);
+
+        protected override void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected) =>
+            DynamicQuest.DrawIncomplete(spriteBatch, canvasOffset, zoom, hovered, selected);
+
+        public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip)
+        {
+            // mousePosition is already in logical canvas coordinates (zoom factored out)
+            bool unlocked = HasInfoPage && (Unlocked() || QuestLogDrawer.ActiveStyle.UseDesigner);
+            bool hovered = CenteredRectangle(CanvasPosition, DynamicQuest.HoverAreaSize(unlocked)).Contains(mousePosition.ToPoint());
+
+            string tooltip = unlocked ? Quest.HoverTooltip : Quest.LockedTooltip;
+            if (hovered && tooltip != null)
+                mouseTooltip = tooltip;
+
+            return hovered && unlocked;
         }
 
         public class DynamicQuestChecker : IMemberConverter<string>

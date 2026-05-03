@@ -116,6 +116,19 @@ namespace QuestBooks.Quests
         /// </summary>
         public abstract bool CheckCompletion();
 
+        /// <summary>
+        /// Called before the QuestDisplay icon is drawn to the canvas.<br/>
+        /// Return <see langword="false"/> to prevent the icon from drawing.<br/>
+        /// <br/>
+        /// Returns <see langword="true"/> by default.
+        /// </summary>
+        public virtual bool PreTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered) => true;
+
+        /// <summary>
+        /// Called after the QuestDisplay icon would be drawn to the canvas, even if <see cref="PreTextureDraw(SpriteBatch, Vector2, float, bool, bool)"/> returned <see langword="false"/>.
+        /// </summary>
+        public virtual void PostTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered) { }
+
         protected sealed override void Register() => QuestLoader.loadingQuests.Add(GetType(), Key);
 
         public sealed override void SetupContent() => SetStaticDefaults();

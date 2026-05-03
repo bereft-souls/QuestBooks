@@ -116,7 +116,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             // mousePosition is already in logical canvas coordinates (zoom factored out)
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
             bool hovered = CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
-            bool unlocked = Unlocked() || QuestLogDrawer.ActiveStyle.UseDesigner;
+            bool unlocked = HasInfoPage && (Unlocked() || QuestLogDrawer.ActiveStyle.UseDesigner);
 
             string tooltip = unlocked ? Quest.HoverTooltip : Quest.LockedTooltip;
             if (hovered && tooltip != null)
@@ -127,33 +127,38 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
-            if (QuestLogDrawer.ActiveStyle.UseDesigner)
+            if (Quest.PreTextureDraw(spriteBatch, canvasViewOffset, zoom, selected, hovered))
             {
-                int cycle = (int)(Main.timeForVisualEffects % 180 / 60);
-                switch (cycle)
+                if (QuestLogDrawer.ActiveStyle.UseDesigner)
                 {
-                    case 0:
-                        DrawLocked(spriteBatch, canvasViewOffset, zoom);
-                        return;
+                    int cycle = (int)(Main.timeForVisualEffects % 180 / 60);
+                    switch (cycle)
+                    {
+                        case 0:
+                            DrawLocked(spriteBatch, canvasViewOffset, zoom, hovered, selected);
+                            break;
 
-                    case 1:
-                        DrawIncomplete(spriteBatch, canvasViewOffset, zoom);
-                        return;
+                        case 1:
+                            DrawIncomplete(spriteBatch, canvasViewOffset, zoom, hovered, selected);
+                            break;
 
-                    default:
-                        DrawCompleted(spriteBatch, canvasViewOffset, zoom, hovered, selected);
-                        return;
+                        default:
+                            DrawCompleted(spriteBatch, canvasViewOffset, zoom, hovered, selected);
+                            break;
+                    }
                 }
+
+                else if (!Unlocked())
+                    DrawLocked(spriteBatch, canvasViewOffset, zoom, hovered, selected);
+
+                else if (!Completed())
+                    DrawIncomplete(spriteBatch, canvasViewOffset, zoom, hovered, selected);
+
+                else
+                    DrawCompleted(spriteBatch, canvasViewOffset, zoom, hovered, selected);
             }
 
-            if (!Unlocked())
-                DrawLocked(spriteBatch, canvasViewOffset, zoom);
-
-            else if (!Completed())
-                DrawIncomplete(spriteBatch, canvasViewOffset, zoom);
-
-            else
-                DrawCompleted(spriteBatch, canvasViewOffset, zoom, hovered, selected);
+            Quest.PostTextureDraw(spriteBatch, canvasViewOffset, zoom, selected, hovered);
         }
 
         protected virtual void DrawOutline(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, Color color)
@@ -162,7 +167,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             DrawTexture(spriteBatch, _outlineTexture.Value, canvasOffset, zoom, color);
         }
 
-        protected virtual void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom)
+        protected virtual void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected)
         {
             if (!string.IsNullOrWhiteSpace(_lockedTexturePath))
             {
@@ -176,7 +181,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             DrawTexture(spriteBatch, _completedTexture.Value, canvasOffset, zoom, Color.Black);
         }
 
-        protected virtual void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom)
+        protected virtual void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected)
         {
             if (!string.IsNullOrWhiteSpace(_incompleteTexturePath))
             {
