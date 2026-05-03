@@ -113,7 +113,8 @@ namespace QuestBooks.QuestLog
         /// </summary>
         public virtual void OverrideIconDraw(ref float drawPriority, ref QuestLogStyle.IconDrawDelegate iconDraw)
         {
-
+            foreach (var element in Elements)
+                element.OverrideIconDraw(ref drawPriority, ref iconDraw);
         }
 
         /// <summary>
@@ -122,7 +123,8 @@ namespace QuestBooks.QuestLog
         /// </summary>
         public virtual void OverrideIconOutlineDraw(ref float drawPriority, ref QuestLogStyle.IconDrawDelegate outlineDraw)
         {
-
+            foreach (var element in Elements)
+                element.OverrideIconOutlineDraw(ref drawPriority, ref outlineDraw);
         }
 
         /// <summary>

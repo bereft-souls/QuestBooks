@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using QuestBooks.Quests;
 using QuestBooks.Systems;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {

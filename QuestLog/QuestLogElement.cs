@@ -7,6 +7,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Localization;
@@ -59,6 +60,18 @@ namespace QuestBooks.QuestLog
             Rectangle area = new(10, 0, 420, 540);
             spriteBatch.DrawOutlinedStringInRectangle(area, FontAssets.DeathText.Value, Color.White, Color.Black, Language.GetTextValue("Mods.QuestBooks.Tooltips.Designer.NoInfoPage"), clipBounds: false);
         }
+
+        /// <summary>
+        /// Override this to change how the "open quest log" outline is drawn in the inventory.<br/>
+        /// <paramref name="drawPriority"/> is the current draw override priority. If you have something of higher priority, modify both <paramref name="drawPriority"/> and <paramref name="outlineDraw"/>.
+        /// </summary>
+        public virtual void OverrideIconOutlineDraw(ref float drawPriority, ref QuestLogStyle.IconDrawDelegate outlineDraw) { }
+
+        /// <summary>
+        /// Override this to change how the "open quest log" icon is drawn in the inventory.<br/>
+        /// <paramref name="drawPriority"/> is the current draw override priority. If you have something of higher priority, modify both <paramref name="drawPriority"/> and <paramref name="iconDraw"/>.
+        /// </summary>
+        public virtual void OverrideIconDraw(ref float drawPriority, ref QuestLogStyle.IconDrawDelegate iconDraw) { }
 
         #endregion
 

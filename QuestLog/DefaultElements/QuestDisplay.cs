@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultElements
@@ -101,6 +100,19 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public List<Connector> Connections { get; set; } = [];
 
+        // The following 2 fields are used to track when a "notification"
+        // should be shown to indicate a new quest.
+        [JsonIgnore] private bool? _showNotification = null;
+
+        /// <summary>
+        /// Determines whether the "notification" indicator should be displayed on the "open quest log" button in the inventory.
+        /// </summary>
+        [JsonIgnore][HideInDesigner] public virtual bool ShowNotification
+        {
+            get => Unlocked() && (_showNotification ?? false);
+            set => _showNotification = value;
+        }
+
         public override bool VisibleOnCanvas() => Quest.Completed || IncomingFeeds >= DisplayFeeds || QuestLogDrawer.ActiveStyle.UseDesigner;
         public bool Unlocked() => Quest.Completed || IncomingFeeds >= UnlockFeeds;
         public bool Completed() => Quest.Completed;
@@ -127,7 +139,9 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
-            if (Quest.PreTextureDraw(spriteBatch, canvasViewOffset, zoom, selected, hovered))
+            bool unlocked = Unlocked();
+
+            if (Quest.PreTextureDraw(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered))
             {
                 if (QuestLogDrawer.ActiveStyle.UseDesigner)
                 {
@@ -148,7 +162,7 @@ namespace QuestBooks.QuestLog.DefaultElements
                     }
                 }
 
-                else if (!Unlocked())
+                else if (!unlocked)
                     DrawLocked(spriteBatch, canvasViewOffset, zoom, hovered, selected);
 
                 else if (!Completed())
@@ -158,7 +172,13 @@ namespace QuestBooks.QuestLog.DefaultElements
                     DrawCompleted(spriteBatch, canvasViewOffset, zoom, hovered, selected);
             }
 
-            Quest.PostTextureDraw(spriteBatch, canvasViewOffset, zoom, selected, hovered);
+            if (selected)
+                _showNotification = false;
+
+            Quest.PostTextureDraw(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered);
+
+            if (ShowNotification)
+                Quest.DrawNotification(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered);
         }
 
         protected virtual void DrawOutline(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, Color color)
@@ -223,6 +243,28 @@ namespace QuestBooks.QuestLog.DefaultElements
         {
             Vector2 drawPos = (CanvasPosition - canvasOffset) * zoom;
             spriteBatch.Draw(texture, drawPos, null, color, 0f, texture.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
+        }
+
+        public override void Update()
+        {
+            if (_showNotification.HasValue)
+                return;
+
+            _showNotification = !Unlocked();
+        }
+
+        public override void OverrideIconDraw(ref float drawPriority, ref QuestLogStyle.IconDrawDelegate iconDraw)
+        {
+            // Don't draw the notification if something else is already changing the draw method
+            if (!ShowNotification || drawPriority > 0)
+                return;
+
+            var normalIcon = iconDraw;
+            iconDraw = (spriteBatch, texture, center, scale, hovered) =>
+            {
+                normalIcon(spriteBatch, texture, center, scale, hovered);
+                // TODO: Notification on the icon
+            };
         }
 
         public override void DrawDesignerIcon(SpriteBatch spriteBatch, Rectangle iconArea) => DrawSimpleIcon(spriteBatch, QuestAssets.MediumQuest, iconArea);

@@ -122,12 +122,21 @@ namespace QuestBooks.Quests
         /// <br/>
         /// Returns <see langword="true"/> by default.
         /// </summary>
-        public virtual bool PreTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered) => true;
+        public virtual bool PreTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered) => true;
 
         /// <summary>
         /// Called after the QuestDisplay icon would be drawn to the canvas, even if <see cref="PreTextureDraw(SpriteBatch, Vector2, float, bool, bool)"/> returned <see langword="false"/>.
         /// </summary>
-        public virtual void PostTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered) { }
+        public virtual void PostTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered) { }
+
+        /// <summary>
+        /// Called if/when a "notification" indicator is requesting to be drawn for this quest.<br/>
+        /// Override this to change how the notification should display.
+        /// </summary>
+        public virtual void DrawNotification(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered)
+        {
+            // TODO: Draw notification
+        }
 
         protected sealed override void Register() => QuestLoader.loadingQuests.Add(GetType(), Key);
 
