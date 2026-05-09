@@ -273,7 +273,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 SwitchTargets(null);
 
-                if (previousBookSwipeOffset == 0)
+                if (questInfoSwipeOffset == 0)
                 {
                     SwitchTargets(previousQuestInfoTarget, BlendState.AlphaBlend);
                     DrawTasks.Add(sb => sb.GraphicsDevice.Clear(Color.Transparent));

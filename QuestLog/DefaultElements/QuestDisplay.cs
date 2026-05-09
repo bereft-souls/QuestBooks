@@ -299,6 +299,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
             // Get info parameters
             quest.MakeSimpleInfoPage(out var title, out var contents, out var texture);
+            Rectangle titleArea = new(8, 10, 430, 64);
             Rectangle contentArea = new(8, 80, 430, 450);
             TextSnippet snippet = null;
 
@@ -306,10 +307,6 @@ namespace QuestBooks.QuestLog.DefaultElements
 
             if (title is null)
                 goto Contents;
-
-            // Default page drawing
-            Rectangle titleArea = new(8, 10, 430, 64);
-            //spriteBatch.DrawRectangle(titleArea, Color.Black);
 
             Rectangle underline = titleArea.CookieCutter(new(0f, 0.6f), new(1f, 0.05f));
             spriteBatch.DrawRectangle(underline, Color.Gray, fill: true);

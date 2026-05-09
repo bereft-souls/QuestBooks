@@ -75,7 +75,7 @@ namespace QuestBooks.Quests
         {
             title = this.GetLocalization("Title").Format(LocalizationArgs);
             contents = this.GetLocalization("Contents").Format(LocalizationArgs);
-            texture = ModContent.RequestIfExists<Texture2D>($"{Mod.Name}/{TextureCategory}/{Name}", out var asset, ReLogic.Content.AssetRequestMode.ImmediateLoad) ? asset.Value : null;
+            texture = ModContent.RequestIfExists<Texture2D>($"{TextureCategory}/{Name}", out var asset, ReLogic.Content.AssetRequestMode.ImmediateLoad) ? asset.Value : null;
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace QuestBooks.Quests
         /// <br/>
         /// Default is <c>{YourModName}/Assets/Texture/QuestBooks</c>
         /// </summary>
-        public virtual string TextureCategory { get => "Assets/Textures/QuestBooks"; }
+        public virtual string TextureCategory { get => $"{Mod.Name}/Assets/Textures/QuestBooks"; }
 
         /// <summary>
         /// This is called every frame, regardless of whether the quest is completed. You can do any logic updating, dynamic quest updating, etc. here.<br/>

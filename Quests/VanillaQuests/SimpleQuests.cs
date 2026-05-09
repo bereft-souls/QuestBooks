@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace QuestBooks.Quests.VanillaQuests;
 
@@ -10,6 +9,8 @@ namespace QuestBooks.Quests.VanillaQuests;
 public abstract class QBQuest : Quest
 {
     private string _localizationCategory = null;
+
+    public override string TextureCategory => $"{Mod.Name}/Assets/Textures/Quests/InfoPages";
 
     public override string LocalizationCategory
     {
