@@ -11,6 +11,9 @@ namespace QuestBooks.Systems
         // Update the active quest log style.
         public override void UpdateUI(GameTime gameTime)
         {
+            if (!QuestLoader.QuestsLoaded)
+                return;
+
             foreach (var questBook in QuestManager.QuestBooks)
                 questBook.Update();
 
@@ -20,6 +23,9 @@ namespace QuestBooks.Systems
         // Loop through and check quest completion post-update.
         public override void PostUpdateEverything()
         {
+            if (!QuestLoader.QuestsLoaded)
+                return;
+
             var allQuests = QuestManager.ActiveQuests.Values.ToArray();
 
             foreach (var quest in allQuests)

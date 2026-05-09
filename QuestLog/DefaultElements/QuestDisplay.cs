@@ -12,6 +12,7 @@ using System.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
+using Terraria.UI.Chat;
 
 namespace QuestBooks.QuestLog.DefaultElements
 {
@@ -178,7 +179,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             Quest.PostTextureDraw(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered);
 
             if (ShowNotification)
-                Quest.DrawNotification(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered);
+                Quest.DrawNotification(spriteBatch, (CanvasPosition - canvasViewOffset + new Vector2(20f)) * zoom, zoom, unlocked, hovered);
         }
 
         protected virtual void DrawOutline(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, Color color)
@@ -263,7 +264,10 @@ namespace QuestBooks.QuestLog.DefaultElements
             iconDraw = (spriteBatch, texture, center, scale, hovered) =>
             {
                 normalIcon(spriteBatch, texture, center, scale, hovered);
-                // TODO: Notification on the icon
+                Vector2 bottomRight = center + (texture.Size() * 0.45f * scale);
+
+                texture = QuestAssets.NotificationMark;
+                spriteBatch.Draw(texture, bottomRight, null, Color.White, 0f, texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
             };
         }
 
@@ -290,14 +294,18 @@ namespace QuestBooks.QuestLog.DefaultElements
             var quest = Quest;
 
             // Custom info page drawing, if overridden
-            if (quest.DrawCustomInfoPage(spriteBatch, mousePosition))
+            if (quest.DrawCustomInfoPage(spriteBatch, mousePosition, ref updateAction))
                 return;
 
             // Get info parameters
             quest.MakeSimpleInfoPage(out var title, out var contents, out var texture);
+            Rectangle contentArea = new(8, 80, 430, 450);
+            TextSnippet snippet = null;
 
-            if (title is null && contents is null)
-                return;
+        // Title:
+
+            if (title is null)
+                goto Contents;
 
             // Default page drawing
             Rectangle titleArea = new(8, 10, 430, 64);
@@ -308,22 +316,52 @@ namespace QuestBooks.QuestLog.DefaultElements
 
             spriteBatch.DrawOutlinedStringInRectangle(titleArea.CookieCutter(new(0f, 0.25f), Vector2.One), FontAssets.DeathText.Value, Color.White, Color.Black, title, stroke: 2.3f, clipBounds: false, alignment: Utilities.TextAlignment.Left);
 
-            Rectangle contentArea = new(8, 80, 430, 450);
+        Contents:
+
+            if (contents is null)
+                goto Texture;
+
             const float scale = 0.5f;
 
             //spriteBatch.DrawOutlinedStringInRectangle(contentArea, FontAssets.DeathText.Value, Color.White, Color.Black, contents, stroke: 1.5f, maxScale: 0.5f, alignment: Utilities.TextAlignment.Left);
-            spriteBatch.DrawParagraphText(FontAssets.DeathText.Value, contentArea.Location.ToVector2(), contents, scale, (int)(contentArea.Width / scale), 50f, mousePosition, out var snippet, stroke: 1.8f);
+            spriteBatch.DrawParagraphText(FontAssets.DeathText.Value, contentArea.Location.ToVector2(), contents, scale, (int)(contentArea.Width / scale), 50f, mousePosition, out snippet, stroke: 1.8f);
 
-            if (snippet is not null)
+        Texture:
+
+            if (texture is null)
+                goto Snippet;
+
+            Vector2 origin = new(texture.Width, 0f);
+            spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+
+            if (!quest.Completed)
             {
-                updateAction = () =>
-                {
-                    snippet.OnHover();
-
-                    if (Main.mouseLeft && Main.mouseLeftRelease)
-                        snippet.OnClick();
-                };
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, blend, sampler, depth, raster, QuestAssets.Grayscale, matrix);
             }
+
+            spriteBatch.Draw(texture, contentArea.TopRight(), null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0f);
+
+            if (!quest.Completed)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, blend, sampler, depth, raster, effect, matrix);
+            }
+
+        Snippet:
+
+            if (snippet is null)
+                return;
+
+            var oldAction = updateAction;
+            updateAction = () =>
+            {
+                oldAction?.Invoke();
+                snippet.OnHover();
+
+                if (Main.mouseLeft && Main.mouseLeftRelease)
+                    snippet.OnClick();
+            };
 
             //spriteBatch.DrawRectangle(contentArea, Color.Black);
         }

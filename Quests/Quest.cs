@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QuestBooks.Assets;
 using QuestBooks.Systems;
+using System;
+using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -48,7 +51,7 @@ namespace QuestBooks.Quests
         /// Note that your logic should NOT scale with any UI parameters, as scaling is handled via matrices and render targets here.<br/>
         /// Return <see langword="true"/> if your did custom drawing, otherwise <see langword="false"/>.
         /// </summary>
-        public virtual bool DrawCustomInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition) => false;
+        public virtual bool DrawCustomInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action updateAction) => false;
 
         /// <summary>
         /// Override this method to modify the parameters for a "simple info page" drawing. This will use the default info page draw logic.<br/>
@@ -92,7 +95,7 @@ namespace QuestBooks.Quests
 
         /// <summary>
         /// This is called every frame, regardless of whether the quest is completed. You can do any logic updating, dynamic quest updating, etc. here.<br/>
-        /// This will be called on both client and server, despite CompletionCheck() being netmode-dependent; implement your updating accordingly.
+        /// This will be called on both client and server, despite <see cref="CheckCompletion"/> being netmode-dependent; implement your updating accordingly.
         /// </summary>
         public virtual void Update() { }
 
@@ -133,9 +136,10 @@ namespace QuestBooks.Quests
         /// Called if/when a "notification" indicator is requesting to be drawn for this quest.<br/>
         /// Override this to change how the notification should display.
         /// </summary>
-        public virtual void DrawNotification(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered)
+        public virtual void DrawNotification(SpriteBatch spriteBatch, Vector2 bottomRight, float zoom, bool unlocked, bool hovered)
         {
-            // TODO: Draw notification
+            Texture2D texture = QuestAssets.NotificationMark;
+            spriteBatch.Draw(texture, bottomRight, null, Color.White, 0f, texture.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
         }
 
         protected sealed override void Register() => QuestLoader.loadingQuests.Add(GetType(), Key);

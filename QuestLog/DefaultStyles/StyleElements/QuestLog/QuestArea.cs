@@ -11,7 +11,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
     {
         private float questElementSwipeOffset = 0f;
         private Vector2 minQuestAreaOffset => UseDesigner ? new(float.MinValue) : SelectedChapter.MinViewPoint;
-        private Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint + defaultCanvasSize * (1 - 1 / Zoom);
+        private Vector2 maxQuestAreaOffset => UseDesigner ? new(float.MaxValue) : SelectedChapter.MaxViewPoint + defaultCanvasSize * (1f - 1f / Zoom);
 
         /// The minimum zoom level that fits the entire canvas in the viewport
         private float MinFitZoom
@@ -240,6 +240,10 @@ namespace QuestBooks.QuestLog.DefaultStyles
             // This is things like the placement preview and actually placing elements
             if (UseDesigner)
                 DesignerPostQuestRegion(placementPosition, mouseInBounds);
+
+            // Cache the view to return to when re-selecting this chapter
+            if (SelectedChapter?.EnableShifting ?? false)
+                CachedViews[SelectedChapter] = (QuestAreaOffset, Zoom);
 
             SwitchTargets(null);
         }

@@ -24,6 +24,11 @@ namespace QuestBooks.Systems
         private static readonly HashSet<Assembly> checkedAssemblies = [];
         internal static readonly Dictionary<Type, string> loadingQuests = [];
 
+        /// <summary>
+        /// Whether or not the quest completion status' have been loaded for a selected world/character.
+        /// </summary>
+        public static bool QuestsLoaded { get; private set; } = false;
+
         public static Dictionary<Type, Mod> QuestMods { get; } = [];
         public static FrozenDictionary<Type, string> QuestKeys { get; internal set; }
 
@@ -126,12 +131,16 @@ namespace QuestBooks.Systems
                     if (quest.CheckCompletion())
                         QuestManager.MarkComplete(quest);
                 }
+
+                QuestsLoaded = true;
             }
         }
 
         #endregion
 
         #region Quest Saving
+
+        public override void ClearWorld() => QuestsLoaded = false;
 
         public override void SaveWorldData(TagCompound tag)
         {

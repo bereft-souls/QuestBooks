@@ -4,7 +4,7 @@ blueprint: {
 	Tooltip: Hello!
 }
 
-Name: Before the Journey
+Name: The Basics
 
 Chapter0: {
 	Name: Prologue
@@ -13,10 +13,10 @@ Chapter0: {
 	// <-> Trunk <->
 	
 	StartFirstSteps: {
-		Title: First Steps
+		Title: Hello, World!
 		Contents:
 			'''
-			Welcome to the wonderful, yet cruel world of Terraria!
+			Welcome to the cruel, wonderful world of Terraria!
 
 			Explore diverse biomes, face off dangerous foes, loot structures and craft weapons all to aid you in your journey!
 			'''
@@ -24,8 +24,13 @@ Chapter0: {
 	}
 
 	StartQBInfo: {
-		Title: Questbooks and You
-		Contents: (insert explanation here)
+		Title: QuestBooks and You
+		Contents:
+			'''
+			QuestBooks is here to help guide you through your journey!
+
+			If you're looking for tips or pointers on what to do next in your voyage through the game's vast catalogue of content, pop open the quest log and see what's available!
+			'''
 		Tooltip: Info: QuestBooks
 	}
 
@@ -34,7 +39,8 @@ Chapter0: {
 		Contents:
 			'''
 			The starting location of all Terrarians.
-			Between the lush greenery and comfy breeze, it seems like the perfect spot to set up base!
+
+			Between the lush greenery and soft breeze, it seems like the perfect spot to setup base!
 			'''
 		Tooltip: The Forest
 	}
@@ -43,7 +49,8 @@ Chapter0: {
 		Title: The Guide
 		Contents:
 			'''
-			A trusty guide to help you along the way with their incredible crafting knowledge and varying useful tips.
+			A trusty guide to help you along the way, with their incredible crafting knowledge and varying useful tips.
+
 			If you ever find an item labeled as a "Material", be sure to check it up with him!
 			'''
 		Tooltip: Talk to the Guide
@@ -103,6 +110,7 @@ Chapter0: {
 		Contents:
 			'''
 			Now that you have finished the basics, go explore the world of Terraria to your hearts content!
+
 			Go ahead and check out the multiple facets of Terraria through the additional branches off of this node.
 			'''
 	}
@@ -133,7 +141,7 @@ Chapter0: {
 			         Several equipments and armors in the game may only benefit 1 archetype, denoted by the class' name. 
 			The 4 different archetypes are:
 				
-			         - The Melee -
+			         - The Warrior -
 			         Often utilizing a variety of close combat or short ranged weapons such as flails and boomerangs.
 			         A tough and defensive Class.
 

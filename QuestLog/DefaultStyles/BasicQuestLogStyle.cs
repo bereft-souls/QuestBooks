@@ -20,6 +20,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         public QuestLogElement[] SortedElements { get; set; } = null;
 
+        protected Dictionary<QuestChapter, (Vector2, float)> CachedViews { get; set; } = [];
+
         // Mouse position on canvas
         protected Vector2 ScaledMousePos { get; set; }
         protected Point MouseCanvas { get; set; }
@@ -513,6 +515,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 SelectedChapter = chapter;
                 Zoom = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.DefaultZoom : 1f;
                 QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? ((SelectedChapter.ViewAnchor * Zoom) - defaultAnchor) / Zoom : Vector2.Zero;
+
+                if (CachedViews.TryGetValue(chapter, out (Vector2 offset, float zoom) view))
+                {
+                    Zoom = view.zoom;
+                    QuestAreaOffset = view.offset;
+                }
+
                 SoundEngine.PlaySound(SoundID.MenuTick);
             }
         }
