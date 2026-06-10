@@ -117,19 +117,69 @@ Chapter0: {
 
 	WorldEventsInfo: {
 		Title: Events and occurances throughout Terraria
-		Contents: ""
+		Contents: 
+			'''
+			A lot of things can occur throughout the world of Terraria. From sandstorms to starfalls to snowman invasions!
+			These are all considered under the umbrella of "Events" (including weather).
+
+			Most events trigger randomly during gameplay usually at the start of day or night, or through purposeful means such as invoking summon items.
+			Theres a few types of events:
+				Weather events - may occur randomly based on things like the current windspeed and can alter the types of mobs that can spawn or states of things in the world.
+				Invasion events - may occur randomly or be invoked by the player and spawn legions of enemies the player must defeat to progress the event. Invasions only happen in certain locations (usually the world spawn) and dont affect the rest of the world.
+				Special events - certain events have special requirements to occur, like town parties!
+			'''
 		Tooltip: Info: Events
 	}
 
 	InventoryInfo: {
 		Title: Inventory Info
-		Contents: ""
+		Contents: 
+			'''
+			Your inventory holds a lot of slots and icons, it may seem daunting but its quite simple! This will act as an expansive explanation of its many features
+			- Main Inventory -
+			At the top left if your Main Inventory, a 5x10 grid + 9 slots of space to store all your items.
+				The first row is your Hotbar, where you can use items from without having to open your inventory each time. Items in your hotbar are not affected by sorting tools mentioned below
+				The 8 smaller slots on the right are your Ammo and Coin slots, Ammo and coins will automatically get stored in those slots if theres space and will be used from there.
+				The single trash slot is.. your trash can! Place any item in there to delete it from your inventory. Hold Ctrl while clicking an item to quick-trash it.
+
+			To the left of your inventory are your Toggles. By default you should only have 3 but more may be acquired through items or mods!
+			To the top-right of the inventory is the Achievements tab, it will show you the next probable achievement you should complete.
+			To the top-left of the inventory (next to the trash) are 4 buttons:
+				Quick Stack to Nearby Chests, which will take all items from your inventory and place them in nearby chests holding the same type of items.
+				Sort Inventory will sort all of your items in a certain order of categories. The item slots will briefly glow, with each category being shown with a different color.
+				The Bestiary, an expansive catalogue of all the critters and enemies you may encounter that fills up with information the more you encounter or defeat them.
+				Emotes Window, which simply lets you make emote speech-bubbles.
+
+			Any item held by the cursor (even while the inventory is open) is considered as if its being used from your hotbar.
+			You can hold Alt and click items to Favorite them! Favorited items will get a visual frame, and this will block them from being dropped, quick-trashed, quick-stacked or quick-sorted.
+			If your chat is open, Alt clicking an item will showcase it in chat instead.
+
+			- Armor & Equipment -
+			To the bottom right of the screen is your Equipment slots, which is divided into 3 columns:
+				Base - any equipment item in the base slots will act as expected, granting its effects and stat bonuses.
+				Vanity - any equipment or vanity item in these slots will not grant any boons, but will override the visual display of the base equipment item.
+				Dye - with special Dye items, you can alter the color of the equipment or vanity present on a given slot.
+			On your accessory slots (below the 3 armor slots), you may notice a small Eye icon: which allows you to toggle completely the visibility of a certain slot on your character.
+
+			On the right, you can swap between 3 different loadouts of equipment (or use F1-3). Item effects and statistics do not transfet between loadouts.
+			At the top, you may find 3 icons:
+				Equipment - where you will be able to equip special other items (Hooks, Minecarts..)
+				Housing - A validation check of a house.
+				Camera - a built in tool to help take pictures of your world.
+			'''
 		Tooltip: Info: Inventory
 	}
 
 	CraftAnyGear: {
 		Title: Gearing Up
-		Contents: ""
+		Contents: 
+			'''
+			Gear up! Craft any weapon or equipment to better protect and aid you in your journey.
+			Any simple sword, bow or armor piece should do..
+
+			Unsure how crafting works?
+			(Explanation will be written for 1.4.5)
+			'''
 		Tooltip: Craft any gear
 	}
 
@@ -138,40 +188,49 @@ Chapter0: {
 		Contents:
 			'''
 			In Terraria, all weapons are categorized into archetypes. That is, each weapon deals a specific type of damage.
-			         Several equipments and armors in the game may only benefit 1 archetype, denoted by the class' name. 
+			Several equipments and armors in the game may only benefit 1 archetype, denoted by the class' name. 
 			The 4 different archetypes are:
 				
-			         - The Warrior -
-			         Often utilizing a variety of close combat or short ranged weapons such as flails and boomerangs.
-			         A tough and defensive Class.
+				- The Warrior -
+				Often utilizing a variety of close combat or short ranged weapons such as flails and boomerangs.
+				A tough and defensive Class.
 
-			         - The Ranger -
-			         Slinging guns, Drawing bows, blasting rockets and more. A versatile archetype that requires the use of Ammo which can grant their weaponry an extra edge.
-			         A well rounded Class
+				- The Ranger -
+				Slinging guns, Drawing bows, blasting rockets and more. A versatile archetype that requires the use of Ammo which can grant their weaponry an extra edge.
+				A well rounded Class
 
-			         - The Mage -
-			         Conjuring spells and casting magic with a variety of arcane staves, books and more. Weapons require the use of your Mana.
-			         Usually has lower defense for higher damage output
+				- The Mage -
+				Conjuring spells and casting magic with a variety of arcane staves, books and more. Weapons require the use of your Mana.
+				Usually has lower defense for higher damage output
 
-			         - The Summoner -
-			         Commanding an army of minions with a tight grip using supportive whips to fight your battles, allowing you to focus on surviving.
-			         A Fragile yet powerful Class.
+				- The Summoner -
+				Commanding an army of minions with a tight grip using supportive whips to fight your battles, allowing you to focus on surviving.
+				A Fragile yet powerful Class.
 
-			         With that said, the differences between classes arent set in the sand; Mages may still get to use magical guns while Melee can acquire magical swords.
-			         So dont worry too much about locking into 1 weapon style, and you can always freely switch between classes at any time, or even mix gear between multiple!
+				With that said, the differences between classes arent set in the sand; Mages may still get to use magical guns while Melee can acquire magical swords.
+				So dont worry too much about locking into 1 weapon style, and you can always freely switch between classes at any time, or even mix gear between multiple!
 			'''
 		Tooltip: Info: Classes
 	}
 
 	DayNightInfo: {
-		Title: ---
-		Contents: ""
+		Title: The Diurnal Cycle
+		Contents: 
+			'''
+			The day and night cycle of the Terraria world refers to the rising and setting of the sun and moon, and the ways this can affect the world.
+			Certain things only happen at certain times of day.
+			Some herbs only bloom at morning, some townsfolk only sell certain items at night, certain enemies only spawn during certain times and so on.
+			Additionally, certain things only happen on specific moon phases!
+
+			Day begins at 4:30 AM, while night begins at 7:30 PM.
+			There are 8 different phases of the moon, and each moon phase starts at 4:30 AM and lasts for the full day.
+			'''
 		Tooltip: Info: Day/Night Cycle
 	}
 
 	SurviveFirstNight: {
-		Title: ---
-		Contents: ""
+		Title: You Can Do It!
+		Contents: "Survive your first night in the wild and dangerous world of Terraria!"
 		Tooltip: Survive a full night
 	}
 }
