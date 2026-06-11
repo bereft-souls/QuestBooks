@@ -8,7 +8,7 @@ Name: Journey's Start
 
 Chapter0: {
 	StartTheWorldInfo: {
-		Title: The World
+		Title: The World & Your Map
 		Contents:
 			'''
 			As you embark the world of terraria, you will find treasures, landmarks and structures to pillage and explore!
@@ -18,7 +18,7 @@ Chapter0: {
 			Quickly toggle the map-mode via {Tab}
 			Alter the map's opacity with {Pgdwn / PgUp}
 			'''
-		Tooltip: ---
+		Tooltip: Info: Map
 	}
 
 	// ------------------
@@ -28,24 +28,36 @@ Chapter0: {
 	
 	EnterLivingTree: {
 		Title: Towers of Nature
-		Contents: Venture deep into a Living Tree's trunk and explore the chambers within its roots.
-		Tooltip: Their canopies touching the heavens..
+		Contents: 
+			'''
+			..Their canopies touching the heavens..
+
+			Venture deep into a Living Tree's trunk and explore the chambers within its roots.
+			'''
+		Tooltip: Explore a Living Tree
 	}
 
 	GardenGnome: {
 		Title: Heliophobia
-		Contents: Trick a gnome into turning into stone!
-		Tooltip: gnot an elf! gnot a goblin!
+		Contents: 
+			'''
+			Gnot an Elf, Gnor a Goblin!
+
+			Gnomes are a rare surface enemy, most frequently spawning near or inside Living Trees.
+			Once they reach the open air, they will turn to stone under the sunlight!
+		Tooltip: Trick a gnome into turning to stone!
 	}
 
 	FlyKite: {
 		Title: A Rather Blustery Day
 		Contents:
 			'''
+			Might just blow in the wind!
+
 			Acquire and fly a kite on a windy day.
 			Basic kites are occasionally dropped by Balloon Slimes who spawn on windy days in the forest, while other kites may be harder to find..
 			'''
-		Tooltip: Might just blow in the wind!
+		Tooltip: Acquire and fly a kite on a windy day
 	}
 
 	KillPinky: {
@@ -68,8 +80,12 @@ Chapter0: {
 
 	SurviveSlimeRain: {
 		Title: Sticky Situation
-		Contents: Survive the slime rain, where gelatinous organisms fall from the sky in droves.
-		Tooltip: ---
+		Contents: 
+			'''
+			Survive the slime rain, where gelatinous organisms fall from the sky in droves.
+			There may be consequences if you defeat too many..
+			'''
+		Tooltip: Survive the slime rain
 	}
 
 	GetEoCSummon: {
@@ -79,7 +95,7 @@ Chapter0: {
 	}
 
 	GetNinjaSet: {
-		Title: ---
+		Title: Stealth Mode
 		Contents: Loot a full set of Ninja Gear from King Slime and fire shuriken like a true ninja!.
 		Tooltip: ---
 	}
@@ -91,9 +107,15 @@ Chapter0: {
 	}
 
 	GetEvilBars: {
-		Title: ---
-		Contents: Smelt the {Demonite / Crimtane} ore dropped by the Eye of Cthulhu and make yourself some wicked new gear.
-		Tooltip: ---
+		Title: Vile and Rancid
+		Contents: 
+			'''
+			While caving throughout Terraria, you may have come across bright glowing ore you couldnt mine.. this is it!
+			Also dropped by the Eye of Cthulhu, {Demonite / Crimtane} Ore is a special type of ore linked to the infection of your world.
+
+			This ore can be used to craft new powerful gear now and later down the line, so smelt it up and make yourself some wicked new gear!
+			'''
+		Tooltip: Craft using Demonite / Crimtane Bars
 	}
 
 	// --------------------
@@ -102,7 +124,7 @@ Chapter0: {
 	BiomeDesert: {
 		Title: The Desert
 		Contents: A Barren and arid expanse home to a giant antlion nest within.
-		Tooltip: ---
+		Tooltip: Enter the Desert
 	}
 
 	CraftCactusGear: {
@@ -124,7 +146,7 @@ Chapter0: {
 			Find an Extractinator in any underground cabin and excavate Desert Fossils to extract, giving you Sturdy Fossils.
 			Sturdy Fossils can be used for various gear, craft yourself something nice!
 			'''
-		Tooltip: ---
+		Tooltip: Obtain an Extractinator & 15 Sturdy Fossils
 	}
 
 	PinkPearl: {
@@ -138,18 +160,23 @@ Chapter0: {
 	
 	BiomeTundra: {
 		Title: The Tundra
-		Contents: A frigid wonderland home to __.
-		Tooltip: ---
+		Contents: A frigid wonderland home to mysterious beasts below the snowy surface.
+		Tooltip: Enter the Tundra
 	}
 
 	GetSnowArmor: {
-		Title: The Cold Doesn't Bother Me Anyway
-		Contents: Occasionally dropped from Snow Zombies, the Snow set provides immunity to chilled and freezing debuffs while also looking extremely fashionable!
-		Tooltip: But the hypothermia might
+		Title: The Cold Doesn't Bother Me Anyway..
+		Contents: 
+			'''
+			..but the hypothermia might.
+
+			Occasionally dropped from Snow Zombies, the Snow set provides immunity to chilled and freezing debuffs while also looking extremely fashionable!
+			'''
+		Tooltip: Obtain a full Snow Armor set
 	}
 
 	KillFlinx: {
-		Title: ---
+		Title: Keep your nose to yourself	
 		Contents: Kill some Snow Flinxes found deep in the undrground Tundra and use their fur.
 		Tooltip: ---
 	}
@@ -164,43 +191,51 @@ Chapter0: {
 		Title: Oculus Mysterium
 		Contents:
 			'''
-			Acquire the Eye Bone, an uncommon drop from Deerclops capable of summoning a pet Chester.
+			Acquire the Eye Bone, an uncommon drop from Deerclops capable of summoning a pet Otto von Chesterfield, Esq.
+			..Or Chester, for short.
+
 			Chester will mimic a piggy bank, allowing you constant access to it!
 			'''
-		Tooltip: --- Chester is short for Otto von Chesterfield, Esq.
+		Tooltip: Acquire the Eye Bone
 	}
 
 	// ------------------
 	// <-> Evil Biome <->
 	
 	BiomeEvilCorruption: {
-		Title: ---
+		Title: God's Blind Spot
 		Contents: -
-		Tooltip: ---
+		Tooltip: Enter the Corruption
 	}
 
 	BiomeEvilCrimson: {
-		Title: +
+		Title: God's Blind Spot
 		Contents: +
-		Tooltip: ---
+		Tooltip: Enter the Crimson
 	}
 
 	SmashEvilCore: {
 		Title: Smashing Poppet
 		Contents: Using explosives or your trusty hammer, smash a Shadow Orb or Crimson Heart in the evil parts of your world.
-		Tooltip: ---
+		Tooltip: Break an Evil Core
 	}
 
 	CraftAtEvilAltar: {
-		Title: O' Cursed Altar
-		Contents: Manifest any item at a {Demon / Crimtane} Altar.
-		Tooltip: --- I Bring An Offering
+		Title: O' Cursed Altar..
+		Contents: 
+			'''
+			..I Bring An Offering.
+
+			Scattered throughout the infections caverns and dotted throughout Terraria are the Evil Altars, unique crafting stations allowing the conjuring of rare summoning items and other wicked trinkets.
+			Find one of these {Demon / Crimtane} altars in your world and manifest any item.
+			'''
+		Tooltip: Craft at an Evil Altar
 	}
 
 	GetEvilBarArmor: {
 		Title: Coated in Evil
 		Contents: Using the {Shadow Scaled / Tissue Samples}, craft yourself a {Shadow / Crimtane} armorset to prepare for the challenges ahead.
-		Tooltip: ---
+		Tooltip: Craft any Evil Bar armor set
 	}
 
 	SubbiomeMeteor: {
@@ -225,7 +260,7 @@ Chapter0: {
 			A Massive spread of tropic land covered in vegetation, infested with large Beehives.
 			Some say an ancient civilization used to reside deep within its caves..
 			'''
-		Tooltip: ---
+		Tooltip: Enter the Jungle
 	}
 
 	KillDoctorBones: {
@@ -270,7 +305,7 @@ Chapter0: {
 	BiomeDungeon: {
 		Title: The Dungeon
 		Contents: Once protected by the Old Man's Curse, the Dungeon is a sprawling catacomb of the necrotic and undead with great treasures stashed within..
-		Tooltip: ---
+		Tooltip: Venture into the Dungeon
 	}
 
 	CrumbleDungeonBricks: {
@@ -292,7 +327,7 @@ Chapter0: {
 			Acquire a different, peculiar key stashed away in the dungeon's depths.
 			Wonder what it could be used for?
 			'''
-		Tooltip: ---
+		Tooltip: Obtain a Shadow Key
 	}
 
 	GetWaterCandle: {
@@ -317,7 +352,7 @@ Chapter0: {
 	BiomeOcean: {
 		Title: The Ocean
 		Contents: A cozy beach before the large ocean surrounding the Terraria island.
-		Tooltip: ---
+		Tooltip: Enter the Ocean
 	}
 
 	GetDivingHelmet: {
@@ -342,7 +377,7 @@ Chapter0: {
 	BiomeSky: {
 		Title: On Cloud Nine-Hundred
 		Contents: Reach to the skies where the air grows stale and gravity starts to falter.
-		Tooltip: ---
+		Tooltip: Enter the Sky
 	}
 
 	LootSkywareChest: {
@@ -354,7 +389,7 @@ Chapter0: {
 	ReachSpace: {
 		Title: Into Orbit
 		Contents: You can only go down from here!
-		Tooltip: ---
+		Tooltip: Touch the top of the world
 	}
 
 	// ------------------
@@ -386,6 +421,7 @@ Chapter1: {
 	EnterUnderground: {
 		Title: Subterrenean
 		Contents: Beneath the surface of Terraria lay massive cave systems filled with ores, loot, special biomes and new enemies to encounter!
+		Tooltip: Enter the Underground
 	}
 
 	MineOre: {
@@ -405,7 +441,7 @@ Chapter1: {
 
 	PlantGemcorn: {
 		Title: Crystalline Trees
-		Contents: "Obtain or craft a Gemcorn and plant them in the Caverns to grow your very own gemtree! "
+		Contents: Obtain or craft a Gemcorn and plant them in the Caverns to grow your very own gemtree!
 		Tooltip: ---
 	}
 
@@ -416,7 +452,7 @@ Chapter1: {
 	}
 
 	SubbiomeAbandonedTrack: {
-		Title: --- -
+		Title: Ready the Canary
 		Contents: Find an Abandoned Minecart Track and follow its path!
 		Tooltip: ---
 	}
@@ -446,8 +482,12 @@ Chapter1: {
 
 	TorchGod: {
 		Title: Torch God
-		Contents: ""
-		Tooltip: ---
+		Contents: 
+			'''
+			Invoke the wrath of the God of Torches, and survived long enough to earn its blessing.
+			To Invoke The Torch God, show your worth by placing over 100 torches in one place while Underground)
+			'''
+		Tooltip: Recieve the Torch God's Blessing
 	}
 
 	// ---------------
@@ -456,7 +496,7 @@ Chapter1: {
 	EnterCaverns: {
 		Title: Deep Down Under
 		Contents: Reach the Cavern Layer, where the bulk of Terrarias cave systems reside with plenty of loot to find and foes to encounter.
-		Tooltip: ---
+		Tooltip: Enter the Cavern
 	}
 
 	InteractSkeletonMerchant: {
@@ -502,13 +542,15 @@ Chapter1: {
 	}
 
 	GetObsidian: {
-		Title: --- -
+		Title: ---
 		Contents:
 			'''
+			This one wont take hours, promise!
+
 			Combine water and lava together and get a decent amount of Obsidian, a tough glass-like material.
 			Also seems to have great alloying potential..
 			'''
-		Tooltip: This one wont take hours, promise!
+		Tooltip: Mine 50 Obsidian
 	}
 
 	SubbiomeAether: {
@@ -518,7 +560,7 @@ Chapter1: {
 			Discover the Aether, a secret shimmer lake capable of dissasembling almost anything.
 			Ancient fables tell tales of critters turning into faes, worms to gummy and even turning coins into pure luck..
 			'''
-		Tooltip: ---
+		Tooltip: Find the Aether
 	}
 
 	ShimmerTransmute: {
@@ -575,6 +617,11 @@ Chapter1: {
 
 	// -------------------------
 	// <-> Underworld / Hell <->
+
+	EnterUnderworld: {
+		Title: It's Getting Hot in Here
+		Contents: Spelunk deep enough to reach the molten underworld.
+	}
 	
 	GetAshwood: {
 		Title: Ashen Logs
@@ -583,7 +630,7 @@ Chapter1: {
 			Find the Ashwood Forest in the outer regions of the Underworld and chop down some Ashwood Trees.
 			Ashwood is special due to its ability to withstand lava without breaking, perfect for using to bridge across large lava lakes!
 			'''
-		Tooltip: ---
+		Tooltip: Obtain Ashwood
 	}
 
 	GetHellstoneGear: {
@@ -601,7 +648,7 @@ Chapter1: {
 	ReachRockBottom: {
 		Title: Rock Bottom
 		Contents: The only way is up!
-		Tooltip: ---
+		Tooltip: Touch the Bottom of the World
 	}
 
 	GetGuideVoodooDoll: {
@@ -610,8 +657,8 @@ Chapter1: {
 			'''
 			Fight a Voodoo Doll Demon and secure the Guide Voodoo Doll before any harm is done to it.
 
-			Feels like you should still get rid of it, though..
+			Feels like you should get rid of it, though..
 			'''
-		Tooltip: ---
+		Tooltip: Obtain a Guide Voodoo Doll
 	}
 }
