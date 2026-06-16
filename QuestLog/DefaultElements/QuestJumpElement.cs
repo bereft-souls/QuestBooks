@@ -27,7 +27,7 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Quests/Diamond";
         private const string DefaultOutline = "QuestBooks/Assets/Textures/Quests/DiamondOutline";
-        private static readonly Asset<Texture2D> DefaultAsset = ModContent.Request<Texture2D>(DefaultTexture);
+        private static readonly Asset<Texture2D> DefaultAsset = Main.dedServ ? null : ModContent.Request<Texture2D>(DefaultTexture);
 
         [JsonProperty] private string _outlineTexturePath = DefaultOutline;
         [JsonProperty] private string _lockedTexturePath = "";

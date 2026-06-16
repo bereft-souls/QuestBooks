@@ -516,7 +516,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                 Zoom = (SelectedChapter?.EnableShifting ?? false) ? SelectedChapter.DefaultZoom : 1f;
                 QuestAreaOffset = (SelectedChapter?.EnableShifting ?? false) ? ((SelectedChapter.ViewAnchor * Zoom) - defaultAnchor) / Zoom : Vector2.Zero;
 
-                if (CachedViews.TryGetValue(chapter, out (Vector2 offset, float zoom) view))
+                if (chapter is not null && CachedViews.TryGetValue(chapter, out (Vector2 offset, float zoom) view))
                 {
                     Zoom = view.zoom;
                     QuestAreaOffset = view.offset;
@@ -670,14 +670,17 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         public override void LoadPlayerData(TagCompound tag)
         {
-            if (tag.TryGet(ScaleKey, out float scale) && LogScale != scale)
+            if (tag is not null)
             {
-                LogScale = scale;
-                SetupTargets();
-            }
+                if (tag.TryGet(ScaleKey, out float scale) && LogScale != scale)
+                {
+                    LogScale = scale;
+                    SetupTargets();
+                }
 
-            if (tag.TryGet(OffsetKey, out Vector2 offset))
-                LogPositionOffset = offset;
+                if (tag.TryGet(OffsetKey, out Vector2 offset))
+                    LogPositionOffset = offset;
+            }
 
             PreviouslyOpened = false;
             verticalDrawPos = null;

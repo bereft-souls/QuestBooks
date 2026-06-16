@@ -110,7 +110,7 @@ namespace QuestBooks.Systems
             // entering the world.
             private TagCompound tagCompound = null;
 
-            public override void LoadData(TagCompound tag) => tagCompound = tag?.ContainsKey(TagKey) ?? false ? tag : null;
+            public override void LoadData(TagCompound tag) => tagCompound = (tag?.ContainsKey(TagKey) ?? false) ? tag : null;
 
             public override void OnEnterWorld()
             {

@@ -21,8 +21,8 @@ namespace QuestBooks.QuestLog.DefaultElements
         // Used when the texture is not found or has not been assigned yet.
         private const string DefaultTexture = "QuestBooks/Assets/Textures/Quests/Medium";
         private const string DefaultOutline = "QuestBooks/Assets/Textures/Quests/MediumOutline";
-        private static readonly Asset<Texture2D> DefaultAsset = ModContent.Request<Texture2D>(DefaultTexture);
-        private static readonly Asset<Texture2D> DefaultOutlineAsset = ModContent.Request<Texture2D>(DefaultOutline);
+        private static readonly Asset<Texture2D> DefaultAsset = Main.dedServ ? null : ModContent.Request<Texture2D>(DefaultTexture);
+        private static readonly Asset<Texture2D> DefaultOutlineAsset = Main.dedServ ? null : ModContent.Request<Texture2D>(DefaultOutline);
 
         public Vector2 CanvasPosition { get; set; }
 
