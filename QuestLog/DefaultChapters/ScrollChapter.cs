@@ -40,8 +40,8 @@ namespace QuestBooks.QuestLog.DefaultChapters
 
             spriteBatch.Draw(QuestAssets.ChapterScroll, area.Center(), null, chapterColor, 0f, QuestAssets.ChapterScroll.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
-            spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+            spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.LinearClamp, depth, raster, effect, matrix);
 
             DrawChapterText(spriteBatch, text, textColor, textOutlineColor, area, scale);

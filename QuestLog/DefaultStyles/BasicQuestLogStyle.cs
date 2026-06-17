@@ -582,8 +582,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             DrawTasks.Add(sb =>
             {
-                sb.End();
                 sb.GetDrawParameters(out returnBlend, out returnSampler, out returnDepth, out returnRaster, out returnEffect, out returnMatrix);
+                sb.End();
                 returnTargets = sb.GraphicsDevice.GetRenderTargets();
                 sb.GraphicsDevice.SetRenderTarget(renderTarget);
                 sb.Begin(SpriteSortMode.Deferred, blend ?? BlendState.AlphaBlend, sampler ?? SamplerState.LinearClamp, depth ?? DepthStencilState.Default, raster ?? RasterizerState.CullNone, effect ?? null, matrix ?? Matrix.Identity);

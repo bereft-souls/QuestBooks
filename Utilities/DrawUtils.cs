@@ -281,8 +281,8 @@ namespace QuestBooks.Utilities
 
             if (clipBounds)
             {
-                spriteBatch.End();
                 spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                spriteBatch.End();
 
                 raster.ScissorTestEnable = true;
                 matrix.Decompose(out var scale, out _, out var translation);
@@ -304,8 +304,8 @@ namespace QuestBooks.Utilities
 
             if (clipBounds)
             {
-                spriteBatch.End();
                 spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                spriteBatch.End();
 
                 raster.ScissorTestEnable = cachedClip;
                 spriteBatch.GraphicsDevice.ScissorRectangle = cachedClipArea;
@@ -334,8 +334,8 @@ namespace QuestBooks.Utilities
 
             if (clipBounds)
             {
-                spriteBatch.End();
                 spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                spriteBatch.End();
 
                 raster.ScissorTestEnable = true;
                 matrix.Decompose(out var scale, out _, out var translation);
@@ -357,8 +357,8 @@ namespace QuestBooks.Utilities
 
             if (clipBounds)
             {
-                spriteBatch.End();
                 spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                spriteBatch.End();
 
                 raster.ScissorTestEnable = cachedClip;
                 spriteBatch.GraphicsDevice.ScissorRectangle = cachedClipArea;

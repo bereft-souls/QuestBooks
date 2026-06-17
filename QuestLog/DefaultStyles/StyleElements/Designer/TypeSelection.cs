@@ -313,8 +313,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    sb.End();
 
                     sb.GraphicsDevice.ScissorRectangle = typeDropDown;
                     raster.ScissorTestEnable = true;
@@ -356,8 +356,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    sb.End();
 
                     sb.GraphicsDevice.ScissorRectangle = new(0, 0, Main.screenWidth, Main.screenHeight);
                     raster.ScissorTestEnable = false;

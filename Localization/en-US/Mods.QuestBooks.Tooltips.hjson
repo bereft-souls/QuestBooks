@@ -220,4 +220,5 @@ Library: {
 	TabBook: A simple book that uses a "pull tab" or bookmark-like texture.
 	ScrollChapter: A simple chapter that uses a scroll texture.
 	BackToCover: Return to Cover
+	ComingSoon: Coming Soon!
 }

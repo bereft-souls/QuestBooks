@@ -214,8 +214,8 @@ namespace QuestBooks.QuestLog.DefaultElements
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
             Effect grayscale = QuestAssets.Grayscale;
 
-            spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+            spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, grayscale, matrix);
             DrawOutline(spriteBatch, canvasOffset, zoom, Color.Gray);

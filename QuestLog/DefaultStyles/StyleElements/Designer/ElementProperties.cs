@@ -437,8 +437,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             DrawTasks.Add(sb =>
             {
-                sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.End();
 
                 // We use a transformation matrix here so we need to be careful
                 Rectangle scissor = new(
@@ -569,8 +569,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             DrawTasks.Add(sb =>
             {
-                sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.End();
 
                 // Undo our rectangle
                 sb.GraphicsDevice.ScissorRectangle = new(0, 0, Main.screenWidth, Main.screenHeight);

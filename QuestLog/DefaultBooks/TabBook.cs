@@ -35,8 +35,8 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
         /// </summary>
         public static void DrawBasicBook(SpriteBatch spriteBatch, string text, Color bookColor, Color gradientColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
         {
-            spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+            spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
 
             spriteBatch.Draw(QuestAssets.BookTabBorder, area.Center(), null, outlineColor, 0f, QuestAssets.BookTabBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);

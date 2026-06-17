@@ -111,8 +111,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
             {
                 DrawTasks.Add(sb =>
                 {
-                    sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    sb.End();
                     sb.Begin(SpriteSortMode.Deferred, GridBlending, sampler, depth, raster, effect, matrix);
                 });
 
@@ -135,8 +135,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    sb.End();
                     sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, sampler, depth, raster, effect, matrix);
                 });
             }
@@ -401,8 +401,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             DrawTasks.Add(sb =>
             {
-                sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.End();
                 sb.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
 
                 placingElement?.DrawPlacementPreview(sb, mousePosition, QuestAreaOffset, Zoom);

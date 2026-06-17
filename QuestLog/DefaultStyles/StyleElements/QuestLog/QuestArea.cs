@@ -159,8 +159,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
             // Switch draw matrices
             DrawTasks.Add(sb =>
             {
-                sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.End();
                 sb.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix * transform);
             });
 
@@ -205,8 +205,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
             DrawTasks.Add(sb =>
             {
-                sb.End();
                 sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                sb.End();
                 sb.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
 
                 // Draw elements

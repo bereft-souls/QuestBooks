@@ -39,8 +39,8 @@ namespace QuestBooks.QuestLog
 
         public virtual void DrawQuestLogIcon(SpriteBatch spriteBatch, Rectangle iconArea, bool hovered)
         {
-            spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+            spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.PointClamp, depth, raster, effect, matrix);
 
             Vector2 center = iconArea.Center();

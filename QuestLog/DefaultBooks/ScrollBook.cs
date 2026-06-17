@@ -48,8 +48,8 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
             if (string.IsNullOrWhiteSpace(text))
                 return;
 
-            spriteBatch.End();
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+            spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, SamplerState.LinearClamp, depth, raster, effect, matrix);
 
             DrawBookText(spriteBatch, text, textColor, textOutlineColor, area, scale);

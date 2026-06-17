@@ -316,8 +316,8 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                 DrawTasks.Add(sb =>
                 {
-                    sb.End();
                     sb.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
+                    sb.End();
 
                     sb.GraphicsDevice.ScissorRectangle = elementTypeSelection;
                     raster.ScissorTestEnable = true;
