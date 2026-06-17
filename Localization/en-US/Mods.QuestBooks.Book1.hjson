@@ -28,7 +28,7 @@ Chapter0: {
 	
 	EnterLivingTree: {
 		Title: Towers of Nature
-		Contents: 
+		Contents:
 			'''
 			..Their canopies touching the heavens..
 
@@ -39,12 +39,13 @@ Chapter0: {
 
 	GardenGnome: {
 		Title: Heliophobia
-		Contents: 
+		Contents:
 			'''
 			Gnot an Elf, Gnor a Goblin!
 
 			Gnomes are a rare surface enemy, most frequently spawning near or inside Living Trees.
 			Once they reach the open air, they will turn to stone under the sunlight!
+			'''
 		Tooltip: Trick a gnome into turning to stone!
 	}
 
@@ -80,7 +81,7 @@ Chapter0: {
 
 	SurviveSlimeRain: {
 		Title: Sticky Situation
-		Contents: 
+		Contents:
 			'''
 			Survive the slime rain, where gelatinous organisms fall from the sky in droves.
 			There may be consequences if you defeat too many..
@@ -108,7 +109,7 @@ Chapter0: {
 
 	GetEvilBars: {
 		Title: Vile and Rancid
-		Contents: 
+		Contents:
 			'''
 			While caving throughout Terraria, you may have come across bright glowing ore you couldnt mine.. this is it!
 			Also dropped by the Eye of Cthulhu, {Demonite / Crimtane} Ore is a special type of ore linked to the infection of your world.
@@ -166,7 +167,7 @@ Chapter0: {
 
 	GetSnowArmor: {
 		Title: The Cold Doesn't Bother Me Anyway..
-		Contents: 
+		Contents:
 			'''
 			..but the hypothermia might.
 
@@ -176,7 +177,7 @@ Chapter0: {
 	}
 
 	KillFlinx: {
-		Title: Keep your nose to yourself	
+		Title: Keep your nose to yourself
 		Contents: Kill some Snow Flinxes found deep in the undrground Tundra and use their fur.
 		Tooltip: ---
 	}
@@ -222,7 +223,7 @@ Chapter0: {
 
 	CraftAtEvilAltar: {
 		Title: O' Cursed Altar..
-		Contents: 
+		Contents:
 			'''
 			..I Bring An Offering.
 
@@ -482,7 +483,7 @@ Chapter1: {
 
 	TorchGod: {
 		Title: Torch God
-		Contents: 
+		Contents:
 			'''
 			Invoke the wrath of the God of Torches, and survived long enough to earn its blessing.
 			To Invoke The Torch God, show your worth by placing over 100 torches in one place while Underground)
@@ -617,12 +618,12 @@ Chapter1: {
 
 	// -------------------------
 	// <-> Underworld / Hell <->
-
+	
 	EnterUnderworld: {
 		Title: It's Getting Hot in Here
 		Contents: Spelunk deep enough to reach the molten underworld.
 	}
-	
+
 	GetAshwood: {
 		Title: Ashen Logs
 		Contents:

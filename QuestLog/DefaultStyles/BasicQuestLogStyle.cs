@@ -175,7 +175,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             // MouseCanvas is the position within the bounds of the canvas itself, even if said canvas does not exactly
             // match the bounds of the screen.
             LogArea = CalculateLogArea(out var logSize, out var halfScreen, out var halfRealScreen);
-            Vector2 questLogCenter = halfRealScreen + (LogPositionOffset * halfRealScreen);
+            Vector2 questLogCenter = LogArea.Center();
             UpdateMousePosition(halfScreen, halfRealScreen);
 
             if (!PreviouslyOpened)
@@ -213,7 +213,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     Rectangle source = pageFlipping.Frame(verticalFrames: 2, frameY: (pageFlippingTimer / frameLength) % sheetFrames);
 
                     Vector2 bookSize = QuestAssets.QuestLogCanvas.Asset.Size();
-                    Rectangle bookArea = CenteredRectangle(questLogCenter, bookSize);
+                    Rectangle bookArea = CenteredRectangle(questLogCenter, bookSize * LogScale);
 
                     sb.Draw(pageFlipping, bookArea.Bottom(), source, Color.White, 0f, source.Bottom() - source.Location.ToVector2(), LogScale, SpriteEffects.None, 0f);
                 });

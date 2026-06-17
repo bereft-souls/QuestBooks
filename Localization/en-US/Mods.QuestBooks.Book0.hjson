@@ -117,7 +117,7 @@ Chapter0: {
 
 	WorldEventsInfo: {
 		Title: Events and occurances throughout Terraria
-		Contents: 
+		Contents:
 			'''
 			A lot of things can occur throughout the world of Terraria. From sandstorms to starfalls to snowman invasions!
 			These are all considered under the umbrella of "Events" (including weather).
@@ -133,7 +133,7 @@ Chapter0: {
 
 	InventoryInfo: {
 		Title: Inventory Info
-		Contents: 
+		Contents:
 			'''
 			Your inventory holds a lot of slots and icons, it may seem daunting but its quite simple! This will act as an expansive explanation of its many features
 			- Main Inventory -
@@ -172,7 +172,7 @@ Chapter0: {
 
 	CraftAnyGear: {
 		Title: Gearing Up
-		Contents: 
+		Contents:
 			'''
 			Gear up! Craft any weapon or equipment to better protect and aid you in your journey.
 			Any simple sword, bow or armor piece should do..
@@ -215,7 +215,7 @@ Chapter0: {
 
 	DayNightInfo: {
 		Title: The Diurnal Cycle
-		Contents: 
+		Contents:
 			'''
 			The day and night cycle of the Terraria world refers to the rising and setting of the sun and moon, and the ways this can affect the world.
 			Certain things only happen at certain times of day.
@@ -230,7 +230,7 @@ Chapter0: {
 
 	SurviveFirstNight: {
 		Title: You Can Do It!
-		Contents: "Survive your first night in the wild and dangerous world of Terraria!"
+		Contents: Survive your first night in the wild and dangerous world of Terraria!
 		Tooltip: Survive a full night
 	}
 }
