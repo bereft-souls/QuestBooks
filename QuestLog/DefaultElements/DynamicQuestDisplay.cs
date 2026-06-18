@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.Quests;
+using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using Terraria;
 
@@ -24,18 +25,19 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         [UseConverter(typeof(DynamicQuestChecker))]
         public override string QuestKey { get => base.QuestKey; set => base.QuestKey = value; }
+        public DynamicQuestDisplay() => QuestKey = new PlaceholderDynamic().Key;
 
         [JsonIgnore]
         public DynamicQuest DynamicQuest { get => base.Quest as DynamicQuest; }
 
         protected override void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected) =>
-            DynamicQuest.DrawCompleted(spriteBatch, canvasOffset, zoom, hovered, selected);
+            DynamicQuest.DrawCompleted(spriteBatch, CanvasPosition, canvasOffset, zoom, hovered, selected);
 
         protected override void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected) =>
-            DynamicQuest.DrawLocked(spriteBatch, canvasOffset, zoom, hovered, selected);
+            DynamicQuest.DrawLocked(spriteBatch, CanvasPosition, canvasOffset, zoom, hovered, selected);
 
         protected override void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected) =>
-            DynamicQuest.DrawIncomplete(spriteBatch, canvasOffset, zoom, hovered, selected);
+            DynamicQuest.DrawIncomplete(spriteBatch, CanvasPosition, canvasOffset, zoom, hovered, selected);
 
         public override bool IsHovered(Vector2 mousePosition, Vector2 canvasViewOffset, float zoom, ref string mouseTooltip)
         {

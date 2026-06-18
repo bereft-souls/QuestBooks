@@ -8,17 +8,17 @@ namespace QuestBooks.Quests
         /// <summary>
         /// Draws the "completed" quest icon to the canvas.
         /// </summary>
-        public abstract void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
+        public abstract void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
 
         /// <summary>
         /// Draws the "incompleted" quest icon to the canvas.
         /// </summary>
-        public abstract void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
+        public abstract void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
 
         /// <summary>
         /// Draws the "locked" quest icon to the canvas.
         /// </summary>
-        public abstract void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
+        public abstract void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool hovered, bool selected);
 
         /// <summary>
         /// Determines how big the "hoverable" area for this element should be.<br/>
