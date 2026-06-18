@@ -3,7 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameInput;
+using Terraria.ID;
 
 namespace QuestBooks.QuestLog.DefaultStyles
 {
@@ -182,6 +184,9 @@ namespace QuestBooks.QuestLog.DefaultStyles
             if (LeftMouseJustReleased && (lastHoveredElement is not null || (lastHoveredElement is null && SelectedElement is not null && mouseInBounds)) && placingElement is null && !movingAnchor && !movingMaxView)
             {
                 QuestLogElement element = lastHoveredElement == SelectedElement ? null : lastHoveredElement;
+
+                if (element is not null)
+                    SoundEngine.PlaySound(SoundID.MenuTick);
 
                 if (!UseDesigner)
                     element?.OnSelect();

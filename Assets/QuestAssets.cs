@@ -16,6 +16,12 @@ namespace QuestBooks.Assets
         public static LazyTexture MagicPixel { get; } = new("Terraria/Images/MagicPixel", true);
         public static LazyTexture BigPixel { get; } = new("BigPixel");
 
+        public static PatchRectangle SimpleRectangle { get; } = new("Simple9Patch", new Point(4, 4));
+        public static PatchRectangle SimpleRectangleHovered { get; } = new("Simple9PatchHovered", new Point(4, 4));
+
+        public static PatchRectangle SelectedRectangle { get; } = new("Selected9Patch", new Point(4, 4));
+        public static PatchRectangle SelectedRectangleHovered { get; } = new("Selected9PatchHovered", new Point(4, 4));
+
         #region QuestLog
 
         public static LazyTexture QuestBookIcon { get; } = new("QuestLog/QuestBookIcon");

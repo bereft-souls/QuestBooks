@@ -49,7 +49,8 @@ namespace QuestBooks.Quests
         /// <summary>
         /// Override this method to implement your own custom drawing for info pages in the quest log.<br/>
         /// Note that your logic should NOT scale with any UI parameters, as scaling is handled via matrices and render targets here.<br/>
-        /// Return <see langword="true"/> if your did custom drawing, otherwise <see langword="false"/>.
+        /// The entire drawing area is roughly 450x550.<br/>
+        /// Return <see langword="true"/> if you did custom drawing, otherwise <see langword="false"/>.
         /// </summary>
         public virtual bool DrawCustomInfoPage(SpriteBatch spriteBatch, Vector2 mousePosition, ref Action updateAction) => false;
 
@@ -79,7 +80,9 @@ namespace QuestBooks.Quests
         }
 
         /// <summary>
-        /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.
+        /// Use <see cref="QuestType.World"/> for quests that are saved and managed in the world, and <see cref="QuestType.Player"/> for individual player quests.<br/>
+        /// <br/>
+        /// Default is <see cref="QuestType.World"/>.
         /// </summary>
         public virtual QuestType QuestType { get => QuestType.World; }
 

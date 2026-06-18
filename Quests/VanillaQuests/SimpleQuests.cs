@@ -47,3 +47,8 @@ internal class Placeholder : Quest
 
     public override string LocalizationCategory => "Tooltips";
 }
+
+internal class IncompletePlaceholder : Placeholder
+{
+    public override bool CheckCompletion() => false;
+}

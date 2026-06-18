@@ -29,7 +29,9 @@ Chapter0: {
 			'''
 			QuestBooks is here to help guide you through your journey!
 
-			If you're looking for tips or pointers on what to do next in your voyage through the game's vast catalogue of content, pop open the quest log and see what's available!
+			If you're looking for tips or pointers on what to do next in your voyage through the
+			game's vast catalogue of content, pop open
+			the quest log and see what's available!
 			'''
 		Tooltip: Info: QuestBooks
 	}
@@ -60,8 +62,13 @@ Chapter0: {
 		Title: Timber!
 		Contents:
 			'''
-			Chop down a nearby tree using your trusted Copper Axe!
-			Tip: holding LeftShift while hovering over any block will automatically swap you to the required tool.
+			Wood [i:Wood] can be used to craft a wide variety of tools and work stations.
+
+			Chop down a nearby tree using your trusty
+			axe! [i:CopperAxe]
+
+			Tip: holding LeftShift while hovering over any block will automatically hold out the
+			required tool to break it.
 			'''
 		Tooltip: Chop a tree
 	}
@@ -70,8 +77,9 @@ Chapter0: {
 		Title: Benched
 		Contents:
 			'''
-			Using the wood you collected, craft an all-purpose Workbench to unlock more recipes!
-			(To view the new recipes, you must stand closeby to the station)
+			Using the wood [i:Wood] you collected, craft an all-purpose Workbench [i:WorkBench] to unlock more recipes!
+
+			To view available recipes, you must place down and stand close to the workbench.
 			'''
 		// Needs to be changed for 1.4.5
 		Tooltip: Craft a workbench
@@ -81,8 +89,9 @@ Chapter0: {
 		Title: Hammer Time!
 		Contents:
 			'''
-			Craft a Wooden Hammer.
-			Hammers are used to break apart background wall tiles, and allows shaping blocks to varying shapes by clicking on them.
+			Craft any hammer! [i:WoodenHammer]
+
+			Hammers are used to destroy background wall tiles, and can shape blocks to various forms by clicking on them.
 			'''
 		Tooltip: Craft a hammer
 	}
@@ -93,11 +102,17 @@ Chapter0: {
 			'''
 			Build a safe shelter for you and your Guide!
 
-			In Terraria, Houses require specific conditions to function:
-			- 60 blocks of space, covered with Background Walls.
-			- A Chair and Table (your workbench works too!)
-			- A lightsource.
-			- An entryway (try Doors or Platforms)
+			In Terraria, Houses require specific conditions to be valid:
+
+			- 60 blocks of space, covered with background walls
+
+			- A chair [i:WoodenChair] and table [i:WoodenTable] (your
+			workbench [i:WorkBench] counts as a table too!)
+
+			- A lightsource [i:Torch]
+
+			- An entryway (try doors [i:WoodenDoor] or
+			platforms [i:WoodPlatform])
 			'''
 		Tooltip: Build and move an NPC into a house
 	}
@@ -109,63 +124,76 @@ Chapter0: {
 		Title: Basically a Pro
 		Contents:
 			'''
-			Now that you have finished the basics, go explore the world of Terraria to your hearts content!
+			Now that you've finished the basics, go explore the world of Terraria to your hearts content!
 
-			Go ahead and check out the multiple facets of Terraria through the additional branches off of this node.
+			Check out the multiple facets of Terraria through the additional branches off of this
+			node.
 			'''
 	}
 
 	WorldEventsInfo: {
-		Title: Events and occurances throughout Terraria
+		Title: Events
 		Contents:
 			'''
-			A lot of things can occur throughout the world of Terraria. From sandstorms to starfalls to snowman invasions!
-			These are all considered under the umbrella of "Events" (including weather).
+			From rain to starfalls to eclipses to snowman invasions, numerous events can take place in the world of Terraria.
 
-			Most events trigger randomly during gameplay usually at the start of day or night, or through purposeful means such as invoking summon items.
-			Theres a few types of events:
-				Weather events - may occur randomly based on things like the current windspeed and can alter the types of mobs that can spawn or states of things in the world.
-				Invasion events - may occur randomly or be invoked by the player and spawn legions of enemies the player must defeat to progress the event. Invasions only happen in certain locations (usually the world spawn) and dont affect the rest of the world.
-				Special events - certain events have special requirements to occur, like town parties!
+			[i:UmbrellaHat] Weather events: may occur randomly based on things like the current windspeed
+			and can alter the types of mobs that spawn or states of things in the world.
+			[i:GoblinBattleStandard] Invasion events: may occur randomly or
+			be invoked by the player, spawning legions
+			of enemies the player must defeat to progress. Invasions only happen in certain locations (usually the world spawn) and dont affect the rest of the world.
+			[i:PartyBundleOfBalloonTile] Special events: certain events have special requirements to occur, like town parties!
 			'''
 		Tooltip: Info: Events
 	}
 
 	InventoryInfo: {
-		Title: Inventory Info
-		Contents:
+		Title: Inventory
+		Contents0:
 			'''
-			Your inventory holds a lot of slots and icons, it may seem daunting but its quite simple! This will act as an expansive explanation of its many features
 			- Main Inventory -
-			At the top left if your Main Inventory, a 5x10 grid + 9 slots of space to store all your items.
-				The first row is your Hotbar, where you can use items from without having to open your inventory each time. Items in your hotbar are not affected by sorting tools mentioned below
-				The 8 smaller slots on the right are your Ammo and Coin slots, Ammo and coins will automatically get stored in those slots if theres space and will be used from there.
-				The single trash slot is.. your trash can! Place any item in there to delete it from your inventory. Hold Ctrl while clicking an item to quick-trash it.
+			Ammo [i:WoodenArrow] and coins [i:CopperCoin] will automatically
+			be stored in the corresponding slots on the right if there's space, and will be automatically be consumed when buying items or expending ammo.
 
-			To the left of your inventory are your Toggles. By default you should only have 3 but more may be acquired through items or mods!
-			To the top-right of the inventory is the Achievements tab, it will show you the next probable achievement you should complete.
-			To the top-left of the inventory (next to the trash) are 4 buttons:
-				Quick Stack to Nearby Chests, which will take all items from your inventory and place them in nearby chests holding the same type of items.
-				Sort Inventory will sort all of your items in a certain order of categories. The item slots will briefly glow, with each category being shown with a different color.
-				The Bestiary, an expansive catalogue of all the critters and enemies you may encounter that fills up with information the more you encounter or defeat them.
-				Emotes Window, which simply lets you make emote speech-bubbles.
+			Place any item into the trash slot in the bottom right to delete it from your inventory. Hold Ctrl while clicking an item to quick-trash it.
 
 			Any item held by the cursor (even while the inventory is open) is considered as if its being used from your hotbar.
-			You can hold Alt and click items to Favorite them! Favorited items will get a visual frame, and this will block them from being dropped, quick-trashed, quick-stacked or quick-sorted.
+			'''
+		Contents1:
+			'''
+			Your equipment slots are in the bottom right. From left to right:
+
+			- Dye: with special dye [i:RedDye] items, you can alter the color of the equipment or vanity present on a given slot.
+
+			- Vanity: any equipment or vanity item [i:JungleRose]
+			in these slots will not grant any boons, but
+			will override the visual display of the base equipment item.
+
+			- Base: any equipment [i:Shackle] in the base
+			slots will act as expected, granting its effects and stat bonuses.
+			'''
+		Contents2:
+			'''
+			On the right, you can swap between 3 different loadouts of equipment (or use F1-F3).
+
+			At the top, you will find 3 icons:
+
+			- Equipment: where you will be able to equip other special items (Hooks [i:GrapplingHook], Minecarts [i:Minecart], etc.)
+
+			- Housing: housing validation check and assigning homes to NPCs.
+
+			- Camera: a built in tool to help take pictures of your world.
+			'''
+		Contents3:
+			'''
+			You can Alt+click items to Favorite them! Favorited items will get a visual frame, and
+			this will block them from being dropped, quick-trashed, quick-stacked or quick-sorted.
+
 			If your chat is open, Alt clicking an item will showcase it in chat instead.
 
-			- Armor & Equipment -
-			To the bottom right of the screen is your Equipment slots, which is divided into 3 columns:
-				Base - any equipment item in the base slots will act as expected, granting its effects and stat bonuses.
-				Vanity - any equipment or vanity item in these slots will not grant any boons, but will override the visual display of the base equipment item.
-				Dye - with special Dye items, you can alter the color of the equipment or vanity present on a given slot.
-			On your accessory slots (below the 3 armor slots), you may notice a small Eye icon: which allows you to toggle completely the visibility of a certain slot on your character.
-
-			On the right, you can swap between 3 different loadouts of equipment (or use F1-3). Item effects and statistics do not transfet between loadouts.
-			At the top, you may find 3 icons:
-				Equipment - where you will be able to equip special other items (Hooks, Minecarts..)
-				Housing - A validation check of a house.
-				Camera - a built in tool to help take pictures of your world.
+			To the left of the inventory are your toggles.
+			To the top-right of the inventory is the achievements tab.
+			To the bottom-right of the inventory are some quick actions and the bestiary.
 			'''
 		Tooltip: Info: Inventory
 	}
@@ -175,40 +203,71 @@ Chapter0: {
 		Contents:
 			'''
 			Gear up! Craft any weapon or equipment to better protect and aid you in your journey.
-			Any simple sword, bow or armor piece should do..
 
-			Unsure how crafting works?
-			(Explanation will be written for 1.4.5)
+			Any simple sword [i:WoodenSword], bow [i:WoodenBow], or armor piece [i:WoodBreastplate] should do.
+
+			Stand next to a crafting station with the necessary items in your inventory to craft something new.
 			'''
 		Tooltip: Craft any gear
 	}
 
 	ClassInfo: {
-		Title: Damage Types; or, "Classes"
-		Contents:
+		Title: Damage Types
+		Contents0:
 			'''
-			In Terraria, all weapons are categorized into archetypes. That is, each weapon deals a specific type of damage.
-			Several equipments and armors in the game may only benefit 1 archetype, denoted by the class' name. 
-			The 4 different archetypes are:
-				
-				- The Warrior -
-				Often utilizing a variety of close combat or short ranged weapons such as flails and boomerangs.
-				A tough and defensive Class.
+			- Classes -
 
-				- The Ranger -
-				Slinging guns, Drawing bows, blasting rockets and more. A versatile archetype that requires the use of Ammo which can grant their weaponry an extra edge.
-				A well rounded Class
+			In Terraria, all weapons are categorized into archetypes. That is, each weapon deals
+			a specific type of damage.
 
-				- The Mage -
-				Conjuring spells and casting magic with a variety of arcane staves, books and more. Weapons require the use of your Mana.
-				Usually has lower defense for higher damage output
+			Several equipments and armors in the game may only benefit 1 archetype, denoted
+			by the class' name. 
 
-				- The Summoner -
-				Commanding an army of minions with a tight grip using supportive whips to fight your battles, allowing you to focus on surviving.
-				A Fragile yet powerful Class.
+			With that said, the differences between classes arent set in the sand; Mages may still get to use magical guns [i:SpaceGun] while Warriors can acquire magical swords [i:EnchantedSword].
+			'''
+		Contents1:
+			'''
+			- The Warrior -
 
-				With that said, the differences between classes arent set in the sand; Mages may still get to use magical guns while Melee can acquire magical swords.
-				So dont worry too much about locking into 1 weapon style, and you can always freely switch between classes at any time, or even mix gear between multiple!
+			Often utilizing a variety of close combat or
+			short ranged weapons like swords [i:WoodenSword],
+			flails [i:Mace], boomerangs [i:WoodenBoomerang], and yo-yo's [i:WoodYoyo].
+
+			A tough and defensive class that best performs by duking it out in close quarters with enemies and bosses.
+			'''
+		Contents2:
+			'''
+			- The Ranger -
+
+			Slinging guns [i:Handgun], drawing bows [i:WoodenBow],
+			blasting rockets [i:RocketLauncher], and more.
+			
+			A versatile archetype that utilizes
+			ammo [i:WoodenArrow][i:MusketBall] to grant their weaponry an
+			extra edge.
+
+			A well rounded class that can can take a few hits while still dishing out respectable damage.
+			'''
+		Contents3:
+			'''
+			- The Mage -
+
+			Conjuring spells and casting magic with a variety of arcane staves [i:AmethystStaff], tomes [i:WaterBolt] and other wizardry. [i:WandofSparking]
+
+			Weapons require the use of your mana. [i:ManaCrystal]
+
+			Typically sacrifices some defense and survivability for a boost to damage output.
+			'''
+		Contents4:
+			'''
+			- The Summoner -
+
+			Commands an army of minions [i:SlimeStaff] and sentries [i:DD2LightningAuraT1Popper] to take on the threat in your name.
+
+			Summoners also utilize a variety of
+			whips [i:BlandWhip] to command their armies and debuff enemies.
+
+			A very fragile, yet very powerful class that allows full focus on maneuverability and dodging while your minions fight your battles.
 			'''
 		Tooltip: Info: Classes
 	}
@@ -218,19 +277,30 @@ Chapter0: {
 		Contents:
 			'''
 			The day and night cycle of the Terraria world refers to the rising and setting of the sun and moon, and the ways this can affect the world.
-			Certain things only happen at certain times of day.
-			Some herbs only bloom at morning, some townsfolk only sell certain items at night, certain enemies only spawn during certain times and so on.
-			Additionally, certain things only happen on specific moon phases!
 
-			Day begins at 4:30 AM, while night begins at 7:30 PM.
-			There are 8 different phases of the moon, and each moon phase starts at 4:30 AM and lasts for the full day.
+			Some herbs [i:Daybloom] only bloom at morning, some townsfolk only sell certain items at night, certain enemies only spawn during certain times, and so on.
+
+			Additionally, certain things only happen on
+			specific moon phases!
+
+			Day begins at 4:30 AM, while night begins
+			at 7:30 PM.
+
+			You can tell the time by crafting any kind of clock!  [i:CopperWatch] [i:GrandfatherClock]
 			'''
 		Tooltip: Info: Day/Night Cycle
 	}
 
 	SurviveFirstNight: {
 		Title: You Can Do It!
-		Contents: Survive your first night in the wild and dangerous world of Terraria!
+		Contents:
+			'''
+			Survive your first night in the wild and dangerous world of Terraria!
+
+			Make sure to keep a close watch on your NPCs to ensure they aren't being overrun by the horde.
+
+			Keep an eye out for... eyes? And zombies!
+			'''
 		Tooltip: Survive a full night
 	}
 }
