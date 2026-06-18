@@ -11,17 +11,32 @@ SurviveBloodMoon: {
 FrostMoon: {
 	EverscreamDefeated: {
 		Title: In The Pines
-		Contents: Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
+		Contents:	
+			'''
+			Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
+
+			Everscreams start to appear starting wave 4.
+			'''
 	}
 
 	Santa-NK1Defeated: {
 		Title: Ho- Ho- Horror
-		Contents: Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and caring appearance of Santa.
+		Contents: 
+			'''
+			Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and caring appearance of Santa.
+
+			Santa-NK1s start to appear starting wave 7.
+			'''
 	}
 
 	IceQueenDefeated: {
 		Title: Frigid Ruler
-		Contents: Defeat the Ice Queen, the cold and elegant ruler of the Frost Moon.
+		Contents: 
+			'''
+			Defeat the Ice Queen, the cold and elegant ruler of the Frost Moon.
+
+			Ice Queens start to appear starting wave 11.
+			'''
 	}
 
 	FrostMoon15thWave: {
@@ -32,16 +47,26 @@ FrostMoon: {
 
 HarvestMoon: {
 	MourningWoodDefeated: {
-		Title: Not that kind.
-		Contents: Defeat a Mourning Wood, a terrifying charred tree trunk roaming the Harvest Moon.
+		Title: Charred for Life
+		Contents: 
+			'''
+			Defeat a Mourning Wood, terrifying charred tree trunks that roam the Pumpkin Moon.
+
+			Mourning Woods start to appear starting wave 6.
+			'''
 	}
 
 	Pumpking: {
 		Title: Ruler of the Harvest
-		Contents: Defeat the Pumpking, a massive pumpkin menace ruling over the Harvest Moon.
+		Contents:
+			'''
+			Defeat the Pumpking, a ghoulish pumpkin menace ruling over the Pumpkin Moon.
+
+			Pumpkings start to appear starting wave 10.
+			'''
 	}
 
-	HarvestMoon15thWave: {
+	PumpkinMoon15thWave: {
 		Title: Baleful Harvest
 		Content: Reach the 15th wave of a pumpkin moon, where evil lurks among the autumn harvest.
 	}
