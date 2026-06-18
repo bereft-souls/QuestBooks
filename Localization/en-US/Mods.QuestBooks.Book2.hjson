@@ -1,4 +1,4 @@
-	blueprint: {
+blueprint: {
 	Title: Placeholder / Blueprint Quest
 	Contents: This is how the quest's text looks like in the localization.
 	Tooltip: Hello!

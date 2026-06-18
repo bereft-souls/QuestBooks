@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
 {
-    public class EyeofCthulhuDefeated : QBQuest
+    public class EyeOfCthulhuDefeated : QBQuest
     {
         public override bool CheckCompletion() => NPC.downedBoss1;
     }

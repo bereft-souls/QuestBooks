@@ -9,7 +9,7 @@ namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
     public class EvilBossDefeated : QBDynamicQuest
     {
         public static bool Crimson => WorldGen.crimson;
-        public override string Name => Crimson ? "BrainofCthulhu" : "EaterofWorlds";
+        public override string Name => Crimson ? "BrainOfCthulhuDefeated" : "EaterOfWorldsDefeated";
         public override bool CheckCompletion() => NPC.downedBoss2;
 
         private readonly Texture2D brain = Main.dedServ ? null : ModContent.Request<Texture2D>("QuestBooks/Assets/Textures/Quests/Book0/Chapter1/BrainOfCthulhu").Value;

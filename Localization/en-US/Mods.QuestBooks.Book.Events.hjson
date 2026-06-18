@@ -3,37 +3,38 @@
 
 BloodMoonDefeated: {
 	Title: Bloodbath
-	Contents: 
+	Contents:
 		'''
 		Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
 
-		Blood moons can now occur randomly each night, or be forcefully conjured using a Bloody Tear. [i:BloodMoonStarter]
-		(Tip: Bloody Tears are rarely dropped by Grooms and Brides, that rarely spawn in Graveyards!)
+		Blood moons can now occur randomly each night, or be forcefully conjured using a Bloody Tear [i:BloodMoonStarter].
+
+		(Tip: Bloody Tears [i:BloodMoonStarter] are rarely dropped by Grooms and Brides, that rarely spawn in Graveyards!)
 		'''
 	Tooltip: Survive a Blood Moon
 }
 
 DreadnautilusDefeated: {
 	Title: Dreadnautilus
-	Contents: 
+	Contents:
 		'''
-		Defeat the Dreadnautilus, murderous mollusk lurking beneath the surface of the sanguine seas.
+		Defeat the Dreadnautilus, murderous mollusk lurking beneath the surface of the
+		sanguine seas.
 
-		The Dreadnautilus is a rare and viscious mollusk that surfaces during the toughest blood moons and rarely reeled up when fishing during it.
+		The Dreadnautilus is a rare and viscious mollusk that surfaces during the toughest blood moons and is rarely reeled up when fishing during it.
 		'''
 	Tooltip: Defeat a Dreadnautilus
 }
 
 SolarEclipseDefeated: {
 	Title: Kill the Sun
-	Contents: 
+	Contents:
 		'''
-		Survive a solar eclipse, a day darker than night filled with creatures of horror that can occur after the defeat of any Mechanical Boss.
+		Survive a solar eclipse, a day darker than night filled with creatures of horror that can occur after the defeat of any Mechanical Boss. [i:MechanicalEye][i:MechanicalWorm][i:MechanicalSkull]
 
 		'''
 	Tooltip: Survive a Solar Eclipse
 }
-
 
 // ---------------------
 // <-> Old Ones Army <->
@@ -42,55 +43,59 @@ SolarEclipseDefeated: {
 
 OOAT1Defeated: {
 	Title: Old One's Army
-	Contents: 
+	Contents:
 		'''
 		Delay the invasion of the Old One's Army by defeating the Dark Mage, a master conjurer leading a horde of skeletal servants.
+
+		The Old One's Army can be summoned by placing an Eternia Crystal [i:DD2ElderCrystal] onto an Eternia Crystal Stand [i:DD2ElderCrystalStand]. Both can be purchased from the Tavernkeep.
 		'''
 	Tooltip: Defeat the Old One's Army - 1
 }
 
 OOAT2Defeated: {
 	Title: Old One's Army (Rematch)
-	Contents: 
+	Contents:
 		'''
-		Repel the second invasion of the Old One's Army by defeating the Ogre A nasty brute who appears in the Old One's Army.
+		Repel the second invasion of the Old One's
+		Army by defeating the Ogre, a nasty brute with a fondness for clubbing.
 
-		The Ogre will only start march with the army after the defeat of a Mechanical Boss.
+		The Ogre will only start march with the army after the defeat of a Mechanical Boss. [i:MechanicalEye][i:MechanicalWorm][i:MechanicalSkull]
 		'''
 	Tooltip: Defeat the Old One's Army - 2
 }
 
 OOAT3Defeated: {
 	Title: Old One's Army (Final Stand)
-	Contents: 
+	Contents:
 		'''
 		Defeat the strongest forces the Old One's Army can muster by felling the great Betsy.
 
-		Betsy will only take flight with the army after the defeat of Golem.
+		Betsy will only take flight with the army after the defeat of Golem [i:LihzahrdAltar].
 		'''
 	Tooltip: Defeat the Old One's Army - 3
 }
-
 
 // ------------------------
 // <-> Invasion Events <->
 
 GoblinArmyDefeated: {
 	Title: Goblin Punter
-	Contents: 
+	Contents:
 		'''
 		Triumph over a goblin invasion, a ragtag regiment of crude, barbaric, pointy-eared warriors and their shadowflame sorcerers.
-		
-		The goblin army may come to wreck havoc and dismay at any point, but will immediately approach if invoked using a Goblin Battle Standard [i:GoblinBattleStandard]
+
+		The goblin army may come to wreck havoc and dismay at any point, but will immediately approach if invoked using a Goblin Battle Standard [i:GoblinBattleStandard].
 		'''
 	Tooltip: Defeat the Goblin Army
 }
 
 PiratesDefeated: {
 	Title: Walk the Plank
-	Contents: 
+	Contents:
 		'''
-		Triumph over a pirate invasion, a group of pillagers from the sea out for your booty... and your life!
+		Triumph over a pirate invasion, a group of
+		pillagers from the sea out for your booty...
+		and your life!
 
 		The pirates may heave-ho and anchor down come any dawn, but will set their sails immediately if you find a special Pirate Map [i:PirateMap] from Ocean mobs.
 		'''
@@ -101,10 +106,7 @@ PiratesDefeated: {
 
 MartianInvasionDefeated: {
 	Title: Tin-Foil Hatter
-	Contents: 
-		'''
-		Triumph over a martian invasion, when beings from out of this world come to scramble your brains and probe you in uncomfortable places.
-		'''
+	Contents: Triumph over a martian invasion, when beings from out of this world come to scramble your brains and probe you in uncomfortable places.
 	Tooltip: Defeat the Martian Invasion
 }
 
@@ -113,49 +115,37 @@ MartianInvasionDefeated: {
 
 AllPillarsDefeated: {
 	Title: Star Destroyer
-	Contents: 
-		'''
-		Defeat the four celestial towers of the moon, and prepare for its wrath..
-		'''
+	Contents: Defeat the four celestial towers of the moon, and prepare for its wrath..
 	Tooltip: Defeat the Celestial Invasion
 }
 
 SolarPillarDefeated: {
 	Title: Solar Pillar
-	Contents: 
-		'''
-		Destroy the Solar Pillar, one of the seals of an ancient terrible tyrant.
-		'''
+	Contents: Destroy the Solar Pillar, one of the seals of an ancient terrible tyrant.
 	Tooltip: Defeat the Solar Pillar
 }
 
 VortexPillarDefeated: {
 	Title: Vortex Pillar
-	Contents: 
-		'''
-		Destroy the Vortex Pillar, one of the seals of an ancient terrible tyrant.
-		'''
+	Contents: Destroy the Vortex Pillar, one of the seals of an ancient terrible tyrant.
 	Tooltip: Defeat the Vortex Pillar
 }
 
 NebulaPillarDefeated: {
 	Title: Nebula Pillar
-	Contents: 
-		'''
-		Defeat the Nebula Pillar, one of the seals of an ancient terrible tyrant.
-		'''
+	Contents: Defeat the Nebula Pillar, one of the seals of an ancient terrible tyrant.
 	Tooltip: Defeat the Nebula Pillar
 }
 
 StardustPillarDefeated: {
 	Title: Stardust Pillar
 	Contents:
-		'''
-		Defeat the Stardust Pillar, one of the seals of an ancient terrible tyrant.
-		'''
+	'''
+	Defeat the Stardust Pillar, one of the seals
+	of an ancient terrible tyrant.
+	'''
 	Tooltip: Defeat the Stardust Pillar
 }
-
 
 // ----------------------
 // <-> Seasonal Moons <->
@@ -167,7 +157,7 @@ MourningWoodDefeated: {
 		'''
 		Defeat a Mourning Wood, terrifying charred tree trunks that roam the Pumpkin Moon.
 
-		Mourning Woods start to appear starting wave 6.
+		Mourning Woods will begin to appear in wave 6 of the Pumpkin Moon [i:PumpkinMoonMedallion].
 		'''
 	Tooltip: Defeat a Mourning Wood
 }
@@ -178,16 +168,17 @@ PumpkingDefeated: {
 		'''
 		Defeat the Pumpking, a ghoulish pumpkin menace ruling over the Pumpkin Moon.
 
-		Pumpkings start to appear starting wave 10.
+		Pumpkings will begin to appear in wave 10 of the Pumpkin Moon [i:PumpkinMoonMedallion].
 		'''
 	Tooltip: Defeat the Pumpking
 }
 
 PumpkinMoonDefeated: {
 	Title: Baleful Harvest
-	Content: 
+	Contents:
 		'''
-		Reach the 15th wave of a pumpkin moon, where evil lurks among the autumn harvest.
+		Reach the 15th wave of a Pumpkin
+		Moon [i:PumpkinMoonMedallion], where evil lurks among the autumn harvest.
 		'''
 	Tooltip: Defeat the Pumpkin Moon
 }
@@ -198,7 +189,7 @@ EverscreamDefeated: {
 		'''
 		Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
 
-		Everscreams start to appear starting wave 4.
+		Everscreams will begin to appear in wave 4 of the Frost Moon [i:NaughtyPresent].
 		'''
 	Tooltip: Defeat an Everscream
 }
@@ -207,9 +198,11 @@ SantaNK1Defeated: {
 	Title: Ho- Ho- Horror
 	Contents:
 		'''
-		Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and caring appearance of Santa.
+		Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and
+		caring appearance of Santa.
 
-		Santa-NK1s start to appear starting wave 7.
+		Santa-NK1s will begin to appear in wave 7
+		of the Frost Moon [i:NaughtyPresent].
 		'''
 	Tooltip: Defeat a Santa-NK1
 }
@@ -218,18 +211,16 @@ IceQueenDefeated: {
 	Title: Frigid Ruler
 	Contents:
 		'''
-		Defeat the Ice Queen, the cold and elegant ruler of the Frost Moon.
+		Defeat the Ice Queen, the cold and elegant
+		ruler of the Frost Moon.
 
-		Ice Queens start to appear starting wave 11.
+		Ice Queens will begin to appear in wave 11 of the Frost Moon [i:NaughtyPresent].
 		'''
 	Tooltip: Defeat the Ice Queen
 }
 
 FrostMoonDefeated: {
 	Title: Ice Scream
-	Contents: 
-		'''
-		Reach the 15th wave of a frost moon, where the festive season quickly degrades into madness.
-		'''
+	Contents: Reach the 15th wave of a Frost Moon [i:NaughtyPresent], where the festive season quickly degrades into madness.
 	Tooltip: Defeat the Frost Moon
 }

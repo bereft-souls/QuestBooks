@@ -3,3 +3,28 @@ Designer: {
 	ParseError: Unable to parse file into QuestBook: {0}
 	QuestLogImported: Quest book loaded!
 }
+
+Commands: {
+	MarkComplete: {
+		Usage: Use /markcomplete <QuestKey> (without the <>) to mark a quest as completed.
+		NoMatch: No quest was found matching the key "{0}".
+		AlreadyComplete: The given quest "{0}" was already completed.
+		Success: Quest "{0}" marked as complete!
+	}
+
+	MarkIncomplete: {
+		Usage: Use /markincomplete <QuestKey> (without the <>) to mark a quest as incompleted.
+		NoMatch: No quest was found matching the key "{0}".
+		NotComplete: The given quest "{0}" has not yet completed.
+		Success: Quest "{0}" marked as incompleted!
+	}
+
+	CompleteQuest: {
+		Usage: Use /completequest <QuestKey> (without the <>) to trigger a quest's completion.
+		NoMatch: No quest was found matching the key "{0}".
+		AlreadyComplete: The given quest "{0}" was already completed.
+		Success: Quest "{0}" marked as complete!
+	}
+
+	ToggleDesigner.Success: Designer toggled: {0}
+}

@@ -5,12 +5,12 @@ KingSlimeDefeated: {
 		Defeat King Slime, the lord of all things slimy. 
 
 		King Slime can be found after surviving through the Slime Rain, or summoned using a gel-based item called the
-		Slime Crown. [i:SlimeCrown]
+		Slime Crown [i:SlimeCrown].
 		'''
 	Tooltip: Defeat the King Slime
 }
 
-EyeofCthulhuDefeated: {
+EyeOfCthulhuDefeated: {
 	Title: Eye on You
 	Contents:
 		'''
@@ -22,25 +22,26 @@ EyeofCthulhuDefeated: {
 	Tooltip: Defeat the Eye of Cthulhu
 }
 
-EaterofWorldsDefeated: {
+EaterOfWorldsDefeated: {
 	Title: Worm Fodder
 	Contents:
 		'''
 		Defeat the Eater of Worlds, a massive worm who dwells in the corruption.
 
-		The Eater of Worlds will appear after the shattering of 3 Shadow Orbs [i:ShadowOrb], or lured in using rotten Worm Food. [i:WormFood]
+		The Eater of Worlds will appear after the shattering of 3 Shadow Orbs [i:ShadowOrb], or lured in using rotten Worm Food [i:WormFood].
 		'''
 	Tooltip: Defeat the Eater of Worlds
 }
 
-BrainofCthulhuDefeated: {
+BrainOfCthulhuDefeated: {
 	Title: Mastermind
 	Contents:
 		'''
-		Defeat the Brain of Cthulhu, an enormous demon brain which haunts the creeping crimson.
+		Defeat the Brain of Cthulhu, an enormous
+		demon brain which haunts the creeping crimson.
 
 		The Brain of Cthulhu will manifest after the destruction of 3 Crimson Hearts [i:CrimsonHeart], or
-		summoned using a Bloody Spine. [i:BloodySpine]
+		summoned using a Bloody Spine [i:BloodySpine].
 		'''
 	Tooltip: Defeat the Brain of Cthulhu
 }
@@ -52,7 +53,7 @@ QueenBeeDefeated: {
 		Defeat the Queen Bee, the matriarch of the jungle hives.
 
 		The Queen Bee will defend her hive if you
-		hurt one of her larvae, or can be called upon using an Abeemination. [i:Abeemination]
+		hurt one of her larvae, or can be called upon using an Abeemination [i:Abeemination].
 		'''
 	Tooltip: Defeat the Queen Bee
 }
@@ -63,7 +64,7 @@ DeerclopsDefeated: {
 		'''
 		Defeat Deerclops, the chilly one-eyed monstrosity from a foreign land.
 
-		The Deerclops will rummage through the cold blizzards of the tundra at night, or can be summoned using a Deer Thing. [i:DeerThing]
+		The Deerclops will rummage through the cold blizzards of the tundra at night, or can be summoned using a Deer Thing [i:DeerThing].
 		'''
 	Tooltip: Defeat the Deerclops
 }
@@ -75,12 +76,12 @@ SkeletronDefeated: {
 		Defeat Skeletron, the cursed guardian of the dungeon.
 
 		Skeletron will manifest when taking a part of the Old Man's Curse at the dungeon, or
-		by killing the Clothier using a Clothier Voodoo Doll. [i:ClothierVoodooDoll]
+		by killing the Clothier using a Clothier Voodoo Doll [i:ClothierVoodooDoll].
 		'''
 	Tooltip: Defeat Skeletron
 }
 
-WallofFleshDefeated: {
+WallOfFleshDefeated: {
 	Title: Still Hungry
 	Contents:
 		'''
@@ -98,9 +99,10 @@ QueenSlimeDefeated: {
 	Title: Just Desserts
 	Contents:
 		'''
-		Defeat Queen Slime, giving the coup-de-grace to the sovereign of all that jiggles.
+		Defeat Queen Slime, giving the coup-de-grace to the sovereign of all that
+		jiggles.
 
-		Queen Slime can be summoned using an iridescent Gelatin Crystal [i:GelatinCrystal] from deep within the Hallow.
+		Queen Slime can be summoned using an iridescent Gelatin Crystal [i:QueenSlimeCrystal] from deep within the Hallow.
 		'''
 	Tooltip: Defeat Queen Slime
 }
@@ -109,9 +111,10 @@ TheDestroyerDefeated: {
 	Title: Earthmover
 	Contents:
 		'''
-		Defeat the Destroyer, a collossal burrowing machine capable of wrecking entire biomes.
+		Defeat the Destroyer, a collossal burrowing
+		machine capable of wrecking entire biomes.
 
-		The Destroyer will tunnel through the world of Terraria during Hardmode and may arrive naturally, or be called using a Mechanical Worm. [i:MechanicalWorm]
+		The Destroyer will tunnel through the world of Terraria during Hardmode and may arrive naturally, or be called using a Mechanical Worm [i:MechanicalWorm].
 		'''
 	Tooltip: Defeat The Destroyer
 }
@@ -120,9 +123,11 @@ TheTwinsDefeated: {
 	Title: Eyes on All
 	Contents:
 		'''
-		Defeat The Twins, mechanical observers of the night that blaze and laser all they see.
+		Defeat The Twins, mechanical observers of
+		the night that blaze and laser all they see.
 
-		The Twins will patrol around the world of Terraria during Hardmode and may arrive naturally, or be called using a Mechanical Eye. [i:MechanicalEye]
+		The Twins will patrol around the world of Terraria during Hardmode and may arrive
+		naturally, or be called using a Mechanical Eye [i:MechanicalEye].
 		'''
 	Tooltip: Defeat The Twins
 }
@@ -133,7 +138,8 @@ SkeletronPrimeDefeated: {
 		'''
 		Defeat Skeletron Prime, a malicious machine instilling fear on all who are unfortunate to come across it in the cold nights.
 
-		Skeletron Prime will terrorize the world of Terraria during Hardmode and may arrive naturally, or be called using a Mechanical Skull. [i:MechanicalSkull]
+		Skeletron Prime will terrorize the world of Terraria during Hardmode and may arrive
+		naturally, or be called using a Mechanical Skull [i:MechanicalSkull].
 		'''
 	Tooltip: Defeat Skeletron Prime
 }
@@ -142,9 +148,11 @@ PlanteraDefeated: {
 	Title: The Great Southern Plantkill
 	Contents:
 		'''
-		Defeat Plantera, the overgrown monstrosity of the jungle's depths
+		Defeat Plantera, the overgrown monstrosity
+		of the jungle's depths
 
-		Plantera will arrive once it feels a disturbance in its budding flowers, find and destroy a Plantera Bud within the underground jungle to invoke it.
+		Plantera will arrive once it feels a disturbance in its budding flowers; find and destroy the Plantera's Bulb, a luminous pink bud within the underground
+		jungle, to invoke it.
 		'''
 	Tooltip: Defeat Plantera
 }
@@ -155,7 +163,7 @@ GolemDefeated: {
 		'''
 		Defeat Golem, the stone-faced ritualistic idol of the lihzahrd tribe.
 
-		Deep within the Temple lies a sacred shrine to the Golem. Using a Lihzahrd Power Cell [i:LihzahrdPowerCell] will activate the shrine and bring the Golem back to life.
+		Deep within the Temple lies a sacred shrine [i:LihzahrdAltar] to the Golem. Using a Lihzahrd Power Cell [i:LihzahrdPowerCell] will activate the shrine and bring the Golem back to life.
 		'''
 	Tooltip: Defeat Golem
 }
@@ -166,7 +174,7 @@ DukeFishronDefeated: {
 		'''
 		Defeat Duke Fishron, mutant terror of the sea.
 
-		Duke Fishron can be lured out of the deep recesses of the Ocean using the rare and delicate Truffle Worm [i:TruffleWorm] as a lure.
+		Duke Fishron can be coerced out of the deep recesses of the Ocean using the Glowing Mushroom Cave's rare delicacy, the Truffle Worm [i:TruffleWorm], as a lure.
 		'''
 	Tooltip: Defeat Duke Fishron
 }
@@ -177,7 +185,8 @@ EmpressOfLightDefeated: {
 		'''
 		Defeat the Empress of Light, responsible for all those flashy lights and glitter.
 
-		The Empress of Light is extremly protective of her ecosystem, killing the vibrant and elusive Prismatic Lacewing [i:EmpressButterfly] will invoke her wrath immediately
+		The Empress of Light is extremly protective of her hallowed ecosystem. Bringing harm to the vibrant and elusive Prismatic Lacewing [i:EmpressButterfly] will invoke her
+		wrath immediately.
 		'''
 	Tooltip: Defeat the Empress of Light
 }
@@ -186,9 +195,10 @@ LunaticCultistDefeated: {
 	Title: Obsessive Devotion
 	Contents:
 		'''
-		Defeat the ancient Lunatic Cultist, fanatical leader of the dungeon coven.
+		Defeat the ancient Lunatic Cultist, fanatical
+		leader of the dungeon coven.
 
-		The Lunatic Cultist will come to fight if you choose to interfere with the coven's ritual at the entrance of the dungeon.
+		The Lunatic Cultist will come to fight if you choose to interfere with the coven's ritual at the entrance of the Dungeon.
 		'''
 	Tooltip: Defeat the Lunatic Cultist
 }
