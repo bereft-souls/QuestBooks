@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
-public class GoblinArmy : QBQuest
+public class GoblinArmyDefeated : QBQuest
 {
     public override bool CheckCompletion() => NPC.downedGoblins;
 }

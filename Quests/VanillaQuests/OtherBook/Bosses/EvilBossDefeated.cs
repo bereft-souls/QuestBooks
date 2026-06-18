@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
 {
-    public class EvilBoss : QBDynamicQuest
+    public class EvilBossDefeated : QBDynamicQuest
     {
         public static bool Crimson => WorldGen.crimson;
         public override string Name => Crimson ? "BrainofCthulhu" : "EaterofWorlds";
@@ -26,13 +26,20 @@ namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
 
         public override void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool hovered, bool selected)
         {
-            Effect grayscale = QuestAssets.Grayscale;
+            if (selected)
+                DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, Color.Yellow);
 
+            else if (hovered)
+                DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, Color.LightGray);
+
+            else
+                DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, Color.Gray);
+
+            Effect grayscale = QuestAssets.Grayscale;
             spriteBatch.GetDrawParameters(out var blend, out var sampler, out var depth, out var raster, out var effect, out var matrix);
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, grayscale, matrix);
-            DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, Color.Gray);
             DrawTexture(spriteBatch, IconTexture, canvasPosition, canvasOffset, zoom, Color.White);
             spriteBatch.End();
 

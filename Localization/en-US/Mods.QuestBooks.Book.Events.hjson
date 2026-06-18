@@ -1,93 +1,150 @@
-AllCelestialPillarsDefeated: {
-	Title: Star Destroyer
-	Contents: Defeat the four celestial towers of the moon.
-}
-
-SurviveBloodMoon: {
+BloodMoonDefeated: {
 	Title: Bloodbath
 	Contents: Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
+	Tooltip: Survive a Blood Moon
 }
 
-FrostMoon: {
-	EverscreamDefeated: {
-		Title: In The Pines
-		Contents:	
-			'''
-			Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
-
-			Everscreams start to appear starting wave 4.
-			'''
-	}
-
-	Santa-NK1Defeated: {
-		Title: Ho- Ho- Horror
-		Contents: 
-			'''
-			Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and caring appearance of Santa.
-
-			Santa-NK1s start to appear starting wave 7.
-			'''
-	}
-
-	IceQueenDefeated: {
-		Title: Frigid Ruler
-		Contents: 
-			'''
-			Defeat the Ice Queen, the cold and elegant ruler of the Frost Moon.
-
-			Ice Queens start to appear starting wave 11.
-			'''
-	}
-
-	FrostMoon15thWave: {
-		Title: Ice Scream
-		Contents: Reach the 15th wave of a frost moon, where the festive season quickly degrades into madness.
-	}
+DreadnautilusDefeated: {
+	Title: Dreadnautilus
+	Contents: Defeat the Dreadnautilus
+	Tooltip: Defeat the Dreadnautilus
 }
 
-HarvestMoon: {
-	MourningWoodDefeated: {
-		Title: Charred for Life
-		Contents: 
-			'''
-			Defeat a Mourning Wood, terrifying charred tree trunks that roam the Pumpkin Moon.
+EverscreamDefeated: {
+	Title: In The Pines
+	Contents:
+		'''
+		Defeat an Everscream, a horrifying mutilation of a christmas tree set filled with wrath.
 
-			Mourning Woods start to appear starting wave 6.
-			'''
-	}
-
-	Pumpking: {
-		Title: Ruler of the Harvest
-		Contents:
-			'''
-			Defeat the Pumpking, a ghoulish pumpkin menace ruling over the Pumpkin Moon.
-
-			Pumpkings start to appear starting wave 10.
-			'''
-	}
-
-	PumpkinMoon15thWave: {
-		Title: Baleful Harvest
-		Content: Reach the 15th wave of a pumpkin moon, where evil lurks among the autumn harvest.
-	}
+		Everscreams start to appear starting wave 4.
+		'''
+	Tooltip: Defeat an Everscream
 }
 
-PirateInvasionDefeated: {
-	Title: Walk the Plank
-	Contents: Triumph over a pirate invasion, a group of pillagers from the sea out for your booty... and your life!
+SantaNK1Defeated: {
+	Title: Ho- Ho- Horror
+	Contents:
+		'''
+		Defeat a Santa-NK1, a menacing and brutal war-machine mimicing the jolly and caring appearance of Santa.
+
+		Santa-NK1s start to appear starting wave 7.
+		'''
+	Tooltip: Defeat a Santa-NK1
 }
 
-GoblinInvasionDefeated: {
+IceQueenDefeated: {
+	Title: Frigid Ruler
+	Contents:
+		'''
+		Defeat the Ice Queen, the cold and elegant ruler of the Frost Moon.
+
+		Ice Queens start to appear starting wave 11.
+		'''
+	Tooltip: Defeat the Ice Queen
+}
+
+FrostMoonDefeated: {
+	Title: Ice Scream
+	Contents: Reach the 15th wave of a frost moon, where the festive season quickly degrades into madness.
+	Tooltip: Defeat the Frost Moon
+}
+
+GoblinArmyDefeated: {
 	Title: Goblin Punter
 	Contents: Triumph over a goblin invasion, a ragtag regiment of crude, barbaric, pointy-eared warriors and their shadowflame sorcerers.
-}
-
-SurviveSolarEclipse: {
-	Title: Kill the Sun
-	Contents: Survive a solar eclipse, a day darker than night filled with creatures of horror that can occur after the defeat of any Mechanical Boss.
+	Tooltip: Defeat the Goblin Army
 }
 
 MartianInvasionDefeated: {
 	Title: Tin-Foil Hatter
 	Contents: Triumph over a martian invasion, when beings from out of this world come to scramble your brains and probe you in uncomfortable places.
+	Tooltip: Defeat the Martian Invasion
+}
+
+OOAT1Defeated: {
+	Title: Old One's Army
+	Contents: Defeat the first invasion of the Old One's Army
+	Tooltip: Defeat the Old One's Army
+}
+
+OOAT2Defeated: {
+	Title: Old One's Army (Rematch)
+	Contents: Defeat the second invasion of the Old One's Army
+	Tooltip: Defeat the Old One's Army (again)
+}
+
+OOAT3Defeated: {
+	Title: Old One's Army (Final Stand)
+	Contents: Defeat the final invasion of the Old One's Army
+	Tooltip: Defeat the Old One's Army (again) ((again))
+}
+
+AllPillarsDefeated: {
+	Title: Star Destroyer
+	Contents: Defeat all 4 invading towers of the moon
+	Tooltip: Defeat the Celestial Invasion
+}
+
+SolarPillarDefeated: {
+	Title: Solar Pillar
+	Contents: Defeat the solar pillar
+	Tooltip: Defeat the Solar Pillar
+}
+
+VortexPillarDefeated: {
+	Title: Vortex Pillar
+	Contents: Defeat the vortex pillar
+	Tooltip: Defeat the Vortex Pillar
+}
+
+NebulaPillarDefeated: {
+	Title: Nebula Pillar
+	Contents: Defeat the nebula pillar
+	Tooltip: Defeat the Nebula Pillar
+}
+
+StardustPillarDefeated: {
+	Title: Stardust Pillar
+	Contents: Defeat the stardust pillar
+	Tooltip: Defeat the Stardust Pillar
+}
+
+PiratesDefeated: {
+	Title: Walk the Plank
+	Contents: Triumph over a pirate invasion, a group of pillagers from the sea out for your booty... and your life!
+	Tooltip: Defeat the Pirate Invasion
+}
+
+MourningWoodDefeated: {
+	Title: Charred for Life
+	Contents:
+		'''
+		Defeat a Mourning Wood, terrifying charred tree trunks that roam the Pumpkin Moon.
+
+		Mourning Woods start to appear starting wave 6.
+		'''
+	Tooltip: Defeat a Mourning Wood
+}
+
+PumpkingDefeated: {
+	Title: Ruler of the Harvest
+	Contents:
+		'''
+		Defeat the Pumpking, a ghoulish pumpkin menace ruling over the Pumpkin Moon.
+
+		Pumpkings start to appear starting wave 10.
+		'''
+	Tooltip: Defeat the Pumpking
+}
+
+PumpkinMoonDefeated: {
+	Title: Baleful Harvest
+	Content: Reach the 15th wave of a pumpkin moon, where evil lurks among the autumn harvest.
+	Tooltip: Defeat the Pumpkin Moon
+}
+
+SolarEclipseDefeated: {
+	Title: Kill the Sun
+	Contents: Survive a solar eclipse, a day darker than night filled with creatures of horror that can occur after the defeat of any Mechanical Boss.
+	Tooltip: Survive a Solar Eclipse
 }

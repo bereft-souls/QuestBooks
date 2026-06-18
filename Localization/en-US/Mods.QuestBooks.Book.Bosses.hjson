@@ -1,4 +1,4 @@
-KingSlime: {
+KingSlimeDefeated: {
 	Title: Slippery Shinobi
 	Contents:
 		'''
@@ -10,7 +10,7 @@ KingSlime: {
 	Tooltip: Defeat the King Slime
 }
 
-EyeofCthulhu: {
+EyeofCthulhuDefeated: {
 	Title: Eye on You
 	Contents:
 		'''
@@ -22,7 +22,7 @@ EyeofCthulhu: {
 	Tooltip: Defeat the Eye of Cthulhu
 }
 
-EaterofWorlds: {
+EaterofWorldsDefeated: {
 	Title: Worm Fodder
 	Contents:
 		'''
@@ -33,7 +33,7 @@ EaterofWorlds: {
 	Tooltip: Defeat the Eater of Worlds
 }
 
-BrainofCthulhu: {
+BrainofCthulhuDefeated: {
 	Title: Mastermind
 	Contents:
 		'''
@@ -45,7 +45,7 @@ BrainofCthulhu: {
 	Tooltip: Defeat the Brain of Cthulhu
 }
 
-QueenBee: {
+QueenBeeDefeated: {
 	Title: Sting Operation
 	Contents:
 		'''
@@ -57,7 +57,7 @@ QueenBee: {
 	Tooltip: Defeat the Queen Bee
 }
 
-Deerclops: {
+DeerclopsDefeated: {
 	Title: An Eye For An Eye
 	Contents:
 		'''
@@ -68,7 +68,7 @@ Deerclops: {
 	Tooltip: Defeat the Deerclops
 }
 
-Skeletron: {
+SkeletronDefeated: {
 	Title: Boned
 	Contents:
 		'''
@@ -80,7 +80,7 @@ Skeletron: {
 	Tooltip: Defeat Skeletron
 }
 
-WallofFlesh: {
+WallofFleshDefeated: {
 	Title: Still Hungry
 	Contents:
 		'''
@@ -94,7 +94,7 @@ WallofFlesh: {
 	Tooltip: Defeat the Wall of Flesh
 }
 
-QueenSlime: {
+QueenSlimeDefeated: {
 	Title: Just Desserts
 	Contents:
 		'''
@@ -105,40 +105,40 @@ QueenSlime: {
 	Tooltip: Defeat Queen Slime
 }
 
-TheDestroyer: {
+TheDestroyerDefeated: {
 	Title: Earthmover
 	Contents:
 		'''
 		Defeat the Destroyer, a collossal burrowing machine capable of wrecking entire biomes.
 
-		The Destroyer will tunnel through the world of Terraria during Hardmode and may arrive naturally, or be called using a [i:MechanicalWorm].
+		The Destroyer will tunnel through the world of Terraria during Hardmode and may arrive naturally, or be called using a Mechanical Worm. [i:MechanicalWorm]
 		'''
 	Tooltip: Defeat The Destroyer
 }
 
-TheTwins: {
+TheTwinsDefeated: {
 	Title: Eyes on All
 	Contents:
 		'''
 		Defeat The Twins, mechanical observers of the night that blaze and laser all they see.
 
-		The Twins will patrol around the world of Terraria during Hardmode and may arrive naturally, or be called using a [i:MechanicalEye].
+		The Twins will patrol around the world of Terraria during Hardmode and may arrive naturally, or be called using a Mechanical Eye. [i:MechanicalEye]
 		'''
 	Tooltip: Defeat The Twins
 }
 
-SkeletronPrime: {
+SkeletronPrimeDefeated: {
 	Title: Steel Boned
 	Contents:
 		'''
 		Defeat Skeletron Prime, a malicious machine instilling fear on all who are unfortunate to come across it in the cold nights.
 
-		Skeletron Prime will terrorize the world of Terraria during Hardmode and may arrive naturally, or be called using a [i:MechanicalSkull].
+		Skeletron Prime will terrorize the world of Terraria during Hardmode and may arrive naturally, or be called using a Mechanical Skull. [i:MechanicalSkull]
 		'''
 	Tooltip: Defeat Skeletron Prime
 }
 
-Plantera: {
+PlanteraDefeated: {
 	Title: The Great Southern Plantkill
 	Contents:
 		'''
@@ -149,7 +149,7 @@ Plantera: {
 	Tooltip: Defeat Plantera
 }
 
-Golem: {
+GolemDefeated: {
 	Title: Lihzahrdian Idol
 	Contents:
 		'''
@@ -160,7 +160,7 @@ Golem: {
 	Tooltip: Defeat Golem
 }
 
-DukeFishron: {
+DukeFishronDefeated: {
 	Title: Fish Out of Water
 	Contents:
 		'''
@@ -171,7 +171,7 @@ DukeFishron: {
 	Tooltip: Defeat Duke Fishron
 }
 
-EmpressOfLight: {
+EmpressOfLightDefeated: {
 	Title: Fae Flayer
 	Contents:
 		'''
@@ -182,7 +182,7 @@ EmpressOfLight: {
 	Tooltip: Defeat the Empress of Light
 }
 
-LunaticCultist: {
+LunaticCultistDefeated: {
 	Title: Obsessive Devotion
 	Contents:
 		'''
@@ -193,7 +193,7 @@ LunaticCultist: {
 	Tooltip: Defeat the Lunatic Cultist
 }
 
-MoonLord.Title: {
+MoonLordDefeated: {
 	Title: Champion of Terraria
 	Contents:
 		'''
@@ -201,6 +201,6 @@ MoonLord.Title: {
 
 		With the fall of the celestial invasion, Moon Lord's approach is imminent.
 		'''
-		// NOT mentioning Celestial Sigil, it appears as its own quest!!
+	// NOT mentioning Celestial Sigil, it appears as its own quest!!
 	Tooltip: Defeat Moon Lord
 }

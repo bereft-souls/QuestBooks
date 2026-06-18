@@ -17,8 +17,11 @@ namespace QuestBooks.QuestLog.DefaultChapters
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch, Rectangle designatedArea, float scale, bool selected, bool hovered)
         {
-            Color chapterColor = Color.White;
+            bool unlocked = IsUnlocked();
+            Color chapterColor = unlocked ? Color.White : Color.DarkGray;
             Color outlineColor = new(0, 0, 0, 0);
+            Color textColor = unlocked ? Color.White : Color.Gray;
+            Color textOutlineColor = unlocked ? new(69, 69, 69, 255) : new(40, 40, 40, 255);
 
             if (selected)
                 outlineColor = new Color(225, 225, 0, 255);
@@ -26,14 +29,13 @@ namespace QuestBooks.QuestLog.DefaultChapters
             else if (hovered)
                 outlineColor = new(200, 200, 200, 255);
 
-            Color textOutlineColor = new(69, 69, 69, 255);
-            DrawBasicChapter(spriteBatch, DisplayName, chapterColor, Color.White, outlineColor, textOutlineColor, designatedArea, scale);
+            DrawBasicChapter(spriteBatch, DisplayName, chapterColor, textColor, outlineColor, textOutlineColor, designatedArea, scale);
         }
 
         /// <summary>
         /// Performs the default chapter drawing code to the spritebatch. Draws a simple container with the specified colors, and text inside the contianer.
         /// </summary>
-        public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale)
+        public static void DrawBasicChapter(SpriteBatch spriteBatch, string text, Color chapterColor, Color textColor, Color outlineColor, Color textOutlineColor, Rectangle area, float scale, Effect? shader = null)
         {
             if (outlineColor.A > 0)
                 spriteBatch.Draw(QuestAssets.ChapterScrollBorder, area.Center(), null, outlineColor, 0f, QuestAssets.ChapterScrollBorder.Asset.Size() * 0.5f, scale, SpriteEffects.None, 0f);
