@@ -1,13 +1,195 @@
+// ------------------------
+// <-> "Weather" Events <->
+
 BloodMoonDefeated: {
 	Title: Bloodbath
-	Contents: Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
+	Contents: 
+		'''
+		Survive a blood moon, a nocturnal event where the rivers run red and monsters swarm aplenty.
+
+		Blood moons can now occur randomly each night, or be forcefully conjured using a Bloody Tear. [i:BloodMoonStarter]
+		(Tip: Bloody Tears are rarely dropped by Grooms and Brides, that rarely spawn in Graveyards!)
+		'''
 	Tooltip: Survive a Blood Moon
 }
 
 DreadnautilusDefeated: {
 	Title: Dreadnautilus
-	Contents: Defeat the Dreadnautilus
-	Tooltip: Defeat the Dreadnautilus
+	Contents: 
+		'''
+		Defeat the Dreadnautilus, murderous mollusk lurking beneath the surface of the sanguine seas.
+
+		The Dreadnautilus is a rare and viscious mollusk that surfaces during the toughest blood moons and rarely reeled up when fishing during it.
+		'''
+	Tooltip: Defeat a Dreadnautilus
+}
+
+SolarEclipseDefeated: {
+	Title: Kill the Sun
+	Contents: 
+		'''
+		Survive a solar eclipse, a day darker than night filled with creatures of horror that can occur after the defeat of any Mechanical Boss.
+
+		'''
+	Tooltip: Survive a Solar Eclipse
+}
+
+
+// ---------------------
+// <-> Old Ones Army <->
+
+// <!> None of these explain "how to", thats in a base quest before them <!>
+
+OOAT1Defeated: {
+	Title: Old One's Army
+	Contents: 
+		'''
+		Delay the invasion of the Old One's Army by defeating the Dark Mage, a master conjurer leading a horde of skeletal servants.
+		'''
+	Tooltip: Defeat the Old One's Army - 1
+}
+
+OOAT2Defeated: {
+	Title: Old One's Army (Rematch)
+	Contents: 
+		'''
+		Repel the second invasion of the Old One's Army by defeating the Ogre A nasty brute who appears in the Old One's Army.
+
+		The Ogre will only start march with the army after the defeat of a Mechanical Boss.
+		'''
+	Tooltip: Defeat the Old One's Army - 2
+}
+
+OOAT3Defeated: {
+	Title: Old One's Army (Final Stand)
+	Contents: 
+		'''
+		Defeat the strongest forces the Old One's Army can muster by felling the great Betsy.
+
+		Betsy will only take flight with the army after the defeat of Golem.
+		'''
+	Tooltip: Defeat the Old One's Army - 3
+}
+
+
+// ------------------------
+// <-> Invasion Events <->
+
+GoblinArmyDefeated: {
+	Title: Goblin Punter
+	Contents: 
+		'''
+		Triumph over a goblin invasion, a ragtag regiment of crude, barbaric, pointy-eared warriors and their shadowflame sorcerers.
+		
+		The goblin army may come to wreck havoc and dismay at any point, but will immediately approach if invoked using a Goblin Battle Standard [i:GoblinBattleStandard]
+		'''
+	Tooltip: Defeat the Goblin Army
+}
+
+PiratesDefeated: {
+	Title: Walk the Plank
+	Contents: 
+		'''
+		Triumph over a pirate invasion, a group of pillagers from the sea out for your booty... and your life!
+
+		The pirates may heave-ho and anchor down come any dawn, but will set their sails immediately if you find a special Pirate Map [i:PirateMap] from Ocean mobs.
+		'''
+	Tooltip: Defeat the Pirate Invasion
+}
+
+// <!> below doesnt need "how to", thats in a base quest before it <!>
+
+MartianInvasionDefeated: {
+	Title: Tin-Foil Hatter
+	Contents: 
+		'''
+		Triumph over a martian invasion, when beings from out of this world come to scramble your brains and probe you in uncomfortable places.
+		'''
+	Tooltip: Defeat the Martian Invasion
+}
+
+// <-> Lunar Invasion <->
+// <!> None of these explain "how to", thats in a base quest before them <!>
+
+AllPillarsDefeated: {
+	Title: Star Destroyer
+	Contents: 
+		'''
+		Defeat the four celestial towers of the moon, and prepare for its wrath..
+		'''
+	Tooltip: Defeat the Celestial Invasion
+}
+
+SolarPillarDefeated: {
+	Title: Solar Pillar
+	Contents: 
+		'''
+		Destroy the Solar Pillar, one of the seals of an ancient terrible tyrant.
+		'''
+	Tooltip: Defeat the Solar Pillar
+}
+
+VortexPillarDefeated: {
+	Title: Vortex Pillar
+	Contents: 
+		'''
+		Destroy the Vortex Pillar, one of the seals of an ancient terrible tyrant.
+		'''
+	Tooltip: Defeat the Vortex Pillar
+}
+
+NebulaPillarDefeated: {
+	Title: Nebula Pillar
+	Contents: 
+		'''
+		Defeat the Nebula Pillar, one of the seals of an ancient terrible tyrant.
+		'''
+	Tooltip: Defeat the Nebula Pillar
+}
+
+StardustPillarDefeated: {
+	Title: Stardust Pillar
+	Contents:
+		'''
+		Defeat the Stardust Pillar, one of the seals of an ancient terrible tyrant.
+		'''
+	Tooltip: Defeat the Stardust Pillar
+}
+
+
+// ----------------------
+// <-> Seasonal Moons <->
+// <!> None of these explain "how to", thats in a base quest before them <!>
+
+MourningWoodDefeated: {
+	Title: Charred for Life
+	Contents:
+		'''
+		Defeat a Mourning Wood, terrifying charred tree trunks that roam the Pumpkin Moon.
+
+		Mourning Woods start to appear starting wave 6.
+		'''
+	Tooltip: Defeat a Mourning Wood
+}
+
+PumpkingDefeated: {
+	Title: Ruler of the Harvest
+	Contents:
+		'''
+		Defeat the Pumpking, a ghoulish pumpkin menace ruling over the Pumpkin Moon.
+
+		Pumpkings start to appear starting wave 10.
+		'''
+	Tooltip: Defeat the Pumpking
+}
+
+PumpkinMoonDefeated: {
+	Title: Baleful Harvest
+	Content: 
+		'''
+		Reach the 15th wave of a pumpkin moon, where evil lurks among the autumn harvest.
+		'''
+	Tooltip: Defeat the Pumpkin Moon
 }
 
 EverscreamDefeated: {
@@ -45,106 +227,9 @@ IceQueenDefeated: {
 
 FrostMoonDefeated: {
 	Title: Ice Scream
-	Contents: Reach the 15th wave of a frost moon, where the festive season quickly degrades into madness.
+	Contents: 
+		'''
+		Reach the 15th wave of a frost moon, where the festive season quickly degrades into madness.
+		'''
 	Tooltip: Defeat the Frost Moon
-}
-
-GoblinArmyDefeated: {
-	Title: Goblin Punter
-	Contents: Triumph over a goblin invasion, a ragtag regiment of crude, barbaric, pointy-eared warriors and their shadowflame sorcerers.
-	Tooltip: Defeat the Goblin Army
-}
-
-MartianInvasionDefeated: {
-	Title: Tin-Foil Hatter
-	Contents: Triumph over a martian invasion, when beings from out of this world come to scramble your brains and probe you in uncomfortable places.
-	Tooltip: Defeat the Martian Invasion
-}
-
-OOAT1Defeated: {
-	Title: Old One's Army
-	Contents: Defeat the first invasion of the Old One's Army
-	Tooltip: Defeat the Old One's Army
-}
-
-OOAT2Defeated: {
-	Title: Old One's Army (Rematch)
-	Contents: Defeat the second invasion of the Old One's Army
-	Tooltip: Defeat the Old One's Army (again)
-}
-
-OOAT3Defeated: {
-	Title: Old One's Army (Final Stand)
-	Contents: Defeat the final invasion of the Old One's Army
-	Tooltip: Defeat the Old One's Army (again) ((again))
-}
-
-AllPillarsDefeated: {
-	Title: Star Destroyer
-	Contents: Defeat all 4 invading towers of the moon
-	Tooltip: Defeat the Celestial Invasion
-}
-
-SolarPillarDefeated: {
-	Title: Solar Pillar
-	Contents: Defeat the solar pillar
-	Tooltip: Defeat the Solar Pillar
-}
-
-VortexPillarDefeated: {
-	Title: Vortex Pillar
-	Contents: Defeat the vortex pillar
-	Tooltip: Defeat the Vortex Pillar
-}
-
-NebulaPillarDefeated: {
-	Title: Nebula Pillar
-	Contents: Defeat the nebula pillar
-	Tooltip: Defeat the Nebula Pillar
-}
-
-StardustPillarDefeated: {
-	Title: Stardust Pillar
-	Contents: Defeat the stardust pillar
-	Tooltip: Defeat the Stardust Pillar
-}
-
-PiratesDefeated: {
-	Title: Walk the Plank
-	Contents: Triumph over a pirate invasion, a group of pillagers from the sea out for your booty... and your life!
-	Tooltip: Defeat the Pirate Invasion
-}
-
-MourningWoodDefeated: {
-	Title: Charred for Life
-	Contents:
-		'''
-		Defeat a Mourning Wood, terrifying charred tree trunks that roam the Pumpkin Moon.
-
-		Mourning Woods start to appear starting wave 6.
-		'''
-	Tooltip: Defeat a Mourning Wood
-}
-
-PumpkingDefeated: {
-	Title: Ruler of the Harvest
-	Contents:
-		'''
-		Defeat the Pumpking, a ghoulish pumpkin menace ruling over the Pumpkin Moon.
-
-		Pumpkings start to appear starting wave 10.
-		'''
-	Tooltip: Defeat the Pumpking
-}
-
-PumpkinMoonDefeated: {
-	Title: Baleful Harvest
-	Content: Reach the 15th wave of a pumpkin moon, where evil lurks among the autumn harvest.
-	Tooltip: Defeat the Pumpkin Moon
-}
-
-SolarEclipseDefeated: {
-	Title: Kill the Sun
-	Contents: Survive a solar eclipse, a day darker than night filled with creatures of horror that can occur after the defeat of any Mechanical Boss.
-	Tooltip: Survive a Solar Eclipse
 }

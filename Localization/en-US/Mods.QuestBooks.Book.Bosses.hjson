@@ -100,7 +100,7 @@ QueenSlimeDefeated: {
 		'''
 		Defeat Queen Slime, giving the coup-de-grace to the sovereign of all that jiggles.
 
-		Queen Slime can be summoned upon using an iridescent [i:GelatinCrystal] from deep within the Hallow.
+		Queen Slime can be summoned using an iridescent Gelatin Crystal [i:GelatinCrystal] from deep within the Hallow.
 		'''
 	Tooltip: Defeat Queen Slime
 }
@@ -155,7 +155,7 @@ GolemDefeated: {
 		'''
 		Defeat Golem, the stone-faced ritualistic idol of the lihzahrd tribe.
 
-		Deep within the Temple lies a sacred shrine to the Golem. Using a [i:LihzahrdPowerCell] will activate the shrine and bring the Golem back to life.
+		Deep within the Temple lies a sacred shrine to the Golem. Using a Lihzahrd Power Cell [i:LihzahrdPowerCell] will activate the shrine and bring the Golem back to life.
 		'''
 	Tooltip: Defeat Golem
 }
@@ -166,7 +166,7 @@ DukeFishronDefeated: {
 		'''
 		Defeat Duke Fishron, mutant terror of the sea.
 
-		Duke Fishron can be lured out of the deep recesses of the Ocean using the rare and delicate [i:TruffleWorm] as a lure.
+		Duke Fishron can be lured out of the deep recesses of the Ocean using the rare and delicate Truffle Worm [i:TruffleWorm] as a lure.
 		'''
 	Tooltip: Defeat Duke Fishron
 }
@@ -177,7 +177,7 @@ EmpressOfLightDefeated: {
 		'''
 		Defeat the Empress of Light, responsible for all those flashy lights and glitter.
 
-		The Empress of Light is extremly protective of her ecosystem, killing the vibrant and elusive [i:PrismaticLacewing] will invoke her wrath immediately
+		The Empress of Light is extremly protective of her ecosystem, killing the vibrant and elusive Prismatic Lacewing [i:EmpressButterfly] will invoke her wrath immediately
 		'''
 	Tooltip: Defeat the Empress of Light
 }
