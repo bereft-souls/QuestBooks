@@ -5,11 +5,11 @@ using Terraria.ModLoader;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class LootOceanChest : QBQuest
+public class LootJungleChest : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class OceanChestTileCheck : GlobalTile
+    public class JungleChestTileCheck : GlobalTile
     {
         // TODO: Do we want to validate only unexplored chests? Or just any valid chest?
         public override void RightClick(int i, int j, int type)
@@ -21,7 +21,7 @@ public class LootOceanChest : QBQuest
             
             var tile = Framing.GetTileSafely(i, j);
 
-            if (tile.TileFrameX != 17 * 36)
+            if (tile.TileFrameX != 11 * 36)
             {
                 return;
             }

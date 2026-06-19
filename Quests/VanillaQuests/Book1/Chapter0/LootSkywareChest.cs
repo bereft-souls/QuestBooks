@@ -21,7 +21,7 @@ public class LootSkywareChest : QBQuest
             
             var tile = Framing.GetTileSafely(i, j);
 
-            if (tile.TileFrameX != 0 || tile.TileFrameY != 0)
+            if (tile.TileFrameX != 13 * 36)
             {
                 return;
             }

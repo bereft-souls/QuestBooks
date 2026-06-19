@@ -21,7 +21,7 @@ public class LootTundraChest : QBQuest
             
             var tile = Framing.GetTileSafely(i, j);
 
-            if (tile.TileFrameX != 0 || tile.TileFrameY != 0)
+            if (tile.TileFrameX != 11 * 36)
             {
                 return;
             }
