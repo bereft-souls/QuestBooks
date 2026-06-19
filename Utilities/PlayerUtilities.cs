@@ -11,7 +11,6 @@ namespace QuestBooks.Utilities;
 /// </summary>
 public static class PlayerExtensions
 {
-#region Inventory
     /// <summary>
     ///     Determines whether the player has an item of any of the specified types in their inventory.
     /// </summary>
@@ -148,9 +147,7 @@ public static class PlayerExtensions
             yield return (item, i);
         }
     }
-#endregion
 
-#region Armor
     /// <summary>
     ///     Determines whether the player is wearing the specified leggings.
     /// </summary>
@@ -321,9 +318,7 @@ public static class PlayerExtensions
     {
         return player.HasHelmet(helmet) && player.HasChestplate(chestplate) && player.HasLeggings(leggings);
     }
-#endregion
 
-#region Accessories
     /// <summary>
     ///     Determines whether the player is wearing an accessory of the specified type.
     /// </summary>
@@ -389,5 +384,4 @@ public static class PlayerExtensions
             yield return (item, i);
         }
     }
-#endregion
 }
