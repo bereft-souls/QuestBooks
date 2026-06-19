@@ -8,6 +8,8 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
 public class CraftAtEvilAltar : QBQuest
 {
+    public override QuestType QuestType => QuestType.Player;
+    
     public override bool CheckCompletion() => false;
     
     public class EvilAltarItemCheck : GlobalItem

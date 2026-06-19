@@ -16,7 +16,7 @@ public class GetEvilBars : QBQuest
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {
-            if (context is not RecipeItemCreationContext recipe || (!recipe.Recipe.HasIngredient(ItemID.CrimtaneBar) || !recipe.Recipe.HasIngredient(ItemID.DemoniteBar)))
+            if (context is not RecipeItemCreationContext recipe || (!recipe.Recipe.HasIngredient(ItemID.CrimtaneBar) && !recipe.Recipe.HasIngredient(ItemID.DemoniteBar)))
             {
                 return;
             }

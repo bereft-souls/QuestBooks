@@ -10,10 +10,7 @@ public class CraftCactusGear : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
-    public override bool CheckCompletion()
-    {
-        return false;
-    }
+    public override bool CheckCompletion() => false;
 
     public class CactusGearItemCheck : GlobalItem
     {
