@@ -14,15 +14,17 @@ public class GetBeeSet : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class BeeSetPlayerCheck : ModPlayer
+    public class BeeSetItemCheck : GlobalItem
     {
-        public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.BeeGun;
+
+        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (item.type == ItemID.BeeGun && Player.HasArmorSet(ItemID.BeeHat, ItemID.BeeBreastplate, ItemID.BeeGreaves))
+            if (player.HasArmorSet(ItemID.BeeHat, ItemID.BeeBreastplate, ItemID.BeeGreaves))
             {
                 QuestManager.MarkComplete<GetBeeSet>();
             }
-            
+
             return true;
         }
     }
