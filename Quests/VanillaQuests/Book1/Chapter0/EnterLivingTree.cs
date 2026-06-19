@@ -1,8 +1,4 @@
-﻿using System;
-using Terraria.ID;
-using Terraria.ModLoader;
-
-namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
+﻿namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
 public class EnterLivingTree : QBQuest
 {
@@ -12,7 +8,8 @@ public class EnterLivingTree : QBQuest
     public class LivingTreeCheck : ModSystem
     {
         /// <summary>
-        ///     Defines the minimum count of living tree tiles required for the player to be considered inside the living tree biome.
+        ///     Defines the minimum count of living tree tiles required for the player to be considered inside
+        ///     the living tree biome.
         /// </summary>
         public const int Threshold = 100;
 
@@ -25,10 +22,11 @@ public class EnterLivingTree : QBQuest
         ///     Gets a value indicating whether the player is inside the living tree biome.
         /// </summary>
         /// <value>
-        ///     <see langword="true"/> if <see cref="Count"/> is greater than or equal to <see cref="Threshold"/>; otherwise, <see langword="false"/>.
+        ///     <see langword="true"/> if <see cref="Count"/> is greater than or equal to
+        ///     <see cref="Threshold"/>; otherwise, <see langword="false"/>.
         /// </value>
         public static bool Active => Count >= Threshold;
-        
+
         public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)
         {
             Count = tileCounts[TileID.LivingMahoganyLeaves] + tileCounts[TileID.LivingMahogany];

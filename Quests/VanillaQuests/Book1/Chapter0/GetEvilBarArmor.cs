@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
@@ -45,9 +42,7 @@ public class GetEvilBarArmor : QBQuest
         public override void OnCreated(Item item, ItemCreationContext context)
         {
             if (context is not RecipeItemCreationContext)
-            {
                 return;
-            }
 
             // TODO: Do we want to enforce that armor pieces must be of the same type (i.e. all Shadow or all Crimson)?
             Head |= item.type == ItemID.CrimsonHelmet || item.type == ItemID.ShadowHelmet;

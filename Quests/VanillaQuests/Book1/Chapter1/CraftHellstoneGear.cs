@@ -1,19 +1,19 @@
 ﻿using QuestBooks.Systems;
 using Terraria.DataStructures;
 
-namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
+namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class CraftMeteorGear : QBQuest
+public class CraftHellstoneGear : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion() => false;
 
-    public class MeteorGearItemCheck : GlobalItem
+    public class HellstoneGearItemCheck : GlobalItem
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {
-            if (context is not RecipeItemCreationContext recipe || !recipe.Recipe.HasIngredient(ItemID.MeteoriteBar))
+            if (context is not RecipeItemCreationContext recipe || !recipe.Recipe.HasIngredient(ItemID.HellstoneBar))
                 return;
 
             // TODO: Should gear be considered only as equipments, or should it also include tools and weapons?
@@ -22,7 +22,7 @@ public class CraftMeteorGear : QBQuest
             if (!gear)
                 return;
 
-            QuestManager.CompleteQuest<CraftCactusGear>();
+            QuestManager.CompleteQuest<CraftHellstoneGear>();
         }
     }
 }

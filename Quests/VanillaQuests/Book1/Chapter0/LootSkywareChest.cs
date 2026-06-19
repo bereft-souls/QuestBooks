@@ -1,7 +1,4 @@
 ﻿using QuestBooks.Systems;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
@@ -15,17 +12,13 @@ public class LootSkywareChest : QBQuest
         public override void RightClick(int i, int j, int type)
         {
             if (type != TileID.Containers)
-            {
                 return;
-            }
-            
+
             var tile = Framing.GetTileSafely(i, j);
 
             if (tile.TileFrameX != 13 * 36)
-            {
                 return;
-            }
-            
+
             QuestManager.MarkComplete<LootSkywareChest>();
         }
     }
