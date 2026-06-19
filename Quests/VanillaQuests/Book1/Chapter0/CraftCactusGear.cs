@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using QuestBooks.Systems;
+﻿using QuestBooks.Systems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -20,15 +19,7 @@ public class CraftCactusGear : QBQuest
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {
-            if (context is not RecipeItemCreationContext recipe)
-            {
-                return;
-            }
-
-            // Ensures automatic compatibility with mods that add new gear using cactus as an ingredient, as opposed to checking for specific item types.
-            var ingredients = recipe.ConsumedItems;
-
-            if (!ingredients.Any(static item => item.type == ItemID.Cactus))
+            if (context is not RecipeItemCreationContext recipe || !recipe.Recipe.HasIngredient(ItemID.Cactus))
             {
                 return;
             }
