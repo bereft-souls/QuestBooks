@@ -27,7 +27,8 @@ namespace QuestBooks.Utilities
                 TypeNameHandling = TypeNameHandling.All,
                 SerializationBinder = new JsonTypeResolverFix(),
                 PreserveReferencesHandling = PreserveReferencesHandling.All,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                MaxDepth = null
             };
         }
 

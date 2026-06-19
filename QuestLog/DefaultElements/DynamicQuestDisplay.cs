@@ -27,8 +27,19 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override string QuestKey { get => base.QuestKey; set => base.QuestKey = value; }
         public DynamicQuestDisplay() => QuestKey = new PlaceholderDynamic().Key;
 
+        public override Quest Quest
+        {
+            get
+            {
+                var quest = base.Quest;
+                if (quest is Placeholder)
+                    return QuestManager.GetQuest<PlaceholderDynamic>();
+                return quest;
+            }
+        }
+
         [JsonIgnore]
-        public DynamicQuest DynamicQuest { get => base.Quest as DynamicQuest; }
+        public DynamicQuest DynamicQuest { get => Quest as DynamicQuest; }
 
         protected override void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected) =>
             DynamicQuest.DrawCompleted(spriteBatch, CanvasPosition, canvasOffset, zoom, hovered, selected);

@@ -1,1 +1,15 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+[h1]QuestBooks[/h1]
+[url=https://discord.gg/BPFyqZsnn8]Discord[/url] [url=https://github.com/bereft-souls/QuestBooks]GitHub[/url]
+
+QuestBooks is a mod that adds in-game quest books to Terraria!
+
+Far too long have players had to over-rely on having 5 wiki pages open at a time. Time spent in a web browser is time taken away from experiencing the content in a fun, natural manner. This is where QuestBooks comes in.
+
+While wiki dependence may never fully disappear, QuestBooks eliminates a vast majority of the necessity to have a page open at all times. The integrated quest lines are organic and natural, guiding players through the game's content without directly holding their hand, while still leaving plenty of intricate sub-content to find on their own!
+
+Mod developers can modify and add their own quest books and chapters through QuestBooks' powerful and easy to use API. Check out the GitHub for documentation and how to get started!
+
+[hr]
+
+[h2]- !! IMPORTANT !! -[/h2]
+QuestBooks is still in BETA There may be bugs, and much of the mod's content is still being worked on. Please be patient as we work on developing QuestBooks!

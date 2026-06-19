@@ -22,10 +22,7 @@ public class CraftWorkbench : QBQuest
             if (context is not RecipeItemCreationContext || item.createTile == -1)
                 return;
 
-            if (item.createTile != TileID.WorkBenches)
-                return;
-
-            if (!(ModContent.GetModTile(item.createTile)?.AdjTiles?.Contains(TileID.WorkBenches) ?? false))
+            if (item.createTile != TileID.WorkBenches && !(ModContent.GetModTile(item.createTile)?.AdjTiles?.Contains(TileID.WorkBenches) ?? false))
                 return;
 
             QuestManager.CompleteQuest<CraftWorkbench>();

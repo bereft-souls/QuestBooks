@@ -24,7 +24,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         public virtual string QuestKey { get; set; } = new Placeholder().Key;
 
         // Already has JsonIgnore
-        public override Quest Quest => QuestManager.GetQuest(QuestKey);
+        public override Quest Quest => QuestManager.TryGetQuest(QuestKey, out var quest) ? quest : QuestManager.GetQuest<Placeholder>();
 
         [JsonIgnore]
         public int IncomingFeeds => Connections.Count(x => x.Destination == this && x.Source.ConnectionActive(this));
@@ -128,7 +128,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         {
             // mousePosition is already in logical canvas coordinates (zoom factored out)
             _completedTexture ??= ModContent.Request<Texture2D>(_completedTexturePath);
-            bool hovered = CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
+            bool hovered = VisibleOnCanvas() && CenteredRectangle(CanvasPosition, _completedTexture.Size()).Contains(mousePosition.ToPoint());
             bool unlocked = HasInfoPage && (Unlocked() || QuestLogDrawer.ActiveStyle.UseDesigner);
 
             string tooltip = unlocked ? Quest.HoverTooltip : Quest.LockedTooltip;
@@ -141,6 +141,7 @@ namespace QuestBooks.QuestLog.DefaultElements
         public override void DrawToCanvas(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool selected, bool hovered)
         {
             bool unlocked = Unlocked();
+            bool completed = Completed();
 
             if (Quest.PreTextureDraw(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered))
             {
@@ -163,10 +164,10 @@ namespace QuestBooks.QuestLog.DefaultElements
                     }
                 }
 
-                else if (!unlocked)
+                else if (!unlocked && !completed)
                     DrawLocked(spriteBatch, canvasViewOffset, zoom, hovered, selected);
 
-                else if (!Completed())
+                else if (!completed)
                     DrawIncomplete(spriteBatch, canvasViewOffset, zoom, hovered, selected);
 
                 else
@@ -204,6 +205,16 @@ namespace QuestBooks.QuestLog.DefaultElements
 
         protected virtual void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasOffset, float zoom, bool hovered, bool selected)
         {
+            if (selected)
+                DrawOutline(spriteBatch, canvasOffset, zoom, Color.Yellow);
+
+            else if (hovered && HasInfoPage)
+                DrawOutline(spriteBatch, canvasOffset, zoom, Color.LightGray);
+
+            else
+                DrawOutline(spriteBatch, canvasOffset, zoom, Color.Gray);
+
+
             if (!string.IsNullOrWhiteSpace(_incompleteTexturePath))
             {
                 _incompleteTexture ??= ModContent.Request<Texture2D>(_incompleteTexturePath);
@@ -218,7 +229,6 @@ namespace QuestBooks.QuestLog.DefaultElements
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, grayscale, matrix);
-            DrawOutline(spriteBatch, canvasOffset, zoom, Color.Gray);
             DrawTexture(spriteBatch, _completedTexture.Value, canvasOffset, zoom, Color.White);
             spriteBatch.End();
 

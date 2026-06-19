@@ -1,3 +1,3 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter1;
 
-public class StartNode : InfoQuest;
+public class ProgressionInfo : InfoQuest;

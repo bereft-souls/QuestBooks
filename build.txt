@@ -1,3 +1,5 @@
 displayName = [BETA] Quest Books
 author = Bereft Souls Team
 version = 0.1.0
+homepage = https://github.com/bereft-souls/QuestBooks
+buildIgnore = docs/*

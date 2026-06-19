@@ -188,5 +188,48 @@ namespace QuestBooks.Systems
             quest.Completed = true;
             quest.MarkAsComplete();
         }
+
+        public static void MarkIncomplete<TQuest>() where TQuest : Quest => MarkIncomplete(GetQuest<TQuest>());
+        public static void MarkIncomplete(string questName) => MarkIncomplete(GetQuest(questName));
+        public static void MarkIncomplete(Quest quest)
+        {
+            if (!quest.Completed)
+                return;
+
+            var newIncomplete = new List<string>(IncompleteQuests);
+            var newComplete = new List<string>(CompletedQuests);
+
+            newIncomplete.Add(quest.Key);
+            newComplete.Remove(quest.Key);
+
+            IncompleteQuests = [.. newIncomplete];
+            CompletedQuests = [.. newComplete];
+
+            if (quest.QuestType == QuestType.World)
+            {
+                var newWorldIncomplete = new List<string>(IncompleteWorldQuests);
+                var newWorldComplete = new List<string>(CompletedWorldQuests);
+
+                newWorldIncomplete.Add(quest.Key);
+                newWorldComplete.Remove(quest.Key);
+
+                IncompleteWorldQuests = [.. newWorldIncomplete];
+                CompletedWorldQuests = [.. newWorldComplete];
+            }
+
+            else
+            {
+                var newPlayerIncomplete = new List<string>(IncompletePlayerQuests);
+                var newPlayerComplete = new List<string>(CompletedPlayerQuests);
+
+                newPlayerIncomplete.Add(quest.Key);
+                newPlayerComplete.Remove(quest.Key);
+
+                IncompletePlayerQuests = [.. newPlayerIncomplete];
+                CompletedPlayerQuests = [.. newPlayerComplete];
+            }
+
+            quest.Completed = false;
+        }
     }
 }

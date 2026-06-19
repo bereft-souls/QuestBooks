@@ -20,6 +20,10 @@ namespace QuestBooks.Utilities
 
     public static partial class Utils
     {
+        private static readonly FieldInfo blendStateField = typeof(SpriteBatch).GetField("blendState", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly FieldInfo samplerStateField = typeof(SpriteBatch).GetField("samplerState", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly FieldInfo depthStencilStateField = typeof(SpriteBatch).GetField("depthStencilState", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly FieldInfo rasterizerStateField = typeof(SpriteBatch).GetField("rasterizerState", BindingFlags.Instance | BindingFlags.NonPublic);
         private static readonly FieldInfo customEffectField = typeof(SpriteBatch).GetField("customEffect", BindingFlags.Instance | BindingFlags.NonPublic);
         private static readonly FieldInfo transformMatrixField = typeof(SpriteBatch).GetField("transformMatrix", BindingFlags.Instance | BindingFlags.NonPublic);
 
@@ -31,11 +35,11 @@ namespace QuestBooks.Utilities
             out Effect effect,
             out Matrix matrix)
         {
-            blendState = spriteBatch.GraphicsDevice.BlendState;
-            samplerState = spriteBatch.GraphicsDevice.SamplerStates[0];
-            depthStencilState = spriteBatch.GraphicsDevice.DepthStencilState;
-            rasterizerState = spriteBatch.GraphicsDevice.RasterizerState;
-            effect = customEffectField.GetValue(spriteBatch) as Effect;
+            blendState = (BlendState)blendStateField.GetValue(spriteBatch);
+            samplerState = (SamplerState)samplerStateField.GetValue(spriteBatch);
+            depthStencilState = (DepthStencilState)depthStencilStateField.GetValue(spriteBatch);
+            rasterizerState = (RasterizerState)rasterizerStateField.GetValue(spriteBatch);
+            effect = customEffectField.GetValue(spriteBatch) as Effect; // can be null
             matrix = (Matrix)transformMatrixField.GetValue(spriteBatch);
         }
 

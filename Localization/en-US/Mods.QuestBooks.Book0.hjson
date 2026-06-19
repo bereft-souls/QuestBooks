@@ -308,15 +308,19 @@ Chapter0: {
 Chapter1: {
 	Name: Pre-Hardmode
 
-	StartNode: {
+	ProgressionInfo: {
 		Title: Recommended Combat Progression
 		Contents:
 			'''
 			Unsure what the next major goal should be? Lost in all the options?
-			Terraria isnt 100% linear, and plenty of things can be done ahead of their "comabt level".
-			If you feel stuck on a certain foe, or are curious about rough power levels of things: then use this handy recommended progression for you to follow (or avoid!)
 
-			Check back often! New goals will appear as you unlock them on the main books.
+			Terraria isnt 100% linear, and plenty of things can be done ahead of their
+			"combat level".
+
+			If you feel stuck on a certain foe, or are curious about rough power levels of things, then use this handy recommended progression for you to follow (or avoid!)
+
+			Check back often! New goals will appear as
+			you unlock them on the main books.
 			'''
 		Tooltip: Info: Progression
 	}
@@ -328,5 +332,23 @@ Chapter1: {
 	}
 }
 
-Chapter2.Name: Hardmode
+Chapter2: {
+	Name: Hardmode
+
+	HardmodeProgressionInfo: {
+		Title: Hard Mode
+		Contents:
+			'''
+			With the defeat of the Wall of Flesh, the ancient spirits of light and dark are now roaming free.
+
+			It appears you're attracting more ominous and malevolent foes...
+
+			While the new threats are great in number,
+			many are not required to progress, and only serve as means to obtain stronger gear and more powerful equipment. Follow
+			the progression path however you like!
+			'''
+		Tooltip: Info: Hardmode Progression
+	}
+}
+
 Chapter3.Name: Endgame

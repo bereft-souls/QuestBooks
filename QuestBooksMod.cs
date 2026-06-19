@@ -27,7 +27,7 @@ namespace QuestBooks
 
         public override void PostSetupContent()
         {
-            EnableDesigner(this);
+            // EnableDesigner(this);
 
             foreach (Mod mod in ModLoader.Mods)
                 QuestLoader.LoadQuests(mod);
@@ -183,6 +183,10 @@ namespace QuestBooks
         public static void MarkComplete<TQuest>() where TQuest : Quest => QuestManager.MarkComplete<TQuest>();
         public static void MarkComplete(string questName) => QuestManager.MarkComplete(questName);
         public static void MarkComplete(Quest quest) => QuestManager.MarkComplete(quest);
+
+        public static void MarkIncomplete<TQuest>() where TQuest : Quest => QuestManager.MarkIncomplete<TQuest>();
+        public static void MarkIncomplete(string questName) => QuestManager.MarkIncomplete(questName);
+        public static void MarkIncomplete(Quest quest) => QuestManager.MarkIncomplete(quest);
 
         #endregion
     }
