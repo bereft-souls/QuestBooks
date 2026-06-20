@@ -45,7 +45,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	GetHallowedGear: {
+	CraftHallowedGear: {
 		Title: Hallow, Hallowed Bar!
 		Contents:
 			'''

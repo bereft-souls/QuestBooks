@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Sets;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
@@ -10,7 +11,7 @@ public class MineOre : QBQuest
     {
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (fail || !TileID.Sets.Ore[type])
+            if (fail || !TileSetsSystem.Ores.Any[type])
             {
                 return;
             }

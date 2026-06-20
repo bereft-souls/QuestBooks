@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Chests;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
@@ -8,10 +9,9 @@ public class LootDesertChest : QBQuest
 
     public class DesertChestTileCheck : GlobalTile
     {
-        // TODO: Do we want to validate only unexplored chests? Or just any valid chest?
         public override void RightClick(int i, int j, int type)
         {
-            if (type != TileID.Containers)
+            if (!ChestSystem.IsNatural(i, j) || ChestSystem.IsExplored(i, j))
                 return;
 
             var tile = Framing.GetTileSafely(i, j);

@@ -34,7 +34,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	FullHPAndMana: {
+	GetFullHPAndMana: {
 		Title: Topped Off
 		Contents: Attain maximum life and mana possible without accessories or buffs.
 		Tooltip: ---
@@ -263,7 +263,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	CraftDrillContainmentUnit: {
+	GetDrillContainmentUnit: {
 		Title: Special Containment Pulverization
 		Contents: Construct the Drill Containment Unit, a mount capable of destroying whole chunks of terrain with ease.
 		Tooltip: ---
@@ -635,7 +635,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetMedicatedBandaid: {
+	GetMedicatedBandage: {
 		Title: Is That Hygenic..?
 		Contents:
 			'''
@@ -646,7 +646,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetCountercoureMantra: {
+	GetCountercurseMantra: {
 		Title: Tongue of the Devil
 		Contents:
 			'''

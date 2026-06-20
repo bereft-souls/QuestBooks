@@ -2,7 +2,7 @@
 
 public class EnterLivingTree : QBQuest
 {
-    public override bool CheckCompletion() => LivingTreeCheck.Active;
+    public override bool CheckCompletion() => LivingTreeCheck.Active && Main.LocalPlayer.ZoneOverworldHeight;
 
     // TODO: Possibly repurpose this as a common system for greater reusability across the mod.
     public class LivingTreeCheck : ModSystem
