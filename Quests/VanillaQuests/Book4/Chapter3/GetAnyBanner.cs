@@ -3,7 +3,7 @@ using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter3;
 
-public class GetBanners : QBQuest
+public class GetAnyBanner : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
@@ -18,7 +18,7 @@ public class GetBanners : QBQuest
             if (banner == -1)
                 return;
             
-            QuestManager.MarkComplete<GetBanners>();
+            QuestManager.MarkComplete<GetAnyBanner>();
         }
     }
 }
