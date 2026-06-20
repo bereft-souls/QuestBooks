@@ -140,7 +140,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	SturdyFossils: {
+	GetSturdyFossils: {
 		Title: Archeologist In The Making
 		Contents:
 			'''
@@ -150,7 +150,7 @@ Chapter0: {
 		Tooltip: Obtain an Extractinator & 15 Sturdy Fossils
 	}
 
-	PinkPearl: {
+	GetPinkPearl: {
 		Title: Pearls Before Oysters
 		Contents: Fish up Oysters in the desert to find a Pink Pearl, the rarest kind!
 		Tooltip: ---
@@ -233,7 +233,7 @@ Chapter0: {
 		Tooltip: Craft at an Evil Altar
 	}
 
-	GetEvilBarArmor: {
+	CraftEvilBarArmor: {
 		Title: Coated in Evil
 		Contents: Using the {Shadow Scaled / Tissue Samples}, craft yourself a {Shadow / Crimtane} armorset to prepare for the challenges ahead.
 		Tooltip: Craft any Evil Bar armor set
@@ -408,7 +408,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	KillBloodMoonReel1: {
+	KillBloodMoonReel: {
 		Title: Bloody Fish!
 		Contents: Fish up a Bloodmoon monster and defeat it for special loot.
 		Tooltip: ---

@@ -4,11 +4,9 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
 public class KillUndeadMiner : QBQuest
 {
-    public override QuestType QuestType => QuestType.Player;
-
     public override bool CheckCompletion() => false;
 
-    public class UndeadMinerNPCCheck : GlobalNPC
+    public class KillUndeadMinerCheck : GlobalNPC
     {
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.UndeadMiner;
 

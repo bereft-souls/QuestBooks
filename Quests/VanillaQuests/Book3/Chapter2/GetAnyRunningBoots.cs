@@ -6,5 +6,5 @@ public class GetAnyRunningBoots : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
-    public override bool CheckCompletion() => Main.LocalPlayer.HasItem(ItemSetsSystem.Boots);
+    public override bool CheckCompletion() => Main.LocalPlayer.HasItem(ItemSetsSystem.Boots.Running);
 }

@@ -9,7 +9,7 @@ public class CraftAtEvilAltar : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class EvilAltarItemCheck : GlobalItem
+    public class CraftEvilAltarCheck : GlobalItem
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {

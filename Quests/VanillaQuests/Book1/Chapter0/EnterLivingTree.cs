@@ -2,10 +2,10 @@
 
 public class EnterLivingTree : QBQuest
 {
-    public override bool CheckCompletion() => LivingTreeCheck.Active && Main.LocalPlayer.ZoneOverworldHeight;
+    public override bool CheckCompletion() => EnterLivingTreeCheck.Active && Main.LocalPlayer.ZoneOverworldHeight;
 
     // TODO: Possibly repurpose this as a common system for greater reusability across the mod.
-    public class LivingTreeCheck : ModSystem
+    public class EnterLivingTreeCheck : ModSystem
     {
         /// <summary>
         ///     Defines the minimum count of living tree tiles required for the player to be considered inside

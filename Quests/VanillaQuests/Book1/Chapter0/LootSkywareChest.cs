@@ -7,7 +7,7 @@ public class LootSkywareChest : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class SkywareChestTileCheck : GlobalTile
+    public class LootSkywareChestCheck : GlobalTile
     {
         public override void RightClick(int i, int j, int type)
         {

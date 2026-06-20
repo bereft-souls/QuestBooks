@@ -9,7 +9,7 @@ public class GetBeeSet : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class BeeSetItemCheck : GlobalItem
+    public class GetBeeSetCheck : GlobalItem
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.BeeGun;
 

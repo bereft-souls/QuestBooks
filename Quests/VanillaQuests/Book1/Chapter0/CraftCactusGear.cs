@@ -9,7 +9,7 @@ public class CraftCactusGear : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CactusGearItemCheck : GlobalItem
+    public class CraftCactusGearCheck : GlobalItem
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {

@@ -8,7 +8,7 @@ public class KillPinky : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class PinkyNPCCheck : GlobalNPC
+    public class KillPinkyCheck : GlobalNPC
     {
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.Pinky;
 

@@ -6,7 +6,7 @@ public class SmashEvilCore : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class EvilCoreTileCheck : GlobalTile
+    public class SmashEvilCoreCheck : GlobalTile
     {
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {

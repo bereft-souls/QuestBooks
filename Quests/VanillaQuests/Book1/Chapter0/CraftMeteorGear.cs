@@ -9,7 +9,7 @@ public class CraftMeteorGear : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class MeteorGearItemCheck : GlobalItem
+    public class CraftMeteorGearCheck : GlobalItem
     {
         public override void OnCreated(Item item, ItemCreationContext context)
         {

@@ -8,7 +8,7 @@ public class KillFlinx : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class FlinxNPCCheck : GlobalNPC
+    public class KillFlinxCheck : GlobalNPC
     {
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.SnowFlinx;
 

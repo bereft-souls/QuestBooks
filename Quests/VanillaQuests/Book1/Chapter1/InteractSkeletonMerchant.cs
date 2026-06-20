@@ -8,7 +8,7 @@ public class InteractSkeletonMerchant : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class SkeletonMerchantNPCCheck : GlobalNPC
+    public class InteractSkeletonMerchantCheck : GlobalNPC
     {
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.SkeletonMerchant;
 

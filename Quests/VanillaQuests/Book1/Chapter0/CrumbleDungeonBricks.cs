@@ -8,11 +8,11 @@ public class CrumbleDungeonBricks : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CrumbleDungeonBricksTileCheck : GlobalTile
+    public class CrumbleDungeonBricksCheck : GlobalTile
     {
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (type != TileID.CrackedBlueDungeonBrick && type != TileID.CrackedGreenDungeonBrick && type != TileID.CrackedPinkDungeonBrick)
+            if (fail || (type != TileID.CrackedBlueDungeonBrick && type != TileID.CrackedGreenDungeonBrick && type != TileID.CrackedPinkDungeonBrick))
                 return;
 
             QuestManager.MarkComplete<CrumbleDungeonBricks>();

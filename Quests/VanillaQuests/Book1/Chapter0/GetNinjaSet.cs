@@ -9,7 +9,7 @@ public class GetNinjaSet : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class NinjaSetItemCheck : GlobalItem
+    public class GetNinjaSetCheck : GlobalItem
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.Shuriken;
 

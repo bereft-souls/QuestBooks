@@ -1,9 +1,21 @@
-﻿namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
+﻿using QuestBooks.Systems;
+
+namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
 public class GetWaterCandle : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
-    // TODO: Do we want to validate all inventories or just the normal inventory? (e.g. piggy bank, safe, void bag, etc.)
-    public override bool CheckCompletion() => Main.LocalPlayer.HasItem(ItemID.WaterCandle);
+    public override bool CheckCompletion() => false;
+
+    public class GetWaterCandleCheck : GlobalTile
+    {
+        public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
+        {
+            if (fail || noItem || type != TileID.WaterCandle)
+                return;
+            
+            QuestManager.MarkComplete<GetWaterCandle>();
+        }
+    }
 }

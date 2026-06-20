@@ -7,5 +7,6 @@ public class PlantGemcorn : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
+    // TODO: Implementation.
     public override bool CheckCompletion() => false;
 }

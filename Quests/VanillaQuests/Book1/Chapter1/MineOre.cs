@@ -7,14 +7,12 @@ public class MineOre : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class OreTileCheck : GlobalTile
+    public class MineOreCheck : GlobalTile
     {
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (fail || !TileSetsSystem.Ores.Any[type])
-            {
+            if (fail || noItem || !TileSetsSystem.Ores.Any[type])
                 return;
-            }
             
             QuestManager.MarkComplete<MineOre>();
         }

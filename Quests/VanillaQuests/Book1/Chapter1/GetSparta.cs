@@ -9,7 +9,7 @@ public class GetSparta : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class SpartaItemCheck : GlobalItem
+    public class GetSpartaCheck : GlobalItem
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.Gladius;
 

@@ -7,13 +7,13 @@ blueprint: {
 Name: Journey's Hardship
 
 Chapter0: {
-	StartHM: {
+	StartHardmode: {
 		Title: It's Hard!
 		Contents: Unleash the ancient spirits of light and darkness across your world, enabling much stronger foes and showering the world with dazzling treasures (and rainbows!).
 		Tooltip: Enter "Hardmode"
 	}
 
-	InfoHM: {
+	InfoHardmode: {
 		Title: ---
 		Contents: ""
 		Tooltip: ---
@@ -27,7 +27,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	MineHMOre: {
+	MineHardmodeOre: {
 		Title: Extra Shiny!
 		Contents: Mine a powerful ore that has been newly blessed upon your world.
 		Tooltip: ---
@@ -110,13 +110,13 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	KillBloodMoonReel2: {
+	KillHardmodeBloodMoonReel: {
 		Title: It Came From The Blood Lake
 		Contents: Fish up a Hardmode Bloodmoon monster and defeat it for special loot.
 		Tooltip: ---
 	}
 
-	GetHMWingMat: {
+	GetHardmodeWingMaterial: {
 		Title: Foes of a feather flock together
 		Contents: Many foes will occasionally drop a large Feather item or some special ingredient that will be able to craft a Pair of Wings, Collect any one of these!
 		Tooltip: ---
@@ -230,13 +230,13 @@ Chapter1: {
 	// --------------------
 	// <-> Main Pathway <->
 	
-	GetHallowedPick: {
+	CraftHallowedPick: {
 		Title: Drax Attax
 		Contents: Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
 		Tooltip: ---
 	}
 
-	GetChlorophyteBars: {
+	CraftChlorophyteBars: {
 		Title: Photosynthesis
 		Contents:
 			'''
@@ -258,7 +258,7 @@ Chapter1: {
 		Tooltip: ---
 	}
 
-	GetShroomite: {
+	CraftShroomite: {
 		Title: Mycelially Reinforced
 		Contents: Alloy together Chlorophyte and Glowing Mushrooms at an Autohammer to create Shroomite Bars, a military grade metal capable of crafting a penultimate Ranged armor-set.
 		Tooltip: ---
@@ -276,7 +276,7 @@ Chapter1: {
 		Tooltip: ---
 	}
 
-	GetSpectre: {
+	CraftSpectreBars: {
 		Title: Half-living Bar
 		Contents: Alloy together Chlorophyte and Ectoplasm to create Spectre Bars, a magically charged metal capable of crafting a penultimate Mage armor-set.
 		Tooltip: ---
@@ -333,7 +333,7 @@ Chapter1: {
 		Tooltip: ---
 	}
 
-	PenultimateWings: {
+	GetPenultimateWings: {
 		Title: ---
 		Contents: Obtain powerful rare wings from either the Empress of Light, Duke Fishron or Betsy.
 		Tooltip: ---

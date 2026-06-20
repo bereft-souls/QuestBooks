@@ -6,17 +6,15 @@ public class SurviveSlimeRain : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    [Autoload(Side = ModSide.Client)]
-    public class SlimeRainCheck : ModSystem
+    public class SurviveSlimeRainCheck : ModSystem
     {
-        private static bool cachedSlimeRain;
+        public override void Load() => On_Main.StopSlimeRain += Check;
 
-        public override void PostUpdateTime()
+        private static void Check(On_Main.orig_StopSlimeRain orig, bool announce)
         {
-            if (!Main.slimeRain && cachedSlimeRain)
-                QuestManager.CompleteQuest<SurviveSlimeRain>();
-
-            cachedSlimeRain = Main.slimeRain;
+            orig(announce);
+            
+            QuestManager.MarkComplete<SurviveSlimeRain>();
         }
     }
 }

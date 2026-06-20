@@ -7,7 +7,7 @@ public class LootJungleChest : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class JungleChestTileCheck : GlobalTile
+    public class LootJungleChestCheck : GlobalTile
     {
         public override void RightClick(int i, int j, int type)
         {
@@ -19,7 +19,7 @@ public class LootJungleChest : QBQuest
             if (tile.TileFrameX != 11 * 36)
                 return;
 
-            QuestManager.MarkComplete<LootOceanChest>();
+            QuestManager.MarkComplete<LootJungleChest>();
         }
     }
 }

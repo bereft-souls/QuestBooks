@@ -5,8 +5,6 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
 public class TorchGod : QBQuest
 {
-    public override QuestType QuestType => QuestType.Player;
-
     public override bool CheckCompletion() => false;
 
     public class TorchGodCheck : ModSystem

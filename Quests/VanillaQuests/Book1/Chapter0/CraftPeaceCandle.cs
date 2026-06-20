@@ -9,7 +9,7 @@ public class CraftPeaceCandle : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class PeaceCandleItemCheck : GlobalItem
+    public class CraftPeaceCandleCheck : GlobalItem
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.PeaceCandle;
 

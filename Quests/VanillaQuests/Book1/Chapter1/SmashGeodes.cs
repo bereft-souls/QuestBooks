@@ -4,9 +4,9 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
 public class SmashGeodes : QBQuest
 {
-    public override bool CheckCompletion() => GeodeItemCheck.Completed;
+    public override bool CheckCompletion() => SmashGeodesCheck.Completed;
 
-    public class GeodeItemCheck : GlobalItem
+    public class SmashGeodesCheck : GlobalItem
     {
         public const int Threshold = 10;
 

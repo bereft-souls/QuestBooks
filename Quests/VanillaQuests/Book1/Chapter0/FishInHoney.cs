@@ -8,7 +8,7 @@ public class FishInHoney : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class FishInHoneyProjectileCheck : GlobalProjectile
+    public class FishInHoneyCheck : GlobalProjectile
     {
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation) => entity.bobber;
 

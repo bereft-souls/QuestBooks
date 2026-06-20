@@ -5,10 +5,10 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
 public class SubbiomeAbandonedTrack : QBQuest
 {
-    public override bool CheckCompletion() => AbandonedTrackCheck.Active && (Main.LocalPlayer.ZoneDirtLayerHeight || Main.LocalPlayer.ZoneRockLayerHeight);
+    public override bool CheckCompletion() => SubbiomeAbandonedTrackCheck.Active && (Main.LocalPlayer.ZoneDirtLayerHeight || Main.LocalPlayer.ZoneRockLayerHeight);
     
     // TODO: Possibly repurpose this as a common system for greater reusability across the mod.
-    public class AbandonedTrackCheck : ModSystem
+    public class SubbiomeAbandonedTrackCheck : ModSystem
     {
         /// <summary>
         ///     Defines the minimum count of abandoned track tiles required for the player to be considered inside

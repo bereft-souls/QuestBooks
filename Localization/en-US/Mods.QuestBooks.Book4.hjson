@@ -10,7 +10,309 @@ Chapter0: {
 }
 
 Chapter1: {
+  	// ------------------------
+  	// Base Needs
+  	  
+    CraftFurnace: {
+        Title: Hot Topic
+        Contents: Craft a Furnace, capable of smelting ores into bars, alloying bricks and more!
+        Tooltip: ---
+    }
+    
+    CraftAnvil: {
+        Title: Heavy Metal
+        Contents: Craft an Anvil, enabling you to smith tools and weaponry using metal bars!
+        Tooltip: ---    
+    }
+    
+    CraftSawmill: {
+        Title: Sawed-on
+        Contents: Construct a Sawmill, an advanced woodworking device capable of crafting plenty of furniture and some utilitary pieces.
+        Tooltip: ---
+    }
+    
+    CraftLoom: {
+        Title: A Looming Feeling
+        Contents: Craft a Loom, a device letting you craft Silk from cobwebs, and use it for various stitching activities!
+        Tooltip: ---
+    }
+    
+    CraftBed: {
+        Title: Urgh.. 5 more minutes mom
+        Contents:
+            '''
+            Construct a Bed using silk and wood at a Sawmill.
+            Beds allow you to change your spawnpoint and to rapidly advance time while sleeping in them!
+            '''
+        Tooltip: ---
+    }
+    
+    CraftSink: {
+        Title: Let that Sink In
+        Contents: There are some recipes that require you to be near pools of different liquids, so craft yourself a Sink to have a water source of any craft!
+        Tooltip: ---
+    }
+    
+    CraftCauldron: {
+        Title: "On Todays Menu: Cauldron Surprise"
+        Contents: Construct a Cooking Pot, with which you can make plenty of food recipes!
+        Tooltip: ---
+    }
+    
+    GetHellforge: {
+        Title: Scorching Subject
+        Contents: Obtain the Hellforge, a demonic furnace capable of smelting even tougher metals!
+        Tooltip: ---
+    }
+    
+    GetAlchemyStation: {
+        Title: Advanced Alchemy
+        Contents: Acquire an Alchemy Station deep within the Dungeon, a special brewing station that can salvage some of the recipe cost of anything it crafts!
+        Tooltip: ---
+    }
+    
+    BuyTinkerersWorkshop: {
+        Title: Tinker-belle
+        Contents: 
+            '''
+            Purchase and place down a Tinkerer's Workshop.
+            This workshop allows you to combine certain accessories together to make even stronger equipment!
+            '''
+        Tooltip: ---
+    }
+    
+    PlaceBottle: {
+        Title: Novice Brewing
+        Contents: Craft and place down a Bottle on a platform or table of any kind, enabling you to make potions!
+        Tooltip: ---
+    }
+    
+    // ------------------------
+    // Storage
+    
+    BuySafe: {
+        Title: Safely Secured
+        Contents:
+            '''
+            Purchase a Safe from the Merchant.
+            Safes are another private and personal seperate from the Piggy Bank that can be places on any surface.
+            '''
+        Tooltip: ---
+    }
+    
+    BuyPiggyBank: {
+        Title: Little Savings Jar
+        Contents:
+            '''
+            Purchase a Piggy Bank from the Merchant, a private and personal inventory space.
+            Money placed within the piggy bank will still be available whenever you buy anything, but will also be safe from getting lost when you die!
+            '''
+        Tooltip: ---
+    }
+    
+    BuyDefendersForge: {
+        Title: Defending your Stash
+        Contents: Purchase a Defender's Forge from the Tavernkeep, a private and personal storage space seperate from the Piggy Bank.
+        Tooltip: ---
+    }
+    
+    CraftVoidBag: {
+        Title: Personal Dimensional Pocket
+        Contents:
+            '''
+            Construct a Void Vault and craft a Void Bag.
+            The Void Vault is another private and personal storage space, seperate from the rest.
+            Uniquely, a Void Vault will be connected to a players Void Bag, allowing to access it from anywhere and for the bag to collect items directly into it if the player's invetory is full!
+            '''
+        Tooltip: ---
+    }
+    
+    // ------------------------
+    // Advanced Base Needs
+    
+    CraftHardmodeAnvil: {
+        Title: Fantasy Metal
+        Contents: Construct {a Mythril / an Orichalcum} Anvil, {flavour text}
+        Tooltip: ---
+    }
+    
+    CraftHardmodeFurnace: {
+        Title: Fantastical Matter
+        Contents: Construct {an Adamantite / a Titanium} Forge using the bare ores, allowing you to smelt them and much more!
+        Tooltip: ---
+    }
+    
+    BuyAutohammer: {
+        Title: Autonomous Hammer Time!
+        Contents: 
+            '''
+            Purchase the Autohammer from the Truffle after the defeat of Plantera.
+            The Autohammer is a specialized device capable of alloying Chlorophyte together with Glowing Mushrooms into a marvelous alloy called Shroomite.
+            '''
+        Tooltip: ---
+    }
+    
+    CraftChlorophyteExtractinator: {
+        Title: Behold! My Chlor-extractinator-inator!
+        Contents: Reinforce an Extractinator with Chlorophyte to get the Chlorophyte Extractinator, a stronger machine capable of some special new features; like cleansing infected blocks or converting materials into an alternate version..
+        Tooltip: ---
+    }
+    
+    GetAncientManipulator: {
+        Title: Ancient Doomscrafter
+        Contents: Place down the Ancient Manipulator, the cultists enchanted apparatus capable of crafting celestial items.
+        Tooltip: ---
+    }
 }
 
 Chapter2: {
+    
+}
+
+Chapter3: {
+	// ------------------------
+	// Furniture Buffs
+	
+    InfoBuffFurniture: {
+        Title: Furniture Buffs
+        Contents:
+            '''
+            Some tiles and furnitures have more use than just looking cool.         
+            Campfires boost your life regeneration, Sunflowers can lower mob spawn rates and more!
+            Be sure to litter those around whenever you need some extra help!
+            '''
+        Tooltip: ---
+    }
+    
+    CraftCampfire: {
+        Title: Bonfire Lit
+        Contents: 
+            '''
+            Construct a campfire, providing considerable light and improving life regeneration in the area around it.
+            Tip: check the Buffs icons right below your hotbar to see when its applied or not!
+            '''
+        Tooltip: ---
+    }
+    
+    CraftStarinaBottle: {
+        Title: Starry Shine
+        Contents: Craft a Star in a Bottle, a makeshift magical ornament that will hasten your mana regeneration!
+        Tooltip: ---
+    }
+    
+    CraftHeartLantern: {
+        Title: Healing Glow
+        Contents: Craft a Heart Lantern, a magical lightsource that hastens your life regeneration!
+        Tooltip: ---
+    }
+    
+    GetBastStatue: {
+        Title: Bastion of Defense
+        Contents: Acquire a Bast Statue, found within underground cabins in the underground desert or their sandstone chests.
+        Tooltip: ---
+    }
+    
+    // ------------------------
+    // Station Buffs
+    
+    InfoBuffStations: {
+        Title: Station Buffs
+        Contents:
+            '''
+            Some tiles can be right-clicked on to apply a buff that persists until you die.
+            Most of these special furniture pieces are scattered throughout the game and provide great boons for different niches.
+            '''
+        Tooltip: ---
+    }
+    
+    BuyCrystalBall: {
+        Title: Pondering it
+        Contents: 
+            '''
+            Acquire a Crystal Ball, available for purchase from the Wizard.
+            When used, the crystal ball will minorly increase all your Mage stats!
+            '''
+        Tooltip: ---
+    }
+    
+    BuyAmmoBox: {
+        Title: Need More Bullets
+        Contents:
+            '''
+            Acquire an Ammo Box, occasionally sold by the Traveling Merchant.
+            When used, the ammo box will lower the chances of your Ranged weapons using up ammo!
+            '''
+        Tooltip: ---
+    }
+    
+    GetBewitchingTable: {
+        Title: Conjuring Spell
+        Contents:
+            '''
+            Acquire a Bewitching Table, found somewhere within the Dungeon.
+            When used, the table will grant a buff that increases your Minion slots by 1!
+            '''
+        Tooltip: ---
+    }
+    
+    GetSharpeningStation: {
+        Title: Grindin' 'till it's Perfect
+        Contents:
+            '''
+            Acquire a Sharpening Station, occasionally found within underground cabins in the Underground Jungle.
+            When used, the station will grant you increased Armor Penetration on all Melee hits!
+            '''
+        Tooltip: ---
+    }
+    
+    // ------------------------
+    // Arenas
+    
+    InfoArena: {
+        Title: Arenas
+        Contents:
+            '''
+            '''
+        Tooltip: ---
+    }
+    
+    GetSundial: {
+        Title:
+        Contents:
+            '''
+            Acquire an Enchanted Sundial, a rare reward from fishing crates in Hardmode capable of fast-forwarding to the next day once a week or skipping Blood Moons!
+            If only you could transmute it into an Enchanted Moondial, aswell..
+            '''
+        Tooltip: ---
+    }
+    
+    GetBanners: {
+        Title:
+        Contents:
+            '''
+            Recieve a Mob Banner for defeating 50 enemies of the same type.
+            When placed, they increase your damage towards the specified enemy and lessen the damage from them in a given area!
+            '''
+        Tooltip: ---
+    }
+    
+    CraftAsphalt: {
+        Title:
+        Contents:
+            '''
+            Buy a Blend-o-matic from the Steampunker and use it to craft Asphalt Blocks, which allow you to accelerate aslong as youre walking on them! 
+            '''
+        Tooltip: ---
+    }
+    
+    BuildPlatforms: {
+        Title:
+        Contents:
+            '''
+            Place a few rows of platforms to act as a makeshift arena.
+            Platforms are unique in allowing players to phase through and descend through them with ease, making them great for combat!
+            Some encounters are biome specific, so you may need to construct a few arenas of varying sizes based on the fight.
+            '''
+        Tooltip: ---
+    }
 }

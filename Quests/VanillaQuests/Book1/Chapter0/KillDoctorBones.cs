@@ -8,7 +8,7 @@ public class KillDoctorBones : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class DoctorBonesNPCCheck : GlobalNPC
+    public class KillDoctorBonesCheck : GlobalNPC
     {
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.DoctorBones;
 
