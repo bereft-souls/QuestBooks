@@ -1,10 +1,10 @@
-﻿using QuestBooks.World;
+﻿using QuestBooks.Common.NPCs;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
 public class HouseAllTownNPCs : QBQuest
 {
-    public override bool CheckCompletion() => WorldUtilities.AllNPCs
+    public override bool CheckCompletion() => NPCUtilities.AllNPCs
     (
         NPCID.Guide,
         NPCID.Merchant,

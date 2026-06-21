@@ -1,4 +1,4 @@
-﻿namespace QuestBooks.NPCs;
+﻿namespace QuestBooks.Common.NPCs;
 
 public sealed class NPCDownedFlagsSystem : ModSystem
 {

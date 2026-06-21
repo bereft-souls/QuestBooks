@@ -13,6 +13,10 @@
 	  <EmbeddedResource Remove=".vs\**" />
 	  <None Remove=".vs\**" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Common\" />
+	  <Folder Include="Content\" />
+	</ItemGroup>
 
 	<!-- References -->
 

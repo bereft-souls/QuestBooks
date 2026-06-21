@@ -1,4 +1,4 @@
-﻿using QuestBooks.NPCs;
+﻿using QuestBooks.Common.NPCs;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 

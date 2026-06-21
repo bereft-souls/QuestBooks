@@ -1,4 +1,4 @@
-﻿using QuestBooks.NPCs;
+﻿using QuestBooks.Common.NPCs;
 using QuestBooks.Systems;
 using QuestBooks.Utilities;
 

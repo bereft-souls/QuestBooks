@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria.ModLoader.IO;
 
-namespace QuestBooks.World;
+namespace QuestBooks.Common.World;
 
 public sealed class ChestSystem : ModSystem
 {

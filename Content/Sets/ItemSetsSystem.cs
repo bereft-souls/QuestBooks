@@ -1,4 +1,4 @@
-﻿namespace QuestBooks.Sets;
+﻿namespace QuestBooks.Content.Sets;
 
 public sealed class ItemSetsSystem : ModSystem
 {

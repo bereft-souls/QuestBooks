@@ -1,4 +1,4 @@
-﻿using QuestBooks.Sets;
+﻿using QuestBooks.Content.Sets;
 using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;

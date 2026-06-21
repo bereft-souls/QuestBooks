@@ -1,6 +1,6 @@
-﻿namespace QuestBooks.World;
+﻿namespace QuestBooks.Common.NPCs;
 
-public static class WorldUtilities
+public static class NPCUtilities
 {
     /// <summary>
     ///     Determines whether any of the given NPC types are present in the world.
