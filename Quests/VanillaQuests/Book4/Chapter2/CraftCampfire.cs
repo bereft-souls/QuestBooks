@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Content.Sets;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
@@ -9,7 +10,7 @@ public class CraftCampfire : QBQuest
 
     public class CraftCampfireCheck : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.Campfire;
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSetsSystem.Furniture.Campfire[entity.type];
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {

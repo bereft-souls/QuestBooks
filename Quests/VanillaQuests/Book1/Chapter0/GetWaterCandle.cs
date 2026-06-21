@@ -14,7 +14,7 @@ public class GetWaterCandle : QBQuest
         {
             if (fail || noItem || type != TileID.WaterCandle)
                 return;
-            
+
             QuestManager.MarkComplete<GetWaterCandle>();
         }
     }

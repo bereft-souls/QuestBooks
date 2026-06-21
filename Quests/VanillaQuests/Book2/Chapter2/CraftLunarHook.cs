@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
@@ -18,7 +17,7 @@ public class CraftLunarHook : QBQuest
         {
             if (context is not RecipeItemCreationContext)
                 return;
-            
+
             QuestManager.MarkComplete<CraftLunarHook>();
         }
     }

@@ -1,7 +1,4 @@
-﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
-
-namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
+﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
 
 public class GetShellphone : QBQuest
 {

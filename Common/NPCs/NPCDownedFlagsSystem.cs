@@ -43,7 +43,8 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     The type of the NPC to check.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if the NPC with the specified type has been killed at least once; otherwise, <see langword="false"/>.
+    ///     <see langword="true"/> if the NPC with the specified type has been killed at least once;
+    ///     otherwise, <see langword="false"/>.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
     ///     <paramref name="type"/> is negative or zero.
@@ -54,7 +55,7 @@ public sealed class NPCDownedFlagsSystem : ModSystem
 
         return flags[type];
     }
-    
+
     /// <summary>
     ///     Determines whether any of the NPCs with the specified types has been killed at least once.
     /// </summary>
@@ -62,26 +63,25 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     The types of the NPCs to check.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if any of the NPCs with the specified types has been killed at least once; otherwise, <see langword="false"/>.
+    ///     <see langword="true"/> if any of the NPCs with the specified types has been killed at least
+    ///     once; otherwise, <see langword="false"/>.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
     ///     Any of the values in <paramref name="types"/> is negative or zero.
     /// </exception>
     public static bool DownedAny(params int[] types)
     {
-        foreach (int type in types)
+        foreach (var type in types)
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
 
             if (flags[type])
-            {
                 return true;
-            }
         }
 
         return false;
     }
-    
+
     /// <summary>
     ///     Determines whether all of the NPCs with the specified types have been killed at least once.
     /// </summary>
@@ -89,21 +89,21 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     The types of the NPCs to check.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if all of the NPCs with the specified types have been killed at least once; otherwise, <see langword="false"/>.
+    ///     <see langword="true"/> if all of the NPCs with the specified types have been killed at least
+    ///     once; otherwise, <see langword="false"/>.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
     ///     Any of the values in <paramref name="types"/> is negative or zero.
-    /// ></exception>
+    ///     >
+    /// </exception>
     public static bool DownedAll(params int[] types)
     {
-        foreach (int type in types)
+        foreach (var type in types)
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
 
             if (!flags[type])
-            {
                 return false;
-            }
         }
 
         return true;
@@ -143,10 +143,8 @@ public sealed class NPCDownedFlagsSystem : ModSystem
         flags[type] = true;
 
         if (!synchronize)
-        {
             return;
-        }
-        
+
         NPC.SetEventFlagCleared(ref flags[type], -1);
     }
 }

@@ -15,7 +15,7 @@ public class InteractNurse : QBQuest
         ///     The amount of gold coins the player must spend at the nurse in order to complete the quest.
         /// </summary>
         public static readonly int Coins = Item.buyPrice(0, 1);
-        
+
         /// <summary>
         ///     Gets the total amount of gold coins the player has spent at the nurse.
         /// </summary>
@@ -24,13 +24,13 @@ public class InteractNurse : QBQuest
         public override void PostNurseHeal(NPC nurse, int health, bool removeDebuffs, int price)
         {
             Value += price;
-            
+
             if (Value < Coins)
                 return;
-            
+
             QuestManager.MarkComplete<InteractNurse>();
         }
-        
+
         public override void SaveData(TagCompound tag) => tag[nameof(Value)] = Value;
 
         public override void LoadData(TagCompound tag) => Value = tag.GetInt(nameof(Value));

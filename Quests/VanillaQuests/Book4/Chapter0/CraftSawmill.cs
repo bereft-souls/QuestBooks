@@ -15,7 +15,7 @@ public class CraftSawmill : QBQuest
         {
             if (context is not RecipeItemCreationContext)
                 return;
-            
+
             QuestManager.MarkComplete<CraftSawmill>();
         }
     }

@@ -16,7 +16,7 @@ public class GetAnyBanner : QBQuest
 
             if (banner == -1)
                 return;
-            
+
             QuestManager.MarkComplete<GetAnyBanner>();
         }
     }

@@ -13,7 +13,7 @@ public class LootGoldenChest : QBQuest
         {
             if (!ChestSystem.IsNatural(i, j) || ChestSystem.IsExplored(i, j))
                 return;
-            
+
             var tile = Framing.GetTileSafely(i, j);
 
             if (tile.TileFrameX != 36)

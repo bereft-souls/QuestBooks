@@ -13,7 +13,7 @@ public class SurviveSlimeRain : QBQuest
         private static void Check(On_Main.orig_StopSlimeRain orig, bool announce)
         {
             orig(announce);
-            
+
             QuestManager.MarkComplete<SurviveSlimeRain>();
         }
     }

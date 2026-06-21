@@ -9,7 +9,6 @@ public class KillHardmodeBloodMoonReel : QBQuest
     
     public class KillHardmodeBloodMoonReelCheck : GlobalItem
     {
-        // TODO: Should validation occur when you acquire all item types or just one of them?
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.DripplerFlail || entity.type == ItemID.SharpTears || entity.type == ItemID.BloodHamaxe;
 
         public override void OnSpawn(Item item, IEntitySource source)

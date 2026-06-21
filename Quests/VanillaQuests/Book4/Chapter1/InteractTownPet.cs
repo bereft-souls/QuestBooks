@@ -1,7 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
-using Terraria.Achievements;
-using Terraria.GameContent.Achievements;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
@@ -18,7 +15,7 @@ public class InteractTownPet : QBQuest
         private static void Check(On_Player.orig_PetAnimal orig, Player self, int index)
         {
             orig(self, index);
-            
+
             QuestManager.MarkComplete<InteractTownPet>();
         }
     }

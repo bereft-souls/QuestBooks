@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
@@ -16,7 +15,7 @@ public class InteractDyeTrader : QBQuest
         private static void Check(On_Player.orig_GetDyeTraderReward orig, Player self, NPC dyeTrader)
         {
             orig(self, dyeTrader);
-            
+
             QuestManager.MarkComplete<InteractDyeTrader>();
         }
     }

@@ -8,7 +8,7 @@ public class CraftHallowedGear : QBQuest
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion() => false;
-    
+
     public class HallowedGearItemCheck : GlobalItem
     {
         public override void OnCreated(Item item, ItemCreationContext context)

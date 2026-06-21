@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
@@ -13,7 +12,7 @@ public class SmashEvilAltar : QBQuest
         {
             if (type != TileID.DemonAltar)
                 return;
-            
+
             QuestManager.MarkComplete<SmashEvilAltar>();
         }
     }

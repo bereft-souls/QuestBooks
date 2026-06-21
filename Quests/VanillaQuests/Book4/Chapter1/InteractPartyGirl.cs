@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 using Terraria.GameContent.Events;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
@@ -18,7 +17,7 @@ public class InteractPartyGirl : QBQuest
         {
             if (!BirthdayParty.PartyIsUp || !BirthdayParty.GenuineParty)
                 return;
-            
+
             QuestManager.MarkComplete<InteractPartyGirl>();
         }
     }

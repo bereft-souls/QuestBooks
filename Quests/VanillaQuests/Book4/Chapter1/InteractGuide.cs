@@ -33,7 +33,8 @@ public class InteractGuide : QBQuest
         ///     complete the quest.
         /// </summary>
         /// <value>
-        ///     <see langword="true"/> if <see cref="Amount"/> is greater than or equal to <see cref="Target"/>; otherwise, <see langword="false"/>.
+        ///     <see langword="true"/> if <see cref="Amount"/> is greater than or equal to <see cref="Target"/>
+        ///     ; otherwise, <see langword="false"/>.
         /// </value>
         public bool Completed => Amount >= Target;
 

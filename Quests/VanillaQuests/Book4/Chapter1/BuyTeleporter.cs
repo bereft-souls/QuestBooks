@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 
@@ -15,12 +14,12 @@ public class BuyTeleporter : QBQuest
         ///     The amount of teleporters the player needs to buy to complete the quest.
         /// </summary>
         public const int Target = 2;
-        
+
         /// <summary>
         ///     Gets the amount of teleporters the player has bought.
         /// </summary>
         public int Amount { get; private set; }
-        
+
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.Teleporter;
 
         public override void OnCreated(Item item, ItemCreationContext context)
@@ -29,15 +28,15 @@ public class BuyTeleporter : QBQuest
                 return;
 
             Amount++;
-            
+
             if (Amount < Target)
                 return;
-            
+
             QuestManager.MarkComplete<BuyTeleporter>();
         }
 
         public override void SaveData(Item item, TagCompound tag) => tag[nameof(Amount)] = Amount;
-        
+
         public override void LoadData(Item item, TagCompound tag) => Amount = tag.GetInt(nameof(Amount));
     }
 }

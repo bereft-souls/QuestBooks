@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
@@ -7,7 +6,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 public class CraftHallowedPickaxe : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
-    
+
     public override bool CheckCompletion() => false;
 
     public class CraftHallowedPickaxeCheck : GlobalItem

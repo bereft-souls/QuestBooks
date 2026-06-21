@@ -1,6 +1,4 @@
-﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
-using Terraria.GameContent;
+﻿using Terraria.GameContent;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 

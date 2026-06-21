@@ -4,7 +4,7 @@ public class FindAFairy : QBQuest
 {
     // Same distance as the lifeform analyzer.
     private const float Distance = 1300f;
-    
+
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion()

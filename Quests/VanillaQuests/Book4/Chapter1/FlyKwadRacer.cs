@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
@@ -13,7 +12,7 @@ public class FlyKwadRacer : QBQuest
 
         public override void AI(Projectile projectile)
         {
-            if (projectile.position.Y - projectile.height > (16f * Main.offScreenRange / 2f))
+            if (projectile.position.Y - projectile.height > 16f * Main.offScreenRange / 2f)
                 return;
 
             QuestManager.MarkComplete<FlyKwadRacer>();

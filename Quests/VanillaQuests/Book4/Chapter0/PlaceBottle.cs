@@ -14,7 +14,7 @@ public class PlaceBottle : QBQuest
                 return;
 
             var bottom = Framing.GetTileSafely(i, j + 1);
-            
+
             if (!bottom.HasTile || !TileID.Sets.Platforms[bottom.TileType])
                 return;
 

@@ -13,7 +13,7 @@ public class MineOre : QBQuest
         {
             if (fail || noItem || !TileSetsSystem.Ores.Any[type])
                 return;
-            
+
             QuestManager.MarkComplete<MineOre>();
         }
     }

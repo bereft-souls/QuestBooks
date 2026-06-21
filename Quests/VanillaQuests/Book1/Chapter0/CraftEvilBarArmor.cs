@@ -8,7 +8,6 @@ public class CraftEvilBarArmor : QBQuest
 
     public override bool CheckCompletion() => CraftEvilBarArmorCheck.Complete;
 
-    // TODO: Possibly consider implementing compatibility support for mods that add armor sets made from evil bars, or alternatively their own evil bars.
     public class CraftEvilBarArmorCheck : GlobalItem
     {
         /// <summary>
@@ -44,7 +43,6 @@ public class CraftEvilBarArmor : QBQuest
             if (context is not RecipeItemCreationContext)
                 return;
 
-            // TODO: Do we want to enforce that armor pieces must be of the same type (i.e. all Shadow or all Crimson)?
             Head |= item.type == ItemID.CrimsonHelmet || item.type == ItemID.ShadowHelmet;
             Body |= item.type == ItemID.CrimsonScalemail || item.type == ItemID.ShadowScalemail;
             Legs |= item.type == ItemID.CrimsonGreaves || item.type == ItemID.ShadowGreaves;

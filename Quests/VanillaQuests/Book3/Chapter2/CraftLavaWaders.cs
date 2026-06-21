@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
@@ -7,7 +6,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
 public class CraftLavaWaders : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
-    
+
     public override bool CheckCompletion() => false;
 
     public class CraftLavaWadersCheck : GlobalItem
