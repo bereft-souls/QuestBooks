@@ -131,7 +131,7 @@ Chapter0: {
 	// ------------------
 	// <-> Biome Content <->
 	
-	BiomeHMEvil: {
+	BiomeHardmodeEvil: {
 		Title: Evil Up
 		Contents: -
 		Tooltip: ---

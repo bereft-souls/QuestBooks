@@ -5,5 +5,5 @@ namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
 
 public class EncounterCultists : QBQuest
 {
-    public override bool CheckCompletion() => Main.LocalPlayer.ZoneDungeon && NPC.downedGolemBoss;
+    public override bool CheckCompletion() => NPC.AnyoneNearCultists();
 }

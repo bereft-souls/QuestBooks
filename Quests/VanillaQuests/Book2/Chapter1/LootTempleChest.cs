@@ -1,6 +1,6 @@
-﻿using QuestBooks.Chests;
-using QuestBooks.Systems;
+﻿using QuestBooks.Systems;
 using QuestBooks.Utilities;
+using QuestBooks.World;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 

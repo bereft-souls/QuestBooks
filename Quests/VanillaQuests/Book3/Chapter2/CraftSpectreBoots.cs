@@ -8,8 +8,6 @@ public class CraftSpectreBoots : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
     
-    public override QuestType QuestType => QuestType.Player;
-    
     public override bool CheckCompletion() => false;
 
     public class CraftSpectreBootsCheck : GlobalItem

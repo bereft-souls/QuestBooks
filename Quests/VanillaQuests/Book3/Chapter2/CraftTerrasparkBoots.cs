@@ -8,8 +8,6 @@ public class CraftTerrasparkBoots : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
     
-    public override QuestType QuestType => QuestType.Player;
-    
     public override bool CheckCompletion() => false;
 
     public class CraftTerrasparkBootsCheck : GlobalItem
