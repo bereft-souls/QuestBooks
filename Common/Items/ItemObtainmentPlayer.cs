@@ -85,7 +85,7 @@ public sealed class ItemObtainmentPlayer : ModPlayer
 
         return false;
     }
-    
+
     /// <summary>
     ///     Determines whether the player has obtained any of the item types from the specified set.
     /// </summary>

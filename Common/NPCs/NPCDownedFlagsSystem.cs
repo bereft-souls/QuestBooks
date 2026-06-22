@@ -28,9 +28,9 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     public override void LoadWorldData(TagCompound tag) => flags = tag.GetBoolArray(Tag);
 
     public override void NetSend(BinaryWriter writer) => Utils.SendBitArray(new BitArray(flags), writer);
-    
+
     public override void NetReceive(BinaryReader reader) => Utils.ReceiveBitArray(flags.Length, reader).CopyTo(flags, 0);
-    
+
     /// <summary>
     ///     Determines whether the NPC with the specified type has been killed at least once.
     /// </summary>
@@ -50,7 +50,8 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     The set of the NPCs to check.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once; otherwise, <see langword="false"/>.
+    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once;
+    ///     otherwise, <see langword="false"/>.
     /// </returns>
     public static bool DownedAny(bool[] set)
     {
@@ -60,7 +61,7 @@ public sealed class NPCDownedFlagsSystem : ModSystem
 
         return false;
     }
-    
+
     /// <summary>
     ///     Determines whether any of the NPCs with the specified types has been killed at least once.
     /// </summary>
@@ -74,14 +75,12 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     public static bool DownedAny(params int[] types)
     {
         foreach (var type in types)
-        {
             if (flags[NPCID.FromNetId(type)])
                 return true;
-        }
 
         return false;
     }
-    
+
     /// <summary>
     ///     Determines whether any of the NPCs from the specified set has been killed at least once.
     /// </summary>
@@ -89,7 +88,8 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     The set of the NPCs to check.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once; otherwise, <see langword="false"/>.
+    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once;
+    ///     otherwise, <see langword="false"/>.
     /// </returns>
     public static bool DownedAny(ContentSet set)
     {
@@ -99,7 +99,7 @@ public sealed class NPCDownedFlagsSystem : ModSystem
 
         return false;
     }
-    
+
     /// <summary>
     ///     Determines whether all of the NPCs from the specified set have been killed at least once.
     /// </summary>
@@ -107,7 +107,8 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     The set of the NPCs to check.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if all of the NPCs from the specified set have been killed at least once; otherwise, <see langword="false"/>.
+    ///     <see langword="true"/> if all of the NPCs from the specified set have been killed at least
+    ///     once; otherwise, <see langword="false"/>.
     /// </returns>
     public static bool DownedAll(bool[] set)
     {
@@ -131,14 +132,12 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     public static bool DownedAll(params int[] types)
     {
         foreach (var type in types)
-        {
             if (!flags[NPCID.FromNetId(type)])
                 return false;
-        }
 
         return true;
     }
-    
+
     /// <summary>
     ///     Determines whether any of the NPCs from the specified set has been killed at least once.
     /// </summary>
@@ -146,7 +145,8 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     The set of the NPCs to check.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once; otherwise, <see langword="false"/>.
+    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once;
+    ///     otherwise, <see langword="false"/>.
     /// </returns>
     public static bool DownedAll(ContentSet set)
     {

@@ -1,13 +1,11 @@
-﻿using Terraria.DataStructures;
-
-namespace QuestBooks.Common.Shimmer;
+﻿namespace QuestBooks.Common.Shimmer;
 
 public sealed class ShimmerCallbacks : ModSystem
 {
     private sealed class ShimmerCallbacksPlayer : ModPlayer
     {
         private bool flag;
-        
+
         public override void PostUpdate()
         {
             var shimmering = Player.shimmering;
@@ -54,4 +52,3 @@ public sealed class ShimmerCallbacks : ModSystem
         OnEndPhase = null;
     }
 }
-

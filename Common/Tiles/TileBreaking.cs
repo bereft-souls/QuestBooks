@@ -11,19 +11,19 @@ public sealed class TileBreakPlayer : ModPlayer
         {
             if (fail || effectOnly || (Main.tileFrameImportant[type] && !TileObjectData.IsTopLeft(i, j)))
                 return;
-  
+
             Main.LocalPlayer.GetModPlayer<TileBreakPlayer>().Count++;
         }
     }
-    
+
     private const string Tag = "Count";
-    
+
     /// <summary>
     ///     Gets the number of tiles the player has broken.
     /// </summary>
     public int Count { get; private set; }
 
     public override void SaveData(TagCompound tag) => tag[Tag] = Count;
-    
+
     public override void LoadData(TagCompound tag) => Count = tag.GetInt(Tag);
 }

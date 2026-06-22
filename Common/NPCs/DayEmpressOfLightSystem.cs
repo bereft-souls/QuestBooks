@@ -26,6 +26,6 @@ public sealed class DayEmpressOfLightSystem : ModSystem
     public override void LoadWorldData(TagCompound tag) => Downed = tag.GetBool(Tag);
 
     public override void NetSend(BinaryWriter writer) => writer.WriteFlags(Downed);
-    
+
     public override void NetReceive(BinaryReader reader) => reader.ReadFlags(out Downed);
 }

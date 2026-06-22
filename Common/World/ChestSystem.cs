@@ -37,9 +37,9 @@ public sealed class ChestSystem : ModSystem
     }
 
     private const string CountTag = "ChestCount";
-    
+
     private const string KeysTag = "ChestKeys";
-    
+
     private const string ValuesTag = "ChestValues";
 
     private static readonly Dictionary<(int X, int Y), bool> flags = [];
@@ -116,16 +116,16 @@ public sealed class ChestSystem : ModSystem
     private static void Save(TagCompound tag)
     {
         tag[CountTag] = flags.Count;
-        
+
         var keys = new List<(int X, int Y)>();
         var values = new List<bool>();
-        
+
         foreach (var (key, value) in flags)
         {
             keys.Add(key);
             values.Add(value);
         }
-     
+
         tag[KeysTag] = keys;
         tag[ValuesTag] = values;
     }
@@ -133,10 +133,10 @@ public sealed class ChestSystem : ModSystem
     private static void Load(TagCompound tag)
     {
         var count = tag.GetInt(CountTag);
-        
+
         var keys = tag.GetList<(int, int)>(KeysTag);
         var values = tag.GetList<bool>(ValuesTag);
-        
+
         for (var i = 0; i < count; i++)
             flags.Add(keys[i], values[i]);
     }

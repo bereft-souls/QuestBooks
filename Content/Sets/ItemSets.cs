@@ -2,8 +2,14 @@
 
 public static class ItemSets
 {
+    /// <summary>
+    ///     Contains sets of items that are categorized as furniture.
+    /// </summary>
     public static class Furniture
     {
+        /// <summary>
+        ///     A set containing all trophies in the game.
+        /// </summary>
         public static readonly ContentSet Trophies = new()
         {
             ItemID.KingSlimeTrophy,
@@ -35,6 +41,9 @@ public static class ItemSets
             ItemID.MartianSaucerTrophy
         };
 
+        /// <summary>
+        ///     A set containing all sinks in the game.
+        /// </summary>
         public static readonly ContentSet Sinks = new()
         {
             ItemID.WoodenSink,
@@ -64,6 +73,9 @@ public static class ItemSets
             ItemID.SpookySink
         };
 
+        /// <summary>
+        ///     A set containing all campfires in the game.
+        /// </summary>
         public static readonly ContentSet Campfires = new()
         {
             ItemID.Campfire,
@@ -85,8 +97,14 @@ public static class ItemSets
         };
     }
 
+    /// <summary>
+    ///     Contains sets of items that are categorized as accessories.
+    /// </summary>
     public static class Accessories
     {
+        /// <summary>
+        ///     A set containing all running boots in the game.
+        /// </summary>
         public static readonly ContentSet Boots = new()
         {
             ItemID.SpectreBoots,
@@ -100,8 +118,14 @@ public static class ItemSets
         };
     }
 
+    /// <summary>
+    ///     Contains sets of items that are categorized as materials.
+    /// </summary>
     public static class Materials
     {
+        /// <summary>
+        ///     A set containing all gems in the game.
+        /// </summary>
         public static readonly ContentSet Gems = new()
         {
             ItemID.Diamond,
@@ -114,10 +138,19 @@ public static class ItemSets
         };
     }
 
+    /// <summary>
+    ///     Contains sets of items that are categorized as tools.
+    /// </summary>
     public static class Tools
     {
+        /// <summary>
+        ///     A set containing all hardmode pickaxes in the game.
+        /// </summary>
         public static class Pickaxes
         {
+            /// <summary>
+            ///     A set containing all hardmode pickaxes in the game.
+            /// </summary>
             public static readonly ContentSet Hardmode = new()
             {
                 ItemID.CobaltPickaxe,

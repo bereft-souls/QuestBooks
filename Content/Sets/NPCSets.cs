@@ -2,8 +2,14 @@
 
 public static class NPCSets
 {
+    /// <summary>
+    ///     Contains sets of NPCs that are used for telemetry purposes.
+    /// </summary>
     public static class Telemetry
     {
+        /// <summary>
+        ///     A set containing all NPCs that will track whether they have been defeated by the player.
+        /// </summary>
         public static readonly ContentSet Downed = new()
         {
             NPCID.SandElemental,
@@ -64,8 +70,14 @@ public static class NPCSets
         };
     }
     
+    /// <summary>
+    ///     Contains sets of NPCs that are categorized as enemies.
+    /// </summary>
     public static class Enemies
     {
+        /// <summary>
+        ///     A set containing all slimes in the game.
+        /// </summary>
         public static readonly ContentSet Slimes = new()
         {
             NPCID.FromNetId(NPCID.GreenSlime),

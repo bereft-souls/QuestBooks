@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Terraria.ModLoader.IO;
+﻿using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Core.IO;
 
