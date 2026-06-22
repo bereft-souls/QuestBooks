@@ -12,12 +12,12 @@ public class BuildPlatforms : QBQuest
         ///     The maximum vertical distance between platform rows for them to count towards the quest.
         /// </summary>
         public const int Tolerance = 25;
-        
+
         /// <summary>
         ///     The number of platforms the player must place in a row in order to complete the quest.
         /// </summary>
         public const int Target = 75;
-        
+
         public override void PlaceInWorld(int i, int j, int type, Item item)
         {
             if (!TileID.Sets.Platforms[type])
@@ -30,11 +30,11 @@ public class BuildPlatforms : QBQuest
 
                 if (above < Target || below < Target)
                     continue;
-                
+
                 QuestManager.MarkComplete<BuildPlatforms>();
             }
         }
-        
+
         private static int CountPlatforms(int x, int y, int direction)
         {
             var count = 0;

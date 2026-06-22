@@ -12,7 +12,7 @@ public class InteractNurse : QBQuest
     public class InteractNurseCheck : ModPlayer
     {
         private const string Tag = "Value";
-        
+
         /// <summary>
         ///     The amount of gold coins the player must spend at the nurse in order to complete the quest.
         /// </summary>

@@ -11,7 +11,7 @@ public class BuyTeleporter : QBQuest
     public class BuyTeleporterCheck : GlobalItem
     {
         private const string Tag = "Amount";
-        
+
         /// <summary>
         ///     The amount of teleporters the player needs to buy to complete the quest.
         /// </summary>

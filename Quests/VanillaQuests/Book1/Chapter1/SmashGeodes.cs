@@ -9,7 +9,7 @@ public class SmashGeodes : QBQuest
     public class SmashGeodesCheck : GlobalItem
     {
         private const string Tag = "Count";
-        
+
         /// <summary>
         ///     The number of geodes the player must smash in order to complete the quest.
         /// </summary>
@@ -24,7 +24,8 @@ public class SmashGeodes : QBQuest
         ///     Gets a value indicating whether the player has smashed enough geodes to complete the quest.
         /// </summary>
         /// <value>
-        ///     <see langword="true"/> if <see cref="Count"/> is greater than or equal to <see cref="Target"/>; otherwise, <see langword="false"/>.
+        ///     <see langword="true"/> if <see cref="Count"/> is greater than or equal to <see cref="Target"/>;
+        ///     otherwise, <see langword="false"/>.
         /// </value>
         public static bool Completed => Count >= Target;
 

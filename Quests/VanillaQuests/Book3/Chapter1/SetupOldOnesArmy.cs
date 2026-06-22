@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 using Terraria.GameContent.Events;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
@@ -14,7 +13,7 @@ public class SetupOldOnesArmy : QBQuest
         {
             if (type != TileID.ElderCrystalStand || DD2Event.WouldFailSpawningHere(i, j))
                 return;
-            
+
             QuestManager.MarkComplete<SetupOldOnesArmy>();
         }
     }

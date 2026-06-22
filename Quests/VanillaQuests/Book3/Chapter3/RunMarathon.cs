@@ -1,6 +1,4 @@
 ﻿using QuestBooks.Common.Movement;
-using QuestBooks.Systems;
-using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
@@ -10,7 +8,7 @@ public class RunMarathon : QBQuest
     ///     The number of tiles the player must run in order to complete the quest.
     /// </summary>
     public const int Target = 69200;
-    
+
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion() => Main.LocalPlayer.GetModPlayer<MovementTrackerPlayer>().Tiles >= Target;

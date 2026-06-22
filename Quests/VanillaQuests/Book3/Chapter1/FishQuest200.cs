@@ -1,7 +1,4 @@
-﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
-
-namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
+﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
 public class FishQuest200 : QBQuest
 {

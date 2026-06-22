@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
@@ -17,7 +16,7 @@ public class FishInLava : QBQuest
         {
             if (!projectile.lavaWet)
                 return;
-            
+
             QuestManager.MarkComplete<FishInLava>();
         }
     }

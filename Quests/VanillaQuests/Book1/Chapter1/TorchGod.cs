@@ -8,7 +8,7 @@ public class TorchGod : QBQuest
     public override void Load() => IL_Player.TorchAttack += Edit;
 
     public override bool CheckCompletion() => false;
-    
+
     private static void Edit(ILContext context)
     {
         var cursor = new ILCursor(context);
