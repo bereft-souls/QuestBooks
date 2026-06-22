@@ -1,4 +1,4 @@
-﻿namespace QuestBooks.Common.NPCs;
+﻿namespace QuestBooks.Systems.Common.NPCs;
 
 public static class NPCUtilities
 {

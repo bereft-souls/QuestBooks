@@ -1,6 +1,6 @@
 ﻿using Terraria.ModLoader.IO;
 
-namespace QuestBooks.Common.Movement;
+namespace QuestBooks.Systems.Common.Movement;
 
 public sealed class MovementTrackerPlayer : ModPlayer
 {

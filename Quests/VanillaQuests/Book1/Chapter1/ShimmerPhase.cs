@@ -1,4 +1,4 @@
-﻿using QuestBooks.Common.Shimmer;
+﻿using QuestBooks.Systems.Common.Shimmer;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 

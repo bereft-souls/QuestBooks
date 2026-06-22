@@ -1,7 +1,7 @@
 ﻿using Terraria.ModLoader.IO;
 using Terraria.ObjectData;
 
-namespace QuestBooks.Common.Tiles;
+namespace QuestBooks.Systems.Common.Tiles;
 
 public sealed class TileBreakPlayer : ModPlayer
 {

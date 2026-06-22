@@ -12,7 +12,7 @@
 	  <Compile Remove=".vs\**" />
 	  <EmbeddedResource Remove=".vs\**" />
 	  <None Remove=".vs\**" />
-	  <Compile Remove="Common\NPCs\NPCDownedContext.cs" />
+	  <Compile Remove="Systems\Common\NPCs\NPCDownedContext.cs" />
 	</ItemGroup>
 
 	<!-- References -->

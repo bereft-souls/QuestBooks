@@ -1,4 +1,4 @@
-﻿using QuestBooks.Common.Tiles;
+﻿using QuestBooks.Systems.Common.Tiles;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 

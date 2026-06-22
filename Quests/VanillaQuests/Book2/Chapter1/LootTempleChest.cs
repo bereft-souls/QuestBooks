@@ -1,5 +1,5 @@
-﻿using QuestBooks.Common.World;
-using QuestBooks.Systems;
+﻿using QuestBooks.Systems;
+using QuestBooks.Systems.Common.World;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 

@@ -2,7 +2,7 @@
 using QuestBooks.Content.Sets;
 using Terraria.ModLoader.IO;
 
-namespace QuestBooks.Common.Items;
+namespace QuestBooks.Systems.Common.Items;
 
 public sealed class ItemObtainmentPlayer : ModPlayer
 {

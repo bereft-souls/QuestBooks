@@ -1,4 +1,4 @@
-﻿using QuestBooks.Common.Movement;
+﻿using QuestBooks.Systems.Common.Movement;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 

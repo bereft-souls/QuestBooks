@@ -1,5 +1,5 @@
-﻿using QuestBooks.Common.Items;
-using QuestBooks.Content.Sets;
+﻿using QuestBooks.Content.Sets;
+using QuestBooks.Systems.Common.Items;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 

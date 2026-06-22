@@ -1,4 +1,4 @@
-﻿namespace QuestBooks.Common.World;
+﻿namespace QuestBooks.Systems.Common.World;
 
 public static class ChestExtensions
 {

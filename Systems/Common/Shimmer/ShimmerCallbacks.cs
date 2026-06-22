@@ -1,4 +1,4 @@
-﻿namespace QuestBooks.Common.Shimmer;
+﻿namespace QuestBooks.Systems.Common.Shimmer;
 
 public sealed class ShimmerCallbacks : ModSystem
 {

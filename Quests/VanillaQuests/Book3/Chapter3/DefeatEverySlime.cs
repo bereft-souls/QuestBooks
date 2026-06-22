@@ -1,5 +1,5 @@
-﻿using QuestBooks.Common.NPCs;
-using QuestBooks.Content.Sets;
+﻿using QuestBooks.Content.Sets;
+using QuestBooks.Systems.Common.NPCs;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 

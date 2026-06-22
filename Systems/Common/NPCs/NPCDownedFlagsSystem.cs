@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.IO;
 using QuestBooks.Content.Sets;
-using QuestBooks.Core.IO;
 using Terraria.ModLoader.IO;
 
-namespace QuestBooks.Common.NPCs;
+namespace QuestBooks.Systems.Common;
 
 public sealed class NPCDownedFlagsSystem : ModSystem
 {
