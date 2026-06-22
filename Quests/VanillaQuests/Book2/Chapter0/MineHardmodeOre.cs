@@ -13,7 +13,7 @@ public class MineHardmodeOre : QBQuest
     {
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (fail || noItem || !TileSetsSystem.Ores.Hardmode[type])
+            if (fail || noItem || !TileSets.Ores.Hardmode[type])
                 return;
 
             QuestManager.MarkComplete<MineHardmodeOre>();

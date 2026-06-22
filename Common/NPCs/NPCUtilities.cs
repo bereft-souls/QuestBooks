@@ -3,6 +3,25 @@
 public static class NPCUtilities
 {
     /// <summary>
+    ///     Determines whether any NPCs in the world satisfy the specified predicate.
+    /// </summary>
+    /// <param name="predicate">
+    ///     The predicate to test NPCs against.
+    /// </param>
+    /// <returns>
+    ///     <see langword="true"/> if any NPCs in the world satisfy the specified predicate; otherwise,
+    ///     <see langword="false"/>.
+    /// </returns>
+    public static bool AnyNPCs(Func<NPC, bool> predicate)
+    {
+        foreach (var npc in Main.ActiveNPCs)
+            if (predicate(npc))
+                return true;
+
+        return false;
+    }
+
+    /// <summary>
     ///     Determines whether any of the given NPC types are present in the world.
     /// </summary>
     /// <param name="types">

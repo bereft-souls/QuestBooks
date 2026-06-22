@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using QuestBooks.Utilities;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
@@ -16,7 +15,7 @@ public class UseSolarFragments : QBQuest
         {
             if (context is not RecipeItemCreationContext recipe || !recipe.Recipe.HasTile(TileID.LunarCraftingStation) || !recipe.Recipe.HasIngredient(ItemID.FragmentSolar))
                 return;
-            
+
             QuestManager.MarkComplete<UseSolarFragments>();
         }
     }

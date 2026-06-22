@@ -12,7 +12,7 @@ public class CraftHardmodeOrePickaxes : QBQuest
 
     public class CraftHardmodeOrePickaxesCheck : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSetsSystem.Pickaxes.Hardmode[entity.type];
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSets.Tools.Pickaxes.Hardmode[entity.type];
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {

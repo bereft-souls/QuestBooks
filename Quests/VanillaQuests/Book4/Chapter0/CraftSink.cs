@@ -10,7 +10,7 @@ public class CraftSink : QBQuest
 
     public class CraftSinkCheck : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSetsSystem.Furniture.Sink[entity.type];
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSets.Furniture.Sinks[entity.type];
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {

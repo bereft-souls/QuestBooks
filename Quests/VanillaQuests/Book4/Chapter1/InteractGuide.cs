@@ -12,9 +12,11 @@ public class InteractGuide : QBQuest
 
     public class InteractGuideCheck : ModPlayer
     {
+        private const string Tag = "Cache";
+
         /// <summary>
-        ///     The amount of unique items the player must interact with in the guide's inventory to complete
-        ///     the quest.
+        ///     The amount of unique items the player must interact with in the guide's inventory in order to
+        ///     complete the quest.
         /// </summary>
         public const int Target = 50;
 
@@ -40,9 +42,9 @@ public class InteractGuide : QBQuest
 
         public override void Load() => On_ItemSlot.LeftClick_ItemArray_int_int += Check;
 
-        public override void SaveData(TagCompound tag) => tag[nameof(Cache)] = Cache;
+        public override void SaveData(TagCompound tag) => tag[Tag] = Cache;
 
-        public override void LoadData(TagCompound tag) => Cache = new List<int>(tag.GetList<int>(nameof(Cache)));
+        public override void LoadData(TagCompound tag) => Cache = new List<int>(tag.GetList<int>(Tag));
 
         // TODO: We may want to stop caching new entries after the quest is completed.
         private static void Check(On_ItemSlot.orig_LeftClick_ItemArray_int_int orig, Item[] inv, int context, int slot)

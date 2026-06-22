@@ -6,7 +6,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 public class KillHardmodeBloodMoonReel : QBQuest
 {
     public override bool CheckCompletion() => false;
-    
+
     public class KillHardmodeBloodMoonReelCheck : GlobalItem
     {
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.DripplerFlail || entity.type == ItemID.SharpTears || entity.type == ItemID.BloodHamaxe;

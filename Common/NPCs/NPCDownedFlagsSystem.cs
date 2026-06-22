@@ -1,41 +1,36 @@
-﻿namespace QuestBooks.Common.NPCs;
+﻿using System.Collections;
+using System.IO;
+using QuestBooks.Content.Sets;
+using QuestBooks.Core.IO;
+using Terraria.ModLoader.IO;
+
+namespace QuestBooks.Common.NPCs;
 
 public sealed class NPCDownedFlagsSystem : ModSystem
 {
-    private sealed class NPCDownedFlagsSystemGlobalNPC : GlobalNPC
+    private sealed class NPCDownedFlagsGlobalNPC : GlobalNPC
     {
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => lateInstantiation && tracked[entity.type];
+        public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => lateInstantiation && NPCSets.Telemetry.Downed[entity.type];
 
-        public override void OnKill(NPC npc) => Mark(npc.type);
+        public override void OnKill(NPC npc) => NPC.SetEventFlagCleared(ref flags[npc.type], -1);
     }
+
+    private const string Tag = "Flags";
 
     private static bool[] flags;
 
-    private static bool[] tracked;
-
-    public override void PostSetupContent()
-    {
-        tracked = NPCID.Sets.Factory.CreateBoolSet
-        (
-            NPCID.SandElemental,
-            NPCID.IceGolem,
-            NPCID.GoblinSummoner,
-            NPCID.Mothron,
-            NPCID.WyvernHead,
-            NPCID.PirateShip,
-            NPCID.BigMimicCorruption,
-            NPCID.BigMimicCrimson,
-            NPCID.BigMimicHallow,
-            NPCID.BigMimicJungle,
-            NPCID.ChaosElemental,
-            NPCID.RainbowSlime
-        );
-
-        flags = NPCID.Sets.Factory.CreateBoolSet();
-    }
+    public override void PostSetupContent() => flags = NPCID.Sets.Factory.CreateBoolSet();
 
     public override void ClearWorld() => Array.Clear(flags, 0, flags.Length);
 
+    public override void SaveWorldData(TagCompound tag) => tag[Tag] = flags;
+
+    public override void LoadWorldData(TagCompound tag) => flags = tag.GetBoolArray(Tag);
+
+    public override void NetSend(BinaryWriter writer) => Utils.SendBitArray(new BitArray(flags), writer);
+    
+    public override void NetReceive(BinaryReader reader) => Utils.ReceiveBitArray(flags.Length, reader).CopyTo(flags, 0);
+    
     /// <summary>
     ///     Determines whether the NPC with the specified type has been killed at least once.
     /// </summary>
@@ -46,16 +41,26 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     <see langword="true"/> if the NPC with the specified type has been killed at least once;
     ///     otherwise, <see langword="false"/>.
     /// </returns>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <paramref name="type"/> is negative or zero.
-    /// </exception>
-    public static bool Downed(int type)
+    public static bool Downed(int type) => flags[NPCID.FromNetId(type)];
+
+    /// <summary>
+    ///     Determines whether any of the NPCs from the specified set has been killed at least once.
+    /// </summary>
+    /// <param name="set">
+    ///     The set of the NPCs to check.
+    /// </param>
+    /// <returns>
+    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once; otherwise, <see langword="false"/>.
+    /// </returns>
+    public static bool DownedAny(bool[] set)
     {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
+        for (var i = 0; i < set.Length; i++)
+            if (set[i] && flags[i])
+                return true;
 
-        return flags[type];
+        return false;
     }
-
+    
     /// <summary>
     ///     Determines whether any of the NPCs with the specified types has been killed at least once.
     /// </summary>
@@ -66,20 +71,51 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     <see langword="true"/> if any of the NPCs with the specified types has been killed at least
     ///     once; otherwise, <see langword="false"/>.
     /// </returns>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     Any of the values in <paramref name="types"/> is negative or zero.
-    /// </exception>
     public static bool DownedAny(params int[] types)
     {
         foreach (var type in types)
         {
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-
-            if (flags[type])
+            if (flags[NPCID.FromNetId(type)])
                 return true;
         }
 
         return false;
+    }
+    
+    /// <summary>
+    ///     Determines whether any of the NPCs from the specified set has been killed at least once.
+    /// </summary>
+    /// <param name="set">
+    ///     The set of the NPCs to check.
+    /// </param>
+    /// <returns>
+    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once; otherwise, <see langword="false"/>.
+    /// </returns>
+    public static bool DownedAny(ContentSet set)
+    {
+        foreach (var type in set)
+            if (flags[type])
+                return true;
+
+        return false;
+    }
+    
+    /// <summary>
+    ///     Determines whether all of the NPCs from the specified set have been killed at least once.
+    /// </summary>
+    /// <param name="set">
+    ///     The set of the NPCs to check.
+    /// </param>
+    /// <returns>
+    ///     <see langword="true"/> if all of the NPCs from the specified set have been killed at least once; otherwise, <see langword="false"/>.
+    /// </returns>
+    public static bool DownedAll(bool[] set)
+    {
+        for (var i = 0; i < set.Length; i++)
+            if (set[i] && !flags[i])
+                return false;
+
+        return true;
     }
 
     /// <summary>
@@ -92,59 +128,32 @@ public sealed class NPCDownedFlagsSystem : ModSystem
     ///     <see langword="true"/> if all of the NPCs with the specified types have been killed at least
     ///     once; otherwise, <see langword="false"/>.
     /// </returns>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     Any of the values in <paramref name="types"/> is negative or zero.
-    ///     >
-    /// </exception>
     public static bool DownedAll(params int[] types)
     {
         foreach (var type in types)
         {
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-
-            if (!flags[type])
+            if (!flags[NPCID.FromNetId(type)])
                 return false;
         }
 
         return true;
     }
-
+    
     /// <summary>
-    ///     Marks the NPC with the specified type to be tracked for being killed at least once.
+    ///     Determines whether any of the NPCs from the specified set has been killed at least once.
     /// </summary>
-    /// <param name="type">
-    ///     The type of the NPC to mark.
+    /// <param name="set">
+    ///     The set of the NPCs to check.
     /// </param>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <paramref name="type"/> is negative or zero.
-    /// </exception>
-    public static void Track(int type)
+    /// <returns>
+    ///     <see langword="true"/> if any of the NPCs from the specified set has been killed at least once; otherwise, <see langword="false"/>.
+    /// </returns>
+    public static bool DownedAll(ContentSet set)
     {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
+        foreach (var type in set)
+            if (!flags[type])
+                return false;
 
-        tracked[type] = true;
-    }
-
-    /// <summary>
-    ///     Marks the NPC with the specified type as killed at least once.
-    /// </summary>
-    /// <param name="type">
-    ///     The type of the NPC to mark.
-    /// </param>
-    /// <param name="synchronize">
-    /// </param>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <paramref name="type"/> is negative or zero.
-    /// </exception>
-    public static void Mark(int type, bool synchronize = true)
-    {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-
-        flags[type] = true;
-
-        if (!synchronize)
-            return;
-
-        NPC.SetEventFlagCleared(ref flags[type], -1);
+        return true;
     }
 }

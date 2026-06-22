@@ -307,7 +307,7 @@ Chapter1: {
 	// ---------------------
 	// <-> Old Ones Army <->
 	
-	SetupOOA: {
+	SetupOldOnesArmy: {
 		Title: Otherworldy Seige
 		Contents:
 			'''
@@ -319,7 +319,7 @@ Chapter1: {
 		Tooltip: ---
 	}
 
-	GetAnyOOASet: {
+	GetAnyOldOnesArmySet: {
 		Title: Dressing like a Defender
 		Contents: (flavour description)
 		Tooltip: ---
@@ -352,7 +352,7 @@ Chapter1: {
 	// ---------------
 	// <-> Fishing <->
 	
-	FishingStarter: {
+	GetAnyFish: {
 		Title: MA! I Caught Somethin'!
 		Contents: Using a fishing rod and some bait, drop a lure in a large pool of water and get a hit!
 		Tooltip: ---
@@ -376,7 +376,7 @@ Chapter1: {
 		Tooltip: ---
 	}
 
-	GetT3Crate: {
+	GetGoldenCrateCrate: {
 		Title: Better Lootbox Economy Than CS2
 		Contents: Hook up a Golden Crate, filled with riches and goodies!
 		Tooltip: ---
@@ -540,7 +540,7 @@ Chapter2: {
 		Contents:
 			'''
 			Obtain any running shoes, allowing you to run quickly across terrain!\
-			
+
 			They can be found in chests in a few biomes, or through crates.
 			'''
 		Tooltip: ---

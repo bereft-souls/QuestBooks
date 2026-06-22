@@ -4,28 +4,25 @@ namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
 public class InteractTaxCollector : QBQuest
 {
+    /// <summary>
+    ///     The amount of gold coins the player must have accumulated from taxes in order to complete the
+    ///     quest.
+    /// </summary>
+    public static readonly int Coins = Item.buyPrice(0, 25);
+
     public override QuestType QuestType => QuestType.Player;
+
+    public override void Load() => On_Player.CollectTaxes += Check;
 
     public override bool CheckCompletion() => false;
 
-    public class InteractTaxCollectorCheck : ModSystem
+    private static void Check(On_Player.orig_CollectTaxes orig, Player self)
     {
-        /// <summary>
-        ///     The amount of gold coins the player must have accumulated from taxes in order to complete the
-        ///     quest.
-        /// </summary>
-        public static readonly int Coins = Item.buyPrice(0, 25);
+        orig(self);
 
-        public override void Load() => On_Player.CollectTaxes += Check;
+        if (self.taxMoney < Coins)
+            return;
 
-        private static void Check(On_Player.orig_CollectTaxes orig, Player self)
-        {
-            orig(self);
-
-            if (self.taxMoney < Coins)
-                return;
-
-            QuestManager.MarkComplete<InteractTaxCollector>();
-        }
+        QuestManager.MarkComplete<InteractTaxCollector>();
     }
 }

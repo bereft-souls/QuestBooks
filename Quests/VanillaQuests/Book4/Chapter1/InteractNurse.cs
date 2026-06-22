@@ -11,6 +11,8 @@ public class InteractNurse : QBQuest
 
     public class InteractNurseCheck : ModPlayer
     {
+        private const string Tag = "Value";
+        
         /// <summary>
         ///     The amount of gold coins the player must spend at the nurse in order to complete the quest.
         /// </summary>
@@ -31,8 +33,8 @@ public class InteractNurse : QBQuest
             QuestManager.MarkComplete<InteractNurse>();
         }
 
-        public override void SaveData(TagCompound tag) => tag[nameof(Value)] = Value;
+        public override void SaveData(TagCompound tag) => tag[Tag] = Value;
 
-        public override void LoadData(TagCompound tag) => Value = tag.GetInt(nameof(Value));
+        public override void LoadData(TagCompound tag) => Value = tag.GetInt(Tag);
     }
 }

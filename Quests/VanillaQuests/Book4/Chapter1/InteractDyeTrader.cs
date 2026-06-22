@@ -6,17 +6,14 @@ public class InteractDyeTrader : QBQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
+    public override void Load() => On_Player.GetDyeTraderReward += Check;
+
     public override bool CheckCompletion() => false;
 
-    public class InteractDyeTraderSystem : ModSystem
+    private static void Check(On_Player.orig_GetDyeTraderReward orig, Player self, NPC dyeTrader)
     {
-        public override void Load() => On_Player.GetDyeTraderReward += Check;
+        orig(self, dyeTrader);
 
-        private static void Check(On_Player.orig_GetDyeTraderReward orig, Player self, NPC dyeTrader)
-        {
-            orig(self, dyeTrader);
-
-            QuestManager.MarkComplete<InteractDyeTrader>();
-        }
+        QuestManager.MarkComplete<InteractDyeTrader>();
     }
 }

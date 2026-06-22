@@ -1,0 +1,20 @@
+Mods: {
+	QuestBooks: {
+		Biomes: {
+			AbandonedTrackBiome: {
+				DisplayName: Abandoned Track Biome
+				TownNPCDialogueName: the Abandoned Track Biome
+			}
+
+			LivingTreeBiome: {
+				DisplayName: Living Tree Biome
+				TownNPCDialogueName: the Living Tree Biome
+			}
+
+			SpiderNestBiome: {
+				DisplayName: Spider Nest Biome
+				TownNPCDialogueName: the Spider Nest Biome
+			}
+		}
+	}
+}

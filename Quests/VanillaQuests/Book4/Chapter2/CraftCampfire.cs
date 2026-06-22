@@ -10,7 +10,7 @@ public class CraftCampfire : QBQuest
 
     public class CraftCampfireCheck : GlobalItem
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSetsSystem.Furniture.Campfire[entity.type];
+        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSets.Furniture.Campfires[entity.type];
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {

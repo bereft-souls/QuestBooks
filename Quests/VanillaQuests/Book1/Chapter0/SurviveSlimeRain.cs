@@ -4,17 +4,14 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
 public class SurviveSlimeRain : QBQuest
 {
+    public override void Load() => On_Main.StopSlimeRain += Check;
+    
     public override bool CheckCompletion() => false;
-
-    public class SurviveSlimeRainCheck : ModSystem
+    
+    private static void Check(On_Main.orig_StopSlimeRain orig, bool announce)
     {
-        public override void Load() => On_Main.StopSlimeRain += Check;
+        orig(announce);
 
-        private static void Check(On_Main.orig_StopSlimeRain orig, bool announce)
-        {
-            orig(announce);
-
-            QuestManager.MarkComplete<SurviveSlimeRain>();
-        }
+        QuestManager.MarkComplete<SurviveSlimeRain>();
     }
 }

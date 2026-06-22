@@ -10,6 +10,8 @@ public class BuyTeleporter : QBQuest
 
     public class BuyTeleporterCheck : GlobalItem
     {
+        private const string Tag = "Amount";
+        
         /// <summary>
         ///     The amount of teleporters the player needs to buy to complete the quest.
         /// </summary>
@@ -18,7 +20,7 @@ public class BuyTeleporter : QBQuest
         /// <summary>
         ///     Gets the amount of teleporters the player has bought.
         /// </summary>
-        public int Amount { get; private set; }
+        public static int Amount { get; private set; }
 
         public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.Teleporter;
 
@@ -35,8 +37,8 @@ public class BuyTeleporter : QBQuest
             QuestManager.MarkComplete<BuyTeleporter>();
         }
 
-        public override void SaveData(Item item, TagCompound tag) => tag[nameof(Amount)] = Amount;
+        public override void SaveData(Item item, TagCompound tag) => tag[Tag] = Amount;
 
-        public override void LoadData(Item item, TagCompound tag) => Amount = tag.GetInt(nameof(Amount));
+        public override void LoadData(Item item, TagCompound tag) => Amount = tag.GetInt(Tag);
     }
 }

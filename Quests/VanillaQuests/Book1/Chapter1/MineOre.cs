@@ -11,7 +11,7 @@ public class MineOre : QBQuest
     {
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (fail || noItem || !TileSetsSystem.Ores.Any[type])
+            if (fail || effectOnly || noItem || !TileID.Sets.Ore[type])
                 return;
 
             QuestManager.MarkComplete<MineOre>();
