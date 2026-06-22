@@ -27,26 +27,15 @@ public sealed class MovementTrackerPlayer : ModPlayer
     /// </value>
     public float Miles => Tiles / 2640f;
 
-    private Vector2 position;
-
-    private bool flag;
+    // Cached player position last frame
+    private Vector2? position;
 
     public override void PostUpdate()
     {
-        if (!flag)
-        {
-            position = Player.position;
-
-            flag = true;
-        }
-        else
-        {
-            var distance = Vector2.Distance(position, Player.position);
-
-            Pixels += distance;
-
-            position = Player.position;
-        }
+        position ??= Player.position;
+        var distance = Vector2.Distance(position.Value, Player.position);
+        Pixels += distance;
+        position = Player.position;
     }
 
     public override void SaveData(TagCompound tag) => tag[Tag] = Pixels;
