@@ -1,8 +1,10 @@
-﻿using QuestBooks.Systems.Common.NPCs;
+﻿using QuestBooks.Quests.QuestSystems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
 public class DefeatBetsy : QBQuest
 {
-    public override bool CheckCompletion() => NPCDownedFlagsSystem.Downed(NPCID.DD2Betsy);
+    public override bool CheckCompletion() => false;
+
+    public sealed class KillBetsyCheck() : KillNPCCheck<DefeatBetsy>(NPCID.DD2Betsy);
 }

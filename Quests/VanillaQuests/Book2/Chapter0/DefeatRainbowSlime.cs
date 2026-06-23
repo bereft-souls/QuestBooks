@@ -1,8 +1,10 @@
-﻿using QuestBooks.Systems.Common.NPCs;
+﻿using QuestBooks.Quests.QuestSystems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
 public class DefeatRainbowSlime : QBQuest
 {
-    public override bool CheckCompletion() => NPCDownedFlagsSystem.Downed(NPCID.RainbowSlime);
+    public override bool CheckCompletion() => false;
+
+    public sealed class KillRainbowSlimeCheck() : KillNPCCheck<DefeatRainbowSlime>(NPCID.RainbowSlime);
 }

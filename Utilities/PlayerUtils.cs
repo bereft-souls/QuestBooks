@@ -7,7 +7,7 @@ namespace QuestBooks.Utilities;
 /// <summary>
 ///     Provides <see cref="Player"/> extensions.
 /// </summary>
-public static class PlayerExtensions
+public static partial class Utils
 {
     /// <summary>
     ///     Determines whether the player has an item of all of the types from the specified set in their inventory.

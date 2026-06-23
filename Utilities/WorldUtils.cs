@@ -1,6 +1,8 @@
-﻿namespace QuestBooks.Systems.Common.World;
+﻿using QuestBooks.Quests.QuestSystems;
 
-public static class ChestExtensions
+namespace QuestBooks.Utilities;
+
+public static partial class Utils
 {
     /// <summary>
     ///     Determines whether the chest has been naturally generated.

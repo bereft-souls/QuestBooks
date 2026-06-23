@@ -6,6 +6,7 @@ using System;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests
 {
@@ -150,6 +151,10 @@ namespace QuestBooks.Quests
         public sealed override void SetupContent() => SetStaticDefaults();
 
         protected sealed override void InitTemplateInstance() => QuestLoader.QuestMods[GetType()] = Mod;
+
+        public virtual void SaveProgress(TagCompound tag) { }
+
+        public virtual void LoadProgress(TagCompound tag) { }
     }
 
     public enum QuestType

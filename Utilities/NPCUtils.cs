@@ -1,6 +1,6 @@
-﻿namespace QuestBooks.Systems.Common.NPCs;
+﻿namespace QuestBooks.Utilities;
 
-public static class NPCUtilities
+public static partial class Utils
 {
     /// <summary>
     ///     Determines whether any NPCs in the world satisfy the specified predicate.
