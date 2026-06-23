@@ -24,7 +24,7 @@ public class KillMarriage : QBQuest
         BrideKilled = tag.GetBool(nameof(BrideKilled));
     }
 
-    public sealed class KillGroomHook() : KillNPCHook(NPCID.TheGroom, _ => QuestManager.GetQuest<KillMarriage>().GroomKilled = true);
+    public sealed class KillGroomHook() : KillNPCHook(static npc => npc.type == NPCID.TheGroom, static _ => QuestManager.GetQuest<KillMarriage>().GroomKilled = true);
     
-    public sealed class KillBrideHook() : KillNPCHook(NPCID.TheBride, _ => QuestManager.GetQuest<KillMarriage>().BrideKilled = true);
+    public sealed class KillBrideHook() : KillNPCHook(static npc => npc.type == NPCID.TheBride, static _ => QuestManager.GetQuest<KillMarriage>().BrideKilled = true);
 }

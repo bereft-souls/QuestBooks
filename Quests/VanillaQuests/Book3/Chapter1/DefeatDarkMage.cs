@@ -13,5 +13,5 @@ public class DefeatDarkMage : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public sealed class KillDarkMageCheck() : KillNPCCheck<DefeatDarkMage>(npc => DarkMageTypes.Contains(npc.type));
+    public sealed class KillDarkMageCheck() : KillNPCHook<DefeatDarkMage>(npc => DarkMageTypes.Contains(npc.type));
 }

@@ -1,40 +1,67 @@
 ﻿using QuestBooks.Systems;
+using System.Linq;
 
-namespace QuestBooks.Quests.QuestSystems
+namespace QuestBooks.Quests.QuestSystems;
+
+public delegate bool KillNPCPredicate(NPC npc);
+
+public delegate void KillNPCCallback(NPC npc);
+
+public abstract class KillNPCHook : GlobalNPC
 {
-    /// <summary>
-    /// Provides a simple hook into when an NPC is killed.<br/>
-    /// <br/>
-    /// See also:<br/>
-    /// <see cref="KillNPCHook{TNPCType}"/><br/>
-    /// <see cref="KillNPCCheck{TQuest}"/><br/>
-    /// <see cref="KillNPCCheck{TQuest, TNPCType}"/>
-    /// </summary>
-    /// <param name="match">Checks whether this hook should fire.</param>
-    /// <param name="onComplete">The action you want to perform when matched to a crafted item.</param>
-    public abstract class KillNPCHook(Func<NPC, bool> match, Action<NPC> onComplete) : GlobalNPC
+    public KillNPCPredicate Predicate { get; init; }
+    
+    public KillNPCCallback Callback { get; init; }
+    
+    public KillNPCHook(KillNPCPredicate predicate, KillNPCCallback callback)
     {
-        public KillNPCHook(int npcType, Action<NPC> onComplete) : this(npc => npc.type == npcType, onComplete) { }
+        ArgumentNullException.ThrowIfNull(callback);
+        
+        Predicate = predicate;
+        Callback = callback;
+    }
+    
+    public KillNPCHook(KillNPCCallback callback) : this(null, callback) { }
+    
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => Predicate?.Invoke(entity) ?? true;
 
-        public Func<NPC, bool> Match { get; init; } = match;
+    public override void OnKill(NPC npc) => Callback.Invoke(npc);
+}
 
-        public Action<NPC> OnComplete { get; init; } = onComplete;
+public abstract class KillNPCHook<TQuest> : KillNPCHook where TQuest : Quest
+{
+    public KillNPCHook(KillNPCPredicate predicate) : base(predicate, Complete) { }
+    
+    public KillNPCHook() : base(Complete) { }
+    
+    public KillNPCHook(int type) : base(Complete)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
 
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => Match(entity);
-
-        public override void OnKill(NPC npc) => OnComplete(npc);
+        Predicate = npc => Match(npc, type);
     }
 
-    public abstract class KillNPCHook<TNPCType>(Action<NPC> onComplete) : KillNPCHook(npc => npc.type == ModContent.NPCType<TNPCType>(), onComplete)
-        where TNPCType : ModNPC;
-
-    public abstract class KillNPCCheck<TQuest>(Func<NPC, bool> match) : KillNPCHook(match, _ => QuestManager.CompleteQuest<TQuest>())
-        where TQuest : Quest
+    public KillNPCHook(bool[] set) : base(Complete)
     {
-        public KillNPCCheck(int npcType) : this(npc => npc.type == npcType) { }
+        ArgumentNullException.ThrowIfNull(set);
+
+        Predicate = npc => Match(npc, set);
     }
 
-    public abstract class KillNPCCheck<TQuest, TNPCType>() : KillNPCCheck<TQuest>(ModContent.NPCType<TNPCType>())
-        where TQuest : Quest
-        where TNPCType : ModNPC;
+    public KillNPCHook(int[] matches) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(matches);
+
+        Predicate = npc => Match(npc, matches);
+    }
+    
+    protected static bool Match(NPC npc, int match) => npc.type == match;
+
+    protected static bool Match(NPC npc, bool[] set) => set[npc.type];
+
+    protected static bool Match(NPC npc, params int[] matches) => matches.Contains(npc.type);
+
+    protected static bool Match<T>(NPC npc) where T : ModNPC => npc.type == ModContent.NPCType<T>();
+
+    protected static void Complete(NPC npc) => QuestManager.CompleteQuest<TQuest>();
 }

@@ -6,5 +6,5 @@ public class DefeatWyvern : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public sealed class KillWyvernCheck() : KillNPCCheck<DefeatWyvern>(NPCID.WyvernHead);
+    public sealed class KillWyvernCheck() : KillNPCHook<DefeatWyvern>(NPCID.WyvernHead);
 }

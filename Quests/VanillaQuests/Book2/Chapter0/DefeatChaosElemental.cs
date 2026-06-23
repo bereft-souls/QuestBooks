@@ -6,5 +6,5 @@ public class DefeatChaosElemental : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public sealed class KillChaosElemenalCheck() : KillNPCCheck<DefeatChaosElemental>(NPCID.ChaosElemental);
+    public sealed class KillChaosElemenalCheck() : KillNPCHook<DefeatChaosElemental>(NPCID.ChaosElemental);
 }

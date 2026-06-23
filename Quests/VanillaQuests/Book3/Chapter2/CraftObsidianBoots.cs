@@ -10,5 +10,5 @@ public class CraftObsidianBoots : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CraftObsidianBootsCheck() : CraftItemHook<CraftObsidianBoots>(ItemID.ObsidianBoots);
+    public class CraftObsidianBootsCheck() : CraftItemHook<CraftObsidianBoots>(ItemID.ObsidianWaterWalkingBoots);
 }

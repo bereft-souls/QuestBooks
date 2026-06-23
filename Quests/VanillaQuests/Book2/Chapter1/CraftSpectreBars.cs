@@ -9,3 +9,4 @@ public class CraftSpectreBars : QBQuest
     public override bool CheckCompletion() => false;
 
     public class CraftSpectreBarsCheck() : CraftItemHook<CraftSpectreBars>(ItemID.SpectreBar);
+}

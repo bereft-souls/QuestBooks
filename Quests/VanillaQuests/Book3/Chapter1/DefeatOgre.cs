@@ -13,5 +13,5 @@ public class DefeatOgre : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public sealed class KillOgreCheck() : KillNPCCheck<DefeatOgre>(npc => OgreTypes.Contains(npc.type));
+    public sealed class KillOgreCheck() : KillNPCHook<DefeatOgre>(npc => OgreTypes.Contains(npc.type));
 }

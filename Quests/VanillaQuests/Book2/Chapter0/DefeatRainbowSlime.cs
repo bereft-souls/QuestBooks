@@ -6,5 +6,5 @@ public class DefeatRainbowSlime : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public sealed class KillRainbowSlimeCheck() : KillNPCCheck<DefeatRainbowSlime>(NPCID.RainbowSlime);
+    public sealed class KillRainbowSlimeCheck() : KillNPCHook<DefeatRainbowSlime>(NPCID.RainbowSlime);
 }

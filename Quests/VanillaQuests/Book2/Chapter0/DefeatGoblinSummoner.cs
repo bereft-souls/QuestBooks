@@ -6,5 +6,5 @@ public class DefeatGoblinSummoner : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public sealed class KillGoblinSummonerCheck() : KillNPCCheck<DefeatGoblinSummoner>(NPCID.GoblinSummoner);
+    public sealed class KillGoblinSummonerCheck() : KillNPCHook<DefeatGoblinSummoner>(NPCID.GoblinSummoner);
 }

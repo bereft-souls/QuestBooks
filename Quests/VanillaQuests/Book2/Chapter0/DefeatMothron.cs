@@ -6,5 +6,5 @@ public class DefeatMothron : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public sealed class KillMothronCheck() : KillNPCCheck<DefeatMothron>(NPCID.Mothron);
+    public sealed class KillMothronCheck() : KillNPCHook<DefeatMothron>(NPCID.Mothron);
 }

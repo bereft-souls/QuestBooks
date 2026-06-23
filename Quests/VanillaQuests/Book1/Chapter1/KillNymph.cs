@@ -7,5 +7,5 @@ public class KillNymph : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class KillNymphCheck() : KillNPCCheck<KillNymph>(NPCID.Nymph);
+    public class KillNymphCheck() : KillNPCHook<KillNymph>(NPCID.Nymph);
 }

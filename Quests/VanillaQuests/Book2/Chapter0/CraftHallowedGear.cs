@@ -10,5 +10,16 @@ public class CraftHallowedGear : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class HallowedGearItemCheck : CraftItemHook<CraftHallowedGear>();
+    public class HallowedGearItemCheck() : CraftItemHook(Complete)
+    {
+        private static void Complete(Item item, RecipeItemCreationContext context)
+        {
+            if (context.Recipe.HasIngredient(ItemID.HallowedBar))
+            {
+                return;
+            }
+            
+            QuestManager.CompleteQuest<CraftHallowedGear>();
+        }
+    }
 }

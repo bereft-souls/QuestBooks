@@ -7,5 +7,5 @@ public class KillTim : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class KillTimCheck() : KillNPCCheck<KillTim>(NPCID.Tim);
+    public class KillTimCheck() : KillNPCHook<KillTim>(NPCID.Tim);
 }

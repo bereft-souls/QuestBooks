@@ -6,5 +6,5 @@ public class DefeatBetsy : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public sealed class KillBetsyCheck() : KillNPCCheck<DefeatBetsy>(NPCID.DD2Betsy);
+    public sealed class KillBetsyCheck() : KillNPCHook<DefeatBetsy>(NPCID.DD2Betsy);
 }

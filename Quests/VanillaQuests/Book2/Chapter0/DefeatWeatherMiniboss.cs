@@ -13,5 +13,5 @@ public class DefeatWeatherMiniboss : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public sealed class KillWeatherMinibossCheck() : KillNPCCheck<DefeatWeatherMiniboss>(npc => WeatherMinibossTypes[npc.type]);
+    public sealed class KillWeatherMinibossCheck() : KillNPCHook<DefeatWeatherMiniboss>(npc => WeatherMinibossTypes[npc.type]);
 }

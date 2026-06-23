@@ -15,5 +15,5 @@ public class DefeatBiomeMimic : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public sealed class KillBigMimicCheck() : KillNPCCheck<DefeatBiomeMimic>(npc => BiomeMimics[npc.type]);
+    public sealed class KillBigMimicCheck() : KillNPCHook<DefeatBiomeMimic>(npc => BiomeMimics[npc.type]);
 }

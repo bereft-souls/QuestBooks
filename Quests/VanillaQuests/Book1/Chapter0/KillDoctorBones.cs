@@ -9,5 +9,5 @@ public class KillDoctorBones : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class KillDoctorBonesCheck() : KillNPCCheck<KillDoctorBones>(NPCID.DoctorBones);
+    public class KillDoctorBonesCheck() : KillNPCHook<KillDoctorBones>(NPCID.DoctorBones);
 }

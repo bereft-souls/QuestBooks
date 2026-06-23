@@ -6,5 +6,5 @@ public class DefeatFlyingDutchman : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public sealed class KillFlyingDutchmanCheck() : KillNPCCheck<DefeatFlyingDutchman>(NPCID.PirateShip);
+    public sealed class KillFlyingDutchmanCheck() : KillNPCHook<DefeatFlyingDutchman>(NPCID.PirateShip);
 }

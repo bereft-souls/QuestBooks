@@ -8,5 +8,5 @@ public class KillPinky : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class KillPinkyCheck() : KillNPCCheck<KillPinky>(NPCID.Pinky);
+    public class KillPinkyCheck() : KillNPCHook<KillPinky>(NPCID.Pinky);
 }

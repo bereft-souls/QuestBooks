@@ -7,5 +7,5 @@ public class KillUndeadMiner : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class KillUndeadMinerCheck() : KillNPCCheck<KillUndeadMiner>(NPCID.UndeadMiner);
+    public class KillUndeadMinerCheck() : KillNPCHook<KillUndeadMiner>(NPCID.UndeadMiner);
 }

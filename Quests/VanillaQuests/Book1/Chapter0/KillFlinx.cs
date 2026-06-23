@@ -9,5 +9,5 @@ public class KillFlinx : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class KillFlinxCheck() : KillNPCCheck<KillFlinx>(NPCID.SnowFlinx);
+    public class KillFlinxCheck() : KillNPCHook<KillFlinx>(NPCID.SnowFlinx);
 }
