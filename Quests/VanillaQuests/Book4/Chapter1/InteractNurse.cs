@@ -5,36 +5,48 @@ namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
 public class InteractNurse : QBQuest
 {
+    private const string Tag = "NurseCoinsSpent";
+    
+    /// <summary>
+    ///     The amount of coins the player must spend at the nurse in order to complete the quest.
+    /// </summary>
+    /// <value>
+    ///     1 gold coin.
+    /// </value>
+    public static readonly int CoinsTarget = Item.buyPrice(0, 1);
+    
+    /// <summary>
+    ///     The amount of coins the player has spent at the nurse so far.
+    /// </summary>
+    public int CoinsSpent { get; private set; }
+    
     public override QuestType QuestType => QuestType.Player;
 
-    public override bool CheckCompletion() => false;
+    public override bool CheckCompletion() => CoinsTarget >= CoinsSpent;
+
+    public override void SaveProgress(TagCompound tag) => tag[Tag] = CoinsSpent;
+
+    public override void LoadProgress(TagCompound tag) => CoinsSpent = tag.GetInt(Tag);
 
     public class InteractNurseCheck : ModPlayer
     {
-        private const string Tag = "Value";
-
-        /// <summary>
-        ///     The amount of gold coins the player must spend at the nurse in order to complete the quest.
-        /// </summary>
-        public static readonly int Coins = Item.buyPrice(0, 1);
-
-        /// <summary>
-        ///     Gets the total amount of gold coins the player has spent at the nurse.
-        /// </summary>
-        public static int Value { get; private set; }
-
         public override void PostNurseHeal(NPC nurse, int health, bool removeDebuffs, int price)
         {
-            Value += price;
+            var quest = QuestManager.GetQuest<InteractNurse>();
 
-            if (Value < Coins)
+            if (quest.Completed)
+            {
                 return;
+            }
+
+            quest.CoinsSpent += price;
+
+            if (quest.CoinsSpent < InteractNurse.CoinsTarget)
+            {
+                return;
+            }
 
             QuestManager.MarkComplete<InteractNurse>();
         }
-
-        public override void SaveData(TagCompound tag) => tag[Tag] = Value;
-
-        public override void LoadData(TagCompound tag) => Value = tag.GetInt(Tag);
     }
 }
