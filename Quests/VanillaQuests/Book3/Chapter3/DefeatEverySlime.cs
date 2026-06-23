@@ -8,6 +8,8 @@ namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
 public class DefeatEverySlime : QBQuest
 {
+    // Despite the fact that mods may add extra slimes, modded slimes should NOT count
+    // towards this quest, and as such do not need to be registered with a set
     public static readonly int[] AllSlimes = [
         NPCID.GreenSlime,
         NPCID.BlueSlime,

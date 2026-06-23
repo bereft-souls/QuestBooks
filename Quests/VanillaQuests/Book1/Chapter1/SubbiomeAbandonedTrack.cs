@@ -1,5 +1,4 @@
-﻿using QuestBooks.Content.Biomes;
-
+﻿
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
 public class SubbiomeAbandonedTrack : QBQuest

@@ -6,6 +6,8 @@ namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
 public class GetEveryTrophy : QBQuest
 {
+    // Despite the fact that mods may add extra trophies, modded trophies should NOT count
+    // towards this quest, and as such do not need to be registered with a set
     public static readonly int[] AllTrophies = [
         ItemID.KingSlimeTrophy,
         ItemID.EyeofCthulhuTrophy,
@@ -36,7 +38,7 @@ public class GetEveryTrophy : QBQuest
         ItemID.MartianSaucerTrophy
     ];
 
-    public const string TagKey = "VanillaTrophies";
+    public const string TagKey = "VanillaTrophiesCollected";
 
     public readonly HashSet<int> CollectedTrophies = [];
 
@@ -44,6 +46,9 @@ public class GetEveryTrophy : QBQuest
 
     public override void Update()
     {
+        if (Main.dedServ)
+            return;
+
         foreach (int trophyType in AllTrophies)
             if (Main.LocalPlayer.inventory.Any(item => item.type == trophyType && item.stack > 0))
                 CollectedTrophies.Add(trophyType);

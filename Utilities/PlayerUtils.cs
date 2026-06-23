@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using QuestBooks.Content.Sets;
 
 namespace QuestBooks.Utilities;
 
@@ -8,28 +7,7 @@ namespace QuestBooks.Utilities;
 ///     Provides <see cref="Player"/> extensions.
 /// </summary>
 public static partial class Utils
-{
-    /// <summary>
-    ///     Determines whether the player has an item of all of the types from the specified set in their inventory.
-    /// </summary>
-    /// <param name="player">
-    ///     The player to check.
-    /// </param>
-    /// <param name="set">
-    ///     The set of the items to check for.
-    /// </param>
-    /// <returns>
-    ///     <see langword="true"/> if the player has an item of all of the types from the specified set in their inventory; otherwise, <see langword="false"/>.
-    /// </returns>
-    public static bool HasAllItems(this Player player, ContentSet set)
-    {
-        foreach (var type in set)
-            if (!player.HasItem(type))
-                return false;
-
-        return true;
-    }
-    
+{   
     /// <summary>
     ///     Determines whether the player has an item of all of the specified types in their inventory.
     /// </summary>
@@ -58,20 +36,6 @@ public static partial class Utils
 
         return true;
     }
-    
-    /// <summary>
-    ///     Determines whether the player has any item of the specified type in their inventory.
-    /// </summary>
-    /// <param name="player">
-    ///     The player to check.
-    /// </param>
-    /// <param name="set">
-    ///     The set of the items to check for.
-    /// </param>
-    /// <returns>
-    ///     <see langword="true"/> if the player has an item of any of the types from the specified set in their inventory; otherwise, <see langword="false"/>.
-    /// </returns>
-    public static bool HasAnyItem(this Player player, ContentSet set) => player.EnumerateInventory().Any(item => set.Contains(item.Item.type));
 
     /// <summary>
     ///     Determines whether the player has an item of any of the specified types in their inventory.

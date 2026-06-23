@@ -1,25 +1,23 @@
-﻿using QuestBooks.Content.Sets;
-using QuestBooks.Systems;
-using Terraria.DataStructures;
+﻿using QuestBooks.Quests.QuestSystems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
 public class CraftHardmodeOrePickaxes : QBQuest
 {
+    public static readonly bool[] HardmodePickaxes = ItemID.Sets.Factory.CreateNamedSet("HardmodePickaxes")
+        .Description("Pickaxes that are (intended to be) hardmode exclusive")
+        .RegisterBoolSet(
+            ItemID.CobaltPickaxe,
+            ItemID.PalladiumPickaxe,
+            ItemID.MythrilPickaxe,
+            ItemID.OrichalcumPickaxe,
+            ItemID.AdamantitePickaxe,
+            ItemID.TitaniumPickaxe
+        );
+
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion() => false;
 
-    public class CraftHardmodeOrePickaxesCheck : GlobalItem
-    {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSets.Tools.Pickaxes.Hardmode[entity.type];
-
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (context is not RecipeItemCreationContext)
-                return;
-
-            QuestManager.MarkComplete<CraftHardmodeOrePickaxes>();
-        }
-    }
+    public class CraftHardmodeOrePickaxesCheck() : CraftItemCheck<CraftHardmodeOrePickaxes>(item => HardmodePickaxes[item.type]);
 }

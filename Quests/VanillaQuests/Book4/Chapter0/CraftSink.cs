@@ -1,23 +1,40 @@
-﻿using QuestBooks.Content.Sets;
-using QuestBooks.Systems;
-using Terraria.DataStructures;
+﻿using QuestBooks.Quests.QuestSystems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
 public class CraftSink : QBQuest
 {
+    public static readonly bool[] Sinks = ItemID.Sets.Factory.CreateNamedSet("Sinks")
+        .Description("All sink furniture items")
+        .RegisterBoolSet(
+            ItemID.WoodenSink,
+            ItemID.EbonwoodSink,
+            ItemID.RichMahoganySink,
+            ItemID.PearlwoodSink,
+            ItemID.ShadewoodSink,
+            ItemID.BorealWoodSink,
+            ItemID.PalmWoodSink,
+            ItemID.AshWoodSink,
+            ItemID.CactusSink,
+            ItemID.BambooSink,
+            ItemID.DynastySink,
+            ItemID.LivingWoodSink,
+            ItemID.SkywareSink,
+            ItemID.MarbleSink,
+            ItemID.GraniteSink,
+            ItemID.MeteoriteSink,
+            ItemID.ObsidianSink,
+            ItemID.BoneSink,
+            ItemID.FleshSink,
+            ItemID.PumpkinSink,
+            ItemID.HoneySink,
+            ItemID.LihzahrdSink,
+            ItemID.MartianSink,
+            ItemID.GlassSink,
+            ItemID.SpookySink
+        );
+
     public override bool CheckCompletion() => false;
 
-    public class CraftSinkCheck : GlobalItem
-    {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => ItemSets.Furniture.Sinks[entity.type];
-
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (context is not RecipeItemCreationContext)
-                return;
-
-            QuestManager.MarkComplete<CraftSink>();
-        }
-    }
+    public class CraftSinkCheck() : CraftItemCheck<CraftSink>(item => Sinks[item.type]);
 }

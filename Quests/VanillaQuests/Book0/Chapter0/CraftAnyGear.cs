@@ -12,7 +12,7 @@ public class CraftAnyGear : QBQuest
 
     public class CraftGearCheck() : CraftItemCheck<CraftAnyGear>(MatchItem)
     {
-        public static bool MatchItem(Item item, ItemCreationContext context)
+        public static bool MatchItem(Item item)
         {
             if (item.pick > 0 || item.hammer > 0 || item.axe > 0)
                 return false;

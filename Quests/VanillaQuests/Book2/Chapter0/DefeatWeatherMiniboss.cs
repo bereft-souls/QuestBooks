@@ -1,16 +1,17 @@
 ﻿using QuestBooks.Quests.QuestSystems;
-using System.Linq;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
 public class DefeatWeatherMiniboss : QBQuest
 {
-    public static readonly int[] WeatherMinibossTypes = [
-        NPCID.SandElemental,
-        NPCID.IceGolem
-    ];
+    public static readonly bool[] WeatherMinibossTypes = NPCID.Sets.Factory.CreateNamedSet("WeatherMinibosses")
+        .Description("Minibosses that only spawn during weather events")
+        .RegisterBoolSet(
+            NPCID.SandElemental,
+            NPCID.IceGolem
+        );
 
     public override bool CheckCompletion() => false;
 
-    public sealed class KillWeatherMinibossCheck() : KillNPCCheck<DefeatWeatherMiniboss>(npc => WeatherMinibossTypes.Contains(npc.type));
+    public sealed class KillWeatherMinibossCheck() : KillNPCCheck<DefeatWeatherMiniboss>(npc => WeatherMinibossTypes[npc.type]);
 }
