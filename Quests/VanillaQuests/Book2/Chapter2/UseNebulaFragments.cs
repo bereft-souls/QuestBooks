@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
@@ -9,11 +10,11 @@ public class UseNebulaFragments : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class UseNebulaFragmentsCheck : GlobalItem
+    public class UseNebulaFragmentsCheck() : CraftItemHook(OnCraft)
     {
-        public override void OnCreated(Item item, ItemCreationContext context)
+        private static void OnCraft(Item item, RecipeItemCreationContext context)
         {
-            if (context is not RecipeItemCreationContext recipe || !recipe.Recipe.HasTile(TileID.LunarCraftingStation) || !recipe.Recipe.HasIngredient(ItemID.FragmentNebula))
+            if (!context.Recipe.HasTile(TileID.LunarCraftingStation) || !context.Recipe.HasIngredient(ItemID.FragmentNebula))
                 return;
 
             QuestManager.MarkComplete<UseNebulaFragments>();

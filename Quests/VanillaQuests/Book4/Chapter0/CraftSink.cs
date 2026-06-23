@@ -36,5 +36,5 @@ public class CraftSink : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CraftSinkCheck() : CraftItemCheck<CraftSink>(item => Sinks[item.type]);
+    public class CraftSinkCheck() : CraftItemHook<CraftSink>(Sinks);
 }

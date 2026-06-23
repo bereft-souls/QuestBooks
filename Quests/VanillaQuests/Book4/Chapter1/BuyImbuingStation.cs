@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
@@ -7,16 +8,5 @@ public class BuyImbuingStation : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class BuyImbuingStationCheck : GlobalItem
-    {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.ImbuingStation;
-
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (context is not BuyItemCreationContext)
-                return;
-
-            QuestManager.MarkComplete<BuyImbuingStation>();
-        }
-    }
+    public class BuyImbuingStationCheck() : BuyItemHook<BuyImbuingStation>(ItemID.ImbuingStation);
 }

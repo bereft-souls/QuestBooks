@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
@@ -7,16 +8,5 @@ public class BuyAmmoBox : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class BuyAmmoBoxCheck : GlobalItem
-    {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.AmmoBox;
-
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (context is not BuyItemCreationContext)
-                return;
-
-            QuestManager.MarkComplete<BuyAmmoBox>();
-        }
-    }
+    public class BuyAmmoBoxCheck() : BuyItemHook<BuyAmmoBox>(ItemID.AmmoBox);
 }

@@ -10,7 +10,7 @@ public class CraftAnyGear : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CraftGearCheck() : CraftItemCheck<CraftAnyGear>(MatchItem)
+    public class CraftGearCheck() : CraftItemHook<CraftAnyGear>(MatchItem)
     {
         public static bool MatchItem(Item item)
         {

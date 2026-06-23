@@ -7,19 +7,5 @@ public class LootGoldenChest : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class LootGoldenChestCheck : GlobalTile
-    {
-        public override void RightClick(int i, int j, int type)
-        {
-            if (!ChestSystem.IsNatural(i, j) || ChestSystem.IsExplored(i, j))
-                return;
-
-            var tile = Framing.GetTileSafely(i, j);
-
-            if (tile.TileFrameX != 36)
-                return;
-
-            QuestManager.MarkComplete<LootGoldenChest>();
-        }
-    }
+    public class LootGoldenChestCheck() : LootChestHook<LootGoldenChest>(TileID.Containers, ChestFrames.Gold);
 }

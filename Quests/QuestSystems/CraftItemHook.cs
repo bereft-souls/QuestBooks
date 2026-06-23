@@ -1,57 +1,95 @@
-﻿using QuestBooks.Systems;
+﻿using System.Linq;
+using QuestBooks.Quests.VanillaQuests;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
-namespace QuestBooks.Quests.QuestSystems
+namespace QuestBooks.Quests.QuestSystems;
+
+public delegate bool CraftItemHookPredicate(Item item, RecipeItemCreationContext context);
+
+public delegate void CraftItemHookCallback(Item item, RecipeItemCreationContext context);
+
+public abstract class CraftItemHook : GlobalItem
 {
     /// <summary>
-    /// Provides a simple hook into when an item is crafted.<br/>
-    /// <br/>
-    /// See also:<br/>
-    /// <see cref="CraftItemHook{TItemType}"/><br/>
-    /// <see cref="CraftItemCheck{TQuest}"/><br/>
-    /// <see cref="CraftItemCheck{TQuest, TItemType}"/>
+    ///     Gets the predicate that determines whether this hook should fire when an item is crafted.
     /// </summary>
-    /// <param name="match">Checks whether this hook should fire.</param>
-    /// <param name="onComplete">The action you want to perform when matched to a crafted item.</param>
-    public abstract class CraftItemHook(Func<Item, bool> match, Action<Item, ItemCreationContext> onComplete) : GlobalItem
+    public CraftItemHookPredicate Predicate { get; init; }
+    
+    /// <summary>
+    ///     Gets the callback that is invoked when an item is crafted and the predicate matches.
+    /// </summary>
+    public CraftItemHookCallback Callback { get; init; }
+
+    public CraftItemHook(CraftItemHookPredicate predicate, CraftItemHookCallback callback)
     {
-        public CraftItemHook(int itemType, Action<Item, ItemCreationContext> onComplete) : this(item => item.type == itemType, onComplete) { }
+        ArgumentNullException.ThrowIfNull(callback);
+        
+        Predicate = predicate;
+        Callback = callback;
+    }
+    
+    public CraftItemHook(CraftItemHookCallback callback) : this(null, callback) { }
 
-        public Func<Item, bool> Match { get; init; } = match;
-
-        public Action<Item, ItemCreationContext> OnComplete { get; init; } = onComplete;
-
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => Match(entity);
-
-        public override void OnCreated(Item item, ItemCreationContext context)
+    public override void OnCreated(Item item, ItemCreationContext context)
+    {
+        if (context is not RecipeItemCreationContext recipe)
         {
-            if (context is RecipeItemCreationContext)
-                OnComplete(item, context);
+            return;
         }
+        
+        var matches = Predicate?.Invoke(item, recipe) ?? true;
+        
+        if (!matches)
+        {
+            return;
+        }
+        
+        Callback.Invoke(item, recipe);
     }
+}
 
-    /// <summary>
-    /// Allows you to run a hook every time the specified <typeparamref name="TItemType"/> is crafted.
-    /// </summary>
-    public abstract class CraftItemHook<TItemType>(Action<Item, ItemCreationContext> onComplete) : CraftItemHook(item => item.type == ModContent.ItemType<TItemType>(), onComplete)
-        where TItemType : ModItem;
+public abstract class CraftItemHook<TQuest> : CraftItemHook where TQuest : QBQuest
+{
+    public CraftItemHook(CraftItemHookPredicate predicate) : base(predicate, Complete) { }
+    
+    public CraftItemHook(CraftItemHookCallback callback) : base(callback) { }
 
-    /// <summary>
-    /// Allows you to set up a hook to automatically complete <typeparamref name="TQuest"/> when an item matching given criteria is crafted.
-    /// </summary>
-    public abstract class CraftItemCheck<TQuest>(Func<Item, bool> match) : CraftItemHook(match, (_, _) => QuestManager.CompleteQuest<TQuest>())
-        where TQuest : Quest
+    public CraftItemHook() : base(Complete) { }
+    
+    public CraftItemHook(int type) : base(Complete)
     {
-        /// <summary>
-        /// Allows you to set up a hook to automatically complete <typeparamref name="TQuest"/> when the specified <paramref name="itemType"/> is crafted.
-        /// </summary>
-        public CraftItemCheck(int itemType) : this(item => item.type == itemType) { }
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
+
+        Predicate = (item, _) => Match(item, type);
+    }
+    
+    public CraftItemHook(bool[] set) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(set);
+
+        Predicate = (item, _) => Match(item, set);
+    }
+    
+    public CraftItemHook(params int[] types) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(types);
+
+        Predicate = (item, _) => Match(item, types);
     }
 
-    /// <summary>
-    /// Allows you to set up a hook to automatically complete <typeparamref name="TQuest"/> when the specified <typeparamref name="TItemType"/> is crafted.
-    /// </summary>
-    public abstract class CraftItemCheck<TQuest, TItemType>() : CraftItemCheck<TQuest>(ModContent.ItemType<TItemType>())
-        where TQuest : Quest
-        where TItemType : ModItem;
+    protected static bool Match(Item item, int match) => item.type == match;
+
+    protected static bool Match(Item item, bool[] set) => set[item.type];
+    
+    protected static bool Match(Item item, params int[] matches) => matches.Contains(item.type);
+
+    protected static void Complete(Item item, RecipeItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
+}
+
+public abstract class CraftItemHook<TQuest, TModItem> : CraftItemHook<TQuest> where TQuest : QBQuest where TModItem : ModItem
+{
+    public CraftItemHook() => Predicate = static (item, _) => Match(item);
+
+    protected static bool Match(Item item) => item.type == ModContent.ItemType<TModItem>();
 }

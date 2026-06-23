@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
@@ -9,16 +10,5 @@ public class CraftLunarHook : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CraftLunarHookCheck : GlobalItem
-    {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.LunarHook;
-
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (context is not RecipeItemCreationContext)
-                return;
-
-            QuestManager.MarkComplete<CraftLunarHook>();
-        }
-    }
+    public class CraftLunarHookCheck() : CraftItemHook<CraftLunarHook>(ItemID.LunarHook);
 }

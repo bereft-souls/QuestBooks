@@ -7,19 +7,5 @@ public class LootSkywareChest : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class LootSkywareChestCheck : GlobalTile
-    {
-        public override void RightClick(int i, int j, int type)
-        {
-            if (!ChestSystem.IsNatural(i, j) || ChestSystem.IsExplored(i, j))
-                return;
-
-            var tile = Framing.GetTileSafely(i, j);
-
-            if (tile.TileFrameX != 13 * 36)
-                return;
-
-            QuestManager.MarkComplete<LootSkywareChest>();
-        }
-    }
+    public class LootSkywareChestCheck() : LootChestHook<LootSkywareChest>(TileID.Containers, ChestFrames.Skyware);
 }

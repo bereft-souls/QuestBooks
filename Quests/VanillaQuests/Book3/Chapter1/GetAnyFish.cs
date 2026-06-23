@@ -1,5 +1,4 @@
-﻿using QuestBooks.Systems;
-using Terraria.DataStructures;
+﻿using QuestBooks.Quests.QuestSystems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
@@ -9,9 +8,5 @@ public class GetAnyFish : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class GetAnyFishCheck : ModPlayer
-    {
-        public override void CatchFish
-            (FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition) => QuestManager.MarkComplete<GetAnyFish>();
-    }
+    public class GetAnyFishCheck() : CatchFishHook<GetAnyFish>;
 }

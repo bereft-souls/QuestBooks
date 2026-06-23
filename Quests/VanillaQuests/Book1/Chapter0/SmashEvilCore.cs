@@ -1,4 +1,4 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
@@ -6,14 +6,5 @@ public class SmashEvilCore : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class SmashEvilCoreCheck : GlobalTile
-    {
-        public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
-        {
-            if (type != TileID.ShadowOrbs || fail)
-                return;
-
-            QuestManager.MarkComplete<SmashEvilCore>();
-        }
-    }
+    public class SmashEvilCoreCheck() : KillTileHook<SmashEvilCore>(TileID.ShadowOrbs);
 }

@@ -19,5 +19,5 @@ public class CraftHardmodeOrePickaxes : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CraftHardmodeOrePickaxesCheck() : CraftItemCheck<CraftHardmodeOrePickaxes>(item => HardmodePickaxes[item.type]);
+    public class CraftHardmodeOrePickaxesCheck() : CraftItemHook<CraftHardmodeOrePickaxes>(item => HardmodePickaxes[item.type]);
 }

@@ -27,5 +27,5 @@ public class CraftCampfire : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CraftCampfireCheck() : CraftItemCheck<CraftCampfire>(item => Campfires[item.type]);
+    public class CraftCampfireCheck() : CraftItemHook<CraftCampfire>(item => Campfires[item.type]);
 }

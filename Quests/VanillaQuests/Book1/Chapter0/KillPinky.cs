@@ -1,4 +1,4 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
@@ -8,10 +8,5 @@ public class KillPinky : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class KillPinkyCheck : GlobalNPC
-    {
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.Pinky;
-
-        public override void OnKill(NPC npc) => QuestManager.MarkComplete<KillPinky>();
-    }
+    public class KillPinkyCheck() : KillNPCCheck<KillPinky>(NPCID.Pinky);
 }

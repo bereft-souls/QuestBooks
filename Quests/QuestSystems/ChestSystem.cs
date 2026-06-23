@@ -3,7 +3,6 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.QuestSystems;
 
-// TODO: Find a better approach.
 public sealed class ChestSystem : ModSystem
 {
     private sealed class ChestSystemGlobalTile : GlobalTile

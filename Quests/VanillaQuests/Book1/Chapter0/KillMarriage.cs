@@ -25,5 +25,6 @@ public class KillMarriage : QBQuest
     }
 
     public sealed class KillGroomHook() : KillNPCHook(NPCID.TheGroom, _ => QuestManager.GetQuest<KillMarriage>().GroomKilled = true);
+    
     public sealed class KillBrideHook() : KillNPCHook(NPCID.TheBride, _ => QuestManager.GetQuest<KillMarriage>().BrideKilled = true);
 }

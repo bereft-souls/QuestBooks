@@ -21,10 +21,10 @@ public class ShimmerPhase : QBQuest
 
     public void End(Player player) => end = player.Center.ToTileCoordinates().Y;
 
-    public sealed class ShimmerPhaseCheck: ModPlayer
+    public sealed class ShimmerPhaseCheck : ModPlayer
     {
         private bool flag;
-
+        
         public override void PostUpdate()
         {
             var shimmering = Player.shimmering;

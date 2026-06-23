@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
@@ -9,14 +10,16 @@ public class CraftHellstoneGear : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class HellstoneGearItemCheck : GlobalItem
+    public class HellstoneGearItemCheck() : CraftItemHook(Complete)
     {
-        public override void OnCreated(Item item, ItemCreationContext context)
+        private static void Complete(Item item, RecipeItemCreationContext context)
         {
-            if (context is not RecipeItemCreationContext recipe || !recipe.Recipe.HasIngredient(ItemID.HellstoneBar))
+            if (!context.Recipe.HasIngredient(ItemID.HellstoneBar))
+            {
                 return;
-
-            QuestManager.CompleteQuest<CraftHellstoneGear>();
+            }
+            
+            QuestManager.MarkComplete<CraftHellstoneGear>();
         }
     }
 }

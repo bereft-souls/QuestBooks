@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
@@ -8,14 +9,5 @@ public class CrumbleDungeonBricks : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class CrumbleDungeonBricksCheck : GlobalTile
-    {
-        public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
-        {
-            if (fail || (type != TileID.CrackedBlueDungeonBrick && type != TileID.CrackedGreenDungeonBrick && type != TileID.CrackedPinkDungeonBrick))
-                return;
-
-            QuestManager.MarkComplete<CrumbleDungeonBricks>();
-        }
-    }
+    public class CrumbleDungeonBricksCheck() : KillTileHook<CrumbleDungeonBricks>(TileID.CrackedBlueDungeonBrick, TileID.CrackedGreenDungeonBrick, TileID.CrackedPinkDungeonBrick);
 }

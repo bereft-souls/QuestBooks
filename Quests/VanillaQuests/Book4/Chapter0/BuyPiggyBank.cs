@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
@@ -7,16 +8,5 @@ public class BuyPiggyBank : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class BuyPiggyBankCheck : GlobalItem
-    {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.PiggyBank;
-
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (context is not BuyItemCreationContext)
-                return;
-
-            QuestManager.MarkComplete<BuyPiggyBank>();
-        }
-    }
+    public class BuyPiggyBankCheck() : BuyItemHook<BuyPiggyBank>(ItemID.PiggyBank);
 }
