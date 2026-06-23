@@ -2,6 +2,7 @@
 using QuestBooks.Systems;
 using System.Collections.Generic;
 using System.Linq;
+using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
@@ -46,11 +47,16 @@ public class DefeatEverySlime : QBQuest
         NPCID.QueenSlimeMinionPurple
     ];
 
+    public const string TagKey = "SlimeTypesKilled";
+
     public readonly HashSet<int> KilledSlimes = [];
 
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion() => AllSlimes.All(KilledSlimes.Contains);
+
+    public override void SaveProgress(TagCompound tag) => tag[TagKey] = KilledSlimes.ToArray();
+    public override void LoadProgress(TagCompound tag) { foreach (int slimeType in tag.GetIntArray(TagKey)) KilledSlimes.Add(slimeType); }
 
     public sealed class KillSlimeHook() : KillNPCHook(
         npc => AllSlimes.Contains(npc.netID),
