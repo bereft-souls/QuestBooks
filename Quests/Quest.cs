@@ -152,8 +152,26 @@ namespace QuestBooks.Quests
 
         protected sealed override void InitTemplateInstance() => QuestLoader.QuestMods[GetType()] = Mod;
 
+        /// <summary>
+        ///     Save any progress for this quest to the given <see cref="TagCompound"/>.
+        /// </summary>
+        /// <param name="tag">
+        ///     The <see cref="TagCompound"/> to save progress to.
+        /// </param>
+        /// <remarks>
+        ///     The given <see cref="TagCompound"/> is shared across quests.
+        /// </remarks>
         public virtual void SaveProgress(TagCompound tag) { }
 
+        /// <summary>
+        ///     Load any progress for this quest from the given <see cref="TagCompound"/>.
+        /// </summary>
+        /// <param name="tag">
+        ///     The <see cref="TagCompound"/> to load progress from.
+        /// </param>
+        /// <remarks>
+        ///     The given <see cref="TagCompound"/> is shared across quests.
+        /// </remarks>
         public virtual void LoadProgress(TagCompound tag) { }
     }
 
