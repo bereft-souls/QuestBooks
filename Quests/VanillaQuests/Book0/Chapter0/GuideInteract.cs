@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,16 +12,5 @@ public class GuideInteract : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class GuideInteractCheck : GlobalNPC
-    {
-        // TODO: Test this
-
-        public override void OnChatButtonClicked(NPC npc, bool firstButton)
-        {
-            if (npc.type != NPCID.Guide)
-                return;
-
-            QuestManager.CompleteQuest<GuideInteract>();
-        }
-    }
+    public class GuideInteractCheck() : ChatNPCHook<GuideInteract>(NPCID.Guide);
 }
