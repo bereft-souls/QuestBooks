@@ -17,7 +17,7 @@ public class InteractTownNPCMaxHappiness : QBQuest
         {
             var settings = Main.ShopHelper.GetShoppingSettings(Main.LocalPlayer, npc);
 
-            if (settings.PriceAdjustment > ShopHelper.MaxHappinessAchievementPriceMultiplier)
+            if (settings.PriceAdjustment >= ShopHelper.MaxHappinessAchievementPriceMultiplier)
                 return;
 
             QuestManager.MarkComplete<InteractTownNPCMaxHappiness>();
