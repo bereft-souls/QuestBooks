@@ -12,7 +12,7 @@ public class CraftHallowedPick : QBQuest
     {
         private static void Complete(Item item, RecipeItemCreationContext context)
         {
-            if (!context.Recipe.HasIngredient(ItemID.HallowedBar))
+            if (item.pick < 0 || !context.Recipe.HasIngredient(ItemID.HallowedBar))
                 return;
 
             QuestManager.MarkComplete<CraftHallowedPick>();
