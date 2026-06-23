@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using QuestBooks.Systems;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
 
@@ -6,65 +7,54 @@ namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
 public class InteractGuide : QBQuest
 {
+    /// <summary>
+    ///     The amount of unique items the player must interact with in the guide's inventory in order to
+    ///     complete the quest.
+    /// </summary>
+    public const int MaterialsTarget = 50;
+    
+    /// <summary>
+    ///     Gets a list of item types that the player has interacted with in the guide's inventory.
+    /// </summary>
+    public List<int> MaterialsCache { get; private set; } = [];
+    
+    /// <summary>
+    ///     Gets the amount of unique items the player has interacted with in the guide's inventory.
+    /// </summary>
+    public int MaterialsAmount => MaterialsCache.Count;
+    
+    private const string Tag = "GuideMaterialsChecked";
+    
     public override QuestType QuestType => QuestType.Player;
 
-    public override bool CheckCompletion() => Main.LocalPlayer.GetModPlayer<InteractGuideCheck>().Completed;
+    public override void Load() => On_ItemSlot.LeftClick_ItemArray_int_int += Check;
+    
+    public override bool CheckCompletion() => MaterialsAmount >= MaterialsTarget;
 
-    public class InteractGuideCheck : ModPlayer
+    public override void SaveProgress(TagCompound tag) => tag[Tag] = MaterialsCache;
+    
+    public override void LoadProgress(TagCompound tag) => MaterialsCache = new List<int>(tag.GetList<int>(Tag));
+    
+    private static void Check(On_ItemSlot.orig_LeftClick_ItemArray_int_int orig, Item[] inv, int context, int slot)
     {
-        private const string Tag = "Cache";
+        orig(inv, context, slot);
+        
+        var quest = QuestManager.GetQuest<InteractGuide>();
 
-        /// <summary>
-        ///     The amount of unique items the player must interact with in the guide's inventory in order to
-        ///     complete the quest.
-        /// </summary>
-        public const int Target = 50;
+        if (quest.Completed)
+            return;
 
-        /// <summary>
-        ///     Gets a list of item types that the player has interacted with in the guide's inventory.
-        /// </summary>
-        public List<int> Cache { get; private set; } = [];
+        var guide = context == ItemSlot.Context.GuideItem;
+        
+        if (!guide)
+            return;
 
-        /// <summary>
-        ///     Gets the amount of unique items the player has interacted with in the guide's inventory.
-        /// </summary>
-        public int Amount => Cache.Count;
+        var item = Main.guideItem;
+        var cache = quest.MaterialsCache;
 
-        /// <summary>
-        ///     Gets a value indicating whether the player has interacted with the guide enough times to
-        ///     complete the quest.
-        /// </summary>
-        /// <value>
-        ///     <see langword="true"/> if <see cref="Amount"/> is greater than or equal to <see cref="Target"/>
-        ///     ; otherwise, <see langword="false"/>.
-        /// </value>
-        public bool Completed => Amount >= Target;
-
-        public override void Load() => On_ItemSlot.LeftClick_ItemArray_int_int += Check;
-
-        public override void SaveData(TagCompound tag) => tag[Tag] = Cache;
-
-        public override void LoadData(TagCompound tag) => Cache = new List<int>(tag.GetList<int>(Tag));
-
-        // TODO: We may want to stop caching new entries after the quest is completed.
-        private static void Check(On_ItemSlot.orig_LeftClick_ItemArray_int_int orig, Item[] inv, int context, int slot)
-        {
-            orig(inv, context, slot);
-
-            if (context != ItemSlot.Context.GuideItem)
-                return;
-
-            var item = Main.guideItem;
-
-            if (item.IsAir)
-                return;
-
-            var player = Main.LocalPlayer.GetModPlayer<InteractGuideCheck>();
-
-            if (player.Cache.Contains(item.type))
-                return;
-
-            player.Cache.Add(item.type);
-        }
+        if (item.IsAir || cache.Contains(item.type))
+            return;
+        
+        cache.Add(item.type);
     }
 }
