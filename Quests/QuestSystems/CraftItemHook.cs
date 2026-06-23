@@ -1,11 +1,10 @@
 ﻿using System.Linq;
-using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.QuestSystems;
 
-public delegate bool CraftItemHookPredicate(Item item, RecipeItemCreationContext context);
+public delegate bool CraftItemHookPredicate(Item item);
 
 public delegate void CraftItemHookCallback(Item item, RecipeItemCreationContext context);
 
@@ -31,65 +30,56 @@ public abstract class CraftItemHook : GlobalItem
     
     public CraftItemHook(CraftItemHookCallback callback) : this(null, callback) { }
 
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => Predicate?.Invoke(entity) ?? true;
+
     public override void OnCreated(Item item, ItemCreationContext context)
     {
         if (context is not RecipeItemCreationContext recipe)
-        {
             return;
-        }
-        
-        var matches = Predicate?.Invoke(item, recipe) ?? true;
-        
-        if (!matches)
-        {
-            return;
-        }
         
         Callback.Invoke(item, recipe);
     }
+
+    protected static bool Match(Item item, int match) => item.type == match;
+
+    protected static bool Match(Item item, bool[] set) => set[item.type];
+
+    protected static bool Match(Item item, params int[] matches) => matches.Contains(item.type);
+
+    protected static bool Match<T>(Item item) where T : ModItem => item.type == ModContent.ItemType<T>();
 }
 
-public abstract class CraftItemHook<TQuest> : CraftItemHook where TQuest : QBQuest
+public abstract class CraftItemHook<TQuest> : CraftItemHook where TQuest : Quest
 {
-    public CraftItemHook(CraftItemHookPredicate predicate) : base(predicate, Complete) { }
-    
-    public CraftItemHook(CraftItemHookCallback callback) : base(callback) { }
-
     public CraftItemHook() : base(Complete) { }
+
+    public CraftItemHook(CraftItemHookPredicate predicate) : base(predicate, Complete) { }
     
     public CraftItemHook(int type) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
 
-        Predicate = (item, _) => Match(item, type);
+        Predicate = item => Match(item, type);
     }
     
     public CraftItemHook(bool[] set) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(set);
 
-        Predicate = (item, _) => Match(item, set);
+        Predicate = item => Match(item, set);
     }
     
     public CraftItemHook(params int[] types) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(types);
 
-        Predicate = (item, _) => Match(item, types);
+        Predicate = item => Match(item, types);
     }
-
-    protected static bool Match(Item item, int match) => item.type == match;
-
-    protected static bool Match(Item item, bool[] set) => set[item.type];
-    
-    protected static bool Match(Item item, params int[] matches) => matches.Contains(item.type);
 
     protected static void Complete(Item item, RecipeItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
 }
 
-public abstract class CraftItemHook<TQuest, TModItem> : CraftItemHook<TQuest> where TQuest : QBQuest where TModItem : ModItem
+public abstract class CraftItemHook<TQuest, TModItem> : CraftItemHook<TQuest> where TQuest : Quest where TModItem : ModItem
 {
-    public CraftItemHook() => Predicate = static (item, _) => Match(item);
-
-    protected static bool Match(Item item) => item.type == ModContent.ItemType<TModItem>();
+    public CraftItemHook() => Predicate = static item => Match<TModItem>(item);
 }
