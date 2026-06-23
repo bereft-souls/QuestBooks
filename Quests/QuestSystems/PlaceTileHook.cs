@@ -1,4 +1,5 @@
 ﻿using QuestBooks.Systems;
+using System.Linq;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -99,7 +100,21 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
 
         Predicate = (_, _, match, _) => Match(type, match);
     }
+
+    public PlaceTileHook(bool[] set) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(set);
+        
+        Predicate = (_, _, match, _) => set[match];
+    }
     
+    public PlaceTileHook(int[] types) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(types);
+
+        Predicate = (_, _, match, _) => types.Contains(match);
+    }
+
     protected static bool Match(int type, int match) => type == match;
 
     protected static void Complete(int i, int j, int type, Item item) => QuestManager.CompleteQuest<TQuest>();
