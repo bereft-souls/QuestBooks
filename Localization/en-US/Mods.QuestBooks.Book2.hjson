@@ -230,7 +230,7 @@ Chapter1: {
 	// --------------------
 	// <-> Main Pathway <->
 	
-	CraftHallowedPick: {
+	CraftHallowedPickaxe: {
 		Title: Drax Attax
 		Contents: Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
 		Tooltip: ---
