@@ -38,6 +38,33 @@ public static partial class Utils
     }
 
     /// <summary>
+    ///     Determines whether the player has an item of any of the specified set in their inventory.
+    /// </summary>
+    /// <param name="player">
+    ///     The player to check.
+    /// </param>
+    /// <param name="set">
+    ///     The set of the items to check for.
+    /// </param>
+    /// <returns>
+    ///     <see langword="true"/> if the player has an item of any of the specified set in their
+    ///     inventory; otherwise, <see langword="false"/>.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="set"/> is <see langword="null"/>.
+    /// </exception>
+    public static bool HasAnyItem(this Player player, bool[] set)
+    {
+        ArgumentNullException.ThrowIfNull(set);
+        
+        for (var i = 0; i < set.Length; i++)
+            if (set[i] && player.HasItem(i))
+                return true;
+
+        return false;
+    }
+
+    /// <summary>
     ///     Determines whether the player has an item of any of the specified types in their inventory.
     /// </summary>
     /// <param name="player">

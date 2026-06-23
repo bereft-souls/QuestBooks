@@ -19,5 +19,5 @@ public class GetGems : QBQuest
             ItemID.Amethyst
         );
 
-    public override bool CheckCompletion() => Main.LocalPlayer.EnumerateInventory().Any(slot => Gems[slot.Item.type]);
+    public override bool CheckCompletion() => Main.LocalPlayer.HasAnyItem(Gems);
 }
