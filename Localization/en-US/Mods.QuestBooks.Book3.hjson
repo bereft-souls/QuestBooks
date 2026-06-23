@@ -233,12 +233,6 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	CraftHallowedPickaxe: {
-		Title: Drax Attax
-		Contents: Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
-		Tooltip: ---
-	}
-
 	CraftShroomiteDiggingClaws: {
 		Title: Shroomverine
 		Contents: Craft the Shroomite Digging Claws, a rapid mining tool making tunneling as easy as plucking a mushroom!
