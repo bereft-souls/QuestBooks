@@ -9,7 +9,7 @@ public class ChopTree : QBQuest
 
     public override bool CheckCompletion() => false;
 
-    public class TreeTileCheck : GlobalTile
+    public sealed class TreeTileCheck : GlobalTile
     {
         public override void Drop(int i, int j, int type)
         {
