@@ -107,7 +107,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	GetEvilBars: {
+	CraftEvilBars: {
 		Title: Vile and Rancid
 		Contents:
 			'''

@@ -8,9 +8,9 @@ public class CraftHallowedPick : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class CraftHallowedPickCheck() : CraftItemHook(OnCraft)
+    public class CraftHallowedPickCheck() : CraftItemHook(Complete)
     {
-        private static void OnCraft(Item item, RecipeItemCreationContext context)
+        private static void Complete(Item item, RecipeItemCreationContext context)
         {
             if (!context.Recipe.HasIngredient(ItemID.HallowedBar))
                 return;
