@@ -20,11 +20,9 @@ namespace QuestBooks.Quests.QuestSystems
 
         public Action<NPC> OnComplete { get; init; } = onComplete;
 
-        public override void OnKill(NPC npc)
-        {
-            if (Match(npc))
-                OnComplete(npc);
-        }
+        public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => Match(entity);
+
+        public override void OnKill(NPC npc) => OnComplete(npc);
     }
 
     public abstract class KillNPCHook<TNPCType>(Action<NPC> onComplete) : KillNPCHook(npc => npc.type == ModContent.NPCType<TNPCType>(), onComplete)
