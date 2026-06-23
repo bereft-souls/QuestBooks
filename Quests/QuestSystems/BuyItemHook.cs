@@ -14,8 +14,11 @@ public abstract class BuyItemHook : GlobalItem
     private const string Tag = "ItemPurchaseAmount";
     
     /// <summary>
-    ///     Gets the predicate that determines whether this hook should fire when an item is bought.
+    ///     Gets the predicate that determines whether this hook should be invoked when an item is bought.
     /// </summary>
+    /// <remarks>
+    ///     If <see langword="null"/>, evaluates as <see langword="true"/>.
+    /// </remarks>
     public BuyItemPredicate Predicate { get; init; }
 
     /// <summary>
@@ -24,10 +27,22 @@ public abstract class BuyItemHook : GlobalItem
     public BuyItemCallback Callback { get; init; }
     
     /// <summary>
-    ///     Gets the amount of times the item has been bought that matches the predicate.
+    ///     Gets the amount of times an item has been bought that matches the predicate.
     /// </summary>
     public static int Amount { get; private set; }
     
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook"/> class with the specified predicate and callback.
+    /// </summary>
+    /// <param name="predicate">
+    ///     The predicate that determines whether this hook should be invoked when an item is bought.
+    /// </param>
+    /// <param name="callback">
+    ///     The callback that is invoked when an item is bought and the predicate matches.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="callback"/> is <see langword="null"/>.
+    /// </exception>
     public BuyItemHook(BuyItemPredicate predicate, BuyItemCallback callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
@@ -36,6 +51,15 @@ public abstract class BuyItemHook : GlobalItem
         Callback = callback;
     }
     
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook"/> class with the specified callback.
+    /// </summary>
+    /// <param name="callback">
+    ///     The callback that is invoked when an item is bought and the predicate matches.
+    /// </param>
+    /// <remarks>
+    ///     Checks for any item bought, regardless of type.
+    /// </remarks>
     public BuyItemHook(BuyItemCallback callback) : this(null, callback) { }
     
     public override void OnCreated(Item item, ItemCreationContext context)
@@ -62,12 +86,34 @@ public abstract class BuyItemHook : GlobalItem
     public override void LoadData(Item item, TagCompound tag) => Amount = tag.GetInt(Tag);
 }
 
-public abstract class BuyItemHook<TQuest> : BuyItemHook where TQuest : QBQuest
+public abstract class BuyItemHook<TQuest> : BuyItemHook 
+    where TQuest : QBQuest
 {
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class with the specified predicate.
+    /// </summary>
+    /// <param name="predicate">
+    ///     The predicate that determines whether this hook should be invoked when an item is bought.
+    /// </param>
     public BuyItemHook(BuyItemPredicate predicate) : base(predicate, Complete) { }
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class.
+    /// </summary>
+    /// <remarks>
+    ///    Checks for any item bought, regardless of type.
+    /// </remarks>
     public BuyItemHook() : base(Complete) { }
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class with the specified item type.
+    /// </summary>
+    /// <param name="type">
+    ///     The type of the item that should trigger this hook when bought.
+    /// </param>
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///     <paramref name="type"/> is less than or equal to zero.
+    /// </exception>
     public BuyItemHook(int type) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
@@ -75,6 +121,18 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook where TQuest : QBQuest
         Predicate = (item, _) => Match(item, type);
     }
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class with the specified item type and amount.
+    /// </summary>
+    /// <param name="type">
+    ///     The type of the item that should trigger this hook when bought.
+    /// </param>
+    /// <param name="amount">
+    ///     The amount of the item that should trigger this hook when bought.
+    /// </param>
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///     <paramref name="type"/> is less than or equal to zero, or <paramref name="amount"/> is negative.
+    /// </exception>
     public BuyItemHook(int type, int amount) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
@@ -82,7 +140,7 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook where TQuest : QBQuest
         
         Predicate = (item, _) => item.type == type && Amount >= amount;
     }
-    
+
     protected static bool Match(Item item, int type) => item.type == type;
 
     protected static bool Match(Item item, int type, int amount) => item.type == type && Amount >= amount;
@@ -90,18 +148,20 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook where TQuest : QBQuest
     protected static void Complete(Item item, BuyItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
 }
 
-public abstract class BuyItemHook<TQuest, TModItem> : BuyItemHook<TQuest> where TQuest : QBQuest where TModItem : ModItem
+public abstract class BuyItemHook<TQuest, TModItem> : BuyItemHook<TQuest> 
+    where TQuest : QBQuest
+    where TModItem : ModItem
 {
-    public BuyItemHook() => Predicate = (item, _) => Match(item);
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest, TModItem}"/> class.
+    /// </summary>
+    public BuyItemHook() : base(ModContent.ItemType<TModItem>()) { }
 
-    public BuyItemHook(int amount)
-    {
-        ArgumentOutOfRangeException.ThrowIfNegative(amount);
-        
-        Predicate = (item, _) => Match(item, amount);
-    }
-    
-    protected static bool Match(Item item) => item.type == ModContent.ItemType<TModItem>();
-    
-    protected static new bool Match(Item item, int amount) => item.type == ModContent.ItemType<TModItem>() && Amount >= amount;
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest, TModItem}"/> class with the specified amount.
+    /// </summary>
+    /// <param name="amount">
+    ///     The amount of the item that should trigger this hook when bought.
+    /// </param>
+    public BuyItemHook(int amount) : base(ModContent.ItemType<TModItem>(), amount) { }
 }
