@@ -1,6 +1,5 @@
 ﻿using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
-using System.Linq;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.QuestSystems;
@@ -39,11 +38,11 @@ public abstract class BuyItemHook : GlobalItem
     public BuyItemHook(BuyItemPredicate predicate, BuyItemCallback callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
-        
+
         Predicate = predicate;
         Callback = callback;
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="BuyItemHook"/> class with the specified callback.
     /// </summary>
@@ -66,7 +65,7 @@ public abstract class BuyItemHook : GlobalItem
     }
 }
 
-public abstract class BuyItemHook<TQuest> : BuyItemHook 
+public abstract class BuyItemHook<TQuest> : BuyItemHook
     where TQuest : QBQuest
 {
     /// <summary>
@@ -163,7 +162,7 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook
     protected static void Complete(Item item, BuyItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
 }
 
-public abstract class BuyItemHook<TQuest, TModItem> : BuyItemHook<TQuest> 
+public abstract class BuyItemHook<TQuest, TModItem> : BuyItemHook<TQuest>
     where TQuest : QBQuest
     where TModItem : ModItem
 {

@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using QuestBooks.Utilities;
+﻿using QuestBooks.Utilities;
+using System.Linq;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 

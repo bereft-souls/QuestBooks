@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QuestBooks.QuestLog
+﻿namespace QuestBooks.QuestLog
 {
     /// <summary>
     /// Marks your class/member with a localization key to be displayed in the mouse tooltip whenever the element is hovered in the designer.

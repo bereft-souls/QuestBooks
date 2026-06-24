@@ -10,14 +10,14 @@ public class GardenGnome : QBQuest
     public override void Load() => On_AchievementsHelper.NotifyProgressionEvent += Check;
 
     public override bool CheckCompletion() => false;
-    
+
     private static void Check(On_AchievementsHelper.orig_NotifyProgressionEvent orig, int eventId)
     {
         if (eventId == AchievementHelperID.Events.TurnGnomeToStatue)
         {
             QuestManager.MarkComplete<GardenGnome>();
         }
-        
+
         orig(eventId);
     }
 }

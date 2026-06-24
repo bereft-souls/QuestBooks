@@ -1,10 +1,6 @@
 ﻿using QuestBooks.Systems;
-using System;
 using System.Linq;
-using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 

@@ -6,7 +6,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 public class SmashGeodes : QBQuest
 {
     private const string Tag = "SmashedGeodesCount";
-    
+
     /// <summary>
     ///     The number of geodes the player must smash in order to complete the quest.
     /// </summary>
@@ -16,11 +16,11 @@ public class SmashGeodes : QBQuest
     ///     Gets the number of geodes the player has smashed.
     /// </summary>
     public int GeodesSmashed { get; private set; }
-    
+
     public override bool CheckCompletion() => GeodesSmashed >= GeodesTarget;
 
     public override void SaveProgress(TagCompound tag) => tag[Tag] = GeodesSmashed;
-    
+
     public override void LoadProgress(TagCompound tag) => GeodesSmashed = tag.GetInt(Tag);
 
     public class SmashGeodesCheck : GlobalItem
@@ -35,7 +35,7 @@ public class SmashGeodes : QBQuest
             {
                 return;
             }
-            
+
             quest.GeodesSmashed++;
         }
     }

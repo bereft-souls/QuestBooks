@@ -15,7 +15,7 @@ public abstract class LootChestHook : GlobalTile
     ///     If <see langword="null"/>, evaluates as <see langword="true"/>.
     /// </remarks>
     public LootChestPredicate Predicate { get; init; }
-    
+
     /// <summary>
     ///     Gets the callback that is invoked when a tile is right-clicked and the predicate matches.
     /// </summary>
@@ -36,7 +36,7 @@ public abstract class LootChestHook : GlobalTile
     public LootChestHook(LootChestPredicate predicate, LootChestCallback callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
-        
+
         Predicate = predicate;
         Callback = callback;
     }
@@ -48,19 +48,19 @@ public abstract class LootChestHook : GlobalTile
     ///     The callback that is invoked when a tile is right-clicked and the predicate matches.
     /// </param>
     public LootChestHook(LootChestCallback callback) : this(null, callback) { }
-    
+
     public override void RightClick(int i, int j, int type)
     {
         var matches = Predicate?.Invoke(i, j, type) ?? true;
 
         if (!matches)
             return;
-        
+
         Callback.Invoke(i, j, type);
     }
 }
 
-public abstract class LootChestHook<TQuest> : LootChestHook 
+public abstract class LootChestHook<TQuest> : LootChestHook
     where TQuest : Quest
 {
     /// <summary>

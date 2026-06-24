@@ -9,7 +9,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Wood = 0;
-    
+
     /// <summary>
     ///     The frame number of a gold chest tile.
     /// </summary>
@@ -17,7 +17,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Gold = 1;
-    
+
     /// <summary>
     ///     The frame number of a locked gold chest tile.
     /// </summary>
@@ -65,7 +65,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int RichMahogany = 8;
-    
+
     /// <summary>
     ///     The frame number of a pearlwood chest tile.
     /// </summary>
@@ -89,7 +89,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Ice = 11;
-    
+
     /// <summary>
     ///     The frame number of a living wood chest tile.
     /// </summary>
@@ -97,7 +97,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int LivingWood = 12;
-    
+
     /// <summary>
     ///     The frame number of a skyware chest tile.
     /// </summary>
@@ -105,7 +105,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Skyware = 13;
-    
+
     /// <summary>
     ///     The frame number of a shadewood chest tile.
     /// </summary>
@@ -113,7 +113,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Shadewood = 14;
-    
+
     /// <summary>
     ///     The frame number of a spider chest tile.
     /// </summary>
@@ -121,7 +121,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Spider = 15;
-    
+
     /// <summary>
     ///     The frame number of a lihzahrd chest tile.
     /// </summary>
@@ -129,7 +129,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Lihzahrd = 16;
-    
+
     /// <summary>
     ///     The frame number of an ocean chest tile.
     /// </summary>
@@ -137,7 +137,7 @@ public static class ChestFrames
     ///    Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int Ocean = 17;
-    
+
     /// <summary>
     ///     The frame number of a dungeon jungle chest tile.
     /// </summary>
@@ -145,7 +145,7 @@ public static class ChestFrames
     ///     Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks> 
     public const int DungeonJungle = 18;
-    
+
     /// <summary>
     ///     The frame number of a dungeon corruption chest tile.
     /// </summary>
@@ -153,7 +153,7 @@ public static class ChestFrames
     ///     Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int DungeonCorruption = 19;
-    
+
     /// <summary>
     ///     The frame number of a dungeon crimson chest tile.
     /// </summary>
@@ -161,7 +161,7 @@ public static class ChestFrames
     ///     Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int DungeonCrimson = 20;
-    
+
     /// <summary>
     ///     The frame number of a dungeon hallow chest tile.
     /// </summary>
@@ -169,7 +169,7 @@ public static class ChestFrames
     ///     Belongs to the <see cref="TileID.Containers"/> tile type.
     /// </remarks>
     public const int DungeonHallow = 21;
-    
+
     /// <summary>
     ///     The frame number of a dungeon tundra chest tile.
     /// </summary>

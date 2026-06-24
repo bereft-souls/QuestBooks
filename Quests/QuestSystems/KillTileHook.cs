@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using QuestBooks.Systems;
+﻿using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -16,12 +15,12 @@ public abstract class KillTileHook : GlobalTile
     ///     If <see langword="null"/>, evaluates as <see langword="true"/>.
     /// </remarks>
     public KillTilePredicate Predicate { get; init; }
-    
+
     /// <summary>
     ///     Gets the callback that is invoked when a tile is killed and the predicate matches.
     /// </summary>
     public KillTileCallback Callback { get; init; }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="KillTileHook"/> class with the specified predicate and callback.
     /// </summary>
@@ -37,11 +36,11 @@ public abstract class KillTileHook : GlobalTile
     public KillTileHook(KillTilePredicate predicate, KillTileCallback callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
-        
+
         Predicate = predicate;
         Callback = callback;
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="KillTileHook"/> class with the specified callback.
     /// </summary>
@@ -52,17 +51,17 @@ public abstract class KillTileHook : GlobalTile
     ///     Checks for any tile killed, regardless of type.
     /// </remarks>
     public KillTileHook(KillTileCallback callback) : this(null, callback) { }
-    
+
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
         if (fail || effectOnly)
             return;
-        
+
         var matches = Predicate?.Invoke(i, j, type) ?? true;
-        
+
         if (!matches)
             return;
-        
+
         Callback.Invoke(i, j, type);
     }
 }
@@ -85,7 +84,7 @@ public abstract class KillTileHook<TQuest> : KillTileHook
     ///     Checks for any tile killed, regardless of type.
     /// </remarks>
     public KillTileHook() : base(Complete) { }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="KillTileHook{TQuest}"/> class.
     /// </summary>
@@ -115,7 +114,7 @@ public abstract class KillTileHook<TQuest> : KillTileHook
         ArgumentNullException.ThrowIfNull(set);
         Predicate = (_, _, type) => Match(type, set);
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="KillTileHook{TQuest}"/> class.
     /// </summary>
@@ -164,8 +163,8 @@ public abstract class KillTileHook<TQuest> : KillTileHook
     protected static void Complete(int x, int y, int type) => QuestManager.MarkComplete<TQuest>();
 }
 
-public abstract class KillTileHook<TQuest, TModTile> : KillTileHook<TQuest> 
-    where TQuest : Quest 
+public abstract class KillTileHook<TQuest, TModTile> : KillTileHook<TQuest>
+    where TQuest : Quest
     where TModTile : ModTile
 {
     /// <summary>
@@ -173,4 +172,3 @@ public abstract class KillTileHook<TQuest, TModTile> : KillTileHook<TQuest>
     /// </summary>
     public KillTileHook() : base(Match<TModTile>) { }
 }
-    

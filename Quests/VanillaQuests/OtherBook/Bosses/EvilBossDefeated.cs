@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
-using Terraria;
-using Terraria.ModLoader;
+﻿using QuestBooks.Assets;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
 {

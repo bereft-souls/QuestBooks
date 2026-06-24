@@ -7,7 +7,7 @@ namespace QuestBooks.Utilities;
 ///     Provides <see cref="Player"/> extensions.
 /// </summary>
 public static partial class Utils
-{   
+{
     /// <summary>
     ///     Determines whether the player has an item of all of the specified types in their inventory.
     /// </summary>
@@ -56,7 +56,7 @@ public static partial class Utils
     public static bool HasAnyItem(this Player player, bool[] set)
     {
         ArgumentNullException.ThrowIfNull(set);
-        
+
         for (var i = 0; i < set.Length; i++)
             if (set[i] && player.HasItem(i))
                 return true;
@@ -529,7 +529,7 @@ public static partial class Utils
     ///     .
     /// </returns>
     public static bool HasMount(this Player player) => !player.miscEquips[2].IsAir;
-    
+
     /// <summary>
     ///     Determines whether the player has any minecart equipped.
     /// </summary>
@@ -581,10 +581,10 @@ public static partial class Utils
         for (var i = 0; i < 4; i++)
         {
             var item = player.miscEquips[i];
-            
+
             if (item.IsAir)
                 continue;
-            
+
             yield return (item, i);
         }
     }
@@ -604,10 +604,10 @@ public static partial class Utils
         for (var i = 0; i < 4; i++)
         {
             var item = player.miscDyes[i];
-            
+
             if (item.IsAir)
                 continue;
-            
+
             yield return (item, i);
         }
     }

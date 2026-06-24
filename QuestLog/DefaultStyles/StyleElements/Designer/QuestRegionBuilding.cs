@@ -1,14 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using QuestBooks.Assets;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace QuestBooks.QuestLog.DefaultStyles
 {
@@ -55,7 +50,7 @@ namespace QuestBooks.QuestLog.DefaultStyles
             return result;
         }
 
-        protected static void ApplyMemberwiseValues(QuestLogElement element,  Dictionary<MemberInfo, object> values)
+        protected static void ApplyMemberwiseValues(QuestLogElement element, Dictionary<MemberInfo, object> values)
         {
             foreach (var member in values.Keys)
             {
@@ -197,9 +192,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         Vector2 newMinView = chapter.MinViewPoint;
 
                         if (oldMinView != newMinView)
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 chapter.MinViewPoint = oldMinView;
-                            }, () => {
+                            }, () =>
+                            {
                                 chapter.MinViewPoint = newMinView;
                             });
                     }
@@ -218,9 +215,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         Vector2 newMaxView = chapter.MaxViewPoint;
 
                         if (oldMaxView != newMaxView)
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 chapter.MaxViewPoint = oldMaxView;
-                            }, () => {
+                            }, () =>
+                            {
                                 chapter.MaxViewPoint = newMaxView;
                             });
                     }
@@ -235,9 +234,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         Vector2 newAnchor = chapter.ViewAnchor;
 
                         if (oldAnchor != newAnchor)
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 chapter.ViewAnchor = oldAnchor;
-                            }, () => {
+                            }, () =>
+                            {
                                 chapter.ViewAnchor = newAnchor;
                             });
                     }
@@ -274,9 +275,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         movingMinView = false;
 
                         if (oldMinView != Vector2.Zero)
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 chapter.MinViewPoint = oldMinView;
-                            }, () => {
+                            }, () =>
+                            {
                                 chapter.MinViewPoint = Vector2.Zero;
                             });
                     }
@@ -297,9 +300,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         movingMaxView = false;
 
                         if (oldMaxView != Vector2.Zero)
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 chapter.MaxViewPoint = oldMaxView;
-                            }, () => {
+                            }, () =>
+                            {
                                 chapter.MaxViewPoint = Vector2.Zero;
                             });
                     }
@@ -326,9 +331,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         movingAnchor = false;
 
                         if (oldAnchor != defaultAnchor)
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 chapter.ViewAnchor = oldAnchor;
-                            }, () => {
+                            }, () =>
+                            {
                                 chapter.ViewAnchor = defaultAnchor;
                             });
                     }
@@ -388,9 +395,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     else
                     {
                         var newMemberwiseValues = GetMemberwiseValues(element);
-                        AddHistory(() => {
+                        AddHistory(() =>
+                        {
                             ApplyMemberwiseValues(element, oldMemberwiseValues);
-                        }, () => {
+                        }, () =>
+                        {
                             ApplyMemberwiseValues(element, newMemberwiseValues);
                         });
                     }

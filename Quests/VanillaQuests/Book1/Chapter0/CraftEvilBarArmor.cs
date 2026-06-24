@@ -7,11 +7,11 @@ namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 public class CraftEvilBarArmor : QBQuest
 {
     private const string HeadTag = "CraftedEvilArmorHead";
-    
+
     private const string BodyTag = "CraftedEvilArmorBody";
-    
+
     private const string LegsTag = "CraftedEvilArmorLegs";
-    
+
     /// <summary>
     ///     Gets a value indicating whether the player has crafted the helmet piece of an armor set made
     ///     from an evil bar.
@@ -29,7 +29,7 @@ public class CraftEvilBarArmor : QBQuest
     ///     from an evil bar.
     /// </summary>
     public bool Legs { get; private set; }
-    
+
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion() => Head && Body && Legs;
@@ -40,7 +40,7 @@ public class CraftEvilBarArmor : QBQuest
         tag[BodyTag] = Body;
         tag[LegsTag] = Legs;
     }
-    
+
     public override void LoadProgress(TagCompound tag)
     {
         Head = tag.GetBool(HeadTag);
@@ -56,7 +56,7 @@ public class CraftEvilBarArmor : QBQuest
             {
                 return;
             }
-            
+
             var quest = QuestManager.GetQuest<CraftEvilBarArmor>();
 
             if (!quest.Head)

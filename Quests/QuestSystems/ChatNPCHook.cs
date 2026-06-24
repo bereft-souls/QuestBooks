@@ -9,21 +9,21 @@ public delegate void ChatNPCHookCallback(NPC npc, bool firstButton);
 public abstract class ChatNPCHook : GlobalNPC
 {
     public ChatNPCHookPredicate Predicate { get; init; }
-    
+
     public ChatNPCHookCallback Callback { get; init; }
 
     public ChatNPCHook(ChatNPCHookPredicate predicate, ChatNPCHookCallback callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
-        
+
         Predicate = predicate;
         Callback = callback;
     }
-    
+
     public ChatNPCHook(ChatNPCHookCallback callback) : this(null, callback) { }
-    
+
     public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => Predicate?.Invoke(entity) ?? true;
-    
+
     public override void OnChatButtonClicked(NPC npc, bool firstButton) => Callback.Invoke(npc, firstButton);
 }
 

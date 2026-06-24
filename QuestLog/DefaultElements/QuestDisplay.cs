@@ -1,17 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using QuestBooks.Assets;
 using QuestBooks.Quests;
 using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria;
 using Terraria.GameContent;
-using Terraria.ModLoader;
 using Terraria.UI.Chat;
 
 namespace QuestBooks.QuestLog.DefaultElements
@@ -108,7 +103,9 @@ namespace QuestBooks.QuestLog.DefaultElements
         /// <summary>
         /// Determines whether the "notification" indicator should be displayed on the "open quest log" button in the inventory.
         /// </summary>
-        [JsonIgnore][HideInDesigner] public virtual bool ShowNotification
+        [JsonIgnore]
+        [HideInDesigner]
+        public virtual bool ShowNotification
         {
             get => Unlocked() && (_showNotification ?? false);
             set => _showNotification = value;
@@ -313,7 +310,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             Rectangle contentArea = new(8, 80, 430, 450);
             TextSnippet snippet = null;
 
-        // Title:
+            // Title:
 
             if (title is null)
                 goto Contents;

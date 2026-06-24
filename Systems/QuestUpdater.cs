@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Linq;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using System.Linq;
 
 namespace QuestBooks.Systems
 {

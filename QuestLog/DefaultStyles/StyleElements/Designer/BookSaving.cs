@@ -1,12 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.Systems;
 using SDL2;
 using System.Collections.Generic;
 using System.IO;
-using Terraria;
-using Terraria.IO;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultStyles

@@ -1,13 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.Systems;
-using System;
 using System.Collections.Generic;
-using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
-using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader.IO;
 

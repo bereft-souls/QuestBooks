@@ -1,6 +1,4 @@
-﻿using Terraria;
-
-namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
+﻿namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
 public class AllPillarsDefeated : QBQuest
 {

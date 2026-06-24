@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Quests.QuestSystems;
-using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 

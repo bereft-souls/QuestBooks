@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Utilities;
-using System.Linq;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 

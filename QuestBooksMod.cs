@@ -1,6 +1,4 @@
 global using static QuestBooks.Utilities.Utils;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultStyles;
@@ -9,10 +7,8 @@ using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using QuestBooks.Systems.NetCode;
 using QuestBooks.Utilities;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using Terraria.ModLoader;
 
 namespace QuestBooks
 {

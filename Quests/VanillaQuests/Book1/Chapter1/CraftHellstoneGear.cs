@@ -18,7 +18,7 @@ public class CraftHellstoneGear : QBQuest
             {
                 return;
             }
-            
+
             QuestManager.MarkComplete<CraftHellstoneGear>();
         }
     }

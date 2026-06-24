@@ -1,6 +1,4 @@
-﻿using QuestBooks.Quests.QuestSystems;
-
-namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
+﻿namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
 public class BuyTeleporter : QBQuest
 {

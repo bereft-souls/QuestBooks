@@ -24,7 +24,7 @@ public class ShimmerPhase : QBQuest
     public sealed class ShimmerPhaseCheck : ModPlayer
     {
         private bool flag;
-        
+
         public override void PostUpdate()
         {
             var shimmering = Player.shimmering;

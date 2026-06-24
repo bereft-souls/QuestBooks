@@ -18,7 +18,7 @@ public class CraftHallowedGear : QBQuest
             {
                 return;
             }
-            
+
             QuestManager.CompleteQuest<CraftHallowedGear>();
         }
     }

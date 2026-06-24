@@ -1,11 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
-using System;
-using Terraria;
+﻿using QuestBooks.Assets;
 using Terraria.Audio;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 

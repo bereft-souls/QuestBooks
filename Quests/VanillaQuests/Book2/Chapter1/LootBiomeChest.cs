@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Quests.QuestSystems;
-using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
@@ -11,9 +10,9 @@ public class LootBiomeChest : QBQuest
     (
         TileID.Containers,
         ChestFrames.DungeonCorruption,
-        ChestFrames.DungeonCrimson, 
-        ChestFrames.DungeonHallow, 
-        ChestFrames.DungeonJungle, 
+        ChestFrames.DungeonCrimson,
+        ChestFrames.DungeonHallow,
+        ChestFrames.DungeonJungle,
         ChestFrames.DungeonTundra
     );
 }

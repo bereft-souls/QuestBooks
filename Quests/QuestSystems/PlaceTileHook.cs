@@ -15,12 +15,12 @@ public abstract class PlaceTileHook : GlobalTile
     ///     If <see langword="null"/>, evaluates as <see langword="true"/>.
     /// </remarks>
     public PlaceTilePredicate Predicate { get; init; }
-    
+
     /// <summary>
     ///     Gets the callback that is invoked when a tile is placed in the world and the predicate matches.
     /// </summary>
     public PlaceTileCallback Callback { get; init; }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="PlaceTileHook"/> class with the specified predicate and callback.
     /// </summary>
@@ -36,11 +36,11 @@ public abstract class PlaceTileHook : GlobalTile
     public PlaceTileHook(PlaceTilePredicate predicate, PlaceTileCallback callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
-        
+
         Predicate = predicate;
         Callback = callback;
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="PlaceTileHook"/> class with the specified callback.
     /// </summary>
@@ -55,17 +55,17 @@ public abstract class PlaceTileHook : GlobalTile
     public override void PlaceInWorld(int i, int j, int type, Item item)
     {
         var matches = Predicate?.Invoke(i, j, type, item) ?? true;
-        
+
         if (!matches)
         {
             return;
         }
-        
+
         Callback.Invoke(i, j, type, item);
     }
 }
 
-public abstract class PlaceTileHook<TQuest> : PlaceTileHook 
+public abstract class PlaceTileHook<TQuest> : PlaceTileHook
     where TQuest : Quest
 {
     /// <summary>
@@ -75,7 +75,7 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
     ///     The predicate that determines whether this hook should be invoked when a tile is placed in the world.
     /// </param>
     public PlaceTileHook(PlaceTilePredicate predicate) : base(predicate, Complete) { }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="PlaceTileHook{TQuest}"/> class.
     /// </summary>
@@ -83,7 +83,7 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
     ///     Checks for any tile placed in the world, regardless of type.
     /// </remarks>
     public PlaceTileHook() : base(Complete) { }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="PlaceTileHook{TQuest}"/> class.
     /// </summary>
@@ -104,7 +104,7 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
         ArgumentNullException.ThrowIfNull(set);
         Predicate = (_, _, tile, _) => Match(tile, set);
     }
-    
+
     public PlaceTileHook(params int[] types) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(types);
@@ -126,8 +126,8 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
     protected static void Complete(int i, int j, int type, Item item) => QuestManager.CompleteQuest<TQuest>();
 }
 
-public abstract class PlaceTileHook<TQuest, TModTile> : PlaceTileHook<TQuest> 
-    where TQuest : Quest 
+public abstract class PlaceTileHook<TQuest, TModTile> : PlaceTileHook<TQuest>
+    where TQuest : Quest
     where TModTile : ModTile
 {
     /// <summary>

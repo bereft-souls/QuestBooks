@@ -15,7 +15,7 @@ public class DefeatDayEmpress : QBQuest
             {
                 return;
             }
-            
+
             QuestManager.MarkComplete<DefeatDayEmpress>();
         }
     }

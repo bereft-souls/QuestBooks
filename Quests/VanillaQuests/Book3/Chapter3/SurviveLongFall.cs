@@ -17,7 +17,7 @@ public class SurviveLongFall : QBQuest
         {
             QuestManager.MarkComplete<SurviveLongFall>();
         }
-        
+
         orig(player, eventId);
     }
 }

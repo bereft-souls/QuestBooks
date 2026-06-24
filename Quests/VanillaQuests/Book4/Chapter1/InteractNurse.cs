@@ -6,7 +6,7 @@ namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 public class InteractNurse : QBQuest
 {
     private const string Tag = "NurseCoinsSpent";
-    
+
     /// <summary>
     ///     The amount of coins the player must spend at the nurse in order to complete the quest.
     /// </summary>
@@ -14,12 +14,12 @@ public class InteractNurse : QBQuest
     ///     1 gold coin.
     /// </value>
     public static readonly int CoinsTarget = Item.buyPrice(0, 1);
-    
+
     /// <summary>
     ///     The amount of coins the player has spent at the nurse so far.
     /// </summary>
     public int CoinsSpent { get; private set; }
-    
+
     public override QuestType QuestType => QuestType.Player;
 
     public override bool CheckCompletion() => CoinsTarget >= CoinsSpent;

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using QuestBooks.Systems;
+﻿using QuestBooks.Systems;
 using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.QuestSystems;
@@ -17,7 +16,7 @@ public abstract class CraftItemHook : GlobalItem
     ///     If <see langword="null"/>, evaluates as <see langword="true"/>.
     /// </remarks>
     public CraftItemHookPredicate Predicate { get; init; }
-    
+
     /// <summary>
     ///     Gets the callback that is invoked when an item is crafted and the predicate matches.
     /// </summary>
@@ -38,11 +37,11 @@ public abstract class CraftItemHook : GlobalItem
     public CraftItemHook(CraftItemHookPredicate predicate, CraftItemHookCallback callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
-        
+
         Predicate = predicate;
         Callback = callback;
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="CraftItemHook"/> class with the specified callback.
     /// </summary>
@@ -60,7 +59,7 @@ public abstract class CraftItemHook : GlobalItem
     {
         if (context is not RecipeItemCreationContext recipe)
             return;
-        
+
         Callback.Invoke(item, recipe);
     }
 }
@@ -75,7 +74,7 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
     ///     The predicate that determines whether this hook should be invoked when an item is crafted.
     /// </param>
     public CraftItemHook(CraftItemHookPredicate predicate) : base(predicate, Complete) { }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class.
     /// </summary>
@@ -83,7 +82,7 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
     ///     Checks for any item crafted, regardless of type.
     /// </remarks>
     public CraftItemHook() : base(Complete) { }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class with the specified item type.
     /// </summary>
@@ -98,7 +97,7 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
         Predicate = item => Match(item, type);
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class with the specified set of item types.
     /// </summary>
@@ -113,7 +112,7 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
         ArgumentNullException.ThrowIfNull(set);
         Predicate = item => Match(item, set);
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class with the specified array of item types.
     /// </summary>
@@ -162,8 +161,8 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
     protected static void Complete(Item item, RecipeItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
 }
 
-public abstract class CraftItemHook<TQuest, TModItem> : CraftItemHook<TQuest> 
-    where TQuest : Quest 
+public abstract class CraftItemHook<TQuest, TModItem> : CraftItemHook<TQuest>
+    where TQuest : Quest
     where TModItem : ModItem
 {
     /// <summary>

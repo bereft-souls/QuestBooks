@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using Terraria.ModLoader;
 
 namespace QuestBooks.Controls
 {
