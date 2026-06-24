@@ -52,8 +52,8 @@ public abstract class CatchFishHook : ModPlayer
     ///     Checks for any fish caught, regardless of type.
     /// </remarks>
     public CatchFishHook(CatchFishCallback callback) : this(null, callback) { }
-
-    public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
+    
+    public sealed override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
     {
         if (itemDrop <= ItemID.None)
             return;

@@ -59,7 +59,7 @@ public abstract class BuyItemHook : GlobalItem
 
     public sealed override bool AppliesToEntity(Item entity, bool lateInstantiation) => true;
 
-    public override void OnCreated(Item item, ItemCreationContext context)
+    public sealed override void OnCreated(Item item, ItemCreationContext context)
     {
         if (context is not BuyItemCreationContext buy)
             return;

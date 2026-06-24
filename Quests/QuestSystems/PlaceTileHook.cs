@@ -52,7 +52,7 @@ public abstract class PlaceTileHook : GlobalTile
     /// </remarks>
     public PlaceTileHook(PlaceTileCallback callback) : this(null, callback) { }
 
-    public override void PlaceInWorld(int i, int j, int type, Item item)
+    public sealed override void PlaceInWorld(int i, int j, int type, Item item)
     {
         var matches = Predicate?.Invoke(i, j, type, item) ?? true;
 
