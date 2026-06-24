@@ -1,5 +1,5 @@
-﻿using QuestBooks.Systems;
-using Terraria.ObjectData;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
@@ -16,17 +16,5 @@ public class Break10kTiles : QBQuest
 
     public override bool CheckCompletion() => TilesBroken >= TargetTiles;
 
-    private sealed class TileBreakGlobalTile : GlobalTile
-    {
-        public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
-        {
-            if (Main.dedServ)
-                return;
-
-            if (fail || effectOnly || (Main.tileFrameImportant[type] && !TileObjectData.IsTopLeft(i, j)))
-                return;
-
-            QuestManager.GetQuest<Break10kTiles>().TilesBroken++;
-        }
-    }
+    public sealed class KillAnyTileCheck() : KillTileHook((_, _, _) => QuestManager.GetQuest<Break10kTiles>().TilesBroken++);
 }
