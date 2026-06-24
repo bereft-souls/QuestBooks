@@ -9,7 +9,7 @@ public class RunMarathon : QBQuest
     /// </summary>
     public const int TargetTiles = 69200;
 
-    public const string TagKey = "ShimmerPixelsMoved";
+    public const string TagKey = "PlayerPixelsMoved";
 
     /// <summary>
     ///     Gets the total number of pixels the player has walked through.
