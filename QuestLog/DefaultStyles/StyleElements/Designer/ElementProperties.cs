@@ -1,16 +1,11 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using SDL2;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultStyles
@@ -115,10 +110,12 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         questInfoSwipeOffset = -questInfoTarget.Height;
                         SoundEngine.PlaySound(SoundID.MenuTick);
 
-                        AddHistory(() => {
+                        AddHistory(() =>
+                        {
                             chapter.Elements.Add(element);
                             SortedElements = null;
-                        }, () => {
+                        }, () =>
+                        {
                             chapter.Elements.Remove(element);
                             element.OnDelete();
                         });

@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
-using Terraria;
+﻿using QuestBooks.Assets;
 using Terraria.GameContent;
 
 namespace QuestBooks.QuestLog.DefaultChapters

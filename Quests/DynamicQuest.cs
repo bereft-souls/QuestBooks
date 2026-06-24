@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace QuestBooks.Quests
+﻿namespace QuestBooks.Quests
 {
     public abstract class DynamicQuest : Quest
     {

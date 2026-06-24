@@ -107,7 +107,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	GetEvilBars: {
+	CraftEvilBars: {
 		Title: Vile and Rancid
 		Contents:
 			'''
@@ -140,7 +140,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	SturdyFossils: {
+	GetSturdyFossils: {
 		Title: Archeologist In The Making
 		Contents:
 			'''
@@ -150,7 +150,7 @@ Chapter0: {
 		Tooltip: Obtain an Extractinator & 15 Sturdy Fossils
 	}
 
-	PinkPearl: {
+	GetPinkPearl: {
 		Title: Pearls Before Oysters
 		Contents: Fish up Oysters in the desert to find a Pink Pearl, the rarest kind!
 		Tooltip: ---
@@ -233,7 +233,7 @@ Chapter0: {
 		Tooltip: Craft at an Evil Altar
 	}
 
-	GetEvilBarArmor: {
+	CraftEvilBarArmor: {
 		Title: Coated in Evil
 		Contents: Using the {Shadow Scaled / Tissue Samples}, craft yourself a {Shadow / Crimtane} armorset to prepare for the challenges ahead.
 		Tooltip: Craft any Evil Bar armor set
@@ -408,7 +408,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	KillBloodMoonReel1: {
+	KillBloodMoonReel: {
 		Title: Bloody Fish!
 		Contents: Fish up a Bloodmoon monster and defeat it for special loot.
 		Tooltip: ---
@@ -485,7 +485,7 @@ Chapter1: {
 		Title: Torch God
 		Contents:
 			'''
-			Invoke the wrath of the God of Torches, and survived long enough to earn its blessing.
+			Invoke the wrath of the God of Torches, and survive long enough to earn its blessing.
 			To Invoke The Torch God, show your worth by placing over 100 torches in one place while Underground)
 			'''
 		Tooltip: Recieve the Torch God's Blessing
@@ -634,7 +634,7 @@ Chapter1: {
 		Tooltip: Obtain Ashwood
 	}
 
-	GetHellstoneGear: {
+	CraftHellstoneGear: {
 		Title: Hell's Alloy
 		Contents: Using Hellstone ore and Obsidian at a Hellforge, alloy yourself a scorching bar of Hellstone and craft yourself some blazing new gear!
 		Tooltip: ---

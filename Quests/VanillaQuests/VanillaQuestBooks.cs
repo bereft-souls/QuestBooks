@@ -1,10 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultStyles;
 using System.Text;
-using Terraria;
-using Terraria.ModLoader;
 
 namespace QuestBooks.Quests.VanillaQuests
 {

@@ -7,10 +7,868 @@ blueprint: {
 Name: World Building
 
 Chapter0: {
+	CraftFurnace: {
+		Title: Hot Topic
+		Contents: Craft a Furnace, capable of smelting ores into bars, alloying bricks and more!
+		Tooltip: ---
+	}
+
+	CraftAnvil: {
+		Title: Heavy Metal
+		Contents: Craft an Anvil, enabling you to smith tools and weaponry using metal bars!
+		Tooltip: ---
+	}
+
+	CraftSawmill: {
+		Title: Sawed-on
+		Contents: Construct a Sawmill, an advanced woodworking device capable of crafting plenty of furniture and some utilitary pieces.
+		Tooltip: ---
+	}
+
+	CraftLoom: {
+		Title: A Looming Feeling
+		Contents: Craft a Loom, a device letting you craft Silk from cobwebs, and use it for various stitching activities!
+		Tooltip: ---
+	}
+
+	CraftBed: {
+		Title: Urgh.. 5 more minutes mom
+		Contents:
+			'''
+			Construct a Bed using silk and wood at a Sawmill.
+			Beds allow you to change your spawnpoint and to rapidly advance time while sleeping in them!
+			'''
+		Tooltip: ---
+	}
+
+	CraftSink: {
+		Title: Let that Sink In
+		Contents: There are some recipes that require you to be near pools of different liquids, so craft yourself a Sink to have a water source of any craft!
+		Tooltip: ---
+	}
+
+	CraftCauldron: {
+		Title: On Todays Menu: Cauldron Surprise
+		Contents: Construct a Cooking Pot, with which you can make plenty of food recipes!
+		Tooltip: ---
+	}
+
+	GetHellforge: {
+		Title: Scorching Subject
+		Contents: Obtain the Hellforge, a demonic furnace capable of smelting even tougher metals!
+		Tooltip: ---
+	}
+
+	GetAlchemyStation: {
+		Title: Advanced Alchemy
+		Contents: Acquire an Alchemy Station deep within the Dungeon, a special brewing station that can salvage some of the recipe cost of anything it crafts!
+		Tooltip: ---
+	}
+
+	BuyTinkerersWorkshop: {
+		Title: Tinker-belle
+		Contents:
+			'''
+			Purchase and place down a Tinkerer's Workshop.
+			This workshop allows you to combine certain accessories together to make even stronger equipment!
+			'''
+		Tooltip: ---
+	}
+
+	PlaceBottle: {
+		Title: Novice Brewing
+		Contents: Craft and place down a Bottle on a platform or table of any kind, enabling you to make potions!
+		Tooltip: ---
+	}
+
+	BuySafe: {
+		Title: Safely Secured
+		Contents:
+			'''
+			Purchase a Safe from the Merchant.
+			Safes are another private and personal seperate from the Piggy Bank that can be places on any surface.
+			'''
+		Tooltip: ---
+	}
+
+	BuyPiggyBank: {
+		Title: Little Savings Jar
+		Contents:
+			'''
+			Purchase a Piggy Bank from the Merchant, a private and personal inventory space.
+			Money placed within the piggy bank will still be available whenever you buy anything, but will also be safe from getting lost when you die!
+			'''
+		Tooltip: ---
+	}
+
+	BuyDefendersForge: {
+		Title: Defending your Stash
+		Contents: Purchase a Defender's Forge from the Tavernkeep, a private and personal storage space seperate from the Piggy Bank.
+		Tooltip: ---
+	}
+
+	CraftVoidBag: {
+		Title: Personal Dimensional Pocket
+		Contents:
+			'''
+			Construct a Void Vault and craft a Void Bag.
+			The Void Vault is another private and personal storage space, seperate from the rest.
+			Uniquely, a Void Vault will be connected to a players Void Bag, allowing to access it from anywhere and for the bag to collect items directly into it if the player's invetory is full!
+			'''
+		Tooltip: ---
+	}
+
+	// ------------------------
+	// Advanced Base Needs
+	
+	CraftHardmodeAnvil: {
+		Title: Fantasy Metal
+		Contents: Construct {a Mythril / an Orichalcum} Anvil, {flavour text}
+		Tooltip: ---
+	}
+
+	CraftHardmodeFurnace: {
+		Title: Fantastical Matter
+		Contents: Construct {an Adamantite / a Titanium} Forge using the bare ores, allowing you to smelt them and much more!
+		Tooltip: ---
+	}
+
+	BuyAutohammer: {
+		Title: Autonomous Hammer Time!
+		Contents:
+			'''
+			Purchase the Autohammer from the Truffle after the defeat of Plantera.
+			The Autohammer is a specialized device capable of alloying Chlorophyte together with Glowing Mushrooms into a marvelous alloy called Shroomite.
+			'''
+		Tooltip: ---
+	}
+
+	CraftChlorophyteExtractinator: {
+		Title: Behold! My Chlor-extractinator-inator!
+		Contents: Reinforce an Extractinator with Chlorophyte to get the Chlorophyte Extractinator, a stronger machine capable of some special new features; like cleansing infected blocks or converting materials into an alternate version..
+		Tooltip: ---
+	}
+
+	GetAncientManipulator: {
+		Title: Ancient Doomscrafter
+		Contents: Place down the Ancient Manipulator, the cultists enchanted apparatus capable of crafting celestial items.
+		Tooltip: ---
+	}
 }
 
 Chapter1: {
+	BuildTown: {
+		Title: Town Skylines
+		Contents:
+			'''
+			Establish your first town by having 3 Townsfolk move in close vicinity to each other!
+
+			Towns drastically reduce the spawnrate of enemies around them, and the townsfolk will influence each others happiness.
+			'''
+		Tooltip: ---
+	}
+
+	HouseGuide: {
+		Title: Guiding the Way
+		Contents:
+			'''
+			Have the Guide move in to one of your towns!
+
+			They've been waiting for one from the beginning.
+			'''
+		Tooltip: ---
+	}
+
+	InteractGuide: {
+		Title: Thorough Learning
+		Contents: Ask the guide about 50 unique materials and observe plenty of new recipes!
+		Tooltip: ---
+	}
+
+	HouseNurse: {
+		Title: Need a Medic!
+		Contents:
+			'''
+			Have the Nurse move in to one of your towns!
+
+			She'll come around once you have more health and the Merchant has moved in aswell.
+			'''
+		Tooltip: ---
+	}
+
+	InteractNurse: {
+		Title: The Frequent Flyer
+		Contents: Spend over 1 gold being treated by the nurse.
+		Tooltip: ---
+	}
+
+	HouseMerchant: {
+		Title: Rope? Torches? Knives?
+		Contents:
+			'''
+			Have the Merchant move in to one of your towns!
+
+			They'll come around once you have enough savings to afford his wares.
+			'''
+		Tooltip: ---
+	}
+
+	BuyBugNet: {
+		Title: I'm Ready! I'm Ready!
+		Contents:
+			'''
+			Purchase a Bug Net from the Merchant, with which you can catch plenty of critters and bugs to use as fishing bait.
+			It seems like it could be upgraded further..
+			'''
+		Tooltip: ---
+	}
+
+	HouseDemolitionist: {
+		Title: Miner's Favorites
+		Contents:
+			'''
+			Have the Demolitionist move in to one of your towns!
+
+			He'll move in once you've acquired any explosive tool.
+			'''
+		Tooltip: ---
+	}
+
+	HouseDyeTrader: {
+		Title: TODO
+		Contents:
+			'''
+			Have the Dye Trader move in to one of your towns!
+
+			He'll move in once you've acquired a Dye or dye-making item, and atleast 3 other tenants have arrived.
+			'''
+		Tooltip: ---
+	}
+
+	InteractDyeTrader: {
+		Title: Peculiar Pigments
+		Contents: Trade the Dye Trader a strange plant in for a random special dye.
+		Tooltip: ---
+	}
+
+	HouseAngler: {
+		Title: Fishing Fin-atic
+		Contents:
+			'''
+			Have the Angler move in to one of your towns!
+
+			Once found floating in the Ocean, they'll move into a vacant house.
+			'''
+		Tooltip: ---
+	}
+
+	HouseZoologist: {
+		Title: Were-fox
+		Contents:
+			'''
+			Have the Zoologist move in to one of your towns!
+
+			She'll arrive once atleast 10% of your Bestiary has been unlocked.
+			'''
+		Tooltip: ---
+	}
+
+	HouseDryad: {
+		Title: Nature's Guardian
+		Contents:
+			'''
+			Have the Dryad move in to one of your towns!
+
+			She'll move in once a great evil force has been defeated.
+			'''
+		Tooltip: ---
+	}
+
+	HousePainter: {
+		Title: Buckets of Paint
+		Contents:
+			'''
+			Have the Painter move in to one of your towns!
+
+			He'll move in when alteast 8 other tenants have moved into your towns.
+			'''
+		Tooltip: ---
+	}
+
+	HouseGolfer: {
+		Title: Four!
+		Contents:
+			'''
+			Have the Golfer move in to one of your towns!
+
+			Once found in golfing in the Underground Desert, he'll move into a vacant house.
+			'''
+		Tooltip: ---
+	}
+
+	HouseArmsDealer: {
+		Title: Guns Blazing
+		Contents:
+			'''
+			Have the Arms Dealer move in to one of your towns!
+
+			He'll move in once you acquire any firearm
+			'''
+		Tooltip: ---
+	}
+
+	HouseTavernkeep: {
+		Title: Another Round on the House!
+		Contents:
+			'''
+			Have the Tavernkeep move in to one of your towns!
+
+			Once found passed out somewhere in world after the defeat of an Evil Boss, he'll move into an vacant house
+			'''
+		Tooltip: ---
+	}
+
+	HouseStylist: {
+		Title: Livin' With Style
+		Contents:
+			'''
+			Have the Stylist move in to one of your towns!
+
+			Once rescued from a Spider's Nest, she'll move into a vacant house.
+			'''
+		Tooltip: ---
+	}
+
+	HouseGoblinTinkerer: {
+		Title: shtinker.
+		Contents:
+			'''
+			Have the Goblin Tinkerer move in to one of your towns!
+
+			After the defeat of the Goblin Army, you may find him tied down somewhere in the Caverns.
+			'''
+		Tooltip: ---
+	}
+
+	BuyRocketBoots: {
+		Title: Rocket Science
+		Contents:
+			'''
+			Purchase the Rocket Boots, a great accessory allowing short flight.
+
+			Could works as a great base for a legendary pair of boots..
+			'''
+		Tooltip: ---
+	}
+
+	HouseWitchDoctor: {
+		Title: Unconventional Medicine
+		Contents:
+			'''
+			Have the Witch Doctor move in to one of your towns!
+
+			They'll move in after the defeat of the Jungle Matriarch.
+			'''
+		Tooltip: ---
+	}
+
+	BuyImbuingStation: {
+		Title: Flask, and you shall recieve
+		Contents:
+			'''
+			Purchase an Imbuing Station from the Witch Doctor.
+
+			The Imbuing Station can be used to craft special Flasks, which coat all Melee and Whip weapons with a specific debuff.
+			'''
+		Tooltip: ---
+	}
+
+	HouseClothier: {
+		Title: Chipping in with Style
+		Contents:
+			'''
+			Have the Clothier move in to one of your towns!
+
+			He'll move in after the defeat of the Old Man's Curse by the Dungeon.
+			'''
+		Tooltip: ---
+	}
+
+	HouseMechanic: {
+		Title: Mechanical Mastermind
+		Contents:
+			'''
+			Have the Mechanic move in to one of your towns!
+
+			Once rescued from the Dungeon, she'll move into a vacant house.
+			'''
+		Tooltip: ---
+	}
+
+	BuyTeleporter: {
+		Title: WAAAARRRPPZZOONNE!!!!
+		Contents: Purchase a pair of Teleporters from the Mechanic, and using wiring connect them together to teleport between them instantly!
+		Tooltip: ---
+	}
+
+	HousePartyGirl: {
+		Title: Let's Get This Party Starting!
+		Contents:
+			'''
+			Have the Party Girl move in to one of your towns!
+
+			She'll eventually move in once yo have enough tenants to throw parties!
+			'''
+		Tooltip: ---
+	}
+
+	EventParty: {
+		Title: Jolly Jamboree
+		Contents: What you're celebrating doesn't matter, just throw a party already!
+		Tooltip: ---
+	}
+
+	InteractPartyGirl: {
+		Title: The Cake is a Truth
+		Contents:
+			'''
+			Talk with the Party Girl during a Party to get a sweet slice of cake!
+
+			Cake can be placed down and used as a short but potent movement and mining speed buff.
+			'''
+		Tooltip: ---
+	}
+
+	HouseWizard: {
+		Title: Hocus Pocus
+		Contents:
+			'''
+			Have the Wizard move in to one of your towns!
+
+			Once found in the Caverns, he'll move into a vacant house
+			'''
+		Tooltip: ---
+	}
+
+	HouseTaxCollector: {
+		Title: A Tenants Greatest Nightmare
+		Contents:
+			'''
+			Have the Tax Collector move in to one of your towns!
+
+			After purifying the Tortured Soul in the Underworld, he'll move into a vacant house.
+			'''
+		Tooltip: ---
+	}
+
+	InteractTaxCollector: {
+		Title: Rent is Due
+		Contents:
+			'''
+			Have the Tax Collector accumulate 25 gold at once for you to collect.
+
+			Tip: His maximum capacity will increase or decrease based on his happiness, so make sure hes content!
+			'''
+		Tooltip: ---
+	}
+
+	HouseTruffle: {
+		Title: It Can Talk?!
+		Contents: Build a house in a surface mushroom biome and have the Truffle move in.
+		Tooltip: ---
+	}
+
+	HousePirate: {
+		Title: All Aboard!
+		Contents:
+			'''
+			Have the Pirate move in to one of your towns!
+
+			After the defeat of the Pirate Invasion, this Pirate will move into a vacant house.
+			'''
+		Tooltip: ---
+	}
+
+	HouseSteampunker: {
+		Title: Cogworks and Steam
+		Contents:
+			'''
+			Have the Steampunker move in to one of your towns!
+
+			She'll move in after a great mechanical terror has been defeated.
+			'''
+		Tooltip: ---
+	}
+
+	FlyKwadRacer: {
+		Title: Kwad Racing!
+		Contents: Fly a Kwad Racer into outer space.
+		Tooltip: ---
+	}
+
+	HouseCyborg: {
+		Title: Beep Boop
+		Contents:
+			'''
+			Have the Cyborg move in to one of your towns!
+
+			He'll move in once a giant floral menace has been defeated.
+			'''
+		Tooltip: ---
+	}
+
+	HousePrincess: {
+		Title: Welcome Home, Your Highness
+		Contents:
+			'''
+			Have the Princess move in to one of your towns!
+
+			She'll happily move in once you have housed every possible tenant.
+			She gets along with everyone!
+			'''
+		Tooltip: ---
+	}
+
+	HouseAllTownNPCs: {
+		Title: Real Estate Agent
+		Contents: Have all possible town NPCs living in your world.
+		Tooltip: ---
+	}
+
+	InteractTravellingMerchant: {
+		Title: Occasional Wares
+		Contents: Buy from the Traveling Merchant, who occasionally visits one of your towns with different items to buy each time!
+		Tooltip: ---
+	}
+
+	PlaceCavernsPylon: {
+		Title: Caverns Pylon
+		Contents: Establish a town in the Caverns and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceForestPylon: {
+		Title: Forest Pylon
+		Contents: Establish a town in the Forest and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceJunglePylon: {
+		Title: Jungle Pylon
+		Contents: Establish a town in the Jungle and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceTundraPylon: {
+		Title: Tundra Pylon
+		Contents: Establish a town in the Snow Biome and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceSurfaceMushroomPylon: {
+		Title: Surface Mushroom Pylon
+		Contents: Establish a town in a Mushroom Biome and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceHallowedPylon: {
+		Title: Halloween Pylon
+		Contents: Establish a town in the Hallow and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceOceanPylon: {
+		Title: Ocean Pylon
+		Contents: Establish a town in the Ocean and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceDesertPylon: {
+		Title: Desert Pylon
+		Contents: Establish a town in the Desert and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceAetherPylon: {
+		Title: Aether Pylon
+		Contents: Transmute any Pylon to get the Aether Pylon, and construct it within a town in the Aether.
+		Tooltip: ---
+	}
+
+	PlaceUnderworldPylon: {
+		Title: Underworld Pylon
+		Contents: Establish a town in the Underworld and construct a functioning Pylon in it.
+		Tooltip: ---
+	}
+
+	PlaceUniversalPylon: {
+		Title: Universal Pylon
+		Contents: Purchase and construct the Universal Pylon, which can be placed anywhere and hook up to the Pylon network without any town requirement.
+		Tooltip: ---
+	}
+
+	EnterGraveyard: {
+		Title: Quiet Neighborhood
+		Contents:
+			'''
+			Enter a misty graveyard filled with the surly dead.
+
+			Graveyards can spawn night mobs and special enemies, and certain tenants may sell new items within them!
+			'''
+		Tooltip: ---
+	}
+
+	GetRavenFeather: {
+		Title: That's So Raven
+		Contents: Obtain a Raven's Feather from Crows in a Graveyard.
+		Tooltip: ---
+	}
+
+	InteractTownPet: {
+		Title: Feeling Petty
+		Contents: Deliver headpats to the town pet.
+		Tooltip: ---
+	}
+
+	InteractTownNPCMaxHappiness: {
+		Title: Leading Landlord
+		Contents: Meet with a tenant who's as happy as they possibly can be!
+		Tooltip: ---
+	}
+
+	CombatTownNPCs: {
+		Title: Training Day
+		Contents: Get your villagers fully combat ready.
+		Tooltip: ---
+	}
+
+	HouseSurlySlime: {
+		Title: Bloody Adorable
+		Contents:
+			'''
+			Bring the Surly Slime into one of your towns!
+
+			The Surly Slime can be fished up during a Blood Moon.
+			'''
+		Tooltip: ---
+	}
+
+	HouseMysticSlime: {
+		Title: The Majesty and the Frog
+		Contents:
+			'''
+			Bring the Mystic Slime into one of your towns!
+
+			Using Purification Powder, find a Mystic Frog in the Jungle and cure the Mystic Slime of their unfortunate circumstance!
+
+			The process does not involve a kiss, however..
+			'''
+		Tooltip: ---
+	}
+
+	HouseSquireSlime: {
+		Title: Adorable Recruit
+		Contents:
+			'''
+			Bring a Squire Slime into one of your towns!
+
+			Recruit a slime by dropping them a copper helmet or shortsword.
+			'''
+		Tooltip: ---
+	}
+
+	HouseCoolSlime: {
+		Title: Party Gooper
+		Contents:
+			'''
+			Bring the Cool Slime into one of your towns!
+
+			The Cool Slime is drawn to parties, and can hop into your vacant houses when one is ongoing!
+			'''
+		Tooltip: ---
+	}
+
+	HouseClumsySlime: {
+		Title: Clumsily Drifting
+		Contents:
+			'''
+			Bring the Clumsy Slime into one of your towns!
+
+			The Clumsy Slime can be found drifting around the space layer, hanging from a balloon.
+			'''
+		Tooltip: ---
+	}
+
+	HouseNerdySlime: {
+		Title: Nerd Alert
+		Contents:
+			'''
+			Bring the Nerdy Slime into one of your Towns!
+
+			The Nerdy Slime can be rescued from the coalesced body of King Slime.
+			'''
+		Tooltip: ---
+	}
+
+	HouseDivaSlime: {
+		Title: Diva Alert
+		Contents:
+			'''
+			Bring the Diva Slime into one of your towns!
+
+			Acquire some Sparkly Slime Balloons from the Queen Slime and find a way to bring them to life.
+
+			They seem to shimmer with potential..
+			'''
+		Tooltip: ---
+	}
+
+	HouseElderSlime: {
+		Title: Respect your Elders
+		Contents:
+			'''
+			Bring the Elder Slime into one of your towns!
+
+			The Elder Slime can be found stuck in a locked chest somewhere in the Caverns, be sure to always have a Golden Key in hand!
+			'''
+		Tooltip: ---
+	}
 }
 
 Chapter2: {
+	InfoBuffFurniture: {
+		Title: Furniture Buffs
+		Contents:
+			'''
+			Some tiles and furnitures have more use than just looking cool.
+
+			Campfires boost your life regeneration, Sunflowers can lower mob spawn rates and more!
+
+			Be sure to litter those around whenever you need some extra help!
+			'''
+		Tooltip: ---
+	}
+
+	CraftCampfire: {
+		Title: Bonfire Lit
+		Contents:
+			'''
+			Construct a campfire, providing considerable light and improving life regeneration in the area around it.
+
+			Tip: check the Buffs icons right below your hotbar to see when its applied or not!
+			'''
+		Tooltip: ---
+	}
+
+	CraftStarinaBottle: {
+		Title: Starry Shine
+		Contents: Craft a Star in a Bottle, a makeshift magical ornament that will hasten your mana regeneration!
+		Tooltip: ---
+	}
+
+	CraftHeartLantern: {
+		Title: Healing Glow
+		Contents: Craft a Heart Lantern, a magical lightsource that hastens your life regeneration!
+		Tooltip: ---
+	}
+
+	GetBastStatue: {
+		Title: Bastion of Defense
+		Contents: Acquire a Bast Statue, found within underground cabins in the underground desert or their sandstone chests.
+		Tooltip: ---
+	}
+
+	InfoBuffStations: {
+		Title: Station Buffs
+		Contents:
+			'''
+			Some tiles can be right-clicked on to apply a buff that persists until you die.
+
+			Most of these special furniture pieces are scattered throughout the game and provide great boons for different niches.
+			'''
+		Tooltip: ---
+	}
+
+	BuyCrystalBall: {
+		Title: Pondering it
+		Contents:
+			'''
+			Acquire a Crystal Ball, available for purchase from the Wizard.
+			When used, the crystal ball will minorly increase all your Mage stats!
+			'''
+		Tooltip: ---
+	}
+
+	BuyAmmoBox: {
+		Title: Need More Bullets
+		Contents:
+			'''
+			Acquire an Ammo Box, occasionally sold by the Traveling Merchant.
+			When used, the ammo box will lower the chances of your Ranged weapons using up ammo!
+			'''
+		Tooltip: ---
+	}
+
+	GetBewitchingTable: {
+		Title: Conjuring Spell
+		Contents:
+			'''
+			Acquire a Bewitching Table, found somewhere within the Dungeon.
+			When used, the table will grant a buff that increases your Minion slots by 1!
+			'''
+		Tooltip: ---
+	}
+
+	GetSharpeningStation: {
+		Title: Grindin' 'till it's Perfect
+		Contents:
+			'''
+			Acquire a Sharpening Station, occasionally found within underground cabins in the Underground Jungle.
+			When used, the station will grant you increased Armor Penetration on all Melee hits!
+			'''
+		Tooltip: ---
+	}
+
+	InfoArena: {
+		Title: Arenas
+		Contents: ""
+		Tooltip: ---
+	}
+
+	GetSundial: {
+		Title: I Don't Have All Day!
+		Contents:
+			'''
+			Acquire an Enchanted Sundial, a rare reward from fishing crates in Hardmode capable of fast-forwarding to the next day once a week or skipping Blood Moons!
+			If only you could transmute it into an Enchanted Moondial, aswell..
+			'''
+		Tooltip: ---
+	}
+
+	GetAnyBanner: {
+		Title: Your Kind Are Not Welcome Here
+		Contents:
+			'''
+			Recieve a Mob Banner for defeating 50 enemies of the same type.
+			When placed, they increase your damage towards the specified enemy and lessen the damage from them in a given area!
+			'''
+		Tooltip: ---
+	}
+
+	CraftAsphalt: {
+		Title: Myway or the Highway
+		Contents: "Buy a Blend-o-matic from the Steampunker and use it to craft Asphalt Blocks, which allow you to accelerate aslong as youre walking on them! "
+		Tooltip: ---
+	}
+
+	BuildPlatforms: {
+		Title: Is this a Platformer now?
+		Contents:
+			'''
+			Place a few rows of platforms to act as a makeshift arena.
+			Platforms are unique in allowing players to phase through and descend through them with ease, making them great for combat!
+			Some encounters are biome specific, so you may need to construct a few arenas of varying sizes based on the fight.
+			'''
+		Tooltip: ---
+	}
 }

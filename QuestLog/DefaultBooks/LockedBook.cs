@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultQuestBooks;
 using Terraria.Localization;
 

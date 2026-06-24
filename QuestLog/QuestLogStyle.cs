@@ -1,10 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.Systems;
 using System.Collections.Generic;
-using Terraria;
-using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
 

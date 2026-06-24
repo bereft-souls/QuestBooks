@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using System.Linq;
-using Terraria;
+﻿using System.Collections.Generic;
 using Terraria.GameInput;
 
 namespace QuestBooks.QuestLog.DefaultStyles

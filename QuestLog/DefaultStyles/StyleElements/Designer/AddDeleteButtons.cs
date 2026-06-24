@@ -1,13 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.QuestLog.DefaultChapters;
 using QuestBooks.QuestLog.DefaultQuestBooks;
 using QuestBooks.Systems;
 using SDL2;
-using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultStyles
@@ -42,11 +38,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     QuestManager.QuestBooks.Add(newBook);
                     SoundEngine.PlaySound(SoundID.MenuTick);
 
-                    AddHistory(() => {
+                    AddHistory(() =>
+                    {
                         QuestManager.QuestBooks.Remove(newBook);
                         if (newBook == SelectedBook)
                             SelectBook(null);
-                    }, () => {
+                    }, () =>
+                    {
                         QuestManager.QuestBooks.Add(newBook);
                     });
                 }
@@ -66,11 +64,13 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     book.Chapters.Add(newLine);
                     SoundEngine.PlaySound(SoundID.MenuTick);
 
-                    AddHistory(() => {
+                    AddHistory(() =>
+                    {
                         book.Chapters.Remove(newLine);
                         if (SelectedChapter == newLine)
                             SelectChapter(null);
-                    }, () => {
+                    }, () =>
+                    {
                         book.Chapters.Add(newLine);
                     });
                 }
@@ -118,9 +118,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         SelectBook(null);
                         SoundEngine.PlaySound(SoundID.MenuTick);
 
-                        AddHistory(() => {
+                        AddHistory(() =>
+                        {
                             QuestManager.QuestBooks.Add(book);
-                        }, () => {
+                        }, () =>
+                        {
                             QuestManager.QuestBooks.Remove(book);
                             if (book == SelectedBook)
                                 SelectBook(null);
@@ -177,9 +179,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
                         SoundEngine.PlaySound(SoundID.MenuTick);
 
-                        AddHistory(() => {
+                        AddHistory(() =>
+                        {
                             book.Chapters.Add(chapter);
-                        }, () => {
+                        }, () =>
+                        {
                             book.Chapters.Remove(chapter);
                             if (chapter == SelectedChapter)
                                 SelectChapter(null);

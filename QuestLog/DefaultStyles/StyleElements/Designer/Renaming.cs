@@ -1,11 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using QuestBooks.QuestLog.DefaultChapters;
+﻿using QuestBooks.QuestLog.DefaultChapters;
 using QuestBooks.QuestLog.DefaultQuestBooks;
-using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultStyles
@@ -83,9 +80,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     string lastNameKey = lastBookName;
                     string newNameKey = basicQuestBook.NameKey;
 
-                    AddHistory(() => {
+                    AddHistory(() =>
+                    {
                         basicQuestBook.NameKey = lastNameKey;
-                    }, () => {
+                    }, () =>
+                    {
                         basicQuestBook.NameKey = newNameKey;
                     });
 
@@ -97,9 +96,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     string lastNameKey = lastChapterName;
                     string newNameKey = basic.NameKey;
 
-                    AddHistory(() => {
+                    AddHistory(() =>
+                    {
                         basic.NameKey = lastNameKey;
-                    }, () => {
+                    }, () =>
+                    {
                         basic.NameKey = newNameKey;
                     });
 

@@ -34,7 +34,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	FullHPAndMana: {
+	GetFullHPAndMana: {
 		Title: Topped Off
 		Contents: Attain maximum life and mana possible without accessories or buffs.
 		Tooltip: ---
@@ -209,37 +209,31 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	GetOrePickaxe: {
+	CraftOrePickaxe: {
 		Title: Getting an Upgrade
 		Contents: Craft yourself a shinier pickaxe using any ore you may have found.
 		Tooltip: ---
 	}
 
-	GetEvilPickaxe: {
+	CraftEvilPickaxe: {
 		Title: Macabre Miner
 		Contents: Craft a wretched pickaxe using the {darkest of scales / freshest tissue samples}
 		Tooltip: ---
 	}
 
-	GetMoltenPickaxe: {
+	CraftMoltenPickaxe: {
 		Title: Miner for Fire
 		Contents: Craft a molten pickaxe using the hottest of materials.
 		Tooltip: ---
 	}
 
-	GetHMOrePickaxes: {
+	GetHardmodeOrePickaxes: {
 		Title: Back-to-back, Pick-to-axe
 		Contents: Progress through the newly generated Hardmode ores and acquire a mining tool from each.
 		Tooltip: ---
 	}
 
-	GetHallowedPickaxe: {
-		Title: Drax Attax
-		Contents: Craft a drax or pickaxe axe using hallowed bars, and the souls of the three mechanical bosses.
-		Tooltip: ---
-	}
-
-	GetShroomiteDiggingClaws: {
+	CraftShroomiteDiggingClaws: {
 		Title: Shroomverine
 		Contents: Craft the Shroomite Digging Claws, a rapid mining tool making tunneling as easy as plucking a mushroom!
 		Tooltip: ---
@@ -257,7 +251,7 @@ Chapter0: {
 		Tooltip: ---
 	}
 
-	GetLunarPickaxe: {
+	CraftLunarPickaxe: {
 		Title: Lunar Excavation
 		Contents: Craft yourself a celestial pickaxe or drill using Luminite and any Celestial Fragment.
 		Tooltip: ---
@@ -307,7 +301,7 @@ Chapter1: {
 	// ---------------------
 	// <-> Old Ones Army <->
 	
-	SetupOOA: {
+	SetupOldOnesArmy: {
 		Title: Otherworldy Seige
 		Contents:
 			'''
@@ -319,7 +313,7 @@ Chapter1: {
 		Tooltip: ---
 	}
 
-	GetAnyOOASet: {
+	GetAnyOldOnesArmySet: {
 		Title: Dressing like a Defender
 		Contents: (flavour description)
 		Tooltip: ---
@@ -352,7 +346,7 @@ Chapter1: {
 	// ---------------
 	// <-> Fishing <->
 	
-	FishingStarter: {
+	GetAnyFish: {
 		Title: MA! I Caught Somethin'!
 		Contents: Using a fishing rod and some bait, drop a lure in a large pool of water and get a hit!
 		Tooltip: ---
@@ -376,7 +370,7 @@ Chapter1: {
 		Tooltip: ---
 	}
 
-	GetT3Crate: {
+	GetGoldenCrateCrate: {
 		Title: Better Lootbox Economy Than CS2
 		Contents: Hook up a Golden Crate, filled with riches and goodies!
 		Tooltip: ---
@@ -471,7 +465,7 @@ Chapter2: {
 	// ------------------
 	// <-> Shellphone <->
 	
-	GetGPS: {
+	CraftGPS: {
 		Title: Who Needs Maps Anymore?
 		Contents:
 			'''
@@ -484,7 +478,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetGoblinTech: {
+	CraftGoblinTech: {
 		Title: No Goblin was involved in the making of this doohickey
 		Contents:
 			'''
@@ -496,7 +490,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetFishFinder: {
+	CraftFishFinder: {
 		Title: Hot Fish in Your Area
 		Contents:
 			'''
@@ -507,7 +501,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetREK: {
+	CraftREK: {
 		Title: Rare, Enemies, Kills
 		Contents:
 			'''
@@ -520,7 +514,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetCellphone: {
+	CraftCellphone: {
 		Title: Black Mirror
 		Contents: Craft the Cell Phone using your PDA and a Magic Mirror. You'll never leave home without it again.
 		Tooltip: ---
@@ -539,20 +533,20 @@ Chapter2: {
 		Title: Swift Toes
 		Contents:
 			'''
-			Obtain any running shoes, allowing you to run quickly across terrain!
+			Obtain any running shoes, allowing you to run quickly across terrain!\
 
 			They can be found in chests in a few biomes, or through crates.
 			'''
 		Tooltip: ---
 	}
 
-	GetSpectreBoots: {
+	CraftSpectreBoots: {
 		Title: Soaring like a Spectre
 		Contents: Craft the Spectre Boots using your running shoes and Rocket Boots sold by the Goblin Tinkerer!
 		Tooltip: ---
 	}
 
-	GetLightningBoots: {
+	CraftLightningBoots: {
 		Title: Zipping like a Lightning Bolt
 		Contents:
 			'''
@@ -564,7 +558,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetObsidianBoots: {
+	CraftObsidianBoots: {
 		Title: The floor may be lava, But my feet are obsidian!
 		Contents:
 			'''
@@ -575,7 +569,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetFrostsparkBoots: {
+	CraftFrostsparkBoots: {
 		Title: Terraria.. On Ice!
 		Contents:
 			'''
@@ -586,7 +580,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetLavaWaders: {
+	CraftLavaWaders: {
 		Title: Hell's Jesus
 		Contents:
 			'''
@@ -598,7 +592,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetTerrasparkBoots: {
+	CraftTerrasparkBoots: {
 		Title: Boots of the Hero
 		Contents: Obtain the Terraspark Boots, forged from the finest boots of fire and ice.
 		Tooltip: ---
@@ -607,13 +601,13 @@ Chapter2: {
 	// -------------------
 	// <-> Ankh Shield <->
 	
-	GetObsidianShield: {
+	CraftObsidianShield: {
 		Title: Tougher than Diamonds
 		Contents: Craft the Obsidian Shield, using an Obsidian Skull and a Cobalt Shield found in the dungeon's locked chests
 		Tooltip: ---
 	}
 
-	GetArmorPolish: {
+	CraftArmorBracing: {
 		Title: Brace Yourself
 		Contents:
 			'''
@@ -624,7 +618,7 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetReflectiveShades: {
+	CraftReflectiveShades: {
 		Title: Slick Shades
 		Contents:
 			'''
@@ -635,28 +629,28 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetMedicatedBandaid: {
+	CraftMedicatedBandage: {
 		Title: Is That Hygenic..?
 		Contents:
 			'''
-			Craft the Medicated Bandaid using Bezoar and an Adhesive Bandage.
+			Craft the Medicated Bandage using Bezoar and an Adhesive Bandage.
 			Bezoar drops from Hornets in the Jungle.
 			Adhesive Bandaid can drop from Werewolves.
 			'''
 		Tooltip: ---
 	}
 
-	GetCountercoureMantra: {
+	CraftCountercurseMantra: {
 		Title: Tongue of the Devil
 		Contents:
 			'''
-			Craft the Countercourse Mantra, made from a Nazar and a Megaphone
+			Craft the Countercurse Mantra, made from a Nazar and a Megaphone
 			{how to get both; i got lazy}
 			'''
 		Tooltip: ---
 	}
 
-	GetThePlan: {
+	CraftThePlan: {
 		Title: This is the greeaatest plaaaaan!
 		Contents:
 			'''
@@ -666,13 +660,13 @@ Chapter2: {
 		Tooltip: ---
 	}
 
-	GetAnkhCharm: {
+	CraftAnkhCharm: {
 		Title: Th-ankh me Later
 		Contents: Craft the Ankh Charm, a powerful protective item providing immunity to 10 different common debuffs!
 		Tooltip: ---
 	}
 
-	GetAnkhShield: {
+	CraftAnkhShield: {
 		Title: Ankhumulation Complete
 		Contents: Obtain the Ankh Shield, the finest protection from unpleasant maladies and ailments.
 		Tooltip: ---

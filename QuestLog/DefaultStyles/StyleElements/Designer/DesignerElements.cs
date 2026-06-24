@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace QuestBooks.QuestLog.DefaultStyles
+﻿namespace QuestBooks.QuestLog.DefaultStyles
 {
     public partial class BasicQuestLogStyle
     {

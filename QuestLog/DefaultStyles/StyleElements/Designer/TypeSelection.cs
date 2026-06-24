@@ -1,17 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.Systems;
-using System;
 using System.Collections.Generic;
-using System.Reflection;
-using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.Localization;
-using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog.DefaultStyles
 {
@@ -58,9 +51,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         {
                             (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
 
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
-                            }, () => {
+                            }, () =>
+                            {
                                 (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex - 1]) = (QuestManager.QuestBooks[bookIndex - 1], QuestManager.QuestBooks[bookIndex]);
                             });
                         }
@@ -74,9 +69,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         {
                             (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
 
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
-                            }, () => {
+                            }, () =>
+                            {
                                 (QuestManager.QuestBooks[bookIndex], QuestManager.QuestBooks[bookIndex + 1]) = (QuestManager.QuestBooks[bookIndex + 1], QuestManager.QuestBooks[bookIndex]);
                             });
                         }
@@ -143,9 +140,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         {
                             (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
 
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
-                            }, () => {
+                            }, () =>
+                            {
                                 (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex - 1]) = (SelectedBook.Chapters[chapterIndex - 1], SelectedBook.Chapters[chapterIndex]);
                             });
                         }
@@ -160,9 +159,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         {
                             (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
 
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
-                            }, () => {
+                            }, () =>
+                            {
                                 (SelectedBook.Chapters[chapterIndex], SelectedBook.Chapters[chapterIndex + 1]) = (SelectedBook.Chapters[chapterIndex + 1], SelectedBook.Chapters[chapterIndex]);
                             });
                         }
@@ -231,12 +232,14 @@ namespace QuestBooks.QuestLog.DefaultStyles
                             QuestManager.QuestBooks[index] = instance;
                             SelectedBook = instance;
 
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 var oldInstance = (QuestBook)Activator.CreateInstance(oldType);
                                 instance.CloneTo(oldInstance);
                                 oldInstance.CloneFrom(instance);
                                 QuestManager.QuestBooks[index] = oldInstance;
-                            }, () => {
+                            }, () =>
+                            {
                                 var newInstance = (QuestBook)Activator.CreateInstance(bookType);
                                 var instance = QuestManager.QuestBooks[index];
                                 instance.CloneTo(newInstance);
@@ -266,12 +269,14 @@ namespace QuestBooks.QuestLog.DefaultStyles
                             book.Chapters[index] = instance;
                             SelectedChapter = instance;
 
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 var oldInstance = (QuestChapter)Activator.CreateInstance(oldType);
                                 instance.CloneTo(oldInstance);
                                 oldInstance.CloneFrom(instance);
                                 book.Chapters[index] = oldInstance;
-                            }, () => {
+                            }, () =>
+                            {
                                 var newInstance = (QuestChapter)Activator.CreateInstance(lineType);
                                 var instance = book.Chapters[index];
                                 instance.CloneTo(newInstance);

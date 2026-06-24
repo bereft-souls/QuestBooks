@@ -1,11 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using QuestBooks.QuestLog.DefaultQuestBooks;
 using QuestBooks.Quests;
 using System.Collections.Generic;
 using System.Linq;
-using Terraria.ModLoader;
 
 namespace QuestBooks.QuestLog
 {

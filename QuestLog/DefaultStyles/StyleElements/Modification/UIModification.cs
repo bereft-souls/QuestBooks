@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
-using Terraria;
+﻿using QuestBooks.Assets;
 using Terraria.Audio;
-using Terraria.ID;
 using Terraria.Localization;
 
 namespace QuestBooks.QuestLog.DefaultStyles

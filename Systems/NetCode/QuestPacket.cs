@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Terraria.ModLoader;
+﻿using System.IO;
 
 namespace QuestBooks.Systems.NetCode
 {

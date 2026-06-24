@@ -2,14 +2,11 @@
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.Utilities;
-using Stubble.Core.Classes;
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 using Terraria.ModLoader.IO;
 
@@ -101,6 +98,9 @@ namespace QuestBooks.Systems
                     QuestManager.MarkComplete(quest);
             }
 
+            foreach (var quest in QuestManager.WorldQuests.Values)
+                quest.LoadProgress(tag);
+
             QuestLogDrawer.ActiveStyle.LoadWorldData(tag);
         }
 
@@ -110,7 +110,7 @@ namespace QuestBooks.Systems
             // entering the world.
             private TagCompound tagCompound = null;
 
-            public override void LoadData(TagCompound tag) => tagCompound = (tag?.ContainsKey(TagKey) ?? false) ? tag : null;
+            public override void LoadData(TagCompound tag) => tagCompound = tag;
 
             public override void OnEnterWorld()
             {
@@ -124,13 +124,16 @@ namespace QuestBooks.Systems
                         QuestManager.UnloadedCompletedPlayerQuests.Add(quest);
                 }
 
-                QuestLogDrawer.ActiveStyle.LoadPlayerData(tagCompound);
-
                 foreach (var quest in QuestManager.IncompletePlayerQuests.Select(QuestManager.GetQuest).ToArray())
                 {
                     if (quest.CheckCompletion())
                         QuestManager.MarkComplete(quest);
                 }
+
+                foreach (var quest in QuestManager.PlayerQuests.Values)
+                    quest.LoadProgress(tagCompound);
+
+                QuestLogDrawer.ActiveStyle.LoadPlayerData(tagCompound);
 
                 QuestsLoaded = true;
             }

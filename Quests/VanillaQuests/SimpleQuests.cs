@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
-using Terraria;
-using Terraria.ModLoader;
+﻿using QuestBooks.Assets;
 
 namespace QuestBooks.Quests.VanillaQuests;
 
@@ -10,6 +6,8 @@ namespace QuestBooks.Quests.VanillaQuests;
 /// Intended for internal QuestBooks use.<br/>
 /// Shorthands the localization category based on namespace instead of <c>QuestBooks</c>.
 /// </summary>
+
+[ReinitializeDuringResizeArrays]
 public abstract class QBQuest : Quest
 {
     private string _localizationCategory = null;

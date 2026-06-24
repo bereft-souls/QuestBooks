@@ -1,11 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.Systems;
 using QuestBooks.Utilities;
-using System;
 using System.Collections.Generic;
-using Terraria;
 using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Localization;
@@ -70,13 +66,15 @@ namespace QuestBooks.QuestLog.DefaultStyles
                     else
                         QuestAreaOffset = Vector2.Zero;
 
-                    AddHistory(() => {
+                    AddHistory(() =>
+                    {
                         chapter.EnableShifting = !chapter.EnableShifting;
                         if (chapter.EnableShifting)
                             chapter.ViewAnchor = oldAnchor;
                         else
                             QuestAreaOffset = Vector2.Zero;
-                    }, () => {
+                    }, () =>
+                    {
                         chapter.EnableShifting = !chapter.EnableShifting;
                         if (chapter.EnableShifting)
                             chapter.ViewAnchor = defaultAnchor;
@@ -123,9 +121,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         float newZoom = chapter.DefaultZoom;
 
                         if (oldZoom != newZoom)
-                            AddHistory(() => {
+                            AddHistory(() =>
+                            {
                                 chapter.DefaultZoom = oldZoom;
-                            }, () => {
+                            }, () =>
+                            {
                                 chapter.DefaultZoom = newZoom;
                             });
                     }
@@ -142,9 +142,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         var chapter = SelectedChapter;
                         chapter.DefaultZoom += zoomIncrement;
 
-                        AddHistory(() => {
+                        AddHistory(() =>
+                        {
                             chapter.DefaultZoom -= zoomIncrement;
-                        }, () => {
+                        }, () =>
+                        {
                             chapter.DefaultZoom += zoomIncrement;
                         });
                     }
@@ -161,9 +163,11 @@ namespace QuestBooks.QuestLog.DefaultStyles
                         var chapter = SelectedChapter;
                         chapter.DefaultZoom -= 0.1f;
 
-                        AddHistory(() => {
+                        AddHistory(() =>
+                        {
                             chapter.DefaultZoom += zoomIncrement;
-                        }, () => {
+                        }, () =>
+                        {
                             chapter.DefaultZoom -= zoomIncrement;
                         });
                     }

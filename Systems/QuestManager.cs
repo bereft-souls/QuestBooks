@@ -2,14 +2,10 @@
 using QuestBooks.QuestLog;
 using QuestBooks.Quests;
 using QuestBooks.Systems.NetCode;
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace QuestBooks.Systems
 {
@@ -107,7 +103,7 @@ namespace QuestBooks.Systems
             var globalBooks = GlobalQuestBooks.Where(kvp => !DisabledQuestLogs.Contains(kvp.Key)).Select(kvp => kvp.Value);
             var newLog = QuestLogs[questLog].Concat(globalBooks.SelectMany(l => l));
 
-            QuestBooks = [..newLog];
+            QuestBooks = [.. newLog];
             QuestLogDrawer.ActiveStyle?.SelectQuestLog(questLog);
         }
 

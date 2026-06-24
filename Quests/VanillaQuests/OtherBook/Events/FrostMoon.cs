@@ -1,7 +1,4 @@
 ﻿using QuestBooks.Systems;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 

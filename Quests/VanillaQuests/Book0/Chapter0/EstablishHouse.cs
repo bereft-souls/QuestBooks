@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Terraria;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 

@@ -1,11 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QuestBooks.Assets;
+﻿using QuestBooks.Assets;
 using QuestBooks.Systems;
-using System;
-using Terraria;
 using Terraria.Localization;
-using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests
 {
@@ -150,6 +146,28 @@ namespace QuestBooks.Quests
         public sealed override void SetupContent() => SetStaticDefaults();
 
         protected sealed override void InitTemplateInstance() => QuestLoader.QuestMods[GetType()] = Mod;
+
+        /// <summary>
+        ///     Save any progress for this quest to the given <see cref="TagCompound"/>.
+        /// </summary>
+        /// <param name="tag">
+        ///     The <see cref="TagCompound"/> to save progress to.
+        /// </param>
+        /// <remarks>
+        ///     The given <see cref="TagCompound"/> is shared across quests.
+        /// </remarks>
+        public virtual void SaveProgress(TagCompound tag) { }
+
+        /// <summary>
+        ///     Load any progress for this quest from the given <see cref="TagCompound"/>.
+        /// </summary>
+        /// <param name="tag">
+        ///     The <see cref="TagCompound"/> to load progress from.
+        /// </param>
+        /// <remarks>
+        ///     The given <see cref="TagCompound"/> is shared across quests.
+        /// </remarks>
+        public virtual void LoadProgress(TagCompound tag) { }
     }
 
     public enum QuestType
