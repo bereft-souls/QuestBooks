@@ -1,5 +1,6 @@
 ﻿using QuestBooks.Systems;
 using Terraria.DataStructures;
+using Terraria.ModLoader.Core;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -53,7 +54,9 @@ public abstract class CraftItemHook : GlobalItem
     /// </remarks>
     public CraftItemHook(CraftItemHookCallback callback) : this(null, callback) { }
 
-    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => Predicate?.Invoke(entity) ?? true;
+    public override bool InstancePerEntity => true;
+
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => GlobalTypeLookups<GlobalItem>.Initialized && (Predicate?.Invoke(entity) ?? true);
 
     public override void OnCreated(Item item, ItemCreationContext context)
     {

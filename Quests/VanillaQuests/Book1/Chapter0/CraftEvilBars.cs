@@ -2,11 +2,17 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
+[ReinitializeDuringResizeArrays]
 public class CraftEvilBars : QBQuest
 {
-    public static readonly bool[] EvilBars = ItemID.Sets.Factory.CreateNamedSet("EvilBars")
-        .Description("Any world evil bar")
-        .RegisterBoolSet(ItemID.CrimtaneBar, ItemID.DemoniteBar);
+    static CraftEvilBars()
+    {
+        EvilBars = ItemID.Sets.Factory.CreateNamedSet("EvilBars")
+            .Description("Any world evil bar")
+            .RegisterBoolSet(ItemID.CrimtaneBar, ItemID.DemoniteBar);
+    }
+
+    public static readonly bool[] EvilBars = [];
 
     public override QuestType QuestType => QuestType.Player;
 

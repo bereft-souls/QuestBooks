@@ -2,18 +2,24 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
+[ReinitializeDuringResizeArrays]
 public class CraftHardmodeOrePickaxes : QBQuest
 {
-    public static readonly bool[] HardmodePickaxes = ItemID.Sets.Factory.CreateNamedSet("HardmodePickaxes")
-        .Description("Pickaxes that are (intended to be) hardmode exclusive")
-        .RegisterBoolSet(
-            ItemID.CobaltPickaxe,
-            ItemID.PalladiumPickaxe,
-            ItemID.MythrilPickaxe,
-            ItemID.OrichalcumPickaxe,
-            ItemID.AdamantitePickaxe,
-            ItemID.TitaniumPickaxe
-        );
+    static CraftHardmodeOrePickaxes()
+    {
+        HardmodePickaxes = ItemID.Sets.Factory.CreateNamedSet("HardmodePickaxes")
+            .Description("Pickaxes that are (intended to be) hardmode exclusive")
+            .RegisterBoolSet(
+                ItemID.CobaltPickaxe,
+                ItemID.PalladiumPickaxe,
+                ItemID.MythrilPickaxe,
+                ItemID.OrichalcumPickaxe,
+                ItemID.AdamantitePickaxe,
+                ItemID.TitaniumPickaxe
+            );
+    }
+
+    public static readonly bool[] HardmodePickaxes = [];
 
     public override QuestType QuestType => QuestType.Player;
 

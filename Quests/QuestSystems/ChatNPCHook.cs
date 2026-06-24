@@ -1,4 +1,5 @@
 ﻿using QuestBooks.Systems;
+using Terraria.ModLoader.Core;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -22,7 +23,9 @@ public abstract class ChatNPCHook : GlobalNPC
 
     public ChatNPCHook(ChatNPCHookCallback callback) : this(null, callback) { }
 
-    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => Predicate?.Invoke(entity) ?? true;
+    public override bool InstancePerEntity => true;
+
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => GlobalTypeLookups<GlobalNPC>.Initialized && (Predicate?.Invoke(entity) ?? true);
 
     public override void OnChatButtonClicked(NPC npc, bool firstButton) => Callback.Invoke(npc, firstButton);
 }

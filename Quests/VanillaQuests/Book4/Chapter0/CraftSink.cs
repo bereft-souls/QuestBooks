@@ -2,37 +2,43 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
+[ReinitializeDuringResizeArrays]
 public class CraftSink : QBQuest
 {
-    public static readonly bool[] Sinks = ItemID.Sets.Factory.CreateNamedSet("Sinks")
-        .Description("All sink furniture items")
-        .RegisterBoolSet(
-            ItemID.WoodenSink,
-            ItemID.EbonwoodSink,
-            ItemID.RichMahoganySink,
-            ItemID.PearlwoodSink,
-            ItemID.ShadewoodSink,
-            ItemID.BorealWoodSink,
-            ItemID.PalmWoodSink,
-            ItemID.AshWoodSink,
-            ItemID.CactusSink,
-            ItemID.BambooSink,
-            ItemID.DynastySink,
-            ItemID.LivingWoodSink,
-            ItemID.SkywareSink,
-            ItemID.MarbleSink,
-            ItemID.GraniteSink,
-            ItemID.MeteoriteSink,
-            ItemID.ObsidianSink,
-            ItemID.BoneSink,
-            ItemID.FleshSink,
-            ItemID.PumpkinSink,
-            ItemID.HoneySink,
-            ItemID.LihzahrdSink,
-            ItemID.MartianSink,
-            ItemID.GlassSink,
-            ItemID.SpookySink
-        );
+    static CraftSink()
+    {
+        Sinks = ItemID.Sets.Factory.CreateNamedSet("Sinks")
+            .Description("All sink furniture items")
+            .RegisterBoolSet(
+                ItemID.WoodenSink,
+                ItemID.EbonwoodSink,
+                ItemID.RichMahoganySink,
+                ItemID.PearlwoodSink,
+                ItemID.ShadewoodSink,
+                ItemID.BorealWoodSink,
+                ItemID.PalmWoodSink,
+                ItemID.AshWoodSink,
+                ItemID.CactusSink,
+                ItemID.BambooSink,
+                ItemID.DynastySink,
+                ItemID.LivingWoodSink,
+                ItemID.SkywareSink,
+                ItemID.MarbleSink,
+                ItemID.GraniteSink,
+                ItemID.MeteoriteSink,
+                ItemID.ObsidianSink,
+                ItemID.BoneSink,
+                ItemID.FleshSink,
+                ItemID.PumpkinSink,
+                ItemID.HoneySink,
+                ItemID.LihzahrdSink,
+                ItemID.MartianSink,
+                ItemID.GlassSink,
+                ItemID.SpookySink
+            );
+    }
+
+    public static readonly bool[] Sinks = [];
 
     public override bool CheckCompletion() => false;
 
