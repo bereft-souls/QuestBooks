@@ -23,7 +23,7 @@ public class GetAnyRunningBoots : QBQuest
             );
     }
 
-    public static readonly bool[] Boots = [];
+    public static readonly bool[] Boots;
 
     public override QuestType QuestType => QuestType.Player;
 

@@ -29,7 +29,7 @@ public class CraftCampfire : QBQuest
         );
     }
 
-    public static readonly bool[] Campfires = [];
+    public static readonly bool[] Campfires;
 
     public override bool CheckCompletion() => false;
 

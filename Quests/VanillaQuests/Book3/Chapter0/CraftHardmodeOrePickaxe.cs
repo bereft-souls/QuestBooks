@@ -19,7 +19,7 @@ public class CraftHardmodeOrePickaxes : QBQuest
             );
     }
 
-    public static readonly bool[] HardmodePickaxes = [];
+    public static readonly bool[] HardmodePickaxes;
 
     public override QuestType QuestType => QuestType.Player;
 

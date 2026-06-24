@@ -15,7 +15,7 @@ public class DefeatWeatherMiniboss : QBQuest
             );
     }
 
-    public static readonly bool[] WeatherMinibossTypes = [];
+    public static readonly bool[] WeatherMinibossTypes;
 
     public override bool CheckCompletion() => false;
 

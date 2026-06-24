@@ -12,7 +12,7 @@ public class CraftEvilPickaxe : QBQuest
             .RegisterBoolSet(ItemID.DeathbringerPickaxe, ItemID.NightmarePickaxe);
     }
 
-    public static readonly bool[] EvilPickaxes = [];
+    public static readonly bool[] EvilPickaxes;
 
     public override QuestType QuestType => QuestType.Player;
 
