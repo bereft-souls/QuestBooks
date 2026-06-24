@@ -70,6 +70,17 @@ public abstract class KillNPCHook<TQuest> : KillNPCHook
     public KillNPCHook(KillNPCPredicate predicate) : base(predicate, Complete) { }
     
     /// <summary>
+    ///     Initializes a new instance of the <see cref="KillNPCHook"/> class with the specified callback.
+    /// </summary>
+    /// <param name="callback">
+    ///     The callback that is invoked when an NPC is killed and the predicate matches.
+    /// </param>
+    /// <remarks>
+    ///     Checks for any NPC killed, regardless of type.
+    /// </remarks>
+    public KillNPCHook(KillNPCCallback callback) : base(null, callback) { }
+    
+    /// <summary>
     ///     Initializes a new instance of the <see cref="KillNPCHook{TQuest}"/> class.
     /// </summary>
     /// <remarks>

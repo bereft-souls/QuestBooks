@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
@@ -6,17 +7,16 @@ public class DefeatDayEmpress : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class DayEmpressOfLightCheck : GlobalNPC
+    public class DayEmpressOfLightCheck() : KillNPCHook<DefeatDayEmpress>(Complete)
     {
-        public override void OnKill(NPC npc)
+        private static new void Complete(NPC npc)
         {
-            if (npc.type != NPCID.HallowBoss)
+            if (npc.type != NPCID.HallowBoss || !npc.AI_120_HallowBoss_IsGenuinelyEnraged())
+            {
                 return;
-
-            if (!npc.AI_120_HallowBoss_IsGenuinelyEnraged())
-                return;
-
-            QuestManager.CompleteQuest<DefeatDayEmpress>();
+            }
+            
+            QuestManager.MarkComplete<DefeatDayEmpress>();
         }
     }
 }
