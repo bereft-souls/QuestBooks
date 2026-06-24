@@ -11,11 +11,11 @@ public class ShimmerTransmute : QBQuest
 
     public class ShimmerTransmuteCheck : GlobalItem
     {
-        public override void OnCreated(Item item, ItemCreationContext context)
+        public override void OnSpawn(Item item, IEntitySource source)
         {
-            if (context is not RecipeItemCreationContext recipe || recipe.Recipe.DecraftDisabled)
+            if (source is not EntitySource_Misc misc || misc.Context != "Shimmer")
                 return;
-
+            
             QuestManager.MarkComplete<ShimmerTransmute>();
         }
     }
