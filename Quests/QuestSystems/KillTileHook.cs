@@ -55,17 +55,13 @@ public abstract class KillTileHook : GlobalTile
     
     public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
-        if (fail)
-        {
+        if (fail || effectOnly)
             return;
-        }
         
         var matches = Predicate?.Invoke(i, j, type) ?? true;
         
         if (!matches)
-        {
             return;
-        }
         
         Callback.Invoke(i, j, type);
     }
@@ -102,7 +98,6 @@ public abstract class KillTileHook<TQuest> : KillTileHook
     public KillTileHook(int type) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-        
         Predicate = (_, _, match) => Match(type, match);
     }
 
@@ -118,7 +113,6 @@ public abstract class KillTileHook<TQuest> : KillTileHook
     public KillTileHook(bool[] set) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(set);
-        
         Predicate = (_, _, type) => Match(type, set);
     }
     
@@ -134,15 +128,38 @@ public abstract class KillTileHook<TQuest> : KillTileHook
     public KillTileHook(params int[] types) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(types);
-        
         Predicate = (_, _, type) => Match(type, types);
     }
 
-    protected static bool Match(int type, int match) => type == match;
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="KillTileHook{TQuest}"/> class.
+    /// </summary>
+    /// <param name="getTileType">
+    ///     The function that returns the tile type that should trigger this hook when killed.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="getTileType"/> is <see langword="null"/>.
+    /// </exception>
+    public KillTileHook(Func<int> getTileType) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getTileType);
+        Predicate = (_, _, type) => Match(type, getTileType);
+    }
 
-    protected static bool Match(int type, bool[] set) => set[type];
-
-    protected static bool Match(int type, params int[] types) => types.Contains(type);
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="KillTileHook{TQuest}"/> class.
+    /// </summary>
+    /// <param name="getTileTypes">
+    ///     The functions that return the tile types that should trigger this hook when killed.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="getTileTypes"/> is <see langword="null"/>.
+    /// </exception>
+    public KillTileHook(params Func<int>[] getTileTypes) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getTileTypes);
+        Predicate = (_, _, type) => Match(type, getTileTypes);
+    }
 
     protected static void Complete(int x, int y, int type) => QuestManager.MarkComplete<TQuest>();
 }
@@ -154,6 +171,6 @@ public abstract class KillTileHook<TQuest, TModTile> : KillTileHook<TQuest>
     /// <summary>
     ///     Initializes a new instance of the <see cref="KillTileHook{TQuest, TModTile}"/> class.
     /// </summary>
-    public KillTileHook() : base(ModContent.TileType<TModTile>()) { }
+    public KillTileHook() : base(Match<TModTile>) { }
 }
     

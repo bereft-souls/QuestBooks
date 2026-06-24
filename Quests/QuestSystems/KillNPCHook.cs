@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using System.Linq;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -70,17 +69,6 @@ public abstract class KillNPCHook<TQuest> : KillNPCHook
     public KillNPCHook(KillNPCPredicate predicate) : base(predicate, Complete) { }
     
     /// <summary>
-    ///     Initializes a new instance of the <see cref="KillNPCHook"/> class with the specified callback.
-    /// </summary>
-    /// <param name="callback">
-    ///     The callback that is invoked when an NPC is killed and the predicate matches.
-    /// </param>
-    /// <remarks>
-    ///     Checks for any NPC killed, regardless of type.
-    /// </remarks>
-    public KillNPCHook(KillNPCCallback callback) : base(null, callback) { }
-    
-    /// <summary>
     ///     Initializes a new instance of the <see cref="KillNPCHook{TQuest}"/> class.
     /// </summary>
     /// <remarks>
@@ -100,7 +88,6 @@ public abstract class KillNPCHook<TQuest> : KillNPCHook
     public KillNPCHook(int type) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-
         Predicate = npc => Match(npc, type);
     }
 
@@ -116,7 +103,6 @@ public abstract class KillNPCHook<TQuest> : KillNPCHook
     public KillNPCHook(bool[] set) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(set);
-
         Predicate = npc => Match(npc, set);
     }
 
@@ -132,17 +118,38 @@ public abstract class KillNPCHook<TQuest> : KillNPCHook
     public KillNPCHook(int[] types) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(types);
-
         Predicate = npc => Match(npc, types);
     }
-    
-    protected static bool Match(NPC npc, int match) => npc.type == match;
 
-    protected static bool Match(NPC npc, bool[] set) => set[npc.type];
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="KillNPCHook{TQuest}"/> class with the specified array of NPC types.
+    /// </summary>
+    /// <param name="getNpcType">
+    ///     The function that returns the item type that should trigger this hook when killed.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="getNpcType"/> is <see langword="null"/>.
+    /// </exception>
+    public KillNPCHook(Func<int> getNpcType) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getNpcType);
+        Predicate = npc => Match(npc, getNpcType);
+    }
 
-    protected static bool Match(NPC npc, params int[] matches) => matches.Contains(npc.type);
-
-    protected static bool Match<T>(NPC npc) where T : ModNPC => npc.type == ModContent.NPCType<T>();
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="KillNPCHook{TQuest}"/> class with the specified array of NPC types.
+    /// </summary>
+    /// <param name="getNpcTypes">
+    ///     The functions that return the item types that should trigger this hook when killed.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="getNpcTypes"/> is <see langword="null"/>.
+    /// </exception>
+    public KillNPCHook(params Func<int>[] getNpcTypes) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getNpcTypes);
+        Predicate = npc => Match(npc, getNpcTypes);
+    }
 
     protected static void Complete(NPC npc) => QuestManager.CompleteQuest<TQuest>();
 }
@@ -154,5 +161,5 @@ public abstract class KillNPCHook<TQuest, TModNPC> : KillNPCHook<TQuest>
     /// <summary>
     ///     Initializes a new instance of the <see cref="KillNPCHook{TQuest, TModNPC}"/> class.
     /// </summary>
-    public KillNPCHook() => Predicate = npc => Match<TModNPC>(npc);
+    public KillNPCHook() : base(Match<TModNPC>) { }
 }

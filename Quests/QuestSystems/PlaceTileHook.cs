@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using System.Linq;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -97,25 +96,32 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
     public PlaceTileHook(int type) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-
-        Predicate = (_, _, match, _) => Match(type, match);
+        Predicate = (_, _, tile, _) => Match(tile, type);
     }
 
     public PlaceTileHook(bool[] set) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(set);
-        
-        Predicate = (_, _, match, _) => set[match];
+        Predicate = (_, _, tile, _) => Match(tile, set);
     }
     
-    public PlaceTileHook(int[] types) : base(Complete)
+    public PlaceTileHook(params int[] types) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(types);
-
-        Predicate = (_, _, match, _) => types.Contains(match);
+        Predicate = (_, _, tile, _) => Match(tile, types);
     }
 
-    protected static bool Match(int type, int match) => type == match;
+    public PlaceTileHook(Func<int> getType) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getType);
+        Predicate = (_, _, tile, _) => Match(tile, getType);
+    }
+
+    public PlaceTileHook(params Func<int>[] getTypes) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getTypes);
+        Predicate = (_, _, tile, _) => Match(tile, getTypes);
+    }
 
     protected static void Complete(int i, int j, int type, Item item) => QuestManager.CompleteQuest<TQuest>();
 }
@@ -127,5 +133,5 @@ public abstract class PlaceTileHook<TQuest, TModTile> : PlaceTileHook<TQuest>
     /// <summary>
     ///     Initializes a new instance of the <see cref="PlaceTileHook{TQuest, TItem}"/> class.
     /// </summary>
-    public PlaceTileHook() : base(ModContent.TileType<TModTile>()) { }
+    public PlaceTileHook() : base(Match<TModTile>) { }
 }

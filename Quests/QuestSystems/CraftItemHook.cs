@@ -63,14 +63,6 @@ public abstract class CraftItemHook : GlobalItem
         
         Callback.Invoke(item, recipe);
     }
-
-    protected static bool Match(Item item, int match) => item.type == match;
-
-    protected static bool Match(Item item, bool[] set) => set[item.type];
-
-    protected static bool Match(Item item, params int[] matches) => matches.Contains(item.type);
-
-    protected static bool Match<T>(Item item) where T : ModItem => item.type == ModContent.ItemType<T>();
 }
 
 public abstract class CraftItemHook<TQuest> : CraftItemHook
@@ -104,7 +96,6 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
     public CraftItemHook(int type) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-
         Predicate = item => Match(item, type);
     }
     
@@ -120,7 +111,6 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
     public CraftItemHook(bool[] set) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(set);
-
         Predicate = item => Match(item, set);
     }
     
@@ -136,8 +126,37 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
     public CraftItemHook(params int[] types) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(types);
-
         Predicate = item => Match(item, types);
+    }
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class with the specified item type function.
+    /// </summary>
+    /// <param name="getItemType">
+    ///     The function that returns of item type that should trigger this hook when crafted.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="getItemType"/> is <see langword="null"/>.
+    /// </exception>
+    public CraftItemHook(Func<int> getItemType) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getItemType);
+        Predicate = item => Match(item, getItemType);
+    }
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class with the specified item type functions.
+    /// </summary>
+    /// <param name="getItemTypes">
+    ///     The functions that return of item types that should trigger this hook when crafted.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="getItemTypes"/> is <see langword="null"/>.
+    /// </exception>
+    public CraftItemHook(params Func<int>[] getItemTypes) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getItemTypes);
+        Predicate = item => Match(item, getItemTypes);
     }
 
     protected static void Complete(Item item, RecipeItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
@@ -150,5 +169,5 @@ public abstract class CraftItemHook<TQuest, TModItem> : CraftItemHook<TQuest>
     /// <summary>
     ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest, TModItem}"/> class.
     /// </summary>
-    public CraftItemHook() : base(ModContent.ItemType<TModItem>()) { }
+    public CraftItemHook() : base(Match<TModItem>) { }
 }

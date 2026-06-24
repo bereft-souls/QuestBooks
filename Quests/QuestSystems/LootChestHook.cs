@@ -54,9 +54,7 @@ public abstract class LootChestHook : GlobalTile
         var matches = Predicate?.Invoke(i, j, type) ?? true;
 
         if (!matches)
-        {
             return;
-        }
         
         Callback.Invoke(i, j, type);
     }
@@ -91,11 +89,35 @@ public abstract class LootChestHook<TQuest> : LootChestHook
     public LootChestHook(int type, params int[] frames) : base(Complete)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-        
         ArgumentNullException.ThrowIfNull(frames);
 
         Predicate = (x, y, _) => Match(x, y, type, frames);
     }
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="LootChestHook{TQuest}"/> class with the specified type and frames.
+    /// </summary>
+    /// <param name="getType">
+    ///     The function to retrieve the type of the chest tile to match.
+    /// </param>
+    /// <param name="frames">
+    ///     The frames of the chest tile to match.
+    /// </param>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="getType"/> is <see langword="null"/>.
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    ///     <paramref name="frames"/> is <see langword="null"/>.
+    /// </exception>
+    public LootChestHook(Func<int> getType, params int[] frames) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getType);
+        ArgumentNullException.ThrowIfNull(frames);
+
+        Predicate = (x, y, _) => Match(x, y, getType, frames);
+    }
+
+    protected static bool Match(int x, int y, Func<int> getType, params int[] frames) => Match(x, y, getType(), frames);
 
     protected static bool Match(int x, int y, int type, params int[] frames)
     {

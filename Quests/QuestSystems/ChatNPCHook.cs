@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using System.Linq;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -31,31 +30,40 @@ public abstract class ChatNPCHook : GlobalNPC
 public abstract class ChatNPCHook<TQuest> : ChatNPCHook
     where TQuest : Quest
 {
-    public ChatNPCHook(ChatNPCHookCallback callback) : base(callback) { }
+    public ChatNPCHook(ChatNPCHookPredicate predicate) : base(predicate, Complete) { }
 
     public ChatNPCHook() : base(Complete) { }
 
     public ChatNPCHook(int type) : base(Complete)
     {
         type = NPCID.FromNetId(type);
-        
-        Predicate = npc => npc.type == type;
+        Predicate = npc => Match(npc, type);
     }
 
     public ChatNPCHook(bool[] set) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(set);
-        
-        Predicate = npc => set[npc.type];
+        Predicate = npc => Match(npc, set);
     }
 
-    public ChatNPCHook(int[] types) : base(Complete)
+    public ChatNPCHook(params int[] types) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(types);
-        
-        Predicate = npc => types.Contains(npc.type);
+        Predicate = npc => Match(npc, types);
     }
-    
+
+    public ChatNPCHook(Func<int> getNpcType) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getNpcType);
+        Predicate = npc => Match(npc, getNpcType);
+    }
+
+    public ChatNPCHook(params Func<int>[] getNpcTypes) : base(Complete)
+    {
+        ArgumentNullException.ThrowIfNull(getNpcTypes);
+        Predicate = npc => Match(npc, getNpcTypes);
+    }
+
     protected static void Complete(NPC npc, bool firstButton) => QuestManager.CompleteQuest<TQuest>();
 }
 
@@ -63,5 +71,5 @@ public abstract class ChatNPCHook<TQuest, TModNPC> : ChatNPCHook<TQuest>
     where TQuest : Quest
     where TModNPC : ModNPC
 {
-    public ChatNPCHook() : base(ModContent.NPCType<TModNPC>()) { }
+    public ChatNPCHook() : base(Match<TModNPC>) { }
 }
