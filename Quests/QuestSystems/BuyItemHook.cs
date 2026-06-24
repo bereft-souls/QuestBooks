@@ -1,7 +1,6 @@
 ﻿using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using Terraria.DataStructures;
-using Terraria.ModLoader.Core;
 
 namespace QuestBooks.Quests.QuestSystems;
 

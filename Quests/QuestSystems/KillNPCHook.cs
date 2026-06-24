@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using Terraria.ModLoader.Core;
 
 namespace QuestBooks.Quests.QuestSystems;
 
