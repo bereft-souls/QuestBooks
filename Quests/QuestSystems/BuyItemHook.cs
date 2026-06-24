@@ -1,18 +1,15 @@
 ﻿using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using Terraria.DataStructures;
-using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.QuestSystems;
 
-public delegate bool BuyItemPredicate(Item item, BuyItemCreationContext context);
+public delegate bool BuyItemPredicate(Item item);
 
 public delegate void BuyItemCallback(Item item, BuyItemCreationContext context);
 
 public abstract class BuyItemHook : GlobalItem
 {
-    private const string Tag = "ItemPurchaseAmount";
-    
     /// <summary>
     ///     Gets the predicate that determines whether this hook should be invoked when an item is bought.
     /// </summary>
@@ -25,12 +22,7 @@ public abstract class BuyItemHook : GlobalItem
     ///     Gets the callback that is invoked when an item is bought and the predicate matches.
     /// </summary>
     public BuyItemCallback Callback { get; init; }
-    
-    /// <summary>
-    ///     Gets the amount of times an item has been bought that matches the predicate.
-    /// </summary>
-    public static int Amount { get; private set; }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="BuyItemHook"/> class with the specified predicate and callback.
     /// </summary>
@@ -61,29 +53,18 @@ public abstract class BuyItemHook : GlobalItem
     ///     Checks for any item bought, regardless of type.
     /// </remarks>
     public BuyItemHook(BuyItemCallback callback) : this(null, callback) { }
-    
+
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => Predicate?.Invoke(entity) ?? true;
+
     public override void OnCreated(Item item, ItemCreationContext context)
     {
         if (context is not BuyItemCreationContext buy)
         {
             return;
         }
-        
-        var matches = Predicate?.Invoke(item, buy) ?? true;
 
-        if (!matches)
-        {
-            return;
-        }
-
-        Amount++;
-        
         Callback.Invoke(item, buy);
     }
-
-    public override void SaveData(Item item, TagCompound tag) => tag[Tag] = Amount;
-    
-    public override void LoadData(Item item, TagCompound tag) => Amount = tag.GetInt(Tag);
 }
 
 public abstract class BuyItemHook<TQuest> : BuyItemHook 
@@ -118,32 +99,10 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
 
-        Predicate = (item, _) => Match(item, type);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class with the specified item type and amount.
-    /// </summary>
-    /// <param name="type">
-    ///     The type of the item that should trigger this hook when bought.
-    /// </param>
-    /// <param name="amount">
-    ///     The amount of the item that should trigger this hook when bought.
-    /// </param>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <paramref name="type"/> is less than or equal to zero, or <paramref name="amount"/> is negative.
-    /// </exception>
-    public BuyItemHook(int type, int amount) : base(Complete)
-    {
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(type);
-        ArgumentOutOfRangeException.ThrowIfNegative(amount);
-        
-        Predicate = (item, _) => item.type == type && Amount >= amount;
+        Predicate = item => Match(item, type);
     }
 
     protected static bool Match(Item item, int type) => item.type == type;
-
-    protected static bool Match(Item item, int type, int amount) => item.type == type && Amount >= amount;
 
     protected static void Complete(Item item, BuyItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
 }
@@ -156,12 +115,4 @@ public abstract class BuyItemHook<TQuest, TModItem> : BuyItemHook<TQuest>
     ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest, TModItem}"/> class.
     /// </summary>
     public BuyItemHook() : base(ModContent.ItemType<TModItem>()) { }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest, TModItem}"/> class with the specified amount.
-    /// </summary>
-    /// <param name="amount">
-    ///     The amount of the item that should trigger this hook when bought.
-    /// </param>
-    public BuyItemHook(int amount) : base(ModContent.ItemType<TModItem>(), amount) { }
 }

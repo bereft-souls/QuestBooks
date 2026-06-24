@@ -6,5 +6,5 @@ public class BuyTeleporter : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class BuyTeleporterCheck() : BuyItemHook<BuyTeleporter>(ItemID.Teleporter, 2);
+    public class BuyTeleporterCheck() : BuyItemAmountHook<BuyTeleporter>(ItemID.Teleporter, 2);
 }
