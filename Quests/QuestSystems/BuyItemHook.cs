@@ -54,11 +54,11 @@ public abstract class BuyItemHook : GlobalItem
     /// </remarks>
     public BuyItemHook(BuyItemCallback callback) : this(null, callback) { }
 
-    public sealed override bool InstancePerEntity => true;
+    public override bool InstancePerEntity => true;
 
-    public sealed override bool AppliesToEntity(Item entity, bool lateInstantiation) => true;
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => true;
 
-    public sealed override void OnCreated(Item item, ItemCreationContext context)
+    public override void OnCreated(Item item, ItemCreationContext context)
     {
         if (context is not BuyItemCreationContext buy)
             return;

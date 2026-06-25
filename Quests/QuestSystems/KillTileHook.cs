@@ -52,7 +52,7 @@ public abstract class KillTileHook : GlobalTile
     /// </remarks>
     public KillTileHook(KillTileCallback callback) : this(null, callback) { }
 
-    public sealed override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
+    public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
     {
         if (fail || effectOnly)
             return;

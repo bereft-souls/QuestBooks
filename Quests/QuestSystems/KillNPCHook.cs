@@ -52,11 +52,11 @@ public abstract class KillNPCHook : GlobalNPC
     /// </remarks>
     public KillNPCHook(KillNPCCallback callback) : this(null, callback) { }
 
-    public sealed override bool InstancePerEntity => true;
+    public override bool InstancePerEntity => true;
 
-    public sealed override bool AppliesToEntity(NPC entity, bool lateInstantiation) => true;
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => true;
 
-    public sealed override void OnKill(NPC npc)
+    public override void OnKill(NPC npc)
     {
         var matches = Predicate?.Invoke(npc) ?? true;
 

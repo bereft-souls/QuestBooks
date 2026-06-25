@@ -49,7 +49,7 @@ public abstract class LootChestHook : GlobalTile
     /// </param>
     public LootChestHook(LootChestCallback callback) : this(null, callback) { }
 
-    public sealed override void RightClick(int i, int j, int type)
+    public override void RightClick(int i, int j, int type)
     {
         var matches = Predicate?.Invoke(i, j, type) ?? true;
 
