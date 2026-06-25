@@ -20,7 +20,7 @@ public class CraftOrePickaxe : QBQuest
             );
     }
 
-    public static readonly bool[] OrePickaxes = [];
+    public static readonly bool[] OrePickaxes;
 
     public override QuestType QuestType => QuestType.Player;
 

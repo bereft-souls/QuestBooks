@@ -21,7 +21,7 @@ public class CraftLunarPickaxe : QBQuest
             );
     }
 
-    public static readonly bool[] LunarPickaxes = [];
+    public static readonly bool[] LunarPickaxes;
 
     public override QuestType QuestType => QuestType.Player;
 

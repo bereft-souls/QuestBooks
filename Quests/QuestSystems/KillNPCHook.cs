@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Systems;
-using Terraria.ModLoader.Core;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -55,9 +54,17 @@ public abstract class KillNPCHook : GlobalNPC
 
     public override bool InstancePerEntity => true;
 
-    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => GlobalTypeLookups<GlobalNPC>.Initialized && (Predicate?.Invoke(entity) ?? true);
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => true;
 
-    public override void OnKill(NPC npc) => Callback.Invoke(npc);
+    public override void OnKill(NPC npc)
+    {
+        var matches = Predicate?.Invoke(npc) ?? true;
+
+        if (!matches)
+            return;
+        
+        Callback.Invoke(npc);
+    }
 }
 
 public abstract class KillNPCHook<TQuest> : KillNPCHook
@@ -122,36 +129,6 @@ public abstract class KillNPCHook<TQuest> : KillNPCHook
     {
         ArgumentNullException.ThrowIfNull(types);
         Predicate = npc => Match(npc, types);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="KillNPCHook{TQuest}"/> class with the specified array of NPC types.
-    /// </summary>
-    /// <param name="getNpcType">
-    ///     The function that returns the item type that should trigger this hook when killed.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="getNpcType"/> is <see langword="null"/>.
-    /// </exception>
-    public KillNPCHook(Func<int> getNpcType) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getNpcType);
-        Predicate = npc => Match(npc, getNpcType);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="KillNPCHook{TQuest}"/> class with the specified array of NPC types.
-    /// </summary>
-    /// <param name="getNpcTypes">
-    ///     The functions that return the item types that should trigger this hook when killed.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="getNpcTypes"/> is <see langword="null"/>.
-    /// </exception>
-    public KillNPCHook(params Func<int>[] getNpcTypes) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getNpcTypes);
-        Predicate = npc => Match(npc, getNpcTypes);
     }
 
     protected static void Complete(NPC npc) => QuestManager.CompleteQuest<TQuest>();

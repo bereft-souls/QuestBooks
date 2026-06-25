@@ -1,6 +1,5 @@
 ﻿using QuestBooks.Systems;
 using Terraria.DataStructures;
-using Terraria.ModLoader.Core;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -56,11 +55,16 @@ public abstract class CraftItemHook : GlobalItem
 
     public override bool InstancePerEntity => true;
 
-    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => GlobalTypeLookups<GlobalItem>.Initialized && (Predicate?.Invoke(entity) ?? true);
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => true;
 
     public override void OnCreated(Item item, ItemCreationContext context)
     {
         if (context is not RecipeItemCreationContext recipe)
+            return;
+        
+        var matches = Predicate?.Invoke(item) ?? true;
+        
+        if (!matches)
             return;
 
         Callback.Invoke(item, recipe);
@@ -129,36 +133,6 @@ public abstract class CraftItemHook<TQuest> : CraftItemHook
     {
         ArgumentNullException.ThrowIfNull(types);
         Predicate = item => Match(item, types);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class with the specified item type function.
-    /// </summary>
-    /// <param name="getItemType">
-    ///     The function that returns of item type that should trigger this hook when crafted.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="getItemType"/> is <see langword="null"/>.
-    /// </exception>
-    public CraftItemHook(Func<int> getItemType) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getItemType);
-        Predicate = item => Match(item, getItemType);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="CraftItemHook{TQuest}"/> class with the specified item type functions.
-    /// </summary>
-    /// <param name="getItemTypes">
-    ///     The functions that return of item types that should trigger this hook when crafted.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="getItemTypes"/> is <see langword="null"/>.
-    /// </exception>
-    public CraftItemHook(params Func<int>[] getItemTypes) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getItemTypes);
-        Predicate = item => Match(item, getItemTypes);
     }
 
     protected static void Complete(Item item, RecipeItemCreationContext context) => QuestManager.MarkComplete<TQuest>();

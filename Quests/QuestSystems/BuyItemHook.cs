@@ -1,7 +1,6 @@
 ﻿using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Systems;
 using Terraria.DataStructures;
-using Terraria.ModLoader.Core;
 
 namespace QuestBooks.Quests.QuestSystems;
 
@@ -57,11 +56,16 @@ public abstract class BuyItemHook : GlobalItem
 
     public override bool InstancePerEntity => true;
 
-    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => GlobalTypeLookups<GlobalItem>.Initialized && (Predicate?.Invoke(entity) ?? true);
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => true;
 
     public override void OnCreated(Item item, ItemCreationContext context)
     {
         if (context is not BuyItemCreationContext buy)
+            return;
+        
+        var matches = Predicate?.Invoke(item) ?? true;
+        
+        if (!matches)
             return;
 
         Callback.Invoke(item, buy);
@@ -130,36 +134,6 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook
     {
         ArgumentNullException.ThrowIfNull(matches);
         Predicate = item => Match(item, matches);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class with the specified item type.
-    /// </summary>
-    /// <param name="getItemType">
-    ///     A function to retrieve the type of the item that should trigger this hook when bought.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="set"/> is null.
-    /// </exception>
-    public BuyItemHook(Func<int> getItemType) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getItemType);
-        Predicate = item => Match(item, getItemType);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class with the specified item type.
-    /// </summary>
-    /// <param name="getItemTypes">
-    ///     A set of functions to retrieve the types of the items that should trigger this hook when bought.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="set"/> is null.
-    /// </exception>
-    public BuyItemHook(params Func<int>[] getItemTypes) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getItemTypes);
-        Predicate = item => Match(item, getItemTypes);
     }
 
     protected static void Complete(Item item, BuyItemCreationContext context) => QuestManager.MarkComplete<TQuest>();

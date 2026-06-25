@@ -22,7 +22,7 @@ public class GetGems : QBQuest
 
     public override QuestType QuestType => QuestType.Player;
 
-    public static readonly bool[] Gems = [];
+    public static readonly bool[] Gems;
 
     public override bool CheckCompletion() => Main.LocalPlayer.HasAnyItem(Gems);
 }

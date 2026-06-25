@@ -12,7 +12,7 @@ public class CraftEvilBars : QBQuest
             .RegisterBoolSet(ItemID.CrimtaneBar, ItemID.DemoniteBar);
     }
 
-    public static readonly bool[] EvilBars = [];
+    public static readonly bool[] EvilBars;
 
     public override QuestType QuestType => QuestType.Player;
 

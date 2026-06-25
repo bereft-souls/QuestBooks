@@ -17,7 +17,7 @@ public class DefeatBiomeMimic : QBQuest
             );
     }
 
-    public static readonly bool[] BiomeMimics = [];
+    public static readonly bool[] BiomeMimics;
 
     public override bool CheckCompletion() => false;
 

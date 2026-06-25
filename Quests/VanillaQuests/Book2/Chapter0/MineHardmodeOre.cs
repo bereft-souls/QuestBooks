@@ -19,7 +19,7 @@ public class MineHardmodeOre : QBQuest
             );
     }
 
-    public static readonly bool[] HardmodeOres = [];
+    public static readonly bool[] HardmodeOres;
 
     public override QuestType QuestType => QuestType.Player;
 

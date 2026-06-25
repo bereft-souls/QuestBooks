@@ -52,7 +52,7 @@ public abstract class CatchFishHook : ModPlayer
     ///     Checks for any fish caught, regardless of type.
     /// </remarks>
     public CatchFishHook(CatchFishCallback callback) : this(null, callback) { }
-
+    
     public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
     {
         if (itemDrop <= ItemID.None)
@@ -129,36 +129,6 @@ public abstract class CatchFishHook<TQuest> : CatchFishHook
     {
         ArgumentNullException.ThrowIfNull(types);
         Predicate = (_, drop, _, _, _) => Match(drop, types);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="CatchFishHook{TQuest}"/> class with the specified fish type.
-    /// </summary>
-    /// <param name="getItemType">
-    ///     A function to retrieve the type of the fish that should trigger this hook when caught.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="getItemType"/> is null.
-    /// </exception>
-    public CatchFishHook(Func<int> getItemType) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getItemType);
-        Predicate = (_, drop, _, _, _) => Match(drop, getItemType);
-    }
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="CatchFishHook{TQuest}"/> class with the specified fish type.
-    /// </summary>
-    /// <param name="getItemTypes">
-    ///     A set of functions to retrieve the types of the fish that should trigger this hook when caught.
-    /// </param>
-    /// <exception cref="ArgumentNullException">
-    ///     <paramref name="getItemTypes"/> is null.
-    /// </exception>
-    public CatchFishHook(params Func<int>[] getItemTypes) : base(Complete)
-    {
-        ArgumentNullException.ThrowIfNull(getItemTypes);
-        Predicate = (_, drop, _, _, _) => Match(drop, getItemTypes);
     }
 
     private static void Complete(FishingAttempt attempt, int drop, int npc, AdvancedPopupRequest sonar, Vector2 position) => QuestManager.MarkComplete<TQuest>();

@@ -38,7 +38,7 @@ public class CraftSink : QBQuest
             );
     }
 
-    public static readonly bool[] Sinks = [];
+    public static readonly bool[] Sinks;
 
     public override bool CheckCompletion() => false;
 
