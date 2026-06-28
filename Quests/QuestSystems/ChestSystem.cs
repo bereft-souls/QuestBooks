@@ -128,8 +128,8 @@ public sealed class ChestSystem : ModSystem
             values.Add(value);
         }
 
-        tag[KeysXTag] = keys.Select(key => key.X);
-        tag[KeysYTag] = keys.Select(key => key.Y);
+        tag[KeysXTag] = keys.Select(key => key.X).ToList();
+        tag[KeysYTag] = keys.Select(key => key.Y).ToList();
         tag[ValuesTag] = values;
     }
 
