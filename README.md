@@ -16,4 +16,4 @@ While wiki dependence may never fully disappear, QuestBooks eliminates a vast ma
 
 QuestBooks also contains an open-source API to allow other mod developers to implement their own quest lines into the game!
 
-Check out the setup documentation to get started!
+Check out the [setup documentation](https://github.com/bereft-souls/QuestBooks/blob/master/docs/SETUP.md) to get started!
