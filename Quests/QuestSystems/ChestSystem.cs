@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.QuestSystems;
@@ -37,7 +38,9 @@ public sealed class ChestSystem : ModSystem
 
     private const string CountTag = "ChestCount";
 
-    private const string KeysTag = "ChestKeys";
+    private const string KeysXTag = "ChestKeysX";
+
+    private const string KeysYTag = "ChestKeysY";
 
     private const string ValuesTag = "ChestValues";
 
@@ -125,7 +128,8 @@ public sealed class ChestSystem : ModSystem
             values.Add(value);
         }
 
-        tag[KeysTag] = keys;
+        tag[KeysXTag] = keys.Select(key => key.X);
+        tag[KeysYTag] = keys.Select(key => key.Y);
         tag[ValuesTag] = values;
     }
 
@@ -133,7 +137,10 @@ public sealed class ChestSystem : ModSystem
     {
         var count = tag.GetInt(CountTag);
 
-        var keys = tag.GetList<(int, int)>(KeysTag);
+        var keysX = tag.GetList<int>(KeysXTag);
+        var keysY = tag.GetList<int>(KeysYTag);
+
+        var keys = keysX.Zip(keysY).ToArray();
         var values = tag.GetList<bool>(ValuesTag);
 
         for (var i = 0; i < count; i++)
