@@ -1,4 +1,3 @@
-global using static QuestBooks.Utilities.Utils;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
 using QuestBooks.QuestLog.DefaultStyles;
