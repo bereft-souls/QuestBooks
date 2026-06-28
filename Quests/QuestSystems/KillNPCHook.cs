@@ -54,8 +54,6 @@ public abstract class KillNPCHook : GlobalNPC
 
     public override bool InstancePerEntity => true;
 
-    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => true;
-
     public override void OnKill(NPC npc)
     {
         var matches = Predicate?.Invoke(npc) ?? true;

@@ -25,9 +25,15 @@ public abstract class ChatNPCHook : GlobalNPC
 
     public override bool InstancePerEntity => true;
 
-    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => GlobalTypeLookups<GlobalNPC>.Initialized && (Predicate?.Invoke(entity) ?? true);
+    public override void OnChatButtonClicked(NPC npc, bool firstButton)
+    {
+        var matches = Predicate?.Invoke(npc) ?? true;
 
-    public override void OnChatButtonClicked(NPC npc, bool firstButton) => Callback.Invoke(npc, firstButton);
+        if (!matches)
+            return;
+
+        Callback.Invoke(npc, firstButton);
+    }
 }
 
 public abstract class ChatNPCHook<TQuest> : ChatNPCHook

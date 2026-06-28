@@ -55,8 +55,6 @@ public abstract class CraftItemHook : GlobalItem
 
     public override bool InstancePerEntity => true;
 
-    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => true;
-
     public override void OnCreated(Item item, ItemCreationContext context)
     {
         if (context is not RecipeItemCreationContext recipe)
