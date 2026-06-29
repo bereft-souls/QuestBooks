@@ -14,7 +14,7 @@ public class SetupOldOnesArmy : QBQuest
             if (type != TileID.ElderCrystalStand || DD2Event.WouldFailSpawningHere(i, j))
                 return;
 
-            QuestManager.MarkComplete<SetupOldOnesArmy>();
+            QuestBooksMod.MarkComplete<SetupOldOnesArmy>();
         }
     }
 }

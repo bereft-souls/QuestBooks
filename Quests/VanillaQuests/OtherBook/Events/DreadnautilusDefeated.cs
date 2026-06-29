@@ -13,7 +13,7 @@ public class DreadnautilusDefeated : QBQuest
             if (npc.type != NPCID.BloodNautilus)
                 return;
 
-            QuestManager.CompleteQuest<DreadnautilusDefeated>();
+            QuestBooksMod.CompleteQuest<DreadnautilusDefeated>();
         }
     }
 }

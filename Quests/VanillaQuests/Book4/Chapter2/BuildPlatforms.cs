@@ -31,7 +31,7 @@ public class BuildPlatforms : QBQuest
                 if (above < Target || below < Target)
                     continue;
 
-                QuestManager.MarkComplete<BuildPlatforms>();
+                QuestBooksMod.MarkComplete<BuildPlatforms>();
             }
         }
 

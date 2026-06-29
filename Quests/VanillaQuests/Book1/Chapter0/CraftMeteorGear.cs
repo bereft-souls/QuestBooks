@@ -17,7 +17,7 @@ public class CraftMeteorGear : QBQuest
             if (!context.Recipe.HasIngredient(ItemID.MeteoriteBar))
                 return;
 
-            QuestManager.MarkComplete<CraftMeteorGear>();
+            QuestBooksMod.MarkComplete<CraftMeteorGear>();
         }
     }
 }

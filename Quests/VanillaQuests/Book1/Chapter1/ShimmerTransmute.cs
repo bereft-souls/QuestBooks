@@ -16,7 +16,7 @@ public class ShimmerTransmute : QBQuest
             if (source is not EntitySource_Misc misc || misc.Context != "Shimmer")
                 return;
 
-            QuestManager.MarkComplete<ShimmerTransmute>();
+            QuestBooksMod.MarkComplete<ShimmerTransmute>();
         }
     }
 }

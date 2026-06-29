@@ -16,7 +16,7 @@ public class GetNinjaSet : QBQuest
         public override bool? UseItem(Item item, Player player)
         {
             if (player.HasArmorSet(ItemID.NinjaHood, ItemID.NinjaShirt, ItemID.NinjaPants))
-                QuestManager.MarkComplete<GetNinjaSet>();
+                QuestBooksMod.MarkComplete<GetNinjaSet>();
 
             return true;
         }

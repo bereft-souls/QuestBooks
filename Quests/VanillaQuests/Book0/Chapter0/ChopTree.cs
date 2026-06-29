@@ -16,7 +16,7 @@ public class ChopTree : QBQuest
             if (type != TileID.Trees && !(ModContent.GetModTile(type)?.AdjTiles.Contains(TileID.Trees) ?? false))
                 return;
 
-            QuestManager.CompleteQuest<ChopTree>();
+            QuestBooksMod.CompleteQuest<ChopTree>();
         }
     }
 }

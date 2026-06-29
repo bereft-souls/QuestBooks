@@ -16,7 +16,7 @@ public class GetBeeSet : QBQuest
         public override bool? UseItem(Item item, Player player)
         {
             if (player.HasArmorSet(ItemID.BeeHat, ItemID.BeeBreastplate, ItemID.BeeGreaves))
-                QuestManager.MarkComplete<GetBeeSet>();
+                QuestBooksMod.MarkComplete<GetBeeSet>();
 
             return true;
         }

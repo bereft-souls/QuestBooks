@@ -35,18 +35,14 @@ public class InteractNurse : QBQuest
             var quest = QuestManager.GetQuest<InteractNurse>();
 
             if (quest.Completed)
-            {
                 return;
-            }
 
             quest.CoinsSpent += price;
 
-            if (quest.CoinsSpent < InteractNurse.CoinsTarget)
-            {
+            if (quest.CoinsSpent < CoinsTarget)
                 return;
-            }
 
-            QuestManager.MarkComplete<InteractNurse>();
+            QuestBooksMod.MarkComplete<InteractNurse>();
         }
     }
 }

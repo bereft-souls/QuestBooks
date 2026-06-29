@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
@@ -18,7 +19,7 @@ public class IceQueenDefeated : QBQuest
             if (npc.type != NPCID.IceQueen)
                 return;
 
-            QuestManager.CompleteQuest<IceQueenDefeated>();
+            QuestBooksMod.CompleteQuest<IceQueenDefeated>();
         }
     }
 }
@@ -34,7 +35,7 @@ public class SantaNK1Defeated : QBQuest
             if (npc.type != NPCID.SantaNK1)
                 return;
 
-            QuestManager.CompleteQuest<SantaNK1Defeated>();
+            QuestBooksMod.CompleteQuest<SantaNK1Defeated>();
         }
     }
 }
@@ -43,14 +44,5 @@ public class EverscreamDefeated : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class EverscreamCheck : GlobalNPC
-    {
-        public override void OnKill(NPC npc)
-        {
-            if (npc.type != NPCID.Everscream)
-                return;
-
-            QuestManager.CompleteQuest<EverscreamDefeated>();
-        }
-    }
+    public class EverscreamCheck() : KillNPCHook<EverscreamDefeated>(NPCID.Everscream);
 }

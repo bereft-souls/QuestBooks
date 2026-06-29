@@ -18,7 +18,7 @@ public class GetPinkPearl : QBQuest
             if (source is not EntitySource_ItemUse usage || usage.Item.type != ItemID.Oyster)
                 return;
 
-            QuestManager.MarkComplete<GetPinkPearl>();
+            QuestBooksMod.MarkComplete<GetPinkPearl>();
         }
     }
 }

@@ -171,16 +171,16 @@ namespace QuestBooks
         public static bool TryGetQuest(string questName, out Quest result) => QuestManager.TryGetQuest(questName, out result);
         public static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest => QuestManager.TryGetQuest(out result);
 
-        public static void CompleteQuest<TQuest>() where TQuest : Quest => QuestManager.CompleteQuest<TQuest>();
-        public static void CompleteQuest(string questName) => QuestManager.CompleteQuest(questName);
+        public static void CompleteQuest<TQuest>() where TQuest : Quest => CompleteQuest(GetQuest<TQuest>());
+        public static void CompleteQuest(string questName) => CompleteQuest(GetQuest(questName));
         public static void CompleteQuest(Quest quest) => QuestManager.CompleteQuest(quest);
 
-        public static void MarkComplete<TQuest>() where TQuest : Quest => QuestManager.MarkComplete<TQuest>();
-        public static void MarkComplete(string questName) => QuestManager.MarkComplete(questName);
+        public static void MarkComplete<TQuest>() where TQuest : Quest => MarkComplete(GetQuest<TQuest>());
+        public static void MarkComplete(string questName) => MarkComplete(GetQuest(questName));
         public static void MarkComplete(Quest quest) => QuestManager.MarkComplete(quest);
 
-        public static void MarkIncomplete<TQuest>() where TQuest : Quest => QuestManager.MarkIncomplete<TQuest>();
-        public static void MarkIncomplete(string questName) => QuestManager.MarkIncomplete(questName);
+        public static void MarkIncomplete<TQuest>() where TQuest : Quest => MarkIncomplete(GetQuest<TQuest>());
+        public static void MarkIncomplete(string questName) => MarkIncomplete(GetQuest(questName));
         public static void MarkIncomplete(Quest quest) => QuestManager.MarkIncomplete(quest);
 
         #endregion

@@ -19,7 +19,7 @@ public class PlaceBottle : QBQuest
             if (!TileID.Sets.Platforms[bottom.TileType])
                 return;
 
-            QuestManager.MarkComplete<PlaceBottle>();
+            QuestBooksMod.MarkComplete<PlaceBottle>();
         }
     }
 }

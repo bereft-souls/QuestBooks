@@ -17,7 +17,7 @@ public class CraftAtEvilAltar : QBQuest
             if (!context.Recipe.HasTile(TileID.DemonAltar))
                 return;
 
-            QuestManager.MarkComplete<CraftAtEvilAltar>();
+            QuestBooksMod.MarkComplete<CraftAtEvilAltar>();
         }
     }
 }

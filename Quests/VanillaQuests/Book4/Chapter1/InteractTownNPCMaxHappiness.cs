@@ -20,7 +20,7 @@ public class InteractTownNPCMaxHappiness : QBQuest
             if (settings.PriceAdjustment >= ShopHelper.MaxHappinessAchievementPriceMultiplier)
                 return;
 
-            QuestManager.MarkComplete<InteractTownNPCMaxHappiness>();
+            QuestBooksMod.MarkComplete<InteractTownNPCMaxHappiness>();
         }
     }
 }

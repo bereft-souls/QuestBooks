@@ -15,6 +15,6 @@ public class AlertMartiansProbe : QBQuest
         if (type != InvasionID.MartianMadness)
             return;
 
-        QuestManager.MarkComplete<AlertMartiansProbe>();
+        QuestBooksMod.MarkComplete<AlertMartiansProbe>();
     }
 }

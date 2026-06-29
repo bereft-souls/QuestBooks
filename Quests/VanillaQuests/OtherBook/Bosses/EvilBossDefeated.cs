@@ -1,8 +1,9 @@
 ﻿using QuestBooks.Assets;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
 {
-    public class EvilBossDefeated : QBDynamicQuest
+    public class EvilBossDefeated : QBQuest
     {
         public static bool Crimson => WorldGen.crimson;
         public override string Name => Crimson ? "BrainOfCthulhuDefeated" : "EaterOfWorldsDefeated";
@@ -14,13 +15,46 @@ namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
         public Texture2D OutlineTexture { get; } = Main.dedServ ? null : ModContent.Request<Texture2D>("QuestBooks/Assets/Textures/Quests/LargeOutline").Value;
         public Texture2D IconTexture => Crimson ? brain : worm;
 
-        public override void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool hovered, bool selected)
+        public override bool PreTextureDraw(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered)
         {
-            DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, Color.Black);
+            if (QuestLogDrawer.ActiveStyle.UseDesigner)
+            {
+                int cycle = (int)(Main.timeForVisualEffects % 180 / 60);
+                switch (cycle)
+                {
+                    case 0:
+                        DrawLocked(spriteBatch, canvasPosition, canvasViewOffset, zoom, selected, hovered);
+                        break;
+
+                    case 1:
+                        DrawIncomplete(spriteBatch, canvasPosition, canvasViewOffset, zoom, selected, hovered);
+                        break;
+
+                    default:
+                        DrawCompleted(spriteBatch, canvasPosition, canvasViewOffset, zoom, selected, hovered);
+                        break;
+                }
+            }
+
+            else if (!unlocked && !Completed)
+                DrawLocked(spriteBatch, canvasPosition, canvasViewOffset, zoom, hovered, selected);
+
+            else if (!Completed)
+                DrawIncomplete(spriteBatch, canvasPosition, canvasViewOffset, zoom, hovered, selected);
+
+            else
+                DrawCompleted(spriteBatch, canvasPosition, canvasViewOffset, zoom, hovered, selected);
+
+            return false;
+        }
+
+        public void DrawLocked(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool selected, bool hovered)
+        {
+            DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, hovered ? Color.LightGray : Color.Black);
             DrawTexture(spriteBatch, IconTexture, canvasPosition, canvasOffset, zoom, Color.Black);
         }
 
-        public override void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool hovered, bool selected)
+        public void DrawIncomplete(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool selected, bool hovered)
         {
             if (selected)
                 DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, Color.Yellow);
@@ -42,7 +76,7 @@ namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
             spriteBatch.Begin(SpriteSortMode.Deferred, blend, sampler, depth, raster, effect, matrix);
         }
 
-        public override void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool hovered, bool selected)
+        public void DrawCompleted(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasOffset, float zoom, bool selected, bool hovered)
         {
             if (selected)
                 DrawOutline(spriteBatch, canvasPosition, canvasOffset, zoom, Color.Yellow);
@@ -64,7 +98,5 @@ namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
             Vector2 drawPos = (canvasPosition - canvasOffset) * zoom;
             spriteBatch.Draw(texture, drawPos, null, color, 0f, texture.Size() * 0.5f, zoom, SpriteEffects.None, 0f);
         }
-
-        public override Vector2 HoverAreaSize(bool unlocked) => IconTexture.Size();
     }
 }

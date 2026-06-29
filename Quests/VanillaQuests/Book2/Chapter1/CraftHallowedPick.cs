@@ -15,7 +15,7 @@ public class CraftHallowedPickaxe : QBQuest
             if (item.pick < 0 || !context.Recipe.HasIngredient(ItemID.HallowedBar))
                 return;
 
-            QuestManager.MarkComplete<CraftHallowedPickaxe>();
+            QuestBooksMod.MarkComplete<CraftHallowedPickaxe>();
         }
     }
 }

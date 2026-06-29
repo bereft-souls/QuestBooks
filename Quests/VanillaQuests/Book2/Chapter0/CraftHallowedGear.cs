@@ -19,7 +19,7 @@ public class CraftHallowedGear : QBQuest
                 return;
             }
 
-            QuestManager.CompleteQuest<CraftHallowedGear>();
+            QuestBooksMod.CompleteQuest<CraftHallowedGear>();
         }
     }
 }

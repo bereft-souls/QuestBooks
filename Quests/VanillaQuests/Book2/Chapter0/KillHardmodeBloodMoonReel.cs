@@ -16,7 +16,7 @@ public class KillHardmodeBloodMoonReel : QBQuest
             if (source is not EntitySource_Loot loot || loot.Entity is not NPC npc || npc.type != NPCID.BloodEelHead || npc.type != NPCID.GoblinShark)
                 return;
 
-            QuestManager.MarkComplete<KillHardmodeBloodMoonReel>();
+            QuestBooksMod.MarkComplete<KillHardmodeBloodMoonReel>();
         }
     }
 }

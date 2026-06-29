@@ -24,11 +24,13 @@ namespace QuestBooks.Quests
         /// </summary>
         public virtual string Key { get => GetType().Name; }
 
+        public override string Name => Key;
+
         /// <summary>
         /// Allows you to modify the collection of objects passed to all of this quest's localization retrievals.<br/>
         /// The default contains only 1 entry, which is a color string (green if the quest is completed, yellow if not).
         /// </summary>
-        public virtual object[] LocalizationArgs { get => [(Completed ? new Color(20, 210, 70) : new Color(255, 240, 0))]; }
+        public virtual object[] LocalizationArgs { get => [(Completed ? new Color(20, 210, 70) : new Color(255, 240, 0)).Hex3()]; }
 
         /// <summary>
         /// The text that should display in the mouse tooltip whenever this quest is hovered over in the quest log.<br/>
@@ -124,12 +126,12 @@ namespace QuestBooks.Quests
         /// <br/>
         /// Returns <see langword="true"/> by default.
         /// </summary>
-        public virtual bool PreTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered) => true;
+        public virtual bool PreTextureDraw(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered) => true;
 
         /// <summary>
         /// Called after the QuestDisplay icon would be drawn to the canvas, even if <see cref="PreTextureDraw(SpriteBatch, Vector2, float, bool, bool)"/> returned <see langword="false"/>.
         /// </summary>
-        public virtual void PostTextureDraw(SpriteBatch spriteBatch, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered) { }
+        public virtual void PostTextureDraw(SpriteBatch spriteBatch, Vector2 canvasPosition, Vector2 canvasViewOffset, float zoom, bool unlocked, bool selected, bool hovered) { }
 
         /// <summary>
         /// Called if/when a "notification" indicator is requesting to be drawn for this quest.<br/>

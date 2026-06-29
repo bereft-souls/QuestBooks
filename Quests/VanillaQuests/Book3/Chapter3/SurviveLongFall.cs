@@ -14,9 +14,7 @@ public class SurviveLongFall : QBQuest
     private static void Check(On_AchievementsHelper.orig_HandleSpecialEvent orig, Player player, int eventId)
     {
         if (eventId == AchievementHelperID.Special.SurviveHugeFall)
-        {
-            QuestManager.MarkComplete<SurviveLongFall>();
-        }
+            QuestBooksMod.MarkComplete<SurviveLongFall>();
 
         orig(player, eventId);
     }

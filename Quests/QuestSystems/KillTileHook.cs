@@ -160,7 +160,7 @@ public abstract class KillTileHook<TQuest> : KillTileHook
         Predicate = (_, _, type) => Match(type, getTileTypes);
     }
 
-    protected static void Complete(int x, int y, int type) => QuestManager.MarkComplete<TQuest>();
+    protected static void Complete(int x, int y, int type) => QuestBooksMod.MarkComplete<TQuest>();
 }
 
 public abstract class KillTileHook<TQuest, TModTile> : KillTileHook<TQuest>

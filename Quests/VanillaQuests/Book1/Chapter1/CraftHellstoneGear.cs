@@ -15,11 +15,9 @@ public class CraftHellstoneGear : QBQuest
         private static void Complete(Item item, RecipeItemCreationContext context)
         {
             if (!context.Recipe.HasIngredient(ItemID.HellstoneBar))
-            {
                 return;
-            }
 
-            QuestManager.MarkComplete<CraftHellstoneGear>();
+            QuestBooksMod.MarkComplete<CraftHellstoneGear>();
         }
     }
 }

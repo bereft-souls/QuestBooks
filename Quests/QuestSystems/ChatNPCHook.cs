@@ -73,7 +73,7 @@ public abstract class ChatNPCHook<TQuest> : ChatNPCHook
         Predicate = npc => Match(npc, getNpcTypes);
     }
 
-    protected static void Complete(NPC npc, bool firstButton) => QuestManager.CompleteQuest<TQuest>();
+    protected static void Complete(NPC npc, bool firstButton) => QuestBooksMod.CompleteQuest<TQuest>();
 }
 
 public abstract class ChatNPCHook<TQuest, TModNPC> : ChatNPCHook<TQuest>

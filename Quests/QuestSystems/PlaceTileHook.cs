@@ -123,7 +123,7 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
         Predicate = (_, _, tile, _) => Match(tile, getTypes);
     }
 
-    protected static void Complete(int i, int j, int type, Item item) => QuestManager.CompleteQuest<TQuest>();
+    protected static void Complete(int i, int j, int type, Item item) => QuestBooksMod.CompleteQuest<TQuest>();
 }
 
 public abstract class PlaceTileHook<TQuest, TModTile> : PlaceTileHook<TQuest>

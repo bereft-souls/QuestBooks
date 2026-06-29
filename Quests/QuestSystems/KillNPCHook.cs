@@ -129,7 +129,7 @@ public abstract class KillNPCHook<TQuest> : KillNPCHook
         Predicate = npc => Match(npc, types);
     }
 
-    protected static void Complete(NPC npc) => QuestManager.CompleteQuest<TQuest>();
+    protected static void Complete(NPC npc) => QuestBooksMod.CompleteQuest<TQuest>();
 }
 
 public abstract class KillNPCHook<TQuest, TModNPC> : KillNPCHook<TQuest>

@@ -17,7 +17,7 @@ public class CraftCactusGear : QBQuest
             if (!context.Recipe.HasIngredient(ItemID.Cactus))
                 return;
 
-            QuestManager.MarkComplete<CraftCactusGear>();
+            QuestBooksMod.MarkComplete<CraftCactusGear>();
         }
     }
 }

@@ -14,7 +14,7 @@ public class InteractTravellingMerchant : QBQuest
             if (context is not BuyItemCreationContext buy || buy.VendorNPC.type != NPCID.TravellingMerchant)
                 return;
 
-            QuestManager.MarkComplete<InteractTravellingMerchant>();
+            QuestBooksMod.MarkComplete<InteractTravellingMerchant>();
         }
     }
 }

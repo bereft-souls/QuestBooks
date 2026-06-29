@@ -16,7 +16,7 @@ public class SolarEclipseDefeated : QBQuest
                 return;
 
             if (!Main.eclipse && cachedEclipse)
-                QuestManager.CompleteQuest<SolarEclipseDefeated>();
+                QuestBooksMod.CompleteQuest<SolarEclipseDefeated>();
 
             cachedEclipse = Main.eclipse;
         }

@@ -13,7 +13,6 @@ public class InteractDyeTrader : QBQuest
     private static void Check(On_Player.orig_GetDyeTraderReward orig, Player self, NPC dyeTrader)
     {
         orig(self, dyeTrader);
-
-        QuestManager.MarkComplete<InteractDyeTrader>();
+        QuestBooksMod.MarkComplete<InteractDyeTrader>();
     }
 }

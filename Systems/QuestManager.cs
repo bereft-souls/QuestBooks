@@ -107,11 +107,11 @@ namespace QuestBooks.Systems
             QuestLogDrawer.ActiveStyle?.SelectQuestLog(questLog);
         }
 
-        public static Quest GetQuest(string questName) => ActiveQuests[questName];
-        public static TQuest GetQuest<TQuest>() where TQuest : Quest => (TQuest)GetQuest(QuestLoader.QuestKeys[typeof(TQuest)]);
+        internal static Quest GetQuest(string questName) => ActiveQuests[questName];
+        internal static TQuest GetQuest<TQuest>() where TQuest : Quest => (TQuest)GetQuest(QuestLoader.QuestKeys[typeof(TQuest)]);
 
-        public static bool TryGetQuest(string questName, out Quest result) => ActiveQuests.TryGetValue(questName, out result);
-        public static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest
+        internal static bool TryGetQuest(string questName, out Quest result) => ActiveQuests.TryGetValue(questName, out result);
+        internal static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest
         {
             if (QuestLoader.QuestKeys.TryGetValue(typeof(TQuest), out var questName) && TryGetQuest(questName, out var questResult))
             {
@@ -123,9 +123,7 @@ namespace QuestBooks.Systems
             return false;
         }
 
-        public static void CompleteQuest<TQuest>() where TQuest : Quest => CompleteQuest(GetQuest<TQuest>());
-        public static void CompleteQuest(string questName) => CompleteQuest(GetQuest(questName));
-        public static void CompleteQuest(Quest quest)
+        internal static void CompleteQuest(Quest quest)
         {
             // Always attempt to sync world quests across server and client.
             // If a quest is already completed, this packet will be ignored.
@@ -139,9 +137,7 @@ namespace QuestBooks.Systems
             MarkComplete(quest);
         }
 
-        public static void MarkComplete<TQuest>() where TQuest : Quest => MarkComplete(GetQuest<TQuest>());
-        public static void MarkComplete(string questName) => MarkComplete(GetQuest(questName));
-        public static void MarkComplete(Quest quest)
+        internal static void MarkComplete(Quest quest)
         {
             // This is not redundant because MarkComplete() can be called separately
             // from CompleteQuest().
@@ -185,9 +181,7 @@ namespace QuestBooks.Systems
             quest.MarkAsComplete();
         }
 
-        public static void MarkIncomplete<TQuest>() where TQuest : Quest => MarkIncomplete(GetQuest<TQuest>());
-        public static void MarkIncomplete(string questName) => MarkIncomplete(GetQuest(questName));
-        public static void MarkIncomplete(Quest quest)
+        internal static void MarkIncomplete(Quest quest)
         {
             if (!quest.Completed)
                 return;

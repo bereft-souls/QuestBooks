@@ -17,7 +17,7 @@ public class UseStardustFragments : QBQuest
             if (!context.Recipe.HasTile(TileID.LunarCraftingStation) || !context.Recipe.HasIngredient(ItemID.FragmentStardust))
                 return;
 
-            QuestManager.MarkComplete<UseStardustFragments>();
+            QuestBooksMod.MarkComplete<UseStardustFragments>();
         }
     }
 }

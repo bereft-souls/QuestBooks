@@ -16,7 +16,7 @@ public class GetSparta : QBQuest
         public override bool? UseItem(Item item, Player player)
         {
             if (player.HasArmorSet(ItemID.GladiatorHelmet, ItemID.GladiatorBreastplate, ItemID.GladiatorLeggings))
-                QuestManager.MarkComplete<GetSparta>();
+                QuestBooksMod.MarkComplete<GetSparta>();
 
             return true;
         }

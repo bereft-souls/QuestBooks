@@ -138,5 +138,5 @@ public abstract class LootChestHook<TQuest> : LootChestHook
         return match;
     }
 
-    protected static void Complete(int x, int y, int type) => QuestManager.CompleteQuest<TQuest>();
+    protected static void Complete(int x, int y, int type) => QuestBooksMod.CompleteQuest<TQuest>();
 }

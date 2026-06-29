@@ -17,7 +17,7 @@ public class FishInLava : QBQuest
             if (!projectile.lavaWet)
                 return;
 
-            QuestManager.MarkComplete<FishInLava>();
+            QuestBooksMod.MarkComplete<FishInLava>();
         }
     }
 }

@@ -131,7 +131,7 @@ public abstract class CatchFishHook<TQuest> : CatchFishHook
         Predicate = (_, drop, _, _, _) => Match(drop, types);
     }
 
-    private static void Complete(FishingAttempt attempt, int drop, int npc, AdvancedPopupRequest sonar, Vector2 position) => QuestManager.MarkComplete<TQuest>();
+    private static void Complete(FishingAttempt attempt, int drop, int npc, AdvancedPopupRequest sonar, Vector2 position) => QuestBooksMod.MarkComplete<TQuest>();
 }
 
 public abstract class CatchFishHook<TQuest, TModItem> : CatchFishHook<TQuest>

@@ -18,7 +18,7 @@ public class InteractPartyGirl : QBQuest
             if (!BirthdayParty.PartyIsUp || !BirthdayParty.GenuineParty)
                 return;
 
-            QuestManager.MarkComplete<InteractPartyGirl>();
+            QuestBooksMod.MarkComplete<InteractPartyGirl>();
         }
     }
 }

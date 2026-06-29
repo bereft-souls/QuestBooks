@@ -19,7 +19,7 @@ public class KillBloodMoonReel : QBQuest
             if (source is not EntitySource_Loot loot || loot.Entity is not NPC npc || npc.type != NPCID.EyeballFlyingFish || npc.type != NPCID.ZombieMerman)
                 return;
 
-            QuestManager.MarkComplete<KillBloodMoonReel>();
+            QuestBooksMod.MarkComplete<KillBloodMoonReel>();
         }
     }
 }

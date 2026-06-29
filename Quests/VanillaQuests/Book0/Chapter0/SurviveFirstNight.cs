@@ -13,7 +13,7 @@ public class SurviveFirstNight : QBQuest
         bool day = Main.IsItDay();
 
         if (day && CachedNight)
-            QuestManager.CompleteQuest<SurviveFirstNight>();
+            QuestBooksMod.CompleteQuest<SurviveFirstNight>();
 
         CachedNight = !day;
     }

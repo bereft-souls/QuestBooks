@@ -14,6 +14,6 @@ public class InteractTownPet : QBQuest
     {
         orig(self, index);
 
-        QuestManager.MarkComplete<InteractTownPet>();
+        QuestBooksMod.MarkComplete<InteractTownPet>();
     }
 }

@@ -17,7 +17,7 @@ public class UseNebulaFragments : QBQuest
             if (!context.Recipe.HasTile(TileID.LunarCraftingStation) || !context.Recipe.HasIngredient(ItemID.FragmentNebula))
                 return;
 
-            QuestManager.MarkComplete<UseNebulaFragments>();
+            QuestBooksMod.MarkComplete<UseNebulaFragments>();
         }
     }
 }

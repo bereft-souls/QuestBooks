@@ -134,7 +134,7 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook
         Predicate = item => Match(item, matches);
     }
 
-    protected static void Complete(Item item, BuyItemCreationContext context) => QuestManager.MarkComplete<TQuest>();
+    protected static void Complete(Item item, BuyItemCreationContext context) => QuestBooksMod.MarkComplete<TQuest>();
 }
 
 public abstract class BuyItemHook<TQuest, TModItem> : BuyItemHook<TQuest>

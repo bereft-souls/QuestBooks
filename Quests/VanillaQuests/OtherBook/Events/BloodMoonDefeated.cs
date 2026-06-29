@@ -16,7 +16,7 @@ public class BloodMoonDefeated : QBQuest
                 return;
 
             if (!Main.bloodMoon && cachedBloodMoon)
-                QuestManager.CompleteQuest<BloodMoonDefeated>();
+                QuestBooksMod.CompleteQuest<BloodMoonDefeated>();
 
             cachedBloodMoon = Main.bloodMoon;
         }

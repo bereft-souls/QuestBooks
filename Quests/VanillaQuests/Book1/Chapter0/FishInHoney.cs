@@ -17,7 +17,7 @@ public class FishInHoney : QBQuest
             if (!projectile.honeyWet)
                 return;
 
-            QuestManager.MarkComplete<FishInHoney>();
+            QuestBooksMod.MarkComplete<FishInHoney>();
         }
     }
 }

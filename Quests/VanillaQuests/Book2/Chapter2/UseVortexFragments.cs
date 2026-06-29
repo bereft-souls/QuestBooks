@@ -17,7 +17,7 @@ public class UseVortexFragments : QBQuest
             if (!context.Recipe.HasTile(TileID.LunarCraftingStation) || !context.Recipe.HasIngredient(ItemID.FragmentVortex))
                 return;
 
-            QuestManager.MarkComplete<UseVortexFragments>();
+            QuestBooksMod.MarkComplete<UseVortexFragments>();
         }
     }
 }

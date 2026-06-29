@@ -1,4 +1,5 @@
-﻿using QuestBooks.Systems;
+﻿using QuestBooks.Quests.QuestSystems;
+using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
@@ -11,30 +12,12 @@ public class PumpkingDefeated : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class PumpkingCheck : GlobalNPC
-    {
-        public override void OnKill(NPC npc)
-        {
-            if (npc.type != NPCID.Pumpking)
-                return;
-
-            QuestManager.CompleteQuest<PumpkingDefeated>();
-        }
-    }
+    public class PumpkingCheck() : KillNPCHook<PumpkingDefeated>(NPCID.Pumpking);
 }
 
 public class MourningWoodDefeated : QBQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class MourningWoodCheck : GlobalNPC
-    {
-        public override void OnKill(NPC npc)
-        {
-            if (npc.type != NPCID.MourningWood)
-                return;
-
-            QuestManager.CompleteQuest<MourningWoodDefeated>();
-        }
-    }
+    public class MourningWoodCheck() : KillNPCHook<MourningWoodDefeated>(NPCID.MourningWood);
 }

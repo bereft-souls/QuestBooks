@@ -17,7 +17,7 @@ public class UseSolarFragments : QBQuest
             if (!context.Recipe.HasTile(TileID.LunarCraftingStation) || !context.Recipe.HasIngredient(ItemID.FragmentSolar))
                 return;
 
-            QuestManager.MarkComplete<UseSolarFragments>();
+            QuestBooksMod.MarkComplete<UseSolarFragments>();
         }
     }
 }

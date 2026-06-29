@@ -16,6 +16,6 @@ public class TorchGod : QBQuest
         if (!cursor.TryGotoNext(MoveType.After, static i => i.MatchLdarg0(), static i => i.MatchLdfld<Player>("numberOfTorchAttacksMade"), static i => i.MatchLdcI4(95)))
             throw new Exception();
 
-        cursor.EmitDelegate(static () => QuestManager.MarkComplete<TorchGod>());
+        cursor.EmitDelegate(static () => QuestBooksMod.MarkComplete<TorchGod>());
     }
 }

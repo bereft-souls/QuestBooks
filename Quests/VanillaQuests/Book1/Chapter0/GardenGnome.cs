@@ -14,9 +14,7 @@ public class GardenGnome : QBQuest
     private static void Check(On_AchievementsHelper.orig_NotifyProgressionEvent orig, int eventId)
     {
         if (eventId == AchievementHelperID.Events.TurnGnomeToStatue)
-        {
-            QuestManager.MarkComplete<GardenGnome>();
-        }
+            QuestBooksMod.MarkComplete<GardenGnome>();
 
         orig(eventId);
     }

@@ -15,7 +15,7 @@ public class FlyKwadRacer : QBQuest
             if (projectile.position.Y - projectile.height > 16f * Main.offScreenRange / 2f)
                 return;
 
-            QuestManager.MarkComplete<FlyKwadRacer>();
+            QuestBooksMod.MarkComplete<FlyKwadRacer>();
         }
     }
 }

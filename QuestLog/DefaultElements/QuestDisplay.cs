@@ -140,7 +140,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             bool unlocked = Unlocked();
             bool completed = Completed();
 
-            if (Quest.PreTextureDraw(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered))
+            if (Quest.PreTextureDraw(spriteBatch, CanvasPosition, canvasViewOffset, zoom, unlocked, selected, hovered))
             {
                 if (QuestLogDrawer.ActiveStyle.UseDesigner)
                 {
@@ -174,7 +174,7 @@ namespace QuestBooks.QuestLog.DefaultElements
             if (selected)
                 _showNotification = false;
 
-            Quest.PostTextureDraw(spriteBatch, canvasViewOffset, zoom, unlocked, selected, hovered);
+            Quest.PostTextureDraw(spriteBatch, CanvasPosition, canvasViewOffset, zoom, unlocked, selected, hovered);
 
             if (ShowNotification)
                 Quest.DrawNotification(spriteBatch, (CanvasPosition - canvasViewOffset + new Vector2(20f)) * zoom, zoom, unlocked, hovered);

@@ -16,7 +16,7 @@ public class CraftHammer : QBQuest
             if (context is not RecipeItemCreationContext || item.hammer <= 0)
                 return;
 
-            QuestManager.CompleteQuest<CraftHammer>();
+            QuestBooksMod.CompleteQuest<CraftHammer>();
         }
     }
 }

@@ -21,7 +21,7 @@ public class CraftWorkbench : QBQuest
             if (item.createTile != TileID.WorkBenches && !(ModContent.GetModTile(item.createTile)?.AdjTiles?.Contains(TileID.WorkBenches) ?? false))
                 return;
 
-            QuestManager.CompleteQuest<CraftWorkbench>();
+            QuestBooksMod.CompleteQuest<CraftWorkbench>();
         }
     }
 }

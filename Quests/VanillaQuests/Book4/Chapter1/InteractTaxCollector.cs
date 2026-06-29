@@ -23,6 +23,6 @@ public class InteractTaxCollector : QBQuest
         if (self.taxMoney < Coins)
             return;
 
-        QuestManager.MarkComplete<InteractTaxCollector>();
+        QuestBooksMod.MarkComplete<InteractTaxCollector>();
     }
 }

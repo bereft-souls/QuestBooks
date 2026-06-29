@@ -14,6 +14,6 @@ public class DefeatMechaMayhem : QBQuest
         if (eventId != AchievementHelperID.Events.DefeatedMechaMayhem)
             return;
 
-        QuestManager.MarkComplete<DefeatMechaMayhem>();
+        QuestBooksMod.MarkComplete<DefeatMechaMayhem>();
     }
 }
