@@ -6,12 +6,12 @@
 ---
 
 > ### Quick Reference:<br/>
-> [Quest Types](https://github.com/bereft-souls/QuestBooks/new/master/docs#quest-types)<br/>
-> [Quest Keys](https://github.com/bereft-souls/QuestBooks/new/master/docs#quest-keys)<br/>
-> [Localization/Good Practices](https://github.com/bereft-souls/QuestBooks/new/master/docs#localization)<br/>
-> [Custom Drawing](https://github.com/bereft-souls/QuestBooks/new/master/docs#custom-drawing)<br/>
-> [Easy Hooks](https://github.com/bereft-souls/QuestBooks/new/master/docs#easy-hooks)<br/>
-> [Extra Overrides](https://github.com/bereft-souls/QuestBooks/new/master/docs#extra-overrides)
+> [Quest Types](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md#quest-types)<br/>
+> [Quest Keys](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md#quest-keys)<br/>
+> [Localization/Good Practices](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md#localization)<br/>
+> [Custom Drawing](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md#custom-drawing)<br/>
+> [Easy Hooks](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md#easy-hooks)<br/>
+> [Extra Overrides](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md#extra-overrides)
 
 ---
 
