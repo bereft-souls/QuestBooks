@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class InteractSkeletonMerchant : QBQuest
+public class InteractSkeletonMerchant : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

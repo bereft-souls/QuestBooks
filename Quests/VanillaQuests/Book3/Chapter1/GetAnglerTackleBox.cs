@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class GetAnglerTackleBox : QBQuest
+public class GetAnglerTackleBox : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

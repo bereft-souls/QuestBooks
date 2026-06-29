@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
 
-public class CraftHeartLantern : QBQuest
+public class CraftHeartLantern : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

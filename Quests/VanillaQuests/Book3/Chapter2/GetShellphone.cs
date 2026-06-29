@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
 
-public class GetShellphone : QBQuest
+public class GetShellphone : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

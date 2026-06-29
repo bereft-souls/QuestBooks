@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
-public class GetEvilEssence : QBQuest
+public class GetEvilEssence : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

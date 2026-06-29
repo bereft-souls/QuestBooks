@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class ShimmerPhase : QBQuest
+public class ShimmerPhase : VanillaQuest
 {
     /// <summary>
     ///     The amount of tiles the player must phase through while shimmering in order to complete the

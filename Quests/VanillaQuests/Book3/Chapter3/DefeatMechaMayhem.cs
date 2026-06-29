@@ -3,7 +3,7 @@ using Terraria.GameContent.Achievements;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
-public class DefeatMechaMayhem : QBQuest
+public class DefeatMechaMayhem : VanillaQuest
 {
     public override void Load() => AchievementsHelper.OnProgressionEvent += Check;
 

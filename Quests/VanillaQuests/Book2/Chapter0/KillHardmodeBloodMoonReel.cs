@@ -3,7 +3,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
-public class KillHardmodeBloodMoonReel : QBQuest
+public class KillHardmodeBloodMoonReel : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

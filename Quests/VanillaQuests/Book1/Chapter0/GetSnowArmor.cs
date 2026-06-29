@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class GetSnowArmor : QBQuest
+public class GetSnowArmor : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

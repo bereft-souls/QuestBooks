@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class MineHardmodeOre : QBQuest
+public class MineHardmodeOre : VanillaQuest
 {
     static MineHardmodeOre()
     {

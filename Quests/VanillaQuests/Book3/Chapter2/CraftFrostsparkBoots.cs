@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
 
-public class CraftFrostsparkBoots : QBQuest
+public class CraftFrostsparkBoots : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

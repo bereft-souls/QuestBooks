@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
 
-public class CraftAnkhShield : QBQuest
+public class CraftAnkhShield : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

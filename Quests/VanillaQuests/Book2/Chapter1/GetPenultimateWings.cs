@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class GetPenultimateWings : QBQuest
+public class GetPenultimateWings : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

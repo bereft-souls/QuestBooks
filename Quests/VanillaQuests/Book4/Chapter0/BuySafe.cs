@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class BuySafe : QBQuest
+public class BuySafe : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

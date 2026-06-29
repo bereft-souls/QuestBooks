@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class CraftPeaceCandle : QBQuest
+public class CraftPeaceCandle : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

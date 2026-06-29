@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
-public class DreadnautilusDefeated : QBQuest
+public class DreadnautilusDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

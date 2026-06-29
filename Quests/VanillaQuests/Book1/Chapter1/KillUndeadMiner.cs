@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class KillUndeadMiner : QBQuest
+public class KillUndeadMiner : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

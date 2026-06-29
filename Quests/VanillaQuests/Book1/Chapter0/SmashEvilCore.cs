@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class SmashEvilCore : QBQuest
+public class SmashEvilCore : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

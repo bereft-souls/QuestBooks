@@ -3,7 +3,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 
-public class CraftHammer : QBQuest
+public class CraftHammer : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

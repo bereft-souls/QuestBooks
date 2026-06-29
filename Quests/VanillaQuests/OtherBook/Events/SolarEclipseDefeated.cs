@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
-public class SolarEclipseDefeated : QBQuest
+public class SolarEclipseDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

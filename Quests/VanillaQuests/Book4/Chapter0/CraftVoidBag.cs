@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class CraftVoidBag : QBQuest
+public class CraftVoidBag : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

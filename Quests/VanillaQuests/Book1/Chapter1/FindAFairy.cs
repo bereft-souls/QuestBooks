@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class FindAFairy : QBQuest
+public class FindAFairy : VanillaQuest
 {
     // Same distance as the lifeform analyzer.
     private const float Distance = 1300f;

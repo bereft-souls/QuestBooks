@@ -3,7 +3,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class InteractTravellingMerchant : QBQuest
+public class InteractTravellingMerchant : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

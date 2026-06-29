@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class CraftEvilPickaxe : QBQuest
+public class CraftEvilPickaxe : VanillaQuest
 {
     static CraftEvilPickaxe()
     {

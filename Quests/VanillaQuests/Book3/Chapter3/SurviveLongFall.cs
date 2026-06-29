@@ -3,7 +3,7 @@ using Terraria.GameContent.Achievements;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
-public class SurviveLongFall : QBQuest
+public class SurviveLongFall : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

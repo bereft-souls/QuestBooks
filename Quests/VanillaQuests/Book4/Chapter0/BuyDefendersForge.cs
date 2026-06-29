@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class BuyDefendersForge : QBQuest
+public class BuyDefendersForge : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

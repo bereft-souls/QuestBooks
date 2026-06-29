@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
 
-public class UseStardustFragments : QBQuest
+public class UseStardustFragments : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

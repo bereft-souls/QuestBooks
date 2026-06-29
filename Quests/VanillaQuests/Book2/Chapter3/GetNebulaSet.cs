@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter3;
 
-public class GetNebulaSet : QBQuest
+public class GetNebulaSet : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

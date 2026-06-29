@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class CraftSink : QBQuest
+public class CraftSink : VanillaQuest
 {
     static CraftSink()
     {

@@ -3,7 +3,7 @@ using Terraria.GameContent;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class InteractTownNPCMaxHappiness : QBQuest
+public class InteractTownNPCMaxHappiness : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

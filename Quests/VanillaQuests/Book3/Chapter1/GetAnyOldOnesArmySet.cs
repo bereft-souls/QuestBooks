@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class GetAnyOldOnesArmySet : QBQuest
+public class GetAnyOldOnesArmySet : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

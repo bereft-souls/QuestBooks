@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class KillTim : QBQuest
+public class KillTim : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
 
-public class BuildPlatforms : QBQuest
+public class BuildPlatforms : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

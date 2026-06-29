@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class CraftAnvil : QBQuest
+public class CraftAnvil : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

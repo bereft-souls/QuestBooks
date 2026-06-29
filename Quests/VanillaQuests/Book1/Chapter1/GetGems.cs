@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
 [ReinitializeDuringResizeArrays]
-public class GetGems : QBQuest
+public class GetGems : VanillaQuest
 {
     static GetGems()
     {

@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class GetTheAxe : QBQuest
+public class GetTheAxe : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

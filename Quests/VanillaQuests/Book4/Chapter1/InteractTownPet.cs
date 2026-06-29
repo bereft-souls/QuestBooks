@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class InteractTownPet : QBQuest
+public class InteractTownPet : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

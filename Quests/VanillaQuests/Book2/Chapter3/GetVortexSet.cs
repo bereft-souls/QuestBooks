@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter3;
 
-public class GetVortexSet : QBQuest
+public class GetVortexSet : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class GetAnyFish : QBQuest
+public class GetAnyFish : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

@@ -1,26 +1,26 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
-public class AllPillarsDefeated : QBQuest
+public class AllPillarsDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => NPC.downedTowers;
 }
 
-public class SolarPillarDefeated : QBQuest
+public class SolarPillarDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => NPC.downedTowerSolar;
 }
 
-public class VortexPillarDefeated : QBQuest
+public class VortexPillarDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => NPC.downedTowerVortex;
 }
 
-public class NebulaPillarDefeated : QBQuest
+public class NebulaPillarDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => NPC.downedTowerNebula;
 }
 
-public class StardustPillarDefeated : QBQuest
+public class StardustPillarDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => NPC.downedTowerStardust;
 }

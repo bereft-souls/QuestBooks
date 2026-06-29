@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class DefeatDarkMage : QBQuest
+public class DefeatDarkMage : VanillaQuest
 {
     // Not affected by other mods, does not need to be a set
     public static readonly int[] DarkMageTypes = [

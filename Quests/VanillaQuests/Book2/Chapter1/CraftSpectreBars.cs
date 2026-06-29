@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class CraftSpectreBars : QBQuest
+public class CraftSpectreBars : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

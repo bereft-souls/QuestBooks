@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class GetWarTable : QBQuest
+public class GetWarTable : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

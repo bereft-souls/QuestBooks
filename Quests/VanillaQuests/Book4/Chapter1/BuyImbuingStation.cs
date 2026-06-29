@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class BuyImbuingStation : QBQuest
+public class BuyImbuingStation : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

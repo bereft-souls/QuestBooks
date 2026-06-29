@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class CraftEvilBars : QBQuest
+public class CraftEvilBars : VanillaQuest
 {
     static CraftEvilBars()
     {

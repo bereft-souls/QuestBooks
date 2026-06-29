@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class GetSpectre : QBQuest
+public class GetSpectre : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

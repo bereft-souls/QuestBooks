@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class BuyBugNet : QBQuest
+public class BuyBugNet : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

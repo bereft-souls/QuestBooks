@@ -3,7 +3,7 @@ using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class PlaceBottle : QBQuest
+public class PlaceBottle : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

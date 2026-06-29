@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class DefeatOgre : QBQuest
+public class DefeatOgre : VanillaQuest
 {
     // Not affected by other mods, does not need to be a set
     public static readonly int[] OgreTypes = [

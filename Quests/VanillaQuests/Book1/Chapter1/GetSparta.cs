@@ -3,7 +3,7 @@ using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class GetSparta : QBQuest
+public class GetSparta : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

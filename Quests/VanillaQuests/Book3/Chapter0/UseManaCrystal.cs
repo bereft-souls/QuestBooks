@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class UseManaCrystal : QBQuest
+public class UseManaCrystal : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

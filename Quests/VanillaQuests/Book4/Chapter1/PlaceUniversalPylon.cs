@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class PlaceUniversalPylon : QBQuest
+public class PlaceUniversalPylon : VanillaQuest
 {
     public override bool CheckCompletion() => Main.PylonSystem.HasPylonOfType(TeleportPylonType.Victory);
 }

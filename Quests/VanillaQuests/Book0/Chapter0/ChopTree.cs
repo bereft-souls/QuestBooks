@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 
-public class ChopTree : QBQuest
+public class ChopTree : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class EquipFullDye : QBQuest
+public class EquipFullDye : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

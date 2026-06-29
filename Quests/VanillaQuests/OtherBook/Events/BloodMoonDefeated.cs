@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
-public class BloodMoonDefeated : QBQuest
+public class BloodMoonDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

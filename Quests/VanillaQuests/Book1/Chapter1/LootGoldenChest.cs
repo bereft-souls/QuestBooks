@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class LootGoldenChest : QBQuest
+public class LootGoldenChest : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

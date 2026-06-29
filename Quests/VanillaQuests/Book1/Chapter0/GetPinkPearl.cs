@@ -3,7 +3,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class GetPinkPearl : QBQuest
+public class GetPinkPearl : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

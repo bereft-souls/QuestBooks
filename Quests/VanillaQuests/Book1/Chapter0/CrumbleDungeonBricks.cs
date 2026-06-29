@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class CrumbleDungeonBricks : QBQuest
+public class CrumbleDungeonBricks : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

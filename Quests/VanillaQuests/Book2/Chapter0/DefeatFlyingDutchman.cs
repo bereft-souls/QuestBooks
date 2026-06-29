@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
-public class DefeatFlyingDutchman : QBQuest
+public class DefeatFlyingDutchman : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

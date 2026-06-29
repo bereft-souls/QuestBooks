@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
 
-public class CraftCelestialSigil : QBQuest
+public class CraftCelestialSigil : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

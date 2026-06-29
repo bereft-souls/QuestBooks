@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class GetEoCSummon : QBQuest
+public class GetEoCSummon : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

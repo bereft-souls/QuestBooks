@@ -5,7 +5,7 @@ using Terraria.UI;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class InteractGuide : QBQuest
+public class InteractGuide : VanillaQuest
 {
     /// <summary>
     ///     The amount of unique items the player must interact with in the guide's inventory in order to

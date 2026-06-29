@@ -5,7 +5,7 @@ using System.Linq;
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
 
 [ReinitializeDuringResizeArrays]
-public class GetAnyRunningBoots : QBQuest
+public class GetAnyRunningBoots : VanillaQuest
 {
     static GetAnyRunningBoots()
     {

@@ -3,7 +3,7 @@ using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses
 {
-    public class EvilBossDefeated : QBQuest
+    public class EvilBossDefeated : VanillaQuest
     {
         public static bool Crimson => WorldGen.crimson;
         public override string Name => Crimson ? "BrainOfCthulhuDefeated" : "EaterOfWorldsDefeated";

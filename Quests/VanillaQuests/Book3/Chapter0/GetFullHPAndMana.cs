@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class GetFullHPAndMana : QBQuest
+public class GetFullHPAndMana : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

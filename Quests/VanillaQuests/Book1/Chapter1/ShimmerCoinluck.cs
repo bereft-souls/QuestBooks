@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class ShimmerCoinluck : QBQuest
+public class ShimmerCoinluck : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class InteractTaxCollector : QBQuest
+public class InteractTaxCollector : VanillaQuest
 {
     /// <summary>
     ///     The amount of gold coins the player must have accumulated from taxes in order to complete the

@@ -3,12 +3,12 @@ using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
-public class FrostMoonDefeated : QBQuest
+public class FrostMoonDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => Main.snowMoon && NPC.waveNumber >= 15;
 }
 
-public class IceQueenDefeated : QBQuest
+public class IceQueenDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 
@@ -24,7 +24,7 @@ public class IceQueenDefeated : QBQuest
     }
 }
 
-public class SantaNK1Defeated : QBQuest
+public class SantaNK1Defeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 
@@ -40,7 +40,7 @@ public class SantaNK1Defeated : QBQuest
     }
 }
 
-public class EverscreamDefeated : QBQuest
+public class EverscreamDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

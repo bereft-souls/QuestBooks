@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class CraftMeteorGear : QBQuest
+public class CraftMeteorGear : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

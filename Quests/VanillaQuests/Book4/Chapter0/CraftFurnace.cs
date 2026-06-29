@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class CraftFurnace : QBQuest
+public class CraftFurnace : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

@@ -4,7 +4,7 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class KillMarriage : QBQuest
+public class KillMarriage : VanillaQuest
 {
     public bool GroomKilled { get; private set; }
 

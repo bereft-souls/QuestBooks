@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
-public class DefeatDayEmpress : QBQuest
+public class DefeatDayEmpress : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

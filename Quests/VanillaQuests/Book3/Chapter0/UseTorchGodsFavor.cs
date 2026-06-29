@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class UseTorchGodsFavor : QBQuest
+public class UseTorchGodsFavor : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

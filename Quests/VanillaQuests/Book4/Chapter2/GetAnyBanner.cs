@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
 
-public class GetAnyBanner : QBQuest
+public class GetAnyBanner : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

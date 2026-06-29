@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter2;
 
-public class CraftLunarHook : QBQuest
+public class CraftLunarHook : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

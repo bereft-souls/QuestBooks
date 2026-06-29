@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class GetSpookyWood : QBQuest
+public class GetSpookyWood : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

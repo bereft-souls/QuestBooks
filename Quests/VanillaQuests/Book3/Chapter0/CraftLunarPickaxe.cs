@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class CraftLunarPickaxe : QBQuest
+public class CraftLunarPickaxe : VanillaQuest
 {
     static CraftLunarPickaxe()
     {

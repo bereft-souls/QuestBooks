@@ -3,7 +3,7 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class SmashGeodes : QBQuest
+public class SmashGeodes : VanillaQuest
 {
     private const string Tag = "SmashedGeodesCount";
 

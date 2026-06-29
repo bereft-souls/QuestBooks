@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 
-public class CraftWorkbench : QBQuest
+public class CraftWorkbench : VanillaQuest
 {
     // Despite being a "craft" quest, this is more related to world state,
     // and thus remains a world quest instead of a player quest.

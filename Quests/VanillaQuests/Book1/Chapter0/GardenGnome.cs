@@ -3,7 +3,7 @@ using Terraria.GameContent.Achievements;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class GardenGnome : QBQuest
+public class GardenGnome : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

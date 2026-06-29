@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
-public class GetInfectionSouls : QBQuest
+public class GetInfectionSouls : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

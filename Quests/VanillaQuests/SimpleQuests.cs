@@ -5,7 +5,7 @@
 /// Shorthands the localization category based on namespace instead of <c>QuestBooks</c>.
 /// </summary>
 
-public abstract class QBQuest : Quest
+public abstract class VanillaQuest : Quest
 {
     private string _localizationCategory = null;
 
@@ -25,7 +25,7 @@ public abstract class QBQuest : Quest
 /// Intended for internal QuestBooks use.<br/>
 /// Acts as a quest that is marked as completed once it has been opened.
 /// </summary>
-public abstract class InfoQuest : QBQuest
+public abstract class InfoQuest : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

@@ -3,7 +3,7 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class InteractNurse : QBQuest
+public class InteractNurse : VanillaQuest
 {
     private const string Tag = "NurseCoinsSpent";
 

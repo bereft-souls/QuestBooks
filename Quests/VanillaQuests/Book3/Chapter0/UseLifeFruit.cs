@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class UseLifeFruit : QBQuest
+public class UseLifeFruit : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

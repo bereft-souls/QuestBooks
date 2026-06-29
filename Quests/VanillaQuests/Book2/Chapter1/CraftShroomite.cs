@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class CraftShroomite : QBQuest
+public class CraftShroomite : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

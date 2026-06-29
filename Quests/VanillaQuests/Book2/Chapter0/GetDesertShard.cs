@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
-public class GetDesertShard : QBQuest
+public class GetDesertShard : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
 
-public class BuyAmmoBox : QBQuest
+public class BuyAmmoBox : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

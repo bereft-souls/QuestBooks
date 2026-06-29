@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class EquipArmor : QBQuest
+public class EquipArmor : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

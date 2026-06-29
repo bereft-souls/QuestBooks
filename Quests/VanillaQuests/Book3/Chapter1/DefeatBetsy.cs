@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class DefeatBetsy : QBQuest
+public class DefeatBetsy : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

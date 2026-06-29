@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
 
 [ReinitializeDuringResizeArrays]
-public class CraftCampfire : QBQuest
+public class CraftCampfire : VanillaQuest
 {
     static CraftCampfire()
     {

@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class CraftOrePickaxe : QBQuest
+public class CraftOrePickaxe : VanillaQuest
 {
     static CraftOrePickaxe()
     {

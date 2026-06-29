@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class HouseAllTownNPCs : QBQuest
+public class HouseAllTownNPCs : VanillaQuest
 {
     public override bool CheckCompletion() => AllNPCs(
         NPCID.Guide,

@@ -3,19 +3,19 @@ using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
-public class PumpkinMoonDefeated : QBQuest
+public class PumpkinMoonDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => Main.pumpkinMoon && NPC.waveNumber >= 15;
 }
 
-public class PumpkingDefeated : QBQuest
+public class PumpkingDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 
     public class PumpkingCheck() : KillNPCHook<PumpkingDefeated>(NPCID.Pumpking);
 }
 
-public class MourningWoodDefeated : QBQuest
+public class MourningWoodDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

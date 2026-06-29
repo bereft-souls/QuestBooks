@@ -4,7 +4,7 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
-public class GetEveryTrophy : QBQuest
+public class GetEveryTrophy : VanillaQuest
 {
     // Despite the fact that mods may add extra trophies, modded trophies should NOT count
     // towards this quest, and as such do not need to be registered with a set

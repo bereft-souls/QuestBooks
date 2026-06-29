@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
-public class DefeatWyvern : QBQuest
+public class DefeatWyvern : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

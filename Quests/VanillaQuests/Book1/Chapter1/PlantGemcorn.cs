@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class PlantGemcorn : QBQuest
+public class PlantGemcorn : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

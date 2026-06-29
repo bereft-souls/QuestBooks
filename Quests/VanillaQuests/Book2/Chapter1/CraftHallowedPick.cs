@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class CraftHallowedPickaxe : QBQuest
+public class CraftHallowedPickaxe : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

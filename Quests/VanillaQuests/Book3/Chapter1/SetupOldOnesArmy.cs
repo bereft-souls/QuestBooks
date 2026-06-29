@@ -3,7 +3,7 @@ using Terraria.GameContent.Events;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter1;
 
-public class SetupOldOnesArmy : QBQuest
+public class SetupOldOnesArmy : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

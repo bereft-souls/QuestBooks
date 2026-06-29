@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class AlertMartiansProbe : QBQuest
+public class AlertMartiansProbe : VanillaQuest
 {
     public override void Load() => On_Main.StartInvasion += Check;
 

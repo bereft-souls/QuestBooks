@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class DefeatWeatherMiniboss : QBQuest
+public class DefeatWeatherMiniboss : VanillaQuest
 {
     static DefeatWeatherMiniboss()
     {

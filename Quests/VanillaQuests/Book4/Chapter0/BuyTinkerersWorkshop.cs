@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class BuyTinkerersWorkshop : QBQuest
+public class BuyTinkerersWorkshop : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

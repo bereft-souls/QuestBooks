@@ -71,7 +71,7 @@ public abstract class BuyItemHook : GlobalItem
 }
 
 public abstract class BuyItemHook<TQuest> : BuyItemHook
-    where TQuest : QBQuest
+    where TQuest : VanillaQuest
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="BuyItemHook{TQuest}"/> class with the specified predicate.
@@ -138,7 +138,7 @@ public abstract class BuyItemHook<TQuest> : BuyItemHook
 }
 
 public abstract class BuyItemHook<TQuest, TModItem> : BuyItemHook<TQuest>
-    where TQuest : QBQuest
+    where TQuest : VanillaQuest
     where TModItem : ModItem
 {
     /// <summary>

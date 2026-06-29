@@ -3,7 +3,7 @@
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter0;
 
 [ReinitializeDuringResizeArrays]
-public class DefeatBiomeMimic : QBQuest
+public class DefeatBiomeMimic : VanillaQuest
 {
     static DefeatBiomeMimic()
     {

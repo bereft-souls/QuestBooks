@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class CraftChlorophyteBars : QBQuest
+public class CraftChlorophyteBars : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

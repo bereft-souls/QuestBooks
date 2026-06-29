@@ -3,7 +3,7 @@ using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
-public class Break10kTiles : QBQuest
+public class Break10kTiles : VanillaQuest
 {
     /// <summary>
     ///     The amount of tiles the player must break in order to complete the quest.

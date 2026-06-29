@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class GetShadowKey : QBQuest
+public class GetShadowKey : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

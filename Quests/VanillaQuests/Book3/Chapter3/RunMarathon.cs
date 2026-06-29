@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
-public class RunMarathon : QBQuest
+public class RunMarathon : VanillaQuest
 {
     /// <summary>
     ///     The number of tiles the player must run in order to complete the quest.

@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class MineOre : QBQuest
+public class MineOre : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

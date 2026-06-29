@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class UseBinoculars : QBQuest
+public class UseBinoculars : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

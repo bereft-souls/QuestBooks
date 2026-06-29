@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter2;
 
-public class CraftLightningBoots : QBQuest
+public class CraftLightningBoots : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

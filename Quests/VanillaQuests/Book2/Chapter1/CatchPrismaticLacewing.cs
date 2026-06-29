@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book2.Chapter1;
 
-public class CatchPrismaticLacewing : QBQuest
+public class CatchPrismaticLacewing : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

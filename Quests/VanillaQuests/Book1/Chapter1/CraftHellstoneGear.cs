@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class CraftHellstoneGear : QBQuest
+public class CraftHellstoneGear : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

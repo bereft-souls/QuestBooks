@@ -3,7 +3,7 @@ using Terraria.DataStructures;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class ShimmerTransmute : QBQuest
+public class ShimmerTransmute : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

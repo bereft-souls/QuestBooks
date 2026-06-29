@@ -3,7 +3,7 @@ using QuestBooks.Utilities;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class GetNinjaSet : QBQuest
+public class GetNinjaSet : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

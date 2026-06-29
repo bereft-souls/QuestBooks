@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book0.Chapter0;
 
-public class SurviveFirstNight : QBQuest
+public class SurviveFirstNight : VanillaQuest
 {
     public bool CachedNight { get; set; } = false;
 

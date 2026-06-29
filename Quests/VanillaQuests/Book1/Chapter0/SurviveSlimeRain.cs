@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class SurviveSlimeRain : QBQuest
+public class SurviveSlimeRain : VanillaQuest
 {
     public override void Load() => On_Main.StopSlimeRain += Check;
 

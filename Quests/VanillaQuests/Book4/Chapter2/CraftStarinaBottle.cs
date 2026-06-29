@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter2;
 
-public class CraftStarinaBottle : QBQuest
+public class CraftStarinaBottle : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

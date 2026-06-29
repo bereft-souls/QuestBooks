@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter0;
 
-public class BuyAutohammer : QBQuest
+public class BuyAutohammer : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

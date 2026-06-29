@@ -3,7 +3,7 @@ using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class TorchGod : QBQuest
+public class TorchGod : VanillaQuest
 {
     public override void Load() => IL_Player.TorchAttack += Edit;
 

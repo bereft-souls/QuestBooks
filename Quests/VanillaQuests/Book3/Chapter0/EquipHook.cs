@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class EquipHook : QBQuest
+public class EquipHook : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

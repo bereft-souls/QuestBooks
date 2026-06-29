@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class FlyKwadRacer : QBQuest
+public class FlyKwadRacer : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

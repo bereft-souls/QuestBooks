@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class CraftMoltenPickaxe : QBQuest
+public class CraftMoltenPickaxe : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

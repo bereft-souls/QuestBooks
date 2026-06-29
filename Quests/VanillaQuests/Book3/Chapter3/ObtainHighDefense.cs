@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter3;
 
-public class ObtainHighDefense : QBQuest
+public class ObtainHighDefense : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

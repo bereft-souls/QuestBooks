@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class GetObsidian : QBQuest
+public class GetObsidian : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

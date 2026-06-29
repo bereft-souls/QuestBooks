@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.OtherBook.Bosses;
 
-public class PlanteraDefeated : QBQuest
+public class PlanteraDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => NPC.downedPlantBoss;
 }

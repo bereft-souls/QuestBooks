@@ -4,7 +4,7 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class BuyTeleporter : QBQuest
+public class BuyTeleporter : VanillaQuest
 {
     public int TeleportersBought { get; set; }
 

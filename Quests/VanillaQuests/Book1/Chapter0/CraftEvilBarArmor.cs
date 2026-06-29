@@ -4,7 +4,7 @@ using Terraria.ModLoader.IO;
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter0;
 
-public class CraftEvilBarArmor : QBQuest
+public class CraftEvilBarArmor : VanillaQuest
 {
     private const string HeadTag = "CraftedEvilArmorHead";
 

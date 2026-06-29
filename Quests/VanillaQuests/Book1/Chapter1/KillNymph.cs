@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book1.Chapter1;
 
-public class KillNymph : QBQuest
+public class KillNymph : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 

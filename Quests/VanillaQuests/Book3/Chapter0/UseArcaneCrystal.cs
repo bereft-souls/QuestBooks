@@ -1,6 +1,6 @@
 ﻿namespace QuestBooks.Quests.VanillaQuests.Book3.Chapter0;
 
-public class UseArcaneCrystal : QBQuest
+public class UseArcaneCrystal : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 

@@ -2,7 +2,7 @@
 
 namespace QuestBooks.Quests.VanillaQuests.Book4.Chapter1;
 
-public class InteractDyeTrader : QBQuest
+public class InteractDyeTrader : VanillaQuest
 {
     public override QuestType QuestType => QuestType.Player;
 
