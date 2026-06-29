@@ -26,3 +26,4 @@ Now you're ready to begin adding your own quest lines!
 # Usage
 
 You can find documentation on the various aspects of QuestBooks below:
+- [Adding Quests](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md)
