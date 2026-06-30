@@ -39,7 +39,8 @@ Implement the `CheckCompletion()` method, which should return true only when you
 
 #### Congratulations, you've added your first quest!
 > Of Note:<br/>
-> If you have decided to implement QuestBooks as a weakReference rather than a dependency, you will need to tag all of your `Quest` implementations with `[ExtendsFromMod("QuestBooks")]` to prevent the game from crashing when QuestBooks is not present.
+> If you have decided to implement QuestBooks as a weakReference rather than a dependency, you will either need to tag all of your `Quest` implementations with `[ExtendsFromMod("QuestBooks")]`, or create a new base abstract class that inherits `Quest` that all of your classes inherit from instead and mark that class with `ExtendsFromMod("QuestBooks")]`.<br/>
+> The second method is preferred for more reasons described in [Localization/Good Practices](https://github.com/bereft-souls/QuestBooks/blob/master/docs/ADDING_QUESTS.md#localization)<br/>
 
 While adding new quests is incredibly simple, there are lots of available options to help you tweak and implement your quests in more engaging and intuitive ways.
 
