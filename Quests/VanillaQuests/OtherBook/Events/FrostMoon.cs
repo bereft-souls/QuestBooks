@@ -1,5 +1,4 @@
 ﻿using QuestBooks.Quests.QuestSystems;
-using QuestBooks.Systems;
 
 namespace QuestBooks.Quests.VanillaQuests.OtherBook.Events;
 
@@ -12,32 +11,14 @@ public class IceQueenDefeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class IceQueenCheck : GlobalNPC
-    {
-        public override void OnKill(NPC npc)
-        {
-            if (npc.type != NPCID.IceQueen)
-                return;
-
-            QuestBooksMod.CompleteQuest<IceQueenDefeated>();
-        }
-    }
+    public class IceQueenCheck() : KillNPCHook<IceQueenDefeated>(NPCID.IceQueen);
 }
 
 public class SantaNK1Defeated : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class SantaNK1Check : GlobalNPC
-    {
-        public override void OnKill(NPC npc)
-        {
-            if (npc.type != NPCID.SantaNK1)
-                return;
-
-            QuestBooksMod.CompleteQuest<SantaNK1Defeated>();
-        }
-    }
+    public class SantaNK1Check() : KillNPCHook<SantaNK1Defeated>(NPCID.SantaNK1);
 }
 
 public class EverscreamDefeated : VanillaQuest
