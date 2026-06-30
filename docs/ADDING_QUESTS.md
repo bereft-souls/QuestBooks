@@ -80,17 +80,17 @@ However, you can change this key if for any reason you need it to be distinct.
 Quest classes implement both `ModType` and `ILocalizedModType`, meaning you can call any of your familiar localization methods directly from within them.
 
 By default, QuestBooks will search the following localization entries for your quest classes:
-- `Mods.{YourMod}.QuestBooks.{QuestKey}.Title`: The title at the top of page in the QuestBooks UI.
-- `Mods.{YourMod}.QuestBooks.{QuestKey}.Contents`: The text that displays on the page of your quest in the QuestBooks UI.
-- `Mods.{YourMod}.QuestBooks.{QuestKey}.Tooltip`: The text that displays when your quest is unlocked and being hovered in the QuestBooks UI.
-- `Mods.{YourMod}.QuestBooks.{QuestKey}.LockedTooltip`: The text that displays when your quest is *not* unlocked and being hovered in the QuestBooks UI.
+- `Mods.{YourMod}.QuestBooks.{Name}.Title`: The title at the top of page in the QuestBooks UI.
+- `Mods.{YourMod}.QuestBooks.{Name}.Contents`: The text that displays on the page of your quest in the QuestBooks UI.
+- `Mods.{YourMod}.QuestBooks.{Name}.Tooltip`: The text that displays when your quest is unlocked and being hovered in the QuestBooks UI.
+- `Mods.{YourMod}.QuestBooks.{Name}.LockedTooltip`: The text that displays when your quest is *not* unlocked and being hovered in the QuestBooks UI.
 
 The only of these two that are actually required are title and contents.
    - If `Tooltip` is not supplied, hover text will not be applied when hovering your quest.
    - If `LockedTooltip` is not supplied, QuestBooks will utilize a default locked tooltip, which in english reads `Complete other quests to unlock!`
 
 > Of Note:<br/>
-> `QuestKey` is the same as the quest keys mentioned in the above section. By default, it is the class name of your quest: `this.GetType().Name`.
+> `Name` is the property implemented by `ILocalizedModType` that determines your class' content name. By default, it points to `Key`, which is described in the above section on Quest Keys. You can override `Name` to change the localization content name without changing the quest key.
 
 Additionally, you can automatically supply your localization entries with arguments for formatting. By default, only one entry is supplied, which is a color hex code that changes depending on completion status (`14D246` for completed, `FFEE00` for incompleted).
 
