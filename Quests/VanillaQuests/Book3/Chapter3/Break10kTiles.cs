@@ -16,5 +16,9 @@ public class Break10kTiles : VanillaQuest
 
     public override bool CheckCompletion() => TilesBroken >= TargetTiles;
 
-    public sealed class KillAnyTileCheck() : KillTileHook((_, _, _) => QuestManager.GetQuest<Break10kTiles>().TilesBroken++);
+    public sealed class KillAnyTileCheck() : KillTileHook((_, _, _) =>
+    {
+        if (QuestManager.TryGetQuest<Break10kTiles>(out var quest))
+            quest.TilesBroken++;
+    });
 }
