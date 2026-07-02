@@ -1,5 +1,18 @@
 # Making Custom Quest Lines
 
+> [!IMPORTANT]
+> Before adding new quests, make sure you follow the [QuestBooks setup guide](https://github.com/bereft-souls/QuestBooks/blob/master/docs/SETUP.md).
+
+---
+
+> ### Quick Reference:<br/>
+> [Creating Global Quest Books](https://github.com/bereft-souls/QuestBooks/blob/master/docs/QUESTLINES.md#creating-global-quest-books)<br/>
+> [Creating Custom Book/Chapter Types](https://github.com/bereft-souls/QuestBooks/blob/master/docs/QUESTLINES.md#creating-custom-quest-bookchapter-types)<br/>
+> [Spicing Up Your Log](https://github.com/bereft-souls/QuestBooks/blob/master/docs/QUESTLINES.md#spicing-up-your-log)<br/>
+> [Using the Designer](https://github.com/bereft-souls/QuestBooks/blob/master/docs/QUESTLINES.md#using-the-designer)
+
+---
+
 ## Creating a new Quest Log
 
 The first step to making your custom quest log is to enable the QuestBooks designer from your mod's code.
@@ -24,7 +37,7 @@ Save the file somewhere within your mod's source code.<br/>
 
 ### Step 4.
 > [!IMPORTANT]
-> If you want your quest books to display inside of other logs as opposed to being it's own quest log, see the section on Creating Global Quest Books.
+> If you want your quest books to display inside of other logs as opposed to being it's own quest log, see the section on [Creating Global Quest Books](https://github.com/bereft-souls/QuestBooks/blob/master/docs/QUESTLINES.md#creating-global-quest-books).
 
 Now that you've exported a copy of the vanilla quest log, head back to your mod system code. In the same `PostSetupContent()` method, you will first want to read the text from the file within your source code.
 After reading the file text, call `QuestBooksMod.AddQuestLog()`. The first argument, `questLogKey`, should be a unique identifier that will be associated with your quest log. A good idea is to save this key as a static/const property that can be re-used.<br/>
@@ -63,7 +76,7 @@ One way to make your quest log feel more engaging is by adding dynamic quest boo
 Within these classes, you can override `DisplayName`, `IsUnlocked()`, and `VisibleInLog()` to change how your element behaves.<br/>
 `DisplayName` controls the text that displays on-screen.<br/>
 `IsUnlocked()` determines whether your element can be clicked on/selected.<br/>
-`VisibleInLog()` determines whether your element should display in the log. Note that elements will always display in the log if the designer is toggled.
+`VisibleInLog()` determines whether your element should display in the log. Note that elements will always display in the log if the designer is toggled.<br/>
 <img width="781" height="572" alt="image" src="https://github.com/user-attachments/assets/1738ab8a-c46d-4e33-8619-7e7faf9f7cbf" />
 
 ### Spicing Up Your Log
