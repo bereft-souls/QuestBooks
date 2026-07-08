@@ -9,8 +9,6 @@ namespace QuestBooks.QuestLog.DefaultQuestBooks
     /// </summary>
     public abstract class BasicQuestBook : QuestBook
     {
-        public override List<QuestChapter> Chapters { get; set; } = [];
-
         public override string DisplayName { get => Language.GetOrRegister(NameKey).Value; }
 
         public string NameKey;

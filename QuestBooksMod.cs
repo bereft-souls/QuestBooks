@@ -194,6 +194,26 @@ namespace QuestBooks
         public static void MarkIncomplete(string questName) => MarkIncomplete(GetQuest(questName));
         public static void MarkIncomplete(Quest quest) => QuestManager.MarkIncomplete(quest);
 
+        public override object Call(params object[] args)
+        {
+            static object Void(Action action)
+            {
+                action();
+                return null;
+            }
+
+            return ((string)args[0]).ToLower() switch
+            {
+                "getquest" => DynamicDict.Wrap(GetQuest(args[1] as string)),
+                "trygetquest" => (TryGetQuest(args[1] as string, out var quest), DynamicDict.Wrap(quest)),
+                "completequest" => Void(() => CompleteQuest(args[1] as string)),
+                "markcomplete" => Void(() => MarkComplete(args[1] as string)),
+                "markincomplete" => Void(() => MarkIncomplete(args[1] as string)),
+                "cast" => (args[1] as DynamicDict).Target,
+                _ => new ArgumentOutOfRangeException(nameof(args), "Arguments provided not implemented by QuestBooks mod call!")
+            };
+        }
+
         #endregion
     }
 }

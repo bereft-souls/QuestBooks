@@ -221,6 +221,9 @@ namespace QuestBooks.Systems
 
         public override void Load()
         {
+            if (Main.dedServ)
+                return;
+
             SetupRenderTarget();
 
             // Prepare render targets.

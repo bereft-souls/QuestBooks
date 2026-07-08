@@ -12,7 +12,7 @@ namespace QuestBooks.QuestLog
         /// <summary>
         /// The collection of <see cref="QuestLogElement"/>s to be displayed in the quest log.
         /// </summary>
-        public abstract List<QuestLogElement> Elements { get; set; }
+        public virtual List<QuestLogElement> Elements { get; set; } = [];
 
         /// <summary>
         /// The string that will be displayed in the quest log. You should use localization here where applicable.

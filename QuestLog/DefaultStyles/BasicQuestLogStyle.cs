@@ -123,6 +123,9 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         public override void OnSelect()
         {
+            if (Main.dedServ)
+                return;
+
             SetupTargets();
             QuestAssets.FadedEdges.Asset.Parameters["FadeDesignation"].SetValue(FadeDesignation);
         }

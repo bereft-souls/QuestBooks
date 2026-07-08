@@ -1,6 +1,8 @@
 ﻿using MonoMod.Utils;
 using Newtonsoft.Json;
 using QuestBooks.QuestLog;
+using QuestBooks.Quests;
+using QuestBooks.Quests.VanillaQuests;
 using QuestBooks.Utilities;
 using System.Collections.Frozen;
 using System.Collections.Generic;

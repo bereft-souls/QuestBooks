@@ -12,7 +12,7 @@ namespace QuestBooks.QuestLog
         /// <summary>
         /// The list of all quest lines contained within this book.
         /// </summary>
-        public abstract List<QuestChapter> Chapters { get; set; }
+        public virtual List<QuestChapter> Chapters { get; set; } = [];
 
         /// <summary>
         /// The string that will be displayed in the quest log. You should use localization here where applicable.

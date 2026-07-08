@@ -18,7 +18,7 @@ public class Break10kTiles : VanillaQuest
 
     public sealed class KillAnyTileCheck() : KillTileHook((_, _, _) =>
     {
-        if (QuestManager.TryGetQuest<Break10kTiles>(out var quest))
+        if (QuestBooksMod.TryGetQuest<Break10kTiles>(out var quest))
             quest.TilesBroken++;
     });
 }
