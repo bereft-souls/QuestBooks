@@ -110,10 +110,17 @@ namespace QuestBooks.Systems
         internal static Quest GetQuest(string questName) => ActiveQuests[questName];
         internal static TQuest GetQuest<TQuest>() where TQuest : Quest => (TQuest)GetQuest(QuestLoader.QuestKeys[typeof(TQuest)]);
 
-        internal static bool TryGetQuest(string questName, out Quest result) => ActiveQuests.TryGetValue(questName, out result);
+        internal static bool TryGetQuest(string questName, out Quest result)
+        {
+            if (ActiveQuestLog is not null)
+                return ActiveQuests.TryGetValue(questName, out result);
+
+            result = null;
+            return false;
+        }
         internal static bool TryGetQuest<TQuest>(out TQuest result) where TQuest : Quest
         {
-            if (QuestLoader.QuestKeys.TryGetValue(typeof(TQuest), out var questName) && TryGetQuest(questName, out var questResult))
+            if ((QuestLoader.QuestKeys?.TryGetValue(typeof(TQuest), out var questName) ?? false) && TryGetQuest(questName, out var questResult))
             {
                 result = (TQuest)questResult;
                 return true;
