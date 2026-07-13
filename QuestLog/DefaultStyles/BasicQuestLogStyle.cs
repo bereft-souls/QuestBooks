@@ -668,17 +668,14 @@ namespace QuestBooks.QuestLog.DefaultStyles
 
         public override void LoadPlayerData(TagCompound tag)
         {
-            if (tag is not null)
+            if (tag.TryGet(ScaleKey, out float scale) && LogScale != scale)
             {
-                if (tag.TryGet(ScaleKey, out float scale) && LogScale != scale)
-                {
-                    LogScale = scale;
-                    SetupTargets();
-                }
-
-                if (tag.TryGet(OffsetKey, out Vector2 offset))
-                    LogPositionOffset = offset;
+                LogScale = scale;
+                SetupTargets();
             }
+
+            if (tag.TryGet(OffsetKey, out Vector2 offset))
+                LogPositionOffset = offset;
 
             PreviouslyOpened = false;
             verticalDrawPos = null;
