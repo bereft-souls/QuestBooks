@@ -109,7 +109,7 @@ public abstract class KillTileHook<TQuest> : KillTileHook
     /// <exception cref="ArgumentNullException">
     ///     <paramref name="set"/> is <see langword="null"/>.
     /// </exception>
-    public KillTileHook(bool[] set) : base(Complete)
+    public KillTileHook(Func<bool[]> set) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(set);
         Predicate = (_, _, type) => Match(type, set);
@@ -154,7 +154,7 @@ public abstract class KillTileHook<TQuest> : KillTileHook
     /// <exception cref="ArgumentNullException">
     ///     <paramref name="getTileTypes"/> is <see langword="null"/>.
     /// </exception>
-    public KillTileHook(params Func<int>[] getTileTypes) : base(Complete)
+    public KillTileHook(Func<int[]> getTileTypes) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(getTileTypes);
         Predicate = (_, _, type) => Match(type, getTileTypes);

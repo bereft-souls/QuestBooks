@@ -117,7 +117,7 @@ public abstract class PlaceTileHook<TQuest> : PlaceTileHook
         Predicate = (_, _, tile, _) => Match(tile, getType);
     }
 
-    public PlaceTileHook(params Func<int>[] getTypes) : base(Complete)
+    public PlaceTileHook(Func<int[]> getTypes) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(getTypes);
         Predicate = (_, _, tile, _) => Match(tile, getTypes);

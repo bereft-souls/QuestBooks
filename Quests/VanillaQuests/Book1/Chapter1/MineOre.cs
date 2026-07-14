@@ -6,5 +6,5 @@ public class MineOre : VanillaQuest
 {
     public override bool CheckCompletion() => false;
 
-    public class MineOreCheck() : KillTileHook<MineOre>(TileID.Sets.Ore);
+    public class MineOreCheck() : KillTileHook<MineOre>(static () => TileID.Sets.Ore);
 }

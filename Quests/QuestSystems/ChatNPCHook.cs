@@ -67,7 +67,7 @@ public abstract class ChatNPCHook<TQuest> : ChatNPCHook
         Predicate = npc => Match(npc, getNpcType);
     }
 
-    public ChatNPCHook(params Func<int>[] getNpcTypes) : base(Complete)
+    public ChatNPCHook(Func<int[]> getNpcTypes) : base(Complete)
     {
         ArgumentNullException.ThrowIfNull(getNpcTypes);
         Predicate = npc => Match(npc, getNpcTypes);

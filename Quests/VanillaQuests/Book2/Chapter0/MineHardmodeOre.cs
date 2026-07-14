@@ -25,5 +25,5 @@ public class MineHardmodeOre : VanillaQuest
 
     public override bool CheckCompletion() => false;
 
-    public class MineHardmodeOreCheck() : KillTileHook<MineHardmodeOre>(HardmodeOres);
+    public class MineHardmodeOreCheck() : KillTileHook<MineHardmodeOre>(static () => HardmodeOres);
 }

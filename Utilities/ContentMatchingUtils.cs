@@ -17,7 +17,7 @@ public static partial class Utils
 
     public static bool Match(Item item, Func<int> getItemType) => item.type == getItemType();
 
-    public static bool Match(Item item, params Func<int>[] getItemTypes) => getItemTypes.Any(f => f() == item.type);
+    public static bool Match(Item item, Func<int[]> getItemTypes) => getItemTypes().Contains(item.type);
 
     #endregion
 
@@ -33,7 +33,7 @@ public static partial class Utils
 
     public static bool Match(NPC npc, Func<int> getNpcType) => npc.type == getNpcType();
 
-    public static bool Match(NPC npc, params Func<int>[] getNpcTypes) => getNpcTypes.Any(f => f() == npc.type);
+    public static bool Match(NPC npc, Func<int[]> getNpcTypes) => getNpcTypes().Contains(npc.type);
 
     #endregion
 
@@ -43,7 +43,11 @@ public static partial class Utils
 
     public static bool Match(int type, bool[] set) => set[type];
 
+    public static bool Match(int type, Func<bool[]> set) => set()[type];
+
     public static bool Match(int type, params int[] matches) => matches.Contains(type);
+
+    public static bool Match(int type, Func<int[]> matches) => matches().Contains(type);
 
     public static bool Match<T>(int type) where T : ModItem => type == ModContent.ItemType<T>();
 
@@ -53,8 +57,6 @@ public static partial class Utils
     public static bool Match<T>(FishingAttempt attempt, int drop, int npc, AdvancedPopupRequest sonar, Vector2 position) where T : ModItem => Match<T>(drop);
 
     public static bool Match(int type, Func<int> getContentType) => type == getContentType();
-
-    public static bool Match(int type, params Func<int>[] getContentTypes) => getContentTypes.Any(f => f() == type);
 
     public static bool MatchTile<T>(int type) where T : ModTile => type == ModContent.TileType<T>();
 
