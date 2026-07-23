@@ -7,6 +7,8 @@ blueprint: {
 Name: Journey's Start
 
 Chapter0: {
+	Name: Surface
+
 	StartTheWorldInfo: {
 		Title: The World & Your Map
 		Contents:
@@ -416,6 +418,8 @@ Chapter0: {
 }
 
 Chapter1: {
+	Name: Caving
+
 	// -------------------
 	// <-> Underground <->
 	
