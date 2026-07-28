@@ -112,8 +112,8 @@ namespace QuestBooks.Systems
 
         internal static bool TryGetQuest(string questName, out Quest result)
         {
-            if (ActiveQuestLog is not null)
-                return ActiveQuests.TryGetValue(questName, out result);
+            if (ActiveQuests?.TryGetValue(questName, out result) ?? false)
+                return true;
 
             result = null;
             return false;
